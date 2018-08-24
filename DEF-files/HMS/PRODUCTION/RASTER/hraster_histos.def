@@ -5,20 +5,20 @@
 # Assume FADC range is set to 1V and the integration is 25 channels
 # Offset in the FADC is about 0.122V or 500 channels.
 
-formula FRXA_V H.rb.raster.frxaRawAdc*(1./4096.)/25.
-formula FRXB_V H.rb.raster.frxbRawAdc*(1./4096.)/25.
-formula FRYA_V H.rb.raster.fryaRawAdc*(1./4096.)/25.
-formula FRYB_V H.rb.raster.frybRawAdc*(1./4096.)/25.
+formula FRXAraw_V H.rb.raster.frxaRawAdc*(1./4096.)/25.
+formula FRXBraw_V H.rb.raster.frxbRawAdc*(1./4096.)/25.
+formula FRYAraw_V H.rb.raster.fryaRawAdc*(1./4096.)/25.
+formula FRYBraw_V H.rb.raster.frybRawAdc*(1./4096.)/25.
 
-TH1F hFRXA 'HMS FRXA; FRXA RAW ADC (chan); Counts' H.rb.raster.frxaRawAdc 1000 0 100000 H.dc.ntrack>0
-TH1F hFRXA_V 'HMS FRXA; FRXA RAW ADC (Volts); Counts' FRXA_V 1000 0 1.0 H.dc.ntrack>0
-TH1F hFRYA 'HMS FRYA; FRYA RAW ADC (chan); Counts' H.rb.raster.fryaRawAdc 1000 0 100000 H.dc.ntrack>0
-TH1F hFRYA_V 'HMS FRYA; FRYA RAW ADC (Volts); Counts' FRYA_V 1000 0 1.0 H.dc.ntrack>0
+TH1F hFRXAraw 'HMS FRXA; FRXA RAW ADC (chan); Counts' H.rb.raster.frxaRawAdc 1000 0 100000 H.dc.ntrack>0
+TH1F hFRXAraw_V 'HMS FRXA; FRXA RAW ADC (Volts); Counts' FRXAraw_V 1000 0 1.0 H.dc.ntrack>0
+TH1F hFRYAraw 'HMS FRYA; FRYA RAW ADC (chan); Counts' H.rb.raster.fryaRawAdc 1000 0 100000 H.dc.ntrack>0
+TH1F hFRYAraw_V 'HMS FRYA; FRYA RAW ADC (Volts); Counts' FRYAraw_V 1000 0 1.0 H.dc.ntrack>0
 
-TH1F hFRXB 'HMS FRXB; FRXB RAW ADC (chan); Counts' H.rb.raster.frxbRawAdc 1000 0 100000 H.dc.ntrack>0
-TH1F hFRXB_V 'HMS FRXB; FRXB RAW ADC (Volts); Counts' FRXB_V 1000 0 1.0 H.dc.ntrack>0
-TH1F hFRYB 'HMS FRYB; FRYB RAW ADC (chan); Counts' H.rb.raster.frybRawAdc 1000 0 100000 H.dc.ntrack>0
-TH1F hFRYB_V 'HMS FRYB; FRYB RAW ADC (Volts); Counts' FRYB_V 1000 0 1.0 H.dc.ntrack>0
+TH1F hFRXBraw 'HMS FRXB; FRXB RAW ADC (chan); Counts' H.rb.raster.frxbRawAdc 1000 0 100000 H.dc.ntrack>0
+TH1F hFRXBraw_V 'HMS FRXB; FRXB RAW ADC (Volts); Counts' FRXBraw_V 1000 0 1.0 H.dc.ntrack>0
+TH1F hFRYBraw 'HMS FRYB; FRYB RAW ADC (chan); Counts' H.rb.raster.frybRawAdc 1000 0 100000 H.dc.ntrack>0
+TH1F hFRYBraw_V 'HMS FRYB; FRYB RAW ADC (Volts); Counts' FRYBraw_V 1000 0 1.0 H.dc.ntrack>0
 
 TH1F hFRXA 'HMS FRXA; FRXA ADC (chan); Counts' H.rb.raster.frxa_adc 100 -50000 50000 H.dc.ntrack>0
 TH1F hFRXB 'HMS FRXB; FRXB ADC (chan); Counts' H.rb.raster.frxb_adc 100 -50000 50000 H.dc.ntrack>0

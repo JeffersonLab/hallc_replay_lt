@@ -26,8 +26,8 @@ TH1F ptrig_p1y_good_tdc 'SHMS p1y Good TDC Time; Good TDC Time (ns); Counts / 1 
 TH1F ptrig_p2x_good_tdc 'SHMS p2x Good TDC Time; Good TDC Time (ns); Counts / 1 ns' T.shms.p2X_tdcTime 800 0 800 
 TH1F ptrig_p2y_good_tdc 'SHMS p2y Good TDC Time; Good TDC Time (ns); Counts / 1 ns' T.shms.p2Y_tdcTime 800 0 800 
 
-TH1F ptrig_p1T_good_tdc 'SHMS p1x/p1y Coincidence Good TDC Time; Good TDC Time (ns); Counts / 1 ns' T.shms.p1T_tdcTime 800 0 800 
-TH1F ptrig_p2T_good_tdc 'SHMS p2x/p2y Coincidence Good TDC Time; Good TDC Time (ns); Counts / 1 ns' T.shms.p2T_tdcTime 800 0 800 
+# TH1F ptrig_p1T_good_tdc 'SHMS p1x/p1y Coincidence Good TDC Time; Good TDC Time (ns); Counts / 1 ns' T.shms.p1T_tdcTime 800 0 800 
+# TH1F ptrig_p2T_good_tdc 'SHMS p2x/p2y Coincidence Good TDC Time; Good TDC Time (ns); Counts / 1 ns' T.shms.p2T_tdcTime 800 0 800 
 
 TH1F ptrig_pT1_good_tdc 'SHMS pT1 Good TDC Time (Slot 20, Channel 15); Good TDC Time (ns); Counts / 1 ns' T.shms.pT1_tdcTime 800 0 800 
 TH1F ptrig_pT2_good_tdc 'SHMS pT2 Good TDC Time (Slot 19, Channel 31); Good TDC Time (ns); Counts / 1 ns' T.shms.pT2_tdcTime 800 0 800 

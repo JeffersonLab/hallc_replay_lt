@@ -4414,7 +4414,7 @@ ppcentral = 2.65*0.985
 ppartmass = 0.1395706
 hpartmass = 0.0005109
 
-4336 - 9999
+4336
 gpbeam = 10.600
 gtargmass_amu =1.00794  
 htheta_lab = -19.705
@@ -4422,4 +4422,37 @@ ptheta_lab = 22.03
 hpcentral = 3.32
 ppcentral = 2.65*0.985
 ppartmass = 0.1395706
+hpartmass = 0.0005109
+
+
+4698 - 4715
+gpbeam = 10.600
+gtargmass_amu =1.00794  
+htheta_lab = -13.5
+ptheta_lab = 18.00
+hpcentral = 5.27
+ppcentral = 2.53
+ppartmass = 0.1395706
+hpartmass = 0.0005109
+
+
+4716 - 4718
+gpbeam = 10.600
+gtargmass_amu =1.00794  
+htheta_lab = -24.43
+ptheta_lab = 20.53
+hpcentral = 4.
+ppcentral = 2.
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+
+
+4719 - 9999
+gpbeam = 10.600
+gtargmass_amu =1.00794  
+htheta_lab = -24.43
+ptheta_lab = 20.53
+hpcentral = 3.
+ppcentral = 2.
+ppartmass = 0.0005109
 hpartmass = 0.0005109

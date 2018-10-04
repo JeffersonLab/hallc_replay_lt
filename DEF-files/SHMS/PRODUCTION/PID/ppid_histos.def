@@ -37,8 +37,8 @@ TH2F pcal_hgnpe_etracknorm 'SHMS HG Cer Npe vs. Cal E/p; Normalized Track Energy
 
 # TH2F pcal_xtrack_vs_etrack 'SHMS Calorimeter X-Track vs Total Track Energy; Track Energy Deposition (Gev) / 0.1 GeV; X Track (cm) / 1 cm' P.cal.etrack P.cal.xtrack 100 0 10 200 -100 100 pcut_CleanTrack
 # TH2F pcal_ytrack_vs_etrack 'SHMS Calorimeter Y-Track vs Total Track Energy; Track Energy Deposition (Gev) / 0.1 GeV; Y Track (cm) / 1 cm' P.cal.etrack P.cal.ytrack 100 0 10 200 -100 100 pcut_CleanTrack
-TH2F pcal_xtrack_vs_etracknorm 'SHMS Calorimeter X-Track vs Total Track Energy; Normalized Track Energy Deposition (Gev) / 0.025; X Track (cm) / 1 cm' P.cal.etracknorm P.cal.xtrack 60 0 1.5 120 -60 60 pcut_CleanTrack
-TH2F pcal_ytrack_vs_etracknorm 'SHMS Calorimeter Y-Track vs Total Track Energy; Normalized Track Energy Deposition (Gev) / 0.025; Y Track (cm) / 1 cm' P.cal.etracknorm P.cal.ytrack 60 0 1.5 100 -50 50 pcut_CleanTrack
+TH2F pcal_xtrack_vs_etracknorm 'SHMS Calorimeter X-Track vs Total Track Energy; Normalized Track Energy Deposition (Gev) / 0.025; X Track (cm) / 1 cm' P.cal.etottracknorm P.cal.xtrack 60 0 1.5 120 -60 60 pcut_CleanTrack
+TH2F pcal_ytrack_vs_etracknorm 'SHMS Calorimeter Y-Track vs Total Track Energy; Normalized Track Energy Deposition (Gev) / 0.025; Y Track (cm) / 1 cm' P.cal.etottracknorm P.cal.ytrack 60 0 1.5 100 -50 50 pcut_CleanTrack
 # TH2F pcal_xtrack_vs_etrack_elec 'SHMS Calorimeter X-Track vs Total Track Energy; Track Energy Deposition (Gev) / 0.1 GeV; X Track (cm) / 1 cm' P.cal.etrack P.cal.xtrack 100 0 10 200 -100 100 pcut_CleanTrack&&pcut_cer_hg_elec&&pcut_cal_elec
 # TH2F pcal_ytrack_vs_etrack_elec 'SHMS Calorimeter Y-Track vs Total Track Energy; Track Energy Deposition (Gev) / 0.1 GeV; Y Track (cm) / 1 cm' P.cal.etrack P.cal.ytrack 100 0 10 200 -100 100 pcut_CleanTrack&&pcut_cer_hg_elec&&pcut_cal_elec
 # TH2F pcal_xtrack_vs_etrack_pi 'SHMS Calorimeter X-Track vs Total Track Energy; Track Energy Deposition (Gev) / 0.1 GeV; X Track (cm) / 1 cm' P.cal.etrack P.cal.xtrack 100 0 10 200 -100 100 pcut_CleanTrack&&pcut_cer_hg_pi&&pcut_cal_pi

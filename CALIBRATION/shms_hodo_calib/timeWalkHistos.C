@@ -227,12 +227,12 @@ void timeWalkHistos(TString inputname, Int_t runNum) {
   Double_t phod_2ynhits;
 
   // Acquire the trigger apparatus data
-  rawDataTree->SetBranchAddress("T.shms.pFADC_TREF_ROC2_adcPulseTimeRaw", &refAdcPulseTimeRaw);
-  rawDataTree->SetBranchAddress("T.shms.pFADC_TREF_ROC2_adcPulseAmp",     &refAdcPulseAmp);
-  rawDataTree->SetBranchAddress("T.shms.pFADC_TREF_ROC2_adcMultiplicity", &refAdcMultiplicity);
-  rawDataTree->SetBranchAddress("T.shms.pT1_tdcTimeRaw", &refT1TdcTimeRaw);
-  rawDataTree->SetBranchAddress("T.shms.pT2_tdcTimeRaw", &refT2TdcTimeRaw);
-  rawDataTree->SetBranchAddress("T.shms.pT3_tdcTimeRaw", &refT3TdcTimeRaw);
+  rawDataTree->SetBranchAddress("T.coin.pFADC_TREF_ROC2_adcPulseTimeRaw", &refAdcPulseTimeRaw);
+  rawDataTree->SetBranchAddress("T.coin.pFADC_TREF_ROC2_adcPulseAmp",     &refAdcPulseAmp);
+  rawDataTree->SetBranchAddress("T.coin.pFADC_TREF_ROC2_adcMultiplicity", &refAdcMultiplicity);
+  rawDataTree->SetBranchAddress("T.coin.pT1_tdcTimeRaw", &refT1TdcTimeRaw);
+  rawDataTree->SetBranchAddress("T.coin.pT2_tdcTimeRaw", &refT2TdcTimeRaw);
+  rawDataTree->SetBranchAddress("T.coin.pT3_tdcTimeRaw", &refT3TdcTimeRaw);
   // rawDataTree->SetBranchAddress("P.cal.etot", &calEtot);
   // rawDataTree->SetBranchAddress("P.ngcer.npeSum", &cerNpeSum);
 

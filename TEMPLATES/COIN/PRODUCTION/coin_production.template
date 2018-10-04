@@ -37,12 +37,12 @@ HMS BCM4C Charge: {H.BCM4C.scalerCharge/1000.:%.3f} mC
 HMS Unser Charge: {H.Unser.scalerCharge/1000.:%.3f} mC
 
 Cut on BCM{gBCM_Current_threshold_index+1} current of {gBCM_Current_threshold} uA. Beam over threshold for {H.1MHz.scalerTimeCut:%.3f}s, or {((H.1MHz.scalerTimeCut/H.1MHz.scalerTime)*100.):%.3f}% of total run time.
-HMS BCM1 Beam Cut Current: {H.BCM1.scalerCharge/H.1MHz.scalerTime:%.3f} uA		  
-HMS BCM2 Beam Cut Current: {H.BCM2.scalerCharge/H.1MHz.scalerTime:%.3f} uA		 
-HMS BCM4A Beam Cut Current: {H.BCM4A.scalerCharge/H.1MHz.scalerTime:%.3f} uA		  
-HMS BCM4B Beam Cut Current: {H.BCM4B.scalerCharge/H.1MHz.scalerTime:%.3f} uA		 
-HMS BCM4C Beam Cut Current: {H.BCM4C.scalerCharge/H.1MHz.scalerTime:%.3f} uA		 
-HMS Unser Beam Cut Current: {H.Unser.scalerCharge/H.1MHz.scalerTime:%.3f} uA		  
+HMS BCM1 Beam Cut Current: {H.BCM1.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA		  
+HMS BCM2 Beam Cut Current: {H.BCM2.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA		 
+HMS BCM4A Beam Cut Current: {H.BCM4A.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA		  
+HMS BCM4B Beam Cut Current: {H.BCM4B.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA		 
+HMS BCM4C Beam Cut Current: {H.BCM4C.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA		 
+HMS Unser Beam Cut Current: {H.Unser.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA		  
 
 HMS BCM1  Beam Cut Charge: {H.BCM1.scalerChargeCut/1000. :%.3f} mC
 HMS BCM2  Beam Cut Charge: {H.BCM2.scalerChargeCut/1000.:%.3f} mC
@@ -68,12 +68,12 @@ SHMS BCM4C Charge: {P.BCM4C.scalerCharge/1000.:%.3f} mC
 SHMS Unser Charge: {P.Unser.scalerCharge/1000.:%.3f} mC
 
 Cut on BCM{gBCM_Current_threshold_index+1} current of {gBCM_Current_threshold} uA. Beam over threshold for {P.1MHz.scalerTimeCut:%.3f}s, or {((P.1MHz.scalerTimeCut/P.1MHz.scalerTime)*100.):%.3f}% of total run time.
-SHMS BCM1 Beam Cut Current: {P.BCM1.scalerCharge/P.1MHz.scalerTime:%.3f} uA		  
-SHMS BCM2 Beam Cut Current: {P.BCM2.scalerCharge/P.1MHz.scalerTime:%.3f} uA		 
-SHMS BCM4A Beam Cut Current: {P.BCM4A.scalerCharge/P.1MHz.scalerTime:%.3f} uA		  
-SHMS BCM4B Beam Cut Current: {P.BCM4B.scalerCharge/P.1MHz.scalerTime:%.3f} uA		 
-SHMS BCM4C Beam Cut Current: {P.BCM4C.scalerCharge/P.1MHz.scalerTime:%.3f} uA		 
-SHMS Unser Beam Cut Current: {P.Unser.scalerCharge/P.1MHz.scalerTime:%.3f} uA		  
+SHMS BCM1 Beam Cut Current: {P.BCM1.scalerChargeCut/P.1MHz.scalerTimeCut:%.3f} uA		  
+SHMS BCM2 Beam Cut Current: {P.BCM2.scalerChargeCut/P.1MHz.scalerTimeCut:%.3f} uA		 
+SHMS BCM4A Beam Cut Current: {P.BCM4A.scalerChargeCut/P.1MHz.scalerTimeCut:%.3f} uA		  
+SHMS BCM4B Beam Cut Current: {P.BCM4B.scalerChargeCut/P.1MHz.scalerTimeCut:%.3f} uA		 
+SHMS BCM4C Beam Cut Current: {P.BCM4C.scalerChargeCut/P.1MHz.scalerTimeCut:%.3f} uA		 
+SHMS Unser Beam Cut Current: {P.Unser.scalerChargeCut/P.1MHz.scalerTimeCut:%.3f} uA		  
 
 SHMS BCM1  Beam Cut Charge: {P.BCM1.scalerChargeCut/1000.:%.3f} mC
 SHMS BCM2  Beam Cut Charge: {P.BCM2.scalerChargeCut/1000.:%.3f} mC

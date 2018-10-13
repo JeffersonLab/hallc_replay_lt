@@ -9,6 +9,7 @@
 *.eps
 *.pdf
 .nfs*
+*.root
 
 # Directories
 REPORT_OUTPUT

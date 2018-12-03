@@ -338,7 +338,7 @@ void THcPShowerCalib::Init() {
 
   gROOT->Reset();
 
-  char* fname = Form("ROOTfiles/%s.root",fPrefix.c_str());
+  char* fname = Form("../../ROOTfiles/%s.root",fPrefix.c_str());
   cout << "THcPShowerCalib::Init: Root file name = " << fname << endl;
 
   TFile *f = new TFile(fname);

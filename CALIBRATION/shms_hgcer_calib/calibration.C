@@ -120,10 +120,10 @@ void calibration::SlaveBegin(TTree * /*tree*/)
   fBeta_Full = new TH1F("Beta_Full", "Full beta for events;Beta;Counts", 100, -2, 2);
   GetOutputList()->Add(fBeta_Full);
 
-  fTiming_Cut = new TH1F("Timing_Cut", "Timing cut used for 'good' hits;Time (ns);Counts", 160, -40, 40);
+  fTiming_Cut = new TH1F("Timing_Cut", "Timing cut used for 'good' hits;Time (ns);Counts", 500, -100, 100);
   GetOutputList()->Add(fTiming_Cut);
 
-  fTiming_Full = new TH1F("Timing_Full", "Full timing information for events;Time (ns);Counts", 160, -40, 40);
+  fTiming_Full = new TH1F("Timing_Full", "Full timing information for events;Time (ns);Counts", 500, -100, 100);
   GetOutputList()->Add(fTiming_Full);
 
   //Particle ID cut visualization
@@ -184,7 +184,7 @@ Bool_t calibration::Process(Long64_t entry)
 	{	  
 	  //Perform a loose timing cut
 	  fTiming_Full->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-	  if (P_hgcer_goodAdcTdcDiffTime[ipmt] > 13.0 || P_hgcer_goodAdcTdcDiffTime[ipmt] < 7.0) continue;
+	  if (P_hgcer_goodAdcTdcDiffTime[ipmt] > 50.0 || P_hgcer_goodAdcTdcDiffTime[ipmt] < 0.0) continue;
 	  fTiming_Cut->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
 
 	  //Cuts to remove entries corresponding to a PMT not registering a hit

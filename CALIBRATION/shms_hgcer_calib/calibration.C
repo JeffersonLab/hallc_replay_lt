@@ -92,7 +92,7 @@ void calibration::SlaveBegin(TTree * /*tree*/)
 
 
   ADC_min = 0;
-  ADC_max = 200;
+  ADC_max = 400;
   bins = 2*(abs(ADC_min) + abs(ADC_max));
 
 
@@ -114,10 +114,10 @@ void calibration::SlaveBegin(TTree * /*tree*/)
     }
 
   //Timing and Beta cut visualizations
-  fBeta_Cut = new TH1F("Beta_Cut", "Beta cut used for 'good' hits;Beta;Counts", 100, -2, 2);
+  fBeta_Cut = new TH1F("Beta_Cut", "Beta cut used for 'good' hits;Beta;Counts", 100, -0.1, 1.5);
   GetOutputList()->Add(fBeta_Cut);
 
-  fBeta_Full = new TH1F("Beta_Full", "Full beta for events;Beta;Counts", 100, -2, 2);
+  fBeta_Full = new TH1F("Beta_Full", "Full beta for events;Beta;Counts", 100, -0.1, 1.5);
   GetOutputList()->Add(fBeta_Full);
 
   fTiming_Cut = new TH1F("Timing_Cut", "Timing cut used for 'good' hits;Time (ns);Counts", 500, -100, 100);
@@ -184,7 +184,7 @@ Bool_t calibration::Process(Long64_t entry)
 	{	  
 	  //Perform a loose timing cut
 	  fTiming_Full->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-	  if (P_hgcer_goodAdcTdcDiffTime[ipmt] > 50.0 || P_hgcer_goodAdcTdcDiffTime[ipmt] < 0.0) continue;
+	  if (P_hgcer_goodAdcTdcDiffTime[ipmt] > 38.0 || P_hgcer_goodAdcTdcDiffTime[ipmt] < 30.0) continue;
 	  fTiming_Cut->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
 
 	  //Cuts to remove entries corresponding to a PMT not registering a hit
@@ -559,8 +559,8 @@ void calibration::Terminate()
 		  Gauss2->SetRange(xpeaks[0]-3, xpeaks[0]+10);
 		  Gauss2->SetParameter(1, xpeaks[0]);
 		  Gauss2->SetParameter(2, 10.);
-		  Gauss2->SetParameter(1, xpeaks[1]);
-		  Gauss2->SetParameter(2, 10.);
+		  Gauss2->SetParameter(4, xpeaks[1]);
+		  Gauss2->SetParameter(5, 10.);
 		  Gauss2->SetParLimits(0, 0., 2000.);
 		  Gauss2->SetParLimits(1, xpeaks[0]-3, xpeaks[0]+3);
 		  Gauss2->SetParLimits(2, 0.5, 10.);
@@ -571,7 +571,7 @@ void calibration::Terminate()
 		  //if (fFullShow) PulseInt_quad[iquad][ipmt]->GetXaxis()->SetRangeUser(0,20);
 
 		  //Store the mean of the SPE in the mean array provided it is not zero and passes a loose statistical cut. Note that indexing by ipad-1 is for convienience 
-		  cout << xpeaks[0] << "   " << PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])) << endl;
+		  //cout << xpeaks[0] << "   " << PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])) << endl;
 		  if (xpeaks[0] > 2.0 && PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])) > 90) mean[ipad-1] = Gauss2->GetParameter(1); 
 		  ipad++;
 		}
@@ -614,7 +614,7 @@ void calibration::Terminate()
 	  nbins = (PulseInt[ipmt]->GetXaxis()->GetNbins());
 
 	  //With the scale of ADC to NPE create a histogram that has the conversion applied
-	  fscaled[ipmt] = new TH1F(Form("fscaled_PMT%d", ipmt+1), Form("Scaled ADC spectra for PMT%d; NPE; Normalized Counts",ipmt+1), 200, 0, 20);
+	  fscaled[ipmt] = new TH1F(Form("fscaled_PMT%d", ipmt+1), Form("Scaled ADC spectra for PMT%d; NPE; Normalized Counts",ipmt+1), 200, 0, 30);
 	  
 	  //Fill this histogram bin by bin
 	  for (Int_t ibin=0; ibin<nbins; ibin++)
@@ -632,13 +632,13 @@ void calibration::Terminate()
 	  //Begin the removal of the Poisson-like background
 	  if (fFullShow) background_ipmt = new TCanvas(Form("backgrounf_pmt%d",ipmt), Form("NPE spectra for PMT%d with Poisson-like background",ipmt+1));
 	  if (fFullShow) background_ipmt->cd(1);
-	  Poisson->SetParameter(0, 6.5);
+	  Poisson->SetParameter(0, 23.0);
 	  Poisson->SetParameter(1, 0.25);
-	  Poisson->SetParLimits(0, 6.0, 25.0);
+	  Poisson->SetParLimits(0, 18.0, 30.0);
 	  fFullShow ? fscaled[ipmt]->Fit("Poisson","RQ") : fscaled[ipmt]->Fit("Poisson","RQN");
 
 	  //Make and fill histogram with the background removed
-	  fscaled_nobackground[ipmt] = new TH1F(Form("fscaled_nobackground_pmt%d", ipmt+1), Form("NPE spectra background removed for PMT%d; NPE; Normalized Counts",ipmt+1), 200, 0, 20);
+	  fscaled_nobackground[ipmt] = new TH1F(Form("fscaled_nobackground_pmt%d", ipmt+1), Form("NPE spectra background removed for PMT%d; NPE; Normalized Counts",ipmt+1), 200, 0, 30);
 
 	  for (Int_t ibin=1; ibin<nbins; ibin++)
 	    {
@@ -686,7 +686,7 @@ void calibration::Terminate()
 	  Double_t xscale_mk2 = xscale * Gauss3->GetParameter(1);
 
 	  //Take this new xscale and repeat the exact same procedure as before
-	  fscaled_mk2[ipmt] = new TH1F(Form("fhgc_scaled_mk2_PMT%d", ipmt+1), Form("Scaled ADC spectra for PMT%d; NPE; Normalized Counts",ipmt+1), 200, 0, 20);
+	  fscaled_mk2[ipmt] = new TH1F(Form("fhgc_scaled_mk2_PMT%d", ipmt+1), Form("Scaled ADC spectra for PMT%d; NPE; Normalized Counts",ipmt+1), 200, 0, 30);
 	  
 	  //Fill this histogram bin by bin
 	  for (Int_t ibin=0; ibin<nbins; ibin++)
@@ -704,13 +704,13 @@ void calibration::Terminate()
 	  //Begin the removal of the Poisson-like background
 	  if (fFullShow) background_mk2_ipmt = new TCanvas(Form("background_mk2_pmt%d",ipmt), Form("NPE spectra for PMT%d with Poisson-like background",ipmt+1));
 	  if (fFullShow) background_mk2_ipmt->cd(1);
-	  Poisson->SetParameter(0, 6.5);
+	  Poisson->SetParameter(0, 23.0);
 	  Poisson->SetParameter(1, 0.25);
-	  Poisson->SetParLimits(0, 6.0, 25.0);
+	  Poisson->SetParLimits(0, 19.0, 30.0);
 	  fFullShow ? fscaled_mk2[ipmt]->Fit("Poisson","RQ"):fscaled_mk2[ipmt]->Fit("Poisson","RQN");
 
 	  //Make and fill histogram with the background removed
-	  fscaled_mk2_nobackground[ipmt] = new TH1F(Form("fscaled_mk2_nobackground_pmt%d", ipmt+1), Form("NPE spectra background removed for PMT%d; NPE; Normalized Counts",ipmt+1), 200, 0, 20);
+	  fscaled_mk2_nobackground[ipmt] = new TH1F(Form("fscaled_mk2_nobackground_pmt%d", ipmt+1), Form("NPE spectra background removed for PMT%d; NPE; Normalized Counts",ipmt+1), 200, 0, 30);
 
 	  for (Int_t ibin=0; ibin<nbins; ibin++)
 	    {

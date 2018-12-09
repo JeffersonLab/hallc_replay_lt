@@ -46,30 +46,6 @@ void run_cal(Int_t RunNumber = 0, Int_t NumEvents = 0, Int_t coin = 0)
 
   if (calib_option != "NA")
     {
-      //Perform a "preprocess" of replay to extact timing information
-      /*
-      ch.Process("preprocess.C+",calib_option);
-      if (calib_option.Contains("showall"))
-	{
-	  TString preprocessing_input;
-	  cout << "\n\nPlease verify if timing cuts are correct (y/n): ";
-	  cin >> preprocessing_input;
-	  if (preprocessing_input != "y") return;	  
-	}
-      
-      //Obtain cut information from preprocessing
-      TFile preprocess_file("Timing_Cuts.root");
-      TNtuple *input_data = new TNtuple("input_data","Storage for Client Timing Information","Mean:Std");
-      preprocess_file.GetObject("timing_data",input_data);
-      float *timing_row_content;
-      for (Int_t irow = 0; irow < input_data->GetEntries(); irow++)
-	{
-	  input_data->GetEntry(irow);
-	  timing_row_content = input_data->GetArgs();
-	  calib_option.Append(Form(" %f %f",timing_row_content[0],timing_row_content[1]));
-	}
-      preprocess_file.Close();
-      */
       //Start calibration process
       ch.Process("calibration.C+",calib_option);
 
@@ -98,5 +74,5 @@ void run_cal(Int_t RunNumber = 0, Int_t NumEvents = 0, Int_t coin = 0)
 	}
     }
 
-  //if (eff_option != "NA") ch.Process("efficiencies.C+",eff_option);
+  if (eff_option != "NA") ch.Process("efficiencies.C+",eff_option);
 }

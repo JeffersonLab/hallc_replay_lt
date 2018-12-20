@@ -4769,8 +4769,6 @@ ppcentral = 5.389
 ppartmass = 0.493677
 hpartmass = 0.0005109
 
-
-
 4999-5012
 gpbeam = 10.5965
 gtargmass_amu = 1.00794
@@ -4780,8 +4778,6 @@ hpcentral = 4.712
 ppcentral = 5.389
 ppartmass = 0.493677
 hpartmass = 0.0005109
-
-
 
 5013-5039
 gpbeam = 10.5965
@@ -4844,7 +4840,6 @@ ppcentral = 6.842
 ppartmass = 0.493677
 hpartmass = 0.0005109
 
-
 5159-5166
 pbeam = 10.5965
 gtargmass_amu = 1.00794
@@ -4854,8 +4849,6 @@ hpcentral = 3.266
 ppcentral = 6.842
 ppartmass = 0.493677
 hpartmass = 0.0005109
-
-
 
 5167-5173
 gpbeam = 10.5965
@@ -4896,7 +4889,6 @@ hpcentral = 3.266
 ppcentral = 6.842
 ppartmass = 0.493677
 hpartmass = 0.0005109
-
 
 5234-5235
 gpbeam = 10.5965
@@ -5191,7 +5183,7 @@ hpartmass = 0.0005109
 
 6636-6637
 gpbeam = 3.835
-gtargmass_amu = 26.92
+gtargmass_amu = 1.00794
 ptheta_lab = 29.305
 htheta_lab = -38.60
 hpcentral = 2.026
@@ -5302,7 +5294,7 @@ ppartmass = 0.0005109
 hpartmass = 0.0005109
 
 6881-6882 #(Heep coin setting)
-gpbeam = 4.917
+gpbeam = 4.933
 gtargmass_amu = 1.00794
 ptheta_lab = 33.5
 htheta_lab = -27.15
@@ -5312,8 +5304,8 @@ ppartmass = 0.93827231
 hpartmass = 0.0005109
 
 6883 #(Al(eep) coin setting)
-gpbeam = 4.917
-gtargmass_amu = 27.2
+gpbeam = 4.933
+gtargmass_amu = 1.00794 # Do not change to Aluminium mass!
 ptheta_lab = 33.5
 htheta_lab = -27.15
 hpcentral = 3.124
@@ -5321,10 +5313,50 @@ ppcentral = 2.583
 ppartmass = 0.93827231
 hpartmass = 0.0005109
 
-6884-9999 #(P(eeK)lambda)
-gpbeam = 4.917
+6884-6920 #(P(eeK)lambda) centre
+gpbeam = 4.933
 gtargmass_amu = 1.00794
 ptheta_lab = 8.86
+htheta_lab = -12.71
+hpcentral = 2.066
+ppcentral = 2.583
+ppartmass = 0.493677
+hpartmass = 0.0005109
+
+6921-6947 #(P(eeK)lambda) left
+gpbeam = 4.933
+gtargmass_amu = 1.00794
+ptheta_lab = 11.86
+htheta_lab = -12.71
+hpcentral = 2.066
+ppcentral = 2.583
+ppartmass = 0.493677
+hpartmass = 0.0005109
+
+6948-6971 #(P(eeK)lambda) center
+gpbeam = 4.933
+gtargmass_amu = 1.00794
+ptheta_lab = 8.86
+htheta_lab = -12.71
+hpcentral = 2.066
+ppcentral = 2.583
+ppartmass = 0.493677
+hpartmass = 0.0005109
+
+6972-6978 #(P(eeK)lambda) center
+gpbeam = 4.933
+gtargmass_amu = 1.00794
+ptheta_lab = 11.855
+htheta_lab = -12.71
+hpcentral = 2.066
+ppcentral = 2.583
+ppartmass = 0.493677
+hpartmass = 0.0005109
+
+6979-9999 #(P(eeK)lambda) center
+gpbeam = 4.933
+gtargmass_amu = 1.00794
+ptheta_lab = 6.01
 htheta_lab = -12.71
 hpcentral = 2.066
 ppcentral = 2.583

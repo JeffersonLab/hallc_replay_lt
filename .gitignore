@@ -12,6 +12,7 @@
 *.root
 
 # Directories
+RAID
 REPORT_OUTPUT
 HISTOGRAMS
 MON_OUTPUT
@@ -23,3 +24,4 @@ cache
 
 # Symbolic links
 hcana
+scratch

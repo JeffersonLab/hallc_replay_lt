@@ -8888,12 +8888,44 @@ hpartmass = 0.000511
 
 # Kaon L-T Physics
 
-7978 - 9999
+7978 - 8002
 gpbeam = 8.210
 gtargmass_amu = 1.00794
 hpcentral = 2.328
 ppcentral = 5.389
 htheta_lab = -27.77
 ptheta_lab = 10.005
+ppartmass =  0.497
+hpartmass = 0.000511
+
+# Kaon L-T Physics
+
+8003 - 8037
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 2.328
+ppcentral = 5.389
+htheta_lab = -27.77
+ptheta_lab = 13.010
+ppartmass =  0.497
+hpartmass = 0.000511
+
+8038 - 8110
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 1.8210
+ppcentral = 6.0530
+htheta_lab = -25.895
+ptheta_lab = 6.910
+ppartmass =  0.497
+hpartmass = 0.000511
+
+8111 - 8999
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 1.8210
+ppcentral = 6.0530
+htheta_lab = -25.895
+ptheta_lab = 9.909
 ppartmass =  0.497
 hpartmass = 0.000511

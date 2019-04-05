@@ -8740,19 +8740,8 @@ ptheta_lab = 28.53
 ppartmass = 0.938272
 hpartmass = 0.000511
 
-# KaonLT Physics
-7869 - 7869
-gpbeam = 6.19009
-gtargmass_amu = 1.00794
-hpcentral = 2.185
-ppcentral = 3.486
-htheta_lab = -27.25
-ptheta_lab = 13.28
-ppartmass = 0.497
-hpartmass = 0.000511
-
 # KaonLT Physics - low epsilon data
-7871 - 7881
+7869 - 7880
 gpbeam = 6.19009
 gtargmass_amu = 1.00794
 hpcentral = 2.185
@@ -8763,7 +8752,7 @@ ppartmass =  0.497
 hpartmass = 0.000511
 
 # KaonLT Physics - SHMS Left 16.28 deg
-7882 - 7888
+7881 - 7888
 gpbeam = 6.19009
 gtargmass_amu = 1.00794
 hpcentral = 2.185
@@ -8774,12 +8763,169 @@ ppartmass =  0.497
 hpartmass = 0.000511
 
 # KaonLT Physics - Q=2.115 SHMS left 8.48 deg 
-7889 - 9999
+7889 - 7908
 gpbeam = 6.19009
 gtargmass_amu = 1.00794
 hpcentral = 0.888
 ppcentral = 4.983
 htheta_lab = -36.15
 ptheta_lab = 8.48
+ppartmass =  0.497
+hpartmass = 0.000511
+
+# KaonLT Physics - Q=2.115 SHMS centre 6.20 deg 
+7909 - 7938
+gpbeam = 6.19009
+gtargmass_amu = 1.00794
+hpcentral = 0.888
+ppcentral = 4.983
+htheta_lab = -36.15
+ptheta_lab = 6.20
+ppartmass =  0.497
+hpartmass = 0.000511
+
+# KaonLT 8.2 GeV optics runs
+
+# Cosmics
+7939-7943
+gpbeam = 6.19009
+gtargmass_amu = 1.00794
+hpcentral = 5.745
+ppcentral = 5.745
+htheta_lab = -12.97
+ptheta_lab = 9.51
+ppartmass =  0.497
+hpartmass = 0.000511
+
+# Sieve
+7947
+gpbeam = 8.186
+gtargmass_amu = 1.00794
+hpcentral = 5.745
+ppcentral = 5.745
+htheta_lab = -12.97
+ptheta_lab = 9.51
+ppartmass =  0.497
+hpartmass = 0.000511
+
+# Lumi scan
+7948 - 7961
+gpbeam = 8.186
+gtargmass_amu = 1.00794
+hpcentral = 5.745
+ppcentral = 5.745
+htheta_lab = -12.97
+ptheta_lab = 9.51
+ppartmass =  0.497
+hpartmass = 0.000511
+
+# Elastic Singles # 1
+7962 - 7963
+gpbeam = 8.186
+gtargmass_amu = 1.00794
+hpcentral = 5.745
+ppcentral = 5.745
+htheta_lab = -17.98
+ptheta_lab = 18.01
+ppartmass =  0.000511
+hpartmass = 0.000511
+
+# Elastic Singles # 2
+7964 - 7965
+gpbeam = 8.186
+gtargmass_amu = 1.00794
+hpcentral = 5.3720
+ppcentral = 5.3720
+htheta_lab = -20.005
+ptheta_lab = 19.995
+ppartmass =  0.000511
+hpartmass = 0.000511
+
+# Elastic Singles # 3
+7966 - 7967
+gpbeam = 8.186
+gtargmass_amu = 1.00794
+hpcentral = 5.013
+ppcentral = 5.013
+htheta_lab = -22.005
+ptheta_lab = 21.995
+ppartmass =  0.000511
+hpartmass = 0.000511
+
+# Elastic Singles # 4
+7968 - 7969
+gpbeam = 8.186
+gtargmass_amu = 1.00794
+hpcentral = 4.672
+ppcentral = 4.672
+htheta_lab = -23.995
+ptheta_lab = 23.995
+ppartmass =  0.000511
+hpartmass = 0.000511
+
+# Elastic Singles # 5
+7970 - 7972
+gpbeam = 8.186
+gtargmass_amu = 1.00794
+hpcentral = 4.352
+ppcentral = 4.352
+htheta_lab = -26.000
+ptheta_lab = 26.000
+ppartmass =  0.000511
+hpartmass = 0.000511
+
+# Heep coin data 
+
+7973 - 7977
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 4.672
+ppcentral = 4.371
+htheta_lab = -24.00
+ptheta_lab = 25.775
+ppartmass =  0.938272
+hpartmass = 0.000511
+
+# Kaon L-T Physics
+
+7978 - 8002
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 2.328
+ppcentral = 5.389
+htheta_lab = -27.77
+ptheta_lab = 10.005
+ppartmass =  0.497
+hpartmass = 0.000511
+
+# Kaon L-T Physics
+
+8003 - 8037
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 2.328
+ppcentral = 5.389
+htheta_lab = -27.77
+ptheta_lab = 13.010
+ppartmass =  0.497
+hpartmass = 0.000511
+
+8038 - 8110
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 1.8210
+ppcentral = 6.0530
+htheta_lab = -25.895
+ptheta_lab = 6.910
+ppartmass =  0.497
+hpartmass = 0.000511
+
+8111 - 8999
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 1.8210
+ppcentral = 6.0530
+htheta_lab = -25.895
+ptheta_lab = 9.909
 ppartmass =  0.497
 hpartmass = 0.000511

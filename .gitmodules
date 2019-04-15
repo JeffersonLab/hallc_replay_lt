@@ -6,4 +6,4 @@
 [submodule "UTIL_KAONLT"]
 	path = UTIL_KAONLT
 	url = https://github.com/JeffersonLab/UTIL_KAONLT
-	branch = develop
+	branch = spring-2019-ver4

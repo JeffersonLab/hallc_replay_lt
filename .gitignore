@@ -16,11 +16,12 @@ RAID
 REPORT_OUTPUT
 HISTOGRAMS
 MON_OUTPUT
-ROOTfiles
+ROOTfiles*
 .root_history
 raw
 raw.copiedtotape
 cache
+OUTPUT
 
 # Symbolic links
 hcana

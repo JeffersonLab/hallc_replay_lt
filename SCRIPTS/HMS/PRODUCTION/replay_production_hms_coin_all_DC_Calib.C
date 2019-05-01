@@ -1,4 +1,4 @@
-void replay_production_hms_coin_all(Int_t RunNumber=0, Int_t MaxEvent=0) {
+void replay_production_hms_coin_all_DC_Calib(Int_t RunNumber=0, Int_t MaxEvent=0) {
 
   // Get RunNumber and MaxEvent if not provided.
   if(RunNumber == 0) {
@@ -23,7 +23,7 @@ void replay_production_hms_coin_all(Int_t RunNumber=0, Int_t MaxEvent=0) {
   pathList.push_back("./raw/../raw.copiedtotape");
   pathList.push_back("./cache");
 
-  const char* ROOTFileNamePattern = "ROOTfiles/hms_coin_replay_production_all_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfilesDCCalib/hms_coin_replay_production_all_DC_Calib_%d_%d.root";
 
   // Load Global parameters
   // Add variables to global list.

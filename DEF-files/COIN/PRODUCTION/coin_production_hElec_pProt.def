@@ -1,5 +1,10 @@
 block T.coin.*
 block CTime*
+block CTime.eKCoinTime_ROC1
+block CTime.ePiCoinTime_ROC1
+block CTime.epCoinTime_ROC1
+block T.coin.pRF*
+block T.coin.hRF*
 
 block H.cer.*
 block H.dc.*

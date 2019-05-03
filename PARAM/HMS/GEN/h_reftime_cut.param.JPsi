@@ -8,26 +8,15 @@
 ;     reference time is used and warning message is produced.
 ; Cut is on reference time per detector.
 
-; from run 4698
+;hdc_tdcrefcut=-19000.
+;hhodo_tdcrefcut=-1000.
+;hhodo_adcrefcut=-2500.
+;hcer_adcrefcut=-2500.
+;hcal_adcrefcut=-2500.
 
-;pdc_tdcrefcut=-13000.
-;phodo_tdcrefcut=-3000.
-
-;phodo_adcrefcut=-200./.0625
-;pngcer_adcrefcut=-200./.0625
-;phgcer_adcrefcut=-200./.0625
-;paero_adcrefcut=-200./.0625
-;pcal_adcrefcut=-200./.0625
-
-; from run 4716
-
-pdc_tdcrefcut=-14500.
-phodo_tdcrefcut=-4000.
-
-phodo_adcrefcut=-5000.
-pngcer_adcrefcut=-5000.
-phgcer_adcrefcut=-5000.
-paero_adcrefcut=-5000.
-pcal_adcrefcut=-5000.
-
-
+;J/Psi coin daq
+hdc_tdcrefcut=-17100.
+hhodo_tdcrefcut=-4000.
+hhodo_adcrefcut=-6300.
+hcer_adcrefcut=-6300.
+hcal_adcrefcut=-6300.

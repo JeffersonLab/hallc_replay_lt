@@ -27,7 +27,7 @@ cminch=2.54
 
 ; HMS default cut parameter files
 #include "PARAM/HMS/CER/hcer_cuts.param"
-#include "PARAM/HMS/DC/hdc_calib_RP1.param"
+#include "PARAM/HMS/DC/hdc_cuts_calib_RP1.param"
 #include "PARAM/HMS/HODO/hhodo_cuts.param"
 #include "PARAM/HMS/AERO/haero_cuts.param"
 #include "PARAM/HMS/CAL/hcal_cuts.param"

@@ -4,7 +4,7 @@
 	branch = master
 [submodule "UTIL_KAONLT"]
 	path = UTIL_KAONLT
-	url = https://github.com/JeffersonLab/UTIL_KAONLT
+	url = https://github.com/heinricn/UTIL_KAONLT
 	branch = master
 [submodule "UTIL_SIDIS"]
 	path = UTIL_SIDIS

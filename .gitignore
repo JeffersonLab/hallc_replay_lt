@@ -18,7 +18,7 @@ HISTOGRAMS
 MON_OUTPUT
 ROOTfiles*
 .root_history
-raw
+raw*
 raw.copiedtotape
 cache
 OUTPUT

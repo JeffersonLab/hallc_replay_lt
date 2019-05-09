@@ -2,12 +2,10 @@
 
 A set of ROOT scripts to determine the time offset parameters for the HMS hodoscope. To use these parameters a  parameter flag ptofusinginvadc is set to 0. The first script determines the time walk correction factor. The next script determines the effective propagation speeed in the paddle, the time difference between the positive and negative PMTs and then the relative time difference of all paddles compared to paddle 7 in plane S1X.
 
-
 This supercedes an older calibration code. The parameters from that code are
 used if a parameter flag ptofusinginvadc is set to 1. 
 
 The two codes have different parameters and it is possible to switch between the parameters of the two calibration codes using the  parameter flag ptofusinginvadc
-
 
 ## Instructions
 

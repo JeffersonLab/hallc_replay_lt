@@ -13,4 +13,10 @@ block H.kin.*
 block H.rb.*
 block H.react.*
 block H.extcor.*
-#block H.bcm.*
+block T.coin.*
+block CTime*
+block CTime.eKCoinTime_ROC1
+block CTime.ePiCoinTime_ROC1
+block CTime.epCoinTime_ROC1
+block T.coin.pRF*
+block T.coin.hRF*

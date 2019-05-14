@@ -24,8 +24,6 @@
 #include <TMultiGraph.h>
 #include <TF1.h>
 
-
-
 // Declare ROOT files
 TFile *histoFile, *outFile;
 
@@ -378,7 +376,8 @@ using namespace std;
   gStyle->SetOptStat(0);
 
   // Read the ROOT file containing the time-walk histos
-  histoFile = new TFile("timeWalkHistos.root", "READ");
+  TString histoFileName = Form("timeWalkHistos_%d.root", run); // SK 13/5/19 - new .root output for each run tested
+  histoFile = new TFile(histoFileName, "READ");
   // Obtain the top level directory
   dataDir = dynamic_cast <TDirectory*> (histoFile->FindObjectAny("hodoUncalib"));
   // Create the parameter canvases
@@ -427,11 +426,4 @@ using namespace std;
   } // Plane loop 
   //Write to a param file
   WriteFitParam(run);
-
 }
-
-
-
-
-
-

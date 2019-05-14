@@ -212,13 +212,9 @@ void timeWalkHistos(TString inputname,Int_t runNum, string SPEC_flg) {    //SPEC
 
   // Obtain the replay data file and create new output ROOT file
   // replayFile = new TFile("ROOTfiles/hms_replay_production_all_1267_-1.root", "READ");
-   replayFile = new TFile(inputname, "READ");
-  //replayFile = new TFile("/lustre/expphy/volatile/hallc/comm2017/pooser/tw-data/hms_replay_production_all_1267_-1.root", "READ");
-
-  // replayFile = new TFile(Form("ROOTfiles/hms_replay_production_all_%d_-1.root", runNum), "READ");
-  // replayFile = new TFile(Form("ROOTfiles/hms_coin_replay_production_%d_-1.root", runNum), "READ");
-
-  outFile    = new TFile("timeWalkHistos.root", "RECREATE");
+  replayFile = new TFile(inputname, "READ");
+  TString outFileName = Form("timeWalkHistos_%d.root", runNum ); // SK 13/5/19 - new .root output for each run tested
+  outFile    = new TFile(outFileName, "RECREATE");
   // Obtain the tree
   rawDataTree = dynamic_cast <TTree*> (replayFile->Get("T"));
   // Acquire the trigger apparatus data
@@ -443,10 +439,7 @@ void timeWalkHistos(TString inputname,Int_t runNum, string SPEC_flg) {    //SPEC
   t = clock() - t;
   printf ("The Analysis Took %.1f seconds \n", ((float) t) / CLOCKS_PER_SEC);
   printf ("The Analysis Event Rate Was %.3f kHz \n", (ievent + 1) / (((float) t) / CLOCKS_PER_SEC*1000.));
-
   outFile->Write();
   //outFile->Close();
-
   //return 0;
-
 } // time_walk_calib()

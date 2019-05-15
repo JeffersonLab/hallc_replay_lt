@@ -17,6 +17,7 @@ REPORT_OUTPUT
 HISTOGRAMS
 MON_OUTPUT
 ROOTfiles
+OUTPUT
 .root_history
 raw
 raw.copiedtotape

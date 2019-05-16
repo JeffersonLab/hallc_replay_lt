@@ -12,12 +12,10 @@ class DC_calib
  public:
   
   //consructor and destructor
-  DC_calib(string a, TString b, const Int_t c, Long64_t d, TString e, string f);
+  DC_calib(TString a, string b, const Int_t c, Long64_t d, TString e, string f);
   ~DC_calib();
 
-
   //Define Functions
-
 
   //----Per-Card Methods
   void GetCard();       
@@ -145,7 +143,6 @@ class DC_calib
 
   TDirectory *main_dir;
 
-
   //Declare 2d dynamic arrays to get histogram bin properties
   
   Int_t **bin_max;
@@ -161,7 +158,6 @@ class DC_calib
   vector<Int_t>  content;               //stores bin content
   vector <Int_t> bin_num;               //stores bin number
    
-
   //Declare 'FIT' related variables
   Int_t **entries;               //wire drift time histo entries
   Int_t **entries_card;
@@ -169,7 +165,6 @@ class DC_calib
   Double_t time_init;           //start fit value 
   Double_t time_final;          //end fit value
   TF1 *tZero_fit;               //linear fit function
-
  
   Double_t m;                //slope
   Double_t y_int;            //y-intercept
@@ -248,7 +243,6 @@ class DC_calib
   TString corr_card_hist_name;
   TString corr_card_hist_title;
 
-
   //Card Histograms
   TH1F **card_hist; 
   TH1F **corr_card_hist;
@@ -258,14 +252,5 @@ class DC_calib
   Int_t **wire_max;
 
 };
-
-
-
-
-
-
-
-
-
 
 #endif  //DC_CALIBRATION_H

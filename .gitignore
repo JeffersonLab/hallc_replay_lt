@@ -31,8 +31,6 @@ OUTPUT
 CALIBRATION/dc_calib/scripts/HMS_*
 CALIBRATION/dc_calib/scripts/SHMS_*
 
-
-
 # Symbolic links
 hcana
 scratch

@@ -1,0 +1,36 @@
+############################################################
+You should not be using this directory for personal scripts!
+############################################################
+
+
+========================== Useful Info =================================================
+
+You need to make various symbolic links for your replay scripts to function correctly. 
+As mentioned in the README for the group directory, you should not store large files of ANY 
+kind under /group/c-kaonlt/.
+
+Your sym links should point to /volatile... unless you want the data to be backed up!
+We have a group directory in /volatile, /volatile/hallc/c-kaonlt/.
+You should make your own repository within this, e.g.
+
+/volatile/hallc/c-kaonlt/USER/
+
+Within this you will need the following folders and corresponding symbolic links in your
+hallc_replay directory -
+
+ROOTfiles
+HISTOGRAMS
+OUTPUT
+REPORT_OUTPUT
+
+Some of these require sub directories such as /COIN/PRODUCTION/ e.t.c unless you change your
+templates.
+
+Note you also need either /raw or /cache pointing to -
+
+/cache/hallc/spring17/raw/
+
+This is where raw data files are cached when they are taken from tape in the batch replay script.
+See the batch template script in /UTIL_KAONLT/batch for more.
+
+I will update this with more info on how to write directly to tape when it becomes relevant.

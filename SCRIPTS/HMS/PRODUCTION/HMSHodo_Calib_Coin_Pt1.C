@@ -23,7 +23,7 @@ void HMSHodo_Calib_Coin_Pt1 (Int_t RunNumber=0, Int_t MaxEvent=0) {
   pathList.push_back("./raw/../raw.copiedtotape");
   pathList.push_back("./cache");
 
-  const char* ROOTFileNamePattern = "ROOTfilesHodoCalibPt1/HMS_Hodo_Calib_Pt1_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfilesHodoCalib/HMS_Hodo_Calib_Pt1_%d_%d.root";
 
    // Load Global parameters
   // Add variables to global list.

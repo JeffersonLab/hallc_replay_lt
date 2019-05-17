@@ -23,7 +23,7 @@ void SHMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./raw/../raw.copiedtotape");
   pathList.push_back("./cache");
 
-  const char* ROOTFileNamePattern = "ROOTfilesHodoCalibPt2/SHMS_Hodo_Calib_Pt2_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfilesHodoCalib/SHMS_Hodo_Calib_Pt2_%d_%d.root";
 
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);

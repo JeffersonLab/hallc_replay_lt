@@ -8,8 +8,8 @@ using namespace std;
 
 int main_calib(TString SpecFlag, string inputname, Int_t RunNum)
 {
-  cout << "Provide a spectrometer flag (HMS/SHMS), a rootfille and a run number!" << endl;
-  cout << "e.g. root -l `main_calib.C(\"HMS\", \"../../ROOTFiles/Test.root\", 9001)" << endl;
+  //cout << "Provide a spectrometer flag (HMS/SHMS), a rootfille and a run number!" << endl;
+  //cout << "e.g. root -l main_calib.C(\"HMS\", \"../../ROOTFiles/Test.root\", 9001)" << endl;
   //prevent root from displaying graphs while executing
   gROOT->SetBatch(1);
 

@@ -27,7 +27,9 @@ raw*
 raw.copiedtotape
 cache
 PARAM/HMS/HODO/Calibration
+PARAM/SHMS/HODO/Calibration
 DBASE/COIN/HMS_HodoCalib
+DBASE/COIN/SHMS_HodoCalib
 DBASE/COIN/HMS_DCCalib
 DBASE/COIN/SHMS_DCCalib
 PARAM/HMS/DC/CALIB

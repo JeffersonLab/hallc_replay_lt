@@ -5,5 +5,5 @@
 
 [submodule "UTIL_KAONLT"]
 	path = UTIL_KAONLT
-	url = https://github.com/JeffersonLab/UTIL_KAONLT
+	url = https://github.com/sjdkay/UTIL_KAONLT
 	branch = offline

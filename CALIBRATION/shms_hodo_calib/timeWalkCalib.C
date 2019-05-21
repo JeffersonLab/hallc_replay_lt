@@ -370,7 +370,6 @@ void WriteFitParam(int runNUM)
 
 void timeWalkCalib(int run) {
 
-
   //prevent root from displaying graphs while executing
   //gROOT->SetBatch(1);
  
@@ -434,12 +433,9 @@ void timeWalkCalib(int run) {
     drawParams(iplane);
   } // Plane loop 
  
- 
   //Write to a param file
   WriteFitParam(run);
   
- 
-
 } // timeWalkCalib()
 
 

@@ -33,4 +33,14 @@ Note you also need either /raw or /cache pointing to -
 This is where raw data files are cached when they are taken from tape in the batch replay script.
 See the batch template script in /UTIL_KAONLT/batch for more.
 
-I will update this with more info on how to write directly to tape when it becomes relevant.
+If you want to write your produced replay files to tape, your ROOTfiles sym link should point to a directory in -
+
+/cache/hallc/kaonlt/
+
+It will automatically be written to tape from here if it is not used for a few days
+
+You can remove it before it is written to tape or edit it but once it's on tape, do not change the file in cache to
+avoid any overwriting conflicts.
+
+You can check to see if it's on tape yet via /mss/hallc/kaonlt
+If it's on tape, you'll have a tape stub in the corresponding directory

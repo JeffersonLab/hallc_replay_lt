@@ -12,5 +12,5 @@
 	branch = master
 [submodule "UTIL_PION"]
 	path = UTIL_PION
-	url = https://github.com/JeffersonLab/UTIL_PION
+	url = https://github.com/JeffersonLab/UTIL_PION.git/
 	branch = master

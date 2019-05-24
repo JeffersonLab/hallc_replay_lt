@@ -518,11 +518,7 @@ ppcentral = 6.842
 ppartmass = 0.493677
 hpartmass = 0.0005109
 
-<<<<<<< HEAD
 5264
-=======
-5264-5264
->>>>>>> upstream/offline
 gpbeam = 10.585
 gtargmass_amu = 1.00794
 htheta_lab = -23.00
@@ -612,7 +608,6 @@ ppcentral = 6.053
 ppartmass = 0.493677
 hpartmass = 0.0005109
 
-<<<<<<< HEAD
 5335
 gpbeam = 10.585
 gtargmass_amu = 1.00794
@@ -623,12 +618,8 @@ ppcentral = 6.269
 ppartmass = 0.0005109
 hpartmass = 0.0005109
 
-5335-6589
-gpbeam = 10.5965
-=======
 5335-5335
 gpbeam = 10.585
->>>>>>> upstream/offline
 gtargmass_amu = 1.00794
 htheta_lab = -13.50
 ptheta_lab = 13.50
@@ -637,8 +628,6 @@ ppcentral = 6.269
 ppartmass = 0.0005109
 hpartmass = 0.0005109
 
-<<<<<<< HEAD
-=======
 5335-6589
 gpbeam = 10.5965
 gtargmass_amu = 1.00794
@@ -649,7 +638,6 @@ ppcentral = 6.269
 ppartmass = 0.0005109
 hpartmass = 0.0005109
 
->>>>>>> upstream/offline
 6590
 gpbeam = 3.835
 gtargmass_amu = 1.00794
@@ -862,12 +850,8 @@ ppcentral = 3.500
 ppartmass = 0.0005109
 hpartmass = 0.0005109
 
-<<<<<<< HEAD
 #(Heep singles setting 1)
 6869-6872 
-=======
-6869-6872 #(Heep singles setting 1)
->>>>>>> upstream/offline
 gpbeam = 4.933
 gtargmass_amu = 1.00794
 ptheta_lab = 8.26
@@ -877,12 +861,8 @@ ppcentral = 4.642
 ppartmass = 0.0005109
 hpartmass = 0.0005109
 
-<<<<<<< HEAD
 #(Heep singles setting 2)
 6873-6875
-=======
-6873-6875 #(Heep singles setting 2)
->>>>>>> upstream/offline
 gpbeam = 4.933
 gtargmass_amu = 1.00794
 ptheta_lab = 11.86
@@ -892,12 +872,8 @@ ppcentral = 4.436
 ppartmass = 0.0005109
 hpartmass = 0.0005109
 
-<<<<<<< HEAD
 #(Heep singles setting 3)
 6876-6877 
-=======
-6876-6877 #(Heep singles setting 3)
->>>>>>> upstream/offline
 gpbeam = 4.933
 gtargmass_amu = 1.00794
 ptheta_lab = 15.00
@@ -907,12 +883,8 @@ ppcentral = 4.184
 ppartmass = 0.0005109
 hpartmass = 0.0005109
 
-<<<<<<< HEAD
 #(Heep singles setting 4)
 6878-6880 
-=======
-6878-6880 #(Heep singles setting 4)
->>>>>>> upstream/offline
 gpbeam = 4.933
 gtargmass_amu = 1.00794
 ptheta_lab = 34.2
@@ -922,12 +894,8 @@ ppcentral = 2.583
 ppartmass = 0.0005109
 hpartmass = 0.0005109
 
-<<<<<<< HEAD
 #(Heep coin setting)
 6881-6882 
-=======
-6881-6882 #(Heep coin setting)
->>>>>>> upstream/offline
 gpbeam = 4.933
 gtargmass_amu = 1.00794
 ptheta_lab = 33.5
@@ -937,16 +905,10 @@ ppcentral = 2.583
 ppartmass = 0.93827231
 hpartmass = 0.0005109
 
-<<<<<<< HEAD
 #(Al(eep) coin setting)
 6883 
 gpbeam = 4.933
 gtargmass_amu = 1.00794 
-=======
-6883 #(Al(eep) coin setting)
-gpbeam = 4.933
-gtargmass_amu = 1.00794 # Do not change to Aluminium mass!
->>>>>>> upstream/offline
 ptheta_lab = 33.5
 htheta_lab = -27.15
 hpcentral = 3.124
@@ -954,12 +916,8 @@ ppcentral = 2.583
 ppartmass = 0.93827231
 hpartmass = 0.0005109
 
-<<<<<<< HEAD
 #(P(eeK)lambda) centre
 6884-6920 
-=======
-6884-6920 #(P(eeK)lambda) centre
->>>>>>> upstream/offline
 gpbeam = 4.933
 gtargmass_amu = 1.00794
 ptheta_lab = 8.86
@@ -969,12 +927,8 @@ ppcentral = 2.583
 ppartmass = 0.493677
 hpartmass = 0.0005109
 
-<<<<<<< HEAD
 #(P(eeK)lambda) left
 6921-6947 
-=======
-6921-6947 #(P(eeK)lambda) left
->>>>>>> upstream/offline
 gpbeam = 4.933
 gtargmass_amu = 1.00794
 ptheta_lab = 11.86
@@ -984,12 +938,8 @@ ppcentral = 2.583
 ppartmass = 0.493677
 hpartmass = 0.0005109
 
-<<<<<<< HEAD
 #(P(eeK)lambda) center
 6948-6971 
-=======
-6948-6971 #(P(eeK)lambda) center
->>>>>>> upstream/offline
 gpbeam = 4.933
 gtargmass_amu = 1.00794
 ptheta_lab = 8.86
@@ -999,12 +949,8 @@ ppcentral = 2.583
 ppartmass = 0.493677
 hpartmass = 0.0005109
 
-<<<<<<< HEAD
 #(P(eeK)lambda) center
 6972-6978 
-=======
-6972-6978 #(P(eeK)lambda) center
->>>>>>> upstream/offline
 gpbeam = 4.933
 gtargmass_amu = 1.00794
 ptheta_lab = 11.855
@@ -1014,12 +960,8 @@ ppcentral = 2.583
 ppartmass = 0.493677
 hpartmass = 0.0005109
 
-<<<<<<< HEAD
 #(P(eeK)lambda) center
 6979-7102 
-=======
-6979-7102 #(P(eeK)lambda) center
->>>>>>> upstream/offline
 gpbeam = 4.933
 gtargmass_amu = 1.00794
 ptheta_lab = 6.01
@@ -4629,7 +4571,7 @@ hpcentral = 3.939
 ppcentral = 3.939
 htheta_lab = -9.5
 ptheta_lab = 13.0
-ppartmass = 0.497
+ppartmass = 0.493677
 hpartmass = 0.000511
 
 # sieve
@@ -4640,7 +4582,7 @@ hpcentral = 3.939
 ppcentral = 3.939
 htheta_lab = -11.005
 ptheta_lab = 13.005
-ppartmass = 0.497
+ppartmass = 0.493677
 hpartmass = 0.000511
 
 # lumi
@@ -4651,7 +4593,7 @@ hpcentral = 3.939
 ppcentral = 3.939
 htheta_lab = -11.005
 ptheta_lab = 13.005
-ppartmass = 0.497
+ppartmass = 0.493677
 hpartmass = 0.000511
 
 # HEEP Singles #1
@@ -4706,7 +4648,7 @@ hpcentral = 3.939
 ppcentral = 3.939
 htheta_lab = -11.00
 ptheta_lab = 13.00
-ppartmass = 0.497
+ppartmass = 0.493677
 hpartmass = 0.000511
 
 # Heep-coin
@@ -4728,7 +4670,7 @@ hpcentral = 2.185
 ppcentral = 3.486
 htheta_lab = -27.25
 ptheta_lab = 13.28
-ppartmass =  0.497
+ppartmass =  0.493677
 hpartmass = 0.000511
 
 # KaonLT Physics - SHMS Left 16.28 deg
@@ -4739,7 +4681,7 @@ hpcentral = 2.185
 ppcentral = 3.486
 htheta_lab = -27.25
 ptheta_lab = 16.28
-ppartmass =  0.497
+ppartmass =  0.493677
 hpartmass = 0.000511
 
 # KaonLT Physics - Q=2.115 SHMS left 8.48 deg 
@@ -4750,7 +4692,7 @@ hpcentral = 0.888
 ppcentral = 4.983
 htheta_lab = -36.15
 ptheta_lab = 8.48
-ppartmass =  0.497
+ppartmass =  0.493677
 hpartmass = 0.000511
 
 # KaonLT Physics - Q=2.115 SHMS centre 6.20 deg 
@@ -4761,7 +4703,7 @@ hpcentral = 0.888
 ppcentral = 4.983
 htheta_lab = -36.15
 ptheta_lab = 6.20
-ppartmass =  0.497
+ppartmass =  0.493677
 hpartmass = 0.000511
 
 # KaonLT 8.2 GeV optics runs
@@ -4774,7 +4716,7 @@ hpcentral = 5.745
 ppcentral = 5.745
 htheta_lab = -12.97
 ptheta_lab = 9.51
-ppartmass =  0.497
+ppartmass =  0.493677
 hpartmass = 0.000511
 
 # Sieve
@@ -4785,7 +4727,7 @@ hpcentral = 5.745
 ppcentral = 5.745
 htheta_lab = -12.97
 ptheta_lab = 9.51
-ppartmass =  0.497
+ppartmass =  0.493677
 hpartmass = 0.000511
 
 # Lumi scan
@@ -4796,7 +4738,7 @@ hpcentral = 5.745
 ppcentral = 5.745
 htheta_lab = -12.97
 ptheta_lab = 9.51
-ppartmass =  0.497
+ppartmass =  0.493677
 hpartmass = 0.000511
 
 # Elastic Singles # 1
@@ -4875,7 +4817,7 @@ hpcentral = 2.328
 ppcentral = 5.389
 htheta_lab = -27.77
 ptheta_lab = 10.005
-ppartmass =  0.497
+ppartmass =  0.493677
 hpartmass = 0.000511
 
 # Kaon L-T Physics
@@ -4887,7 +4829,7 @@ hpcentral = 2.328
 ppcentral = 5.389
 htheta_lab = -27.77
 ptheta_lab = 13.010
-ppartmass =  0.497
+ppartmass =  0.493677
 hpartmass = 0.000511
 
 8038 - 8110
@@ -4897,7 +4839,7 @@ hpcentral = 1.8210
 ppcentral = 6.0530
 htheta_lab = -25.895
 ptheta_lab = 6.910
-ppartmass =  0.497
+ppartmass =  0.493677
 hpartmass = 0.000511
 
 8111 - 8185
@@ -4907,7 +4849,7 @@ hpcentral = 1.8210
 ppcentral = 6.0530
 htheta_lab = -25.895
 ptheta_lab = 9.909
-ppartmass =  0.497
+ppartmass =  0.493677
 hpartmass = 0.000511
 
 8186 - 8246
@@ -4917,7 +4859,7 @@ hpcentral = 0.962
 ppcentral = 6.755
 htheta_lab = -49.308
 ptheta_lab = 8.498
-ppartmass =  0.497
+ppartmass =  0.493677
 hpartmass = 0.000511
 
 8251 - 8999
@@ -4927,5 +4869,5 @@ hpcentral = 0.962
 ppcentral = 6.755
 htheta_lab = -49.308
 ptheta_lab = 6.205
-ppartmass =  0.497
+ppartmass =  0.493677
 hpartmass = 0.000511

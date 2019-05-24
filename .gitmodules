@@ -10,3 +10,7 @@
 	path = UTIL_SIDIS
 	url = https://github.com/JeffersonLab/UTIL_SIDIS
 	branch = master
+[submodule "UTIL_PION"]
+	path = UTIL_PION
+	url = https://github.com/JeffersonLab/UTIL_PION
+	branch = master

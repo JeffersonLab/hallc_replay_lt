@@ -40,3 +40,5 @@ puts cuts on P.cal.etracknorm, P.hgcer.npeSum and P.hod.betanotrack to select el
      d. To analyze cosmic data :  .x  fitHodoCalib.C+("current_dir/to/ROOT_filename.root",Run_Number,kTRUE) 
 
      e. For cosmic data the speed of light is set to -30 cm/ns and the PID cut is just on P.hod.betanotrack with the default of betanotrack_low_cut = -1.2 and betanotrack_hi_cut = -.7
+
+5. Replay the data again with the new parameter file. For a good calibration, the beta distribution should be centred at 1.

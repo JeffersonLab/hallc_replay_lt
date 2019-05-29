@@ -146,6 +146,7 @@ ppcentral = 8.035
 ppartmass = 0.0005109
 hpartmass = 0.0005109
 
+
 4814 - 4817
 gpbeam = 10.588
 gtargmass_amu = 1.00794
@@ -203,7 +204,7 @@ htheta_lab = -11.91
 ptheta_lab = 15.18
 hpcentral = 6.590
 ppcentral = 3.486
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 4871-4880
@@ -213,7 +214,7 @@ htheta_lab = -11.91
 ptheta_lab = 18.18
 hpcentral = 6.590
 ppcentral = 3.486
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 4881 - 4890
@@ -223,7 +224,7 @@ htheta_lab = -11.91
 ptheta_lab = 21.180
 hpcentral = 6.590
 ppcentral = 3.486
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 4891
@@ -233,8 +234,9 @@ htheta_lab = -11.159
 ptheta_lab = 7.738
 hpcentral = 5.292
 ppcentral = 4.983
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
+
 
 4892 - 4912
 gpbeam = 10.588
@@ -243,7 +245,7 @@ htheta_lab = -11.159
 ptheta_lab = 13.742
 hpcentral = 5.292
 ppcentral = 4.983
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 4913 - 4924
@@ -253,7 +255,7 @@ htheta_lab = -11.159
 ptheta_lab = 10.735
 hpcentral = 5.292
 ppcentral = 4.983
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 4925-4939
@@ -263,7 +265,7 @@ htheta_lab = -11.159
 ptheta_lab = 7.735
 hpcentral = 5.292
 ppcentral = 4.983
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 4940-4944
@@ -273,7 +275,7 @@ htheta_lab = -11.159
 ptheta_lab = 7.735
 hpcentral = 5.292
 ppcentral = 4.983
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 4945-4947
@@ -283,7 +285,7 @@ htheta_lab = -11.159
 ptheta_lab = 10.730
 hpcentral = 5.292
 ppcentral = 4.983
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 4948-4959
@@ -293,7 +295,7 @@ htheta_lab = -11.159
 ptheta_lab = 7.73
 hpcentral = 5.292
 ppcentral = 4.983
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 4960-4979
@@ -303,7 +305,7 @@ htheta_lab = -17.08
 ptheta_lab = 9.81
 hpcentral = 4.712
 ppcentral = 5.389
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 4980-4998
@@ -313,7 +315,7 @@ htheta_lab = -17.08
 ptheta_lab = 12.81
 hpcentral = 4.712
 ppcentral = 5.389
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 4999-5012
@@ -323,7 +325,7 @@ htheta_lab = -17.08
 ptheta_lab = 15.81
 hpcentral = 4.712
 ppcentral = 5.389
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 5013-5039
@@ -333,7 +335,7 @@ htheta_lab = -14.93
 ptheta_lab = 12.46
 hpcentral = 4.204
 ppcentral = 6.053
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 5040-5077
@@ -343,7 +345,7 @@ htheta_lab = -14.93
 ptheta_lab = 9.42
 hpcentral = 4.204
 ppcentral = 6.053
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 5078-5123
@@ -353,7 +355,7 @@ htheta_lab = -14.93
 ptheta_lab = 6.495
 hpcentral = 4.204
 ppcentral = 6.053
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 5124-5145
@@ -363,7 +365,7 @@ htheta_lab = -23.005
 ptheta_lab = 6.490
 hpcentral = 3.266
 ppcentral = 6.842
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 5149-5153
@@ -373,7 +375,7 @@ htheta_lab = -12.53
 ptheta_lab = 6.495
 hpcentral = 3.266
 ppcentral = 6.842
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 5154-5158
@@ -383,7 +385,7 @@ htheta_lab = -12.53
 ptheta_lab = 6.495
 hpcentral = 3.266
 ppcentral = 6.842
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 5159-5166
@@ -393,7 +395,7 @@ htheta_lab = -12.53
 ptheta_lab = 6.495
 hpcentral = 3.266
 ppcentral = 6.842
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 5167-5173
@@ -403,7 +405,7 @@ htheta_lab = -14.93
 ptheta_lab = 6.495
 hpcentral = 4.204
 ppcentral = 6.053
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 5174-5181
@@ -413,7 +415,7 @@ htheta_lab = -14.93
 ptheta_lab = 6.495
 hpcentral = 4.204
 ppcentral = 6.053
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 5182-5220
@@ -423,7 +425,7 @@ htheta_lab = -23.00
 ptheta_lab = 6.495
 hpcentral = 3.266
 ppcentral = 6.842
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 5221-5233
@@ -433,7 +435,7 @@ htheta_lab = -23.00
 ptheta_lab = 9.552
 hpcentral = 3.266
 ppcentral = 6.842
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 5234-5235
@@ -443,7 +445,7 @@ htheta_lab = -23.00
 ptheta_lab = 9.552
 hpcentral = 3.266
 ppcentral = 6.842
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 5236-5248
@@ -453,7 +455,7 @@ htheta_lab = -23.00
 ptheta_lab = 12.565
 hpcentral = 3.266
 ppcentral = 6.842
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 5249-5250
@@ -463,7 +465,7 @@ htheta_lab = -23.00
 ptheta_lab = 12.565
 hpcentral = 3.266
 ppcentral = 6.842
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 5251-5261
@@ -473,7 +475,7 @@ htheta_lab = -23.00
 ptheta_lab = 9.555
 hpcentral = 3.266
 ppcentral = 6.842
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 5262-5263
@@ -483,7 +485,7 @@ htheta_lab = -23.00
 ptheta_lab = 12.555
 hpcentral = 3.266
 ppcentral = 6.842
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 5264
@@ -493,7 +495,7 @@ htheta_lab = -23.00
 ptheta_lab = 6.509
 hpcentral = 3.266
 ppcentral = 6.842
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 5265-5270
@@ -503,7 +505,7 @@ htheta_lab = -23.00
 ptheta_lab = 9.560
 hpcentral = 3.266
 ppcentral = 6.842
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 5271-5274
@@ -513,7 +515,7 @@ htheta_lab = -23.00
 ptheta_lab = 12.565
 hpcentral = 3.266
 ppcentral = 6.842
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 5275-5294
@@ -523,7 +525,7 @@ htheta_lab = -23.00
 ptheta_lab = 6.500
 hpcentral = 3.266
 ppcentral = 6.842
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 5295-5299
@@ -533,7 +535,7 @@ htheta_lab = -12.505
 ptheta_lab = 6.500
 hpcentral = 3.266
 ppcentral = 6.842
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 5300-5303
@@ -543,7 +545,7 @@ htheta_lab = -14.91
 ptheta_lab = 6.500
 hpcentral = 4.204
 ppcentral = 6.053
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 5304-5310
@@ -553,7 +555,7 @@ htheta_lab = -14.91
 ptheta_lab = 9.425
 hpcentral = 4.204
 ppcentral = 6.053
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 5311-5312
@@ -563,7 +565,7 @@ htheta_lab = -14.91
 ptheta_lab = 12.42
 hpcentral = 4.204
 ppcentral = 6.053
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 5313-5334
@@ -573,27 +575,7 @@ htheta_lab = -14.91
 ptheta_lab = 6.525
 hpcentral = 4.204
 ppcentral = 6.053
-ppartmass = 0.493677
-hpartmass = 0.0005109
-
-5335
-gpbeam = 10.585
-gtargmass_amu = 1.00794
-htheta_lab = -13.50
-ptheta_lab = 13.50
-hpcentral = 6.269
-ppcentral = 6.269
-ppartmass = 0.0005109
-hpartmass = 0.0005109
-
-5335-5335
-gpbeam = 10.585
-gtargmass_amu = 1.00794
-htheta_lab = -13.50
-ptheta_lab = 13.50
-hpcentral = 6.269
-ppcentral = 6.269
-ppartmass = 0.0005109
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 5335-6589
@@ -763,7 +745,7 @@ ptheta_lab = 6.79
 htheta_lab = -21.14
 hpcentral = 0.968 
 ppcentral = 2.583
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 6709-6730
@@ -773,7 +755,7 @@ ptheta_lab = 9.79
 htheta_lab = -21.14
 hpcentral = 0.968 
 ppcentral = 2.583
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 #OPTICS
@@ -785,7 +767,7 @@ ptheta_lab = 9.79
 htheta_lab = -13.00
 hpcentral = 0.968 
 ppcentral = 2.583
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 6732-6789
@@ -795,7 +777,7 @@ ptheta_lab = 9.79
 htheta_lab = -21.14
 hpcentral = 0.968
 ppcentral = 2.583
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 6790-6867
@@ -805,7 +787,7 @@ ptheta_lab = 6.795
 htheta_lab = -21.135
 hpcentral = 0.968
 ppcentral = 2.583
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 6868
@@ -892,7 +874,7 @@ ptheta_lab = 8.86
 htheta_lab = -12.71
 hpcentral = 2.066
 ppcentral = 2.583
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 #(P(eeK)lambda) left
@@ -903,7 +885,7 @@ ptheta_lab = 11.86
 htheta_lab = -12.71
 hpcentral = 2.066
 ppcentral = 2.583
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 #(P(eeK)lambda) center
@@ -914,7 +896,7 @@ ptheta_lab = 8.86
 htheta_lab = -12.71
 hpcentral = 2.066
 ppcentral = 2.583
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 #(P(eeK)lambda) center
@@ -925,7 +907,7 @@ ptheta_lab = 11.855
 htheta_lab = -12.71
 hpcentral = 2.066
 ppcentral = 2.583
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 #(P(eeK)lambda) center
@@ -936,7 +918,7 @@ ptheta_lab = 6.01
 htheta_lab = -12.71
 hpcentral = 2.066
 ppcentral = 2.583
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.0005109
 
 #### KaonLT Spring 19 6.2 GeV Calibration Runs
@@ -949,7 +931,7 @@ hpcentral = 3.939
 ppcentral = 3.939
 htheta_lab = -9.5
 ptheta_lab = 13.0
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.000511
 
 # sieve
@@ -960,7 +942,7 @@ hpcentral = 3.939
 ppcentral = 3.939
 htheta_lab = -11.005
 ptheta_lab = 13.005
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.000511
 
 # lumi
@@ -971,7 +953,7 @@ hpcentral = 3.939
 ppcentral = 3.939
 htheta_lab = -11.005
 ptheta_lab = 13.005
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.000511
 
 # HEEP Singles #1
@@ -1026,7 +1008,7 @@ hpcentral = 3.939
 ppcentral = 3.939
 htheta_lab = -11.00
 ptheta_lab = 13.00
-ppartmass = 0.493677
+ppartmass = 0.139570
 hpartmass = 0.000511
 
 # Heep-coin
@@ -1048,7 +1030,7 @@ hpcentral = 2.185
 ppcentral = 3.486
 htheta_lab = -27.25
 ptheta_lab = 13.28
-ppartmass =  0.493677
+ppartmass =  0.139570
 hpartmass = 0.000511
 
 # KaonLT Physics - SHMS Left 16.28 deg
@@ -1059,7 +1041,7 @@ hpcentral = 2.185
 ppcentral = 3.486
 htheta_lab = -27.25
 ptheta_lab = 16.28
-ppartmass =  0.493677
+ppartmass =  0.139570
 hpartmass = 0.000511
 
 # KaonLT Physics - Q=2.115 SHMS left 8.48 deg 
@@ -1070,7 +1052,7 @@ hpcentral = 0.888
 ppcentral = 4.983
 htheta_lab = -36.15
 ptheta_lab = 8.48
-ppartmass =  0.493677
+ppartmass =  0.139570
 hpartmass = 0.000511
 
 # KaonLT Physics - Q=2.115 SHMS centre 6.20 deg 
@@ -1081,7 +1063,7 @@ hpcentral = 0.888
 ppcentral = 4.983
 htheta_lab = -36.15
 ptheta_lab = 6.20
-ppartmass =  0.493677
+ppartmass =  0.139570
 hpartmass = 0.000511
 
 # KaonLT 8.2 GeV optics runs
@@ -1094,7 +1076,7 @@ hpcentral = 5.745
 ppcentral = 5.745
 htheta_lab = -12.97
 ptheta_lab = 9.51
-ppartmass =  0.493677
+ppartmass =  0.139570
 hpartmass = 0.000511
 
 # Sieve
@@ -1105,7 +1087,7 @@ hpcentral = 5.745
 ppcentral = 5.745
 htheta_lab = -12.97
 ptheta_lab = 9.51
-ppartmass =  0.493677
+ppartmass =  0.139570
 hpartmass = 0.000511
 
 # Lumi scan
@@ -1116,7 +1098,7 @@ hpcentral = 5.745
 ppcentral = 5.745
 htheta_lab = -12.97
 ptheta_lab = 9.51
-ppartmass =  0.493677
+ppartmass =  0.139570
 hpartmass = 0.000511
 
 # Elastic Singles # 1
@@ -1195,7 +1177,7 @@ hpcentral = 2.328
 ppcentral = 5.389
 htheta_lab = -27.77
 ptheta_lab = 10.005
-ppartmass =  0.493677
+ppartmass =  0.139570
 hpartmass = 0.000511
 
 # Kaon L-T Physics
@@ -1207,7 +1189,7 @@ hpcentral = 2.328
 ppcentral = 5.389
 htheta_lab = -27.77
 ptheta_lab = 13.010
-ppartmass =  0.493677
+ppartmass =  0.139570
 hpartmass = 0.000511
 
 8038 - 8110
@@ -1217,7 +1199,7 @@ hpcentral = 1.8210
 ppcentral = 6.0530
 htheta_lab = -25.895
 ptheta_lab = 6.910
-ppartmass =  0.493677
+ppartmass =  0.139570
 hpartmass = 0.000511
 
 8111 - 8185
@@ -1227,7 +1209,7 @@ hpcentral = 1.8210
 ppcentral = 6.0530
 htheta_lab = -25.895
 ptheta_lab = 9.909
-ppartmass =  0.493677
+ppartmass =  0.139570
 hpartmass = 0.000511
 
 8186 - 8246
@@ -1237,7 +1219,7 @@ hpcentral = 0.962
 ppcentral = 6.755
 htheta_lab = -49.308
 ptheta_lab = 8.498
-ppartmass =  0.493677
+ppartmass =  0.139570
 hpartmass = 0.000511
 
 8251 - 8999
@@ -1247,5 +1229,5 @@ hpcentral = 0.962
 ppcentral = 6.755
 htheta_lab = -49.308
 ptheta_lab = 6.205
-ppartmass =  0.493677
+ppartmass =  0.139570
 hpartmass = 0.000511

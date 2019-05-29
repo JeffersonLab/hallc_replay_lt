@@ -196,7 +196,7 @@ Bool_t calibration::Process(Long64_t entry)
 	  if (!fTrack && fCut && !fPions)
 	    {
 	      //Retrieve particle ID information
-	      Float_t central_p = 2.2;
+	      Float_t central_p = 2.2; // !!! Why is this hard coded in!? Should get it from the parameter file
 	      Float_t p = ((P_gtr_dp[0]/100.0)*central_p) + central_p;
 
 	      //Fill histogram visualizaing the electron selection

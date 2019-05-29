@@ -16,12 +16,8 @@ RAID
 REPORT_OUTPUT
 HISTOGRAMS
 MON_OUTPUT
-<<<<<<< HEAD
 ROOTfiles*
-=======
-ROOTfiles
 OUTPUT
->>>>>>> upstream/offline
 .root_history
 raw*
 raw.copiedtotape

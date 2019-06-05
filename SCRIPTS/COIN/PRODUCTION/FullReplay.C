@@ -24,7 +24,7 @@ void FullReplay (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./cache");
 
   //const char* RunFileNamePattern = "raw/coin_all_%05d.dat";
-  const char* ROOTFileNamePattern = "ROOTfilesFullReplay/coin_replay_Full_%d_%d.root";                                                                                                                         
+  const char* ROOTFileNamePattern = "ROOTfilesFullReplay/coin_replay_Full_%d_%d.root";
 
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
@@ -191,7 +191,8 @@ void FullReplay (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   coin->SetEvtType(1);
   coin->AddEvtType(2);
   TRG->AddDetector(coin); 
-
+  THcHelicity* helicity = new THcHelicity("helicity","Helicity Detector");
+  TRG->AddDetector(helicity); 
   
   //Add coin physics module THcCoinTime::THcCoinTime (const char *name, const char* description, const char* hadArmName, 
   // const char* elecArmName, const char* coinname) :

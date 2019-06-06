@@ -964,14 +964,34 @@ ppartmass = 0.493677
 hpartmass = 0.000511
 
 # lumi
-7841 - 7847
+7841
+gpbeam = 6.19009
+gtargmass_amu = 12.0107
+hpcentral = 3.939
+ppcentral = 3.939
+htheta_lab = -11.005
+ptheta_lab = 13.005
+ppartmass = 0.000511
+hpartmass = 0.000511
+
+7842-7845
 gpbeam = 6.19009
 gtargmass_amu = 1.00794
 hpcentral = 3.939
 ppcentral = 3.939
 htheta_lab = -11.005
 ptheta_lab = 13.005
-ppartmass = 0.493677
+ppartmass = 0.000511
+hpartmass = 0.000511
+
+7846-7847
+gpbeam = 6.19009
+gtargmass_amu = 12.0107
+hpcentral = 3.939
+ppcentral = 3.939
+htheta_lab = -11.005
+ptheta_lab = 13.005
+ppartmass = 0.000511
 hpartmass = 0.000511
 
 # HEEP Singles #1
@@ -1019,14 +1039,24 @@ ppartmass = 0.000511
 hpartmass = 0.000511
 
 # lumi
-7862 - 7865
+7862 - 7863
 gpbeam = 6.19009
 gtargmass_amu = 1.00794
 hpcentral = 3.939
 ppcentral = 3.939
 htheta_lab = -11.00
 ptheta_lab = 13.00
-ppartmass = 0.493677
+ppartmass = 0.139570
+hpartmass = 0.000511
+
+7864-7865
+gpbeam = 6.19009
+gtargmass_amu = 12.0107
+hpcentral = 3.939
+ppcentral = 3.939
+htheta_lab = -11.00
+ptheta_lab = 13.00
+ppartmass = 0.000511
 hpartmass = 0.000511
 
 # Heep-coin
@@ -1109,14 +1139,24 @@ ppartmass =  0.493677
 hpartmass = 0.000511
 
 # Lumi scan
-7948 - 7961
+7948 - 7953
+gpbeam = 8.186
+gtargmass_amu = 12.0107
+hpcentral = 5.745
+ppcentral = 5.745
+htheta_lab = -12.97
+ptheta_lab = 9.51
+ppartmass = 0.000511
+hpartmass = 0.000511
+
+7954-7861
 gpbeam = 8.186
 gtargmass_amu = 1.00794
 hpcentral = 5.745
 ppcentral = 5.745
 htheta_lab = -12.97
 ptheta_lab = 9.51
-ppartmass =  0.493677
+ppartmass = 0.000511
 hpartmass = 0.000511
 
 # Elastic Singles # 1

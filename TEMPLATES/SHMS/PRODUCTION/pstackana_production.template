@@ -194,7 +194,7 @@ P2XP2Y : {P.S2XS2Y.scalerCut} [ {(P.S2XS2Y.scalerCut/P.1MHz.scalerTimeCut)/1000.
 
 AERO : {P.AERO.scalerCut} [ {(P.AERO.scalerCut/P.1MHz.scalerTimeCut)/1000.:%.3f} kHz ] Aerogel sum currently not available
 HGC  : {P.HCER.scalerCut} [ {(P.HCER.scalerCut/P.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
-NGC  : {P.NCER.scalerCut} [ {(P.NCER.scalerCut/P.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
+#NGC  : {P.NCER.scalerCut} [ {(P.NCER.scalerCut/P.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
 PRLO : {P.PRLO.scalerCut} [ {(P.PRLO.scalerCut/P.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
 PRHI : {P.PRHI.scalerCut} [ {(P.PRHI.scalerCut/P.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
 
@@ -326,8 +326,8 @@ pcut_Clean3Track:{pcut_Clean3Track.npassed}	 eff: {pcut_Clean3Track.npassed/(shm
 pcut_Clean4Track:{pcut_Clean4Track.npassed}	 eff: {pcut_Clean4Track.npassed/(shms_trigs.npassed+.0001):%5.3f}
 
 **CHERENKOVS AND CAL**
-pcut_cer_ng_elec   :	  {pcut_cer_ng_elec.npassed}
-pcut_cer_ng_pi     :	  {pcut_cer_ng_pi.npassed}
+pcut_cer_ag_elec   :	  {pcut_cer_ag_elec.npassed}
+pcut_cer_ag_pi     :	  {pcut_cer_ag_pi.npassed}
 pcut_cer_hg_elec   :	  {pcut_cer_hg_elec.npassed}
 pcut_cer_hg_pi     :	  {pcut_cer_hg_pi.npassed}
 pcut_cer_pi_both   :	  {pcut_cer_pi_both.npassed}
@@ -389,23 +389,6 @@ SHMS HGC Region 2 efficiency: {SHMS_hgcer_track_fired_region_2.npassed/SHMS_hgce
 SHMS HGC Region 3 efficiency: {SHMS_hgcer_track_fired_region_3.npassed/SHMS_hgcer_track_matched_region_3.npassed} = {SHMS_hgcer_track_fired_region_3.npassed} of {SHMS_hgcer_track_matched_region_3.npassed} good tracks.
 SHMS HGC Region 4 efficiency: {SHMS_hgcer_track_fired_region_4.npassed/SHMS_hgcer_track_matched_region_4.npassed} = {SHMS_hgcer_track_fired_region_4.npassed} of {SHMS_hgcer_track_matched_region_4.npassed} good tracks.
 Overall HGC Efficiency: {SHMS_hgcer_track_fired_tot.npassed/SHMS_hgcer_track_matched_tot.npassed} = {SHMS_hgcer_track_fired_tot.npassed} of {SHMS_hgcer_track_matched_tot.npassed} good tracks.
-
-***************
-* NGC Cerenkov 
-***************
-
-Good Track Requirements:
-   1. Only one track found in the focal plane
-   2. chisq/dof < {pngcer_red_chi2_max:%5.1f}
-   3. {pngcer_beta_min:%5.3f} < beta < {pngcer_beta_max:%5.3f}
-   4. {pngcer_enorm_min:%5.3f} < calorimeter energy < {pngcer_enorm_max:%5.3f}
-Threshold set at {pngcer_npe_thresh:%4.1f}
-*NGC EFF* 4PMTs
-SHMS NGC Region 1 efficiency: {SHMS_ngcer_track_fired_region_1.npassed/SHMS_ngcer_track_matched_region_1.npassed} = {SHMS_ngcer_track_fired_region_1.npassed} of {SHMS_ngcer_track_matched_region_1.npassed} good tracks.
-SHMS NGC Region 2 efficiency: {SHMS_ngcer_track_fired_region_2.npassed/SHMS_ngcer_track_matched_region_2.npassed} = {SHMS_ngcer_track_fired_region_2.npassed} of {SHMS_ngcer_track_matched_region_2.npassed} good tracks.
-SHMS NGC Region 3 efficiency: {SHMS_ngcer_track_fired_region_3.npassed/SHMS_ngcer_track_matched_region_3.npassed} = {SHMS_ngcer_track_fired_region_3.npassed} of {SHMS_ngcer_track_matched_region_3.npassed} good tracks.
-SHMS NGC Region 4 efficiency: {SHMS_ngcer_track_fired_region_4.npassed/SHMS_ngcer_track_matched_region_4.npassed} = {SHMS_ngcer_track_fired_region_4.npassed} of {SHMS_ngcer_track_matched_region_4.npassed} good tracks.
-Overall NGC Efficiency: {SHMS_ngcer_track_fired_tot.npassed/SHMS_ngcer_track_matched_tot.npassed} = {SHMS_ngcer_track_fired_tot.npassed} of {SHMS_ngcer_track_matched_tot.npassed} good tracks.
 
 **********
 * Aerogel  

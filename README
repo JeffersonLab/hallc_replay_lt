@@ -1,5 +1,4 @@
-This branch, summer-2019-ver0, contains all of the scripts for the online running of the upcoming pion experiments. 
-It will be updated before the run starts and switced to a new branch, ver1 for online running. 
+This branch, summer-2019-ver1, has all of the scripts as setup for the start of the run on 17/6/19.
 Once the run is over, a "final" branch will be created. 
 This will serve as a snapshot of the parameter files and scripts as used during the run.
 

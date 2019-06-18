@@ -998,7 +998,7 @@ hpartmass = 0.000511
 7848 - 7849
 gpbeam = 6.19009
 gtargmass_amu = 1.00794
-hpcentral = 2.939
+hpcentral = 3.939
 ppcentral = 3.939
 htheta_lab = -24.00
 ptheta_lab = 24.00
@@ -1288,4 +1288,18 @@ ppcentral = 6.755
 htheta_lab = -49.308
 ptheta_lab = 6.205
 ppartmass =  0.493677
+hpartmass = 0.000511
+
+### Pion Electrproduction Runs
+### Summer 2019
+
+# Beam checkout/calibration runs
+9000-9999
+gpbeam = 2.744
+gtargmass_amu = 1.00794
+hpcentral = 1.500
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 9.50
+ppartmass =  0.000511
 hpartmass = 0.000511

@@ -1101,7 +1101,7 @@ hpartmass = 0.000511
 
 # Sieve
 7947
-gpbeam = 8.186
+gpbeam = 8.210
 gtargmass_amu = 1.00794
 hpcentral = 5.745
 ppcentral = 5.745
@@ -1112,7 +1112,7 @@ hpartmass = 0.000511
 
 # Lumi scan
 7948 - 7961
-gpbeam = 8.186
+gpbeam = 8.210
 gtargmass_amu = 1.00794
 hpcentral = 5.745
 ppcentral = 5.745
@@ -1123,7 +1123,7 @@ hpartmass = 0.000511
 
 # Elastic Singles # 1
 7962 - 7963
-gpbeam = 8.186
+gpbeam = 8.210
 gtargmass_amu = 1.00794
 hpcentral = 5.745
 ppcentral = 5.745
@@ -1134,7 +1134,7 @@ hpartmass = 0.000511
 
 # Elastic Singles # 2
 7964 - 7965
-gpbeam = 8.186
+gpbeam = 8.210
 gtargmass_amu = 1.00794
 hpcentral = 5.3720
 ppcentral = 5.3720
@@ -1145,7 +1145,7 @@ hpartmass = 0.000511
 
 # Elastic Singles # 3
 7966 - 7967
-gpbeam = 8.186
+gpbeam = 8.210
 gtargmass_amu = 1.00794
 hpcentral = 5.013
 ppcentral = 5.013
@@ -1156,7 +1156,7 @@ hpartmass = 0.000511
 
 # Elastic Singles # 4
 7968 - 7969
-gpbeam = 8.186
+gpbeam = 8.210
 gtargmass_amu = 1.00794
 hpcentral = 4.672
 ppcentral = 4.672
@@ -1167,7 +1167,7 @@ hpartmass = 0.000511
 
 # Elastic Singles # 5
 7970 - 7972
-gpbeam = 8.186
+gpbeam = 8.210
 gtargmass_amu = 1.00794
 hpcentral = 4.352
 ppcentral = 4.352

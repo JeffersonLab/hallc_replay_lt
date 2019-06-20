@@ -10,6 +10,8 @@
 *.pdf
 .nfs*
 *.root
+*.root*
+*_-1_0_-1
 
 # Directories
 RAID
@@ -37,3 +39,4 @@ CALIBRATION/dc_calib/scripts/SHMS_*
 # Symbolic links
 hcana
 scratch
+ROOTfilesPion

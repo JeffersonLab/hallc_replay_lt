@@ -5,7 +5,6 @@
 #include "DEF-files/SHMS/TEST_STANDS/DC/pdcana_histos.def"
 #include "DEF-files/SHMS/TEST_STANDS/HGCER/phgcerana_histos.def"
 #include "DEF-files/SHMS/TEST_STANDS/HODO/phodoana_histos.def"
-#include "DEF-files/SHMS/TEST_STANDS/NGCER/pngcerana_histos.def"
 #include "DEF-files/SHMS/TEST_STANDS/TRIG/ptrigana_histos.def"
 
 #include "DEF-files/SHMS/PRODUCTION/TRIG/ptrig_histos.def"
@@ -14,7 +13,6 @@
 #include "DEF-files/SHMS/PRODUCTION/DC/pdc_histos.def"
 #include "DEF-files/SHMS/PRODUCTION/HGCER/phgcer_histos.def"
 #include "DEF-files/SHMS/PRODUCTION/HODO/phodo_histos.def"
-#include "DEF-files/SHMS/PRODUCTION/NGCER/pngcer_histos.def"
 
 #include "DEF-files/SHMS/PRODUCTION/KIN/pkin_histos.def"
 #include "DEF-files/SHMS/PRODUCTION/GTR/pgtr_histos.def"

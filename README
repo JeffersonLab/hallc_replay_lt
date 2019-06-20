@@ -63,6 +63,9 @@ The value of epsilon should also match up. You should also see a missing mass pl
 neutron mass (~0.940). This should have a nice gaussian fit to it, you'll also get a textbox with the 
 number of pion events found. Make a note of this number on the run sheet.
 
+NOTE - The scripts are set up such that they will NOT run another replay IF an existing root file exists.
+If you want to replay again, comment out the relevant line in each script.
+
 ######################################################################################################
 ###################################### DEBUGGING #####################################################
 ######################################################################################################

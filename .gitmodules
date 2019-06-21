@@ -10,3 +10,7 @@
 	path = UTIL_PION
 	url = https://github.com/sjdkay/UTIL_PION.git/
 	branch = offline
+[submodule "UTIL_BATCH"]
+	path = UTIL_BATCH
+	url = https://github.com/sjdkay/UTIL_BATCH.git/
+	branch = develop

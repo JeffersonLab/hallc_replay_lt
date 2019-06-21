@@ -12,5 +12,5 @@
 	branch = offline
 [submodule "UTIL_BATCH"]
 	path = UTIL_BATCH
-	url = https://github.com/sjdkay/UTIL_BATCH.git/
+	url = https://github.com/sjdkay/UTIL_BATCH/
 	branch = develop

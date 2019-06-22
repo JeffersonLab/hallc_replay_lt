@@ -4,7 +4,7 @@
 20	Minimum number of hits per channel required to be calibrated
 0. 2.	Range of uncalibrated energy deposition histogram
 500	Binning of uncalibrated energy deposition histogram
-0.5 1.5	Gaussian fit range around e- peak in the uncalibrated Edep histogram
+0.4 1.	Gaussian fit range around e- peak in the uncalibrated Edep histogram
 
 ; Initial calibration constants. 7834
 

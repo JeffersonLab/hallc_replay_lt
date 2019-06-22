@@ -1272,7 +1272,7 @@ ptheta_lab = 8.498
 ppartmass =  0.493677
 hpartmass = 0.000511
 
-8251 - 8999
+8251 - 8367
 gpbeam = 8.210
 gtargmass_amu = 1.00794
 hpcentral = 0.962
@@ -1282,16 +1282,62 @@ ptheta_lab = 6.205
 ppartmass =  0.493677
 hpartmass = 0.000511
 
-### Pion Electrproduction Runs
-### Summer 2019
+################ Pion Electrproduction Runs #################
+################ Summer 2019 ################################
 
-# Beam checkout/calibration runs
-9000 - 9999
-gpbeam = 2.744
-gtargmass_amu = 1.00794
+# Beam checkout/calibration runs / Carbon Hole
+8368 - 8372
+gpbeam = 2.758
+gtargmass_amu = 12.0107
 hpcentral = 1.500
 ppcentral = 1.500
 htheta_lab = -11.50
-ptheta_lab = 9.50
+ptheta_lab = 9.499
+ppartmass =  0.000511
+hpartmass = 0.000511
+
+
+# Carbon 1.5% for PID legs checkout
+8373 - 8374
+gpbeam = 2.758
+gtargmass_amu = 12.0107
+hpcentral = 1.500
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 9.499
+ppartmass =  0.000511
+hpartmass = 0.000511
+
+# Carbon Sieve
+8375 - 8376
+gpbeam = 2.758
+gtargmass_amu = 12.0107
+hpcentral = 1.500
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 9.499
+ppartmass =  0.000511
+hpartmass = 0.000511
+
+
+# Carbon 1.5 pid legs
+8377 - 8386
+gpbeam = 2.758
+gtargmass_amu = 12.0107
+hpcentral = 0.448
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 9.499
+ppartmass =  0.000511
+hpartmass = 0.000511
+
+# Carbon 1.5 sieve
+8387 - 9999
+gpbeam = 2.758
+gtargmass_amu = 12.0107
+hpcentral = 0.448
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 9.499
 ppartmass =  0.000511
 hpartmass = 0.000511

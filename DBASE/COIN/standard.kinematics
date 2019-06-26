@@ -1287,7 +1287,7 @@ hpartmass = 0.000511
 
 # Beam checkout/calibration runs / Carbon Hole
 8368 - 8372
-gpbeam = 2.758
+gpbeam = 2.783
 gtargmass_amu = 12.0107
 hpcentral = 1.500
 ppcentral = 1.500
@@ -1296,10 +1296,9 @@ ptheta_lab = 9.499
 ppartmass =  0.000511
 hpartmass = 0.000511
 
-
-# Carbon 1.5% for PID legs checkout
+# Carbon 1.5%, PID legs checkout
 8373 - 8374
-gpbeam = 2.758
+gpbeam = 2.783
 gtargmass_amu = 12.0107
 hpcentral = 1.500
 ppcentral = 1.500
@@ -1310,7 +1309,7 @@ hpartmass = 0.000511
 
 # Carbon Sieve
 8375 - 8376
-gpbeam = 2.758
+gpbeam = 2.783
 gtargmass_amu = 12.0107
 hpcentral = 1.500
 ppcentral = 1.500
@@ -1320,9 +1319,9 @@ ppartmass =  0.000511
 hpartmass = 0.000511
 
 
-# Carbon 1.5 pid legs
+# Carbon 1.5, pid legs
 8377 - 8386
-gpbeam = 2.758
+gpbeam = 2.783
 gtargmass_amu = 12.0107
 hpcentral = 0.448
 ppcentral = 1.500
@@ -1331,9 +1330,9 @@ ptheta_lab = 9.499
 ppartmass =  0.000511
 hpartmass = 0.000511
 
-# Carbon 1.5 sieve
-8387 - 9999
-gpbeam = 2.758
+# Carbon 1.5, sieve runs
+8387 - 8391
+gpbeam = 2.783
 gtargmass_amu = 12.0107
 hpcentral = 0.448
 ppcentral = 1.500
@@ -1341,3 +1340,200 @@ htheta_lab = -11.50
 ptheta_lab = 9.499
 ppartmass =  0.000511
 hpartmass = 0.000511
+
+# Optics 1, sieve runs
+8392 - 8395
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 0.800
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 9.499
+ppartmass = 0.000511
+hpartmass = 0.000511
+
+# Optics 1, sieve runs
+8396 - 8402
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 1.000
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 9.499
+ppartmass = 0.000511
+hpartmass = 0.000511
+
+# Optics 1, shms pointing scan
+8403 - 8404
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 1.000
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 7.598
+ppartmass = 0.000511
+hpartmass = 0.000511
+
+# Optics 1, shms pointing scan 2
+8405 - 8406
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 1.000
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 10.990
+ppartmass = 0.000511
+hpartmass = 0.000511
+
+# Optics 1, shms pointing scan 3
+8407 - 8408
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 1.000
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 12.990
+ppartmass = 0.000511
+hpartmass = 0.000511
+
+# Optics 1, shms pointing scan 4
+8409 - 8409
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 1.000
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 14.990
+ppartmass = 0.000511
+hpartmass = 0.000511
+
+# Optics 1, shms pointing scan 5
+8410 - 8411
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 1.000
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 16.990
+ppartmass = 0.000511
+hpartmass = 0.000511
+
+# Optics 1, shms pointing scan 6
+8412 - 8413
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 1.000
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 19.985
+ppartmass = 0.000511
+hpartmass = 0.000511
+
+# Optics 1, shms pointing scan 7
+8414 - 8416
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 1.000
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 24.984
+ppartmass = 0.000511
+hpartmass = 0.000511
+
+# Optics 1, shms pointing scan 8
+8417 - 8419
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 1.000
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 29.967
+ppartmass = 0.000511
+hpartmass = 0.000511
+
+# Optics 1, shms pointing scan 9
+8420 - 8421
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 1.000
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 34.995
+ppartmass = 0.000511
+hpartmass = 0.000511
+ 
+#optics 1, shms pointing scan 10
+8422-8425
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 1.000
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 38.795
+ppartmass = 0.000511
+hpartmass = 0.000511
+
+#optics 1, hms pointing scan 10
+8426-8440
+gpbeam = 2.775
+gtargmass_amu = 12.0107
+hpcentral = 1.500
+ppcentral = 2.77
+htheta_lab = -13.50
+ptheta_lab = 6.00
+ppartmass = 0.000511
+hpartmass = 0.000511
+
+8441-8443
+gpbeam = 2.775
+gtargmass_amu = 12.0107
+hpcentral = 1.500
+ppcentral = 2.77
+htheta_lab = -15.50
+ptheta_lab = 6.00
+ppartmass = 0.000511
+hpartmass = 0.000511
+
+8444-8445
+gpbeam = 2.775
+gtargmass_amu = 12.0107
+hpcentral = 1.500
+ppcentral = 2.77
+htheta_lab = -17.50
+ptheta_lab = 6.00
+ppartmass = 0.000511
+hpartmass = 0.000511
+
+8446-8446
+gpbeam = 2.775
+gtargmass_amu = 12.0107
+hpcentral = 1.500
+ppcentral = 2.77
+htheta_lab = -20.00
+ptheta_lab = 6.00
+ppartmass = 0.000511
+hpartmass = 0.000511
+
+8447-8447
+gpbeam = 2.775
+gtargmass_amu = 12.0107
+hpcentral = 1.500
+ppcentral = 2.77
+htheta_lab = -25.00
+ptheta_lab = 6.00
+ppartmass = 0.000511
+hpartmass = 0.000511
+
+8448-9999
+gpbeam = 2.775
+gtargmass_amu = 12.0107
+hpcentral = 1.500
+ppcentral = 2.77
+htheta_lab = -30.00
+ptheta_lab = 6.00
+ppartmass = 0.000511
+hpartmass = 0.000511
+
+
+
+

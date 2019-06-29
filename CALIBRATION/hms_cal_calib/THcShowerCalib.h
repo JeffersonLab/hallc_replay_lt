@@ -433,7 +433,7 @@ void THcShowerCalib::CalcThresholds() {
   TF1 *fit = hEunc->GetFunction("gaus");
   Double_t gmean  = fit->GetParameter(1);
   Double_t gsigma = fit->GetParameter(2);
-  fLoThr = gmean - 3.*gsigma;
+  fLoThr = gmean - 2.*gsigma;
   fHiThr = gmean + 3.*gsigma;
   cout << "CalcThreshods: fLoThr=" << fLoThr << "  fHiThr=" << fHiThr 
        << "  nev=" << nev << endl;

@@ -1599,7 +1599,7 @@ hpartmass = 0.000511
 #Heep
 
 8482-8483
-gpbeam = 2.758
+gpbeam = 2.749
 gtargmass_amu = 1.00794
 hpcentral = 2.6170
 ppcentral = 2.6040
@@ -1609,7 +1609,7 @@ ppartmass = 0.000511
 hpartmass = 0.000511
 
 8484-8486
-gpbeam = 2.758
+gpbeam = 2.749
 gtargmass_amu = 1.00794
 hpcentral = 2.573
 ppcentral = 2.573
@@ -1619,7 +1619,7 @@ ppartmass = 0.000511
 hpartmass = 0.000511
 
 8487-8489
-gpbeam = 2.758
+gpbeam = 2.749
 gtargmass_amu = 1.00794
 hpcentral = 2.501
 ppcentral = 2.501
@@ -1629,7 +1629,7 @@ ppartmass = 0.000511
 hpartmass = 0.000511
 
 8490-8491
-gpbeam = 2.758
+gpbeam = 2.749
 gtargmass_amu = 1.00794
 hpcentral = 2.30
 ppcentral = 2.30
@@ -1640,7 +1640,7 @@ hpartmass = 0.000511
 
 #Q2 = 0.375 centre
 8492-8508
-gpbeam = 2.758
+gpbeam = 2.749
 gtargmass_amu = 1.00794
 hpcentral = 0.448
 ppcentral = 2.30
@@ -1651,7 +1651,7 @@ hpartmass = 0.000511
 
 #Q2 = 0.425 centre
 8509-8516
-gpbeam = 2.758
+gpbeam = 2.749
 gtargmass_amu = 1.00794
 hpcentral = 0.421
 ppcentral = 2.326
@@ -1662,7 +1662,7 @@ hpartmass = 0.000511
 
 #Q2 = 0.425 left 1
 8517-8528
-gpbeam = 2.758
+gpbeam = 2.749
 gtargmass_amu = 1.00794
 hpcentral = 0.421
 ppcentral = 2.326
@@ -1673,7 +1673,7 @@ hpartmass = 0.000511
 
 #Q2 = 0.425 left 2
 8529-8536
-gpbeam = 2.758
+gpbeam = 2.749
 gtargmass_amu = 1.00794
 hpcentral = 0.421
 ppcentral = 2.326
@@ -1684,7 +1684,7 @@ hpartmass = 0.000511
 
 #Q2 = 0.375 left 2
 8537-8542
-gpbeam = 2.758
+gpbeam = 2.749
 gtargmass_amu = 1.00794
 hpcentral = 0.448
 ppcentral = 2.300
@@ -1694,12 +1694,78 @@ ppartmass = 0.139570
 hpartmass = 0.000511
 
 #Q2 = 0.375 left 1
-8543-9999
-gpbeam = 2.758
+8543-8547
+gpbeam = 2.749
 gtargmass_amu = 1.00794
 hpcentral = 0.448
 ppcentral = 2.300
 htheta_lab = -31.965
 ptheta_lab = 7.695
 ppartmass = 0.139570
+hpartmass = 0.000511
+
+# HeeP Coin
+8548 - 8551
+gpbeam = 2.749
+gtargmass_amu = 1.00794
+hpcentral = 1.729
+ppcentral = 1.729
+htheta_lab = -37.10
+ptheta_lab = 37.105
+ppartmass = 0.93827231
+hpartmass = 0.000511
+
+# elastic singles junk
+8552 - 8556
+gpbeam = 2.749
+gtargmass_amu = 1.00794
+hpcentral = 2.3000
+ppcentral = 2.3000
+htheta_lab = -21.195
+ptheta_lab = 21.195
+ppartmass = 0.93827231
+hpartmass = 0.000511
+
+# elastic singles
+8557 - 8559
+gpbeam = 2.749
+gtargmass_amu = 1.00794
+hpcentral = 1.964
+ppcentral = 1.964
+htheta_lab = -30.395
+ptheta_lab = 30.405
+ppartmass = 0.93827231
+hpartmass = 0.000511
+
+# elastic singles
+8560 - 8565
+gpbeam = 2.749
+gtargmass_amu = 1.00794
+hpcentral = 1.8480
+ppcentral = 1.8480
+htheta_lab = -33.640
+ptheta_lab = 33.645
+ppartmass = 0.93827231
+hpartmass = 0.000511
+
+# elastic singles
+8566 - 8568
+gpbeam = 2.749
+gtargmass_amu = 1.00794
+hpcentral = 2.3000
+ppcentral = 2.3000
+htheta_lab = 21.200
+ptheta_lab = 21.200
+ppartmass = 0.93827231
+hpartmass = 0.000511
+
+# 3.6 GeV Heep
+8569 - 9999
+gpbeam = 3.660
+gtargmass_amu = 1.00794
+hpcentral = 2.114
+ppcentral = 2.300
+htheta_lab = 35.65
+ptheta_lab = 32.395
+ppartmass = 0.93827231
 hpartmass = 0.000511

@@ -33,8 +33,8 @@ formula FRYBraw_V P.rb.raster.frybRawAdc*(1./4096.)/25.
 # TH2F pFRAraw_XvsY 'SHMS FRA Raw X vs Y; FRXA RAW ADC (Volts); FRYA RAW ADC (Volts)' FRXAraw_V FRYAraw_V 100 0 1.0 100 0 1.0 P.dc.ntrack>0
 # TH2F pFRBraw_XvsY 'SHMS FRB Raw X vs Y; FRXB RAW ADC (Volts); FRYB RAW ADC (Volts)' FRXBraw_V FRYBraw_V 100 0 1.0 100 0 1.0 P.dc.ntrack>0
 
-TH2F pFRApos_XvsY 'SHMS FRA X vs Y; FRA X Position (cm); FRA Y Position (cm)' P.rb.raster.fr_xa P.rb.raster.fr_ya 40 -0.2 0.2 40 -0.2 0.2 P.dc.ntrack>0
-TH2F pFRBpos_XvsY 'SHMS FRB X vs Y; FRB X Position (cm); FRB Y Position (cm)' P.rb.raster.fr_xb P.rb.raster.fr_yb 40 -0.2 0.2 40 -0.2 0.2 P.dc.ntrack>0
+TH2F pFRApos_XvsY 'SHMS FRA X vs Y; FRA X Position (cm); FRA Y Position (cm)' P.rb.raster.fr_xa P.rb.raster.fr_ya 140 -0.2 0.2 140 -0.2 0.2 P.dc.ntrack>0
+TH2F pFRBpos_XvsY 'SHMS FRB X vs Y; FRB X Position (cm); FRB Y Position (cm)' P.rb.raster.fr_xb P.rb.raster.fr_yb 140 -0.2 0.2 140 -0.2 0.2 P.dc.ntrack>0
 
 TH1F hBPMA_X 'Beam BPMA_X ; BPMA_X  (CM); Counts' P.rb.raster.fr_xbpmA 300 -.3 .3
 TH1F hBPMB_X 'Beam BPMB_X ; BPMB_X  (CM); Counts' P.rb.raster.fr_xbpmB 300 -.3 .3

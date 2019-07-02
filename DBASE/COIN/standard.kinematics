@@ -1754,18 +1754,54 @@ gpbeam = 2.749
 gtargmass_amu = 1.00794
 hpcentral = 2.3000
 ppcentral = 2.3000
-htheta_lab = 21.200
+htheta_lab = - 21.200
 ptheta_lab = 21.200
 ppartmass = 0.93827231
 hpartmass = 0.000511
 
 # 3.6 GeV Heep
-8569 - 9999
+8569 - 8572
 gpbeam = 3.660
 gtargmass_amu = 1.00794
 hpcentral = 2.114
 ppcentral = 2.300
-htheta_lab = 35.65
+htheta_lab = - 35.65
 ptheta_lab = 32.395
 ppartmass = 0.93827231
 hpartmass = 0.000511
+
+# 3.6 GeV Heep
+8573 - 8582
+gpbeam = 3.660
+gtargmass_amu = 1.00794
+hpcentral = 1.182
+ppcentral = 2.412
+htheta_lab = - 33.64
+ptheta_lab = 11.755
+ppartmass = 0.139570
+hpartmass = 0.000511
+
+# 3.6 GeV Heep
+8583 - 8584
+gpbeam = 3.650
+gtargmass_amu = 1.00794
+hpcentral = 1.182
+ppcentral = 2.412
+htheta_lab = - 33.64
+ptheta_lab = 13.755
+ppartmass = 0.139570
+hpartmass = 0.000511
+
+# 3.6 GeV Heep
+8585 - 9999
+gpbeam = 3.650
+gtargmass_amu = 1.00794
+hpcentral = 1.35
+ppcentral = 2.3
+htheta_lab = - 15.83
+ptheta_lab = 5.75
+ppartmass = 0.139570
+hpartmass = 0.000511
+
+
+

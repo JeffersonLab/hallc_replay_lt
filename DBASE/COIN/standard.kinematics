@@ -1982,7 +1982,7 @@ ppartmass = 0.139570
 hpartmass = 0.000511
 
 # 4.5 GeV Q2=0.425 th=10.075
-8758 - 9999
+8758 - 8762
 gpbeam = 4.550
 gtargmass_amu = 1.00794
 hpcentral = 2.226
@@ -1993,7 +1993,7 @@ ppartmass = 0.139570
 hpartmass = 0.000511
 
 # 4.5 GeV Q2=0.425 th=12.075
-8758 - 8767
+8763 - 8767
 gpbeam = 4.550
 gtargmass_amu = 1.00794
 hpcentral = 2.226
@@ -2015,7 +2015,7 @@ ppartmass = 0.139570
 hpartmass = 0.000511
 
 # 4.5 GeV Heep, Pshms = 2.792,th=29.90, Phms = -2.553, th =33.05
-8775 - 9999
+8775 - 8779
 gpbeam = 4.550
 gtargmass_amu = 1.00794
 hpcentral = 2.553*.997
@@ -2026,12 +2026,133 @@ ppartmass = 0.93827
 hpartmass = 0.000511
 
 # 4.5 GeV Q2=0.425 th=15.14
-8780 - 9999
+8780 - 8784
 gpbeam = 4.550
 gtargmass_amu = 1.00794
 hpcentral = 1.662
 ppcentral = 2.792
 htheta_lab = -30.65
 ptheta_lab = 15.14
+ppartmass = 0.139570
+hpartmass = 0.000511
+ 
+# 4.5 GeV Q2=0.425 th=17.13
+8785 - 8789
+gpbeam = 4.550
+gtargmass_amu = 1.00794
+hpcentral = 1.662
+ppcentral = 2.792
+htheta_lab = -30.65
+ptheta_lab = 17.13
+ppartmass = 0.139570
+hpartmass = 0.000511
+
+# 4.5 GeV Q2=0.425 th=13.14
+8790 - 8796
+gpbeam = 4.550
+gtargmass_amu = 1.00794
+hpcentral = 1.662
+ppcentral = 2.792
+htheta_lab = -30.65
+ptheta_lab = 13.140
+ppartmass = 0.139570
+hpartmass = 0.000511
+
+# 4.5 GeV Q2=0.425 th=15.14
+8797 - 8798
+gpbeam = 4.550
+gtargmass_amu = 1.00794
+hpcentral = 1.662
+ppcentral = 2.792
+htheta_lab = -30.65
+ptheta_lab = 15.14
+ppartmass = 0.139570
+hpartmass = 0.000511
+
+# 4.5 GeV Q2=0.425 th=17.13
+8799 - 8801
+gpbeam = 4.550
+gtargmass_amu = 1.00794
+hpcentral = 1.662
+ppcentral = 2.792
+htheta_lab = -30.65
+ptheta_lab = 17.135
+ppartmass = 0.139570
+hpartmass = 0.000511
+
+# 4.5 GeV Q2=0.425 th=13.14
+8802 - 8804
+gpbeam = 4.550
+gtargmass_amu = 1.00794
+hpcentral = 1.662
+ppcentral = 2.792
+htheta_lab = -30.65
+ptheta_lab = 13.14
+ppartmass = 0.139570
+hpartmass = 0.000511
+
+# 4.5 GeV Q2=0.425 th=15.14
+8805 - 8805
+gpbeam = 4.550
+gtargmass_amu = 1.00794
+hpcentral = 1.662
+ppcentral = 2.792
+htheta_lab = -30.65
+ptheta_lab = 15.14
+ppartmass = 0.139570
+hpartmass = 0.000511
+
+# 4.5 GeV Q2=0.425 th=17.13
+8806 - 8806
+gpbeam = 4.550
+gtargmass_amu = 1.00794
+hpcentral = 1.662
+ppcentral = 2.792
+htheta_lab = -30.65
+ptheta_lab = 17.13
+ppartmass = 0.139570
+hpartmass = 0.000511
+
+# 4.5 GeV Q2=0.425 th=13.14
+8807-8807
+gpbeam = 4.550
+gtargmass_amu = 1.00794
+hpcentral = 1.662
+ppcentral = 2.792
+htheta_lab = -30.65
+ptheta_lab = 13.14
+ppartmass = 0.139570
+hpartmass = 0.000511
+
+# 4.5 GeV Q2=0.425 th=15.14
+8808-8809
+gpbeam = 4.550
+gtargmass_amu = 1.00794
+hpcentral = 1.662
+ppcentral = 2.792
+htheta_lab = -30.65
+ptheta_lab = 15.14
+ppartmass = 0.139570
+hpartmass = 0.000511
+
+# 4.5 GeV Q2=0.425 th=17.13
+8811 - 8812
+gpbeam = 4.550
+gtargmass_amu = 1.00794
+hpcentral = 1.662
+ppcentral = 2.792
+htheta_lab = -30.65
+ptheta_lab = 17.13
+ppartmass = 0.139570
+hpartmass = 0.000511
+
+# 4.5 GeV Q2=0.425 th=13.14
+8813 - 9999
+gpbeam = 4.550
+gtargmass_amu = 1.00794
+hpcentral = 1.662
+ppcentral = 2.792
+htheta_lab = -30.65
+ptheta_lab = 13.14
 ppartmass = 0.139570
 hpartmass = 0.000511

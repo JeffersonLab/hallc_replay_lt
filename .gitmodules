@@ -10,6 +10,10 @@
 	path = UTIL_PION
 	url = https://github.com/sjdkay/UTIL_PION.git/
 	branch = develop
+[submodule "UTIL_PROTON"]
+        path = UTIL_PROTON
+        url = https://github.com/sjdkay/UTIL_PROTON.git/
+        branch = develop
 [submodule "UTIL_BATCH"]
 	path = UTIL_BATCH
 	url = https://github.com/sjdkay/UTIL_BATCH/

@@ -1,41 +1,6 @@
-This branch, summer-2019-ver2, has all of the scripts as they were at the END of the run on 20/7/19.
-
-######################################################################################################
-###################################### INSTRUCTIONS ##################################################
-######################################################################################################
-
-The following all assume you are in /home/cdaq/hallc-online/hallc_replay_lt
-
-DO NOT type go_analysis to get back to this folder if you navigate out of it, just cd to the path
-above.
-
-Once you have 50k events (whatever type of run it is), execute the 50k replay scripts via -
-
-./run_coin_hms.sh
-./run_coin_shms.sh
-
-You do not need to provide any other arguments when running these, they will run on the latest file 
-automatically. HOWEVER, you MAY specify a run number if you want to re-run a certain one to double 
-check it. You should compare the histograms produced to the reference plots (see the binder), log 
-any major differences. You should also log any changing trends you see in the plots if they don't
-make sense. E.g. you notice over the course of your shift the beta peak has been shifting steadily
-left.
-
-Once your run ends, you need to execute an online physics analysis script. ONLY do this when the run 
-has ENDED. The script you need to execute depends upon the type of run you are doing. The names of the
-scripts define the types of runs they're for, pretty self explanitory. The scripts you should execute
-are as follows -
-
-./UTIL_PION/HeepSinglesYield.sh RUN# 
-./UTIL_PION/HeepCoinYield.sh RUN#
-./UTIL_PION/luminosity.sh RUN#
-./UTIL_PION/PionYield.sh RUN#
-
-Note for these, you must provide a run number as an arugment, i.e. you just finished a HeepCoin run,
-number 0118999, you would then run - ./UTIL_PION/HeepCoinYield.sh 0118999. 
-You can also provide a number of events to examine as a second argument. You should run for all events
-(-1) however, you do not need to specify this as a second argument as it is assumed to be -1 if you 
-only give 1 argument.
+This branch, offline, has all of the scripts as they were at the END of the run on 20/7/19. It will 
+also receive future updates to scripts that are applicable to ALL users analysing the Kaon or Pion LT
+data.
 
 ######################################################################################################
 #################################### SCRIPT INFO #####################################################
@@ -64,40 +29,3 @@ number of pion events found. Make a note of this number on the run sheet.
 NOTE - The scripts are set up such that they will NOT run another replay IF an existing root file exists.
 If you want to replay again, comment out the relevant line in each script.
 
-######################################################################################################
-###################################### DEBUGGING #####################################################
-######################################################################################################
-
-So, what if these plots look weird? Well, there are some things you should do and some things you
-should not do. You should -
-
-- Double check that standard.kinematics has been updated and is CORRECT, verify that when you start the
-replay the values you THINK it is reading appear in the hcana initiation info dump. Watch out for
-silly typos, e.g. gbeam and not gpbeam.
-
-- Make sure you have the correct particles going into each spectrometer
-
-- Whilst on the subject of standard.kinematics - for aluminium (dummy target) runs, DO NOT enter the mass
-of aluminium. These should be analysed AS THOUGH THEY ARE HYDROGEN. That's the point!
-
-- Check the event selection histograms carefully, particularly the timing ones for the PionYield. If
-these are clearly off this will screw up the kinematics later. 
-
-- If the timing windows are clearly selecting the wrong things you can do one of two things -
-  1. Have a go at correcting it yourself, the relevant file to edit is -
-     UTIL_PION/scripts_Yield/PionYield.C
-     In the main process loop, check the values used in the timing cuts. If you edit these please COMMENT
-     the old versions in the file and leave a note saying who changed it and when too.
-  2. If you don't feel confident in editing the script, make an elog entry noting that the timing windows
-     look off and the plots look weird. Please tag sjdkay@jlab.org, muhozam@jlab.org and trottar@jlab.org
-
-- If the fit to the neutron peak in the pion yield script looks crappy, you can try adjusting the fit
-  parameters and seeing if you get any improvement. Same conditions on commenting as above apply.
-
-You should not -
-
-- Panic
-- Start editing scripts and deleting things without knowing what you're adjusting
-- Delete ANYTHING in the scripts without also leaving a comment explaining what you have deleted or changed
-
-If you have any questions or comments, please email - sjdkay@jlab.org, muhozam@jlab.org or trottar@jlab.org

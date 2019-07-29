@@ -1748,7 +1748,7 @@ ptheta_lab = 33.645
 ppartmass = 0.93827231
 hpartmass = 0.000511
 
-# elastic singles
+# Heep singles
 8566 - 8568
 gpbeam = 2.749
 gtargmass_amu = 1.00794
@@ -1770,7 +1770,7 @@ ptheta_lab = 32.395
 ppartmass = 0.93827231
 hpartmass = 0.000511
 
-# 3.6 GeV Q2=1.45 th=11.76
+# 3.6 GeV Q2 = 1.45
 8573 - 8582
 gpbeam = 3.660
 gtargmass_amu = 1.00794
@@ -1781,9 +1781,9 @@ ptheta_lab = 11.755
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 3.6 GeV Q2=1.45 th=13.76
+# 3.6 GeV Q2 = 1.45
 8583 - 8584
-gpbeam = 3.650
+gpbeam = 3.660
 gtargmass_amu = 1.00794
 hpcentral = 1.182
 ppcentral = 2.412
@@ -1792,9 +1792,9 @@ ptheta_lab = 13.755
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 3.6 GeV Q2=0.375 th=5.75
+# 3.6 GeV Q2 = 0.375
 8585 - 8611
-gpbeam = 3.650
+gpbeam = 3.660
 gtargmass_amu = 1.00794
 hpcentral = 1.35
 ppcentral = 2.3
@@ -1803,10 +1803,9 @@ ptheta_lab = 5.75
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-
-# 3.6 GeV Q2=0.375 th=6.87
+# 3.6 GeV Q2 = 0.375
 8612 - 8619
-gpbeam = 3.650
+gpbeam = 3.660
 gtargmass_amu = 1.00794
 hpcentral = 1.35
 ppcentral = 2.3
@@ -1815,9 +1814,9 @@ ptheta_lab = 6.87
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 3.6 GeV Q2=0.375 th=8.870
+# 3.6 GeV Q2 = 0.375
 8620 - 8620
-gpbeam = 3.650
+gpbeam = 3.660
 gtargmass_amu = 1.00794
 hpcentral = 1.35
 ppcentral = 2.3
@@ -1826,9 +1825,9 @@ ptheta_lab = 8.87
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 3.6 GeV Q2=0.375 th=8.870
+# 3.6 GeV Q2 = 0.375
 8621 - 8627
-gpbeam = 3.650
+gpbeam = 3.660
 gtargmass_amu = 1.00794
 hpcentral = 1.35
 ppcentral = 2.3
@@ -1837,9 +1836,9 @@ ptheta_lab = 8.87
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 3.6 GeV Q2=0.375 th=10.865
+# 3.6 GeV Q2 = 0.375
 8628 - 8637
-gpbeam = 3.650
+gpbeam = 3.660
 gtargmass_amu = 1.00794
 hpcentral = 1.35
 ppcentral = 2.3
@@ -1848,9 +1847,9 @@ ptheta_lab = 10.87
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 3.6 GeV Q2=0.375 th=12.87
+# 3.6 GeV Q2 = 0.375
 8638 - 8654
-gpbeam = 3.650
+gpbeam = 3.660
 gtargmass_amu = 1.00794
 hpcentral = 1.35
 ppcentral = 2.3
@@ -1859,9 +1858,9 @@ ptheta_lab = 12.87
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 3.6 GeV Q2=1.45 th=13.760
+# 3.6 GeV Q2 = 1.45
 8655 - 8670
-gpbeam = 3.650
+gpbeam = 3.660
 gtargmass_amu = 1.00794
 hpcentral = 1.182
 ppcentral = 2.412
@@ -1870,9 +1869,9 @@ ptheta_lab = 13.760
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 3.6 GeV Q2=1.45 th=15.76
+# 3.6 GeV Q2 = 1.45
 8671 - 8680
-gpbeam = 3.650
+gpbeam = 3.660
 gtargmass_amu = 1.00794
 hpcentral = 1.182
 ppcentral = 2.412
@@ -1892,9 +1891,9 @@ ptheta_lab = 9.200
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 3.6 GeV Q2=1.45 th=15.76
+# 3.6 GeV Q2 = 1.45
 8690 - 8696
-gpbeam = 3.650
+gpbeam = 3.660
 gtargmass_amu = 1.00794
 hpcentral = 1.3230
 ppcentral = 2.3260
@@ -1903,10 +1902,9 @@ ptheta_lab = 11.20
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-
-# 3.6 GeV Q2=1.45 th=15.76
+# 3.6 GeV Q2 = 1.45
 8697 - 8700
-gpbeam = 3.650
+gpbeam = 3.660
 gtargmass_amu = 1.00794
 hpcentral = 1.3230
 ppcentral = 2.3260
@@ -1915,9 +1913,9 @@ ptheta_lab = 13.20
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 4.5 GeV Q2=0.33 th=7.64
+# 4.5 GeV Q2 = 0.33 
 8701 - 8710
-gpbeam = 4.550
+gpbeam = 4.559
 gtargmass_amu = 1.00794
 hpcentral = 2.252
 ppcentral = 2.300
@@ -1926,9 +1924,9 @@ ptheta_lab = 7.645
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 4.5 GeV Q2=0.33 th=10.33
+# 4.5 GeV Q2 = 0.33 
 8711 - 8719
-gpbeam = 4.550
+gpbeam = 4.559
 gtargmass_amu = 1.00794
 hpcentral = 2.252
 ppcentral = 2.300
@@ -1937,9 +1935,9 @@ ptheta_lab = 10.325
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 4.5 GeV Q2=0.33 th=12.34
+# 4.5 GeV Q2 = 0.33 
 8720 - 8725
-gpbeam = 4.550
+gpbeam = 4.559
 gtargmass_amu = 1.00794
 hpcentral = 2.252
 ppcentral = 2.300
@@ -1948,9 +1946,9 @@ ptheta_lab = 12.34
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 4.5 GeV Q2=0.375 th=14.33
+# 4.5 GeV Q2 = 0.375
 8726 - 8731
-gpbeam = 4.550
+gpbeam = 4.559
 gtargmass_amu = 1.00794
 hpcentral = 2.252
 ppcentral = 2.300
@@ -1959,9 +1957,9 @@ ptheta_lab = 14.325
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 4.5 GeV Q2=0.425 th=6.87
+# 4.5 GeV Q2 = 0.425
 8732 - 8743
-gpbeam = 4.550
+gpbeam = 4.559
 gtargmass_amu = 1.00794
 hpcentral = 2.226
 ppcentral = 2.326
@@ -1970,9 +1968,9 @@ ptheta_lab = 6.870
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 4.5 GeV Q2=0.425 th=8.075
+# 4.5 GeV Q2 = 0.425
 8744 - 8757
-gpbeam = 4.550
+gpbeam = 4.559
 gtargmass_amu = 1.00794
 hpcentral = 2.226
 ppcentral = 2.326
@@ -1981,9 +1979,9 @@ ptheta_lab = 8.075
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 4.5 GeV Q2=0.425 th=10.075
+# 4.5 GeV Q2 = 0.425
 8758 - 8762
-gpbeam = 4.550
+gpbeam = 4.559
 gtargmass_amu = 1.00794
 hpcentral = 2.226
 ppcentral = 2.326
@@ -1992,9 +1990,9 @@ ptheta_lab = 10.075
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 4.5 GeV Q2=0.425 th=12.075
+# 4.5 GeV Q2 = 0.425
 8763 - 8767
-gpbeam = 4.550
+gpbeam = 4.559
 gtargmass_amu = 1.00794
 hpcentral = 2.226
 ppcentral = 2.326
@@ -2003,9 +2001,9 @@ ptheta_lab = 12.075
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 4.5 GeV Q2=0.425 th=14.08
+# 4.5 GeV Q2 = 0.425
 8768 - 8774
-gpbeam = 4.550
+gpbeam = 4.559
 gtargmass_amu = 1.00794
 hpcentral = 2.226
 ppcentral = 2.326
@@ -2014,9 +2012,9 @@ ptheta_lab = 14.08
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 4.5 GeV Heep, Pshms = 2.792,th=29.90, Phms = -2.553, th =33.05
+# 4.5 GeV Heep COIN
 8775 - 8779
-gpbeam = 4.550
+gpbeam = 4.559
 gtargmass_amu = 1.00794
 hpcentral = 2.553*.997
 ppcentral = 2.792
@@ -2025,9 +2023,9 @@ ptheta_lab = 29.90
 ppartmass = 0.93827
 hpartmass = 0.000511
 
-# 4.5 GeV Q2=0.425 th=15.14
+# 4.5 GeV Q2 = 0.425 
 8780 - 8784
-gpbeam = 4.550
+gpbeam = 4.559
 gtargmass_amu = 1.00794
 hpcentral = 1.662
 ppcentral = 2.792
@@ -2036,9 +2034,9 @@ ptheta_lab = 15.14
 ppartmass = 0.139570
 hpartmass = 0.000511
  
-# 4.5 GeV Q2=0.425 th=17.13
+# 4.5 GeV Q2 = 0.425 
 8785 - 8789
-gpbeam = 4.550
+gpbeam = 4.559
 gtargmass_amu = 1.00794
 hpcentral = 1.662
 ppcentral = 2.792
@@ -2047,9 +2045,9 @@ ptheta_lab = 17.13
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 4.5 GeV Q2=0.425 th=13.14
+# 4.5 GeV Q2 = 0.425 
 8790 - 8796
-gpbeam = 4.550
+gpbeam = 4.559
 gtargmass_amu = 1.00794
 hpcentral = 1.662
 ppcentral = 2.792
@@ -2058,9 +2056,9 @@ ptheta_lab = 13.140
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 4.5 GeV Q2=0.425 th=15.14
+# 4.5 GeV Q2 = 0.425 
 8797 - 8798
-gpbeam = 4.550
+gpbeam = 4.559
 gtargmass_amu = 1.00794
 hpcentral = 1.662
 ppcentral = 2.792
@@ -2069,9 +2067,9 @@ ptheta_lab = 15.14
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 4.5 GeV Q2=0.425 th=17.13
+# 4.5 GeV Q2 = 0.425 
 8799 - 8801
-gpbeam = 4.550
+gpbeam = 4.559
 gtargmass_amu = 1.00794
 hpcentral = 1.662
 ppcentral = 2.792
@@ -2080,9 +2078,9 @@ ptheta_lab = 17.135
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 4.5 GeV Q2=0.425 th=13.14
+# 4.5 GeV Q2 = 0.425 
 8802 - 8804
-gpbeam = 4.550
+gpbeam = 4.559
 gtargmass_amu = 1.00794
 hpcentral = 1.662
 ppcentral = 2.792
@@ -2091,9 +2089,9 @@ ptheta_lab = 13.14
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 4.5 GeV Q2=0.425 th=15.14
+# 4.5 GeV Q2 = 0.425 
 8805 - 8805
-gpbeam = 4.550
+gpbeam = 4.559
 gtargmass_amu = 1.00794
 hpcentral = 1.662
 ppcentral = 2.792
@@ -2102,9 +2100,9 @@ ptheta_lab = 15.14
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 4.5 GeV Q2=0.425 th=17.13
+# 4.5 GeV Q2 = 0.425 
 8806 - 8806
-gpbeam = 4.550
+gpbeam = 4.559
 gtargmass_amu = 1.00794
 hpcentral = 1.662
 ppcentral = 2.792
@@ -2113,9 +2111,9 @@ ptheta_lab = 17.13
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 4.5 GeV Q2=0.425 th=13.14
+# 4.5 GeV Q2 = 0.425 
 8807-8807
-gpbeam = 4.550
+gpbeam = 4.559
 gtargmass_amu = 1.00794
 hpcentral = 1.662
 ppcentral = 2.792
@@ -2124,9 +2122,9 @@ ptheta_lab = 13.14
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 4.5 GeV Q2=0.425 th=15.14
+# 4.5 GeV Q2 = 0.425 
 8808-8809
-gpbeam = 4.550
+gpbeam = 4.559
 gtargmass_amu = 1.00794
 hpcentral = 1.662
 ppcentral = 2.792
@@ -2135,9 +2133,9 @@ ptheta_lab = 15.14
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 4.5 GeV Q2=0.425 th=17.13
+# 4.5 GeV Q2 = 0.425 
 8811 - 8812
-gpbeam = 4.550
+gpbeam = 4.559
 gtargmass_amu = 1.00794
 hpcentral = 1.662
 ppcentral = 2.792
@@ -2146,9 +2144,9 @@ ptheta_lab = 17.13
 ppartmass = 0.139570
 hpartmass = 0.000511
 
-# 4.5 GeV Q2=0.425 th=13.14
+# 4.5 GeV Q2 = 0.425 
 8813 - 9999
-gpbeam = 4.550
+gpbeam = 4.559
 gtargmass_amu = 1.00794
 hpcentral = 1.662
 ppcentral = 2.792

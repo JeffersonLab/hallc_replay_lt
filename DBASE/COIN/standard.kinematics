@@ -2145,7 +2145,7 @@ ppartmass = 0.139570
 hpartmass = 0.000511
 
 # 4.5 GeV Q2 = 0.425 
-8813 - 9999
+8813 - 8976
 gpbeam = 4.559
 gtargmass_amu = 1.00794
 hpcentral = 1.662
@@ -2154,3 +2154,14 @@ htheta_lab = -30.65
 ptheta_lab = 13.14
 ppartmass = 0.139570
 hpartmass = 0.000511
+
+#VCS Runs for HGC test
+8977 - 9999
+gpbeam = 4.55
+gtargmass_amu = 1.00794
+htheta_lab = -37.33
+ptheta_lab = 7.69
+hpcentral = 0.893
+ppcentral = 4.034
+ppartmass = 0.000511
+hpartmass = 0.938272

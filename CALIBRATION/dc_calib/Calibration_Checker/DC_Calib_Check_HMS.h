@@ -23,18 +23,18 @@ class DC_Calib_Check_HMS : public TSelector {
   TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
 
   //Declare Histograms
-  TH1F           *h1_1u1_DriftDistance;
-  TH1F           *h1_1u2_DriftDistance;
-  TH1F           *h1_1v1_DriftDistance;
-  TH1F           *h1_1v2_DriftDistance;
-  TH1F           *h1_1x1_DriftDistance;
-  TH1F           *h1_1x2_DriftDistance;
-  TH1F           *h1_2u1_DriftDistance;
-  TH1F           *h1_2u2_DriftDistance;
-  TH1F           *h1_2v1_DriftDistance;
-  TH1F           *h1_2v2_DriftDistance;
-  TH1F           *h1_2x1_DriftDistance;
-  TH1F           *h1_2x2_DriftDistance;
+  TH2F           *h2_1u1_DriftDistance;
+  TH2F           *h2_1u2_DriftDistance;
+  TH2F           *h2_1v1_DriftDistance;
+  TH2F           *h2_1v2_DriftDistance;
+  TH2F           *h2_1x1_DriftDistance;
+  TH2F           *h2_1x2_DriftDistance;
+  TH2F           *h2_2u1_DriftDistance;
+  TH2F           *h2_2u2_DriftDistance;
+  TH2F           *h2_2v1_DriftDistance;
+  TH2F           *h2_2v2_DriftDistance;
+  TH2F           *h2_2x1_DriftDistance;
+  TH2F           *h2_2x2_DriftDistance;
 
   // Readers to access the data (delete the ones you do not need).
   TTreeReaderArray<Double_t> H_dc_1u1_time      = {fReader, "H.dc.1u1.time"};
@@ -62,8 +62,24 @@ class DC_Calib_Check_HMS : public TSelector {
   TTreeReaderArray<Double_t> H_dc_2v2_dist      = {fReader, "H.dc.2v2.dist"};
   TTreeReaderArray<Double_t> H_dc_2x1_dist      = {fReader, "H.dc.2x1.dist"};
   TTreeReaderArray<Double_t> H_dc_2x2_dist      = {fReader, "H.dc.2x2.dist"};
- 
-  DC_Calib_Check_HMS(TTree * /*tree*/ =0) {h1_1u1_DriftDistance = 0, h1_1u2_DriftDistance = 0, h1_1v1_DriftDistance = 0, h1_1v2_DriftDistance = 0, h1_1x1_DriftDistance = 0, h1_1x2_DriftDistance = 0, h1_2u1_DriftDistance = 0, h1_2u2_DriftDistance = 0, h1_2v1_DriftDistance = 0, h1_2v2_DriftDistance = 0, h1_2x1_DriftDistance = 0, h1_2x2_DriftDistance = 0;}
+
+  TTreeReaderArray<Double_t> H_dc_1u1_wirenum   = {fReader, "H.dc.1u1.wirenum"};
+  TTreeReaderArray<Double_t> H_dc_1u2_wirenum   = {fReader, "H.dc.1u2.wirenum"};
+  TTreeReaderArray<Double_t> H_dc_1v1_wirenum   = {fReader, "H.dc.1v1.wirenum"};
+  TTreeReaderArray<Double_t> H_dc_1v2_wirenum   = {fReader, "H.dc.1v2.wirenum"};
+  TTreeReaderArray<Double_t> H_dc_1x1_wirenum   = {fReader, "H.dc.1x1.wirenum"};
+  TTreeReaderArray<Double_t> H_dc_1x2_wirenum   = {fReader, "H.dc.1x2.wirenum"};
+  TTreeReaderArray<Double_t> H_dc_2u1_wirenum   = {fReader, "H.dc.2u1.wirenum"};
+  TTreeReaderArray<Double_t> H_dc_2u2_wirenum   = {fReader, "H.dc.2u2.wirenum"};
+  TTreeReaderArray<Double_t> H_dc_2v1_wirenum   = {fReader, "H.dc.2v1.wirenum"};
+  TTreeReaderArray<Double_t> H_dc_2v2_wirenum   = {fReader, "H.dc.2v2.wirenum"};
+  TTreeReaderArray<Double_t> H_dc_2x1_wirenum   = {fReader, "H.dc.2x1.wirenum"};
+  TTreeReaderArray<Double_t> H_dc_2x2_wirenum   = {fReader, "H.dc.2x2.wirenum"};
+
+  TTreeReaderArray<Double_t> H_cer_npeSum       = {fReader, "H.cer.npeSum"};
+  TTreeReaderArray<Double_t> T_hms_hEL_CLEAN_tdcTime = {fReader, "T.hms.hEL_CLEAN_tdcTime"};
+
+  DC_Calib_Check_HMS(TTree * /*tree*/ =0) {h2_1u1_DriftDistance = 0, h2_1u2_DriftDistance = 0, h2_1v1_DriftDistance = 0, h2_1v2_DriftDistance = 0, h2_1x1_DriftDistance = 0, h2_1x2_DriftDistance = 0, h2_2u1_DriftDistance = 0, h2_2u2_DriftDistance = 0, h2_2v1_DriftDistance = 0, h2_2v2_DriftDistance = 0, h2_2x1_DriftDistance = 0, h2_2x2_DriftDistance = 0;}
   virtual ~DC_Calib_Check_HMS() { }
   virtual Int_t   Version() const { return 2; }
   virtual void    Begin(TTree *tree);

@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <TSystem.h>
 
-void run_DC_Calib_Check(Int_t RunNumber = 0, Int_t MaxEvent = 0, TString Detector = "")
+void run_DC_Calib_Check(Int_t RunNumber = 0, Int_t MaxEvent = 0, string Detector = "")
 {
   TString Hostname = gSystem->HostName();
   TString rootFileNameString;
@@ -23,35 +23,41 @@ void run_DC_Calib_Check(Int_t RunNumber = 0, Int_t MaxEvent = 0, TString Detecto
       exit;
     }
   }
-  if(Detector = "") {
-    cout << "Enter a Detector: ";
+  if(Detector == "") {
+    cout << "Enter a Detector (HMS or SHMS): ";
     cin >> Detector;
-   
   }
-
-  //Begin Scaler Efficiency Calculation
+  // Need to convert string to char* for use in form command, do via .c_str()
   if(Hostname.Contains("farm")){
-    rootFileNameString = Form("/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/ROOTfilesDCCalib/%s_DC_Calib_Pt1_%i_%i.root", Detector, RunNumber, MaxEvent);
+    rootFileNameString = Form("/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/ROOTfilesDCCalib/%s_DC_Calib_Pt2_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
   }
   else if(Hostname.Contains("qcd")){
-    rootFileNameString = Form("/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/ROOTfilesDCCalib/%s_DC_Calib_Pt1_%i_%i.root", Detector, RunNumber, MaxEvent);
+    rootFileNameString = Form("/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/ROOTfilesDCCalib/%s_DC_Calib_Pt2_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
   }
   else if (Hostname.Contains("cdaq")){
-    rootFileNameString = Form("/home/cdaq/hallc-online/hallc_replay_lt/ROOTfilesDCCalib/%s_DC_Calib_Pt1_%i_%i.root", Detector, RunNumber, MaxEvent);
+    rootFileNameString = Form("/home/cdaq/hallc-online/hallc_replay_lt/ROOTfilesDCCalib/%s_DC_Calib_Pt2_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
   }
   else if (Hostname.Contains("phys.uregina.ca")){
-    rootFileNameString = Form("/home/${USER}/work/JLab/hallc_replay_lt/ROOTfilesDCCalib/ROOTfiles_KaonOL/%s_DC_Calib_Pt1_%i_%i.root", Detecotr, RunNumber, MaxEvent);
+    rootFileNameString = Form("/home/${USER}/work/JLab/hallc_replay_lt/ROOTfilesDCCalib/ROOTfiles_KaonOL/%s_DC_Calib_Pt2_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
   }
-  //Begin Counting Good Proton Events
+
   TChain ch("T");
   ch.Add(rootFileNameString);
   TString option = Form("%i",RunNumber);
-
-  // Need to add conditional statements to run different processes depending upon spectrometer chosen
-
+  
   TProof *proof = TProof::Open("workers=4");
   //proof->SetProgressDialog(0);  
   ch.SetProof();
-  ch.Process("DC_Calib_Check.C+",option);
-  proof->Close();
+  if (Detector == "HMS"){
+    ch.Process("DC_Calib_Check_HMS.C+",option);
+  }
+  else if (Detector == "SHMS"){
+    ch.Process("DC_Calib_Check_SHMS.C+",option);
+  }
+  else{
+    proof->Close();
+    cerr << "Error, enter HMS or SHMS as detector \n";
+    exit;
+  }
+ proof->Close();
 }

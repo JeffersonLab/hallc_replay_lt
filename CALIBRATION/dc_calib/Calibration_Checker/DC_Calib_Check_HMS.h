@@ -23,18 +23,24 @@ class DC_Calib_Check_HMS : public TSelector {
   TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
 
   //Declare Histograms
-  TH2F           *h2_1u1_DriftDistance;
-  TH2F           *h2_1u2_DriftDistance;
-  TH2F           *h2_1v1_DriftDistance;
-  TH2F           *h2_1v2_DriftDistance;
-  TH2F           *h2_1x1_DriftDistance;
-  TH2F           *h2_1x2_DriftDistance;
-  TH2F           *h2_2u1_DriftDistance;
-  TH2F           *h2_2u2_DriftDistance;
-  TH2F           *h2_2v1_DriftDistance;
-  TH2F           *h2_2v2_DriftDistance;
-  TH2F           *h2_2x1_DriftDistance;
-  TH2F           *h2_2x2_DriftDistance;
+  // Could do these as arrays of histos but there's only 12 so won't bother
+  TH1F           *h1_1u1_DriftDistance;
+  TH1F           *h1_1u2_DriftDistance;
+  TH1F           *h1_1x1_DriftDistance;
+  TH1F           *h1_1x2_DriftDistance;
+  TH1F           *h1_1v1_DriftDistance;
+  TH1F           *h1_1v2_DriftDistance;
+  TH1F           *h1_2u1_DriftDistance;
+  TH1F           *h1_2u2_DriftDistance;
+  TH1F           *h1_2x1_DriftDistance;
+  TH1F           *h1_2x2_DriftDistance;
+  TH1F           *h1_2v1_DriftDistance;
+  TH1F           *h1_2v2_DriftDistance;
+
+  // Residual is the distance betwen the final track position and the hit location obtained from an individual plane
+  TH1F           **h1_Residual;
+  // Residual "unbiased" by the plane you're looking at, need to find a better description somewhere...
+  TH1F           **h1_ResidualExclPlane;
 
   // Readers to access the data (delete the ones you do not need).
   TTreeReaderArray<Double_t> H_dc_1u1_time      = {fReader, "H.dc.1u1.time"};
@@ -76,10 +82,13 @@ class DC_Calib_Check_HMS : public TSelector {
   TTreeReaderArray<Double_t> H_dc_2x1_wirenum   = {fReader, "H.dc.2x1.wirenum"};
   TTreeReaderArray<Double_t> H_dc_2x2_wirenum   = {fReader, "H.dc.2x2.wirenum"};
 
+  TTreeReaderArray<Double_t> H_dc_residual      = {fReader, "H.dc.residual"};
+  TTreeReaderArray<Double_t> H_dc_residualExclPlane  = {fReader, "H.dc.residualExclPlane"};
+
   TTreeReaderArray<Double_t> H_cer_npeSum       = {fReader, "H.cer.npeSum"};
   TTreeReaderArray<Double_t> T_hms_hEL_CLEAN_tdcTime = {fReader, "T.hms.hEL_CLEAN_tdcTime"};
 
-  DC_Calib_Check_HMS(TTree * /*tree*/ =0) {h2_1u1_DriftDistance = 0, h2_1u2_DriftDistance = 0, h2_1v1_DriftDistance = 0, h2_1v2_DriftDistance = 0, h2_1x1_DriftDistance = 0, h2_1x2_DriftDistance = 0, h2_2u1_DriftDistance = 0, h2_2u2_DriftDistance = 0, h2_2v1_DriftDistance = 0, h2_2v2_DriftDistance = 0, h2_2x1_DriftDistance = 0, h2_2x2_DriftDistance = 0;}
+  DC_Calib_Check_HMS(TTree * /*tree*/ =0) {h1_1u1_DriftDistance = 0, h1_1u2_DriftDistance = 0, h1_1v1_DriftDistance = 0, h1_1v2_DriftDistance = 0, h1_1x1_DriftDistance = 0, h1_1x2_DriftDistance = 0, h1_2u1_DriftDistance = 0, h1_2u2_DriftDistance = 0, h1_2v1_DriftDistance = 0, h1_2v2_DriftDistance = 0, h1_2x1_DriftDistance = 0, h1_2x2_DriftDistance = 0;}
   virtual ~DC_Calib_Check_HMS() { }
   virtual Int_t   Version() const { return 2; }
   virtual void    Begin(TTree *tree);
@@ -96,7 +105,7 @@ class DC_Calib_Check_HMS : public TSelector {
   virtual void    Terminate();
 
   ClassDef(DC_Calib_Check_HMS,0);
-
+  //h1_1u1_Residual = 0, h1_1u2_Residual = 0, h1_1v1_Residual = 0, h1_1v2_Residual = 0, h1_1x1_Residual = 0, h1_1x2_Residual = 0, h1_2u1_Residual = 0, h1_2u2_Residual = 0, h1_2v1_Residual = 0, h1_2v2_Residual = 0, h1_2x1_Residual = 0, h1_2x2_Residual = 0, h1_1u1_ResidualExclPlane = 0, h1_1u2_ResidualExclPlane = 0, h1_1v1_ResidualExclPlane = 0, h1_1v2_ResidualExclPlane = 0, h1_1x1_ResidualExclPlane = 0, h1_1x2_ResidualExclPlane = 0, h1_2u1_ResidualExclPlane = 0, h1_2u2_ResidualExclPlane = 0, h1_2v1_ResidualExclPlane = 0, h1_2v2_ResidualExclPlane = 0, h1_2x1_ResidualExclPlane = 0, h1_2x2_ResidualExclPlane = 0
 };
 
 #endif

@@ -2,15 +2,11 @@ HMS/SHMS Drift Chambers Calibration
 ============================================
 This directory contains the code for calibrating the pair of HMS/SHMS drift chambers.
 
-
-
 Directory structure
 ----------------------
 * hallc_replay/CALIBRATION/dc_calib/scripts/main_calib.C   : steering C++ code that executes the methods in DC_Calib.C
 * hallc_replay/CALIBRATION/dc_calib/scripts/DC_Calib.C  : Calibration Code where all the class  methods are defined
 * hallc_replay/CALIBRATION/dc_calib/scripts/DC_Calib.h  : Header file containing the variable definitions used in the methods
-
-
 
 Running code
 ---------------
@@ -20,8 +16,8 @@ NOTE: p: SHMS,  h: HMS,  <spec>: HMS, or SHMS
   parameter file located in: hallc_replay/PARAM/<spec>/DC/p(h)dc_cuts.param
 
 * Replay the data to produce the uncalibrated root file to be used as input in the calibration
-  NOTE: Make sure to include the necessary leafs if you want to make any pid cuts.
-  The leafs are:
+  NOTE: Make sure to include the necessary leaves if you want to make any pid cuts.
+  The leaves are:
 
       SHMS:
       P.ngcer.npeSum, P.cal.etot, T.shms.pEL_CLEAN_tdcTime (the P.cal.etot is currently commented out until further discussion)
@@ -30,7 +26,7 @@ NOTE: p: SHMS,  h: HMS,  <spec>: HMS, or SHMS
       H.cer.npeSum, H.cal.etot, T.hms.hEL_CLEAN_tdcTime (the H.cal.etot is currently commented out until further discussion)
       
 
-  * From the hallc_replay execute: ./hcana SCRIPTS/<spec>/PRODUCTION/<replay_script.C>
+  * From the hallc_replay directory execute: ./hcana SCRIPTS/<spec>/PRODUCTION/<replay_script.C>
 
 * From the directory where this README file is:
   -Open and modify 'DC_Calib obj()' line. This line has the following format:
@@ -41,6 +37,7 @@ NOTE: p: SHMS,  h: HMS,  <spec>: HMS, or SHMS
 	EDIT - This is stupid, why not just provide these things as arguments to your script? 
 	Altered main_calib.C to do this... SK 15/5/19
 	Simmply provide Spec_Flag, ROOTfile (full path), run number
+	Will add PID flag in as argument soon too for comparison  SK 26/8/19	
 
 	**The <spec_flag> and <pid_flag> have the possible arguments:
 
@@ -84,11 +81,11 @@ When the calibration is completed, a directory will be created under the name: <
 * Set the parameter 'p(h)_using_tzero_per_wire = 1' in the 
   parameter file located in: hallc_replay/PARAM/<spec>/DC/p(h)dc_cuts.param
 
-
-* From the hallc_replay execute: ./hcana SCRIPTS/SHMS/PRODUCTION/<replay_script.C> once again.
+* From the hallc_replay directory execute: ./hcana SCRIPTS/SHMS/PRODUCTION/<replay_script.C> once again.
 
 NOTE: An indication that the calibration worked is by looking a the drift distances, which should appear
-      relatively flat. There may be a high number of counts at the extremes of the drift distance, for which
+      relatively flat. Not on a per wire basis, plot drift distance for each plane as a 1D hist.
+       There may be a high number of counts at the extremes of the drift distance, for which
       the additional cuts may need to be applied.
 
 * The recommended cuts when looking at drift distances are:

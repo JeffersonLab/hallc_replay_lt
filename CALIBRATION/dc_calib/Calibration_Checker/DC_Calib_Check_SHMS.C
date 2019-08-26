@@ -139,7 +139,7 @@ void DC_Calib_Check_SHMS::Terminate()
 {
   TString option = GetOption();
 
-  TString foutname = Form("SHMS_DC_Calib_Check_Run%i", option.Atoi());
+  TString foutname = Form("OUTPUT/SHMS_DC_Calib_Check_Run%i", option.Atoi());
   TString outputpdf = foutname + ".pdf";
   TCanvas *cDC1 = new TCanvas("DC1","Drift Chamber 1 Planes",100,0,1000,900);
   cDC1->Divide(2,3);
@@ -160,7 +160,7 @@ void DC_Calib_Check_SHMS::Terminate()
   cDC2->cd(6); h2_2v2_DriftDistance->Draw("COLZ");
   cDC2->Print(outputpdf + ')');               
 
-  TFile *Histogram_file = new TFile(Form("SHMS_DCCalib_Check_Run%i.root",option.Atoi()),"RECREATE");
+  TFile *Histogram_file = new TFile(Form("HISTOGRAMS/SHMS_DCCalib_Check_Run%i.root",option.Atoi()),"RECREATE");
 
   h2_1u1_DriftDistance->Write();
   h2_1u2_DriftDistance->Write();

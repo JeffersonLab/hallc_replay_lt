@@ -139,7 +139,7 @@ void DC_Calib_Check_HMS::Terminate()
 {
   TString option = GetOption();
 
-  TString foutname = Form("HMS_DC_Calib_Check_Run%i", option.Atoi());
+  TString foutname = Form("OUTPUT/HMS_DC_Calib_Check_Run%i", option.Atoi());
   TString outputpdf = foutname + ".pdf";
   TCanvas *cDC1 = new TCanvas("DC1","Drift Chamber 1 Planes",100,0,1000,900);
   cDC1->Divide(2,3);
@@ -160,7 +160,7 @@ void DC_Calib_Check_HMS::Terminate()
   cDC2->cd(6); h2_2v2_DriftDistance->Draw("COLZ");
   cDC2->Print(outputpdf + ')');               
 
-  TFile *Histogram_file = new TFile(Form("HMS_DCCalib_Check_Run%i.root",option.Atoi()),"RECREATE");
+  TFile *Histogram_file = new TFile(Form("HISTOGRAMS/HMS_DCCalib_Check_Run%i.root",option.Atoi()),"RECREATE");
 
   h2_1u1_DriftDistance->Write();
   h2_1u2_DriftDistance->Write();

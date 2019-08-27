@@ -19,18 +19,18 @@ void DC_Calib_Check_HMS::SlaveBegin(TTree * /*tree*/)
   printf("\n\n");
   TString option = GetOption();
 
-  h1_1u1_DriftDistance = new TH1F("1u1_DriftDistance", "Drift Distance 1u1 Plane; Drift Distance; Counts", 200, -1, 1);
-  h1_1u2_DriftDistance = new TH1F("1u2_DriftDistance", "Drift Distance 1u2 Plane; Drift Distance; Counts", 200, -1, 1);
-  h1_1x1_DriftDistance = new TH1F("1x1_DriftDistance", "Drift Distance 1x1 Plane; Drift Distance; Counts", 200, -1, 1);
-  h1_1x2_DriftDistance = new TH1F("1x2_DriftDistance", "Drift Distance 1x2 Plane; Drift Distance; Counts", 200, -1, 1);
-  h1_1v1_DriftDistance = new TH1F("1v1_DriftDistance", "Drift Distance 1v1 Plane; Drift Distance; Counts", 200, -1, 1);
-  h1_1v2_DriftDistance = new TH1F("1v2_DriftDistance", "Drift Distance 1v2 Plane; Drift Distance; Counts", 200, -1, 1);
-  h1_2u1_DriftDistance = new TH1F("2u1_DriftDistance", "Drift Distance 2u1 Plane; Drift Distance; Counts", 200, -1, 1);
-  h1_2u2_DriftDistance = new TH1F("2u2_DriftDistance", "Drift Distance 2u2 Plane; Drift Distance; Counts", 200, -1, 1);
-  h1_2x1_DriftDistance = new TH1F("2x1_DriftDistance", "Drift Distance 2x1 Plane; Drift Distance; Counts", 200, -1, 1);
-  h1_2x2_DriftDistance = new TH1F("2x2_DriftDistance", "Drift Distance 2x2 Plane; Drift Distance; Counts", 200, -1, 1);
-  h1_2v1_DriftDistance = new TH1F("2v1_DriftDistance", "Drift Distance 2v1 Plane; Drift Distance; Counts", 200, -1, 1);
-  h1_2v2_DriftDistance = new TH1F("2v2_DriftDistance", "Drift Distance 2v2 Plane; Drift Distance; Counts", 200, -1, 1);
+  h1_1u1_DriftDistance = new TH1F("1u1_DriftDistance", "Drift Distance 1u1 Plane; Drift Distance; Counts", 100, 0, 1);
+  h1_1u2_DriftDistance = new TH1F("1u2_DriftDistance", "Drift Distance 1u2 Plane; Drift Distance; Counts", 100, 0, 1);
+  h1_1x1_DriftDistance = new TH1F("1x1_DriftDistance", "Drift Distance 1x1 Plane; Drift Distance; Counts", 100, 0, 1);
+  h1_1x2_DriftDistance = new TH1F("1x2_DriftDistance", "Drift Distance 1x2 Plane; Drift Distance; Counts", 100, 0, 1);
+  h1_1v1_DriftDistance = new TH1F("1v1_DriftDistance", "Drift Distance 1v1 Plane; Drift Distance; Counts", 100, 0, 1);
+  h1_1v2_DriftDistance = new TH1F("1v2_DriftDistance", "Drift Distance 1v2 Plane; Drift Distance; Counts", 100, 0, 1);
+  h1_2u1_DriftDistance = new TH1F("2u1_DriftDistance", "Drift Distance 2u1 Plane; Drift Distance; Counts", 100, 0, 1);
+  h1_2u2_DriftDistance = new TH1F("2u2_DriftDistance", "Drift Distance 2u2 Plane; Drift Distance; Counts", 100, 0, 1);
+  h1_2x1_DriftDistance = new TH1F("2x1_DriftDistance", "Drift Distance 2x1 Plane; Drift Distance; Counts", 100, 0, 1);
+  h1_2x2_DriftDistance = new TH1F("2x2_DriftDistance", "Drift Distance 2x2 Plane; Drift Distance; Counts", 100, 0, 1);
+  h1_2v1_DriftDistance = new TH1F("2v1_DriftDistance", "Drift Distance 2v1 Plane; Drift Distance; Counts", 100, 0, 1);
+  h1_2v2_DriftDistance = new TH1F("2v2_DriftDistance", "Drift Distance 2v2 Plane; Drift Distance; Counts", 100, 0, 1);
 
   GetOutputList()->Add(h1_1u1_DriftDistance);
   GetOutputList()->Add(h1_1u2_DriftDistance);
@@ -60,7 +60,6 @@ void DC_Calib_Check_HMS::SlaveBegin(TTree * /*tree*/)
     GetOutputList()->Add(h1_Residual[i]);
     GetOutputList()->Add(h1_ResidualExclPlane[i]);
   }
-
 }
 
 Bool_t DC_Calib_Check_HMS::Process(Long64_t entry)
@@ -72,81 +71,57 @@ Bool_t DC_Calib_Check_HMS::Process(Long64_t entry)
 
   for (Int_t i = 0; i < 12; i++){
     h1_Residual[i]->Fill(H_dc_residual[i]);
-    h1_Residual[i]->Fill(H_dc_residualExclPlane[i]);
+    h1_ResidualExclPlane[i]->Fill(H_dc_residualExclPlane[i]);
   }
 
-  for (Int_t i = 0; i < H_dc_1u1_time.GetSize(); i++){
-    if (H_dc_1u1_time[i] > 0){
-      h1_1u1_DriftDistance->Fill(H_dc_1u1_dist[i]);
+  if (H_dc_1u1_time[0] > 0){
+    h1_1u1_DriftDistance->Fill(H_dc_1u1_dist[0]);
     }
+   
+  if (H_dc_1u2_time[0] > 0){
+    h1_1u2_DriftDistance->Fill(H_dc_1u2_dist[0]);
   }
   
-  for (Int_t i = 0; i < H_dc_1u2_time.GetSize(); i++){
-    if (H_dc_1u2_time[i] > 0){
-      h1_1u2_DriftDistance->Fill(H_dc_1u2_dist[i]);
-    }
-  }
-
-  for (Int_t i = 0; i < H_dc_1x1_time.GetSize(); i++){
-    if (H_dc_1x1_time[i] > 0){
-      h1_1x1_DriftDistance->Fill(H_dc_1x1_dist[i]);
-    }
+  if (H_dc_1x1_time[0] > 0){
+    h1_1x1_DriftDistance->Fill(H_dc_1x1_dist[0]);
   }
   
-  for (Int_t i = 0; i < H_dc_1x2_time.GetSize(); i++){
-    if (H_dc_1x2_time[i] > 0){
-      h1_1x2_DriftDistance->Fill(H_dc_1x2_dist[i]);
-    }
+  if (H_dc_1x2_time[0] > 0){
+    h1_1x2_DriftDistance->Fill(H_dc_1x2_dist[0]);
   }
   
-  for (Int_t i = 0; i < H_dc_1v1_time.GetSize(); i++){
-    if (H_dc_1v1_time[i] > 0){
-      h1_1v1_DriftDistance->Fill(H_dc_1v1_dist[i]);
-    }
+  if (H_dc_1v1_time[0] > 0){
+    h1_1v1_DriftDistance->Fill(H_dc_1v1_dist[0]);
   }
   
-  for (Int_t i = 0; i < H_dc_1v2_time.GetSize(); i++){
-    if (H_dc_1v2_time[i] > 0){
-      h1_1v2_DriftDistance->Fill(H_dc_1v2_dist[i]);
-    }
-  }
-
-  for (Int_t i = 0; i < H_dc_2u1_time.GetSize(); i++){
-    if (H_dc_2u1_time[i] > 0){
-      h1_2u1_DriftDistance->Fill(H_dc_2u1_dist[i]);
-    }
+  if (H_dc_1v2_time[0] > 0){
+    h1_1v2_DriftDistance->Fill(H_dc_1v2_dist[0]);
   }
   
-  for (Int_t i = 0; i < H_dc_2u2_time.GetSize(); i++){
-    if (H_dc_2u2_time[i] > 0){
-      h1_2u2_DriftDistance->Fill(H_dc_2u2_dist[i]);
-    }
-  }
-
-  for (Int_t i = 0; i < H_dc_2x1_time.GetSize(); i++){
-    if (H_dc_2x1_time[i] > 0){
-      h1_2x1_DriftDistance->Fill(H_dc_2x1_dist[i]);
-    }
+  if (H_dc_2u1_time[0] > 0){
+    h1_2u1_DriftDistance->Fill(H_dc_2u1_dist[0]);
   }
   
-  for (Int_t i = 0; i < H_dc_2x2_time.GetSize(); i++){
-    if (H_dc_2x2_time[i] > 0){
-      h1_2x2_DriftDistance->Fill(H_dc_2x2_dist[i]);
-    }
+  if (H_dc_2u2_time[0] > 0){
+    h1_2u2_DriftDistance->Fill(H_dc_2u2_dist[0]);
   }
   
-  for (Int_t i = 0; i < H_dc_2v1_time.GetSize(); i++){
-    if (H_dc_2v1_time[i] > 0){
-      h1_2v1_DriftDistance->Fill( H_dc_2v1_dist[i]);
-    }
+  if (H_dc_2x1_time[0] > 0){
+    h1_2x1_DriftDistance->Fill(H_dc_2x1_dist[0]);
   }
   
-  for (Int_t i = 0; i < H_dc_2v2_time.GetSize(); i++){
-    if (H_dc_2v2_time[i] > 0){
-      h1_2v2_DriftDistance->Fill(H_dc_2v2_dist[i]);
-    }
-  }  
-
+  if (H_dc_2x2_time[0] > 0){
+    h1_2x2_DriftDistance->Fill(H_dc_2x2_dist[0]);
+  }
+    
+  if (H_dc_2v1_time[0] > 0){
+     h1_2v1_DriftDistance->Fill( H_dc_2v1_dist[0]);
+   }
+  
+  if (H_dc_2v2_time[0] > 0){
+     h1_2v2_DriftDistance->Fill(H_dc_2v2_dist[0]);
+   }
+  
   return kTRUE;
 }
 
@@ -157,6 +132,11 @@ void DC_Calib_Check_HMS::SlaveTerminate()
 void DC_Calib_Check_HMS::Terminate()
 {
   TString option = GetOption();
+  TString Run_temp = option(0,option.Index("."));
+  TString Part_temp = option(option.Index(".")+1,option.Length());
+  Int_t Run = Run_temp.Atoi(); 
+  Int_t Part =  Part_temp.Atoi();
+  cout << Run << "   " << Part;
   //Need to exact the histograms from the OutputList
   TH1F* Residual[12];
   TH1F* ResidualExclPl[12];
@@ -169,7 +149,7 @@ void DC_Calib_Check_HMS::Terminate()
     Name = "h1_ResidualExclPlane_"+Plane[i];
     ResidualExclPl[i] = dynamic_cast<TH1F*> (GetOutputList()->FindObject(Name));
   }             
-  TString foutname = Form("OUTPUT/HMS_DC_Calib_Check_Run%i", option.Atoi());
+  TString foutname = Form("OUTPUT/HMS_DC_Calib_Check_Run%i_Pt%i", Run, Part);
   TString outputpdf = foutname + ".pdf";
   TCanvas *cDC1 = new TCanvas("DC1","Drift Chamber 1 Planes",100,0,1000,900);
   cDC1->Divide(2,3);

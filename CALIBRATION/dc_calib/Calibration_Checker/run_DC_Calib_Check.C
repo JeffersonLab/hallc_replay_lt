@@ -45,10 +45,11 @@ void run_DC_Calib_Check(Int_t RunNumber = 0, Int_t MaxEvent = 0, string Detector
     Histopath = "/volatile/hallc/c-kaonlt/${USER}/HISTOGRAMS/DC_Calib";
   }
   else if (Hostname.Contains("phys.uregina.ca")){
-    rootFileNameString1 = Form("/home/${USER}/work/JLab/hallc_replay_lt/ROOTfilesDCCalib/ROOTfiles_KaonOL/%s_DC_Calib_Pt1_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
-    rootFileNameString2 = Form("/home/${USER}/work/JLab/hallc_replay_lt/ROOTfilesDCCalib/ROOTfiles_KaonOL/%s_DC_Calib_Pt2_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
-    //Outpath = ;
-  }
+    rootFileNameString1 = Form("/dsk3/${USER}/JLab/ROOTfiles/DC_Calib/%s_DC_Calib_Pt1_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
+    rootFileNameString2 = Form("/dsk3/${USER}/JLab/ROOTfiles/DC_Calib/%s_DC_Calib_Pt2_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
+    Outpath = "/dsk3/${USER}/JLab/OUTPUT/DC_Calib";
+    Histopath = "/dsk3/${USER}/JLab/HISTOGRAMS/DC_Calib" ;
+}
 
   TChain ch1("T");
   ch1.Add(rootFileNameString1);
@@ -86,7 +87,7 @@ void run_DC_Calib_Check(Int_t RunNumber = 0, Int_t MaxEvent = 0, string Detector
   cDC1->cd(1); ((TH1F*)f2->Get("1u1_DriftDistance"))->Draw();
   ((TH1F*)f1->Get("1u1_DriftDistance"))->SetLineColor(kRed);
   ((TH1F*)f1->Get("1u1_DriftDistance"))->Draw("SAME");
-  TLegend *leg2 = new TLegend(0.6, 0.7, 0.7, 0.9);
+  TLegend *leg2 = new TLegend(0.8, 0.5, 0.95, 0.7);
   leg2->AddEntry(((TH1F*)f2->Get("1u1_DriftDistance")), "Post Calibration", "lepz");
   leg2->AddEntry(((TH1F*)f1->Get("1u1_DriftDistance")), "Pre-Calibration", "lepz");
   leg2->Draw("SAME");
@@ -163,12 +164,14 @@ void run_DC_Calib_Check(Int_t RunNumber = 0, Int_t MaxEvent = 0, string Detector
     ((TH1F*)f1->Get(Name))->SetLineColor(kRed); ((TH1F*)f1->Get(Name))->Draw("SAME");
     if(i == 0) leg2->Draw("SAME");
   }
-
-  cDC1->Print(outputpdf + '(');               
+  
+  cDC1->Print(outputpdf+"["); //Opens file without printing anything
+  cDC1->Print(outputpdf);               
   cDC2->Print(outputpdf);               
   cDC1_Res->Print(outputpdf);
   cDC2_Res->Print(outputpdf);
   cDC1_ResExclPl->Print(outputpdf);
-  cDC2_ResExclPl->Print(outputpdf + ')');
-
+  cDC2_ResExclPl->Print(outputpdf);
+  cDC1->Print(outputpdf+"]"); //Closes file without printing anything
+  
 }

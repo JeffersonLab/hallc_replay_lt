@@ -23,7 +23,7 @@ class DC_Calib_Check_HMS : public TSelector {
   TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
 
   //Declare Histograms
-  // Could do these as arrays of histos but there's only 12 so won't bother
+  // Could do these as arrays of histos but there's only 12 so won't bother, also more annoying in terms of how they're filled
   TH1F           *h1_1u1_DriftDistance;
   TH1F           *h1_1u2_DriftDistance;
   TH1F           *h1_1x1_DriftDistance;
@@ -105,7 +105,6 @@ class DC_Calib_Check_HMS : public TSelector {
   virtual void    Terminate();
 
   ClassDef(DC_Calib_Check_HMS,0);
-  //h1_1u1_Residual = 0, h1_1u2_Residual = 0, h1_1v1_Residual = 0, h1_1v2_Residual = 0, h1_1x1_Residual = 0, h1_1x2_Residual = 0, h1_2u1_Residual = 0, h1_2u2_Residual = 0, h1_2v1_Residual = 0, h1_2v2_Residual = 0, h1_2x1_Residual = 0, h1_2x2_Residual = 0, h1_1u1_ResidualExclPlane = 0, h1_1u2_ResidualExclPlane = 0, h1_1v1_ResidualExclPlane = 0, h1_1v2_ResidualExclPlane = 0, h1_1x1_ResidualExclPlane = 0, h1_1x2_ResidualExclPlane = 0, h1_2u1_ResidualExclPlane = 0, h1_2u2_ResidualExclPlane = 0, h1_2v1_ResidualExclPlane = 0, h1_2v2_ResidualExclPlane = 0, h1_2x1_ResidualExclPlane = 0, h1_2x2_ResidualExclPlane = 0
 };
 
 #endif
@@ -113,24 +112,11 @@ class DC_Calib_Check_HMS : public TSelector {
 #ifdef DC_Calib_Check_HMS_cxx
 void DC_Calib_Check_HMS::Init(TTree *tree)
 {
-  // The Init() function is called when the selector needs to initialize
-  // a new tree or chain. Typically here the reader is initialized.
-  // It is normally not necessary to make changes to the generated
-  // code, but the routine can be extended by the user if needed.
-  // Init() will be called many times when running on PROOF
-  // (once per file to be processed).
-
   fReader.SetTree(tree);
 }
 
 Bool_t DC_Calib_Check_HMS::Notify()
 {
-  // The Notify() function is called when a new file is opened. This
-  // can be either for a new TTree in a TChain or when when a new TTree
-  // is started when using PROOF. It is normally not necessary to make changes
-  // to the generated code, but the routine can be extended by the
-  // user if needed. The return value is currently not used.
-
   return kTRUE;
 }
 

@@ -23,18 +23,24 @@ class DC_Calib_Check_SHMS : public TSelector {
   TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
 
   //Declare Histograms
-  TH2F           *h2_1u1_DriftDistance;
-  TH2F           *h2_1u2_DriftDistance;
-  TH2F           *h2_1v1_DriftDistance;
-  TH2F           *h2_1v2_DriftDistance;
-  TH2F           *h2_1x1_DriftDistance;
-  TH2F           *h2_1x2_DriftDistance;
-  TH2F           *h2_2u1_DriftDistance;
-  TH2F           *h2_2u2_DriftDistance;
-  TH2F           *h2_2v1_DriftDistance;
-  TH2F           *h2_2v2_DriftDistance;
-  TH2F           *h2_2x1_DriftDistance;
-  TH2F           *h2_2x2_DriftDistance;
+  // Could do these as arrays of histos but there's only 12 so won't bother
+  TH1F           *h1_1u1_DriftDistance;
+  TH1F           *h1_1u2_DriftDistance;
+  TH1F           *h1_1x1_DriftDistance;
+  TH1F           *h1_1x2_DriftDistance;
+  TH1F           *h1_1v1_DriftDistance;
+  TH1F           *h1_1v2_DriftDistance;
+  TH1F           *h1_2u1_DriftDistance;
+  TH1F           *h1_2u2_DriftDistance;
+  TH1F           *h1_2x1_DriftDistance;
+  TH1F           *h1_2x2_DriftDistance;
+  TH1F           *h1_2v1_DriftDistance;
+  TH1F           *h1_2v2_DriftDistance;
+
+  // Residual is the distance betwen the final track position and the hit location obtained from an individual plane
+  TH1F           **h1_Residual;
+  // Residual "unbiased" by the plane you're looking at, need to find a better description somewhere...
+  TH1F           **h1_ResidualExclPlane;
 
   // Readers to access the data (delete the ones you do not need).
   TTreeReaderArray<Double_t> P_dc_1u1_time      = {fReader, "P.dc.1u1.time"};
@@ -76,10 +82,13 @@ class DC_Calib_Check_SHMS : public TSelector {
   TTreeReaderArray<Double_t> P_dc_2x1_wirenum   = {fReader, "P.dc.2x1.wirenum"};
   TTreeReaderArray<Double_t> P_dc_2x2_wirenum   = {fReader, "P.dc.2x2.wirenum"};
 
+  TTreeReaderArray<Double_t> P_dc_residual      = {fReader, "P.dc.residual"};
+  TTreeReaderArray<Double_t> P_dc_residualExclPlane  = {fReader, "P.dc.residualExclPlane"};
+
   TTreeReaderArray<Double_t> P_hgcer_npeSum       = {fReader, "P.hgcer.npeSum"};
   TTreeReaderArray<Double_t> T_shms_pEL_CLEAN_tdcTime = {fReader, "T.shms.pEL_CLEAN_tdcTime"};
 
-  DC_Calib_Check_SHMS(TTree * /*tree*/ =0) {h2_1u1_DriftDistance = 0, h2_1u2_DriftDistance = 0, h2_1v1_DriftDistance = 0, h2_1v2_DriftDistance = 0, h2_1x1_DriftDistance = 0, h2_1x2_DriftDistance = 0, h2_2u1_DriftDistance = 0, h2_2u2_DriftDistance = 0, h2_2v1_DriftDistance = 0, h2_2v2_DriftDistance = 0, h2_2x1_DriftDistance = 0, h2_2x2_DriftDistance = 0;}
+  DC_Calib_Check_SHMS(TTree * /*tree*/ =0) {h1_1u1_DriftDistance = 0, h1_1u2_DriftDistance = 0, h1_1v1_DriftDistance = 0, h1_1v2_DriftDistance = 0, h1_1x1_DriftDistance = 0, h1_1x2_DriftDistance = 0, h1_2u1_DriftDistance = 0, h1_2u2_DriftDistance = 0, h1_2v1_DriftDistance = 0, h1_2v2_DriftDistance = 0, h1_2x1_DriftDistance = 0, h1_2x2_DriftDistance = 0;}
   virtual ~DC_Calib_Check_SHMS() { }
   virtual Int_t   Version() const { return 2; }
   virtual void    Begin(TTree *tree);
@@ -96,7 +105,6 @@ class DC_Calib_Check_SHMS : public TSelector {
   virtual void    Terminate();
 
   ClassDef(DC_Calib_Check_SHMS,0);
-
 };
 
 #endif
@@ -104,24 +112,11 @@ class DC_Calib_Check_SHMS : public TSelector {
 #ifdef DC_Calib_Check_SHMS_cxx
 void DC_Calib_Check_SHMS::Init(TTree *tree)
 {
-  // The Init() function is called when the selector needs to initialize
-  // a new tree or chain. Typically here the reader is initialized.
-  // It is normally not necessary to make changes to the generated
-  // code, but the routine can be extended by the user if needed.
-  // Init() will be called many times when running on PROOF
-  // (once per file to be processed).
-
   fReader.SetTree(tree);
 }
 
 Bool_t DC_Calib_Check_SHMS::Notify()
 {
-  // The Notify() function is called when a new file is opened. This
-  // can be either for a new TTree in a TChain or when when a new TTree
-  // is started when using PROOF. It is normally not necessary to make changes
-  // to the generated code, but the routine can be extended by the
-  // user if needed. The return value is currently not used.
-
   return kTRUE;
 }
 

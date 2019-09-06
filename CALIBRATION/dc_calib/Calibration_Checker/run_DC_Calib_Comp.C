@@ -139,37 +139,52 @@ void run_DC_Calib_Comp(string Det = "", TString Run_List="")
   // Quickly find the first and last run numbers in our array to set the range of our plots (and for naming)
   Double_t FirstRun = RunNumberD[0];
   Double_t LastRun = RunNumberD[0];
+  Int_t FirstPoint;
   for(Int_t i = 0; i < line_numTot; i++){
     if (RunNumberD[i] > LastRun) LastRun = RunNumberD[i];
     else if (RunNumberD[i] < FirstRun) FirstRun = RunNumberD[i];
   }
   // Have four arrays of values now, plot on a TGraphErrors - Need 1 plot per plane (12) for each quantity (2) and each fit parameter (2)
+  // Could probably define some function to do all of the setting of the plot stuff to make this loop look a little neater
   TGraphErrors *StabilityPlots[2][2][12]; // Quantity/parameter/plane
+  TF1 *StrLn1 = new TF1("StrLn", "pol1");
+  StrLn1->SetParNames("Intercept", "Gradient");
   TDirectory *DGraphs = Histogram_file->mkdir("Graphs"); DGraphs->cd(); 
   for(Int_t i = 0; i<12; i++){ // loop over planes
     StabilityPlots[0][0][i] = new TGraphErrors(line_numTot, RunNumberD, Mean[0][i], 0, MeanErr[0][i]);
     StabilityPlots[0][0][i]->SetTitle(Plane[i] + " Residual Mean as a function of Run Number"); StabilityPlots[0][0][i]->SetName(Plane[i] + "ResMean");
     StabilityPlots[0][0][i]->SetMarkerSize(1); StabilityPlots[0][0][i]->SetMarkerStyle(4); StabilityPlots[0][0][i]->SetMarkerColor(2); StabilityPlots[0][0][i]->SetLineColor(2);
-    StabilityPlots[0][0][i]->GetXaxis()->SetTitle("Run Number"); StabilityPlots[0][0][i]->GetXaxis()->SetDecimals(kFALSE); StabilityPlots[0][0][i]->GetXaxis()->SetRangeUser(FirstRun, LastRun);
+    StabilityPlots[0][0][i]->GetXaxis()->SetTitle("Run Number"); StabilityPlots[0][0][i]->GetXaxis()->SetDecimals(kFALSE); StabilityPlots[0][0][i]->GetXaxis()->SetRangeUser(FirstRun-1, LastRun+1);
     StabilityPlots[0][0][i]->GetYaxis()->SetTitle("Residual Mean"); //StabilityPlots[0][0][i]->GetYaxis()->SetRangeUser(-0.02, 0.02);
+    FirstPoint = TMath::LocMin(StabilityPlots[0][0][i]->GetN(), StabilityPlots[0][0][i]->GetX()); // Get the entry number of the point with the FIRST run number in the set
+    StrLn1->SetParLimits(0, (Mean[0][i][FirstPoint]-MeanErr[0][i][FirstPoint]), (Mean[0][i][FirstPoint]+MeanErr[0][i][FirstPoint])); // Set the intercept to only vary within 1 sigma of the first run number in the set
+    StrLn1->SetParameter(0, Mean[0][i][FirstPoint]);
+    StrLn1->SetParameter(1, 0); StrLn1->FixParameter(1, 0); 
+    //cout << StrLn1->GetChisquare()/StrLn1->GetNDF() << endl;
+    StabilityPlots[0][0][i]->Fit(StrLn1, "FMQ");
     StabilityPlots[0][0][i]->Write();
     StabilityPlots[0][1][i] = new TGraphErrors(line_numTot, RunNumberD, StdDev[0][i], 0, StdDevErr[0][i]);
     StabilityPlots[0][1][i]->SetTitle(Plane[i] + " Residual #sigma as a function of Run Number"); StabilityPlots[0][1][i]->SetName(Plane[i]+"ResStdDev");
     StabilityPlots[0][1][i]->SetMarkerSize(1); StabilityPlots[0][1][i]->SetMarkerStyle(4); StabilityPlots[0][1][i]->SetMarkerColor(2); StabilityPlots[0][1][i]->SetLineColor(2);
-    StabilityPlots[0][1][i]->GetXaxis()->SetTitle("Run Number"); StabilityPlots[0][1][i]->GetXaxis()->SetDecimals(kFALSE); StabilityPlots[0][1][i]->GetXaxis()->SetRangeUser(FirstRun, LastRun);
+    StabilityPlots[0][1][i]->GetXaxis()->SetTitle("Run Number"); StabilityPlots[0][1][i]->GetXaxis()->SetDecimals(kFALSE); StabilityPlots[0][1][i]->GetXaxis()->SetRangeUser(FirstRun-1, LastRun+1);
     StabilityPlots[0][1][i]->GetYaxis()->SetTitle("Residual #sigma"); //StabilityPlots[0][1][i]->GetYaxis()->SetRangeUser(0, 0.05);
     StabilityPlots[0][1][i]->Write();
 
     StabilityPlots[1][0][i] = new TGraphErrors(line_numTot, RunNumberD, Mean[1][i], 0, MeanErr[1][i]);
     StabilityPlots[1][0][i]->SetTitle(Plane[i] + " Unbiased Residual Mean as a function of Run Number"); StabilityPlots[1][0][i]->SetName(Plane[i] + "UbResMean");
     StabilityPlots[1][0][i]->SetMarkerSize(1); StabilityPlots[1][0][i]->SetMarkerStyle(4); StabilityPlots[1][0][i]->SetMarkerColor(2); StabilityPlots[1][0][i]->SetLineColor(2);
-    StabilityPlots[1][0][i]->GetXaxis()->SetTitle("Run Number"); StabilityPlots[1][0][i]->GetXaxis()->SetDecimals(kFALSE); StabilityPlots[1][0][i]->GetXaxis()->SetRangeUser(FirstRun, LastRun);
+    StabilityPlots[1][0][i]->GetXaxis()->SetTitle("Run Number"); StabilityPlots[1][0][i]->GetXaxis()->SetDecimals(kFALSE); StabilityPlots[1][0][i]->GetXaxis()->SetRangeUser(FirstRun-1, LastRun+1);
     StabilityPlots[1][0][i]->GetYaxis()->SetTitle("Unbiased Residual Mean"); //StabilityPlots[1][0][i]->GetYaxis()->SetRangeUser(-0.02, 0.02);
+    FirstPoint = TMath::LocMin(StabilityPlots[1][0][i]->GetN(), StabilityPlots[1][0][i]->GetX()); // Get the entry number of the point with the FIRST run number in the set
+    StrLn1->SetParLimits(0, (Mean[1][i][FirstPoint]-MeanErr[1][i][FirstPoint]), (Mean[1][i][FirstPoint]+MeanErr[1][i][FirstPoint])); // Set the intercept to only vary within 1 sigma of the first run number in the set
+    StrLn1->SetParameter(0, Mean[1][i][FirstPoint]);
+    StrLn1->SetParameter(1, 0); StrLn1->FixParameter(1, 0); 
+    StabilityPlots[1][0][i]->Fit(StrLn1, "FMQ");
     StabilityPlots[1][0][i]->Write();
     StabilityPlots[1][1][i] = new TGraphErrors(line_numTot, RunNumberD, StdDev[1][i], 0,  StdDevErr[1][i]);
     StabilityPlots[1][1][i]->SetTitle(Plane[i] + " Unbiased Residual #sigma as a function of Run Number"); StabilityPlots[1][1][i]->SetName(Plane[i]+"UbResStdDev");
     StabilityPlots[1][1][i]->SetMarkerSize(1); StabilityPlots[1][1][i]->SetMarkerStyle(4); StabilityPlots[1][1][i]->SetMarkerColor(2); StabilityPlots[1][1][i]->SetLineColor(2);
-    StabilityPlots[1][1][i]->GetXaxis()->SetTitle("Run Number"); StabilityPlots[1][1][i]->GetXaxis()->SetDecimals(kFALSE); StabilityPlots[1][1][i]->GetXaxis()->SetRangeUser(FirstRun, LastRun);
+    StabilityPlots[1][1][i]->GetXaxis()->SetTitle("Run Number"); StabilityPlots[1][1][i]->GetXaxis()->SetDecimals(kFALSE); StabilityPlots[1][1][i]->GetXaxis()->SetRangeUser(FirstRun-1, LastRun+1);
     StabilityPlots[1][1][i]->GetYaxis()->SetTitle("Unbiased Residual #sigma"); //StabilityPlots[1][1][i]->GetYaxis()->SetRangeUser(0, 0.05); 
     StabilityPlots[1][1][i]->Write();
   }

@@ -7,6 +7,7 @@
 #include <TLegend.h>
 #include <TF1.h>
 #include <TGraphErrors.h>
+#include <TPaveText.h>
 
 void run_DC_Calib_Comp(string Det = "", TString Run_List="")
 {
@@ -149,6 +150,15 @@ void run_DC_Calib_Comp(string Det = "", TString Run_List="")
   TGraphErrors *StabilityPlots[2][2][12]; // Quantity/parameter/plane
   TF1 *StrLn1 = new TF1("StrLn", "pol1");
   StrLn1->SetParNames("Intercept", "Gradient");
+  Bool_t Overconstrained[2][12];
+  Bool_t Stability[2][12];
+  TPaveText* Label1 = new TPaveText(0.7, 0.8, 0.9, 0.9, "NDC");
+  Label1->SetTextColor(kRed); Label1->AddText("Overconstrained"); 
+  TPaveText* Label2 = new TPaveText(0.7, 0.8, 0.9, 0.9, "NDC");
+  Label2->SetTextColor(kGreen+3); Label2->AddText("Stable calibration");
+  TPaveText* Label3 = new TPaveText(0.7, 0.8, 0.9, 0.9, "NDC");
+  Label3->SetTextColor(kRed); Label3->AddText("Unstable calibration");
+  Int_t nUnstablePlanes = 0;
   TDirectory *DGraphs = Histogram_file->mkdir("Graphs"); DGraphs->cd(); 
   for(Int_t i = 0; i<12; i++){ // loop over planes
     StabilityPlots[0][0][i] = new TGraphErrors(line_numTot, RunNumberD, Mean[0][i], 0, MeanErr[0][i]);
@@ -159,10 +169,25 @@ void run_DC_Calib_Comp(string Det = "", TString Run_List="")
     FirstPoint = TMath::LocMin(StabilityPlots[0][0][i]->GetN(), StabilityPlots[0][0][i]->GetX()); // Get the entry number of the point with the FIRST run number in the set
     StrLn1->SetParLimits(0, (Mean[0][i][FirstPoint]-MeanErr[0][i][FirstPoint]), (Mean[0][i][FirstPoint]+MeanErr[0][i][FirstPoint])); // Set the intercept to only vary within 1 sigma of the first run number in the set
     StrLn1->SetParameter(0, Mean[0][i][FirstPoint]);
-    StrLn1->SetParameter(1, 0); StrLn1->FixParameter(1, 0); 
-    //cout << StrLn1->GetChisquare()/StrLn1->GetNDF() << endl;
+    StrLn1->SetParameter(1, 0); StrLn1->FixParameter(1, 0);
     StabilityPlots[0][0][i]->Fit(StrLn1, "FMQ");
+    // Should maybe just re-write this as some function
+    if (StrLn1->GetChisquare()/StrLn1->GetNDF() < 0.5){
+      Overconstrained[0][i] = kTRUE;
+      Stability[0][i] = kFALSE;
+      nUnstablePlanes++;
+    }
+    else if (StrLn1->GetChisquare()/StrLn1->GetNDF() > 0.5 && StrLn1->GetChisquare()/StrLn1->GetNDF() < 5){
+      Overconstrained[0][i] = kFALSE;
+      Stability[0][i] = kTRUE;
+    }
+    else if (StrLn1->GetChisquare()/StrLn1->GetNDF() > 5 ){
+      Overconstrained[0][i] = kFALSE;
+      Stability[0][i] = kFALSE;
+      nUnstablePlanes++;
+    }
     StabilityPlots[0][0][i]->Write();
+   
     StabilityPlots[0][1][i] = new TGraphErrors(line_numTot, RunNumberD, StdDev[0][i], 0, StdDevErr[0][i]);
     StabilityPlots[0][1][i]->SetTitle(Plane[i] + " Residual #sigma as a function of Run Number"); StabilityPlots[0][1][i]->SetName(Plane[i]+"ResStdDev");
     StabilityPlots[0][1][i]->SetMarkerSize(1); StabilityPlots[0][1][i]->SetMarkerStyle(4); StabilityPlots[0][1][i]->SetMarkerColor(2); StabilityPlots[0][1][i]->SetLineColor(2);
@@ -181,6 +206,18 @@ void run_DC_Calib_Comp(string Det = "", TString Run_List="")
     StrLn1->SetParameter(1, 0); StrLn1->FixParameter(1, 0); 
     StabilityPlots[1][0][i]->Fit(StrLn1, "FMQ");
     StabilityPlots[1][0][i]->Write();
+    if (StrLn1->GetChisquare()/StrLn1->GetNDF() < 0.5){
+      Overconstrained[1][i] = kTRUE;
+      Stability[1][i] = kFALSE;
+    }
+    else if (StrLn1->GetChisquare()/StrLn1->GetNDF() > 0.5 && StrLn1->GetChisquare()/StrLn1->GetNDF() < 5){
+      Overconstrained[1][i] = kFALSE;
+      Stability[1][i] = kTRUE;
+    }
+    else if (StrLn1->GetChisquare()/StrLn1->GetNDF() > 5 ){
+      Overconstrained[1][i] = kFALSE;
+      Stability[1][i] = kFALSE;
+    }   
     StabilityPlots[1][1][i] = new TGraphErrors(line_numTot, RunNumberD, StdDev[1][i], 0,  StdDevErr[1][i]);
     StabilityPlots[1][1][i]->SetTitle(Plane[i] + " Unbiased Residual #sigma as a function of Run Number"); StabilityPlots[1][1][i]->SetName(Plane[i]+"UbResStdDev");
     StabilityPlots[1][1][i]->SetMarkerSize(1); StabilityPlots[1][1][i]->SetMarkerStyle(4); StabilityPlots[1][1][i]->SetMarkerColor(2); StabilityPlots[1][1][i]->SetLineColor(2);
@@ -188,12 +225,27 @@ void run_DC_Calib_Comp(string Det = "", TString Run_List="")
     StabilityPlots[1][1][i]->GetYaxis()->SetTitle("Unbiased Residual #sigma"); //StabilityPlots[1][1][i]->GetYaxis()->SetRangeUser(0, 0.05); 
     StabilityPlots[1][1][i]->Write();
   }
+
+  if (nUnstablePlanes > 5){
+    cout << "\n" << "WARNING" << endl << "\n";
+    cout << nUnstablePlanes << " planes look unstable, check if any are overconstrained and consider comparing more runs or recalibrating" << endl;
+    cout << "\n" << "WARNING" << endl << "\n";
+  }
   
   TCanvas *cResMean = new TCanvas("ResMean","Residual Means as a function of run number by Plane",300,100,1000,900);
   cResMean->Divide(3,4);
   for(Int_t i = 0; i<12; i++){ // loop over planes
     cResMean->cd(i+1);
     StabilityPlots[0][0][i]->Draw("AEP");
+    if (Overconstrained[0][i] == kTRUE && Stability[0][i] == kFALSE){
+      Label1->DrawClone("SAME");
+    }
+    else if (Overconstrained[0][i] == kFALSE && Stability[0][i] == kTRUE){
+      Label2->DrawClone("SAME");
+    }
+    else if (Overconstrained[0][i] == kFALSE && Stability[0][i] == kFALSE){
+      Label3->DrawClone("SAME");
+    }
   }
   TCanvas *cResStdDev = new TCanvas("ResStdDev","Residual Standard Deviation as a function of run number by Plane",300,100,1000,900);
   cResStdDev->Divide(3,4);
@@ -206,6 +258,15 @@ void run_DC_Calib_Comp(string Det = "", TString Run_List="")
   for(Int_t i = 0; i<12; i++){ // loop over planes
     cUbResMean->cd(i+1);
     StabilityPlots[1][0][i]->Draw("AEP");
+    if (Overconstrained[1][i] == kTRUE && Stability[1][i] == kFALSE){
+      Label1->DrawClone("SAME");
+    }
+    else if (Overconstrained[1][i] == kFALSE && Stability[1][i] == kTRUE){
+      Label2->DrawClone("SAME");
+    }
+    else if (Overconstrained[1][i] == kFALSE && Stability[1][i] == kFALSE){
+      Label3->DrawClone("SAME");
+    }
   }
   TCanvas *cUbResStdDev = new TCanvas("UbResStdDev","Unbiased Residual Standard Deviation as a function of run number by Plane",300,100,1000,900);
   cUbResStdDev->Divide(3,4);

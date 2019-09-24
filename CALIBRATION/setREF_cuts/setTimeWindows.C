@@ -1,7 +1,7 @@
 /*
  * Description: Define and Set REF. TIME CUTS 
  * ================================================================
- * Time-stamp: "2019-09-23 19:24:25 trottar"
+ * Time-stamp: "2019-09-24 13:15:22 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu>

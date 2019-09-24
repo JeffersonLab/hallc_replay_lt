@@ -1,7 +1,7 @@
 /*
  * Description: Define and Set REF. TIME CUTS 
  * ================================================================
- * Time-stamp: "2019-09-23 17:34:04 trottar"
+ * Time-stamp: "2019-09-24 13:48:18 trottar"
  * ================================================================
  *
  * Author:  Richard L. Trotta III <trotta@cua.edu>, Carlos Yero <cyero002@fiu.edu>
@@ -48,15 +48,27 @@ static const Int_t pmaxPMT[hod_PLANES] = {13, 13, 14, 21};
 
 //NOTE: These Values must be entered with a "minus(-)" sign in the para file
 
+// Carlos values
 //(See /PARAM/HMS/GEN/h_reftime_cut.param, units in Channel)
-static const Double_t hhod_trefcut = 1600.;      //hodo tdc ref cut
-static const Double_t hdc_trefcut = 13400.;      //dc tdc ref cut
-static const Double_t hadc_trefcut = 2900.;      //hodo/cer/cal adc ref cut
+/* static const Double_t hhod_trefcut = 1600.;      //hodo tdc ref cut */
+/* static const Double_t hdc_trefcut = 13400.;      //dc tdc ref cut */
+/* static const Double_t hadc_trefcut = 2900.;      //hodo/cer/cal adc ref cut */
 
 //(See /PARAM/SHMS/GEN/p_reftime_cut.param, units in Channel)
-static const Double_t phod_trefcut = 2800.;            //**NOTE: Use this to set t_coin_trig_tdcrefcut in tcoin.param
-static const Double_t pdc_trefcut = 13700.;
-static const Double_t padc_trefcut = 2850.;            //**NOTE: Use this to set t_coin_trig_tdcrefcut in tcoin.param
+/* static const Double_t phod_trefcut = 2800.;            //\**NOTE: Use this to set t_coin_trig_tdcrefcut in tcoin.param */
+/* static const Double_t pdc_trefcut = 13700.; */
+/* static const Double_t padc_trefcut = 2850.;            //\**NOTE: Use this to set t_coin_trig_tdcrefcut in tcoin.param */
+
+//(See /PARAM/HMS/GEN/h_reftime_cut.param, units in Channel)
+static const Double_t hhod_trefcut = 3700.;      //hodo tdc ref cut
+static const Double_t hdc_trefcut = 16500.;      //dc tdc ref cut
+static const Double_t hadc_trefcut = 5150.;      //hodo/cer/cal adc ref cut
+
+//(See /PARAM/SHMS/GEN/p_reftime_cut.param, units in Channel)
+static const Double_t phod_trefcut = 4700.;            //**NOTE: Use this to set t_coin_trig_tdcrefcut in tcoin.param
+static const Double_t pdc_trefcut = 15500.;
+static const Double_t padc_trefcut = 6150.;            //**NOTE: Use this to set t_coin_trig_tdcrefcut in tcoin.param
+
 
 //=======================================================
 
@@ -163,17 +175,31 @@ Double_t pcal_nSig = 10.0;
 
 //**NOTE** : These are found in the PARAM/TRIG/tcoin.param file
 
-static const Double_t ptrg1r1_tWinMin = 2200;    //pTRIG1_ROC1
-static const Double_t ptrg1r1_tWinMax = 3050;
+// Carlos values
+/* static const Double_t ptrg1r1_tWinMin = 2200;    //pTRIG1_ROC1 */
+/* static const Double_t ptrg1r1_tWinMax = 3050; */
 
-static const Double_t ptrg1r2_tWinMin = 2850;    //pTRIG1_ROC2
-static const Double_t ptrg1r2_tWinMax = 3800;
+/* static const Double_t ptrg1r2_tWinMin = 2850;    //pTRIG1_ROC2 */
+/* static const Double_t ptrg1r2_tWinMax = 3800; */
 
-static const Double_t ptrg4r1_tWinMin = 1900;
-static const Double_t ptrg4r1_tWinMax = 2900;
+/* static const Double_t ptrg4r1_tWinMin = 1900; */
+/* static const Double_t ptrg4r1_tWinMax = 2900; */
 
-static const Double_t ptrg4r2_tWinMin = 2600;
-static const Double_t ptrg4r2_tWinMax = 3550;
+/* static const Double_t ptrg4r2_tWinMin = 2600; */
+/* static const Double_t ptrg4r2_tWinMax = 3550; */
+
+
+static const Double_t ptrg1r1_tWinMin = 4200;    //pTRIG1_ROC1, 28
+static const Double_t ptrg1r1_tWinMax = 6200;
+
+static const Double_t ptrg1r2_tWinMin = 0;    //pTRIG1_ROC2, 59
+static const Double_t ptrg1r2_tWinMax = 10000;
+
+static const Double_t ptrg4r1_tWinMin = 4200;    //pTRIG4_ROC1, 31
+static const Double_t ptrg4r1_tWinMax = 6200;
+
+static const Double_t ptrg4r2_tWinMin = 5500;   //pTRIG4_ROC2, 62
+static const Double_t ptrg4r2_tWinMax = 7000;
 
 //==============================================================
 

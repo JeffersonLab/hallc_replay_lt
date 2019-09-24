@@ -1,0 +1,9 @@
+; SHMS Pre-Shower Parameter File Containing TimeWindow Min/Max Cuts 
+ 
+ 
+ 
+
+pcal_pos_AdcTimeWindowMin = 
+pcal_pos_AdcTimeWindowMax = 
+pcal_neg_AdcTimeWindowMin = 
+pcal_neg_AdcTimeWindowMax = 

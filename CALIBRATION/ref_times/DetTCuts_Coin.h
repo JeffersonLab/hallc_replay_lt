@@ -92,6 +92,7 @@ public :
 
    // Declaration of histograms
    TH1F           *h1hCerAdcTdcTDiff[2]; // Array of 2 histograms
+   TH2F           *h2hCerTDiffADCAmp[2];
    TH1F           *h1hdcTdcT[12]; // Array of 12 histograms
    TH1F           *h1hCalAdcTdcTDiff[4][2][13]; // 3D array of 4/2/13 (4 planes, 2 sides, 13 PMTs per side)
    TH1F           *h1hHodoAdcTdcTDiff[4][2][16]; // 3D array of 4/2/16 (4 planes, 2 sides, UP TO 16 PMTs per side)
@@ -103,6 +104,7 @@ public :
    TH1F           *h1pHodoAdcTdcTDiff[4][2][21]; // 3D array of 4/2/21 (4 planes, 2 sides, UP TO 21 PMTs per side)
    TH2F           *h2pHodoTDiffADCAmp[4][2][21];
    TH1F           *h1pPrShAdcTdcTDiff[2][14]; // 2D array, 2/14 (2 sides, 14 PMTs per side)
+   TH2F           *h2pPrShTDiffADCAmp[2][14];
    TH1F           *h1pCalAdcTdcTDiff[224]; // Array of 224 histograms, 224 PMTs
 
    // Readers to access the data
@@ -149,6 +151,7 @@ public :
    TTreeReaderArray<Double_t> H_dc_2v2_nhit                  = {fReader, "H.dc.2v2.nhit"};   
 
    TTreeReaderArray<Double_t> H_cer_goodAdcTdcDiffTime        = {fReader, "H.cer.goodAdcTdcDiffTime"};
+   TTreeReaderArray<Double_t> H_cer_goodAdcPulseAmp           = {fReader, "H.cer.goodAdcPulseAmp"};
    TTreeReaderArray<Double_t> H_cer_goodAdcMult               = {fReader, "H.cer.goodAdcMult"};   
 
    TTreeReaderArray<Double_t> H_cal_1pr_goodPosAdcTdcDiffTime = {fReader, "H.cal.1pr.goodPosAdcTdcDiffTime"};   
@@ -229,6 +232,8 @@ public :
             
    TTreeReaderArray<Double_t> P_cal_pr_goodPosAdcTdcDiffTime = {fReader, "P.cal.pr.goodPosAdcTdcDiffTime"};   
    TTreeReaderArray<Double_t> P_cal_pr_goodNegAdcTdcDiffTime = {fReader, "P.cal.pr.goodNegAdcTdcDiffTime"};   
+   TTreeReaderArray<Double_t> P_cal_pr_goodPosAdcPulseAmp    = {fReader, "P.cal.pr.goodPosAdcPulseAmp"};   
+   TTreeReaderArray<Double_t> P_cal_pr_goodNegAdcPulseAmp    = {fReader, "P.cal.pr.goodNegAdcPulseAmp"};   
    TTreeReaderArray<Double_t> P_cal_pr_goodPosAdcMult        = {fReader, "P.cal.pr.goodPosAdcMult"};   
    TTreeReaderArray<Double_t> P_cal_pr_goodNegAdcMult        = {fReader, "P.cal.pr.goodNegAdcMult"};   
    TTreeReaderArray<Double_t> P_cal_fly_goodAdcTdcDiffTime   = {fReader, "P.cal.fly.goodAdcTdcDiffTime"};

@@ -33,7 +33,9 @@ void DetTCuts_Coin::SlaveBegin(TTree * /*tree*/)
   //HMS Histos
   for (Int_t ipmt = 0; ipmt < 2; ipmt++){
     h1hCerAdcTdcTDiff[ipmt] = new TH1F (Form("hCER%d_timeDiff", ipmt+1), Form("HMS Cer PMT%d AdcTdcTimeDiff", ipmt+1), 200, 0, 200);
+    h2hCerTDiffADCAmp[ipmt] = new TH2F(Form("hCER%d_tDiffADCAmp", ipmt+1), Form("HMS Cer ADC TDC Diff Time PMT%d vs ADC Pulse Amp; Time (ns); Charge (pC)",ipmt+1), 200, 0, 200, 500, 0.0, 500);
     GetOutputList()->Add(h1hCerAdcTdcTDiff[ipmt]);
+    GetOutputList()->Add(h2hCerTDiffADCAmp[ipmt]);
   }
   for (Int_t i = 0; i < 12; i++){
     h1hdcTdcT[i] = new TH1F( Form("hDC%s_rawTDC", dc_pl_names[i].c_str()), Form("HMS DC Plane %s Raw TDC", dc_pl_names[i].c_str()), 200, -20000, 0);
@@ -88,14 +90,15 @@ void DetTCuts_Coin::SlaveBegin(TTree * /*tree*/)
   for (Int_t nside = 0; nside < sides; nside++){ //Loop over each side
     for (Int_t ipmt = 0; ipmt < 14; ipmt++){ // Loop over PMTs
       h1pPrShAdcTdcTDiff[nside][ipmt] = new TH1F(Form("pPrSh%d%s_timeDiff", ipmt+1, nsign[nside].c_str()), Form("SHMS Pre-Shower PMT%d%s AdcTdcTimeDiff", ipmt+1, nsign[nside].c_str()), 200, -200, 200);
+      h2pPrShTDiffADCAmp[nside][ipmt] = new TH2F(Form("pPrSh%d%s_tDiffADCAmp", ipmt+1, nsign[nside].c_str()), Form("SHMS Pre-Shower PMT%d%s AdcTdcTimeDiff vs ADC Pulse Amp; Time(ns); Charge(pC)", ipmt+1, nsign[nside].c_str()), 200, -100, 100, 500, 0, 500);
       GetOutputList()->Add(h1pPrShAdcTdcTDiff[nside][ipmt]);
+      GetOutputList()->Add(h2pPrShTDiffADCAmp[nside][ipmt]);
     }
   }
   for(Int_t ipmt = 0; ipmt < 224; ipmt++){
     h1pCalAdcTdcTDiff[ipmt] = new TH1F(Form("pCalPMT%d", ipmt+1), Form("SHMS Calorimeter PMT%d AdcTdcTimeDiff", ipmt+1), 200, -100, 100); 
     GetOutputList()->Add(h1pCalAdcTdcTDiff[ipmt]);
   }
-
 }
 
 Bool_t DetTCuts_Coin::Process(Long64_t entry)
@@ -104,7 +107,10 @@ Bool_t DetTCuts_Coin::Process(Long64_t entry)
   
   // Fill our HMS timing histograms, explicitly select only multiplicity 1 events
   for (Int_t ipmt = 0; ipmt < 2; ipmt++){
-    if(H_cer_goodAdcMult[ipmt] == 1) h1hCerAdcTdcTDiff[ipmt]->Fill(H_cer_goodAdcTdcDiffTime[ipmt]);
+    if(H_cer_goodAdcMult[ipmt] == 1){
+      h1hCerAdcTdcTDiff[ipmt]->Fill(H_cer_goodAdcTdcDiffTime[ipmt]);
+      h2hCerTDiffADCAmp[ipmt]->Fill(H_cer_goodAdcTdcDiffTime[ipmt], H_cer_goodAdcPulseAmp[ipmt]);
+    }
   }
   // This is a disgustingly bad way of doing this, really need to figure out how to have some ARRAY of readers
   for (Int_t i = 0; i < 12; i++){
@@ -316,10 +322,16 @@ Bool_t DetTCuts_Coin::Process(Long64_t entry)
   for (Int_t nside = 0; nside < sides; nside++){
     for (Int_t ipmt = 0; ipmt < 14; ipmt++){
       if(nside == 0){
-	if(P_cal_pr_goodPosAdcMult[ipmt] == 1) h1pPrShAdcTdcTDiff[nside][ipmt]->Fill(P_cal_pr_goodPosAdcTdcDiffTime[ipmt]);
+	if(P_cal_pr_goodPosAdcMult[ipmt] == 1) {
+	  h1pPrShAdcTdcTDiff[nside][ipmt]->Fill(P_cal_pr_goodPosAdcTdcDiffTime[ipmt]);
+	  h2pPrShTDiffADCAmp[nside][ipmt]->Fill(P_cal_pr_goodPosAdcTdcDiffTime[ipmt], P_cal_pr_goodPosAdcPulseAmp[ipmt]);
+	}
       }
       else if(nside == 1){
-	if(P_cal_pr_goodNegAdcMult[ipmt] == 1) h1pPrShAdcTdcTDiff[nside][ipmt]->Fill(P_cal_pr_goodNegAdcTdcDiffTime[ipmt]);  
+	if(P_cal_pr_goodNegAdcMult[ipmt] == 1){
+	  h1pPrShAdcTdcTDiff[nside][ipmt]->Fill(P_cal_pr_goodNegAdcTdcDiffTime[ipmt]);
+	  h2pPrShTDiffADCAmp[nside][ipmt]->Fill(P_cal_pr_goodNegAdcTdcDiffTime[ipmt], P_cal_pr_goodNegAdcPulseAmp[ipmt]);
+	}  
       }
     }
   }
@@ -347,11 +359,14 @@ void DetTCuts_Coin::Terminate()
 
   TDirectory *DHMSCER = Histogram_file->mkdir("HMS Cherenkov Timing"); DHMSCER->cd();
   TCanvas *CHMSCER = new TCanvas("CHMSCER", "HMS Cherenkov timing plots", 300,100,1000,900);
-  CHMSCER->Divide(2,1);
+  TCanvas *CHMSCER2 = new TCanvas("CHMSCER2", "HMS Cherenkov 2D plots", 300,100,1000,900);
+  CHMSCER->Divide(2,1); CHMSCER2->Divide(2,1);
   for (Int_t ipmt = 0; ipmt < 2; ipmt++){
     TH1F *HMSCER = dynamic_cast<TH1F *>(TProof::GetOutput(Form("hCER%d_timeDiff", ipmt+1), fOutput));
+    TH2F* HMSCER2D = dynamic_cast<TH2F *>(TProof::GetOutput(Form("hCER%d_tDiffADCAmp", ipmt+1), fOutput));
     HMSCER->Write();
-    CHMSCER->cd(ipmt+1); HMSCER->Draw();
+    HMSCER2D->Write();
+    CHMSCER->cd(ipmt+1); HMSCER->Draw(); CHMSCER2->cd(ipmt+1); HMSCER2D->Draw("COLZ");
   }
 
   TDirectory *DHMSDC = Histogram_file->mkdir("HMS DC Timing"); DHMSDC->cd();
@@ -413,13 +428,13 @@ void DetTCuts_Coin::Terminate()
 
   TDirectory *DSHMSHGC = Histogram_file->mkdir("SHMS HGC Timing"); DSHMSHGC->cd();  
   TCanvas *CSHMSHGC = new TCanvas("CSHMSHGC", "SHMS HGC timing plots", 300,100,1000,900);
-  CSHMSHGC->Divide(2,2);
+  TCanvas *CSHMSHGC2 = new TCanvas("CSHMSHGC2", "SHMS HGC 2D plots", 300,100,1000,900);
+  CSHMSHGC->Divide(2,2); CSHMSHGC2->Divide(2,2);
   for (Int_t ipmt = 0; ipmt < 4; ipmt++){
     TH1F *SHMSHGC = dynamic_cast<TH1F *>(TProof::GetOutput(Form("pHGCER%d_timeDiff", ipmt+1), fOutput));
     TH2F* SHMSHGC2D = dynamic_cast<TH2F *>(TProof::GetOutput(Form("pHGCER%d_tDiffADCAmp", ipmt+1), fOutput));
-    SHMSHGC->Write();
-    SHMSHGC2D->Write();
-    CSHMSHGC->cd(ipmt+1); SHMSHGC->Draw();
+    SHMSHGC->Write(); SHMSHGC2D->Write();
+    CSHMSHGC->cd(ipmt+1); SHMSHGC->Draw(); CSHMSHGC2->cd(ipmt+1); SHMSHGC2D->Draw("COLZ");
   }
 
   TDirectory *DSHMSAERO = Histogram_file->mkdir("SHMS Aerogel Cherenkov Timing"); DSHMSAERO->cd();  
@@ -458,30 +473,37 @@ void DetTCuts_Coin::Terminate()
 
   TDirectory *DSHMSHODO = Histogram_file->mkdir("SHMS Hodoscope Timing"); DSHMSHODO->cd();  
   TCanvas *CSHMSHODO[4][2];  
+  TCanvas *CSHMSHODO2[4][2];
   for (Int_t npl = 0; npl < hod_planes; npl++){ // Loop over all hodoscope planes
     for (Int_t nside = 0; nside < sides; nside++){ //Loop over each side
       CSHMSHODO[npl][nside] = new TCanvas(Form("CSHMSHODO%s%s", hod_pl_names[npl].c_str(), nsign[nside].c_str()),  Form("SHMS Hodoscope %s%s Timing", hod_pl_names[npl].c_str(), nsign[nside].c_str()), 300,100,1000,900);
-      if (npl != 3) CSHMSHODO[npl][nside]->Divide(5, 3);
-      else if (npl == 3) CSHMSHODO[npl][nside]->Divide(7, 3);
+      CSHMSHODO2[npl][nside] = new TCanvas(Form("CSHMSHODO2%s%s", hod_pl_names[npl].c_str(), nsign[nside].c_str()),  Form("SHMS Hodoscope %s%s 2D", hod_pl_names[npl].c_str(), nsign[nside].c_str()), 300,100,1000,900);
+      if (npl != 3){
+	CSHMSHODO[npl][nside]->Divide(5, 3); CSHMSHODO2[npl][nside]->Divide(5, 3);
+      }
+      else if (npl == 3){
+	CSHMSHODO[npl][nside]->Divide(7, 3); CSHMSHODO2[npl][nside]->Divide(7, 3);
+      }
       for (Int_t ipmt = 0; ipmt < pmaxPMT[npl]; ipmt++){ // Loop over each PMT in a particular plane	
 	TH1F *SHMSHODO = dynamic_cast<TH1F *>(TProof::GetOutput(Form("pHodo%s%d%s_timeDiff", hod_pl_names[npl].c_str(),ipmt+1,nsign[nside].c_str() ), fOutput));
 	TH2F *SHMSHODO2D = dynamic_cast<TH2F *>(TProof::GetOutput(Form("pHodo%s%d%s_tDiffADCAmp", hod_pl_names[npl].c_str(),ipmt+1,nsign[nside].c_str() ), fOutput));
-	SHMSHODO->Write();
-	SHMSHODO2D->Write();
-	CSHMSHODO[npl][nside]->cd(ipmt+1); SHMSHODO->Draw();
+	SHMSHODO->Write(); SHMSHODO2D->Write();
+	CSHMSHODO[npl][nside]->cd(ipmt+1); SHMSHODO->Draw(); CSHMSHODO2[npl][nside]->cd(ipmt+1); SHMSHODO2D->Draw("COLZ");
       }
     }
   }
 
   TDirectory *DSHMSPRSH = Histogram_file->mkdir("SHMS Pre-Shower Timing"); DSHMSPRSH->cd();  
-  TCanvas *CSHMSPRSH[2];
+  TCanvas *CSHMSPRSH[2]; TCanvas *CSHMSPRSH2[2];
   for (Int_t nside = 0; nside < sides; nside++){ //Loop over each side
     CSHMSPRSH[nside] = new TCanvas(Form("CSHMSPRSH%s", nsign[nside].c_str()),  Form("SHMS Pre-Shower  %sPMT Timing", nsign[nside].c_str()), 300,100,1000,900);
-    CSHMSPRSH[nside]->Divide(5, 3);    
+    CSHMSPRSH2[nside] = new TCanvas(Form("CSHMSPRSH2%s", nsign[nside].c_str()),  Form("SHMS Pre-Shower  %sPMT 2D Timing", nsign[nside].c_str()), 300,100,1000,900);    
+    CSHMSPRSH[nside]->Divide(5, 3); CSHMSPRSH2[nside]->Divide(5, 3);
     for (Int_t ipmt = 0; ipmt < 14; ipmt++){ // Loop over PMTs
       TH1F *SHMSPRSH = dynamic_cast<TH1F *>(TProof::GetOutput(Form("pPrSh%d%s_timeDiff", ipmt+1, nsign[nside].c_str()), fOutput));
-      SHMSPRSH->Write();
-      CSHMSPRSH[nside]->cd(ipmt+1); SHMSPRSH->Draw();
+      TH2F *SHMSPRSH2D = dynamic_cast<TH2F *>(TProof::GetOutput(Form("pPrSh%d%s_tDiffADCAmp", ipmt+1, nsign[nside].c_str()), fOutput));
+      SHMSPRSH->Write(); SHMSPRSH2D->Write();
+      CSHMSPRSH[nside]->cd(ipmt+1); SHMSPRSH->Draw(); CSHMSPRSH2[nside]->cd(ipmt+1); SHMSPRSH2D->Draw("COLZ"); 
     }
   }
   
@@ -505,6 +527,7 @@ void DetTCuts_Coin::Terminate()
 
   CHMSCER->Print(outputpdf+"[");
   CHMSCER->Print(outputpdf);
+  CHMSCER2->Print(outputpdf);
   CHMSDC->Print(outputpdf);
   for (Int_t npl = 0; npl < cal_planes; npl++){ // Loop over all calorimeter planes
     for (Int_t nside = 0; nside < sides; nside++){ //Loop over each side
@@ -519,12 +542,14 @@ void DetTCuts_Coin::Terminate()
     }
   }
   CSHMSHGC->Print(outputpdf);
+  CSHMSHGC2->Print(outputpdf);
   CSHMSAERO[0]->Print(outputpdf);
   CSHMSAERO[1]->Print(outputpdf);
   CSHMSDC->Print(outputpdf);
   for (Int_t npl = 0; npl < hod_planes; npl++){ // Loop over all hodoscope planes
     for (Int_t nside = 0; nside < sides; nside++){ //Loop over each side
       CSHMSHODO[npl][nside]->Print(outputpdf);
+      CSHMSHODO2[npl][nside]->Print(outputpdf);
     }
   }
   CSHMSPRSH[0]->Print(outputpdf);

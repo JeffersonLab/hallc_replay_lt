@@ -32,9 +32,10 @@ void DetTCuts_Coin::SlaveBegin(TTree * /*tree*/)
 
   //HMS Histos
   for (Int_t ipmt = 0; ipmt < 2; ipmt++){
-    h1hCerAdcTdcTDiff[ipmt] = new TH1F (Form("hCER%d_timeDiff", ipmt+1), Form("HMS Cer PMT%d AdcTdcTimeDiff", ipmt+1), 200, 0, 200);
+    h1hCerAdcTdcTDiff[0][ipmt] = new TH1F (Form("hCER%d_timeDiff", ipmt+1), Form("HMS Cer PMT%d AdcTdcTimeDiff", ipmt+1), 200, 0, 200);
+    h1hCerAdcTdcTDiff[1][ipmt] = new TH1F (Form("hCER%d_timeDiff_Cut", ipmt+1), Form("HMS Cer PMT%d AdcTdcTimeDiff, ADC Pulse Amp Cut", ipmt+1), 200, 0, 200);
     h2hCerTDiffADCAmp[ipmt] = new TH2F(Form("hCER%d_tDiffADCAmp", ipmt+1), Form("HMS Cer ADC TDC Diff Time PMT%d vs ADC Pulse Amp; Time (ns); Charge (pC)",ipmt+1), 200, 0, 200, 500, 0.0, 500);
-    GetOutputList()->Add(h1hCerAdcTdcTDiff[ipmt]);
+    GetOutputList()->Add(h1hCerAdcTdcTDiff[0][ipmt]); GetOutputList()->Add(h1hCerAdcTdcTDiff[1][ipmt]);
     GetOutputList()->Add(h2hCerTDiffADCAmp[ipmt]);
   }
   for (Int_t i = 0; i < 12; i++){
@@ -62,9 +63,10 @@ void DetTCuts_Coin::SlaveBegin(TTree * /*tree*/)
   
   // SHMS Histos
   for (Int_t ipmt = 0; ipmt < 4; ipmt++){
-    h1pHGCAdcTdcTDiff[ipmt] = new TH1F (Form("pHGCER%d_timeDiff", ipmt+1), Form("SHMS HGCer PMT%d AdcTdcTimeDiff", ipmt+1), 200, 0, 100);
+    h1pHGCAdcTdcTDiff[0][ipmt] = new TH1F (Form("pHGCER%d_timeDiff", ipmt+1), Form("SHMS HGCer PMT%d AdcTdcTimeDiff", ipmt+1), 200, 0, 100);
+    h1pHGCAdcTdcTDiff[1][ipmt] = new TH1F (Form("pHGCER%d_timeDiff_Cut", ipmt+1), Form("SHMS HGCer PMT%d AdcTdcTimeDiff, ADC Pulse Amp Cut", ipmt+1), 200, 0, 100);
     h2pHGCTDiffADCAmp[ipmt] = new TH2F(Form("pHGCER%d_tDiffADCAmp", ipmt+1), Form("SHMS HGC ADC TDC Diff Time PMT%d vs ADC Pulse Amp; Time (ns); Charge (pC)",ipmt+1), 200, 0, 100, 500, 0.0, 500); 
-    GetOutputList()->Add(h1pHGCAdcTdcTDiff[ipmt]);
+    GetOutputList()->Add(h1pHGCAdcTdcTDiff[0][ipmt]); GetOutputList()->Add(h1pHGCAdcTdcTDiff[1][ipmt]);
     GetOutputList()->Add(h2pHGCTDiffADCAmp[ipmt]);
   }
   for (Int_t nside = 0; nside < sides; nside++){ //Loop over each side
@@ -89,9 +91,10 @@ void DetTCuts_Coin::SlaveBegin(TTree * /*tree*/)
   }
   for (Int_t nside = 0; nside < sides; nside++){ //Loop over each side
     for (Int_t ipmt = 0; ipmt < 14; ipmt++){ // Loop over PMTs
-      h1pPrShAdcTdcTDiff[nside][ipmt] = new TH1F(Form("pPrSh%d%s_timeDiff", ipmt+1, nsign[nside].c_str()), Form("SHMS Pre-Shower PMT%d%s AdcTdcTimeDiff", ipmt+1, nsign[nside].c_str()), 200, -200, 200);
+      h1pPrShAdcTdcTDiff[0][nside][ipmt] = new TH1F(Form("pPrSh%d%s_timeDiff", ipmt+1, nsign[nside].c_str()), Form("SHMS Pre-Shower PMT%d%s AdcTdcTimeDiff", ipmt+1, nsign[nside].c_str()), 200, -100, 100);
+      h1pPrShAdcTdcTDiff[1][nside][ipmt] = new TH1F(Form("pPrSh%d%s_timeDiff_Cut", ipmt+1, nsign[nside].c_str()), Form("SHMS Pre-Shower PMT%d%s AdcTdcTimeDiff With ADC Pulse Amp Cut", ipmt+1, nsign[nside].c_str()), 200, -100, 100);
       h2pPrShTDiffADCAmp[nside][ipmt] = new TH2F(Form("pPrSh%d%s_tDiffADCAmp", ipmt+1, nsign[nside].c_str()), Form("SHMS Pre-Shower PMT%d%s AdcTdcTimeDiff vs ADC Pulse Amp; Time(ns); Charge(pC)", ipmt+1, nsign[nside].c_str()), 200, -100, 100, 500, 0, 500);
-      GetOutputList()->Add(h1pPrShAdcTdcTDiff[nside][ipmt]);
+      GetOutputList()->Add(h1pPrShAdcTdcTDiff[0][nside][ipmt]); GetOutputList()->Add(h1pPrShAdcTdcTDiff[1][nside][ipmt]); 
       GetOutputList()->Add(h2pPrShTDiffADCAmp[nside][ipmt]);
     }
   }
@@ -108,7 +111,8 @@ Bool_t DetTCuts_Coin::Process(Long64_t entry)
   // Fill our HMS timing histograms, explicitly select only multiplicity 1 events
   for (Int_t ipmt = 0; ipmt < 2; ipmt++){
     if(H_cer_goodAdcMult[ipmt] == 1){
-      h1hCerAdcTdcTDiff[ipmt]->Fill(H_cer_goodAdcTdcDiffTime[ipmt]);
+      h1hCerAdcTdcTDiff[0][ipmt]->Fill(H_cer_goodAdcTdcDiffTime[ipmt]);
+      if(H_cer_goodAdcPulseAmp[ipmt] > CerPulseAmpCut) h1hCerAdcTdcTDiff[1][ipmt]->Fill(H_cer_goodAdcTdcDiffTime[ipmt]); 
       h2hCerTDiffADCAmp[ipmt]->Fill(H_cer_goodAdcTdcDiffTime[ipmt], H_cer_goodAdcPulseAmp[ipmt]);
     }
   }
@@ -211,7 +215,8 @@ Bool_t DetTCuts_Coin::Process(Long64_t entry)
   // Fill our SHMS timing histograms, explicitly select only multiplicity 1 events
   for (Int_t ipmt = 0; ipmt < 4; ipmt++){
     if(P_hgcer_goodAdcMult[ipmt] == 1){
-      h1pHGCAdcTdcTDiff[ipmt]->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+      h1pHGCAdcTdcTDiff[0][ipmt]->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+      if(P_hgcer_goodAdcPulseAmp[ipmt] > CerPulseAmpCut) h1pHGCAdcTdcTDiff[1][ipmt]->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
       h2pHGCTDiffADCAmp[ipmt]->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt], P_hgcer_goodAdcPulseAmp[ipmt]);
     }
   }
@@ -323,13 +328,15 @@ Bool_t DetTCuts_Coin::Process(Long64_t entry)
     for (Int_t ipmt = 0; ipmt < 14; ipmt++){
       if(nside == 0){
 	if(P_cal_pr_goodPosAdcMult[ipmt] == 1) {
-	  h1pPrShAdcTdcTDiff[nside][ipmt]->Fill(P_cal_pr_goodPosAdcTdcDiffTime[ipmt]);
+	  h1pPrShAdcTdcTDiff[0][nside][ipmt]->Fill(P_cal_pr_goodPosAdcTdcDiffTime[ipmt]);
+	  if(P_cal_pr_goodPosAdcPulseAmp[ipmt] > PrShPulseAmpCut) h1pPrShAdcTdcTDiff[1][nside][ipmt]->Fill(P_cal_pr_goodPosAdcTdcDiffTime[ipmt]);
 	  h2pPrShTDiffADCAmp[nside][ipmt]->Fill(P_cal_pr_goodPosAdcTdcDiffTime[ipmt], P_cal_pr_goodPosAdcPulseAmp[ipmt]);
 	}
       }
       else if(nside == 1){
 	if(P_cal_pr_goodNegAdcMult[ipmt] == 1){
-	  h1pPrShAdcTdcTDiff[nside][ipmt]->Fill(P_cal_pr_goodNegAdcTdcDiffTime[ipmt]);
+	  h1pPrShAdcTdcTDiff[0][nside][ipmt]->Fill(P_cal_pr_goodNegAdcTdcDiffTime[ipmt]);
+	  if(P_cal_pr_goodNegAdcPulseAmp[ipmt] > PrShPulseAmpCut) h1pPrShAdcTdcTDiff[1][nside][ipmt]->Fill(P_cal_pr_goodNegAdcTdcDiffTime[ipmt]);
 	  h2pPrShTDiffADCAmp[nside][ipmt]->Fill(P_cal_pr_goodNegAdcTdcDiffTime[ipmt], P_cal_pr_goodNegAdcPulseAmp[ipmt]);
 	}  
       }
@@ -356,6 +363,7 @@ void DetTCuts_Coin::Terminate()
 
   TFile *Histogram_file = new TFile(Form("TimeWindowHistos_Run%i.root",option.Atoi()),"RECREATE");
   TString outputpdf = Form("TimeWindowPlots_Run%i.pdf", option.Atoi()) ; 
+  TF1 *Gauss_Fit = new TF1("Gauss_Fit","gaus"); 
 
   TDirectory *DHMSCER = Histogram_file->mkdir("HMS Cherenkov Timing"); DHMSCER->cd();
   TCanvas *CHMSCER = new TCanvas("CHMSCER", "HMS Cherenkov timing plots", 300,100,1000,900);
@@ -363,10 +371,18 @@ void DetTCuts_Coin::Terminate()
   CHMSCER->Divide(2,1); CHMSCER2->Divide(2,1);
   for (Int_t ipmt = 0; ipmt < 2; ipmt++){
     TH1F *HMSCER = dynamic_cast<TH1F *>(TProof::GetOutput(Form("hCER%d_timeDiff", ipmt+1), fOutput));
+    TH1F *HMSCERCut = dynamic_cast<TH1F *>(TProof::GetOutput(Form("hCER%d_timeDiff_Cut", ipmt+1), fOutput));
+    HMSCER_tMin[ipmt] = (HMSCERCut->GetMean() - (5*HMSCERCut->GetStdDev())); HMSCER_tMax[ipmt] = (HMSCERCut->GetMean() + (5*HMSCERCut->GetStdDev()));
+    LHMSCER_tMin[ipmt] = new TLine(HMSCER_tMin[ipmt], 0, HMSCER_tMin[ipmt], HMSCERCut->GetMaximum());
+    LHMSCER_tMax[ipmt] = new TLine(HMSCER_tMax[ipmt], 0, HMSCER_tMax[ipmt], HMSCERCut->GetMaximum());
+    LHMSCER_tMin[ipmt]->SetLineColor(kRed); LHMSCER_tMin[ipmt]->SetLineStyle(7); LHMSCER_tMin[ipmt]->SetLineWidth(1);
+    LHMSCER_tMax[ipmt]->SetLineColor(kRed); LHMSCER_tMax[ipmt]->SetLineStyle(7); LHMSCER_tMax[ipmt]->SetLineWidth(1);
     TH2F* HMSCER2D = dynamic_cast<TH2F *>(TProof::GetOutput(Form("hCER%d_tDiffADCAmp", ipmt+1), fOutput));
-    HMSCER->Write();
-    HMSCER2D->Write();
-    CHMSCER->cd(ipmt+1); HMSCER->Draw(); CHMSCER2->cd(ipmt+1); HMSCER2D->Draw("COLZ");
+    LCerADCCut = new TLine(0, CerPulseAmpCut, HMSCER2D->GetXaxis()->GetBinCenter((HMSCER2D->GetMaximumBin())) , CerPulseAmpCut);
+    LCerADCCut->SetLineColor(kRed); LCerADCCut->SetLineStyle(7); LCerADCCut->SetLineWidth(1);
+    HMSCER->Write(); HMSCERCut->Write(); HMSCERCut->SetLineColor(kRed); HMSCER2D->Write();
+    CHMSCER->cd(ipmt+1); HMSCER->Draw(); HMSCERCut->Draw("SAME"); LHMSCER_tMin[ipmt]->Draw("SAME"); LHMSCER_tMax[ipmt]->Draw("SAME"); 
+    CHMSCER2->cd(ipmt+1); HMSCER2D->Draw("COLZ"); LCerADCCut->Draw("SAME");
   }
 
   TDirectory *DHMSDC = Histogram_file->mkdir("HMS DC Timing"); DHMSDC->cd();
@@ -432,9 +448,19 @@ void DetTCuts_Coin::Terminate()
   CSHMSHGC->Divide(2,2); CSHMSHGC2->Divide(2,2);
   for (Int_t ipmt = 0; ipmt < 4; ipmt++){
     TH1F *SHMSHGC = dynamic_cast<TH1F *>(TProof::GetOutput(Form("pHGCER%d_timeDiff", ipmt+1), fOutput));
+    TH1F *SHMSHGCCut = dynamic_cast<TH1F *>(TProof::GetOutput(Form("pHGCER%d_timeDiff_Cut", ipmt+1), fOutput));
+    SHMSHGCCut->Fit("Gauss_Fit", "MQN");
+    SHMSHGC_tMin[ipmt] = (Gauss_Fit->GetParameter(1) - (5*Gauss_Fit->GetParameter(2))); SHMSHGC_tMax[ipmt] = (Gauss_Fit->GetParameter(1) + (5*Gauss_Fit->GetParameter(2)));     
+    LSHMSHGC_tMin[ipmt] = new TLine(SHMSHGC_tMin[ipmt], 0, SHMSHGC_tMin[ipmt], SHMSHGCCut->GetMaximum());
+    LSHMSHGC_tMax[ipmt] = new TLine(SHMSHGC_tMax[ipmt], 0, SHMSHGC_tMax[ipmt], SHMSHGCCut->GetMaximum());
+    LSHMSHGC_tMin[ipmt]->SetLineColor(kRed); LSHMSHGC_tMin[ipmt]->SetLineStyle(7); LSHMSHGC_tMin[ipmt]->SetLineWidth(1);
+    LSHMSHGC_tMax[ipmt]->SetLineColor(kRed); LSHMSHGC_tMax[ipmt]->SetLineStyle(7); LSHMSHGC_tMax[ipmt]->SetLineWidth(1);
     TH2F* SHMSHGC2D = dynamic_cast<TH2F *>(TProof::GetOutput(Form("pHGCER%d_tDiffADCAmp", ipmt+1), fOutput));
-    SHMSHGC->Write(); SHMSHGC2D->Write();
-    CSHMSHGC->cd(ipmt+1); SHMSHGC->Draw(); CSHMSHGC2->cd(ipmt+1); SHMSHGC2D->Draw("COLZ");
+    LCerADCCut = new TLine(0, CerPulseAmpCut, SHMSHGC2D->GetXaxis()->GetBinCenter((SHMSHGC2D->GetMaximumBin())) , CerPulseAmpCut);
+    LCerADCCut->SetLineColor(kRed); LCerADCCut->SetLineStyle(7); LCerADCCut->SetLineWidth(1);
+    SHMSHGC->Write(); SHMSHGCCut->Write(); SHMSHGCCut->SetLineColor(kRed); SHMSHGC2D->Write();
+    CSHMSHGC->cd(ipmt+1); SHMSHGC->Draw(); SHMSHGCCut->Draw("SAME"); LSHMSHGC_tMin[ipmt]->Draw("SAME"); LSHMSHGC_tMax[ipmt]->Draw("SAME");
+    CSHMSHGC2->cd(ipmt+1); SHMSHGC2D->Draw("COLZ"); LCerADCCut->Draw("SAME");
   }
 
   TDirectory *DSHMSAERO = Histogram_file->mkdir("SHMS Aerogel Cherenkov Timing"); DSHMSAERO->cd();  
@@ -501,9 +527,19 @@ void DetTCuts_Coin::Terminate()
     CSHMSPRSH[nside]->Divide(5, 3); CSHMSPRSH2[nside]->Divide(5, 3);
     for (Int_t ipmt = 0; ipmt < 14; ipmt++){ // Loop over PMTs
       TH1F *SHMSPRSH = dynamic_cast<TH1F *>(TProof::GetOutput(Form("pPrSh%d%s_timeDiff", ipmt+1, nsign[nside].c_str()), fOutput));
+      TH1F *SHMSPRSHCut = dynamic_cast<TH1F *>(TProof::GetOutput(Form("pPrSh%d%s_timeDiff_Cut", ipmt+1, nsign[nside].c_str()), fOutput));
+      SHMSPRSHCut->Fit("Gauss_Fit", "MQN");
+      SHMSPRSH_tMin[nside][ipmt] = (Gauss_Fit->GetParameter(1) - (5*Gauss_Fit->GetParameter(2))); SHMSPRSH_tMax[nside][ipmt] = (Gauss_Fit->GetParameter(1) + (5*Gauss_Fit->GetParameter(2)));
+      LSHMSPRSH_tMin[nside][ipmt] = new TLine(SHMSPRSH_tMin[nside][ipmt], 0, SHMSPRSH_tMin[nside][ipmt], SHMSPRSH->GetMaximum());
+      LSHMSPRSH_tMax[nside][ipmt] = new TLine(SHMSPRSH_tMax[nside][ipmt], 0, SHMSPRSH_tMax[nside][ipmt], SHMSPRSH->GetMaximum());
+      LSHMSPRSH_tMin[nside][ipmt]->SetLineColor(kRed); LSHMSPRSH_tMin[nside][ipmt]->SetLineStyle(7); LSHMSPRSH_tMin[nside][ipmt]->SetLineWidth(1);
+      LSHMSPRSH_tMax[nside][ipmt]->SetLineColor(kRed); LSHMSPRSH_tMax[nside][ipmt]->SetLineStyle(7); LSHMSPRSH_tMax[nside][ipmt]->SetLineWidth(1);
       TH2F *SHMSPRSH2D = dynamic_cast<TH2F *>(TProof::GetOutput(Form("pPrSh%d%s_tDiffADCAmp", ipmt+1, nsign[nside].c_str()), fOutput));
-      SHMSPRSH->Write(); SHMSPRSH2D->Write();
-      CSHMSPRSH[nside]->cd(ipmt+1); SHMSPRSH->Draw(); CSHMSPRSH2[nside]->cd(ipmt+1); SHMSPRSH2D->Draw("COLZ"); 
+      LPrShADCCut = new TLine(-100, PrShPulseAmpCut, SHMSPRSH2D->GetXaxis()->GetBinCenter((SHMSPRSH2D->GetMaximumBin())) , PrShPulseAmpCut);
+      LPrShADCCut->SetLineColor(kRed); LPrShADCCut->SetLineStyle(7); LPrShADCCut->SetLineWidth(1);
+      SHMSPRSH->Write(); SHMSPRSHCut->Write(); SHMSPRSHCut->SetLineColor(kRed); SHMSPRSH2D->Write();
+      CSHMSPRSH[nside]->cd(ipmt+1); SHMSPRSH->Draw(); SHMSPRSHCut->Draw("SAME"); LSHMSPRSH_tMin[nside][ipmt]->Draw("SAME"); LSHMSPRSH_tMax[nside][ipmt]->Draw("SAME");
+      CSHMSPRSH2[nside]->cd(ipmt+1); SHMSPRSH2D->Draw("COLZ"); LPrShADCCut->Draw("SAME");
     }
   }
   
@@ -553,7 +589,9 @@ void DetTCuts_Coin::Terminate()
     }
   }
   CSHMSPRSH[0]->Print(outputpdf);
+  CSHMSPRSH2[0]->Print(outputpdf);
   CSHMSPRSH[1]->Print(outputpdf);
+  CSHMSPRSH2[1]->Print(outputpdf);
   for(Int_t row = 0; row < 14; row++){
     CSHMSCAL[row]->Print(outputpdf);
   }
@@ -859,29 +897,29 @@ void DetTCuts_Coin::Terminate()
 	} // End loop over last two layers
       } // End loop over layers
 
-	//------Write SHMS PreShower Param-------
-	//Lower Limit Time Window Cut
-	// if(lim==0){
-	//   out_pprsh << setprecision(2) << SHMSPRSH_tMin[iside][0] << ", " << SHMSPRSH_tMin[iside][1] << ", " 
-	// 		<<  SHMSPRSH_tMin[iside][2] << ", "  <<  SHMSPRSH_tMin[iside][3]  << ", " 
-	// 		<<  SHMSPRSH_tMin[iside][4] << ", "  <<  SHMSPRSH_tMin[iside][5]  << ", " 
-	// 		<<  SHMSPRSH_tMin[iside][6] << ", "  <<  SHMSPRSH_tMin[iside][7]  << ", "
-	// 		<<  SHMSPRSH_tMin[iside][8] << ", "  <<  SHMSPRSH_tMin[iside][9]  << ", " 
-	// 		<<  SHMSPRSH_tMin[iside][10] << ", " <<  SHMSPRSH_tMin[iside][11] << ", " 
-	// 		<<  SHMSPRSH_tMin[iside][12] << ", " <<  SHMSPRSH_tMin[iside][13] << fixed << endl;
-	// }
-	// //Upper Limit Time Window Cut
-	// if(lim==1){
-	//   out_pprsh << setprecision(2) << SHMSPRSH_tMax[iside][0] << ", " << SHMSPRSH_tMax[iside][1] << ", " 
-	// 		<<  SHMSPRSH_tMax[iside][2] << ", "  <<  SHMSPRSH_tMax[iside][3]  << ", " 
-	// 		<<  SHMSPRSH_tMax[iside][4] << ", "  <<  SHMSPRSH_tMax[iside][5]  << ", " 
-	// 		<<  SHMSPRSH_tMax[iside][6] << ", "  <<  SHMSPRSH_tMax[iside][7]  << ", "
-	// 		<<  SHMSPRSH_tMax[iside][8] << ", "  <<  SHMSPRSH_tMax[iside][9]  << ", " 
-	// 		<<  SHMSPRSH_tMax[iside][10] << ", " <<  SHMSPRSH_tMax[iside][11] << ", " 
-	// 		<<  SHMSPRSH_tMax[iside][12] << ", " <<  SHMSPRSH_tMax[iside][13] << fixed << endl;
-	// }
+      // ------Write SHMS PreShower Param-------
+      // Lower Limit Time Window Cut
+	if(lim==0){
+	  out_pprsh << setprecision(2) << SHMSPRSH_tMin[iside][0] << ", " << SHMSPRSH_tMin[iside][1] << ", " 
+		    <<  SHMSPRSH_tMin[iside][2] << ", "  <<  SHMSPRSH_tMin[iside][3]  << ", " 
+		    <<  SHMSPRSH_tMin[iside][4] << ", "  <<  SHMSPRSH_tMin[iside][5]  << ", " 
+		    <<  SHMSPRSH_tMin[iside][6] << ", "  <<  SHMSPRSH_tMin[iside][7]  << ", "
+		    <<  SHMSPRSH_tMin[iside][8] << ", "  <<  SHMSPRSH_tMin[iside][9]  << ", " 
+		    <<  SHMSPRSH_tMin[iside][10] << ", " <<  SHMSPRSH_tMin[iside][11] << ", " 
+		    <<  SHMSPRSH_tMin[iside][12] << ", " <<  SHMSPRSH_tMin[iside][13] << fixed << endl;
+	}
+      //Upper Limit Time Window Cut
+      if(lim==1){
+	out_pprsh << setprecision(2) << SHMSPRSH_tMax[iside][0] << ", " << SHMSPRSH_tMax[iside][1] << ", " 
+		  <<  SHMSPRSH_tMax[iside][2] << ", "  <<  SHMSPRSH_tMax[iside][3]  << ", " 
+		  <<  SHMSPRSH_tMax[iside][4] << ", "  <<  SHMSPRSH_tMax[iside][5]  << ", " 
+		  <<  SHMSPRSH_tMax[iside][6] << ", "  <<  SHMSPRSH_tMax[iside][7]  << ", "
+		  <<  SHMSPRSH_tMax[iside][8] << ", "  <<  SHMSPRSH_tMax[iside][9]  << ", " 
+		  <<  SHMSPRSH_tMax[iside][10] << ", " <<  SHMSPRSH_tMax[iside][11] << ", " 
+		  <<  SHMSPRSH_tMax[iside][12] << ", " <<  SHMSPRSH_tMax[iside][13] << fixed << endl;
+      }
 
-	//------Write SHMS Aerogel Param-------
+      //------Write SHMS Aerogel Param-------
       for(Int_t ipmt = 0; ipmt < 7; ipmt++){
 	if(lim==0){
 	  out_paero << setw(2) << setprecision(2) << SHMSAERO_tMin[iside][ipmt] << ( (ipmt+1) == 7 ? "\n" : ", ") << fixed;
@@ -927,20 +965,20 @@ void DetTCuts_Coin::Terminate()
 	  if(lim==0){
 	    //HMS Cer
 	    if(ipmt<2){
-	      //out_hcer << setprecision(2) << HMSCER_tMin[ipmt] << ", " << fixed;
+	      out_hcer << setprecision(2) << HMSCER_tMin[ipmt] << ", " << fixed;
 	    }
 	    //SHMS HGCER
-	    //out_phgcer << setprecision(2) << SHMSHGC_tMin[ipmt] << ", " << fixed;
+	    out_phgcer << setprecision(2) << SHMSHGC_tMin[ipmt] << ", " << fixed;
 	  }
 	 
 	  //Upper Limit Time Window Cut
 	  if(lim==1){
 	    //HMS Cer
 	    if(ipmt<2){
-	      //out_hcer << setprecision(2) << HMSCER_tMax[ipmt] << ", " << fixed;
+	      out_hcer << setprecision(2) << HMSCER_tMax[ipmt] << ", " << fixed;
 	    }
 	    //SHMS HGCER
-	    //out_phgcer << setprecision(2) << SHMSHGC_tMax[ipmt] << ", " << fixed;
+	    out_phgcer << setprecision(2) << SHMSHGC_tMax[ipmt] << ", " << fixed;
 	  }
 	}
       } // End loop over min/max limits

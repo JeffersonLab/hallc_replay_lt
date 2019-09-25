@@ -15,6 +15,9 @@
 #include <TLine.h>
 
 const Double_t tdc_nsperch = 0.09766;   //TDC Conv. ns/channel 
+// Note, will modify these in future to be user defined at launch of script, hard coding is not good!
+const Double_t CerPulseAmpCut = 50;   // Cut on ADC Pulse amp for cherenkovs (HMS CER/SHMS HGC)
+const Double_t PrShPulseAmpCut = 40;   // Cut on ADC Pulse amp for SHMS Pre-shower
 
 //Define some detectors planes and sides
 const Int_t hod_planes = 4;
@@ -40,8 +43,8 @@ TString HMSCal_Name;
 TString HMSHodo_Name;
 
 // Double arrays to store time window values once determined
-Double_t HMSCer_tMin[2];
-Double_t HMSCer_tMax[2];
+Double_t HMSCER_tMin[2];
+Double_t HMSCER_tMax[2];
 Double_t HMSDC_tMin[12];
 Double_t HMSDC_tMax[12];
 Double_t HMSCAL_tMin[4][2][13];
@@ -63,8 +66,8 @@ Double_t SHMSCAL_tMin[14][16];
 Double_t SHMSCAL_tMax[14][16];
 
 // Arrays of lines to store time window values once determined
-TLine *LHMSCer_tMin[2];
-TLine *LHMSCer_tMax[2];
+TLine *LHMSCER_tMin[2];
+TLine *LHMSCER_tMax[2];
 TLine *LHMSDC_tMin[12];
 TLine *LHMSDC_tMax[12];
 TLine *LHMSCAL_tMin[4][2][13];
@@ -85,25 +88,28 @@ TLine *LSHMSPRSH_tMax[2][14];
 TLine *LSHMSCAL_tMin[14][16];
 TLine *LSHMSCAL_tMax[14][16];
 
+TLine *LCerADCCut;
+TLine *LPrShADCCut;
+
 class DetTCuts_Coin : public TSelector {
 public :
    TTreeReader    fReader;
    TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
 
    // Declaration of histograms
-   TH1F           *h1hCerAdcTdcTDiff[2]; // Array of 2 histograms
+   TH1F           *h1hCerAdcTdcTDiff[2][2]; // Uncut/cut and by PMT
    TH2F           *h2hCerTDiffADCAmp[2];
    TH1F           *h1hdcTdcT[12]; // Array of 12 histograms
    TH1F           *h1hCalAdcTdcTDiff[4][2][13]; // 3D array of 4/2/13 (4 planes, 2 sides, 13 PMTs per side)
    TH1F           *h1hHodoAdcTdcTDiff[4][2][16]; // 3D array of 4/2/16 (4 planes, 2 sides, UP TO 16 PMTs per side)
 
-   TH1F           *h1pHGCAdcTdcTDiff[4]; // Array of 4 histograms
+   TH1F           *h1pHGCAdcTdcTDiff[2][4]; // Uncut/cut and by PMT
    TH2F           *h2pHGCTDiffADCAmp[4];
    TH1F           *h1pAeroAdcTdcTDiff[2][7]; // 2D array of 2/7 (2 sides, 7 PMTs per side)
    TH1F           *h1pdcTdcT[12]; // Array of 12 histograms
    TH1F           *h1pHodoAdcTdcTDiff[4][2][21]; // 3D array of 4/2/21 (4 planes, 2 sides, UP TO 21 PMTs per side)
    TH2F           *h2pHodoTDiffADCAmp[4][2][21];
-   TH1F           *h1pPrShAdcTdcTDiff[2][14]; // 2D array, 2/14 (2 sides, 14 PMTs per side)
+   TH1F           *h1pPrShAdcTdcTDiff[2][2][14]; // 3D array, 2/2/14 (uncut/cut, 2 sides, 14 PMTs per side)
    TH2F           *h2pPrShTDiffADCAmp[2][14];
    TH1F           *h1pCalAdcTdcTDiff[224]; // Array of 224 histograms, 224 PMTs
 

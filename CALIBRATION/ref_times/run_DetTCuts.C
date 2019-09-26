@@ -61,7 +61,7 @@ void run_DetTCuts(Int_t RunNumber = 0, Int_t MaxEvent = 0, string RunType = "")
   TString option = Form("%i.%s", RunNumber, RunType.c_str());
   TProof *proof = TProof::Open("workers=4");
   ch.SetProof();
-  if(RunT.EqualTo("HMS")) ch.Process("DetTCuts_Coin.C+",option);
+  if(RunT.EqualTo("HMS")) ch.Process("DetTCuts_HMS.C+",option);
   else if(RunT.EqualTo("SHMS")) ch.Process("DetTCuts_SHMS.C+",option);
   else if(RunT.EqualTo("COIN")) ch.Process("DetTCuts_Coin.C+",option);
   proof->Close();

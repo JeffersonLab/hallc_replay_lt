@@ -361,8 +361,8 @@ void DetTCuts_Coin::Terminate()
   printf("\n");
   TString option = GetOption();
 
-  TFile *Histogram_file = new TFile(Form("TimeWindowHistos_Run%i.root",option.Atoi()),"RECREATE");
-  TString outputpdf = Form("TimeWindowPlots_Run%i.pdf", option.Atoi()) ; 
+  TFile *Histogram_file = new TFile(Form("TimeWindowHistos_Coin_Run%i.root",option.Atoi()),"RECREATE");
+  TString outputpdf = Form("TimeWindowPlots_Coin_Run%i.pdf", option.Atoi()) ; 
   TF1 *Gauss_Fit = new TF1("Gauss_Fit","gaus"); 
 
   TDirectory *DHMSCER = Histogram_file->mkdir("HMS Cherenkov Timing"); DHMSCER->cd();

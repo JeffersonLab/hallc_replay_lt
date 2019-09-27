@@ -40,7 +40,7 @@ void DetTCuts_SHMS::SlaveBegin(TTree * /*tree*/)
   }
   for (Int_t nside = 0; nside < sides; nside++){ //Loop over each side
     for (Int_t ipmt = 0; ipmt < 7; ipmt++){ // Loop over PMTs
-      h1pAeroAdcTdcTDiff[nside][ipmt] = new TH1F(Form("pAero%d%s_timeDiff", ipmt+1, nsign[nside].c_str()), Form("SHMS Aerogel PMT%d%s AdcTdcTimeDiff", ipmt+1, nsign[nside].c_str()), 200, 0, 400);
+      h1pAeroAdcTdcTDiff[nside][ipmt] = new TH1F(Form("pAero%d%s_timeDiff", ipmt+1, nsign[nside].c_str()), Form("SHMS Aerogel PMT%d%s AdcTdcTimeDiff", ipmt+1, nsign[nside].c_str()), 200, 0, 300);
       GetOutputList()->Add(h1pAeroAdcTdcTDiff[nside][ipmt]);
     }
   }
@@ -330,8 +330,21 @@ void DetTCuts_SHMS::Terminate()
     for (Int_t ipmt = 0; ipmt < 14; ipmt++){ // Loop over PMTs
       TH1F *SHMSPRSH = dynamic_cast<TH1F *>(TProof::GetOutput(Form("pPrSh%d%s_timeDiff", ipmt+1, nsign[nside].c_str()), fOutput));
       TH1F *SHMSPRSHCut = dynamic_cast<TH1F *>(TProof::GetOutput(Form("pPrSh%d%s_timeDiff_Cut", ipmt+1, nsign[nside].c_str()), fOutput));
-      SHMSPRSHCut->Fit("Gauss_Fit", "MQN");
-      SHMSPRSH_tMin[nside][ipmt] = (Gauss_Fit->GetParameter(1) - (5*Gauss_Fit->GetParameter(2))); SHMSPRSH_tMax[nside][ipmt] = (Gauss_Fit->GetParameter(1) + (5*Gauss_Fit->GetParameter(2)));
+      if((SHMSPRSHCut->GetEntries()) != 0){
+	if ((SHMSPRSHCut->GetBinContent((SHMSPRSHCut->GetMaximumBin()))) >= 50){
+	  SHMSPRSHCut->Fit("Gauss_Fit", "QNN");
+	  SHMSPRSH_tMin[nside][ipmt] = (Gauss_Fit->GetParameter(1) - (5*Gauss_Fit->GetParameter(2))); 
+	  SHMSPRSH_tMax[nside][ipmt] = (Gauss_Fit->GetParameter(1) + (5*Gauss_Fit->GetParameter(2)));
+	}
+	else if(SHMSPRSHCut->GetBinContent((SHMSPRSHCut->GetMaximumBin())) < 50){
+	  SHMSPRSH_tMin[nside][ipmt] = (SHMSPRSHCut->GetMean() - 20); 
+	  SHMSPRSH_tMax[nside][ipmt] = (SHMSPRSHCut->GetMean() + 20);  
+	}
+      }
+      else if ((SHMSPRSHCut->GetEntries()) == 0){
+	SHMSPRSH_tMin[nside][ipmt] = -80; 
+	SHMSPRSH_tMax[nside][ipmt] = 80;  
+      }
       LSHMSPRSH_tMin[nside][ipmt] = new TLine(SHMSPRSH_tMin[nside][ipmt], 0, SHMSPRSH_tMin[nside][ipmt], SHMSPRSH->GetMaximum());
       LSHMSPRSH_tMax[nside][ipmt] = new TLine(SHMSPRSH_tMax[nside][ipmt], 0, SHMSPRSH_tMax[nside][ipmt], SHMSPRSH->GetMaximum());
       LSHMSPRSH_tMin[nside][ipmt]->SetLineColor(kRed); LSHMSPRSH_tMin[nside][ipmt]->SetLineStyle(7); LSHMSPRSH_tMin[nside][ipmt]->SetLineWidth(1);
@@ -344,7 +357,7 @@ void DetTCuts_SHMS::Terminate()
       CSHMSPRSH2[nside]->cd(ipmt+1); SHMSPRSH2D->Draw("COLZ"); LPrShADCCut->Draw("SAME");
     }
   }
-  
+   
   TDirectory *DSHMSCAL = Histogram_file->mkdir("SHMS Calorimeter Timing"); DSHMSCAL->cd();  
   TCanvas *CSHMSCAL[14]; // 16 histograms per canvas
   for(Int_t row = 0; row < 14; row++){
@@ -407,7 +420,7 @@ void DetTCuts_SHMS::Terminate()
   ofstream out_paero; 
 
   //SHMS Hodo
-  out_phodo.open(Form("SHMS/Hodo.phodo_tWin_%d.param", option.Atoi()));
+  out_phodo.open(Form("SHMS/Hodo/phodo_tWin_%d.param", option.Atoi()));
   out_phodo << "; SHMS Hodoscope Parameter File Containing TimeWindow Min/Max Cuts " << endl;
   out_phodo << " " << endl;
   out_phodo << " " << endl;

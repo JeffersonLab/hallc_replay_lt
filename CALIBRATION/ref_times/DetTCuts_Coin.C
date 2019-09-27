@@ -71,7 +71,7 @@ void DetTCuts_Coin::SlaveBegin(TTree * /*tree*/)
   }
   for (Int_t nside = 0; nside < sides; nside++){ //Loop over each side
     for (Int_t ipmt = 0; ipmt < 7; ipmt++){ // Loop over PMTs
-      h1pAeroAdcTdcTDiff[nside][ipmt] = new TH1F(Form("pAero%d%s_timeDiff", ipmt+1, nsign[nside].c_str()), Form("SHMS Aerogel PMT%d%s AdcTdcTimeDiff", ipmt+1, nsign[nside].c_str()), 200, 0, 400);
+      h1pAeroAdcTdcTDiff[nside][ipmt] = new TH1F(Form("pAero%d%s_timeDiff", ipmt+1, nsign[nside].c_str()), Form("SHMS Aerogel PMT%d%s AdcTdcTimeDiff", ipmt+1, nsign[nside].c_str()), 200, 0, 300);
       GetOutputList()->Add(h1pAeroAdcTdcTDiff[nside][ipmt]);
     }
   }
@@ -542,8 +542,21 @@ void DetTCuts_Coin::Terminate()
     for (Int_t ipmt = 0; ipmt < 14; ipmt++){ // Loop over PMTs
       TH1F *SHMSPRSH = dynamic_cast<TH1F *>(TProof::GetOutput(Form("pPrSh%d%s_timeDiff", ipmt+1, nsign[nside].c_str()), fOutput));
       TH1F *SHMSPRSHCut = dynamic_cast<TH1F *>(TProof::GetOutput(Form("pPrSh%d%s_timeDiff_Cut", ipmt+1, nsign[nside].c_str()), fOutput));
-      SHMSPRSHCut->Fit("Gauss_Fit", "MQN");
-      SHMSPRSH_tMin[nside][ipmt] = (Gauss_Fit->GetParameter(1) - (5*Gauss_Fit->GetParameter(2))); SHMSPRSH_tMax[nside][ipmt] = (Gauss_Fit->GetParameter(1) + (5*Gauss_Fit->GetParameter(2)));
+      if((SHMSPRSHCut->GetEntries()) != 0){
+	if ((SHMSPRSHCut->GetBinContent((SHMSPRSHCut->GetMaximumBin()))) >= 25){
+	  SHMSPRSHCut->Fit("Gauss_Fit", "MQN");
+	  SHMSPRSH_tMin[nside][ipmt] = (Gauss_Fit->GetParameter(1) - (5*Gauss_Fit->GetParameter(2))); 
+	  SHMSPRSH_tMax[nside][ipmt] = (Gauss_Fit->GetParameter(1) + (5*Gauss_Fit->GetParameter(2)));
+	}
+	else if(SHMSPRSHCut->GetBinContent((SHMSPRSHCut->GetMaximumBin())) < 25){
+	  SHMSPRSH_tMin[nside][ipmt] = (SHMSPRSHCut->GetMean() - 20); 
+	  SHMSPRSH_tMax[nside][ipmt] = (SHMSPRSHCut->GetMean() + 20);  
+	}
+      }
+      else if ((SHMSPRSHCut->GetEntries()) == 0){
+	SHMSPRSH_tMin[nside][ipmt] = -80; 
+	SHMSPRSH_tMax[nside][ipmt] = 80;  
+      }
       LSHMSPRSH_tMin[nside][ipmt] = new TLine(SHMSPRSH_tMin[nside][ipmt], 0, SHMSPRSH_tMin[nside][ipmt], SHMSPRSH->GetMaximum());
       LSHMSPRSH_tMax[nside][ipmt] = new TLine(SHMSPRSH_tMax[nside][ipmt], 0, SHMSPRSH_tMax[nside][ipmt], SHMSPRSH->GetMaximum());
       LSHMSPRSH_tMin[nside][ipmt]->SetLineColor(kRed); LSHMSPRSH_tMin[nside][ipmt]->SetLineStyle(7); LSHMSPRSH_tMin[nside][ipmt]->SetLineWidth(1);
@@ -644,7 +657,7 @@ void DetTCuts_Coin::Terminate()
   out_hhodo << " " << endl;
   out_hhodo << " " << endl;
   //SHMS Hodo
-  out_phodo.open(Form("SHMS/Hodo.phodo_tWin_%d.param", option.Atoi()));
+  out_phodo.open(Form("SHMS/Hodo/phodo_tWin_%d.param", option.Atoi()));
   out_phodo << "; SHMS Hodoscope Parameter File Containing TimeWindow Min/Max Cuts " << endl;
   out_phodo << " " << endl;
   out_phodo << " " << endl;
@@ -781,36 +794,36 @@ void DetTCuts_Coin::Terminate()
 	if(ipmt<16){
 	  if(ipmt==0){   
 	    if (lim==0){
-	      out_hhodo << setprecision(2) << HMSHODO_tMin[0][iside][ipmt] << ", " << setw(15) << HMSHODO_tMin[1][iside][ipmt] << ", " << setw(15) << HMSHODO_tMin[2][iside][ipmt] << ", " << setw(15) << HMSHODO_tMin[3][iside][ipmt] << fixed << endl; 
+	      out_hhodo << Form("%.1f", HMSHODO_tMin[0][iside][ipmt]) << ", " << setw(15) << Form("%.1f", HMSHODO_tMin[1][iside][ipmt]) << ", " << setw(15) << Form("%.1f", HMSHODO_tMin[2][iside][ipmt]) << ", " << setw(15) << Form("%.1f", HMSHODO_tMin[3][iside][ipmt]) << fixed << endl; 
 	    }
 	    if(lim==1){
-	      out_hhodo << setprecision(2) << HMSHODO_tMax[0][iside][ipmt] << ", " << setw(15) << HMSHODO_tMax[1][iside][ipmt] << ", " << setw(15) << HMSHODO_tMax[2][iside][ipmt] << ", " << setw(15) << HMSHODO_tMax[3][iside][ipmt] << fixed << endl; 
+	      out_hhodo << Form("%.1f", HMSHODO_tMax[0][iside][ipmt]) << ", " << setw(15) << Form("%.1f", HMSHODO_tMax[1][iside][ipmt]) << ", " << setw(15) << Form("%.1f", HMSHODO_tMax[2][iside][ipmt]) << ", " << setw(15) << Form("%.1f", HMSHODO_tMax[3][iside][ipmt]) << fixed << endl; 
 	    }
 	  }
 	  else{
 	    if(lim==0){
-	      out_hhodo << setw(32) << setprecision(2) << HMSHODO_tMin[0][iside][ipmt] << ", " << setw(15) << HMSHODO_tMin[1][iside][ipmt] << ", " << setw(15) << HMSHODO_tMin[2][iside][ipmt] << ", " << setw(15) << HMSHODO_tMin[3][iside][ipmt] << fixed << endl; 
+	      out_hhodo << setw(32) << Form("%.1f", HMSHODO_tMin[0][iside][ipmt]) << ", " << setw(15) << Form("%.1f", HMSHODO_tMin[1][iside][ipmt]) << ", " << setw(15) << Form("%.1f", HMSHODO_tMin[2][iside][ipmt]) << ", " << setw(15) << Form("%.1f", HMSHODO_tMin[3][iside][ipmt]) << fixed << endl; 
 	    }
 	    if(lim==1){
-	      out_hhodo << setw(32) << setprecision(2) << HMSHODO_tMax[0][iside][ipmt] << ", " << setw(15) << HMSHODO_tMax[1][iside][ipmt] << ", " << setw(15) << HMSHODO_tMax[2][iside][ipmt] << ", " << setw(15) << HMSHODO_tMax[3][iside][ipmt] << fixed << endl; 
+	      out_hhodo << setw(32) << Form("%.1f", HMSHODO_tMax[0][iside][ipmt]) << ", " << setw(15) << Form("%.1f", HMSHODO_tMax[1][iside][ipmt]) << ", " << setw(15) << Form("%.1f", HMSHODO_tMax[2][iside][ipmt]) << ", " << setw(15) << Form("%.1f", HMSHODO_tMax[3][iside][ipmt]) << fixed << endl; 
 	    }   
 	  }
 	}//end HMS Hodo PMT Loop          
 	//------Write out SHMS Hodo Param-------
 	if(ipmt==0){	
 	  if (lim==0){
-	    out_phodo << setprecision(2) << SHMSHODO_tMin[0][iside][ipmt] << ", " << setw(15) << SHMSHODO_tMin[1][iside][ipmt] << ", " << setw(15) << SHMSHODO_tMin[2][iside][ipmt] << ", " << setw(15) << SHMSHODO_tMin[3][iside][ipmt] << fixed << endl; 
+	    out_phodo << Form("%.1f", SHMSHODO_tMin[0][iside][ipmt]) << ", " << setw(15) << Form("%.1f", SHMSHODO_tMin[1][iside][ipmt]) << ", " << setw(15) << Form("%.1f", SHMSHODO_tMin[2][iside][ipmt]) << ", " << setw(15) << Form("%.1f", SHMSHODO_tMin[3][iside][ipmt]) << fixed << endl; 
 	  }
 	  if(lim==1){
-	    out_phodo << setprecision(2) << SHMSHODO_tMax[0][iside][ipmt] << ", " << setw(15) << SHMSHODO_tMax[1][iside][ipmt] << ", " << setw(15) << SHMSHODO_tMax[2][iside][ipmt] << ", " << setw(15) << SHMSHODO_tMax[3][iside][ipmt] << fixed << endl; 
+	    out_phodo << Form("%.1f", SHMSHODO_tMax[0][iside][ipmt]) << ", " << setw(15) << Form("%.1f", SHMSHODO_tMax[1][iside][ipmt]) << ", " << setw(15) << Form("%.1f", SHMSHODO_tMax[2][iside][ipmt]) << ", " << setw(15) << Form("%.1f", SHMSHODO_tMax[3][iside][ipmt]) << fixed << endl; 
 	  }
 	}   
 	else{
 	  if(lim==0){
-	    out_phodo << setw(32) << setprecision(2) << SHMSHODO_tMin[0][iside][ipmt] << ", " << setw(15) << SHMSHODO_tMin[1][iside][ipmt] << ", " << setw(15) << SHMSHODO_tMin[2][iside][ipmt] << ", " << setw(15) << SHMSHODO_tMin[3][iside][ipmt] << fixed << endl; 
+	    out_phodo << setw(32) << Form("%.1f", SHMSHODO_tMin[0][iside][ipmt]) << ", " << setw(15) << Form("%.1f", SHMSHODO_tMin[1][iside][ipmt]) << ", " << setw(15) << Form("%.1f", SHMSHODO_tMin[2][iside][ipmt]) << ", " << setw(15) << Form("%.1f", SHMSHODO_tMin[3][iside][ipmt]) << fixed << endl; 
 	  }
 	  if(lim==1){
-	    out_phodo << setw(32) << setprecision(2) << SHMSHODO_tMax[0][iside][ipmt] << ", " << setw(15) << SHMSHODO_tMax[1][iside][ipmt] << ", " << setw(15) << SHMSHODO_tMax[2][iside][ipmt] << ", " << setw(15) << SHMSHODO_tMax[3][iside][ipmt] << fixed << endl; 
+	    out_phodo << setw(32) << Form("%.1f", SHMSHODO_tMax[0][iside][ipmt]) << ", " << setw(15) << Form("%.1f", SHMSHODO_tMax[1][iside][ipmt]) << ", " << setw(15) << Form("%.1f", SHMSHODO_tMax[2][iside][ipmt]) << ", " << setw(15) << Form("%.1f", SHMSHODO_tMax[3][iside][ipmt]) << fixed << endl; 
 	  }	
 	}
       } //end loop over pmts
@@ -819,67 +832,67 @@ void DetTCuts_Coin::Terminate()
       for(Int_t layer = 0; layer < 4; layer++){	            
 	if(layer < 2 ){
 	  if(lim==0){
-	    out_hcal << setprecision(2) << HMSCAL_tMin[layer][iside][0]<<","
-		     << HMSCAL_tMin[layer][iside][1]<<","
-		     << HMSCAL_tMin[layer][iside][2]<<","
-		     << HMSCAL_tMin[layer][iside][3]<<","
-		     << HMSCAL_tMin[layer][iside][4]<<","
-		     << HMSCAL_tMin[layer][iside][5]<<","
-		     << HMSCAL_tMin[layer][iside][6]<<","
-		     << HMSCAL_tMin[layer][iside][7]<<","
-		     << HMSCAL_tMin[layer][iside][8]<<","
-		     << HMSCAL_tMin[layer][iside][9]<<","
-		     << HMSCAL_tMin[layer][iside][10]<<","
-		     << HMSCAL_tMin[layer][iside][11]<<","
-		     << HMSCAL_tMin[layer][iside][12]<< fixed << endl;
+	    out_hcal << Form("%.1f", HMSCAL_tMin[layer][iside][0])<<","
+		     << Form("%.1f", HMSCAL_tMin[layer][iside][1])<<","
+		     << Form("%.1f", HMSCAL_tMin[layer][iside][2])<<","
+		     << Form("%.1f", HMSCAL_tMin[layer][iside][3])<<","
+		     << Form("%.1f", HMSCAL_tMin[layer][iside][4])<<","
+		     << Form("%.1f", HMSCAL_tMin[layer][iside][5])<<","
+		     << Form("%.1f", HMSCAL_tMin[layer][iside][6])<<","
+		     << Form("%.1f", HMSCAL_tMin[layer][iside][7])<<","
+		     << Form("%.1f", HMSCAL_tMin[layer][iside][8])<<","
+		     << Form("%.1f", HMSCAL_tMin[layer][iside][9])<<","
+		     << Form("%.1f", HMSCAL_tMin[layer][iside][10])<<","
+		     << Form("%.1f", HMSCAL_tMin[layer][iside][11])<<","
+		     << Form("%.1f", HMSCAL_tMin[layer][iside][12])<< fixed << endl;
 	  } // end Min Limit
 	  if(lim==1){
-	    out_hcal << setprecision(2) << HMSCAL_tMax[layer][iside][0]<<","
-		     << HMSCAL_tMax[layer][iside][1]<<","
-		     << HMSCAL_tMax[layer][iside][2]<<","
-		     << HMSCAL_tMax[layer][iside][3]<<","
-		     << HMSCAL_tMax[layer][iside][4]<<","
-		     << HMSCAL_tMax[layer][iside][5]<<","
-		     << HMSCAL_tMax[layer][iside][6]<<","
-		     << HMSCAL_tMax[layer][iside][7]<<","
-		     << HMSCAL_tMax[layer][iside][8]<<","
-		     << HMSCAL_tMax[layer][iside][9]<<","
-		     << HMSCAL_tMax[layer][iside][10]<<","
-		     << HMSCAL_tMax[layer][iside][11]<<","
-		     << HMSCAL_tMax[layer][iside][12]<< fixed << endl;
+	    out_hcal << Form("%.1f", HMSCAL_tMax[layer][iside][0])<<","
+		     << Form("%.1f", HMSCAL_tMax[layer][iside][1])<<","
+		     << Form("%.1f", HMSCAL_tMax[layer][iside][2])<<","
+		     << Form("%.1f", HMSCAL_tMax[layer][iside][3])<<","
+		     << Form("%.1f", HMSCAL_tMax[layer][iside][4])<<","
+		     << Form("%.1f", HMSCAL_tMax[layer][iside][5])<<","
+		     << Form("%.1f", HMSCAL_tMax[layer][iside][6])<<","
+		     << Form("%.1f", HMSCAL_tMax[layer][iside][7])<<","
+		     << Form("%.1f", HMSCAL_tMax[layer][iside][8])<<","
+		     << Form("%.1f", HMSCAL_tMax[layer][iside][9])<<","
+		     << Form("%.1f", HMSCAL_tMax[layer][iside][10])<<","
+		     << Form("%.1f", HMSCAL_tMax[layer][iside][11])<<","
+		     << Form("%.1f", HMSCAL_tMax[layer][iside][12])<< fixed << endl;
 	  } //end Max Limit
 	} //end layer<2 requirement
 	else if (layer > 1){
 	  if(iside == 0){ // Only do +ve side
 	    if(lim==0){
-	      out_hcal << setprecision(2) << HMSCAL_tMin[layer][iside][0]<<","
-		       << HMSCAL_tMin[layer][iside][1]<<","
-		       << HMSCAL_tMin[layer][iside][2]<<","
-		       << HMSCAL_tMin[layer][iside][3]<<","
-		       << HMSCAL_tMin[layer][iside][4]<<","
-		       << HMSCAL_tMin[layer][iside][5]<<","
-		       << HMSCAL_tMin[layer][iside][6]<<","
-		       << HMSCAL_tMin[layer][iside][7]<<","
-		       << HMSCAL_tMin[layer][iside][8]<<","
-		       << HMSCAL_tMin[layer][iside][9]<<","
-		       << HMSCAL_tMin[layer][iside][10]<<","
-		       << HMSCAL_tMin[layer][iside][11]<<","
-		       << HMSCAL_tMin[layer][iside][12]<< fixed << endl;
+	      out_hcal << Form("%.1f", HMSCAL_tMin[layer][iside][0])<<","
+		       << Form("%.1f", HMSCAL_tMin[layer][iside][1])<<","
+		       << Form("%.1f", HMSCAL_tMin[layer][iside][2])<<","
+		       << Form("%.1f", HMSCAL_tMin[layer][iside][3])<<","
+		       << Form("%.1f", HMSCAL_tMin[layer][iside][4])<<","
+		       << Form("%.1f", HMSCAL_tMin[layer][iside][5])<<","
+		       << Form("%.1f", HMSCAL_tMin[layer][iside][6])<<","
+		       << Form("%.1f", HMSCAL_tMin[layer][iside][7])<<","
+		       << Form("%.1f", HMSCAL_tMin[layer][iside][8])<<","
+		       << Form("%.1f", HMSCAL_tMin[layer][iside][9])<<","
+		       << Form("%.1f", HMSCAL_tMin[layer][iside][10])<<","
+		       << Form("%.1f", HMSCAL_tMin[layer][iside][11])<<","
+		       << Form("%.1f", HMSCAL_tMin[layer][iside][12])<< fixed << endl;
 	    } // end Min Limit
 	    if(lim==1){
-	      out_hcal << setprecision(2) << HMSCAL_tMax[layer][iside][0]<<","
-		       << HMSCAL_tMax[layer][iside][1]<<","
-		       << HMSCAL_tMax[layer][iside][2]<<","
-		       << HMSCAL_tMax[layer][iside][3]<<","
-		       << HMSCAL_tMax[layer][iside][4]<<","
-		       << HMSCAL_tMax[layer][iside][5]<<","
-		       << HMSCAL_tMax[layer][iside][6]<<","
-		       << HMSCAL_tMax[layer][iside][7]<<","
-		       << HMSCAL_tMax[layer][iside][8]<<","
-		       << HMSCAL_tMax[layer][iside][9]<<","
-		       << HMSCAL_tMax[layer][iside][10]<<","
-		       << HMSCAL_tMax[layer][iside][11]<<","
-		       << HMSCAL_tMax[layer][iside][12]<< fixed << endl;
+	      out_hcal << Form("%.1f", HMSCAL_tMax[layer][iside][0])<<","
+		       << Form("%.1f", HMSCAL_tMax[layer][iside][1])<<","
+		       << Form("%.1f", HMSCAL_tMax[layer][iside][2])<<","
+		       << Form("%.1f", HMSCAL_tMax[layer][iside][3])<<","
+		       << Form("%.1f", HMSCAL_tMax[layer][iside][4])<<","
+		       << Form("%.1f", HMSCAL_tMax[layer][iside][5])<<","
+		       << Form("%.1f", HMSCAL_tMax[layer][iside][6])<<","
+		       << Form("%.1f", HMSCAL_tMax[layer][iside][7])<<","
+		       << Form("%.1f", HMSCAL_tMax[layer][iside][8])<<","
+		       << Form("%.1f", HMSCAL_tMax[layer][iside][9])<<","
+		       << Form("%.1f", HMSCAL_tMax[layer][iside][10])<<","
+		       << Form("%.1f", HMSCAL_tMax[layer][iside][11])<<","
+		       << Form("%.1f", HMSCAL_tMax[layer][iside][12])<< fixed << endl;
 	    } //end Max Limit
 	  }
 	  else if (iside == 1){
@@ -920,32 +933,32 @@ void DetTCuts_Coin::Terminate()
       // ------Write SHMS PreShower Param-------
       // Lower Limit Time Window Cut
 	if(lim==0){
-	  out_pprsh << setprecision(2) << SHMSPRSH_tMin[iside][0] << ", " << SHMSPRSH_tMin[iside][1] << ", " 
-		    <<  SHMSPRSH_tMin[iside][2] << ", "  <<  SHMSPRSH_tMin[iside][3]  << ", " 
-		    <<  SHMSPRSH_tMin[iside][4] << ", "  <<  SHMSPRSH_tMin[iside][5]  << ", " 
-		    <<  SHMSPRSH_tMin[iside][6] << ", "  <<  SHMSPRSH_tMin[iside][7]  << ", "
-		    <<  SHMSPRSH_tMin[iside][8] << ", "  <<  SHMSPRSH_tMin[iside][9]  << ", " 
-		    <<  SHMSPRSH_tMin[iside][10] << ", " <<  SHMSPRSH_tMin[iside][11] << ", " 
-		    <<  SHMSPRSH_tMin[iside][12] << ", " <<  SHMSPRSH_tMin[iside][13] << fixed << endl;
+	  out_pprsh  << Form("%.1f", SHMSPRSH_tMin[iside][0]) << ", " << Form("%.1f", SHMSPRSH_tMin[iside][1])     << ", " 
+		     << Form("%.1f", SHMSPRSH_tMin[iside][2]) << ", "  <<  Form("%.1f", SHMSPRSH_tMin[iside][3])   << ", " 
+		     <<  Form("%.1f", SHMSPRSH_tMin[iside][4]) << ", "  <<  Form("%.1f", SHMSPRSH_tMin[iside][5])  << ", " 
+		     <<  Form("%.1f", SHMSPRSH_tMin[iside][6]) << ", "  <<  Form("%.1f", SHMSPRSH_tMin[iside][7])  << ", "
+		     <<  Form("%.1f", SHMSPRSH_tMin[iside][8]) << ", "  <<  Form("%.1f", SHMSPRSH_tMin[iside][9])  << ", " 
+		     <<  Form("%.1f", SHMSPRSH_tMin[iside][10]) << ", " <<  Form("%.1f", SHMSPRSH_tMin[iside][11]) << ", " 
+		     <<  Form("%.1f", SHMSPRSH_tMin[iside][12]) << ", " <<  Form("%.1f", SHMSPRSH_tMin[iside][13]) << fixed << endl;
 	}
       //Upper Limit Time Window Cut
       if(lim==1){
-	out_pprsh << setprecision(2) << SHMSPRSH_tMax[iside][0] << ", " << SHMSPRSH_tMax[iside][1] << ", " 
-		  <<  SHMSPRSH_tMax[iside][2] << ", "  <<  SHMSPRSH_tMax[iside][3]  << ", " 
-		  <<  SHMSPRSH_tMax[iside][4] << ", "  <<  SHMSPRSH_tMax[iside][5]  << ", " 
-		  <<  SHMSPRSH_tMax[iside][6] << ", "  <<  SHMSPRSH_tMax[iside][7]  << ", "
-		  <<  SHMSPRSH_tMax[iside][8] << ", "  <<  SHMSPRSH_tMax[iside][9]  << ", " 
-		  <<  SHMSPRSH_tMax[iside][10] << ", " <<  SHMSPRSH_tMax[iside][11] << ", " 
-		  <<  SHMSPRSH_tMax[iside][12] << ", " <<  SHMSPRSH_tMax[iside][13] << fixed << endl;
+	  out_pprsh  << Form("%.1f", SHMSPRSH_tMax[iside][0]) << ", "  << Form("%.1f", SHMSPRSH_tMax[iside][1])  << ", " 
+		     << Form("%.1f", SHMSPRSH_tMax[iside][2]) << ", "  << Form("%.1f", SHMSPRSH_tMax[iside][3])  << ", " 
+		     << Form("%.1f", SHMSPRSH_tMax[iside][4]) << ", "  << Form("%.1f", SHMSPRSH_tMax[iside][5])  << ", " 
+		     << Form("%.1f", SHMSPRSH_tMax[iside][6]) << ", "  << Form("%.1f", SHMSPRSH_tMax[iside][7])  << ", "
+		     << Form("%.1f", SHMSPRSH_tMax[iside][8]) << ", "  << Form("%.1f", SHMSPRSH_tMax[iside][9])  << ", " 
+		     << Form("%.1f", SHMSPRSH_tMax[iside][10]) << ", " << Form("%.1f", SHMSPRSH_tMax[iside][11]) << ", " 
+		     << Form("%.1f", SHMSPRSH_tMax[iside][12]) << ", " << Form("%.1f", SHMSPRSH_tMax[iside][13]) << fixed << endl;
       }
 
       //------Write SHMS Aerogel Param-------
       for(Int_t ipmt = 0; ipmt < 7; ipmt++){
 	if(lim==0){
-	  out_paero << setw(2) << setprecision(2) << SHMSAERO_tMin[iside][ipmt] << ( (ipmt+1) == 7 ? "\n" : ", ") << fixed;
+	  out_paero << setw(2) << Form("%.1f", SHMSAERO_tMin[iside][ipmt]) << ( (ipmt+1) == 7 ? "\n" : ", ") << fixed;
 	}
 	if(lim==1){
-	  out_paero << setw(2) << setprecision(2) << SHMSAERO_tMax[iside][ipmt] << ( (ipmt+1) == 7 ? "\n" : ", ") << fixed;
+	  out_paero << setw(2) << Form("%.1f", SHMSAERO_tMax[iside][ipmt]) << ( (ipmt+1) == 7 ? "\n" : ", ") << fixed;
 	}
       }
 	  
@@ -954,13 +967,13 @@ void DetTCuts_Coin::Terminate()
 	for(Int_t i = 0; i < 12; i++){
 	  //Lower Limit Time Window Cut
 	  if(lim==0){
-	    out_hdc << setw(2) << setprecision(2) << HMSDC_tMin[i] << ", " << fixed;
-	    out_pdc << setw(2) << setprecision(2) << SHMSDC_tMin[i] << ", " << fixed;
+	    out_hdc << setw(2)  << Form("%.0f", HMSDC_tMin[i]) << ", " << fixed;
+	    out_pdc << setw(2)  << Form("%.0f", SHMSDC_tMin[i]) << ", " << fixed;
 	  }
 	  //Upper Limit Time Window Cut
 	  if(lim==1){
-	    out_hdc << setw(2) << setprecision(2) << HMSDC_tMax[i] << ", " << fixed;
-	    out_pdc << setw(2) << setprecision(2) << SHMSDC_tMax[i] << ", " << fixed;
+	    out_hdc << setw(2) << Form("%.0f", HMSDC_tMax[i]) << ", " << fixed;
+	    out_pdc << setw(2) << Form("%.0f", SHMSDC_tMax[i]) << ", " << fixed;
 	  }
 	} //End loop over DC Planes
 		
@@ -969,11 +982,11 @@ void DetTCuts_Coin::Terminate()
 	  for(Int_t ipmt = 0; ipmt < 16; ipmt++){  
 	    //Lower Limit Time Window Cut
 	    if(lim==0){
-	      out_pcal << setw(2) << setprecision(2) << SHMSCAL_tMin[row][ipmt] << ( (ipmt+1) == 16 ? "\n" : ", ") << fixed;
+	      out_pcal << setw(2) << Form("%.1f", SHMSCAL_tMin[row][ipmt]) << ( (ipmt+1) == 16 ? "\n" : ", ") << fixed;
 	    }
 	    //Upper Limit Time Window Cut
 	    if(lim==1){
-	      out_pcal << setw(2) << setprecision(2) << SHMSCAL_tMax[row][ipmt] << ( (ipmt+1) == 16 ? "\n" : ", ") << fixed; 
+	      out_pcal << setw(2) << Form("%.1f", SHMSCAL_tMax[row][ipmt]) << ( (ipmt+1) == 16 ? "\n" : ", ") << fixed; 
 	    }
 	  }
 	} //End Fly's Eye Cal PMT Loop
@@ -985,20 +998,20 @@ void DetTCuts_Coin::Terminate()
 	  if(lim==0){
 	    //HMS Cer
 	    if(ipmt<2){
-	      out_hcer << setprecision(2) << HMSCER_tMin[ipmt] << ", " << fixed;
+	      out_hcer << Form("%.1f", HMSCER_tMin[ipmt]) << ", " << fixed;
 	    }
 	    //SHMS HGCER
-	    out_phgcer << setprecision(2) << SHMSHGC_tMin[ipmt] << ", " << fixed;
+	    out_phgcer << Form("%.1f", SHMSHGC_tMin[ipmt]) << ", " << fixed;
 	  }
 	 
 	  //Upper Limit Time Window Cut
 	  if(lim==1){
 	    //HMS Cer
 	    if(ipmt<2){
-	      out_hcer << setprecision(2) << HMSCER_tMax[ipmt] << ", " << fixed;
+	      out_hcer << Form("%.1f", HMSCER_tMax[ipmt]) << ", " << fixed;
 	    }
 	    //SHMS HGCER
-	    out_phgcer << setprecision(2) << SHMSHGC_tMax[ipmt] << ", " << fixed;
+	    out_phgcer << Form("%.1f", SHMSHGC_tMax[ipmt]) << ", " << fixed;
 	  }
 	}
       } // End loop over min/max limits

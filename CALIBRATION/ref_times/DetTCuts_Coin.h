@@ -112,6 +112,7 @@ public :
    TH1F           *h1pPrShAdcTdcTDiff[2][2][14]; // 3D array, 2/2/14 (uncut/cut, 2 sides, 14 PMTs per side)
    TH2F           *h2pPrShTDiffADCAmp[2][14];
    TH1F           *h1pCalAdcTdcTDiff[224]; // Array of 224 histograms, 224 PMTs
+   TH2F           *h2pCalTDiffADCAmp[224];
 
    // Readers to access the data
    TTreeReaderArray<Double_t> H_hod_1x_GoodPosAdcTdcDiffTime = {fReader, "H.hod.1x.GoodPosAdcTdcDiffTime"};
@@ -244,6 +245,7 @@ public :
    TTreeReaderArray<Double_t> P_cal_pr_goodNegAdcMult        = {fReader, "P.cal.pr.goodNegAdcMult"};   
    TTreeReaderArray<Double_t> P_cal_fly_goodAdcTdcDiffTime   = {fReader, "P.cal.fly.goodAdcTdcDiffTime"};
    TTreeReaderArray<Double_t> P_cal_fly_goodAdcMult          = {fReader, "P.cal.fly.goodAdcMult"};
+   TTreeReaderArray<Double_t> P_cal_fly_goodAdcPulseAmp      = {fReader, "P.cal.fly.goodAdcPulseAmp"};
 
  DetTCuts_Coin(TTree * /*tree*/ =0) : fChain(0) {}
    virtual ~DetTCuts_Coin() { }

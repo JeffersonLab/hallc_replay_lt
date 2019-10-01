@@ -100,7 +100,9 @@ void DetTCuts_Coin::SlaveBegin(TTree * /*tree*/)
   }
   for(Int_t ipmt = 0; ipmt < 224; ipmt++){
     h1pCalAdcTdcTDiff[ipmt] = new TH1F(Form("pCalPMT%d", ipmt+1), Form("SHMS Calorimeter PMT%d AdcTdcTimeDiff", ipmt+1), 200, -100, 100); 
+    h2pCalTDiffADCAmp[ipmt] = new TH2F(Form("pCalPMT%d_tDiffADCAmp", ipmt+1), Form("SHMS Calorimeter PMT%d AdcTdcTimeDiff vs ADC Pulse Amp; Time(ns); Charge(pC)", ipmt+1), 200, -100, 100, 200, 0, 500);
     GetOutputList()->Add(h1pCalAdcTdcTDiff[ipmt]);
+    GetOutputList()->Add(h2pCalTDiffADCAmp[ipmt]);
   }
 }
 
@@ -345,6 +347,7 @@ Bool_t DetTCuts_Coin::Process(Long64_t entry)
 
   for (Int_t ipmt = 0; ipmt < 224; ipmt++){
     if(P_cal_fly_goodAdcMult[ipmt] == 1) h1pCalAdcTdcTDiff[ipmt]->Fill(P_cal_fly_goodAdcTdcDiffTime[ipmt]);
+    if(P_cal_fly_goodAdcMult[ipmt] == 1) h2pCalTDiffADCAmp[ipmt]->Fill(P_cal_fly_goodAdcTdcDiffTime[ipmt], P_cal_fly_goodAdcPulseAmp[ipmt]);
   }
 
   return kTRUE;
@@ -572,12 +575,15 @@ void DetTCuts_Coin::Terminate()
   
   TDirectory *DSHMSCAL = Histogram_file->mkdir("SHMS Calorimeter Timing"); DSHMSCAL->cd();  
   TCanvas *CSHMSCAL[14]; // 16 histograms per canvas
+  TCanvas *CSHMSCAL2[14];
   for(Int_t row = 0; row < 14; row++){
-    CSHMSCAL[row] = new TCanvas(Form("CSHMSCAL%d", row+1),  Form("SHMS Pre-Shower Row %d", row+1), 300,100,1000,900);
-    CSHMSCAL[row]->Divide(4, 4);     
+    CSHMSCAL[row] = new TCanvas(Form("CSHMSCAL%d", row+1),  Form("SHMS Calorimeter Row %d", row+1), 300,100,1000,900);
+    CSHMSCAL2[row] = new TCanvas(Form("CSHMSCAL2%d", row+1),  Form("SHMS Calorimeter Row %d 2D", row+1), 300,100,1000,900);
+    CSHMSCAL[row]->Divide(4, 4);  CSHMSCAL2[row]->Divide(4, 4);
     for(Int_t ipmt = 0; ipmt < 16; ipmt++){
       TH1F *SHMSCAL = dynamic_cast<TH1F *>(TProof::GetOutput(Form("pCalPMT%d", (row*16)+ipmt+1), fOutput)); 
-      SHMSCAL->Write();
+      TH2F *SHMSCAL2D = dynamic_cast<TH2F *>(TProof::GetOutput(Form("pCalPMT%d_tDiffADCAmp", (row*16)+ipmt+1), fOutput));
+      SHMSCAL->Write(); SHMSCAL2D->Write();
       if(SHMSCAL->GetBinContent((SHMSCAL->GetMaximumBin())) >= 10){
 	SHMSCAL_tMin[row][ipmt] = (SHMSCAL->GetMean() - (5*SHMSCAL->GetStdDev()));
 	SHMSCAL_tMax[row][ipmt] = (SHMSCAL->GetMean() + (5*SHMSCAL->GetStdDev()));
@@ -591,6 +597,7 @@ void DetTCuts_Coin::Terminate()
       LSHMSCAL_tMin[row][ipmt]->SetLineColor(kRed); LSHMSCAL_tMin[row][ipmt]->SetLineStyle(7); LSHMSCAL_tMin[row][ipmt]->SetLineWidth(1);
       LSHMSCAL_tMax[row][ipmt]->SetLineColor(kRed); LSHMSCAL_tMax[row][ipmt]->SetLineStyle(7); LSHMSCAL_tMax[row][ipmt]->SetLineWidth(1);
       CSHMSCAL[row]->cd(ipmt+1); SHMSCAL->Draw(); SHMSCAL->Draw(); LSHMSCAL_tMin[row][ipmt]->Draw("SAME"); LSHMSCAL_tMax[row][ipmt]->Draw("SAME");
+      CSHMSCAL2[row]->cd(ipmt+1); SHMSCAL2D->Draw("COLZ");
     }
   }
 
@@ -627,6 +634,7 @@ void DetTCuts_Coin::Terminate()
   CSHMSPRSH2[1]->Print(outputpdf);
   for(Int_t row = 0; row < 14; row++){
     CSHMSCAL[row]->Print(outputpdf);
+    CSHMSCAL2[row]->Print(outputpdf);
   }
   CHMSCER->Print(outputpdf+"]");
   

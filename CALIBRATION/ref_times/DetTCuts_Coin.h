@@ -113,8 +113,21 @@ public :
    TH2F           *h2pPrShTDiffADCAmp[2][14];
    TH1F           *h1pCalAdcTdcTDiff[224]; // Array of 224 histograms, 224 PMTs
    TH2F           *h2pCalTDiffADCAmp[224];
+   //   TH2F           *h2HGCxyDist[4][4];
+   TH2F           *h2HGCxyDist[4];
 
    // Readers to access the data
+   // Readers for PID/Delta cuts
+   TTreeReaderArray<Double_t> H_gtr_dp           = {fReader, "H.gtr.dp"}; 
+   TTreeReaderArray<Double_t> P_gtr_dp           = {fReader, "P.gtr.dp"}; 
+   TTreeReaderArray<Double_t> H_cal_etotnorm     = {fReader, "H.cal.etotnorm"};  
+   TTreeReaderArray<Double_t> P_cal_etotnorm     = {fReader, "P.cal.etotnorm"};
+   TTreeReaderValue<Double_t> P_hgcer_xAtCer     = {fReader, "P.hgcer.xAtCer"}; 
+   TTreeReaderValue<Double_t> P_hgcer_yAtCer     = {fReader, "P.hgcer.yAtCer"}; 
+
+   // Reader for ADC pulse amp cut
+   TTreeReaderValue<Double_t> T_coin_pFADC_TREF_ROC2_adcPulseAmpRaw = {fReader, "T.coin.pFADC_TREF_ROC2_adcPulseAmpRaw"};
+
    TTreeReaderArray<Double_t> H_hod_1x_GoodPosAdcTdcDiffTime = {fReader, "H.hod.1x.GoodPosAdcTdcDiffTime"};
    TTreeReaderArray<Double_t> H_hod_1x_GoodNegAdcTdcDiffTime = {fReader, "H.hod.1x.GoodNegAdcTdcDiffTime"};
    TTreeReaderArray<Double_t> H_hod_1y_GoodPosAdcTdcDiffTime = {fReader, "H.hod.1y.GoodPosAdcTdcDiffTime"};

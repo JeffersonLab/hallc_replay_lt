@@ -68,6 +68,13 @@ void DetTCuts_Coin::SlaveBegin(TTree * /*tree*/)
     h2pHGCTDiffADCAmp[ipmt] = new TH2F(Form("pHGCER%d_tDiffADCAmp", ipmt+1), Form("SHMS HGC ADC TDC Diff Time PMT%d vs ADC Pulse Amp; Time (ns); Charge (pC)",ipmt+1), 200, 0, 100, 500, 0.0, 500); 
     GetOutputList()->Add(h1pHGCAdcTdcTDiff[0][ipmt]); GetOutputList()->Add(h1pHGCAdcTdcTDiff[1][ipmt]);
     GetOutputList()->Add(h2pHGCTDiffADCAmp[ipmt]);
+    h2HGCxyDist[ipmt] = new TH2F(Form("pHGCER%d_xyDist", ipmt+1), Form ("SHMS y vs x PMT%d for 10 < AdcDiffTime < 20; y(cm);x(cm)", ipmt+1), 100, -50, 50, 100, -50, 50);
+    GetOutputList()->Add(h2HGCxyDist[ipmt]);
+    
+    // for(Int_t i = 0; i < 4; i++){
+    //   h2HGCxyDist[i][ipmt] = new TH2F(Form("pHGCER%d_%d_xyDist", ipmt+1, i+1), Form ("SHMS y vs x PMT%d Peak %d; y(cm);x(cm)", ipmt+1, i+1), 100, -50, 50, 100, -50, 50);
+    //   GetOutputList()->Add(h2HGCxyDist[i][ipmt]);
+    // }
   }
   for (Int_t nside = 0; nside < sides; nside++){ //Loop over each side
     for (Int_t ipmt = 0; ipmt < 7; ipmt++){ // Loop over PMTs
@@ -109,7 +116,8 @@ void DetTCuts_Coin::SlaveBegin(TTree * /*tree*/)
 Bool_t DetTCuts_Coin::Process(Long64_t entry)
 {
   fReader.SetEntry(entry);
-  
+
+  // if((abs(H_gtr_dp[0]) < 20) && (H_cal_etotnorm[0] > 0.8)){ // Delta cut to test if it removed ghost bands, still present
   // Fill our HMS timing histograms, explicitly select only multiplicity 1 events
   for (Int_t ipmt = 0; ipmt < 2; ipmt++){
     if(H_cer_goodAdcMult[ipmt] == 1){
@@ -213,143 +221,161 @@ Bool_t DetTCuts_Coin::Process(Long64_t entry)
       }
     }
   }
+  //} //Close of PID/delta cut loop
+
+  if(*T_coin_pFADC_TREF_ROC2_adcPulseAmpRaw > 0){ // Cut any events where the ADC raw amplitude is zero, removes ghost band
+
+    //if((abs(P_gtr_dp[0]) < 20) && (P_cal_etotnorm[0] > 0.8)){
+    // Double_t PeakLow[4][4] = {{10, 23, 27, 31}, {10, 14, 22, 30}, {10, 16, 24, 30}, {10, 16, 22, 30}};
+    // Double_t PeakHigh[4][4] = {{16, 28, 31, 40}, {14, 20, 30, 40}, {16, 20, 30, 40}, {16, 20, 30, 40}};
+    // Fill our SHMS timing histograms, explicitly select only multiplicity 1 events
+    for (Int_t ipmt = 0; ipmt < 4; ipmt++){
+      if(P_hgcer_goodAdcMult[ipmt] == 1){
+	if(ipmt == 0){if(P_hgcer_goodAdcMult[1] != 0 || P_hgcer_goodAdcMult[2] != 0 || P_hgcer_goodAdcMult[3] != 0 ) continue;}
+	else if(ipmt == 1){if(P_hgcer_goodAdcMult[0] != 0 || P_hgcer_goodAdcMult[2] != 0 || P_hgcer_goodAdcMult[3] != 0 ) continue;}
+	else if(ipmt == 2){if(P_hgcer_goodAdcMult[1] != 0 || P_hgcer_goodAdcMult[0] != 0 || P_hgcer_goodAdcMult[3] != 0 ) continue;}
+	else if(ipmt == 3){if(P_hgcer_goodAdcMult[1] != 0 || P_hgcer_goodAdcMult[2] != 0 || P_hgcer_goodAdcMult[0] != 0 ) continue;}
+	h1pHGCAdcTdcTDiff[0][ipmt]->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+        if((10 < P_hgcer_goodAdcTdcDiffTime[ipmt]) && (20 > P_hgcer_goodAdcTdcDiffTime[ipmt]))h2HGCxyDist[ipmt]->Fill(*P_hgcer_yAtCer, *P_hgcer_xAtCer);
+	// Fill xy timing plot for each peak, final peak (~30-40) is the "good peak"
+	// if((PeakLow[ipmt][0] < P_hgcer_goodAdcTdcDiffTime[ipmt]) && (PeakHigh[ipmt][0] > P_hgcer_goodAdcTdcDiffTime[ipmt]))h2HGCxyDist[0][ipmt]->Fill(*P_hgcer_yAtCer, *P_hgcer_xAtCer);
+	// else if((PeakLow[ipmt][1] < P_hgcer_goodAdcTdcDiffTime[ipmt]) && (PeakHigh[ipmt][1] > P_hgcer_goodAdcTdcDiffTime[ipmt]))h2HGCxyDist[1][ipmt]->Fill(*P_hgcer_yAtCer, *P_hgcer_xAtCer);
+	// else if((PeakLow[ipmt][2] < P_hgcer_goodAdcTdcDiffTime[ipmt]) && (PeakHigh[ipmt][2] > P_hgcer_goodAdcTdcDiffTime[ipmt]))h2HGCxyDist[2][ipmt]->Fill(*P_hgcer_yAtCer, *P_hgcer_xAtCer);
+	// else if((PeakLow[ipmt][3] < P_hgcer_goodAdcTdcDiffTime[ipmt]) && (PeakHigh[ipmt][3] > P_hgcer_goodAdcTdcDiffTime[ipmt]))h2HGCxyDist[3][ipmt]->Fill(*P_hgcer_yAtCer, *P_hgcer_xAtCer);
+	//if(P_hgcer_goodAdcPulseAmp[ipmt] > CerPulseAmpCut) h1pHGCAdcTdcTDiff[1][ipmt]->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+	h2pHGCTDiffADCAmp[ipmt]->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt], P_hgcer_goodAdcPulseAmp[ipmt]);
+      }
+    }
+ 
   
-  // Fill our SHMS timing histograms, explicitly select only multiplicity 1 events
-  for (Int_t ipmt = 0; ipmt < 4; ipmt++){
-    if(P_hgcer_goodAdcMult[ipmt] == 1){
-      h1pHGCAdcTdcTDiff[0][ipmt]->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-      if(P_hgcer_goodAdcPulseAmp[ipmt] > CerPulseAmpCut) h1pHGCAdcTdcTDiff[1][ipmt]->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-      h2pHGCTDiffADCAmp[ipmt]->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt], P_hgcer_goodAdcPulseAmp[ipmt]);
-    }
-  }
-  
-  for (Int_t nside = 0; nside < sides; nside++){
-    for (Int_t ipmt = 0; ipmt < 7; ipmt++){
-      if(nside == 0){
-	if(P_aero_goodPosAdcMult[ipmt] == 1) h1pAeroAdcTdcTDiff[nside][ipmt]->Fill(P_aero_goodPosAdcTdcDiffTime[ipmt]);
-      }
-      else if(nside == 1){
-	if(P_aero_goodNegAdcMult[ipmt] == 1) h1pAeroAdcTdcTDiff[nside][ipmt]->Fill(P_aero_goodNegAdcTdcDiffTime[ipmt]);  
-      }
-    }
-  }
-
-  for (Int_t i = 0; i < 12; i++){
-    if(i == 0){if(P_dc_1u1_nhit[0] == 1) h1pdcTdcT[i]->Fill(P_dc_1u1_rawtdc[0]);}
-    else if(i == 1){
-      if(P_dc_1u2_nhit[0] == 1) h1pdcTdcT[i]->Fill(P_dc_1u2_rawtdc[0]);
-    }
-    else if(i == 2){
-      if(P_dc_1x1_nhit[0] == 1) h1pdcTdcT[i]->Fill(P_dc_1x1_rawtdc[0]);
-    }
-    else if(i == 3){
-      if(P_dc_1x2_nhit[0] == 1) h1pdcTdcT[i]->Fill(P_dc_1x2_rawtdc[0]);
-    }
-    else if(i == 4){
-      if(P_dc_1v1_nhit[0] == 1) h1pdcTdcT[i]->Fill(P_dc_1v1_rawtdc[0]);
-    }
-    else if(i == 5){
-      if(P_dc_1v2_nhit[0] == 1) h1pdcTdcT[i]->Fill(P_dc_1v2_rawtdc[0]);
-    }
-    else if(i == 6){
-      if(P_dc_2u1_nhit[0] == 1) h1pdcTdcT[i]->Fill(P_dc_2u1_rawtdc[0]);
-    }
-    else if(i == 7){
-      if(P_dc_2u2_nhit[0] == 1) h1pdcTdcT[i]->Fill(P_dc_2u2_rawtdc[0]);
-    }
-    else if(i == 8){
-      if(P_dc_2x1_nhit[0] == 1) h1pdcTdcT[i]->Fill(P_dc_2x1_rawtdc[0]);
-    }
-    else if(i == 9){
-      if(P_dc_2x2_nhit[0] == 1) h1pdcTdcT[i]->Fill(P_dc_2x2_rawtdc[0]);
-    }
-    else if(i == 10){
-      if(P_dc_2v1_nhit[0] == 1) h1pdcTdcT[i]->Fill(P_dc_2v1_rawtdc[0]);
-    }
-    else if(i == 11){
-      if(P_dc_2v2_nhit[0] == 1) h1pdcTdcT[i]->Fill(P_dc_2v2_rawtdc[0]);
-    }
-  }
-
-  for (Int_t npl = 0; npl < hod_planes; npl++){ // Loop over all hodoscope planes
-    for (Int_t nside = 0; nside < sides; nside++){ //Loop over each side
-      for (Int_t ipmt = 0; ipmt < pmaxPMT[npl]; ipmt++){ // Loop over each PMT in a particular plane	
-	if (npl == 0 && nside == 0){
-	  if (P_hod_1x_GoodPosAdcMult[ipmt] == 1){
-	    h1pHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(P_hod_1x_GoodPosAdcTdcDiffTime[ipmt]);
-	    h2pHodoTDiffADCAmp[npl][nside][ipmt]->Fill(P_hod_1x_GoodPosAdcTdcDiffTime[ipmt], P_hod_1x_GoodPosAdcPulseAmp[ipmt]); 
-	  }
+    for (Int_t nside = 0; nside < sides; nside++){
+      for (Int_t ipmt = 0; ipmt < 7; ipmt++){
+	if(nside == 0){
+	  if(P_aero_goodPosAdcMult[ipmt] == 1) h1pAeroAdcTdcTDiff[nside][ipmt]->Fill(P_aero_goodPosAdcTdcDiffTime[ipmt]);
 	}
-	else if (npl == 1 && nside == 0){
-	  if (P_hod_1y_GoodPosAdcMult[ipmt] == 1){
-	    h1pHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(P_hod_1y_GoodPosAdcTdcDiffTime[ipmt]);
-	    h2pHodoTDiffADCAmp[npl][nside][ipmt]->Fill(P_hod_1y_GoodPosAdcTdcDiffTime[ipmt], P_hod_1y_GoodPosAdcPulseAmp[ipmt]);
-	  }
-	}
-	else if (npl == 2 && nside == 0){
-	  if (P_hod_2x_GoodPosAdcMult[ipmt] == 1) {
-	    h1pHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(P_hod_2x_GoodPosAdcTdcDiffTime[ipmt]);
-	    h2pHodoTDiffADCAmp[npl][nside][ipmt]->Fill(P_hod_2x_GoodPosAdcTdcDiffTime[ipmt], P_hod_2x_GoodPosAdcPulseAmp[ipmt]);   
-	  }
-	}  
-	else if (npl == 3 && nside == 0){
-	  if (P_hod_2y_GoodPosAdcMult[ipmt] == 1){
-	    h1pHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(P_hod_2y_GoodPosAdcTdcDiffTime[ipmt]);
-	    h2pHodoTDiffADCAmp[npl][nside][ipmt]->Fill(P_hod_2y_GoodPosAdcTdcDiffTime[ipmt], P_hod_2y_GoodPosAdcPulseAmp[ipmt]);     
-	  }
-	}
-	else if (npl == 0 && nside == 1){
-	  if (P_hod_1x_GoodNegAdcMult[ipmt] == 1){
-	    h1pHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(P_hod_1x_GoodNegAdcTdcDiffTime[ipmt]);
-	    h2pHodoTDiffADCAmp[npl][nside][ipmt]->Fill(P_hod_1x_GoodNegAdcTdcDiffTime[ipmt], P_hod_1x_GoodNegAdcPulseAmp[ipmt]);   
-	  }
-	}
-	else if (npl == 1 && nside == 1){
-	  if (P_hod_1y_GoodNegAdcMult[ipmt] == 1){
-	    h1pHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(P_hod_1y_GoodNegAdcTdcDiffTime[ipmt]);
-	    h2pHodoTDiffADCAmp[npl][nside][ipmt]->Fill(P_hod_1y_GoodNegAdcTdcDiffTime[ipmt], P_hod_1y_GoodNegAdcPulseAmp[ipmt]);
-	  }
-	}
-	else if (npl == 2 && nside == 1){
-	  if (P_hod_2x_GoodNegAdcMult[ipmt] == 1){
-	    h1pHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(P_hod_2x_GoodNegAdcTdcDiffTime[ipmt]);
-	    h2pHodoTDiffADCAmp[npl][nside][ipmt]->Fill(P_hod_2x_GoodNegAdcTdcDiffTime[ipmt], P_hod_2x_GoodNegAdcPulseAmp[ipmt]);
-	  }
-	}  
-	else if (npl == 3 && nside == 1){
-	  if (P_hod_2y_GoodNegAdcMult[ipmt] == 1){
-	    h1pHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(P_hod_2y_GoodNegAdcTdcDiffTime[ipmt]);
-	    h2pHodoTDiffADCAmp[npl][nside][ipmt]->Fill(P_hod_2y_GoodNegAdcTdcDiffTime[ipmt], P_hod_2y_GoodNegAdcPulseAmp[ipmt]);  
-	  }
+	else if(nside == 1){
+	  if(P_aero_goodNegAdcMult[ipmt] == 1) h1pAeroAdcTdcTDiff[nside][ipmt]->Fill(P_aero_goodNegAdcTdcDiffTime[ipmt]);  
 	}
       }
     }
-  }  
 
-  for (Int_t nside = 0; nside < sides; nside++){
-    for (Int_t ipmt = 0; ipmt < 14; ipmt++){
-      if(nside == 0){
-	if(P_cal_pr_goodPosAdcMult[ipmt] == 1) {
-	  h1pPrShAdcTdcTDiff[0][nside][ipmt]->Fill(P_cal_pr_goodPosAdcTdcDiffTime[ipmt]);
-	  if(P_cal_pr_goodPosAdcPulseAmp[ipmt] > PrShPulseAmpCut) h1pPrShAdcTdcTDiff[1][nside][ipmt]->Fill(P_cal_pr_goodPosAdcTdcDiffTime[ipmt]);
-	  h2pPrShTDiffADCAmp[nside][ipmt]->Fill(P_cal_pr_goodPosAdcTdcDiffTime[ipmt], P_cal_pr_goodPosAdcPulseAmp[ipmt]);
-	}
+    for (Int_t i = 0; i < 12; i++){
+      if(i == 0){if(P_dc_1u1_nhit[0] == 1) h1pdcTdcT[i]->Fill(P_dc_1u1_rawtdc[0]);}
+      else if(i == 1){
+	if(P_dc_1u2_nhit[0] == 1) h1pdcTdcT[i]->Fill(P_dc_1u2_rawtdc[0]);
       }
-      else if(nside == 1){
-	if(P_cal_pr_goodNegAdcMult[ipmt] == 1){
-	  h1pPrShAdcTdcTDiff[0][nside][ipmt]->Fill(P_cal_pr_goodNegAdcTdcDiffTime[ipmt]);
-	  if(P_cal_pr_goodNegAdcPulseAmp[ipmt] > PrShPulseAmpCut) h1pPrShAdcTdcTDiff[1][nside][ipmt]->Fill(P_cal_pr_goodNegAdcTdcDiffTime[ipmt]);
-	  h2pPrShTDiffADCAmp[nside][ipmt]->Fill(P_cal_pr_goodNegAdcTdcDiffTime[ipmt], P_cal_pr_goodNegAdcPulseAmp[ipmt]);
-	}  
+      else if(i == 2){
+	if(P_dc_1x1_nhit[0] == 1) h1pdcTdcT[i]->Fill(P_dc_1x1_rawtdc[0]);
+      }
+      else if(i == 3){
+	if(P_dc_1x2_nhit[0] == 1) h1pdcTdcT[i]->Fill(P_dc_1x2_rawtdc[0]);
+      }
+      else if(i == 4){
+	if(P_dc_1v1_nhit[0] == 1) h1pdcTdcT[i]->Fill(P_dc_1v1_rawtdc[0]);
+      }
+      else if(i == 5){
+	if(P_dc_1v2_nhit[0] == 1) h1pdcTdcT[i]->Fill(P_dc_1v2_rawtdc[0]);
+      }
+      else if(i == 6){
+	if(P_dc_2u1_nhit[0] == 1) h1pdcTdcT[i]->Fill(P_dc_2u1_rawtdc[0]);
+      }
+      else if(i == 7){
+	if(P_dc_2u2_nhit[0] == 1) h1pdcTdcT[i]->Fill(P_dc_2u2_rawtdc[0]);
+      }
+      else if(i == 8){
+	if(P_dc_2x1_nhit[0] == 1) h1pdcTdcT[i]->Fill(P_dc_2x1_rawtdc[0]);
+      }
+      else if(i == 9){
+	if(P_dc_2x2_nhit[0] == 1) h1pdcTdcT[i]->Fill(P_dc_2x2_rawtdc[0]);
+      }
+      else if(i == 10){
+	if(P_dc_2v1_nhit[0] == 1) h1pdcTdcT[i]->Fill(P_dc_2v1_rawtdc[0]);
+      }
+      else if(i == 11){
+	if(P_dc_2v2_nhit[0] == 1) h1pdcTdcT[i]->Fill(P_dc_2v2_rawtdc[0]);
       }
     }
-  }
 
-  for (Int_t ipmt = 0; ipmt < 224; ipmt++){
-    if(P_cal_fly_goodAdcMult[ipmt] == 1) h1pCalAdcTdcTDiff[ipmt]->Fill(P_cal_fly_goodAdcTdcDiffTime[ipmt]);
-    if(P_cal_fly_goodAdcMult[ipmt] == 1) h2pCalTDiffADCAmp[ipmt]->Fill(P_cal_fly_goodAdcTdcDiffTime[ipmt], P_cal_fly_goodAdcPulseAmp[ipmt]);
-  }
+    for (Int_t npl = 0; npl < hod_planes; npl++){ // Loop over all hodoscope planes
+      for (Int_t nside = 0; nside < sides; nside++){ //Loop over each side
+	for (Int_t ipmt = 0; ipmt < pmaxPMT[npl]; ipmt++){ // Loop over each PMT in a particular plane	
+	  if (npl == 0 && nside == 0){
+	    if (P_hod_1x_GoodPosAdcMult[ipmt] == 1){
+	      h1pHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(P_hod_1x_GoodPosAdcTdcDiffTime[ipmt]);
+	      h2pHodoTDiffADCAmp[npl][nside][ipmt]->Fill(P_hod_1x_GoodPosAdcTdcDiffTime[ipmt], P_hod_1x_GoodPosAdcPulseAmp[ipmt]); 
+	    }
+	  }
+	  else if (npl == 1 && nside == 0){
+	    if (P_hod_1y_GoodPosAdcMult[ipmt] == 1){
+	      h1pHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(P_hod_1y_GoodPosAdcTdcDiffTime[ipmt]);
+	      h2pHodoTDiffADCAmp[npl][nside][ipmt]->Fill(P_hod_1y_GoodPosAdcTdcDiffTime[ipmt], P_hod_1y_GoodPosAdcPulseAmp[ipmt]);
+	    }
+	  }
+	  else if (npl == 2 && nside == 0){
+	    if (P_hod_2x_GoodPosAdcMult[ipmt] == 1) {
+	      h1pHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(P_hod_2x_GoodPosAdcTdcDiffTime[ipmt]);
+	      h2pHodoTDiffADCAmp[npl][nside][ipmt]->Fill(P_hod_2x_GoodPosAdcTdcDiffTime[ipmt], P_hod_2x_GoodPosAdcPulseAmp[ipmt]);   
+	    }
+	  }  
+	  else if (npl == 3 && nside == 0){
+	    if (P_hod_2y_GoodPosAdcMult[ipmt] == 1){
+	      h1pHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(P_hod_2y_GoodPosAdcTdcDiffTime[ipmt]);
+	      h2pHodoTDiffADCAmp[npl][nside][ipmt]->Fill(P_hod_2y_GoodPosAdcTdcDiffTime[ipmt], P_hod_2y_GoodPosAdcPulseAmp[ipmt]);     
+	    }
+	  }
+	  else if (npl == 0 && nside == 1){
+	    if (P_hod_1x_GoodNegAdcMult[ipmt] == 1){
+	      h1pHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(P_hod_1x_GoodNegAdcTdcDiffTime[ipmt]);
+	      h2pHodoTDiffADCAmp[npl][nside][ipmt]->Fill(P_hod_1x_GoodNegAdcTdcDiffTime[ipmt], P_hod_1x_GoodNegAdcPulseAmp[ipmt]);   
+	    }
+	  }
+	  else if (npl == 1 && nside == 1){
+	    if (P_hod_1y_GoodNegAdcMult[ipmt] == 1){
+	      h1pHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(P_hod_1y_GoodNegAdcTdcDiffTime[ipmt]);
+	      h2pHodoTDiffADCAmp[npl][nside][ipmt]->Fill(P_hod_1y_GoodNegAdcTdcDiffTime[ipmt], P_hod_1y_GoodNegAdcPulseAmp[ipmt]);
+	    }
+	  }
+	  else if (npl == 2 && nside == 1){
+	    if (P_hod_2x_GoodNegAdcMult[ipmt] == 1){
+	      h1pHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(P_hod_2x_GoodNegAdcTdcDiffTime[ipmt]);
+	      h2pHodoTDiffADCAmp[npl][nside][ipmt]->Fill(P_hod_2x_GoodNegAdcTdcDiffTime[ipmt], P_hod_2x_GoodNegAdcPulseAmp[ipmt]);
+	    }
+	  }  
+	  else if (npl == 3 && nside == 1){
+	    if (P_hod_2y_GoodNegAdcMult[ipmt] == 1){
+	      h1pHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(P_hod_2y_GoodNegAdcTdcDiffTime[ipmt]);
+	      h2pHodoTDiffADCAmp[npl][nside][ipmt]->Fill(P_hod_2y_GoodNegAdcTdcDiffTime[ipmt], P_hod_2y_GoodNegAdcPulseAmp[ipmt]);  
+	    }
+	  }
+	}
+      }
+    }  
 
+    for (Int_t nside = 0; nside < sides; nside++){
+      for (Int_t ipmt = 0; ipmt < 14; ipmt++){
+	if(nside == 0){
+	  if(P_cal_pr_goodPosAdcMult[ipmt] == 1) {
+	    h1pPrShAdcTdcTDiff[0][nside][ipmt]->Fill(P_cal_pr_goodPosAdcTdcDiffTime[ipmt]);
+	    if(P_cal_pr_goodPosAdcPulseAmp[ipmt] > PrShPulseAmpCut) h1pPrShAdcTdcTDiff[1][nside][ipmt]->Fill(P_cal_pr_goodPosAdcTdcDiffTime[ipmt]);
+	    h2pPrShTDiffADCAmp[nside][ipmt]->Fill(P_cal_pr_goodPosAdcTdcDiffTime[ipmt], P_cal_pr_goodPosAdcPulseAmp[ipmt]);
+	  }
+	}
+	else if(nside == 1){
+	  if(P_cal_pr_goodNegAdcMult[ipmt] == 1){
+	    h1pPrShAdcTdcTDiff[0][nside][ipmt]->Fill(P_cal_pr_goodNegAdcTdcDiffTime[ipmt]);
+	    if(P_cal_pr_goodNegAdcPulseAmp[ipmt] > PrShPulseAmpCut) h1pPrShAdcTdcTDiff[1][nside][ipmt]->Fill(P_cal_pr_goodNegAdcTdcDiffTime[ipmt]);
+	    h2pPrShTDiffADCAmp[nside][ipmt]->Fill(P_cal_pr_goodNegAdcTdcDiffTime[ipmt], P_cal_pr_goodNegAdcPulseAmp[ipmt]);
+	  }  
+	}
+      }
+    }
+
+    for (Int_t ipmt = 0; ipmt < 224; ipmt++){
+      if(P_cal_fly_goodAdcMult[ipmt] == 1) h1pCalAdcTdcTDiff[ipmt]->Fill(P_cal_fly_goodAdcTdcDiffTime[ipmt]);
+      if(P_cal_fly_goodAdcMult[ipmt] == 1) h2pCalTDiffADCAmp[ipmt]->Fill(P_cal_fly_goodAdcTdcDiffTime[ipmt], P_cal_fly_goodAdcPulseAmp[ipmt]);
+    }
+  }
+  //}//Close of PID/delta cut loop
   return kTRUE;
 
 }
@@ -362,6 +388,7 @@ void DetTCuts_Coin::Terminate()
 {
   cout << "Finished processing" << endl;
   printf("\n");
+  gStyle->SetOptLogz();
   TString option = GetOption();
 
   TFile *Histogram_file = new TFile(Form("TimeWindowHistos_Coin_Run%i.root",option.Atoi()),"RECREATE");
@@ -448,22 +475,38 @@ void DetTCuts_Coin::Terminate()
   TDirectory *DSHMSHGC = Histogram_file->mkdir("SHMS HGC Timing"); DSHMSHGC->cd();  
   TCanvas *CSHMSHGC = new TCanvas("CSHMSHGC", "SHMS HGC timing plots", 300,100,1000,900);
   TCanvas *CSHMSHGC2 = new TCanvas("CSHMSHGC2", "SHMS HGC 2D plots", 300,100,1000,900);
-  CSHMSHGC->Divide(2,2); CSHMSHGC2->Divide(2,2);
+  TCanvas *CSHMSHGC3 = new TCanvas("CSHMSHGC3", "SHMS HGC XY plots", 300,100,1000,900);
+
+  // TCanvas *CSHMSHGC3[4];
+  CSHMSHGC->Divide(2,2); CSHMSHGC2->Divide(2,2); CSHMSHGC3->Divide(2,2);
   for (Int_t ipmt = 0; ipmt < 4; ipmt++){
     TH1F *SHMSHGC = dynamic_cast<TH1F *>(TProof::GetOutput(Form("pHGCER%d_timeDiff", ipmt+1), fOutput));
-    TH1F *SHMSHGCCut = dynamic_cast<TH1F *>(TProof::GetOutput(Form("pHGCER%d_timeDiff_Cut", ipmt+1), fOutput));
-    SHMSHGCCut->Fit("Gauss_Fit", "MQN");
+    //TH1F *SHMSHGCCut = dynamic_cast<TH1F *>(TProof::GetOutput(Form("pHGCER%d_timeDiff_Cut", ipmt+1), fOutput));
+    SHMSHGC->Fit("Gauss_Fit", "MQN");
+    //SHMSHGCCut->Fit("Gauss_Fit", "MQN");
     SHMSHGC_tMin[ipmt] = (Gauss_Fit->GetParameter(1) - (5*Gauss_Fit->GetParameter(2))); SHMSHGC_tMax[ipmt] = (Gauss_Fit->GetParameter(1) + (5*Gauss_Fit->GetParameter(2)));     
-    LSHMSHGC_tMin[ipmt] = new TLine(SHMSHGC_tMin[ipmt], 0, SHMSHGC_tMin[ipmt], SHMSHGCCut->GetMaximum());
-    LSHMSHGC_tMax[ipmt] = new TLine(SHMSHGC_tMax[ipmt], 0, SHMSHGC_tMax[ipmt], SHMSHGCCut->GetMaximum());
+    LSHMSHGC_tMin[ipmt] = new TLine(SHMSHGC_tMin[ipmt], 0, SHMSHGC_tMin[ipmt], SHMSHGC->GetMaximum());
+    LSHMSHGC_tMax[ipmt] = new TLine(SHMSHGC_tMax[ipmt], 0, SHMSHGC_tMax[ipmt], SHMSHGC->GetMaximum());
     LSHMSHGC_tMin[ipmt]->SetLineColor(kRed); LSHMSHGC_tMin[ipmt]->SetLineStyle(7); LSHMSHGC_tMin[ipmt]->SetLineWidth(1);
     LSHMSHGC_tMax[ipmt]->SetLineColor(kRed); LSHMSHGC_tMax[ipmt]->SetLineStyle(7); LSHMSHGC_tMax[ipmt]->SetLineWidth(1);
     TH2F* SHMSHGC2D = dynamic_cast<TH2F *>(TProof::GetOutput(Form("pHGCER%d_tDiffADCAmp", ipmt+1), fOutput));
-    LCerADCCut = new TLine(0, CerPulseAmpCut, SHMSHGC2D->GetXaxis()->GetBinCenter((SHMSHGC2D->GetMaximumBin())) , CerPulseAmpCut);
-    LCerADCCut->SetLineColor(kRed); LCerADCCut->SetLineStyle(7); LCerADCCut->SetLineWidth(1);
-    SHMSHGC->Write(); SHMSHGCCut->Write(); SHMSHGCCut->SetLineColor(kRed); SHMSHGC2D->Write();
-    CSHMSHGC->cd(ipmt+1); SHMSHGC->Draw(); SHMSHGCCut->Draw("SAME"); LSHMSHGC_tMin[ipmt]->Draw("SAME"); LSHMSHGC_tMax[ipmt]->Draw("SAME");
-    CSHMSHGC2->cd(ipmt+1); SHMSHGC2D->Draw("COLZ"); LCerADCCut->Draw("SAME");
+    TH2F* SHMSHGCXY = dynamic_cast<TH2F *>(TProof::GetOutput(Form("pHGCER%d_xyDist", ipmt+1), fOutput));
+    // LCerADCCut = new TLine(0, CerPulseAmpCut, SHMSHGC2D->GetXaxis()->GetBinCenter((SHMSHGC2D->GetMaximumBin())) , CerPulseAmpCut);
+    //LCerADCCut->SetLineColor(kRed); LCerADCCut->SetLineStyle(7); LCerADCCut->SetLineWidth(1);
+    SHMSHGC->Write(); //SHMSHGCCut->Write(); //SHMSHGCCut->SetLineColor(kRed); 
+    SHMSHGC2D->Write();
+    SHMSHGCXY->Write();
+    CSHMSHGC->cd(ipmt+1); SHMSHGC->Draw(); 
+    //SHMSHGCCut->Draw("SAME"); 
+    LSHMSHGC_tMin[ipmt]->Draw("SAME"); LSHMSHGC_tMax[ipmt]->Draw("SAME");
+    CSHMSHGC2->cd(ipmt+1); SHMSHGC2D->Draw("COLZ"); //LCerADCCut->Draw("SAME");
+    CSHMSHGC3->cd(ipmt+1); SHMSHGCXY->Draw("COLZ");
+    // CSHMSHGC3[ipmt] = new TCanvas(Form("CSHMSHGC_PMT%d", ipmt+1), Form("SHMS HGC y vs x PMT %d", ipmt+1), 300,100,1000,900);
+    // CSHMSHGC3[ipmt]->Divide(2,2);
+    // for (Int_t i = 0; i < 4; i++){
+    //   TH2F* SHMSHGCXY2D = dynamic_cast<TH2F *>(TProof::GetOutput(Form("pHGCER%d_%d_xyDist", ipmt+1, i+1), fOutput));
+    //   CSHMSHGC3[ipmt]->cd(i+1); SHMSHGCXY2D->Draw("COLZ"); SHMSHGCXY2D->Write();
+    // }
   }
 
   TDirectory *DSHMSAERO = Histogram_file->mkdir("SHMS Aerogel Cherenkov Timing"); DSHMSAERO->cd();  
@@ -475,7 +518,7 @@ void DetTCuts_Coin::Terminate()
       TH1F *SHMSAERO = dynamic_cast<TH1F *>(TProof::GetOutput(Form("pAero%d%s_timeDiff", ipmt+1, nsign[nside].c_str()), fOutput));
       SHMSAERO->Write();
       SHMSAERO_tMin[nside][ipmt] = (SHMSAERO->GetMean() - (5*SHMSAERO->GetStdDev()));
-      SHMSAERO_tMax[nside][ipmt] = (SHMSAERO->GetMean() + (5*SHMSAERO->GetStdDev()));
+      SHMSAERO_tMax[nside][ipmt] = (SHMSAERO->GetMean() + (2*SHMSAERO->GetStdDev()));
       if(SHMSAERO_tMin[nside][ipmt] < 0) SHMSAERO_tMin[nside][ipmt] = 0;
       LSHMSAERO_tMin[nside][ipmt] = new TLine(SHMSAERO_tMin[nside][ipmt], 0, SHMSAERO_tMin[nside][ipmt], SHMSAERO->GetMaximum());
       LSHMSAERO_tMax[nside][ipmt] = new TLine(SHMSAERO_tMax[nside][ipmt], 0, SHMSAERO_tMax[nside][ipmt], SHMSAERO->GetMaximum());
@@ -521,8 +564,8 @@ void DetTCuts_Coin::Terminate()
 	}
 	else if((SHMSHODO->GetEntries()) != 0){ // If entries in the histogram, get windows normally
 	  SHMSHODO->Fit("Gauss_Fit", "MQN");
-	  SHMSHODO_tMin[npl][nside][ipmt] = (Gauss_Fit->GetParameter(1) - (3*Gauss_Fit->GetParameter(2)));
-	  SHMSHODO_tMax[npl][nside][ipmt] = (Gauss_Fit->GetParameter(1) + (5*Gauss_Fit->GetParameter(2)));
+	  SHMSHODO_tMin[npl][nside][ipmt] = (Gauss_Fit->GetParameter(1) - (8*Gauss_Fit->GetParameter(2)));
+	  SHMSHODO_tMax[npl][nside][ipmt] = (Gauss_Fit->GetParameter(1) + (10*Gauss_Fit->GetParameter(2))); // Higher up limit so poorly calibrated runs don't cut low amp stuff off
 	}
 	LSHMSHODO_tMin[npl][nside][ipmt] = new TLine(SHMSHODO_tMin[npl][nside][ipmt], 0, SHMSHODO_tMin[npl][nside][ipmt], SHMSHODO->GetMaximum());
 	LSHMSHODO_tMax[npl][nside][ipmt] = new TLine(SHMSHODO_tMax[npl][nside][ipmt], 0, SHMSHODO_tMax[npl][nside][ipmt], SHMSHODO->GetMaximum());
@@ -546,19 +589,23 @@ void DetTCuts_Coin::Terminate()
       TH1F *SHMSPRSH = dynamic_cast<TH1F *>(TProof::GetOutput(Form("pPrSh%d%s_timeDiff", ipmt+1, nsign[nside].c_str()), fOutput));
       TH1F *SHMSPRSHCut = dynamic_cast<TH1F *>(TProof::GetOutput(Form("pPrSh%d%s_timeDiff_Cut", ipmt+1, nsign[nside].c_str()), fOutput));
       if((SHMSPRSHCut->GetEntries()) != 0){
-	if ((SHMSPRSHCut->GetBinContent((SHMSPRSHCut->GetMaximumBin()))) >= 25){
-	  SHMSPRSHCut->Fit("Gauss_Fit", "MQN");
-	  SHMSPRSH_tMin[nside][ipmt] = (Gauss_Fit->GetParameter(1) - (5*Gauss_Fit->GetParameter(2))); 
-	  SHMSPRSH_tMax[nside][ipmt] = (Gauss_Fit->GetParameter(1) + (5*Gauss_Fit->GetParameter(2)));
-	}
-	else if(SHMSPRSHCut->GetBinContent((SHMSPRSHCut->GetMaximumBin())) < 25){
-	  SHMSPRSH_tMin[nside][ipmt] = (SHMSPRSHCut->GetMean() - 20); 
-	  SHMSPRSH_tMax[nside][ipmt] = (SHMSPRSHCut->GetMean() + 20);  
-	}
+      	if ((SHMSPRSHCut->GetBinContent((SHMSPRSHCut->GetMaximumBin()))) >= 50){
+      	  SHMSPRSHCut->Fit("Gauss_Fit", "MQN");
+      	  SHMSPRSH_tMin[nside][ipmt] = (Gauss_Fit->GetParameter(1) - (5*Gauss_Fit->GetParameter(2))); 
+      	  SHMSPRSH_tMax[nside][ipmt] = (Gauss_Fit->GetParameter(1) + (5*Gauss_Fit->GetParameter(2)));
+	  if (Gauss_Fit->GetParameter(2) > 2 || Gauss_Fit->GetParameter(2) < 1){ // Prevent the window from being too broad or too narrow
+	    SHMSPRSH_tMin[nside][ipmt] = (Gauss_Fit->GetParameter(1) - 10); 
+	    SHMSPRSH_tMax[nside][ipmt] = (Gauss_Fit->GetParameter(1) + 10);
+	  }
+      	}
+      	else if(SHMSPRSHCut->GetBinContent((SHMSPRSHCut->GetMaximumBin())) < 50){
+      	  SHMSPRSH_tMin[nside][ipmt] = (SHMSPRSHCut->GetMean() - 10); 
+      	  SHMSPRSH_tMax[nside][ipmt] = (SHMSPRSHCut->GetMean() + 10);  
+      	}
       }
       else if ((SHMSPRSHCut->GetEntries()) == 0){
-	SHMSPRSH_tMin[nside][ipmt] = -80; 
-	SHMSPRSH_tMax[nside][ipmt] = 80;  
+      	SHMSPRSH_tMin[nside][ipmt] = -80; 
+      	SHMSPRSH_tMax[nside][ipmt] = 80;  
       }
       LSHMSPRSH_tMin[nside][ipmt] = new TLine(SHMSPRSH_tMin[nside][ipmt], 0, SHMSPRSH_tMin[nside][ipmt], SHMSPRSH->GetMaximum());
       LSHMSPRSH_tMax[nside][ipmt] = new TLine(SHMSPRSH_tMax[nside][ipmt], 0, SHMSPRSH_tMax[nside][ipmt], SHMSPRSH->GetMaximum());
@@ -567,8 +614,10 @@ void DetTCuts_Coin::Terminate()
       TH2F *SHMSPRSH2D = dynamic_cast<TH2F *>(TProof::GetOutput(Form("pPrSh%d%s_tDiffADCAmp", ipmt+1, nsign[nside].c_str()), fOutput));
       LPrShADCCut = new TLine(-100, PrShPulseAmpCut, SHMSPRSH2D->GetXaxis()->GetBinCenter((SHMSPRSH2D->GetMaximumBin())) , PrShPulseAmpCut);
       LPrShADCCut->SetLineColor(kRed); LPrShADCCut->SetLineStyle(7); LPrShADCCut->SetLineWidth(1);
-      SHMSPRSH->Write(); SHMSPRSHCut->Write(); SHMSPRSHCut->SetLineColor(kRed); SHMSPRSH2D->Write();
-      CSHMSPRSH[nside]->cd(ipmt+1); SHMSPRSH->Draw(); SHMSPRSHCut->Draw("SAME"); LSHMSPRSH_tMin[nside][ipmt]->Draw("SAME"); LSHMSPRSH_tMax[nside][ipmt]->Draw("SAME");
+      SHMSPRSH->Write();SHMSPRSHCut->Write(); SHMSPRSHCut->SetLineColor(kRed); 
+      SHMSPRSH2D->Write();
+      CSHMSPRSH[nside]->cd(ipmt+1); SHMSPRSH->Draw(); SHMSPRSHCut->Draw("SAME"); 
+      LSHMSPRSH_tMin[nside][ipmt]->Draw("SAME"); LSHMSPRSH_tMax[nside][ipmt]->Draw("SAME");
       CSHMSPRSH2[nside]->cd(ipmt+1); SHMSPRSH2D->Draw("COLZ"); LPrShADCCut->Draw("SAME");
     }
   }
@@ -584,16 +633,33 @@ void DetTCuts_Coin::Terminate()
       TH1F *SHMSCAL = dynamic_cast<TH1F *>(TProof::GetOutput(Form("pCalPMT%d", (row*16)+ipmt+1), fOutput)); 
       TH2F *SHMSCAL2D = dynamic_cast<TH2F *>(TProof::GetOutput(Form("pCalPMT%d_tDiffADCAmp", (row*16)+ipmt+1), fOutput));
       SHMSCAL->Write(); SHMSCAL2D->Write();
-      if(SHMSCAL->GetBinContent((SHMSCAL->GetMaximumBin())) >= 10){
-	SHMSCAL_tMin[row][ipmt] = (SHMSCAL->GetMean() - (5*SHMSCAL->GetStdDev()));
-	SHMSCAL_tMax[row][ipmt] = (SHMSCAL->GetMean() + (5*SHMSCAL->GetStdDev()));
+      if(SHMSCAL->GetEntries() >= 5){
+	if(SHMSCAL->GetBinContent((SHMSCAL->GetMaximumBin())) >= 100){
+	  SHMSCAL_tMin[row][ipmt] = (SHMSCAL->GetMean() - (5*SHMSCAL->GetStdDev()));
+	  SHMSCAL_tMax[row][ipmt] = (SHMSCAL->GetMean() + (5*SHMSCAL->GetStdDev()));
+	  if (SHMSCAL->GetStdDev() > 4 || SHMSCAL->GetStdDev() < 1){ // Stop the window being too wide or too narrow
+	    SHMSCAL_tMin[row][ipmt] = (SHMSCAL->GetMean() - 20);
+	    SHMSCAL_tMax[row][ipmt] = (SHMSCAL->GetMean() + 20);
+	  }
+	}
+	else if(SHMSCAL->GetBinContent((SHMSCAL->GetMaximumBin())) < 100){
+	  SHMSCAL_tMin[row][ipmt] = (SHMSCAL->GetMean() - 20);
+	  SHMSCAL_tMax[row][ipmt] = (SHMSCAL->GetMean() + 20);	
+	}
       }
-      else if(SHMSCAL->GetBinContent((SHMSCAL->GetMaximumBin())) < 10){
-	SHMSCAL_tMin[row][ipmt] = (SHMSCAL->GetMean() - 20);
-	SHMSCAL_tMax[row][ipmt] = (SHMSCAL->GetMean() + 20);	
+      else if (SHMSCAL->GetEntries() < 5){
+	SHMSCAL_tMin[row][ipmt] = -40;
+	SHMSCAL_tMax[row][ipmt] = 40;	
       }
-      LSHMSCAL_tMin[row][ipmt] = new TLine(SHMSCAL_tMin[row][ipmt], 0, SHMSCAL_tMin[row][ipmt], SHMSCAL->GetMaximum());
-      LSHMSCAL_tMax[row][ipmt] = new TLine(SHMSCAL_tMax[row][ipmt], 0, SHMSCAL_tMax[row][ipmt], SHMSCAL->GetMaximum());
+      
+      if(SHMSCAL->GetEntries() >= 5){
+	LSHMSCAL_tMin[row][ipmt] = new TLine(SHMSCAL_tMin[row][ipmt], 0, SHMSCAL_tMin[row][ipmt], SHMSCAL->GetMaximum());
+	LSHMSCAL_tMax[row][ipmt] = new TLine(SHMSCAL_tMax[row][ipmt], 0, SHMSCAL_tMax[row][ipmt], SHMSCAL->GetMaximum());
+      }
+      else if (SHMSCAL->GetEntries() < 5){
+	LSHMSCAL_tMin[row][ipmt] = new TLine(SHMSCAL_tMin[row][ipmt], 0, SHMSCAL_tMin[row][ipmt], 10);
+	LSHMSCAL_tMax[row][ipmt] = new TLine(SHMSCAL_tMax[row][ipmt], 0, SHMSCAL_tMax[row][ipmt], 10);      
+      }
       LSHMSCAL_tMin[row][ipmt]->SetLineColor(kRed); LSHMSCAL_tMin[row][ipmt]->SetLineStyle(7); LSHMSCAL_tMin[row][ipmt]->SetLineWidth(1);
       LSHMSCAL_tMax[row][ipmt]->SetLineColor(kRed); LSHMSCAL_tMax[row][ipmt]->SetLineStyle(7); LSHMSCAL_tMax[row][ipmt]->SetLineWidth(1);
       CSHMSCAL[row]->cd(ipmt+1); SHMSCAL->Draw(); SHMSCAL->Draw(); LSHMSCAL_tMin[row][ipmt]->Draw("SAME"); LSHMSCAL_tMax[row][ipmt]->Draw("SAME");
@@ -617,8 +683,10 @@ void DetTCuts_Coin::Terminate()
       CHMSHODO[npl][nside]->Print(outputpdf);
     }
   }
+
   CSHMSHGC->Print(outputpdf);
   CSHMSHGC2->Print(outputpdf);
+  
   CSHMSAERO[0]->Print(outputpdf);
   CSHMSAERO[1]->Print(outputpdf);
   CSHMSDC->Print(outputpdf);
@@ -638,6 +706,23 @@ void DetTCuts_Coin::Terminate()
   }
   CHMSCER->Print(outputpdf+"]");
   
+  // TString outputpdf2 = Form("SHMSHGC_xyPlots_Coin_Run%i.pdf", option.Atoi()) ; 
+  // CSHMSHGC3[0]->Print(outputpdf2 +"[");
+  // CSHMSHGC->Print(outputpdf2);
+  // CSHMSHGC2->Print(outputpdf2);
+  // CSHMSHGC3[0]->Print(outputpdf2);
+  // CSHMSHGC3[1]->Print(outputpdf2);
+  // CSHMSHGC3[2]->Print(outputpdf2);
+  // CSHMSHGC3[3]->Print(outputpdf2);
+  // CSHMSHGC3[0]->Print(outputpdf2 +"]");
+
+  TString outputpdf2 = Form("SHMSHGC_xyPlots_Coin_Run%i.pdf", option.Atoi()) ; 
+  CSHMSHGC3->Print(outputpdf2 +"[");
+  CSHMSHGC->Print(outputpdf2);
+  CSHMSHGC2->Print(outputpdf2);
+  CSHMSHGC3->Print(outputpdf2);
+  CSHMSHGC3->Print(outputpdf2 +"]");  
+
   Histogram_file->Close();
 
   // Output time windows to some parameter files

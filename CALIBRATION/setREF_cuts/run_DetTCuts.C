@@ -48,12 +48,12 @@ void run_DetTCuts(Int_t RunNumber = 0, Int_t MaxEvent = 0, string RunType = "")
   }
   else if(Hostname.Contains("qcd")){ // Empty for now, fill in later
   }
-  else if (Hostname.Contains("phys.uregina.ca")){
-    if (RunT.EqualTo("HMS")) rootFileNameString = Form("/dsk3/${USER}/JLab/ROOTfiles/DC_Calib/HMS_DC_Calib_Check_%i_%i.root", RunNumber, MaxEvent); // NOTE, this file name is temporary and only for testing currently
-    else if (RunT.EqualTo("SHMS")) rootFileNameString = Form("/dsk3/${USER}/JLab/ROOTfiles/DC_Calib/SHMS_DC_Calib_Check_%i_%i.root", RunNumber, MaxEvent); // NOTE, this file name is temporary and only for testing currently
-    else if (RunT.EqualTo("COIN")) rootFileNameString = Form("/dsk3/${USER}/JLab/ROOTfiles/PionLT_coin_replay_production_%i_%i.root", RunNumber, MaxEvent);  
-    Outpath = "/dsk3/${USER}/JLab/OUTPUT/";
-    Histopath = "/dsk3/${USER}/JLab/HISTOGRAMS/";
+  else if (Hostname.Contains("trottar")){
+    if (RunT.EqualTo("HMS")) rootFileNameString = Form("~/ResearchNP/ROOTfiles/kaon-coin/hms_reftime_%i_%i.root", RunNumber, MaxEvent); // NOTE, this file name is temporary and only for testing currently
+    else if (RunT.EqualTo("SHMS")) rootFileNameString = Form("~/ResearchNP/ROOTfiles/kaon-coin/shms_reftime_%i_%i.root", RunNumber, MaxEvent); // NOTE, this file name is temporary and only for testing currently
+    else if (RunT.EqualTo("COIN")) rootFileNameString = Form("~/ResearchNP/ROOTfiles/kaon-coin/coin_reftime_%i_%i.root", RunNumber, MaxEvent);  
+    Outpath = "~/Analysis/hallc_replay_kaonlt/CALIBRATION/setREF_cuts/OUTPUT/";
+    Histopath = "~/Analysis/hallc_replay_kaonlt/CALIBRATION/setREF_cuts/HISTOGRAMS/";
   }
   // Should process a different script for COIN/HMS/SHMS
   TChain ch("T");

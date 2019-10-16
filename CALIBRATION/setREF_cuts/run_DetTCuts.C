@@ -45,6 +45,11 @@ void run_DetTCuts(Int_t RunNumber = 0, Int_t MaxEvent = 0, string RunType = "")
   cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
   if(Hostname.Contains("farm")){
+    if (RunT.EqualTo("HMS")) rootFileNameString = Form("/lustre/expphy/volatile/hallc/spring17/trottar/ROOTfiles/hms_reftime_%i_%i.root", RunNumber, MaxEvent); // NOTE, this file name is temporary and only for testing currently
+    else if (RunT.EqualTo("SHMS")) rootFileNameString = Form("/lustre/expphy/volatile/hallc/spring17/trottar/ROOTfiles/shms_reftime_%i_%i.root", RunNumber, MaxEvent); // NOTE, this file name is temporary and only for testing currently
+    else if (RunT.EqualTo("COIN")) rootFileNameString = Form("/lustre/expphy/volatile/hallc/spring17/trottar/ROOTfiles/coin_reftime_%i_%i.root", RunNumber, MaxEvent);  
+    Outpath = "/u/group/c-kaonlt/USERS/trottar/hallc_replay_kaonlt/CALIBRATION/setREF_cuts/OUTPUT/";
+    Histopath = "/u/group/c-kaonlt/USERS/trottar/hallc_replay_kaonlt/CALIBRATION/setREF_cuts/HISTOGRAMS/";
   }
   else if(Hostname.Contains("qcd")){ // Empty for now, fill in later
   }

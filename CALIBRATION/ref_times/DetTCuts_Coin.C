@@ -65,10 +65,11 @@ void DetTCuts_Coin::SlaveBegin(TTree * /*tree*/)
   for (Int_t ipmt = 0; ipmt < 4; ipmt++){
     h1pHGCAdcTdcTDiff[0][ipmt] = new TH1F (Form("pHGCER%d_timeDiff", ipmt+1), Form("SHMS HGCer PMT%d AdcTdcTimeDiff", ipmt+1), 200, 0, 100);
     h1pHGCAdcTdcTDiff[1][ipmt] = new TH1F (Form("pHGCER%d_timeDiff_Cut", ipmt+1), Form("SHMS HGCer PMT%d AdcTdcTimeDiff, ADC Pulse Amp Cut", ipmt+1), 200, 0, 100);
+    //h1pHGCAdcTdcTDiff[2][ipmt] = new TH1F (Form("pHGCER%d_timeDiff_AerogelTest", ipmt+1), Form("SHMS HGCer PMT%d AdcTdcTimeDiff Aerogel Cut", ipmt+1), 200, 0, 100);
     h2pHGCTDiffADCAmp[ipmt] = new TH2F(Form("pHGCER%d_tDiffADCAmp", ipmt+1), Form("SHMS HGC ADC TDC Diff Time PMT%d vs ADC Pulse Amp; Time (ns); Charge (pC)",ipmt+1), 200, 0, 100, 500, 0.0, 500); 
-    GetOutputList()->Add(h1pHGCAdcTdcTDiff[0][ipmt]); GetOutputList()->Add(h1pHGCAdcTdcTDiff[1][ipmt]);
+    GetOutputList()->Add(h1pHGCAdcTdcTDiff[0][ipmt]); GetOutputList()->Add(h1pHGCAdcTdcTDiff[1][ipmt]); //GetOutputList()->Add(h1pHGCAdcTdcTDiff[2][ipmt]);
     GetOutputList()->Add(h2pHGCTDiffADCAmp[ipmt]);
-    h2HGCxyDist[ipmt] = new TH2F(Form("pHGCER%d_xyDist", ipmt+1), Form ("SHMS y vs x PMT%d for 10 < AdcDiffTime < 20; y(cm);x(cm)", ipmt+1), 100, -50, 50, 100, -50, 50);
+    h2HGCxyDist[ipmt] = new TH2F(Form("pHGCER%d_xyDist", ipmt+1), Form ("SHMS y vs x PMT%d for 0 < AdcDiffTime < 20; y(cm);x(cm)", ipmt+1), 100, -50, 50, 100, -50, 50);
     GetOutputList()->Add(h2HGCxyDist[ipmt]);
     
     // for(Int_t i = 0; i < 4; i++){
@@ -224,25 +225,37 @@ Bool_t DetTCuts_Coin::Process(Long64_t entry)
   //} //Close of PID/delta cut loop
 
   if(*T_coin_pFADC_TREF_ROC2_adcPulseAmpRaw > 0){ // Cut any events where the ADC raw amplitude is zero, removes ghost band
-
+    // Loop over all Aerogel PMTs, find events with no aerogel signals
+    // AeroMultSum = 0;
+    // for (Int_t nside = 0; nside < sides; nside++){
+    //   for (Int_t ipmt = 0; ipmt < 7; ipmt++){
+    // 	if(nside == 0){
+    // 	  AeroMultSum += P_aero_goodPosAdcMult[ipmt];
+    // 	}
+    // 	if(nside == 1){
+    // 	  AeroMultSum += P_aero_goodNegAdcMult[ipmt];
+    // 	}
+    //   }
+    // }
     //if((abs(P_gtr_dp[0]) < 20) && (P_cal_etotnorm[0] > 0.8)){
     // Double_t PeakLow[4][4] = {{10, 23, 27, 31}, {10, 14, 22, 30}, {10, 16, 24, 30}, {10, 16, 22, 30}};
     // Double_t PeakHigh[4][4] = {{16, 28, 31, 40}, {14, 20, 30, 40}, {16, 20, 30, 40}, {16, 20, 30, 40}};
     // Fill our SHMS timing histograms, explicitly select only multiplicity 1 events
     for (Int_t ipmt = 0; ipmt < 4; ipmt++){
       if(P_hgcer_goodAdcMult[ipmt] == 1){
+	//if (AeroMultSum == 0) h1pHGCAdcTdcTDiff[2][ipmt]->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);	
 	if(ipmt == 0){if(P_hgcer_goodAdcMult[1] != 0 || P_hgcer_goodAdcMult[2] != 0 || P_hgcer_goodAdcMult[3] != 0 ) continue;}
 	else if(ipmt == 1){if(P_hgcer_goodAdcMult[0] != 0 || P_hgcer_goodAdcMult[2] != 0 || P_hgcer_goodAdcMult[3] != 0 ) continue;}
 	else if(ipmt == 2){if(P_hgcer_goodAdcMult[1] != 0 || P_hgcer_goodAdcMult[0] != 0 || P_hgcer_goodAdcMult[3] != 0 ) continue;}
 	else if(ipmt == 3){if(P_hgcer_goodAdcMult[1] != 0 || P_hgcer_goodAdcMult[2] != 0 || P_hgcer_goodAdcMult[0] != 0 ) continue;}
 	h1pHGCAdcTdcTDiff[0][ipmt]->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-        if((10 < P_hgcer_goodAdcTdcDiffTime[ipmt]) && (20 > P_hgcer_goodAdcTdcDiffTime[ipmt]))h2HGCxyDist[ipmt]->Fill(*P_hgcer_yAtCer, *P_hgcer_xAtCer);
+        if((0 < P_hgcer_goodAdcTdcDiffTime[ipmt]) && (20 > P_hgcer_goodAdcTdcDiffTime[ipmt]))h2HGCxyDist[ipmt]->Fill(*P_hgcer_yAtCer, *P_hgcer_xAtCer);
 	// Fill xy timing plot for each peak, final peak (~30-40) is the "good peak"
 	// if((PeakLow[ipmt][0] < P_hgcer_goodAdcTdcDiffTime[ipmt]) && (PeakHigh[ipmt][0] > P_hgcer_goodAdcTdcDiffTime[ipmt]))h2HGCxyDist[0][ipmt]->Fill(*P_hgcer_yAtCer, *P_hgcer_xAtCer);
 	// else if((PeakLow[ipmt][1] < P_hgcer_goodAdcTdcDiffTime[ipmt]) && (PeakHigh[ipmt][1] > P_hgcer_goodAdcTdcDiffTime[ipmt]))h2HGCxyDist[1][ipmt]->Fill(*P_hgcer_yAtCer, *P_hgcer_xAtCer);
 	// else if((PeakLow[ipmt][2] < P_hgcer_goodAdcTdcDiffTime[ipmt]) && (PeakHigh[ipmt][2] > P_hgcer_goodAdcTdcDiffTime[ipmt]))h2HGCxyDist[2][ipmt]->Fill(*P_hgcer_yAtCer, *P_hgcer_xAtCer);
 	// else if((PeakLow[ipmt][3] < P_hgcer_goodAdcTdcDiffTime[ipmt]) && (PeakHigh[ipmt][3] > P_hgcer_goodAdcTdcDiffTime[ipmt]))h2HGCxyDist[3][ipmt]->Fill(*P_hgcer_yAtCer, *P_hgcer_xAtCer);
-	//if(P_hgcer_goodAdcPulseAmp[ipmt] > CerPulseAmpCut) h1pHGCAdcTdcTDiff[1][ipmt]->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+	if(P_hgcer_goodAdcPulseAmp[ipmt] > CerPulseAmpCut) h1pHGCAdcTdcTDiff[1][ipmt]->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
 	h2pHGCTDiffADCAmp[ipmt]->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt], P_hgcer_goodAdcPulseAmp[ipmt]);
       }
     }
@@ -481,9 +494,10 @@ void DetTCuts_Coin::Terminate()
   CSHMSHGC->Divide(2,2); CSHMSHGC2->Divide(2,2); CSHMSHGC3->Divide(2,2);
   for (Int_t ipmt = 0; ipmt < 4; ipmt++){
     TH1F *SHMSHGC = dynamic_cast<TH1F *>(TProof::GetOutput(Form("pHGCER%d_timeDiff", ipmt+1), fOutput));
-    //TH1F *SHMSHGCCut = dynamic_cast<TH1F *>(TProof::GetOutput(Form("pHGCER%d_timeDiff_Cut", ipmt+1), fOutput));
-    SHMSHGC->Fit("Gauss_Fit", "MQN");
-    //SHMSHGCCut->Fit("Gauss_Fit", "MQN");
+    TH1F *SHMSHGCCut = dynamic_cast<TH1F *>(TProof::GetOutput(Form("pHGCER%d_timeDiff_Cut", ipmt+1), fOutput));
+    //TH1F *SHMSHGCAeroCut = dynamic_cast<TH1F *>(TProof::GetOutput(Form("pHGCER%d_timeDiff_AerogelTest", ipmt+1), fOutput));
+    //SHMSHGC->Fit("Gauss_Fit", "MQN");
+    SHMSHGCCut->Fit("Gauss_Fit", "MQN");
     SHMSHGC_tMin[ipmt] = (Gauss_Fit->GetParameter(1) - (5*Gauss_Fit->GetParameter(2))); SHMSHGC_tMax[ipmt] = (Gauss_Fit->GetParameter(1) + (5*Gauss_Fit->GetParameter(2)));     
     LSHMSHGC_tMin[ipmt] = new TLine(SHMSHGC_tMin[ipmt], 0, SHMSHGC_tMin[ipmt], SHMSHGC->GetMaximum());
     LSHMSHGC_tMax[ipmt] = new TLine(SHMSHGC_tMax[ipmt], 0, SHMSHGC_tMax[ipmt], SHMSHGC->GetMaximum());
@@ -491,15 +505,15 @@ void DetTCuts_Coin::Terminate()
     LSHMSHGC_tMax[ipmt]->SetLineColor(kRed); LSHMSHGC_tMax[ipmt]->SetLineStyle(7); LSHMSHGC_tMax[ipmt]->SetLineWidth(1);
     TH2F* SHMSHGC2D = dynamic_cast<TH2F *>(TProof::GetOutput(Form("pHGCER%d_tDiffADCAmp", ipmt+1), fOutput));
     TH2F* SHMSHGCXY = dynamic_cast<TH2F *>(TProof::GetOutput(Form("pHGCER%d_xyDist", ipmt+1), fOutput));
-    // LCerADCCut = new TLine(0, CerPulseAmpCut, SHMSHGC2D->GetXaxis()->GetBinCenter((SHMSHGC2D->GetMaximumBin())) , CerPulseAmpCut);
-    //LCerADCCut->SetLineColor(kRed); LCerADCCut->SetLineStyle(7); LCerADCCut->SetLineWidth(1);
-    SHMSHGC->Write(); //SHMSHGCCut->Write(); //SHMSHGCCut->SetLineColor(kRed); 
+    LCerADCCut = new TLine(0, CerPulseAmpCut, SHMSHGC2D->GetXaxis()->GetBinCenter((SHMSHGC2D->GetMaximumBin())) , CerPulseAmpCut);
+    LCerADCCut->SetLineColor(kRed); LCerADCCut->SetLineStyle(7); LCerADCCut->SetLineWidth(1);
+    SHMSHGC->Write(); SHMSHGCCut->Write(); SHMSHGCCut->SetLineColor(kRed); //SHMSHGCAeroCut->Write();
     SHMSHGC2D->Write();
     SHMSHGCXY->Write();
     CSHMSHGC->cd(ipmt+1); SHMSHGC->Draw(); 
-    //SHMSHGCCut->Draw("SAME"); 
+    SHMSHGCCut->Draw("SAME"); 
     LSHMSHGC_tMin[ipmt]->Draw("SAME"); LSHMSHGC_tMax[ipmt]->Draw("SAME");
-    CSHMSHGC2->cd(ipmt+1); SHMSHGC2D->Draw("COLZ"); //LCerADCCut->Draw("SAME");
+    CSHMSHGC2->cd(ipmt+1); SHMSHGC2D->Draw("COLZ"); LCerADCCut->Draw("SAME");
     CSHMSHGC3->cd(ipmt+1); SHMSHGCXY->Draw("COLZ");
     // CSHMSHGC3[ipmt] = new TCanvas(Form("CSHMSHGC_PMT%d", ipmt+1), Form("SHMS HGC y vs x PMT %d", ipmt+1), 300,100,1000,900);
     // CSHMSHGC3[ipmt]->Divide(2,2);
@@ -792,14 +806,14 @@ void DetTCuts_Coin::Terminate()
   out_hcer << " " << endl;
   out_hcer << " " << endl;
   //SHMS HGCER
-  out_phgcer.open(Form("/SHMS/HGC/phgcer_tWin_%d.param", option.Atoi()));
-  out_phgcer << "; SHMS Heavy Gas Cer  Parameter File Containing TimeWindow Min/Max Cuts " << endl;
+  out_phgcer.open(Form("SHMS/HGC/phgcer_tWin_%d.param", option.Atoi()));
+  out_phgcer << "; SHMS Heavy Gas Cer Parameter File Containing TimeWindow Min/Max Cuts " << endl;
   out_phgcer << " " << endl;
   out_phgcer << " " << endl;
   out_phgcer << " " << endl;
   //SHMS AERO
   out_paero.open(Form("SHMS/Aero/paero_tWin_%d.param", option.Atoi()));
-  out_paero << "; SHMS Aerogel Cer  Parameter File Containing TimeWindow Min/Max Cuts " << endl;
+  out_paero << "; SHMS Aerogel Cer Parameter File Containing TimeWindow Min/Max Cuts " << endl;
   out_paero << " " << endl;
   out_paero << " " << endl;
   out_paero << " " << endl;
@@ -1048,10 +1062,10 @@ void DetTCuts_Coin::Terminate()
       //------Write SHMS Aerogel Param-------
       for(Int_t ipmt = 0; ipmt < 7; ipmt++){
 	if(lim==0){
-	  out_paero << setw(2) << Form("%.1f", SHMSAERO_tMin[iside][ipmt]) << ( (ipmt+1) == 7 ? "\n" : ", ") << fixed;
+	  out_paero << setw(2) << Form("%.1f", SHMSAERO_tMin[iside][ipmt]) << ( (ipmt+1) == 7 ? "" : ", ") << fixed;
 	}
 	if(lim==1){
-	  out_paero << setw(2) << Form("%.1f", SHMSAERO_tMax[iside][ipmt]) << ( (ipmt+1) == 7 ? "\n" : ", ") << fixed;
+	  out_paero << setw(2) << Form("%.1f", SHMSAERO_tMax[iside][ipmt]) << ( (ipmt+1) == 7 ? "" : ", ") << fixed;
 	}
       }
 	  
@@ -1091,20 +1105,20 @@ void DetTCuts_Coin::Terminate()
 	  if(lim==0){
 	    //HMS Cer
 	    if(ipmt<2){
-	      out_hcer << Form("%.1f", HMSCER_tMin[ipmt]) << ", " << fixed;
+	      out_hcer << Form("%.1f", HMSCER_tMin[ipmt]) << ((ipmt+1) == 2 ? "" : ", ") << fixed;
 	    }
 	    //SHMS HGCER
-	    out_phgcer << Form("%.1f", SHMSHGC_tMin[ipmt]) << ", " << fixed;
+	    out_phgcer << Form("%.1f", SHMSHGC_tMin[ipmt]) << ((ipmt+1) == 4 ? "" : ", ") << fixed;
 	  }
 	 
 	  //Upper Limit Time Window Cut
 	  if(lim==1){
 	    //HMS Cer
 	    if(ipmt<2){
-	      out_hcer << Form("%.1f", HMSCER_tMax[ipmt]) << ", " << fixed;
+	      out_hcer << Form("%.1f", HMSCER_tMax[ipmt]) << ((ipmt+1) == 2 ? "" : ", ") << fixed;
 	    }
 	    //SHMS HGCER
-	    out_phgcer << Form("%.1f", SHMSHGC_tMax[ipmt]) << ", " << fixed;
+	    out_phgcer << Form("%.1f", SHMSHGC_tMax[ipmt]) << ((ipmt+1) == 4 ? "" : ", ") << fixed;
 	  }
 	}
       } // End loop over min/max limits

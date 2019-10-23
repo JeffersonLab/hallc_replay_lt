@@ -5,8 +5,8 @@ t_coin_adc_tdc_offset = 200.
 
 t_coin_tdcchanperns = 0.09766
 eHadCoinTime_Offset = 0.
-t_coin_trig_tdcrefcut=-4800.
-t_coin_trig_adcrefcut=-5000.
+t_coin_trig_tdcrefcut=-4000.
+t_coin_trig_adcrefcut=-5100.
 
 ;NOTE: pTRIG1_ROC1, pTRIG4_ROC1, pTRIG1_ROC2, pTRIG4_ROC2 (tdcTimeRaw),  are hard-coded in THcTrigDet.cxx class
 ;      These varibles and their indices are used for the coincidence time calculation, and should NOT change here.
@@ -34,7 +34,7 @@ t_coin_TdcTimeWindowMin =    0,    0,    0,    0,    0,    0,    0,    0,    0, 
 t_coin_TdcTimeWindowMax = 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000,
 			  100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000,
 			  100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000,
-			    6200, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000,
+			  100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000,
 			  100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000,
 			  100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000,
 			  100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000,

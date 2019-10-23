@@ -25,6 +25,8 @@ const Int_t cal_planes = 4;
 const Int_t dc_planes = 12;
 const Int_t sides = 2;
 
+Int_t AeroMultSum;
+
 const string hod_pl_names[hod_planes] = {"1x", "1y", "2x", "2y"};
 const string cal_pl_names[cal_planes] = {"1pr", "2ta", "3ta", "4ta"};
 
@@ -103,7 +105,7 @@ public :
    TH1F           *h1hCalAdcTdcTDiff[4][2][13]; // 3D array of 4/2/13 (4 planes, 2 sides, 13 PMTs per side)
    TH1F           *h1hHodoAdcTdcTDiff[4][2][16]; // 3D array of 4/2/16 (4 planes, 2 sides, UP TO 16 PMTs per side)
 
-   TH1F           *h1pHGCAdcTdcTDiff[2][4]; // Uncut/cut and by PMT
+   TH1F           *h1pHGCAdcTdcTDiff[3][4]; // Uncut/cut/Aerogel Test and by PMT
    TH2F           *h2pHGCTDiffADCAmp[4];
    TH1F           *h1pAeroAdcTdcTDiff[2][7]; // 2D array of 2/7 (2 sides, 7 PMTs per side)
    TH1F           *h1pdcTdcT[12]; // Array of 12 histograms
@@ -113,7 +115,7 @@ public :
    TH2F           *h2pPrShTDiffADCAmp[2][14];
    TH1F           *h1pCalAdcTdcTDiff[224]; // Array of 224 histograms, 224 PMTs
    TH2F           *h2pCalTDiffADCAmp[224];
-   //   TH2F           *h2HGCxyDist[4][4];
+   //TH2F           *h2HGCxyDist[4][4];
    TH2F           *h2HGCxyDist[4];
 
    // Readers to access the data

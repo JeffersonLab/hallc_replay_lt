@@ -34,11 +34,6 @@ void run_ProtonYield(Int_t RunNumber = 0, Int_t MaxEvent = 0, Double_t threshold
     if( pscal<=0 ) return;
   }
 
-  ofstream myfile1;
-  myfile1.open ("pionyieldVar", fstream::app);
-  myfile1 << left << RunNumber << "   " << pscal << "   ";
-  myfile1.close();
-
   //Begin Scaler Efficiency Calculation
   if(Hostname.Contains("farm")){
     rootFileNameString = Form("/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/ROOTfilesPion/PionLT_coin_replay_production_%i_%i.root",RunNumber,MaxEvent);

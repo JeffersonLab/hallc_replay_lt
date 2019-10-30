@@ -11,7 +11,7 @@ g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
 ### Run Period 3 - Spring 19 KaonLT Kinematics
 7046-8357
 g_ctp_parm_filename       = "DBASE/COIN/DC_Calib/OfflineSpring19_DCCalib.param"
-g_ctp_kinematics_filename = "DBASE/COIN/DC_Calib/standard.kinematics"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
 
 ### Run Period 4 - Summer 19 PionLT Kinematics
 8358-8976

@@ -39,9 +39,6 @@ void FullReplay_Lumi_Offline (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Load fadc debug parameters
   gHcParms->Load("PARAM/HMS/GEN/h_fadc_debug.param");
   gHcParms->Load("PARAM/SHMS/GEN/p_fadc_debug.param");
-  // Load params for BCM
-  //  const char* CurrentFileNamePattern = "PARAM/HMS/BCM/CALIB/bcmcurrent_%d.param";
-  //gHcParms->Load(Form(CurrentFileNamePattern, RunNumber));
 
   // Load the Hall C detector map
   gHcDetectorMap = new THcDetectorMap();
@@ -144,9 +141,6 @@ void FullReplay_Lumi_Offline (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Calculate the hodoscope efficiencies
   THcHodoEff* heff = new THcHodoEff("hhodeff", "HMS hodo efficiency", "H.hod");
   gHaPhysics->Add(heff);
-  // Add BCM Current check
-  //THcBCMCurrent* hbc = new THcBCMCurrent("H.bcm", "BCM current check");
-  //gHaPhysics->Add(hbc);
 
   // Add event handler for scaler events
   THcScalerEvtHandler *hscaler = new THcScalerEvtHandler("H", "Hall C scaler event type 4");  
@@ -248,7 +242,7 @@ void FullReplay_Lumi_Offline (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Define cuts file
   analyzer->SetCutFile("UTIL_PION/DEF-files/luminosity_coin_production_cuts.def");  // optional
   // File to record accounting information for cuts
-  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/COIN/PRODUCTION/summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
+  //analyzer->SetSummaryFile(Form("REPORT_OUTPUT/COIN/PRODUCTION/summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template	       

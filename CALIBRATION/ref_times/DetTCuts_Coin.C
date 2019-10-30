@@ -63,10 +63,10 @@ void DetTCuts_Coin::SlaveBegin(TTree * /*tree*/)
   
   // SHMS Histos
   for (Int_t ipmt = 0; ipmt < 4; ipmt++){
-    h1pHGCAdcTdcTDiff[0][ipmt] = new TH1F (Form("pHGCER%d_timeDiff", ipmt+1), Form("SHMS HGCer PMT%d AdcTdcTimeDiff", ipmt+1), 200, 0, 100);
-    h1pHGCAdcTdcTDiff[1][ipmt] = new TH1F (Form("pHGCER%d_timeDiff_Cut", ipmt+1), Form("SHMS HGCer PMT%d AdcTdcTimeDiff, ADC Pulse Amp Cut", ipmt+1), 200, 0, 100);
+    h1pHGCAdcTdcTDiff[0][ipmt] = new TH1F (Form("pHGCER%d_timeDiff", ipmt+1), Form("SHMS HGCer PMT%d AdcTdcTimeDiff", ipmt+1), 300, -50, 100);
+    h1pHGCAdcTdcTDiff[1][ipmt] = new TH1F (Form("pHGCER%d_timeDiff_Cut", ipmt+1), Form("SHMS HGCer PMT%d AdcTdcTimeDiff, ADC Pulse Amp Cut", ipmt+1), 300, -50, 100);
     //h1pHGCAdcTdcTDiff[2][ipmt] = new TH1F (Form("pHGCER%d_timeDiff_AerogelTest", ipmt+1), Form("SHMS HGCer PMT%d AdcTdcTimeDiff Aerogel Cut", ipmt+1), 200, 0, 100);
-    h2pHGCTDiffADCAmp[ipmt] = new TH2F(Form("pHGCER%d_tDiffADCAmp", ipmt+1), Form("SHMS HGC ADC TDC Diff Time PMT%d vs ADC Pulse Amp; Time (ns); Charge (pC)",ipmt+1), 200, 0, 100, 500, 0.0, 500); 
+    h2pHGCTDiffADCAmp[ipmt] = new TH2F(Form("pHGCER%d_tDiffADCAmp", ipmt+1), Form("SHMS HGC ADC TDC Diff Time PMT%d vs ADC Pulse Amp; Time (ns); Charge (pC)",ipmt+1), 300, -50, 100, 500, 0.0, 500); 
     GetOutputList()->Add(h1pHGCAdcTdcTDiff[0][ipmt]); GetOutputList()->Add(h1pHGCAdcTdcTDiff[1][ipmt]); //GetOutputList()->Add(h1pHGCAdcTdcTDiff[2][ipmt]);
     GetOutputList()->Add(h2pHGCTDiffADCAmp[ipmt]);
     h2HGCxyDist[ipmt] = new TH2F(Form("pHGCER%d_xyDist", ipmt+1), Form ("SHMS y vs x PMT%d for 0 < AdcDiffTime < 20; y(cm);x(cm)", ipmt+1), 100, -50, 50, 100, -50, 50);
@@ -498,14 +498,16 @@ void DetTCuts_Coin::Terminate()
     //TH1F *SHMSHGCAeroCut = dynamic_cast<TH1F *>(TProof::GetOutput(Form("pHGCER%d_timeDiff_AerogelTest", ipmt+1), fOutput));
     //SHMSHGC->Fit("Gauss_Fit", "MQN");
     SHMSHGCCut->Fit("Gauss_Fit", "MQN");
+    if (Gauss_Fit->GetParameter(2) > 2) Gauss_Fit->SetParameter(2, 2);
     SHMSHGC_tMin[ipmt] = (Gauss_Fit->GetParameter(1) - (5*Gauss_Fit->GetParameter(2))); SHMSHGC_tMax[ipmt] = (Gauss_Fit->GetParameter(1) + (5*Gauss_Fit->GetParameter(2)));     
+    if (Gauss_Fit->GetParameter(2) > 3) Gauss_Fit->SetParameter(2, 3);
     LSHMSHGC_tMin[ipmt] = new TLine(SHMSHGC_tMin[ipmt], 0, SHMSHGC_tMin[ipmt], SHMSHGC->GetMaximum());
     LSHMSHGC_tMax[ipmt] = new TLine(SHMSHGC_tMax[ipmt], 0, SHMSHGC_tMax[ipmt], SHMSHGC->GetMaximum());
     LSHMSHGC_tMin[ipmt]->SetLineColor(kRed); LSHMSHGC_tMin[ipmt]->SetLineStyle(7); LSHMSHGC_tMin[ipmt]->SetLineWidth(1);
     LSHMSHGC_tMax[ipmt]->SetLineColor(kRed); LSHMSHGC_tMax[ipmt]->SetLineStyle(7); LSHMSHGC_tMax[ipmt]->SetLineWidth(1);
     TH2F* SHMSHGC2D = dynamic_cast<TH2F *>(TProof::GetOutput(Form("pHGCER%d_tDiffADCAmp", ipmt+1), fOutput));
     TH2F* SHMSHGCXY = dynamic_cast<TH2F *>(TProof::GetOutput(Form("pHGCER%d_xyDist", ipmt+1), fOutput));
-    LCerADCCut = new TLine(0, CerPulseAmpCut, SHMSHGC2D->GetXaxis()->GetBinCenter((SHMSHGC2D->GetMaximumBin())) , CerPulseAmpCut);
+    LCerADCCut = new TLine(-100, CerPulseAmpCut, SHMSHGC2D->GetXaxis()->GetBinCenter((SHMSHGC2D->GetMaximumBin())), CerPulseAmpCut);
     LCerADCCut->SetLineColor(kRed); LCerADCCut->SetLineStyle(7); LCerADCCut->SetLineWidth(1);
     SHMSHGC->Write(); SHMSHGCCut->Write(); SHMSHGCCut->SetLineColor(kRed); //SHMSHGCAeroCut->Write();
     SHMSHGC2D->Write();

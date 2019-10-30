@@ -67,7 +67,6 @@ Bool_t DC_Calib_Check_SHMS::Process(Long64_t entry)
   fReader.SetEntry(entry);
 
   if (P_hgcer_npeSum[0] < 1.0) return kTRUE;
-  if (T_shms_pEL_CLEAN_tdcTime[0] < 0) return kTRUE;
   for (Int_t i = 0; i < 12; i++){
     h1_Residual[i]->Fill(P_dc_residual[i]);
     h1_ResidualExclPlane[i]->Fill(P_dc_residualExclPlane[i]);

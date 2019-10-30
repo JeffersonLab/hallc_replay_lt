@@ -40,9 +40,6 @@ void FullReplay_Offline (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHcParms->Load("PARAM/HMS/GEN/h_fadc_debug.param");
   gHcParms->Load("PARAM/SHMS/GEN/p_fadc_debug.param");
 
-  // const char* CurrentFileNamePattern = "low_curr_bcm/bcmcurrent_%d.param";
-  // gHcParms->Load(Form(CurrentFileNamePattern, RunNumber));
-
   // Load the Hall C detector map
   gHcDetectorMap = new THcDetectorMap();
   gHcDetectorMap->Load("MAPS/COIN/DETEC/coin.map");
@@ -76,9 +73,6 @@ void FullReplay_Offline (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Add calorimeter to SHMS apparatus
   THcShower* pcal = new THcShower("cal", "Calorimeter");
   SHMS->AddDetector(pcal);
-
-  // THcBCMCurrent* hbc = new THcBCMCurrent("H.bcm", "BCM current check");
-  // gHaPhysics->Add(hbc);
 
   // Add rastered beam apparatus
   THaApparatus* pbeam = new THcRasteredBeam("P.rb", "Rastered Beamline");
@@ -130,9 +124,6 @@ void FullReplay_Offline (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Add Cherenkov to HMS apparatus
   THcCherenkov* hcer = new THcCherenkov("cer", "Heavy Gas Cherenkov");
   HMS->AddDetector(hcer);
-  // Add Aerogel Cherenkov to HMS apparatus
-  // THcAerogel* haero = new THcAerogel("aero", "Aerogel");
-  // HMS->AddDetector(haero);
   // Add calorimeter to HMS apparatus
   THcShower* hcal = new THcShower("cal", "Calorimeter");
   HMS->AddDetector(hcal);

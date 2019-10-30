@@ -86,7 +86,6 @@ class DC_Calib_Check_HMS : public TSelector {
   TTreeReaderArray<Double_t> H_dc_residualExclPlane  = {fReader, "H.dc.residualExclPlane"};
 
   TTreeReaderArray<Double_t> H_cer_npeSum       = {fReader, "H.cer.npeSum"};
-  TTreeReaderArray<Double_t> T_hms_hEL_CLEAN_tdcTime = {fReader, "T.hms.hEL_CLEAN_tdcTime"};
 
   DC_Calib_Check_HMS(TTree * /*tree*/ =0) {h1_1u1_DriftDistance = 0, h1_1u2_DriftDistance = 0, h1_1v1_DriftDistance = 0, h1_1v2_DriftDistance = 0, h1_1x1_DriftDistance = 0, h1_1x2_DriftDistance = 0, h1_2u1_DriftDistance = 0, h1_2u2_DriftDistance = 0, h1_2v1_DriftDistance = 0, h1_2v2_DriftDistance = 0, h1_2x1_DriftDistance = 0, h1_2x2_DriftDistance = 0;}
   virtual ~DC_Calib_Check_HMS() { }

@@ -86,7 +86,6 @@ class DC_Calib_Check_SHMS : public TSelector {
   TTreeReaderArray<Double_t> P_dc_residualExclPlane  = {fReader, "P.dc.residualExclPlane"};
 
   TTreeReaderArray<Double_t> P_hgcer_npeSum       = {fReader, "P.hgcer.npeSum"};
-  TTreeReaderArray<Double_t> T_shms_pEL_CLEAN_tdcTime = {fReader, "T.shms.pEL_CLEAN_tdcTime"};
 
   DC_Calib_Check_SHMS(TTree * /*tree*/ =0) {h1_1u1_DriftDistance = 0, h1_1u2_DriftDistance = 0, h1_1v1_DriftDistance = 0, h1_1v2_DriftDistance = 0, h1_1x1_DriftDistance = 0, h1_1x2_DriftDistance = 0, h1_2u1_DriftDistance = 0, h1_2u2_DriftDistance = 0, h1_2v1_DriftDistance = 0, h1_2v2_DriftDistance = 0, h1_2x1_DriftDistance = 0, h1_2x2_DriftDistance = 0;}
   virtual ~DC_Calib_Check_SHMS() { }

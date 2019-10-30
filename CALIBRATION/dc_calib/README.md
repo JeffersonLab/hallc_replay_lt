@@ -17,10 +17,13 @@ NOTE: p: SHMS,  h: HMS,  <spec>: HMS, or SHMS
 
 * Replay the data to produce the uncalibrated root file to be used as input in the calibration
   NOTE: Make sure to include the necessary leaves if you want to make any pid cuts.
+  NOTE SK 24/10/19 - This isn't actually true, the script does not look at the time but rather the etot norm value instead
+                     To add the timing back in this should really look at the correct time for T.coin.* not T.hms/T.shms...
   The leaves are:
 
       SHMS:
       P.ngcer.npeSum, P.cal.etot, T.shms.pEL_CLEAN_tdcTime (the P.cal.etot is currently commented out until further discussion)
+      NOTE - Changed to P.hgcer.npeSum for KaonLT running      
 
       HMS:
       H.cer.npeSum, H.cal.etot, T.hms.hEL_CLEAN_tdcTime (the H.cal.etot is currently commented out until further discussion)

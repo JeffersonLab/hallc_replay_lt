@@ -4,6 +4,6 @@
  
 
 paero_adcPosTimeWindowMin = 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
-paero_adcPosTimeWindowMax = 63.2, 61.0, 60.0, 58.7, 59.4, 59.0, 54.7
-paero_adcNegTimeWindowMin = 181.3, 181.7, 184.3, 185.6, 185.3, 186.0, 186.7
-paero_adcNegTimeWindowMax = 258.3, 256.9, 258.1, 258.8, 256.6, 259.0, 259.8
+paero_adcPosTimeWindowMax = 63.1, 61.1, 60.0, 58.8, 59.4, 59.1, 55.1
+paero_adcNegTimeWindowMin = 180.8, 181.3, 183.5, 186.3, 185.3, 186.2, 187.0
+paero_adcNegTimeWindowMax = 258.3, 257.0, 258.4, 258.7, 256.6, 259.0, 259.7

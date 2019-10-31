@@ -390,7 +390,6 @@ Bool_t DetTCuts_Coin::Process(Long64_t entry)
   }
   //}//Close of PID/delta cut loop
   return kTRUE;
-
 }
 
 void DetTCuts_Coin::SlaveTerminate()

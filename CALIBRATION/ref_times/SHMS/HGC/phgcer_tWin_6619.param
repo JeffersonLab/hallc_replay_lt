@@ -3,5 +3,5 @@
  
  
 
-phgcer_adcTimeWindowMin = 32.5, 31.1, 30.9, 31.0
-phgcer_adcTimeWindowMax = 39.8, 38.1, 37.5, 38.1
+phgcer_adcTimeWindowMin = 32.3, 31.3, 31.0, 31.0
+phgcer_adcTimeWindowMax = 39.9, 38.0, 37.5, 38.1

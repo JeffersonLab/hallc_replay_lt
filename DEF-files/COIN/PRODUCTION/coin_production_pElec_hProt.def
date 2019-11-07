@@ -11,7 +11,6 @@ block H.kin.*
 block H.rb.*
 block H.react.*
 
-block P.ngcer.*
 block P.dc.*
 block P.tr.*
 block P.hod.*
@@ -22,7 +21,6 @@ block P.gtr.*
 block P.kin.*
 block P.rb.*
 block P.react.*
-
 
 begin epics
 IBC3H00CRCUR4

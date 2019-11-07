@@ -10,7 +10,7 @@ How to make a parameter file for the average BCM current information
 root [0] .L ScalerCalib.C+
 
 To run a script:
-> roob -b
+> root -b
 root [0] .x run.C("/path/Scaler root output file");
 
 It prints out 

@@ -3,7 +3,6 @@
 #********************
 
 block T.shms.*
-block P.ngcer.*
 block P.dc.*
 block P.hod.*
 block P.hgcer.*

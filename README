@@ -1,36 +1,30 @@
-############################################################
-You should not be using this directory for personal scripts!
-############################################################
+This branch, offline, has all of the scripts as they were at the END of the run on 20/7/19. It will 
+also receive future updates to scripts that are applicable to ALL users analysing the Kaon or Pion LT
+data.
 
+######################################################################################################
+#################################### SCRIPT INFO #####################################################
+######################################################################################################
 
-========================== Useful Info =================================================
+These scripts execute a hcana replay and then run a quick analysis script on that replay once it ends.
+The replay script outputs some plots to the screen, here's some brief notes on what you should expect
+to see -
 
-You need to make various symbolic links for your replay scripts to function correctly. 
-As mentioned in the README for the group directory, you should not store large files of ANY 
-kind under /group/c-kaonlt/.
+HeepSinglesYield.sh - Plots of the HMS and SHMS W distributions, here we expect these to be peaked at
+~0.938. If you see an extra bump in the distribution at ~1.2 this is likely just due to the delta cut
+being too open. You'll also get some other plots of phi for the q vector and of W vs x'fp.
 
-Your sym links should point to /volatile... unless you want the data to be backed up!
-We have a group directory in /volatile, /volatile/hallc/c-kaonlt/.
-You should make your own repository within this, e.g.
+HeepCoinYield.sh - A plot of the missing mass, this should be ZERO. You should also see that the missing
+momenta (all components) and energy are ZERO.
 
-/volatile/hallc/c-kaonlt/USER/
+luminosity.sh - You should see some event selection histograms, what's important here are the numbers
+that are also printed to screen detailing the numbers of events. Don't worry about these too much.
 
-Within this you will need the following folders and corresponding symbolic links in your
-hallc_replay directory -
+PionYield.sh - Here you will see some event selection histograms, some timing histograms and finally a 
+summary of the kinematics. The Q2 and W diamond should match up to your current experimental setting.
+The value of epsilon should also match up. You should also see a missing mass plot with a peak at the
+neutron mass (~0.940). This should have a nice gaussian fit to it, you'll also get a textbox with the 
+number of pion events found. Make a note of this number on the run sheet.
 
-ROOTfiles
-HISTOGRAMS
-OUTPUT
-REPORT_OUTPUT
-
-Some of these require sub directories such as /COIN/PRODUCTION/ e.t.c unless you change your
-templates.
-
-Note you also need either /raw or /cache pointing to -
-
-/cache/hallc/spring17/raw/
-
-This is where raw data files are cached when they are taken from tape in the batch replay script.
-See the batch template script in /UTIL_KAONLT/batch for more.
-
-I will update this with more info on how to write directly to tape when it becomes relevant.
+NOTE - The scripts are set up such that they will NOT run another replay IF an existing root file exists.
+If you want to replay again, comment out the relevant line in each script.

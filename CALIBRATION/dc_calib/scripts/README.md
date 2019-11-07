@@ -2,15 +2,11 @@ HMS/SHMS Drift Chambers Calibration
 ============================================
 This directory contains the code for calibrating the pair of HMS/SHMS drift chambers.
 
-
-
 Directory structure
 ----------------------
 * hallc_replay/CALIBRATION/dc_calib/scripts/main_calib.C   : steering C++ code that executes the methods in DC_Calib.C
 * hallc_replay/CALIBRATION/dc_calib/scripts/DC_Calib.C  : Calibration Code where all the class  methods are defined
 * hallc_replay/CALIBRATION/dc_calib/scripts/DC_Calib.h  : Header file containing the variable definitions used in the methods
-
-
 
 Running code
 ---------------
@@ -37,6 +33,11 @@ NOTE: p: SHMS,  h: HMS,  <spec>: HMS, or SHMS
 
   -------------------------------------------------------------------------------------------------
   	DC_calib obj("<spec_flag>", "/path/to/ROOTfile/", run_NUM, event_NUM, "<pid_flag>");
+	
+	EDIT - This is stupid, why not just provide these things as arguments to your script? 
+	Altered main_calib.C to do this... SK 15/5/19
+	Simply provide Spec_Flag, ROOTfile (full path), run number
+	For now just these three, can maybe add the other one later too
 
 	**The <spec_flag> and <pid_flag> have the possible arguments:
 
@@ -53,7 +54,6 @@ NOTE: p: SHMS,  h: HMS,  <spec>: HMS, or SHMS
 		 4) pid_kFALSE: No cuts are applied.
   -------------------------------------------------------------------------------------------------
 	    		
-
 * Once the arguments are specified, execute: root -l main_calib.C
 
 When the calibration is completed, a directory will be created under the name: <spec_flag>_DC_Log_runNUM/
@@ -70,7 +70,6 @@ When the calibration is completed, a directory will be created under the name: <
 		     2) data files containing four columns: wire, tzero, tzero_error,  entries
 		     3) parameter file containing time-to-distance look-up values
 		     4) parameter file containing per-wire tzero corrections
-
 
 * The parameter files must be copied to the following location:
 

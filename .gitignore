@@ -10,19 +10,34 @@
 *.pdf
 .nfs*
 *.root
+*.root*
+*_-1_0_-1
+*_0_-1
 
 # Directories
 RAID
 REPORT_OUTPUT
 HISTOGRAMS
 MON_OUTPUT
-ROOTfiles
+ROOTfiles*
 OUTPUT
 .root_history
-raw
+raw*
 raw.copiedtotape
 cache
+#PARAM/HMS/HODO/Calibration
+#PARAM/SHMS/HODO/Calibration
+DBASE/COIN/HMS_HodoCalib
+DBASE/COIN/SHMS_HodoCalib
+DBASE/COIN/HMS_DCCalib
+DBASE/COIN/SHMS_DCCalib
+#PARAM/HMS/DC/CALIB
+#PARAM/SHMS/DC/CALIB
+OUTPUT
+CALIBRATION/dc_calib/scripts/HMS_*
+CALIBRATION/dc_calib/scripts/SHMS_*
 
 # Symbolic links
 hcana
 scratch
+ROOTfilesPion

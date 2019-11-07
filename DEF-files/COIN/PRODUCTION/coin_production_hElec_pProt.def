@@ -3,8 +3,9 @@ block CTime*
 block CTime.eKCoinTime_ROC1
 block CTime.ePiCoinTime_ROC1
 block CTime.epCoinTime_ROC1
-block T.coin.pRF*
-block T.coin.hRF*
+#block T.coin.pRF*
+#block T.coin.hRF*
+block T.helicity.hel 
 
 block H.cer.*
 block H.dc.*
@@ -17,7 +18,7 @@ block H.rb.*
 block H.react.*
 #block H.bcm.*
 
-block P.ngcer.*
+#block P.ngcer.*
 block P.dc.*
 block P.tr.*
 block P.hod.*
@@ -55,6 +56,7 @@ IPM3H07B.XSOF
 IPM3H07B.YSOF
 IPM3H07C.XSOF
 IPM3H07C.YSOF
+HALLC:p
 end epics
 
 #include "DEF-files/COIN/PRODUCTION/GTR/coin_gtr_histos.def"

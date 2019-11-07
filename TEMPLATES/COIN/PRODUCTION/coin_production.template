@@ -177,7 +177,6 @@ SHMS_pTRIG3 Pre-scaled Pre-triggers :  {(P.pTRIG3.scalerCut/gHC_ti_ps_factors[2]
 SHMS_pTRIG4 Pre-scaled Pre-triggers :  {(P.pTRIG4.scalerCut/gHC_ti_ps_factors[3]):%.0f}   [ {((P.pTRIG4.scalerCut/gHC_ti_ps_factors[3])/P.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
 SHMS_pTRIG5 Pre-scaled Pre-triggers :  {(P.pTRIG5.scalerCut/gHC_ti_ps_factors[4]):%.0f}   [ {((P.pTRIG5.scalerCut/gHC_ti_ps_factors[4])/P.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
 SHMS_pTRIG6 Pre-scaled Pre-triggers :  {(P.pTRIG6.scalerCut/gHC_ti_ps_factors[5]):%.0f}   [ {((P.pTRIG6.scalerCut/gHC_ti_ps_factors[5])/P.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
->>>>>>> 5504e475e00e91b58af1441b5a634a8d7a986874
 
 =:=:=:=:=:=:=:=:=:=:=:  
 = HMS Trigger Scalers

@@ -8,9 +8,6 @@ t_shms_tdcchanperns = 0.09766
 t_shms_trig_tdcrefcut=-4800.
 t_shms_trig_adcrefcut=-5000.
 
-t_shms_trig_tdcrefcut = -4800.
-t_shms_trig_adcrefcut = -5000.
-
 ; bar num:          1      2      3      4         5             6          7         8        9        10
 t_shms_adcNames = "pAER pHGCER pNGCER pPSHWR pFADC_TREF_ROC2 pHGCER_MOD pNGCER_MOD pHEL_NEG pHEL_POS pHEL_MPS"
 

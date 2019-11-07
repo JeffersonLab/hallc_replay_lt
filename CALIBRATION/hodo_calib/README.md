@@ -11,8 +11,6 @@ Directory structure
 * shmstofcal.inp : Version of tofcal.inp for SHMS
 * hmstofcal.inp : Version of tofcal.inp for HMS
 
-
-
 Compiling code
 --------------
 * Execute ./Maketof

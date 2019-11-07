@@ -343,7 +343,7 @@ void DC_calib::GetDCLeafs()
   if (spec=="SHMS")
     {
       cal_etot_leaf = "P.cal.etot";
-      cer_npe_leaf = "P.ngcer.npeSum";  
+      cer_npe_leaf = "P.hgcer.npeSum";  
     
       //Check Branch Status 
       status_cal = tree->GetBranchStatus(cal_etot_leaf);  //returns a boolean

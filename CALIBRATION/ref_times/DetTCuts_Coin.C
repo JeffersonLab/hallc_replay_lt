@@ -56,7 +56,9 @@ void DetTCuts_Coin::SlaveBegin(TTree * /*tree*/)
     for (Int_t nside = 0; nside < sides; nside++){ //Loop over each side
       for (Int_t ipmt = 0; ipmt < hmaxPMT[npl]; ipmt++){ // Loop over each PMT in a particular plane	
 	h1hHodoAdcTdcTDiff[npl][nside][ipmt] = new TH1F(Form("hHodo%s%d%s_timeDiff", hod_pl_names[npl].c_str(),ipmt+1,nsign[nside].c_str() ), Form("HMS Hodo %s%d%s AdcTdcTimeDiff", hod_pl_names[npl].c_str(), ipmt+1, nsign[nside].c_str()), 200, -100, 100);
+	h2hHodoTDiffADCAmp[npl][nside][ipmt] = new TH2F(Form("hHodo%s%d%s_tDiffADCAmp", hod_pl_names[npl].c_str(),ipmt+1,nsign[nside].c_str() ), Form("HMS Hodo %s%d%s AdcTdcTimeDiff vs ADC Pulse Amp; Time (ns); Charge (pC)", hod_pl_names[npl].c_str(), ipmt+1,nsign[nside].c_str()), 200, -60, 60, 500, 0, 500);
 	GetOutputList()->Add(h1hHodoAdcTdcTDiff[npl][nside][ipmt]);
+	GetOutputList()->Add(h2hHodoTDiffADCAmp[npl][nside][ipmt]);
       }
     }
   }
@@ -196,29 +198,53 @@ Bool_t DetTCuts_Coin::Process(Long64_t entry)
     for (Int_t nside = 0; nside < sides; nside++){ //Loop over each side
       for (Int_t ipmt = 0; ipmt < hmaxPMT[npl]; ipmt++){ // Loop over each PMT in a particular plane	
 	if (npl == 0 && nside == 0){
-	  if (H_hod_1x_GoodPosAdcMult[ipmt] == 1) h1hHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(H_hod_1x_GoodPosAdcTdcDiffTime[ipmt]);
+	  if (H_hod_1x_GoodPosAdcMult[ipmt] == 1){
+	    h1hHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(H_hod_1x_GoodPosAdcTdcDiffTime[ipmt]);
+	    h2hHodoTDiffADCAmp[npl][nside][ipmt]->Fill(H_hod_1x_GoodPosAdcTdcDiffTime[ipmt], H_hod_1x_GoodPosAdcPulseAmp[ipmt]); 
+	  }
 	}
 	else if (npl == 1 && nside == 0){
-	  if (H_hod_1y_GoodPosAdcMult[ipmt] == 1) h1hHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(H_hod_1y_GoodPosAdcTdcDiffTime[ipmt]);
+	  if (H_hod_1y_GoodPosAdcMult[ipmt] == 1){
+	    h1hHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(H_hod_1y_GoodPosAdcTdcDiffTime[ipmt]);
+	    h2hHodoTDiffADCAmp[npl][nside][ipmt]->Fill(H_hod_1y_GoodPosAdcTdcDiffTime[ipmt], H_hod_1y_GoodPosAdcPulseAmp[ipmt]); 
+	  }
 	}
 	else if (npl == 2 && nside == 0){
-	  if (H_hod_2x_GoodPosAdcMult[ipmt] == 1) h1hHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(H_hod_2x_GoodPosAdcTdcDiffTime[ipmt]);
+	  if (H_hod_2x_GoodPosAdcMult[ipmt] == 1){
+	    h1hHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(H_hod_2x_GoodPosAdcTdcDiffTime[ipmt]);
+	    h2hHodoTDiffADCAmp[npl][nside][ipmt]->Fill(H_hod_2x_GoodPosAdcTdcDiffTime[ipmt], H_hod_2x_GoodPosAdcPulseAmp[ipmt]); 
+	  }
 	}  
 	else if (npl == 3 && nside == 0){
-	  if (H_hod_2y_GoodPosAdcMult[ipmt] == 1) h1hHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(H_hod_2y_GoodPosAdcTdcDiffTime[ipmt]);
+	  if (H_hod_2y_GoodPosAdcMult[ipmt] == 1){
+	    h1hHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(H_hod_2y_GoodPosAdcTdcDiffTime[ipmt]);
+	    h2hHodoTDiffADCAmp[npl][nside][ipmt]->Fill(H_hod_2y_GoodPosAdcTdcDiffTime[ipmt], H_hod_2y_GoodPosAdcPulseAmp[ipmt]); 
+	  }
 	}
 	else if (npl == 0 && nside == 1){
-	  if (H_hod_1x_GoodNegAdcMult[ipmt] == 1) h1hHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(H_hod_1x_GoodNegAdcTdcDiffTime[ipmt]);
+	  if (H_hod_1x_GoodNegAdcMult[ipmt] == 1){
+	    h1hHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(H_hod_1x_GoodNegAdcTdcDiffTime[ipmt]);
+	    h2hHodoTDiffADCAmp[npl][nside][ipmt]->Fill(H_hod_1x_GoodNegAdcTdcDiffTime[ipmt], H_hod_1x_GoodNegAdcPulseAmp[ipmt]); 
+	  }
 	}
 	else if (npl == 1 && nside == 1){
-	  if (H_hod_1y_GoodNegAdcMult[ipmt] == 1) h1hHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(H_hod_1y_GoodNegAdcTdcDiffTime[ipmt]);
+	  if (H_hod_1y_GoodNegAdcMult[ipmt] == 1){
+	    h1hHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(H_hod_1y_GoodNegAdcTdcDiffTime[ipmt]);
+	    h2hHodoTDiffADCAmp[npl][nside][ipmt]->Fill(H_hod_1y_GoodNegAdcTdcDiffTime[ipmt], H_hod_1y_GoodNegAdcPulseAmp[ipmt]); 
+	  }
 	}
 	else if (npl == 2 && nside == 1){
-	  if (H_hod_2x_GoodNegAdcMult[ipmt] == 1) h1hHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(H_hod_2x_GoodNegAdcTdcDiffTime[ipmt]);
+	  if (H_hod_2x_GoodNegAdcMult[ipmt] == 1){
+	    h1hHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(H_hod_2x_GoodNegAdcTdcDiffTime[ipmt]);
+	    h2hHodoTDiffADCAmp[npl][nside][ipmt]->Fill(H_hod_2x_GoodNegAdcTdcDiffTime[ipmt], H_hod_2x_GoodNegAdcPulseAmp[ipmt]); 
+	  }
 	}  
 	else if (npl == 3 && nside == 1){
-	  if (H_hod_2y_GoodNegAdcMult[ipmt] == 1) h1hHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(H_hod_2y_GoodNegAdcTdcDiffTime[ipmt]);
-	} 	
+	  if (H_hod_2y_GoodNegAdcMult[ipmt] == 1){
+	    h1hHodoAdcTdcTDiff[npl][nside][ipmt]->Fill(H_hod_2y_GoodNegAdcTdcDiffTime[ipmt]);
+	    h2hHodoTDiffADCAmp[npl][nside][ipmt]->Fill(H_hod_2y_GoodNegAdcTdcDiffTime[ipmt], H_hod_2y_GoodNegAdcPulseAmp[ipmt]); 
+	  }
+	}
       }
     }
   }
@@ -466,10 +492,12 @@ void DetTCuts_Coin::Terminate()
 
   TDirectory *DHMSHODO = Histogram_file->mkdir("HMS Hodoscope Timing"); DHMSHODO->cd();  
   TCanvas *CHMSHODO[4][2];  
+  TCanvas *CHMSHODO2[4][2];
   for (Int_t npl = 0; npl < hod_planes; npl++){ // Loop over all hodoscope planes
     for (Int_t nside = 0; nside < sides; nside++){ //Loop over each side
       CHMSHODO[npl][nside] = new TCanvas(Form("CHMSHODO%s%s", hod_pl_names[npl].c_str(), nsign[nside].c_str()),  Form("HMS Hodoscope %s%s Timing", hod_pl_names[npl].c_str(), nsign[nside].c_str()), 300,100,1000,900);
-      CHMSHODO[npl][nside]->Divide(4, 4);
+      CHMSHODO2[npl][nside] = new TCanvas(Form("CHMSHODO2%s%s", hod_pl_names[npl].c_str(), nsign[nside].c_str()),  Form("HMS Hodoscope %s%s 2D", hod_pl_names[npl].c_str(), nsign[nside].c_str()), 300,100,1000,900);
+      CHMSHODO[npl][nside]->Divide(4, 4); CHMSHODO2[npl][nside]->Divide(4, 4);
       for (Int_t ipmt = 0; ipmt < hmaxPMT[npl]; ipmt++){ // Loop over each PMT in a particular plane	
 	TH1F *HMSHODO = dynamic_cast<TH1F *>(TProof::GetOutput(Form("hHodo%s%d%s_timeDiff", hod_pl_names[npl].c_str(),ipmt+1,nsign[nside].c_str() ), fOutput));
 	HMSHODO->Write();
@@ -480,6 +508,9 @@ void DetTCuts_Coin::Terminate()
 	LHMSHODO_tMin[npl][nside][ipmt]->SetLineColor(kRed); LHMSHODO_tMin[npl][nside][ipmt]->SetLineStyle(7); LHMSHODO_tMin[npl][nside][ipmt]->SetLineWidth(1);
 	LHMSHODO_tMax[npl][nside][ipmt]->SetLineColor(kRed); LHMSHODO_tMax[npl][nside][ipmt]->SetLineStyle(7); LHMSHODO_tMax[npl][nside][ipmt]->SetLineWidth(1);
 	CHMSHODO[npl][nside]->cd(ipmt+1); HMSHODO->Draw(); LHMSHODO_tMin[npl][nside][ipmt]->Draw("SAME"); LHMSHODO_tMax[npl][nside][ipmt]->Draw("SAME");
+	TH2F *HMSHODO2D = dynamic_cast<TH2F *>(TProof::GetOutput(Form("hHodo%s%d%s_tDiffADCAmp", hod_pl_names[npl].c_str(),ipmt+1,nsign[nside].c_str() ), fOutput));
+	HMSHODO2D->Write();
+	CHMSHODO2[npl][nside]->cd(ipmt+1); HMSHODO2D->Draw("COLZ"); LHMSHODO_tMin[npl][nside][ipmt]->Draw("SAME"); LHMSHODO_tMax[npl][nside][ipmt]->Draw("SAME");
       }
     }
   }
@@ -696,6 +727,7 @@ void DetTCuts_Coin::Terminate()
   for (Int_t npl = 0; npl < hod_planes; npl++){ // Loop over all hodoscope planes
     for (Int_t nside = 0; nside < sides; nside++){ //Loop over each side
       CHMSHODO[npl][nside]->Print(outputpdf);
+      CHMSHODO2[npl][nside]->Print(outputpdf);
     }
   }
 

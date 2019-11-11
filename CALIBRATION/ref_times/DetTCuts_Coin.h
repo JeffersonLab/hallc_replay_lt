@@ -104,6 +104,7 @@ public :
    TH1F           *h1hdcTdcT[12]; // Array of 12 histograms
    TH1F           *h1hCalAdcTdcTDiff[4][2][13]; // 3D array of 4/2/13 (4 planes, 2 sides, 13 PMTs per side)
    TH1F           *h1hHodoAdcTdcTDiff[4][2][16]; // 3D array of 4/2/16 (4 planes, 2 sides, UP TO 16 PMTs per side)
+   TH2F           *h2hHodoTDiffADCAmp[4][2][16];
 
    TH1F           *h1pHGCAdcTdcTDiff[3][4]; // Uncut/cut/Aerogel Test and by PMT
    TH2F           *h2pHGCTDiffADCAmp[4];
@@ -138,6 +139,14 @@ public :
    TTreeReaderArray<Double_t> H_hod_2x_GoodNegAdcTdcDiffTime = {fReader, "H.hod.2x.GoodNegAdcTdcDiffTime"};
    TTreeReaderArray<Double_t> H_hod_2y_GoodPosAdcTdcDiffTime = {fReader, "H.hod.2y.GoodPosAdcTdcDiffTime"};
    TTreeReaderArray<Double_t> H_hod_2y_GoodNegAdcTdcDiffTime = {fReader, "H.hod.2y.GoodNegAdcTdcDiffTime"};
+   TTreeReaderArray<Double_t> H_hod_1x_GoodPosAdcPulseAmp    = {fReader, "H.hod.1x.GoodPosAdcPulseAmp"};   
+   TTreeReaderArray<Double_t> H_hod_1x_GoodNegAdcPulseAmp    = {fReader, "H.hod.1x.GoodNegAdcPulseAmp"};   
+   TTreeReaderArray<Double_t> H_hod_1y_GoodPosAdcPulseAmp    = {fReader, "H.hod.1y.GoodPosAdcPulseAmp"};   
+   TTreeReaderArray<Double_t> H_hod_1y_GoodNegAdcPulseAmp    = {fReader, "H.hod.1y.GoodNegAdcPulseAmp"};   
+   TTreeReaderArray<Double_t> H_hod_2x_GoodPosAdcPulseAmp    = {fReader, "H.hod.2x.GoodPosAdcPulseAmp"};   
+   TTreeReaderArray<Double_t> H_hod_2x_GoodNegAdcPulseAmp    = {fReader, "H.hod.2x.GoodNegAdcPulseAmp"};   
+   TTreeReaderArray<Double_t> H_hod_2y_GoodPosAdcPulseAmp    = {fReader, "H.hod.2y.GoodPosAdcPulseAmp"};   
+   TTreeReaderArray<Double_t> H_hod_2y_GoodNegAdcPulseAmp    = {fReader, "H.hod.2y.GoodNegAdcPulseAmp"};   
    TTreeReaderArray<Double_t> H_hod_1x_GoodPosAdcMult        = {fReader, "H.hod.1x.GoodPosAdcMult"};
    TTreeReaderArray<Double_t> H_hod_1x_GoodNegAdcMult        = {fReader, "H.hod.1x.GoodNegAdcMult"};
    TTreeReaderArray<Double_t> H_hod_1y_GoodPosAdcMult        = {fReader, "H.hod.1y.GoodPosAdcMult"};

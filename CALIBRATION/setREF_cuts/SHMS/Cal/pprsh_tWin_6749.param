@@ -1,0 +1,12 @@
+; SHMS Pre-Shower Parameter File Containing TimeWindow Min/Max Cuts 
+ 
+ 
+ 
+
+pcal_pos_AdcTimeWindowMin = -4.8, 23.6, 29.2, -1.5, 194.3, 174.4, 3.0, 2.8, 2.7, -1.7, -9.5, 0.9, -11.7, -8.7
+
+pcal_pos_AdcTimeWindowMax = 15.2, 43.6, 49.2, 15.1, 214.3, 194.4, 13.4, 13.1, 13.1, 18.3, 10.5, 12.2, 8.3, 11.3
+
+pcal_neg_AdcTimeWindowMin = -4.1, -0.8, -2.0, -0.0, 3.1, -0.0, -1.7, -10.4, 1.2, -2.3, -1.6, 1.8, -9.6, -9.3
+
+pcal_neg_AdcTimeWindowMax = 12.6, 13.9, 13.3, 14.3, 13.6, 14.1, 18.3, 9.6, 11.4, 17.7, 18.4, 11.9, 10.4, 10.7

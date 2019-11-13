@@ -1,0 +1,6 @@
+; Reference time from run 4889
+hdc_tdcrefcut=-16500.
+hhodo_tdcrefcut=-3000.
+hhodo_adcrefcut=-3500.
+hcer_adcrefcut=-3500.
+hcal_adcrefcut=-3500.

@@ -1,0 +1,9 @@
+; Reference time for no cuts
+; pdc_tdcrefcut=-15500.
+; phodo_tdcrefcut=-4700.
+
+; phodo_adcrefcut=-6150.
+; pngcer_adcrefcut=-6150.
+; phgcer_adcrefcut=-6150.
+; paero_adcrefcut=-6150.
+; pcal_adcrefcut=-6150.

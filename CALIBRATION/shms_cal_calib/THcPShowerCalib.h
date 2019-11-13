@@ -48,7 +48,7 @@ class THcPShowerCalib {
 
  public:
 
-  THcPShowerCalib(string, int, int);
+  THcPShowerCalib(string, int,  int, int);
   THcPShowerCalib();
   ~THcPShowerCalib();
 
@@ -76,6 +76,7 @@ class THcPShowerCalib {
  private:
 
   string fPrefix;
+  Int_t fRunNumber;
   Double_t fLoThr;     // Low and high thresholds on the normalized uncalibrated
   Double_t fHiThr;     // energy deposition.
   UInt_t fNev;         // Number of processed events.
@@ -173,8 +174,9 @@ THcPShowerCalib::THcPShowerCalib() {};
 
 //------------------------------------------------------------------------------
 
-THcPShowerCalib::THcPShowerCalib(string Prefix, int nstart, int nstop) {
+THcPShowerCalib::THcPShowerCalib(string Prefix, int RunNumber, int nstart, int nstop) {
   fPrefix = Prefix;
+  fRunNumber = RunNumber;
   fNstart = nstart;
   //  fNstop = nstop;  defined in Init
   fNstopRequested = nstop;
@@ -230,7 +232,7 @@ void THcPShowerCalib::ReadThresholds() {
     falpha0[ipmt] = 0.;
   };
 
-  ifstream fin( "input.dat" );
+  ifstream fin( Form("Input/input_%d.dat", fRunNumber) );
 
   string line;
   istringstream iss;
@@ -342,7 +344,7 @@ void THcPShowerCalib::Init() {
 
   gROOT->Reset();
 
-  char* fname = Form("ROOTfiles/%s.root",fPrefix.c_str());
+  char* fname = Form("ROOTfiles/%s_%d_%d.root",fPrefix.c_str(), fRunNumber, fNstopRequested);
   cout << "THcPShowerCalib::Init: Root file name = " << fname << endl;
 
   TFile *f = new TFile(fname);
@@ -780,7 +782,7 @@ void THcPShowerCalib::SolveAlphas() {
 
       if (q0[i] != 0. || qe[i] != 0.) {
 
-	cout << "*** Inconsistency in chanel " << i << ": # of hits  "
+	cout << "*** Inconsistency in channel " << i << ": # of hits  "
 	     << fHitCount[i] << ", q0=" << q0[i] << ", qe=" << qe[i];
 
 	for (UInt_t k=0; k<THcPShTrack::fNpmts; k++) {
@@ -926,8 +928,8 @@ void THcPShowerCalib::SaveAlphas() {
   //
 
   ofstream output;
-  char* fname = Form("pcal.param.%s_%d_%d", fPrefix.c_str(),
-		     fNstart, fNstopRequested);
+  char* fname = Form("pcal.param.%s_%d_%d", fPrefix.c_str(), fRunNumber,
+		     fNstopRequested);
   cout << "SaveAlphas: fname=" << fname << endl;
 
   output.open(fname,ios::out);

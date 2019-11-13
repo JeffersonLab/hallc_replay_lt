@@ -8,15 +8,15 @@
 // A steering Root script for the SHMS calorimeter calibration.
 //
 
-void pcal_calib(string Prefix, int nstop=-1, int nstart=0) {
+void pcal_calib(string Prefix,int RunNumber, int nstop=-1, int nstart=0) {
 
   // Initialize the analysis clock
   clock_t t = clock();
  
-  cout << "Calibrating file " << Prefix << ".root, events "
+  cout << "Calibrating file " << Prefix << "_" << RunNumber << "_" << nstop <<  ".root, events "
        << nstart << " -- " << nstop << endl;
 
-  THcPShowerCalib theShowerCalib(Prefix, nstart, nstop);
+  THcPShowerCalib theShowerCalib(Prefix, RunNumber, nstart, nstop);
 
   theShowerCalib.ReadThresholds();  // Read in threshold param-s and intial gains
   theShowerCalib.Init();            // Initialize constants and variables
@@ -69,11 +69,11 @@ void pcal_calib(string Prefix, int nstop=-1, int nstart=0) {
   theShowerCalib.hDPvsEcal->Draw("colz");
 
   // Save canvas in a pdf format.
-  Canvas->Print(Form("%s_%d_%d.pdf",Prefix.c_str(),nstart,nstop));
+  Canvas->Print(Form("%s_%d_%d.pdf",Prefix.c_str(),RunNumber,nstop));
 
   // Save histograms in root file.
 
-  TFile* froot=new TFile(Form("%s_%d_%d.root",Prefix.c_str(),nstart,nstop),
+  TFile* froot=new TFile(Form("%s_%d_%d.root",Prefix.c_str(),RunNumber,nstop),
 			 "RECREATE");
   theShowerCalib.hEunc->Write();
   theShowerCalib.hEuncSel->Write();

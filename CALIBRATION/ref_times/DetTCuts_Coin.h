@@ -1,3 +1,4 @@
+// Stephen Kay - University of Regina - 2019 // 
 
 #ifndef DetTCuts_Coin_h
 #define DetTCuts_Coin_h

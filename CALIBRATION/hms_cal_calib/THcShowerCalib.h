@@ -35,7 +35,7 @@ using namespace std;
 class THcShowerCalib {
 
  public:
-  THcShowerCalib(string, int, int);
+  THcShowerCalib(string, int, int, int);
   THcShowerCalib();
   ~THcShowerCalib();
 
@@ -58,6 +58,7 @@ class THcShowerCalib {
  private:
 
   string fPrefix;
+  Int_t fRunNumber;
 
   Double_t fDeltaMin, fDeltaMax;   // Delta range, %.
   Double_t fBetaMin, fBetaMax;     // Beta range
@@ -156,8 +157,9 @@ THcShowerCalib::THcShowerCalib() {};
 
 //------------------------------------------------------------------------------
 
-THcShowerCalib::THcShowerCalib(string Prefix, int nstart, int nstop) {
+THcShowerCalib::THcShowerCalib(string Prefix, int RunNumber, int nstart, int nstop) {
   fPrefix = Prefix;
+  fRunNumber = RunNumber;
   fNstart = nstart;
   //  fNstop = nstop;       //defined in Init
   fNstopRequested = nstop;
@@ -212,7 +214,7 @@ void THcShowerCalib::ReadThresholds() {
     falpha0[iblk] = 0.;
   };
 
-  ifstream fin( "input.dat" );
+  ifstream fin( Form("Input/input_%d.dat", fRunNumber) );
 
   string line;
   istringstream iss;
@@ -309,7 +311,7 @@ void THcShowerCalib::Init() {
 
   gROOT->Reset();
 
-    char* fname = Form("ROOTfiles/%s.root",fPrefix.c_str());
+  char* fname = Form("ROOTfiles/%s_%d_%d.root",fPrefix.c_str(), fRunNumber, fNstopRequested);
   //   char* fname = Form("kaonRoot/%s.root",fPrefix.c_str());
  cout << "THcShowerCalib::Init: Root file name = " << fname << endl;
 
@@ -870,8 +872,8 @@ void THcShowerCalib::SaveAlphas() {
   //
 
   ofstream output;
-  char* fname = Form("pcal.param.%s_%d_%d", fPrefix.c_str(),
-		     fNstart, fNstopRequested);
+  char* fname = Form("hcal.param.%s_%d_%d", fPrefix.c_str(),
+		     fRunNumber, fNstopRequested);
   cout << "SaveAlphas: fname=" << fname << endl;
 
   output.open(fname,ios::out);

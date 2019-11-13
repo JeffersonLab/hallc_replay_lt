@@ -1,3 +1,5 @@
+// Stephen Kay - University of Regina - 2019 // 
+
 #define DetTCuts_Coin_cxx
 
 #include "DetTCuts_Coin.h"

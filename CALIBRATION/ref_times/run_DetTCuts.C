@@ -1,3 +1,5 @@
+// Stephen Kay - University of Regina - 2019 // 
+
 #include <TProof.h>
 #include <iostream>
 #include <fstream>

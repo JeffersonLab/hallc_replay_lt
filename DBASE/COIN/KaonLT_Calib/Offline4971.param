@@ -37,8 +37,8 @@ cminch=2.54
 
 ; HMS default calibration parameter files
 #include "PARAM/HMS/CER/hcer_calib_Autumn18.param"
-#include "PARAM/HMS/DC/hdc_calib_Autumn18.param"
-#include "PARAM/HMS/DC/hdc_tzero_per_wire_Autumn18.param"
+#include "PARAM/HMS/DC/CALIB/hdc_calib_4971.param"
+#include "PARAM/HMS/DC/CALIB/hdc_tzero_per_wire_4971.param"
 #include "PARAM/HMS/HODO/hhodo_calib_Autumn18.param"
 #include "PARAM/HMS/HODO/hhodo_TWcalib_Autumn18.param"
 #include "PARAM/HMS/HODO/hhodo_Vpcalib_Autumn18.param"

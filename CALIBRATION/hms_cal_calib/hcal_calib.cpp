@@ -8,15 +8,15 @@
 // A steering Root script for the HMS calorimeter calibration.
 //
 
-void hcal_calib(string Prefix, int nstop=-1, int nstart=0) {
+void hcal_calib(string Prefix, int RunNumber, int nstop=-1, int nstart=0) {
 
   // Initialize the analysis clock
   clock_t t = clock();
-  
-  cout << "Calibrating file " << Prefix << ".root, events "
+
+  cout << "Calibrating file " << Prefix << "_" << RunNumber << "_" << nstop <<  ".root, events "
        << nstart << " -- " << nstop << endl;
 
-  THcShowerCalib theShowerCalib(Prefix, nstart, nstop);
+  THcShowerCalib theShowerCalib(Prefix, RunNumber, nstart, nstop);
 
  theShowerCalib.ReadThresholds();  // Read in threshold param-s and intial gains
  theShowerCalib.Init();            // Initialize constants and variables
@@ -71,7 +71,7 @@ void hcal_calib(string Prefix, int nstop=-1, int nstart=0) {
  theShowerCalib.hDPvsEcal->Draw("colz");
 
  // Save canvas in a pdf format.
- Canvas->Print(Form("%s_%d_%d.pdf",Prefix.c_str(),nstart,nstop));
+ Canvas->Print(Form("%s_%d_%d.pdf",Prefix.c_str(),RunNumber,nstop));
 
  // Calculate the analysis rate
  t = clock() - t;

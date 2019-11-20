@@ -3,15 +3,35 @@ How to calibrate SHMS calorimeter with real electrons.
 The calibration code resides in
 hallc_replay/CALIBRATION/shms_cal_calib directory. It consists of 3
 header files called THcPShHit.h,THcPShTrack.h, THcPShowerCalib.h, and
-a steering script pcal_calib.cpp. There is also an input file
+a steering script pcal_calib.cpp. 
+
+There is also an input file
 input.dat containing threshold parameters and initial gain constants
 necessary for calibration.
+
+### NOTE - SK 12/11/19 ###
+
+I have modified the script to look into Input/
+and find the input.dat for the run number in question, 
+e.g. if you're analysing run 8977, the script will look for
+Input/input_8977.dat
+This makes it easier to run this calibration with a shell script
+
+### NOTE - SK 12/11/19 ###
 
 The scripts work on root files from hcana analysis and make use of
 quantities pertained to tracking, gas Cherenkovs, and TOF from
 hodoscopes. Hence it is convenient to calibrate on root files from
 full SHMS analysis. The root files are assumed to be in a linked
 ROOTfiles directory.
+
+### NOTE - SK 12/11/19 ###
+
+By default the script tried to use the NGC, this caused issues if the
+NGC was not present. I will modify the script in future to check which
+cherenkov is there and use the relevant one
+
+### NOTE - SK 12/11/19 ###
 
 Th input file contains thresholds on the quantities used in the
 calibration, such as: SHMS delta range, the hodoscope beta range,
@@ -27,23 +47,35 @@ histogram. Note that code does not iterate the gain constants.  The
 user is free to modify cuts in the input file as needed. Caution must
 be exercised not to alter the format of the file.
 
-The steering script pcal_calib.cpp takes 3 parameters: prefix of the
-root file to be calibrated, last (-1 by default) and the first (0 by
+The steering script pcal_calib.cpp takes 4 parameters: prefix of the
+root file to be calibrated, run number, last 
+(-1 by default, i.e. the number of events in the replay) and the first (0 by
 default) events to be used for calibration. The -1 value for last
 event number defaults to the number of entries in the root file.
 
 Once your hcana, hallc_replay and Root are set up, you can compile and
 run pcal_calib under hcana, by issuing command
 
-.x pcal_calib.cpp+("Prefix"),
+.x pcal_calib.cpp+("Prefix", RunNumber),
 
 where Prefix is the prefix part in the name of root file.
 
 For instance, for calibration with
-shms_coin_replay_production_all_4313.root file in ROOTfiles, the
+shms_coin_replay_production_all_4313_-1.root file in ROOTfiles, the
 correct command would be
 
-.x pcal_calib.cpp+("shms_coin_replay_production_all_4313") .
+.x pcal_calib.cpp+("shms_coin_replay_production_all", 4313) .
+
+### NOTE - SK 12/11/19 ###
+
+The 3rd argument provided is the final piece of the replay name.
+By default this is -1, if for example you only had 500k events replayed
+and had file shms_coin_replay_production_all_4313_500000.root
+you would simply run
+
+.x pcal_calib.cpp+("shms_coin_replay_production_all", 4313, 500000) . 
+
+### NOTE - SK 12/11/19 ###
 
 Upon calibration, a canvas with representative plots will pop up. The
 calibration constants will be written in output file

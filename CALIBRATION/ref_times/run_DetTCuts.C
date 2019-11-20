@@ -1,19 +1,28 @@
+// Stephen Kay - University of Regina - 2019 // 
+
 #include <TProof.h>
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <stdio.h>
 
-void run_DetTCuts(Int_t RunNumber = 0, Int_t MaxEvent = 0, string RunType = "")
+void run_DetTCuts(string RunPrefix = "", Int_t RunNumber = 0, Int_t MaxEvent = 0)
 {
   cout << "Script to plot detector timing windows" << endl;
-  cout << "Input is run number, number of events and run type (HMS, SHMS or COIN)" << endl;
+  cout << "Input is RootfilePrefix, run number and number of events" << endl;
   TString Hostname = gSystem->HostName();
-  TString RunT;
+  TString RunPref;
   TString rootFileNameString;
+  TString Rootpath;
   TString Outpath;
   TString Histopath;
-  
+ 
+  RunPref = RunPrefix;
+  if(RunPref == "") {
+    cout << "Enter a Rootfile name prefix (Assumed format is PREFIX_RUN#_#EVENTS.root): ";
+    cin >> RunPrefix;
+    RunPref = RunPrefix;
+  }
   if (RunNumber == 0)
     {
       cout << "Enter a Run Number (-1 to exit): ";
@@ -29,42 +38,32 @@ void run_DetTCuts(Int_t RunNumber = 0, Int_t MaxEvent = 0, string RunType = "")
     }
   }
 
-  RunT = RunType;
-  if(RunT == "") {
-    cout << "Enter a Run Type (COIN, HMS or SHMS): ";
-    cin >> RunType;
-    RunT = RunType;
-  }
-  if(RunT.EqualTo("HMS")) cout << "HMS singles run selected" << endl;
-  else if(RunT.EqualTo("SHMS")) cout << "SHMS singles run selected" << endl;
-  else if (RunT.EqualTo("COIN")) cout << "COIN run selected" << endl;
-  else if((RunT.EqualTo("HMS") == kFALSE) && (RunT.EqualTo("SHMS") == kFALSE) && (RunT.EqualTo("COIN") == kFALSE)) {
-    cerr << "...Invalid entry, enter HMS, SHMS or COIN\n";
-    return;
-  }
   cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
   if(Hostname.Contains("farm")){
+    Rootpath = "/group/c-kaonlt/USERS/${USER}/ROOTfiles/";
+    Outpath = "/group/c-kaonlt/USERS/${USER}/OUTPUT/";
+    Histopath = "/group/c-kaonlt/USERS/${USER}/HISTOGRAMS/";
   }
   else if(Hostname.Contains("qcd")){ // Empty for now, fill in later
+    Rootpath = "/group/c-kaonlt/USERS/${USER}/ROOTfiles/";
+    Outpath = "/group/c-kaonlt/USERS/${USER}/OUTPUT/";
+    Histopath = "/group/c-kaonlt/USERS/${USER}/HISTOGRAMS/";
   }
   // Need to change this, probably expliticly require a ROOTfile name as an argument in future (Or just the file prefix)
   else if (Hostname.Contains("phys.uregina.ca")){
-    if (RunT.EqualTo("HMS")) rootFileNameString = Form("/dsk3/${USER}/JLab/ROOTfiles/DC_Calib/HMS_DC_Calib_Check_%i_%i.root", RunNumber, MaxEvent); // NOTE, this file name is temporary and only for testing currently
-    else if (RunT.EqualTo("SHMS")) rootFileNameString = Form("/dsk3/${USER}/JLab/ROOTfiles/DC_Calib/SHMS_DC_Calib_Check_%i_%i.root", RunNumber, MaxEvent); // NOTE, this file name is temporary and only for testing currently
-    //else if (RunT.EqualTo("COIN")) rootFileNameString = Form("/dsk3/${USER}/JLab/ROOTfiles/Lumi_coin_replay_production_Offline_%i_%i.root", RunNumber, MaxEvent);  
-    else if (RunT.EqualTo("COIN")) rootFileNameString = Form("/dsk3/${USER}/JLab/ROOTfiles/PionLT_coin_replay_production_%i_%i.root", RunNumber, MaxEvent);  
+    Rootpath = "/dsk3/${USER}/JLab/ROOTfiles/";
     Outpath = "/dsk3/${USER}/JLab/OUTPUT/";
     Histopath = "/dsk3/${USER}/JLab/HISTOGRAMS/";
   }
+  rootFileNameString = Rootpath + Form("%s_%i_%i.root", RunPrefix.c_str(), RunNumber, MaxEvent);  
+  cout << rootFileNameString << endl;
   // Should process a different script for COIN/HMS/SHMS
   TChain ch("T");
   ch.Add(rootFileNameString);
-  TString option = Form("%i.%s", RunNumber, RunType.c_str());
+  TString option = Form("%i.Coin", RunNumber);
   TProof *proof = TProof::Open("workers=4");
   ch.SetProof();
-  if(RunT.EqualTo("HMS")) ch.Process("DetTCuts_HMS.C+",option);
-  else if(RunT.EqualTo("SHMS")) ch.Process("DetTCuts_SHMS.C+",option);
-  else if(RunT.EqualTo("COIN")) ch.Process("DetTCuts_Coin.C+",option);
+  ch.Process("DetTCuts_Coin.C+",option);
   proof->Close();
 }

@@ -71,8 +71,8 @@ cminch=2.54
 
 ; SHMS default calibration parameter files
 #include "PARAM/SHMS/NGCER/pngcer_calib.param"
-#include "PARAM/SHMS/DC/pdc_calib_Autumn18.param"
-#include "PARAM/SHMS/DC/pdc_tzero_per_wire_Autumn18.param"
+#include "PARAM/SHMS/DC/CALIB/pdc_calib_5326.param"
+#include "PARAM/SHMS/DC/CALIB/pdc_tzero_per_wire_5326.param"
 #include "PARAM/SHMS/HODO/phodo_calib_Autumn18.param"
 #include "PARAM/SHMS/HODO/phodo_TWcalib_Autumn18.param"
 #include "PARAM/SHMS/HODO/phodo_Vpcalib_Autumn18.param"

@@ -1,10 +1,10 @@
-; Calibration constants for file HMS_Cal_Calib.root, 9211 events processed
+; Calibration constants for file HMS_Cal_Calib.root, 0 events processed
 
-hcal_pos_gain_cor=  0.00,  8.66, 10.86, 11.59,  8.55, 12.39, 11.04, 10.75, 10.20, 13.32, 15.86, 13.32,  0.00,
-                   11.83, 12.69,  8.27, 12.92,  8.25,  6.22,  8.05,  9.09,  8.90,  9.89,  8.81, 10.36,  0.00,
-                   17.89, 10.84, 12.85, 17.47, 12.04, 15.27, 17.16, 12.82, 16.24, 18.32, 13.71, 15.54,  0.00,
-                    0.00, 14.55, 13.45, 16.19, 12.35, 16.77, 24.15, 20.37, 17.87, 17.65, 15.56,  0.00,  0.00,
-hcal_neg_gain_cor=  0.00,  9.04, 10.11,  9.60, 10.62, 12.03, 16.20, 18.27, 13.08, 12.29,  9.16, 11.09,  0.00,
-                   19.55, 10.76, 15.37, 12.85, 15.14, 17.22, 17.04, 15.23, 17.94, 11.92, 14.47, 16.81,  0.00,
+hcal_pos_gain_cor=  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,
+                    -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,
+                    -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,
+                    -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,
+hcal_neg_gain_cor=  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,
+                    -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,
                     0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,
                     0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,

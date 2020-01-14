@@ -884,42 +884,51 @@ g_ctp_parm_filename       = "DBASE/COIN/KaonLT_Calib/Offline8476.param"
 g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
 
 ### Calib from run 8489 - Summer 19 RP ###
-8489-8493
+8489-8528
 g_ctp_parm_filename       = "DBASE/COIN/KaonLT_Calib/Offline8489.param"
 g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
 
-### Calib from run 8494 - Summer 19 RP ###
-8494-8504
-g_ctp_parm_filename       = "DBASE/COIN/KaonLT_Calib/Offline8494.param"
-g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+###### WEIRD RUNS COMMENTED OUT FOR NOW ####
+
+### Calib from run 8489 - Summer 19 RP ###
+#8489-8504
+#g_ctp_parm_filename       = "DBASE/COIN/KaonLT_Calib/Offline8489.param"
+#g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
 
 ### Calib from run 8505 - Summer 19 RP ###
-8505-8513
-g_ctp_parm_filename       = "DBASE/COIN/KaonLT_Calib/Offline8505.param"
-g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+#8505-8513
+#g_ctp_parm_filename       = "DBASE/COIN/KaonLT_Calib/Offline8505.param"
+#g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
 
 ### Calib from run 8514 - Summer 19 RP ###
-8514-8523
-g_ctp_parm_filename       = "DBASE/COIN/KaonLT_Calib/Offline8514.param"
-g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+#8514-8523
+#g_ctp_parm_filename       = "DBASE/COIN/KaonLT_Calib/Offline8514.param"
+#g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
 
 ### Calib from run 8524 - Summer 19 RP ###
-8524-8533
-g_ctp_parm_filename       = "DBASE/COIN/KaonLT_Calib/Offline8524.param"
-g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+#8524-8533
+#g_ctp_parm_filename       = "DBASE/COIN/KaonLT_Calib/Offline8524.param"
+#g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
 
 ### Calib from run 8534 - Summer 19 RP ###
-8534-8539
-g_ctp_parm_filename       = "DBASE/COIN/KaonLT_Calib/Offline8534.param"
-g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+#8534-8539
+#g_ctp_parm_filename       = "DBASE/COIN/KaonLT_Calib/Offline8534.param"
+#g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
 
 ### Calib from run 8540 - Summer 19 RP ###
-8540-8547
-g_ctp_parm_filename       = "DBASE/COIN/KaonLT_Calib/Offline8540.param"
-g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+#8540-8547
+#g_ctp_parm_filename       = "DBASE/COIN/KaonLT_Calib/Offline8540.param"
+#g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
 
 ### Calib from run 8548 - Summer 19 RP ###
-8548-8569
+#8548-8569
+#g_ctp_parm_filename       = "DBASE/COIN/KaonLT_Calib/Offline8548.param"
+#g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+###### WEIRD RUNS COMMENTED OUT FOR NOW ####
+
+### Calib from run 8548 - Summer 19 RP ###
+8529-8569
 g_ctp_parm_filename       = "DBASE/COIN/KaonLT_Calib/Offline8548.param"
 g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
 

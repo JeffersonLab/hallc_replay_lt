@@ -8,5 +8,5 @@ inputFile="$1"
 while IFS='' read -r line || [[ -n "$line" ]]; do
     ##Run number#                                                         
     runNum=$line
-    sed -i "s/hcal_$runNum.param/hcal_8476.param/" "Offline"$runNum".param"
+    sed -i "s/hcal_calib_Spring19/CALIB\/hcal_$runNum.param/" "Offline"$runNum".param"
 done < "$inputFile"

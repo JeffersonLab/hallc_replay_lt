@@ -20,6 +20,8 @@ block H.dc.x*
 block H.dc.y*
 block P.dc.x*
 block P.dc.y*
+block P.hgcer.xAtCer
+block P.hgcer.yAtCer
 block H.kin.primary.*
 block P.kin.secondary.*
 block T.coin.pTRIG5_ROC2_tdcTime

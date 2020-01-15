@@ -22,9 +22,9 @@ void ProtonYield::SlaveBegin(TTree * /*tree*/)
   h2misspcut_CT   = new TH2F("h1misspcut_CT","Proton Missing mass vs Coincidence Time;Time (ns);Mass (GeV/c^{2})^{2}",400,-10,10,200,0.8,1.5);
 
   h2HGCXYAll = new TH2F("h2HGCXYAll", "X vs Y Position in HGC; X Dimension (cm);Y Dimension (cm)", 100, -50, 50, 100, -50, 50);
-  h2HGCXYPions = new TH2F("h2HGCXYPions", "X vs Y for Pions Position in HGC; X Dimension (cm);Y Dimension (cm)", 100, -50, 50, 100, -50, 50);
-  h2HGCXKaons = new TH2F("h2HGCXYKaons", "X vs Y for Kaons Position in HGC; X Dimension (cm);Y Dimension (cm)", 100, -50, 50, 100, -50, 50);
-  h2HGCXYProtons = new TH2F("h2HGCXYProtons", "X vs Y for Protons Position in HGC; X Dimension (cm);Y Dimension (cm)", 100, -50, 50, 100, -50, 50);
+  h2HGCXYPion = new TH2F("h2HGCXYPion", "X vs Y for Pions Position in HGC; X Dimension (cm);Y Dimension (cm)", 100, -50, 50, 100, -50, 50);
+  h2HGCXYKaon = new TH2F("h2HGCXYKaon", "X vs Y for Kaons Position in HGC; X Dimension (cm);Y Dimension (cm)", 100, -50, 50, 100, -50, 50);
+  h2HGCXYProton = new TH2F("h2HGCXYProton", "X vs Y for Protons Position in HGC; X Dimension (cm);Y Dimension (cm)", 100, -50, 50, 100, -50, 50);
 
   h3XYNPEAll = new TH3F("h3XYNPEAll","NPE Sum vs X vs Y;X Dimension (cm);Y Dimension (cm);NPE",100,-50,50,100,-50,50,100,0.0,50);
   h3XYNPEPion = new TH3F("h3XYNPEPion","NPE Sum vs X vs Y for Pions;X Dimension (cm);Y Dimension (cm);NPE",100,-50,50,100,-50,50,100,0.0,50);
@@ -96,7 +96,7 @@ void ProtonYield::SlaveBegin(TTree * /*tree*/)
 
   h1mmpKMissID             = new TH1F("mmpKMissID","MM_{p} - K Wrong PID;Mass (GeV/c^{2});Counts",200,0.0,2.0);
   h1mmKpMissID             = new TH1F("mmKpMissID","MM_{K} - p Wrong PID;Mass (GeV/c^{2});Counts",200,0.0,2.0);
-  h2HGCXKMissID            = new TH2F("h2HGCXYKMissID", "X vs Y for K wrong PID in HGC; X Dimension (cm);Y Dimension (cm)", 100, -50, 50, 100, -50, 50);
+  h2HGCXYKMissID            = new TH2F("h2HGCXYKMissID", "X vs Y for K wrong PID in HGC; X Dimension (cm);Y Dimension (cm)", 100, -50, 50, 100, -50, 50);
   h2HGCXYpMissID           = new TH2F("h2HGCXYpMissID", "X vs Y for p wrong PID in HGC; X Dimension (cm);Y Dimension (cm)", 100, -50, 50, 100, -50, 50);  
   h3XYNPEKMissID           = new TH3F("h3XYNPEKMissID","NPE Sum vs X vs Y for K wrong PID;X Dimension (cm);Y Dimension (cm);NPE",100,-50,50,100,-50,50,100,0.0,50);
   h3XYNPEpMissID           = new TH3F("h3XYNPEpMissID","NPE Sum vs X vs Y for p wrong PID;X Dimension (cm);Y Dimension (cm);NPE",100,-50,50,100,-50,50,100,0.0,50);
@@ -107,10 +107,10 @@ void ProtonYield::SlaveBegin(TTree * /*tree*/)
   GetOutputList()->Add(h2missKcut_CT);
   GetOutputList()->Add(h2misspicut_CT);
   GetOutputList()->Add(h2misspcut_CT);
-  GetOutputList()->Add(2HGCXYAll);
-  GetOutputList()->Add(2HGCXYPion);
-  GetOutputList()->Add(2HGCXYKaon);
-  GetOutputList()->Add(2HGCXYProton);
+  GetOutputList()->Add(h2HGCXYAll);
+  GetOutputList()->Add(h2HGCXYPion);
+  GetOutputList()->Add(h2HGCXYKaon);
+  GetOutputList()->Add(h2HGCXYProton);
   GetOutputList()->Add(h3XYNPEAll);
   GetOutputList()->Add(h3XYNPEPion);
   GetOutputList()->Add(h3XYNPEKaon);
@@ -199,8 +199,8 @@ Bool_t ProtonYield::Process(Long64_t entry)
  
  // This analysis operates on runs that have been analysed as though a kaon is going into the SHMS
   Double_t MMp = sqrt(pow(emiss[0] + sqrt(pow(0.493677,2) + pow(P_gtr_p[0],2)) - sqrt(pow(0.93828,2) + pow(P_gtr_p[0],2)),2)-pow(pmiss[0],2)); // Calculate missing mass under condition that hadron is a proton
-  Double_t MMPi = sqrt(pow(emiss[0] + sqrt(pow(0.493677,2) + pow(P_gtr_p[0],2)) - sqrt(pow(0.13957018,2) + pow(P_gtr_p[0],2)),2)-pow(pmiss[0],2)); // Calculate missing mass under condition that hadron is a kaon 
-  Double_t MMK = sqrt(pow(emiss[0],2)-pow(pmiss[0],2)); // Calculate missing mass under condition that hadron is a pion
+  Double_t MMPi = sqrt(pow(emiss[0] + sqrt(pow(0.493677,2) + pow(P_gtr_p[0],2)) - sqrt(pow(0.13957018,2) + pow(P_gtr_p[0],2)),2)-pow(pmiss[0],2)); // Calculate missing mass under condition that hadron is a pion
+  Double_t MMK = sqrt(pow(emiss[0],2)-pow(pmiss[0],2)); // Calculate missing mass under condition that hadron is a kaon
   h1mmissK->Fill(MMK);
   h1mmisspi->Fill(MMPi);
   if (MMp > 0) h1mmissp->Fill(MMp);

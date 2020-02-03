@@ -19,6 +19,32 @@ void DC_Calib_Comp_HMS::SlaveBegin(TTree * /*tree*/)
   printf("\n\n");
   TString option = GetOption();
 
+  h1_1u1_DriftDistance = new TH1F("1u1_DriftDistance", "Drift Distance 1u1 Plane; Drift Distance; Counts", 120, 0, 0.6);
+  h1_1u2_DriftDistance = new TH1F("1u2_DriftDistance", "Drift Distance 1u2 Plane; Drift Distance; Counts", 120, 0, 0.6);
+  h1_1x1_DriftDistance = new TH1F("1x1_DriftDistance", "Drift Distance 1x1 Plane; Drift Distance; Counts", 120, 0, 0.6);
+  h1_1x2_DriftDistance = new TH1F("1x2_DriftDistance", "Drift Distance 1x2 Plane; Drift Distance; Counts", 120, 0, 0.6);
+  h1_1v1_DriftDistance = new TH1F("1v1_DriftDistance", "Drift Distance 1v1 Plane; Drift Distance; Counts", 120, 0, 0.6);
+  h1_1v2_DriftDistance = new TH1F("1v2_DriftDistance", "Drift Distance 1v2 Plane; Drift Distance; Counts", 120, 0, 0.6);
+  h1_2u1_DriftDistance = new TH1F("2u1_DriftDistance", "Drift Distance 2u1 Plane; Drift Distance; Counts", 120, 0, 0.6);
+  h1_2u2_DriftDistance = new TH1F("2u2_DriftDistance", "Drift Distance 2u2 Plane; Drift Distance; Counts", 120, 0, 0.6);
+  h1_2x1_DriftDistance = new TH1F("2x1_DriftDistance", "Drift Distance 2x1 Plane; Drift Distance; Counts", 120, 0, 0.6);
+  h1_2x2_DriftDistance = new TH1F("2x2_DriftDistance", "Drift Distance 2x2 Plane; Drift Distance; Counts", 120, 0, 0.6);
+  h1_2v1_DriftDistance = new TH1F("2v1_DriftDistance", "Drift Distance 2v1 Plane; Drift Distance; Counts", 120, 0, 0.6);
+  h1_2v2_DriftDistance = new TH1F("2v2_DriftDistance", "Drift Distance 2v2 Plane; Drift Distance; Counts", 120, 0, 0.6);
+
+  GetOutputList()->Add(h1_1u1_DriftDistance);
+  GetOutputList()->Add(h1_1u2_DriftDistance);
+  GetOutputList()->Add(h1_1x1_DriftDistance);
+  GetOutputList()->Add(h1_1x2_DriftDistance);
+  GetOutputList()->Add(h1_1v1_DriftDistance);
+  GetOutputList()->Add(h1_1v2_DriftDistance);
+  GetOutputList()->Add(h1_2u1_DriftDistance);
+  GetOutputList()->Add(h1_2u2_DriftDistance);
+  GetOutputList()->Add(h1_2x1_DriftDistance);
+  GetOutputList()->Add(h1_2x2_DriftDistance);
+  GetOutputList()->Add(h1_2v1_DriftDistance);
+  GetOutputList()->Add(h1_2v2_DriftDistance);
+
   h1_Residual = new TH1F*[12];
   h1_ResidualExclPlane = new TH1F*[12];
   TString Plane[12] = {"1u1", "1u2", "1x1", "1x2", "1v1", "1v2", "2u1", "2u2", "2x1", "2x2", "2v1", "2v2"};
@@ -41,12 +67,60 @@ Bool_t DC_Calib_Comp_HMS::Process(Long64_t entry)
   fReader.SetEntry(entry);
 
   if (H_cer_npeSum[0] < 1.0) return kTRUE;
-  if (T_hms_hEL_CLEAN_tdcTime[0] < 0) return kTRUE;
+  if (T_coin_hEL_CLEAN_tdcTime[0] < 0) return kTRUE;
 
   for (Int_t i = 0; i < 12; i++){
     h1_Residual[i]->Fill(H_dc_residual[i]);
     h1_ResidualExclPlane[i]->Fill(H_dc_residualExclPlane[i]);
   }
+
+  if (H_dc_1u1_time[0] > 0){
+    h1_1u1_DriftDistance->Fill(H_dc_1u1_dist[0]);
+    }
+   
+  if (H_dc_1u2_time[0] > 0){
+    h1_1u2_DriftDistance->Fill(H_dc_1u2_dist[0]);
+  }
+  
+  if (H_dc_1x1_time[0] > 0){
+    h1_1x1_DriftDistance->Fill(H_dc_1x1_dist[0]);
+  }
+  
+  if (H_dc_1x2_time[0] > 0){
+    h1_1x2_DriftDistance->Fill(H_dc_1x2_dist[0]);
+  }
+  
+  if (H_dc_1v1_time[0] > 0){
+    h1_1v1_DriftDistance->Fill(H_dc_1v1_dist[0]);
+  }
+  
+  if (H_dc_1v2_time[0] > 0){
+    h1_1v2_DriftDistance->Fill(H_dc_1v2_dist[0]);
+  }
+  
+  if (H_dc_2u1_time[0] > 0){
+    h1_2u1_DriftDistance->Fill(H_dc_2u1_dist[0]);
+  }
+  
+  if (H_dc_2u2_time[0] > 0){
+    h1_2u2_DriftDistance->Fill(H_dc_2u2_dist[0]);
+  }
+  
+  if (H_dc_2x1_time[0] > 0){
+    h1_2x1_DriftDistance->Fill(H_dc_2x1_dist[0]);
+  }
+  
+  if (H_dc_2x2_time[0] > 0){
+    h1_2x2_DriftDistance->Fill(H_dc_2x2_dist[0]);
+  }
+    
+  if (H_dc_2v1_time[0] > 0){
+     h1_2v1_DriftDistance->Fill( H_dc_2v1_dist[0]);
+   }
+  
+  if (H_dc_2v2_time[0] > 0){
+     h1_2v2_DriftDistance->Fill(H_dc_2v2_dist[0]);
+   }
   
   return kTRUE;
 }
@@ -78,6 +152,20 @@ void DC_Calib_Comp_HMS::Terminate()
     Residual[i]->Write();
     ResidualExclPl[i]->Write();
   }
+
+  h1_1u1_DriftDistance->Write();
+  h1_1u2_DriftDistance->Write();
+  h1_1x1_DriftDistance->Write();
+  h1_1x2_DriftDistance->Write();
+  h1_1v1_DriftDistance->Write();
+  h1_1v2_DriftDistance->Write();
+
+  h1_2u1_DriftDistance->Write();
+  h1_2u2_DriftDistance->Write();
+  h1_2x1_DriftDistance->Write();
+  h1_2x2_DriftDistance->Write();
+  h1_2v1_DriftDistance->Write();
+  h1_2v2_DriftDistance->Write();
 
   Histogram_file->Close();
 }

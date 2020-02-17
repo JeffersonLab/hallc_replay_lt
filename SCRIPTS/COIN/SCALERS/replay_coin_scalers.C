@@ -145,6 +145,6 @@ void replay_coin_scalers (Int_t RunNumber = 0, Int_t MaxEvent = 0,Int_t FirstEve
   analyzer->Process(run);
   // Create report file from template
   analyzer->PrintReport("TEMPLATES/COIN/SCALERS/coinscalers.template",
-  			Form("REPORT_OUTPUT/COIN/SCALERS/replay_coin_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
+  			Form("UTIL_KAONLT/REPORT_OUTPUT/COIN/SCALERS/replay_coin_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
 
 }

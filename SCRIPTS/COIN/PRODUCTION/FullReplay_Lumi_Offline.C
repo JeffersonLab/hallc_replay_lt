@@ -261,6 +261,8 @@ void FullReplay_Lumi_Offline (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template	       
-  analyzer->PrintReport("TEMPLATES/COIN/coin_production.template", Form("UTIL_KAONLT/REPORT_OUTPUT/COIN/PRODUCTION/Lumi_coin_replay_production_Offline_%d_%d.report", RunNumber, MaxEvent)); // optional
+  // analyzer->PrintReport("TEMPLATES/COIN/coin_production.template",
+analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/coin_production_new.template",
+		    Form("UTIL_KAONLT/REPORT_OUTPUT/COIN/PRODUCTION/Lumi_coin_replay_production_Offline_%d_%d.report", RunNumber, MaxEvent)); // optional
   
 }

@@ -29,8 +29,8 @@ void FullReplay_Lumi_Offline (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./cache");
 
   //const char* RunFileNamePattern = "raw/coin_all_%05d.dat";
-  // const char* ROOTFileNamePattern = "UTIL_KAONLT/ROOTfiles/Lumi_coin_replay_production_Offline_%d_%d.root";
-  const char* ROOTFileNamePattern = "/u/group/c-kaonlt/tmp_TProofTest/Lumi_coin_replay_production_Offline_%d_%d.root";
+  const char* ROOTFileNamePattern = "UTIL_KAONLT/ROOTfiles/Lumi_coin_replay_production_Offline_%d_%d.root";
+  
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
   // gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_Offline.database");
@@ -250,12 +250,12 @@ void FullReplay_Lumi_Offline (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file+
-  analyzer->SetOdefFile("DEF-files/COIN/PRODUCTION/coin_production_hElec_pProt.def");
-  // analyzer->SetOdefFile("UTIL_KAONLT/DEF-files/luminosity_coin_production.def");
+  // analyzer->SetOdefFile("DEF-files/COIN/PRODUCTION/coin_production_hElec_pProt.def");
+  analyzer->SetOdefFile("UTIL_KAONLT/DEF-files/luminosity_coin_production.def");
   // analyzer->SetOdefFile("UTIL_KAONLT/DEF-files/coin_production.def");
   // Define cuts file
-  analyzer->SetCutFile("UTIL_KAONLT/DEF-files/luminosity_coin_production_cuts.def");  // optional
-  // analyzer->SetCutFile("DEF-files/COIN/PRODUCTION/CUTS/coin_production_cuts.def");  // optional
+  // analyzer->SetCutFile("UTIL_KAONLT/DEF-files/luminosity_coin_production_cuts.def");  // optional
+  analyzer->SetCutFile("DEF-files/COIN/PRODUCTION/CUTS/coin_production_cuts.def");  // optional
   // File to record accounting information for cuts
   analyzer->SetSummaryFile(Form("UTIL_KAONLT/REPORT_OUTPUT/COIN/PRODUCTION/summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.

@@ -43,6 +43,7 @@ void FullReplay_Lumi_Offline (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Load fadc debug parameters
   gHcParms->Load("PARAM/HMS/GEN/h_fadc_debug.param");
   gHcParms->Load("PARAM/SHMS/GEN/p_fadc_debug.param");
+
   // Load params for BCM
   const char* CurrentFileNamePattern = "PARAM/HMS/BCM/CALIB/bcmcurrent_%d.param";
   gHcParms->Load(Form(CurrentFileNamePattern, RunNumber));
@@ -250,8 +251,8 @@ void FullReplay_Lumi_Offline (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file+
-  // analyzer->SetOdefFile("DEF-files/COIN/PRODUCTION/coin_production_hElec_pProt.def");
-  analyzer->SetOdefFile("UTIL_KAONLT/DEF-files/luminosity_coin_production.def");
+  analyzer->SetOdefFile("DEF-files/COIN/PRODUCTION/coin_production_hElec_pProt.def");
+  // analyzer->SetOdefFile("UTIL_KAONLT/DEF-files/luminosity_coin_production.def");
   // analyzer->SetOdefFile("UTIL_KAONLT/DEF-files/coin_production.def");
   // Define cuts file
   // analyzer->SetCutFile("UTIL_KAONLT/DEF-files/luminosity_coin_production_cuts.def");  // optional
@@ -261,8 +262,8 @@ void FullReplay_Lumi_Offline (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template	       
-  // analyzer->PrintReport("TEMPLATES/COIN/coin_production.template",// ERROR!!!!
-analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/coin_production_new.template",
+  analyzer->PrintReport("TEMPLATES/COIN/coin_production.template",// ERROR!!!!
+// analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/coin_production_new.template",
 		    Form("UTIL_KAONLT/REPORT_OUTPUT/COIN/PRODUCTION/Lumi_coin_replay_production_Offline_%d_%d.report", RunNumber, MaxEvent)); // optional
   
 }

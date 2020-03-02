@@ -8,13 +8,8 @@ inputFile="$1"
 while IFS='' read -r line || [[ -n "$line" ]]; do
     ##Run number#                                                         
     runNum=$line
-    sed -i "s/hdc_calib_Autumn18.param/CALIB\/hdc_calib_$runNum.param/" "Offline"$runNum".param"
-    sed -i "s/hdc_calib_Winter18.param/CALIB\/hdc_calib_$runNum.param/" "Offline"$runNum".param"
-    sed -i "s/hdc_calib_Spring19.param/CALIB\/hdc_calib_$runNum.param/" "Offline"$runNum".param"
-    sed -i "s/hdc_calib_Summer19.param/CALIB\/hdc_calib_$runNum.param/" "Offline"$runNum".param"
-    sed -i "s/hdc_tzero_per_wire_Autumn18.param/CALIB\/hdc_tzero_per_wire_$runNum.param/" "Offline"$runNum".param"
-    sed -i "s/hdc_tzero_per_wire_Winter18.param/CALIB\/hdc_tzero_per_wire_$runNum.param/" "Offline"$runNum".param"
-    sed -i "s/hdc_tzero_per_wire_Spring19.param/CALIB\/hdc_tzero_per_wire_$runNum.param/" "Offline"$runNum".param"
-    sed -i "s/hdc_tzero_per_wire_Summer19.param/CALIB\/hdc_tzero_per_wire_$runNum.param/" "Offline"$runNum".param"
-    
+    sed -i "s/hcal_calib_Autumn18.param/CALIB\/hcal_$runNum.param/" "Offline"$runNum".param"
+    sed -i "s/hcal_calib_Winter18.param/CALIB\/hcal_$runNum.param/" "Offline"$runNum".param"
+    sed -i "s/hcal_calib_Spring19.param/CALIB\/hcal_$runNum.param/" "Offline"$runNum".param"
+    sed -i "s/new_hcal_calib_Summer19_0.448gev_pidlegs.param/CALIB\/hcal_$runNum.param/" "Offline"$runNum".param"
 done < "$inputFile"

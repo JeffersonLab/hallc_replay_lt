@@ -67,6 +67,9 @@ void FullReplay_Lumi_Offline (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   SHMS->AddEvtType(6);
   SHMS->AddEvtType(7);
   gHaApps->Add(SHMS);
+  // Add Noble Gas Cherenkov to SHMS apparatus
+  THcCherenkov* pngcer = new THcCherenkov("ngcer", "Noble Gas Cherenkov");
+  SHMS->AddDetector(pngcer);
   // Add drift chambers to SHMS apparatus
   THcDC* pdc = new THcDC("dc", "Drift Chambers");
   SHMS->AddDetector(pdc);
@@ -197,8 +200,8 @@ void FullReplay_Lumi_Offline (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   TRG->AddDetector(coin); 
 
   // Add helicity detector to trigger apparatus
-  THcHelicity* helicity = new THcHelicity("helicity","Helicity Detector");
-  TRG->AddDetector(helicity);
+  // THcHelicity* helicity = new THcHelicity("helicity","Helicity Detector");
+  // TRG->AddDetector(helicity);
   
   //Add coin physics module THcCoinTime::THcCoinTime (const char *name, const char* description, const char* hadArmName, 
   // const char* elecArmName, const char* coinname) :

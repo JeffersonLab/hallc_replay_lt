@@ -45,8 +45,8 @@ void FullReplay_Lumi_Offline (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHcParms->Load("PARAM/SHMS/GEN/p_fadc_debug.param");
 
   // Load params for BCM
-  const char* CurrentFileNamePattern = "PARAM/HMS/BCM/CALIB/bcmcurrent_%d.param";
-  gHcParms->Load(Form(CurrentFileNamePattern, RunNumber));
+  // const char* CurrentFileNamePattern = "PARAM/HMS/BCM/CALIB/bcmcurrent_%d.param";
+  // gHcParms->Load(Form(CurrentFileNamePattern, RunNumber));
 
   // Load the Hall C detector map
   gHcDetectorMap = new THcDetectorMap();
@@ -152,8 +152,8 @@ void FullReplay_Lumi_Offline (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Calculate the hodoscope efficiencies
   THcHodoEff* heff = new THcHodoEff("hhodeff", "HMS hodo efficiency", "H.hod");
   gHaPhysics->Add(heff);
-  THcBCMCurrent* hbc = new THcBCMCurrent("H.bcm", "BCM current check");
-  gHaPhysics->Add(hbc);
+  // THcBCMCurrent* hbc = new THcBCMCurrent("H.bcm", "BCM current check");
+  // gHaPhysics->Add(hbc);
 
   // Add event handler for scaler events
   THcScalerEvtHandler *hscaler = new THcScalerEvtHandler("H", "Hall C scaler event type 4");  

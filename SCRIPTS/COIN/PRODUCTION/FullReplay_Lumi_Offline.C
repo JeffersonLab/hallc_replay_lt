@@ -200,8 +200,8 @@ void FullReplay_Lumi_Offline (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   TRG->AddDetector(coin); 
 
   // Add helicity detector to trigger apparatus
-  // THcHelicity* helicity = new THcHelicity("helicity","Helicity Detector");
-  // TRG->AddDetector(helicity);
+  THcHelicity* helicity = new THcHelicity("helicity","Helicity Detector");
+  TRG->AddDetector(helicity);
   
   //Add coin physics module THcCoinTime::THcCoinTime (const char *name, const char* description, const char* hadArmName, 
   // const char* elecArmName, const char* coinname) :
@@ -266,7 +266,7 @@ void FullReplay_Lumi_Offline (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   analyzer->Process(run);
   // Create report file from template	       
   // analyzer->PrintReport("TEMPLATES/COIN/coin_production.template",// ERROR!!!!
-// analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/coin_production_new.template",
-		    // Form("UTIL_KAONLT/REPORT_OUTPUT/COIN/PRODUCTION/Lumi_coin_replay_production_Offline_%d_%d.report", RunNumber, MaxEvent)); // optional
+analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/coin_production_new.template",
+		    Form("UTIL_KAONLT/REPORT_OUTPUT/COIN/PRODUCTION/Lumi_coin_replay_production_Offline_%d_%d.report", RunNumber, MaxEvent)); // optional
   
 }

@@ -20,12 +20,6 @@ void DC_Calib_Comp(string Det = "", TString Run_List="")
   TString Outpath;
   TString Histopath;
   TString Rootpath;
-  TString CurrentListNames[100];
-  TString CalibRunList;
-  Int_t CurrentOpt = 0;
-  Int_t CurrentLists = 0;
-  Int_t CalibOpt = 0;
-  Int_t DeletedPoints=0;
   Detector = Det;
   if(Detector == "") {
     cout << "Enter a Detector (HMS or SHMS): ";
@@ -43,38 +37,6 @@ void DC_Calib_Comp(string Det = "", TString Run_List="")
     cout << "Enter path to list of runs to be compared: ";
     cin >> Run_List;
     if(gSystem->AccessPathName(Run_List)){
-      cerr << "...Invalid file path\n";
-      return; 
-    }
-  }
-
-  // Yes, this is stupid and not very user friendly but this is for my own usage mainly
-  cout << "Colour plots by current? 1 for yes, any other input for no" << endl;
-  cin >> CurrentOpt;
-  if(CurrentOpt == 1){
-    cout << "Define number of currents used" << endl;
-    cin >> CurrentLists;
-    if (CurrentLists <=0) return;
-    else if (CurrentLists > 100){
-      cerr << "... too many run lists, enter a number under 100";
-      return;
-    }
-    cout << "Enter path to run list for each current" << endl;
-    for(Int_t i = 0; i < CurrentLists; i++){
-      cin >> CurrentListNames[i];
-      if(gSystem->AccessPathName(CurrentListNames[i])){
-	cerr << "...Invalid file path\n";
-	return; 
-      }
-    }
-  }
-
-  cout << "Set different markers for calibration runs? 1 for yes, any other input for no" << endl;
-  cin >> CalibOpt;
-  if(CalibOpt == 1){
-    cout << "Enter path to list of calibration runs in data set" << endl;
-    cin >> CalibRunList;
-    if(gSystem->AccessPathName(CalibRunList)){
       cerr << "...Invalid file path\n";
       return; 
     }
@@ -123,76 +85,15 @@ void DC_Calib_Comp(string Det = "", TString Run_List="")
     }
   }
   RunListFile.close();
-
-  fstream CurrentRunListFile[CurrentLists];
-  Int_t Current_line_num[CurrentLists];
-  Int_t Current_line_numTot[CurrentLists];
-  TString CurrentRunString[CurrentLists][100];
-  Int_t CurrentRunNumber[CurrentLists][100];
-  Double_t CurrentRunNumberD[CurrentLists][100];
-  string Currentline;
-
-  // Messy but working, reads in run numbers from file and assigns them to the array
-  if(CurrentOpt == 1){
-    for(Int_t i = 0; i < CurrentLists; i++){
-      CurrentRunListFile[i].open(CurrentListNames[i]);
-      Current_line_num[i] = 0;
-      Current_line_numTot[i] = 0;
-      if(CurrentRunListFile[i].is_open()){
-	while (getline(CurrentRunListFile[i], Currentline)){
-	  Current_line_num[i]++;
-	}
-      }
-      CurrentRunListFile[i].clear();
-      CurrentRunListFile[i].seekg(0, ios::beg);
-      Current_line_numTot[i] = Current_line_num[i];
-      cout << "Reading " <<  Current_line_numTot[i] <<  " lines in current run list file "<< i+1 << endl;
-      Current_line_num[i] = 0;
-      if(CurrentRunListFile[i].is_open()){
- 	while (getline(CurrentRunListFile[i], Currentline)){
-       	  CurrentRunString[i][Current_line_num[i]] = Currentline;
-       	  CurrentRunNumber[i][Current_line_num[i]] = CurrentRunString[i][Current_line_num[i]].Atoi();
-       	  CurrentRunNumberD[i][Current_line_num[i]] = CurrentRunString[i][Current_line_num[i]].Atof();
-	  Current_line_num[i]++;
-       	}
-      }
-      CurrentRunListFile[i].close();  
-    }
-  }
-  
-  Int_t Calib_line_num = 0;
-  Int_t Calib_line_numTot = 0;
-  string Calib_line;
-  fstream CalibRunListFile;
-  // Open our list of calib runs and grab the run numbers
-  if (CalibOpt ==1){
-    CalibRunListFile.open(CalibRunList);
-    if(CalibRunListFile.is_open()){
-      while (getline(CalibRunListFile, Calib_line)){
-	Calib_line_num++;
-      }
-    }
-    CalibRunListFile.clear();
-    CalibRunListFile.seekg(0, ios::beg);
-    Calib_line_numTot = Calib_line_num;
-  }
-  TString CalibRunString[Calib_line_numTot];
-  Int_t CalibRunNumber[Calib_line_numTot];
-  Double_t CalibRunNumberD[Calib_line_numTot];
-  if (CalibOpt ==1){
-  cout << "Reading " <<  Calib_line_numTot <<  " lines in calibration run list file" << endl;
-    Calib_line_num = 0;
-    if(CalibRunListFile.is_open()){
-      while (getline(CalibRunListFile, Calib_line)){
-	CalibRunString[Calib_line_num] = Calib_line;
-	CalibRunNumber[Calib_line_num] = CalibRunString[Calib_line_num].Atoi();
-	CalibRunNumberD[Calib_line_num] = CalibRunString[Calib_line_num].Atof();
-	Calib_line_num++;
-      }
-    }
-    CalibRunListFile.close();
-  }
-  
+    
+  // Quickly find the first and last run numbers in our array to set the range of our plots (and for naming)  
+  Double_t FirstRun = RunNumberD[0];
+  Double_t LastRun = RunNumberD[0];
+  Int_t FirstPoint;
+  for(Int_t i = 0; i < line_numTot; i++){
+    if (RunNumberD[i] > LastRun) LastRun = RunNumberD[i];
+    else if (RunNumberD[i] < FirstRun) FirstRun = RunNumberD[i];
+  }  
   // Define array of processed root files containing all the relevant histograms - Note, these are made using the run_DC_Calib_Comp.C script
   TFile *ROOTfiles[line_numTot];
   for (Int_t i = 0; i < line_numTot; i++){
@@ -202,7 +103,8 @@ void DC_Calib_Comp(string Det = "", TString Run_List="")
   TString Plane[12] = {"1u1", "1u2", "1x1", "1x2", "1v1", "1v2", "2u1", "2u2", "2x1", "2x2", "2v1", "2v2"};
   TString hName1;
   TString hName2;
-  TFile *Histogram_file = new TFile(Form("HISTOGRAMS/%s_DCCalib_Comparison.root", Det.c_str()),"RECREATE");
+  TString outputhisto = Form("OUTPUT/%s_DC_Comparison_Runs_%.f_%.f.root", Det.c_str(), FirstRun, LastRun) ; 
+  TFile *Histogram_file = new TFile(outputhisto,"RECREATE");
   TH1F* h1_Residuals[12][line_numTot];
   TH1F* h1_ResidualsExclPlane[12][line_numTot];
   TH1F* HistTemp;
@@ -230,14 +132,6 @@ void DC_Calib_Comp(string Det = "", TString Run_List="")
       h1_ResidualsExclPlane[i][j]->Write();
     }
   }
-  // Quickly find the first and last run numbers in our array to set the range of our plots (and for naming)
-  Double_t FirstRun = RunNumberD[0];
-  Double_t LastRun = RunNumberD[0];
-  Int_t FirstPoint;
-  for(Int_t i = 0; i < line_numTot; i++){
-    if (RunNumberD[i] > LastRun) LastRun = RunNumberD[i];
-    else if (RunNumberD[i] < FirstRun) FirstRun = RunNumberD[i];
-  }
   // Have four arrays of values now, plot on a TGraphErrors - Need 1 plot per plane (12) for each quantity (2) and each fit parameter (2)
   // Could probably define some function to do all of the setting of the plot stuff to make this loop look a little neater
   TGraphErrors *StabilityPlots[2][2][12]; // Quantity/parameter/plane
@@ -248,7 +142,7 @@ void DC_Calib_Comp(string Det = "", TString Run_List="")
     StabilityPlots[0][0][i]->SetMarkerSize(1); StabilityPlots[0][0][i]->SetMarkerStyle(4); 
     StabilityPlots[0][0][i]->SetMarkerColor(2); StabilityPlots[0][0][i]->SetLineColor(2);
     StabilityPlots[0][0][i]->GetXaxis()->SetTitle("Run Number"); StabilityPlots[0][0][i]->GetXaxis()->SetDecimals(kFALSE); StabilityPlots[0][0][i]->GetXaxis()->SetRangeUser(FirstRun-1, LastRun+1);
-    StabilityPlots[0][0][i]->GetYaxis()->SetTitle("Residual Mean"); StabilityPlots[0][0][i]->GetYaxis()->SetRangeUser(-0.02, 0.02);
+    StabilityPlots[0][0][i]->GetYaxis()->SetTitle("Residual Mean"); StabilityPlots[0][0][i]->GetYaxis()->SetRangeUser(-0.03, 0.03);
     StabilityPlots[0][0][i]->Write();
    
     StabilityPlots[0][1][i] = new TGraphErrors(line_numTot, RunNumberD, StdDev[0][i], 0, StdDevErr[0][i]);
@@ -262,7 +156,7 @@ void DC_Calib_Comp(string Det = "", TString Run_List="")
     StabilityPlots[1][0][i]->SetTitle(Plane[i] + " Unbiased Residual Mean as a function of Run Number"); StabilityPlots[1][0][i]->SetName(Plane[i] + "UbResMean");
     StabilityPlots[1][0][i]->SetMarkerSize(1); StabilityPlots[1][0][i]->SetMarkerStyle(4); StabilityPlots[1][0][i]->SetMarkerColor(2); StabilityPlots[1][0][i]->SetLineColor(2);
     StabilityPlots[1][0][i]->GetXaxis()->SetTitle("Run Number"); StabilityPlots[1][0][i]->GetXaxis()->SetDecimals(kFALSE); StabilityPlots[1][0][i]->GetXaxis()->SetRangeUser(FirstRun-1, LastRun+1);
-    StabilityPlots[1][0][i]->GetYaxis()->SetTitle("Unbiased Residual Mean"); StabilityPlots[1][0][i]->GetYaxis()->SetRangeUser(-0.02, 0.02);
+    StabilityPlots[1][0][i]->GetYaxis()->SetTitle("Unbiased Residual Mean"); StabilityPlots[1][0][i]->GetYaxis()->SetRangeUser(-0.03, 0.03);
     StabilityPlots[1][0][i]->Write();
 
     StabilityPlots[1][1][i] = new TGraphErrors(line_numTot, RunNumberD, StdDev[1][i], 0,  StdDevErr[1][i]);
@@ -278,39 +172,6 @@ void DC_Calib_Comp(string Det = "", TString Run_List="")
   for(Int_t i = 0; i<12; i++){ // loop over planes
     cResMean->cd(i+1);
     StabilityPlots[0][0][i]->Draw("AEP");
-    if(CalibOpt == 1 && CurrentOpt != 1){
-      for(Int_t j = 0; j < line_numTot; j++){
-	for(Int_t k = 0; k < Calib_line_numTot; k++){
-	  if (CalibRunNumberD[k] == RunNumberD[j]){
-	    StabilityPlots[0][0][i]->RemovePoint(j-DeletedPoints);
-	    DeletedPoints++;
-	    TMarker *CalibMarker = new TMarker(RunNumber[j], Mean[0][i][j], 33);
-	    CalibMarker->SetMarkerColor(2);
-	    CalibMarker->Draw("");
-	  }
-	}
-      }
-      DeletedPoints = 0;
-    }
-    else if(CalibOpt != 1 && CurrentOpt == 1){
-      for(Int_t j = 0; j < CurrentLists; j++){
-	for(Int_t k = 0; k < line_numTot; k++){
-	  for(Int_t w = 0; w < Current_line_numTot[j]; w++){
-	    if(CurrentRunNumberD[j][w] == RunNumberD[k]){
-	      StabilityPlots[0][0][i]->RemovePoint(k-DeletedPoints);
-	      DeletedPoints++;
-	      TMarker *CurrentMarker = new TMarker(RunNumber[k], Mean[0][i][k], 4);
-	      CurrentMarker->SetMarkerColor(j+31);
-	      CurrentMarker->Draw("");
-	    }
-	  }
-	}
-      }
-      DeletedPoints = 0;
-    }
-    else if(CalibOpt == 1 && CurrentOpt == 1){
-    }
-    cResMean->Update();
   }
 
   TCanvas *cResStdDev = new TCanvas("ResStdDev","Residual Standard Deviation as a function of run number by Plane",300,100,1000,900);
@@ -318,21 +179,6 @@ void DC_Calib_Comp(string Det = "", TString Run_List="")
   for(Int_t i = 0; i<12; i++){ // loop over planes
     cResStdDev->cd(i+1);
     StabilityPlots[0][1][i]->Draw("AEP");
-    if(CalibOpt == 1){
-      for(Int_t j = 0; j < line_numTot; j++){
-	for(Int_t k = 0; k < Calib_line_numTot; k++){
-	  if (CalibRunNumberD[k] == RunNumberD[j]){
-	    StabilityPlots[0][1][i]->RemovePoint(j-DeletedPoints);
-	    DeletedPoints++;
-	    TMarker *CalibMarker = new TMarker(RunNumber[j], StdDev[0][i][j], 33);
-	    CalibMarker->SetMarkerColor(2);
-	    CalibMarker->Draw("");
-	  }
-	}
-      }
-      DeletedPoints = 0;
-    }
-    cResStdDev->Update();
   }
 
   TCanvas *cUbResMean = new TCanvas("UbResMean","Unbiased Residual Means as a function of run number by Plane",300,100,1000,900);
@@ -340,21 +186,6 @@ void DC_Calib_Comp(string Det = "", TString Run_List="")
   for(Int_t i = 0; i<12; i++){ // loop over planes
     cUbResMean->cd(i+1);
     StabilityPlots[1][0][i]->Draw("AEP");
-    if(CalibOpt == 1){
-      for(Int_t j = 0; j < line_numTot; j++){
-	for(Int_t k = 0; k < Calib_line_numTot; k++){
-	  if (CalibRunNumberD[k] == RunNumberD[j]){
-	    StabilityPlots[1][0][i]->RemovePoint(j-DeletedPoints);
-	    DeletedPoints++;
-	    TMarker *CalibMarker = new TMarker(RunNumber[j], Mean[1][i][j], 33);
-	    CalibMarker->SetMarkerColor(2);
-	    CalibMarker->Draw("");
-	  }
-	}
-      }
-      DeletedPoints = 0;
-    }
-    cUbResMean->Update();
   }
 
   TCanvas *cUbResStdDev = new TCanvas("UbResStdDev","Unbiased Residual Standard Deviation as a function of run number by Plane",300,100,1000,900);
@@ -362,21 +193,6 @@ void DC_Calib_Comp(string Det = "", TString Run_List="")
   for(Int_t i = 0; i<12; i++){ // loop over planes
     cUbResStdDev->cd(i+1);
     StabilityPlots[1][1][i]->Draw("AEP");
-    if(CalibOpt == 1){
-      for(Int_t j = 0; j < line_numTot; j++){
-	for(Int_t k = 0; k < Calib_line_numTot; k++){
-	  if (CalibRunNumberD[k] == RunNumberD[j]){
-	    StabilityPlots[1][1][i]->RemovePoint(j-DeletedPoints);
-	    DeletedPoints++;
-	    TMarker *CalibMarker = new TMarker(RunNumber[j], StdDev[1][i][j], 33);
-	    CalibMarker->SetMarkerColor(2);
-	    CalibMarker->Draw("");
-	  }
-	}
-      }
-      DeletedPoints = 0;
-    }
-    cUbResStdDev->Update();
   }
 
   TString outputpdf = Form("OUTPUT/%s_DC_Comparison_Runs_%.f_%.f.pdf", Det.c_str(), FirstRun, LastRun) ; 

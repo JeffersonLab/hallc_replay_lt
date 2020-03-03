@@ -1,0 +1,444 @@
+///////////////// Stephen Kay, University of Regina, 03/02/20 /////////////////////////////
+
+#include <TProof.h>
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <stdio.h>
+#include <TSystem.h>
+#include <TLegend.h>
+#include <TF1.h>
+#include <TGraphErrors.h>
+#include <TPaveText.h>
+
+void DC_Calib_Comp(string Det = "", TString Run_List="")
+{
+  cout << "Script to compare stability of DC calibration over a series of runs" << endl;
+  cout << "Input is detector (HMS or SHMS) and a Run_List path" << endl;
+  TString Hostname = gSystem->HostName();
+  TString Detector;
+  TString Outpath;
+  TString Histopath;
+  TString Rootpath;
+  TString CurrentListNames[100];
+  TString CalibRunList;
+  TMarker *CurrentMarker2;
+  Int_t CurrentOpt = 0;
+  Int_t CurrentLists = 0;
+  Int_t CalibOpt = 0;
+  Int_t DeletedPoints=0;
+  Detector = Det;
+  if(Detector == "") {
+    cout << "Enter a Detector (HMS or SHMS): ";
+    cin >> Det;
+    Detector = Det;
+  }
+  if(Detector.EqualTo("HMS")) cout << "HMS selected" << endl;
+  else if(Detector.EqualTo("SHMS")) cout << "SHMS selected" << endl;
+  else if((Detector.EqualTo("HMS") == kFALSE) && (Detector.EqualTo("SHMS") == kFALSE) ) {
+    cerr << "...Invalid entry, enter HMS or SHMS\n";
+    return;
+  }
+   
+  if(Run_List == "") {
+    cout << "Enter path to list of runs to be compared: ";
+    cin >> Run_List;
+    if(gSystem->AccessPathName(Run_List)){
+      cerr << "...Invalid file path\n";
+      return; 
+    }
+  }
+
+  // Yes, this is stupid and not very user friendly but this is for my own usage mainly
+  cout << "Colour plots by current? 1 for yes, any other input for no" << endl;
+  cin >> CurrentOpt;
+  if(CurrentOpt == 1){
+    cout << "Define number of currents used" << endl;
+    cin >> CurrentLists;
+    if (CurrentLists <=0) return;
+    else if (CurrentLists > 100){
+      cerr << "... too many run lists, enter a number under 100";
+      return;
+    }
+    cout << "Enter path to run list for each current" << endl;
+    for(Int_t i = 0; i < CurrentLists; i++){
+      cin >> CurrentListNames[i];
+      if(gSystem->AccessPathName(CurrentListNames[i])){
+	cerr << "...Invalid file path\n";
+	return; 
+      }
+    }
+  }
+
+  cout << "Set different markers for calibration runs? 1 for yes, any other input for no" << endl;
+  cin >> CalibOpt;
+  if(CalibOpt == 1){
+    cout << "Enter path to list of calibration runs in data set" << endl;
+    cin >> CalibRunList;
+    if(gSystem->AccessPathName(CalibRunList)){
+      cerr << "...Invalid file path\n";
+      return; 
+    }
+  }
+
+  // Set some paths
+  if(Hostname.Contains("farm")){
+    Outpath = "/volatile/hallc/c-kaonlt/${USER}/OUTPUT/DC_Calib";
+    Histopath = "/volatile/hallc/c-kaonlt/${USER}/HISTOGRAMS/DC_Calib";
+  }
+  else if(Hostname.Contains("qcd")){
+    Outpath = "/volatile/hallc/c-kaonlt/${USER}/OUTPUT/DC_Calib";
+    Histopath = "/volatile/hallc/c-kaonlt/${USER}/HISTOGRAMS/DC_Calib";
+    Rootpath= "/cache/hallc/kaonlt/sjdkay/ROOTfiles/DC_Calib/Pass1_RateTest";
+  }
+  else if (Hostname.Contains("phys.uregina.ca")){
+    Outpath = "/dsk3/${USER}/JLab/OUTPUT/DC_Calib";
+    Histopath = "/dsk3/${USER}/JLab/HISTOGRAMS/DC_Calib" ;
+  }
+
+  // Open our list of runs and grab the run numbers
+  fstream RunListFile;
+  RunListFile.open(Run_List);
+  Int_t line_num = 0;
+  Int_t line_numTot = 0;
+  string line;
+  if(RunListFile.is_open()){
+    while (getline(RunListFile, line)){
+      line_num++;
+    }
+  }
+  RunListFile.clear();
+  RunListFile.seekg(0, ios::beg);
+  line_numTot = line_num;
+  cout << "Reading " <<  line_numTot <<  " lines in file" << endl;
+  TString RunString[line_numTot];
+  Int_t RunNumber[line_numTot];
+  Double_t RunNumberD[line_numTot];
+  line_num = 0;
+  if(RunListFile.is_open()){
+    while (getline(RunListFile, line)){
+      RunString[line_num] = line;
+      RunNumber[line_num] = RunString[line_num].Atoi();
+      RunNumberD[line_num] = RunString[line_num].Atof();
+      line_num++;
+    }
+  }
+  RunListFile.close();
+
+  fstream CurrentRunListFile[CurrentLists];
+  Int_t Current_line_num[CurrentLists];
+  Int_t Current_line_numTot[CurrentLists];
+  TString CurrentRunString[CurrentLists][100];
+  Int_t CurrentRunNumber[CurrentLists][100];
+  Double_t CurrentRunNumberD[CurrentLists][100];
+  string Currentline;
+
+  // Messy but working, reads in run numbers from file and assigns them to the array
+  if(CurrentOpt == 1){
+    for(Int_t i = 0; i < CurrentLists; i++){
+      CurrentRunListFile[i].open(CurrentListNames[i]);
+      Current_line_num[i] = 0;
+      Current_line_numTot[i] = 0;
+      if(CurrentRunListFile[i].is_open()){
+	while (getline(CurrentRunListFile[i], Currentline)){
+	  Current_line_num[i]++;
+	}
+      }
+      CurrentRunListFile[i].clear();
+      CurrentRunListFile[i].seekg(0, ios::beg);
+      Current_line_numTot[i] = Current_line_num[i];
+      cout << "Reading " <<  Current_line_numTot[i] <<  " lines in current run list file "<< i+1 << endl;
+      Current_line_num[i] = 0;
+      if(CurrentRunListFile[i].is_open()){
+ 	while (getline(CurrentRunListFile[i], Currentline)){
+       	  CurrentRunString[i][Current_line_num[i]] = Currentline;
+       	  CurrentRunNumber[i][Current_line_num[i]] = CurrentRunString[i][Current_line_num[i]].Atoi();
+       	  CurrentRunNumberD[i][Current_line_num[i]] = CurrentRunString[i][Current_line_num[i]].Atof();
+	  Current_line_num[i]++;
+       	}
+      }
+      CurrentRunListFile[i].close();  
+    }
+  }
+  
+  Int_t Calib_line_num = 0;
+  Int_t Calib_line_numTot = 0;
+  string Calib_line;
+  fstream CalibRunListFile;
+  // Open our list of calib runs and grab the run numbers
+  if (CalibOpt ==1){
+    CalibRunListFile.open(CalibRunList);
+    if(CalibRunListFile.is_open()){
+      while (getline(CalibRunListFile, Calib_line)){
+	Calib_line_num++;
+      }
+    }
+    CalibRunListFile.clear();
+    CalibRunListFile.seekg(0, ios::beg);
+    Calib_line_numTot = Calib_line_num;
+  }
+  TString CalibRunString[Calib_line_numTot];
+  Int_t CalibRunNumber[Calib_line_numTot];
+  Double_t CalibRunNumberD[Calib_line_numTot];
+  if (CalibOpt ==1){
+  cout << "Reading " <<  Calib_line_numTot <<  " lines in calibration run list file" << endl;
+    Calib_line_num = 0;
+    if(CalibRunListFile.is_open()){
+      while (getline(CalibRunListFile, Calib_line)){
+	CalibRunString[Calib_line_num] = Calib_line;
+	CalibRunNumber[Calib_line_num] = CalibRunString[Calib_line_num].Atoi();
+	CalibRunNumberD[Calib_line_num] = CalibRunString[Calib_line_num].Atof();
+	Calib_line_num++;
+      }
+    }
+    CalibRunListFile.close();
+  }
+  
+  // Quickly find the first and last run numbers in our array to set the range of our plots (and for naming)  
+  Double_t FirstRun = RunNumberD[0];
+  Double_t LastRun = RunNumberD[0];
+  Int_t FirstPoint;
+  for(Int_t i = 0; i < line_numTot; i++){
+    if (RunNumberD[i] > LastRun) LastRun = RunNumberD[i];
+    else if (RunNumberD[i] < FirstRun) FirstRun = RunNumberD[i];
+  }  
+  // Define array of processed root files containing all the relevant histograms - Note, these are made using the run_DC_Calib_Comp.C script
+  TFile *ROOTfiles[line_numTot];
+  for (Int_t i = 0; i < line_numTot; i++){
+    ROOTfiles[i] = new TFile(Histopath + Form("/%s_DCCalib_Comp_Run%i.root", Det.c_str(), RunNumber[i]));
+  } 
+  // Define string with planes and then the histogram arrays
+  TString Plane[12] = {"1u1", "1u2", "1x1", "1x2", "1v1", "1v2", "2u1", "2u2", "2x1", "2x2", "2v1", "2v2"};
+  TString hName1;
+  TString hName2;
+  TString outputhisto = Form("OUTPUT/%s_DC_Comparison_Runs_%.f_%.f.root", Det.c_str(), FirstRun, LastRun) ; 
+  TFile *Histogram_file = new TFile(outputhisto,"RECREATE");
+  TH1F* h1_Residuals[12][line_numTot];
+  TH1F* h1_ResidualsExclPlane[12][line_numTot];
+  TH1F* HistTemp;
+  TF1 *Gauss1 = new TF1("Gauss1", "gaus");
+  Gauss1->SetParNames("Amplitude","Mean","Std. Dev.");
+  Gauss1->SetParameter(1, 0);
+  Gauss1->SetParLimits(1, -0.5, 0.5);
+  Double_t Mean[2][12][line_numTot];
+  Double_t MeanErr[2][12][line_numTot];
+  Double_t StdDev[2][12][line_numTot];
+  Double_t StdDevErr[2][12][line_numTot];
+  // Pull out desired histograms from file, fit a simple Gaussian to residual plots, extract mean and std deviation of each and store in an array
+  TDirectory *DHists = Histogram_file->mkdir("Histograms"); DHists->cd();
+  for(Int_t i = 0; i < 12; i ++){ //Loop over planes
+    hName1 = "h1_"+Plane[i]+"_Residual";
+    hName2 = "h1_ResidualExclPlane_"+Plane[i];
+    for(Int_t j = 0; j < line_numTot; j++){ //Loop over all runs
+      h1_Residuals[i][j] = (TH1F*)(((TH1F*)ROOTfiles[j]->Get(hName1))->Clone(hName1 + Form("_%i", RunNumber[j])));
+      h1_ResidualsExclPlane[i][j] = (TH1F*)(((TH1F*)ROOTfiles[j]->Get(hName2))->Clone(hName2 + Form("_%i", RunNumber[j])));
+      h1_Residuals[i][j]->Fit(Gauss1, "Q"); 
+      Mean[0][i][j] = Gauss1->GetParameter(1); MeanErr[0][i][j] = Gauss1->GetParError(1); StdDev[0][i][j] = Gauss1->GetParameter(2); StdDevErr[0][i][j] = Gauss1->GetParError(2);
+      h1_ResidualsExclPlane[i][j]->Fit(Gauss1, "Q"); 
+      Mean[1][i][j] = Gauss1->GetParameter(1); MeanErr[1][i][j] = Gauss1->GetParError(1); StdDev[1][i][j] = Gauss1->GetParameter(2); StdDevErr[1][i][j] = Gauss1->GetParError(2);
+      h1_Residuals[i][j]->Write();
+      h1_ResidualsExclPlane[i][j]->Write();
+    }
+  }
+  // Have four arrays of values now, plot on a TGraphErrors - Need 1 plot per plane (12) for each quantity (2) and each fit parameter (2)
+  // Could probably define some function to do all of the setting of the plot stuff to make this loop look a little neater
+  TGraphErrors *StabilityPlots[2][2][12]; // Quantity/parameter/plane
+  TDirectory *DGraphs = Histogram_file->mkdir("Graphs"); DGraphs->cd(); 
+  for(Int_t i = 0; i<12; i++){ // loop over planes
+    StabilityPlots[0][0][i] = new TGraphErrors(line_numTot, RunNumberD, Mean[0][i], 0, MeanErr[0][i]);
+    StabilityPlots[0][0][i]->SetTitle(Plane[i] + " Residual Mean as a function of Run Number"); StabilityPlots[0][0][i]->SetName(Plane[i] + "ResMean");
+    StabilityPlots[0][0][i]->SetMarkerSize(1); StabilityPlots[0][0][i]->SetMarkerStyle(4); 
+    StabilityPlots[0][0][i]->SetMarkerColor(2); StabilityPlots[0][0][i]->SetLineColor(2);
+    StabilityPlots[0][0][i]->GetXaxis()->SetTitle("Run Number"); StabilityPlots[0][0][i]->GetXaxis()->SetDecimals(kFALSE); StabilityPlots[0][0][i]->GetXaxis()->SetRangeUser(FirstRun-1, LastRun+1);
+    StabilityPlots[0][0][i]->GetYaxis()->SetTitle("Residual Mean"); StabilityPlots[0][0][i]->GetYaxis()->SetRangeUser(-0.03, 0.03);
+    StabilityPlots[0][0][i]->Write();
+   
+    StabilityPlots[0][1][i] = new TGraphErrors(line_numTot, RunNumberD, StdDev[0][i], 0, StdDevErr[0][i]);
+    StabilityPlots[0][1][i]->SetTitle(Plane[i] + " Residual #sigma as a function of Run Number"); StabilityPlots[0][1][i]->SetName(Plane[i]+"ResStdDev");
+    StabilityPlots[0][1][i]->SetMarkerSize(1); StabilityPlots[0][1][i]->SetMarkerStyle(4); StabilityPlots[0][1][i]->SetMarkerColor(2); StabilityPlots[0][1][i]->SetLineColor(2);
+    StabilityPlots[0][1][i]->GetXaxis()->SetTitle("Run Number"); StabilityPlots[0][1][i]->GetXaxis()->SetDecimals(kFALSE); StabilityPlots[0][1][i]->GetXaxis()->SetRangeUser(FirstRun-1, LastRun+1);
+    StabilityPlots[0][1][i]->GetYaxis()->SetTitle("Residual #sigma"); StabilityPlots[0][1][i]->GetYaxis()->SetRangeUser(0, 0.1);
+    StabilityPlots[0][1][i]->Write();
+
+    StabilityPlots[1][0][i] = new TGraphErrors(line_numTot, RunNumberD, Mean[1][i], 0, MeanErr[1][i]);
+    StabilityPlots[1][0][i]->SetTitle(Plane[i] + " Unbiased Residual Mean as a function of Run Number"); StabilityPlots[1][0][i]->SetName(Plane[i] + "UbResMean");
+    StabilityPlots[1][0][i]->SetMarkerSize(1); StabilityPlots[1][0][i]->SetMarkerStyle(4); StabilityPlots[1][0][i]->SetMarkerColor(2); StabilityPlots[1][0][i]->SetLineColor(2);
+    StabilityPlots[1][0][i]->GetXaxis()->SetTitle("Run Number"); StabilityPlots[1][0][i]->GetXaxis()->SetDecimals(kFALSE); StabilityPlots[1][0][i]->GetXaxis()->SetRangeUser(FirstRun-1, LastRun+1);
+    StabilityPlots[1][0][i]->GetYaxis()->SetTitle("Unbiased Residual Mean"); StabilityPlots[1][0][i]->GetYaxis()->SetRangeUser(-0.03, 0.03);
+    StabilityPlots[1][0][i]->Write();
+
+    StabilityPlots[1][1][i] = new TGraphErrors(line_numTot, RunNumberD, StdDev[1][i], 0,  StdDevErr[1][i]);
+    StabilityPlots[1][1][i]->SetTitle(Plane[i] + " Unbiased Residual #sigma as a function of Run Number"); StabilityPlots[1][1][i]->SetName(Plane[i]+"UbResStdDev");
+    StabilityPlots[1][1][i]->SetMarkerSize(1); StabilityPlots[1][1][i]->SetMarkerStyle(4); StabilityPlots[1][1][i]->SetMarkerColor(2); StabilityPlots[1][1][i]->SetLineColor(2);
+    StabilityPlots[1][1][i]->GetXaxis()->SetTitle("Run Number"); StabilityPlots[1][1][i]->GetXaxis()->SetDecimals(kFALSE); StabilityPlots[1][1][i]->GetXaxis()->SetRangeUser(FirstRun-1, LastRun+1);
+    StabilityPlots[1][1][i]->GetYaxis()->SetTitle("Unbiased Residual #sigma"); StabilityPlots[1][1][i]->GetYaxis()->SetRangeUser(0, 0.1); 
+    StabilityPlots[1][1][i]->Write();
+  }
+  
+  TCanvas *cResMean = new TCanvas("ResMean","Residual Means as a function of run number by Plane",300,100,1000,900);
+  cResMean->Divide(3,4);
+  for(Int_t i = 0; i<12; i++){ // loop over planes
+    cResMean->cd(i+1);
+    StabilityPlots[0][0][i]->Draw("AEP");
+    if(CalibOpt == 1 && CurrentOpt != 1){ // If calibration option on but colour by current not, just switch out points which were new calibrations
+      for(Int_t j = 0; j < line_numTot; j++){
+	for(Int_t k = 0; k < Calib_line_numTot; k++){
+	  if (CalibRunNumberD[k] == RunNumberD[j]){
+	    StabilityPlots[0][0][i]->RemovePoint(j-DeletedPoints);
+	    DeletedPoints++;
+	    TMarker *CalibMarker = new TMarker(RunNumber[j], Mean[0][i][j], 33);
+	    CalibMarker->SetMarkerColor(2);
+	    CalibMarker->Draw("");
+	  }
+	}
+      }
+      DeletedPoints = 0;
+    }
+    else if(CalibOpt != 1 && CurrentOpt == 1){ // If colour by currents option on but calibration one not, colour points by the current of the run
+      for(Int_t j = 0; j < CurrentLists; j++){
+	for(Int_t k = 0; k < line_numTot; k++){
+	  for(Int_t w = 0; w < Current_line_numTot[j]; w++){
+	    if(CurrentRunNumberD[j][w] == RunNumberD[k]){
+	      StabilityPlots[0][0][i]->RemovePoint(k-DeletedPoints);
+	      DeletedPoints++;
+	      TMarker *CurrentMarker = new TMarker(RunNumber[k], Mean[0][i][k], 4);
+	      CurrentMarker->SetMarkerColor(31+(j*20));
+	      CurrentMarker->Draw("");
+	    }
+	  }
+	}
+      }
+      DeletedPoints = 0;
+    }
+    if(i ==0){
+      TLegend *leg1 = new TLegend(0.8, 0.5, 0.95, 0.7);
+      TLine *Line = new TLine();
+      for(Int_t j = 0; j < CurrentLists; j++){
+	Line->SetLineWidth(5);
+	Line->SetLineColor(31+(j*20));
+	leg1->AddEntry(Line, CurrentListNames[j], "l");
+      }
+      leg1->Draw("SAME");
+    }
+    // else if(CalibOpt == 1 && CurrentOpt == 1){ // If colour by current AND calibration on, colour points by current AND change the shape of calibration points
+    //   Bool_t CalibMatch[line_numTot];
+    //   Bool_t CurrentMatch[CurrentLists][line_numTot];
+    //   for(Int_t j = 0; j < line_numTot; j++){ //Check every line in analysed file
+    // 	for(Int_t k = 0; k < Calib_line_numTot; k++){ // Check every line in calib run list
+    // 	  if(CalibRunNumberD[k] == RunNumberD[j]) CalibMatch[j] = kTRUE; // If run number matches any of the ones on calib list, set bool true for this run number
+    // 	}
+    // 	if(CalibMatch[j] != kTRUE) CalibMatch[j] = kFALSE; // If run number doesn't match any in calib run list, set bool false for this run number
+    //   }
+    //   for(Int_t j = 0; j < line_numTot; j++){ //Check every line in analysed file
+    // 	for(Int_t k = 0; k < CurrentLists; k++){ // Check each current list file
+    // 	  for(Int_t w = 0; w < Current_line_numTot[k]; w++){ // Check every line in file
+    // 	    if(CurrentRunNumber[k][w] == RunNumberD[j]) CurrentMatch[k][j] = kTRUE; // If run number matches any of the ones in the current run list, set bool true for this list and run number 
+    // 	  }
+    // 	  if(CurrentMatch[k][j] != kTRUE) CurrentMatch[k][j] = kFALSE; //If this list and run number don't match at all, set bool false
+    // 	}   
+    //   } // Bools now set, need to modify plots next
+    //   cout << "Plot \t RunNumber \t Calibration Run \t Current List \t Current matched" << endl;
+    //   for(Int_t j = 0; j <  line_numTot; j++){ // Check every line number
+    // 	cout << i << "\t" << RunNumberD[j] << "\t" << CalibMatch[j] << "\t";
+    // 	for(Int_t k = 0; k < CurrentLists; k++){ // Check each current list file
+    // 	  cout << k << "\t" << cout << CurrentMatch[k][j]; // For some reason the output of this when in the loop is now a fucking pointer
+    // 	}
+    // 	cout << endl;
+    //   }
+      
+      // for(Int_t j = 0; j <  line_numTot; j++){ // Check every line number
+      // 	for(Int_t k = 0; k < CurrentLists; k++){ // Check each current list file
+      // 	  cout << i << "  " << RunNumberD[j] << "  " << k << "  " << j <<  "  " << CurrentMatch[k][j] << "  " << CalibMatch[j] << endl;
+      // 	  if (CurrentMatch[k][j] == kTRUE){ // If current matches one on the run list, do something
+      // 	      StabilityPlots[0][0][i]->RemovePoint(j-DeletedPoints);
+      // 	      DeletedPoints++;
+      // 	      CurrentMarker2 = new TMarker();
+      // 	      CurrentMarker2->SetX(RunNumber[j]); CurrentMarker2->SetY(Mean[0][i][j]);
+      // 	      if(CalibMatch[j] == kFALSE) CurrentMarker2->SetMarkerStyle(4);
+      // 	      else if (CalibMatch[j] == kTRUE) CurrentMarker2->SetMarkerStyle(33);
+      // 	      CurrentMarker2->SetMarkerColor(31+(k*20));
+      // 	      CurrentMarker2->Draw("");  
+      // 	  }
+      // 	}
+      // }
+      // DeletedPoints = 0;
+    //}
+    cResMean->Update();
+  }
+
+  TCanvas *cResStdDev = new TCanvas("ResStdDev","Residual Standard Deviation as a function of run number by Plane",300,100,1000,900);
+  cResStdDev->Divide(3,4);
+  for(Int_t i = 0; i<12; i++){ // loop over planes
+    cResStdDev->cd(i+1);
+    StabilityPlots[0][1][i]->Draw("AEP");
+    if(CalibOpt == 1){
+      for(Int_t j = 0; j < line_numTot; j++){
+	for(Int_t k = 0; k < Calib_line_numTot; k++){
+	  if (CalibRunNumberD[k] == RunNumberD[j]){
+	    StabilityPlots[0][1][i]->RemovePoint(j-DeletedPoints);
+	    DeletedPoints++;
+	    TMarker *CalibMarker = new TMarker(RunNumber[j], StdDev[0][i][j], 33);
+	    CalibMarker->SetMarkerColor(2);
+	    CalibMarker->Draw("");
+	  }
+	}
+      }
+      DeletedPoints = 0;
+    }
+    cResStdDev->Update();
+  }
+
+  TCanvas *cUbResMean = new TCanvas("UbResMean","Unbiased Residual Means as a function of run number by Plane",300,100,1000,900);
+  cUbResMean->Divide(3,4);
+  for(Int_t i = 0; i<12; i++){ // loop over planes
+    cUbResMean->cd(i+1);
+    StabilityPlots[1][0][i]->Draw("AEP");
+    if(CalibOpt == 1){
+      for(Int_t j = 0; j < line_numTot; j++){
+	for(Int_t k = 0; k < Calib_line_numTot; k++){
+	  if (CalibRunNumberD[k] == RunNumberD[j]){
+	    StabilityPlots[1][0][i]->RemovePoint(j-DeletedPoints);
+	    DeletedPoints++;
+	    TMarker *CalibMarker = new TMarker(RunNumber[j], Mean[1][i][j], 33);
+	    CalibMarker->SetMarkerColor(2);
+	    CalibMarker->Draw("");
+	  }
+	}
+      }
+      DeletedPoints = 0;
+    }
+    cUbResMean->Update();
+  }
+
+  TCanvas *cUbResStdDev = new TCanvas("UbResStdDev","Unbiased Residual Standard Deviation as a function of run number by Plane",300,100,1000,900);
+  cUbResStdDev->Divide(3,4);
+  for(Int_t i = 0; i<12; i++){ // loop over planes
+    cUbResStdDev->cd(i+1);
+    StabilityPlots[1][1][i]->Draw("AEP");
+    if(CalibOpt == 1){
+      for(Int_t j = 0; j < line_numTot; j++){
+	for(Int_t k = 0; k < Calib_line_numTot; k++){
+	  if (CalibRunNumberD[k] == RunNumberD[j]){
+	    StabilityPlots[1][1][i]->RemovePoint(j-DeletedPoints);
+	    DeletedPoints++;
+	    TMarker *CalibMarker = new TMarker(RunNumber[j], StdDev[1][i][j], 33);
+	    CalibMarker->SetMarkerColor(2);
+	    CalibMarker->Draw("");
+	  }
+	}
+      }
+      DeletedPoints = 0;
+    }
+    cUbResStdDev->Update();
+  }
+
+  TString outputpdf = Form("OUTPUT/%s_DC_Comparison_Runs_%.f_%.f.pdf", Det.c_str(), FirstRun, LastRun) ; 
+  cResMean->Print(outputpdf+"["); //Opens file without printing anything
+  cResMean->Print(outputpdf);
+  cResStdDev->Print(outputpdf);
+  cUbResMean->Print(outputpdf);
+  cUbResStdDev->Print(outputpdf);
+  cResMean->Print(outputpdf+"]"); //Closes file without printing anything
+
+  Histogram_file->Close();
+}

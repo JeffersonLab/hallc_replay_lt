@@ -2,19 +2,3 @@
 	path = UTIL_OL
 	url = https://github.com/JeffersonLab/UTIL_OL
 	branch = master
-[submodule "UTIL_KAONLT"]
-	path = UTIL_KAONLT
-	url = https://github.com/JeffersonLab/UTIL_KAONLT
-	branch = offline
-[submodule "UTIL_PION"]
-	path = UTIL_PION
-	url = https://github.com/sjdkay/UTIL_PION.git/
-	branch = develop
-[submodule "UTIL_PROTON"]
-        path = UTIL_PROTON
-        url = https://github.com/sjdkay/UTIL_PROTON.git/
-        branch = develop
-[submodule "UTIL_BATCH"]
-	path = UTIL_BATCH
-	url = https://github.com/sjdkay/UTIL_BATCH/
-	branch = develop

@@ -1,0 +1,19 @@
+Run #: {gen_run_number}
+
+**************************
+* General Run Information
+**************************
+Beam energy : {gpbeam}
+Target mass (amu) : {gtargmass_amu} 
+
+HMS Particle Mass : {hpartmass}
+HMS P Central : {hpcentral}
+HMS Angle : {htheta_lab}
+
+SHMS Particle Mass : {ppartmass}
+SHMS P Central : {ppcentral}
+SHMS Angle : {ptheta_lab}
+
+SHMS Run Length   : {P.1MHz.scalerTime:%.3f} sec
+HMS  Run Length   : {H.1MHz.scalerTime:%.3f} sec
+

@@ -1,0 +1,9 @@
+#### Run period 1 KaonLT kinematics
+0-6580
+g_ctp_parm_filename       = "DBASE/COIN/general.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+### Run period 2 KaonLT kinematics
+6581-99999
+g_ctp_parm_filename       = "DBASE/COIN/general_runperiod2.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"

@@ -1,0 +1,7 @@
+Lists of files sorted by beam energy. 
+
+Split into ProductionLH2, ProductionDummy, LumiScan, HeepSingles and HeepCoin.
+
+No junk runs included.
+
+To make subsets of these as you want, just merge the relevant ones.

@@ -1,0 +1,59 @@
+block P.cal.etotnorm
+block P.cal.etottracknorm
+block P.aero.npeSum
+block P.hgcer.npeSum   
+block P.tr.*
+block P.gtr.*
+block P.hod.goodscinhit
+block P.hod.betanotrack
+block P.dc.ntrack
+block P.dc.1x1.nhit
+block P.dc.1u1.nhit
+block P.dc.1v1.nhit
+block P.dc.1x2.nhit
+block P.dc.1u2.nhit
+block P.dc.1v2.nhit
+block P.dc.2x1.nhit
+block P.dc.2u1.nhit
+block P.dc.2v1.nhit
+block P.dc.2x2.nhit
+block P.dc.2u2.nhit
+block P.dc.2v2.nhit
+block H.cal.etotnorm
+block H.cal.etottracknorm
+block H.cer.npeSum
+block H.gtr.*
+block H.tr.*
+block H.hod.goodscinhit
+block H.hod.betanotrack
+block H.dc.ntrack
+block H.dc.1x1.nhit
+block H.dc.1u1.nhit
+block H.dc.1v1.nhit
+block H.dc.1x2.nhit
+block H.dc.1u2.nhit
+block H.dc.1v2.nhit
+block H.dc.2x1.nhit
+block H.dc.2u1.nhit
+block H.dc.2v1.nhit
+block H.dc.2x2.nhit
+block H.dc.2u2.nhit
+block H.dc.2v2.nhit
+block H.bcm.*
+block T.coin.pTRIG1_ROC1_tdcTime
+block T.coin.pTRIG3_ROC1_tdcTime
+block T.coin.pTRIG5_ROC1_tdcTime
+block T.coin.pTRIG1_ROC2_tdcTime
+block T.coin.pTRIG3_ROC2_tdcTime
+block T.coin.pTRIG5_ROC2_tdcTime
+block T.coin.pEDTM_tdcTime
+
+begin epics
+IBC3H00CRCUR4
+hac_bcm_average
+ibcm1
+ibcm2
+iunser
+itov3out
+itov4out
+end epics

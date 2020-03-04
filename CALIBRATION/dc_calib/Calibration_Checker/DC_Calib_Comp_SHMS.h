@@ -23,6 +23,20 @@ class DC_Calib_Comp_SHMS : public TSelector {
   TTree          *fChain = 0;   //!pointer to the analyzed TTree or TChain
 
   //Declare Histograms
+  // Could do these as arrays of histos but there's only 12 so won't bother
+  TH1F           *h1_1u1_DriftDistance;
+  TH1F           *h1_1u2_DriftDistance;
+  TH1F           *h1_1x1_DriftDistance;
+  TH1F           *h1_1x2_DriftDistance;
+  TH1F           *h1_1v1_DriftDistance;
+  TH1F           *h1_1v2_DriftDistance;
+  TH1F           *h1_2u1_DriftDistance;
+  TH1F           *h1_2u2_DriftDistance;
+  TH1F           *h1_2x1_DriftDistance;
+  TH1F           *h1_2x2_DriftDistance;
+  TH1F           *h1_2v1_DriftDistance;
+  TH1F           *h1_2v2_DriftDistance;
+
   // Residual is the distance betwen the final track position and the hit location obtained from an individual plane
   TH1F           **h1_Residual;
   // Residual "unbiased" by the plane you're looking at, need to find a better description somewhere...
@@ -42,6 +56,19 @@ class DC_Calib_Comp_SHMS : public TSelector {
   TTreeReaderArray<Double_t> P_dc_2x1_time      = {fReader, "P.dc.2x1.time"};
   TTreeReaderArray<Double_t> P_dc_2x2_time      = {fReader, "P.dc.2x2.time"};
  
+  TTreeReaderArray<Double_t> P_dc_1u1_dist      = {fReader, "P.dc.1u1.dist"};
+  TTreeReaderArray<Double_t> P_dc_1u2_dist      = {fReader, "P.dc.1u2.dist"};
+  TTreeReaderArray<Double_t> P_dc_1v1_dist      = {fReader, "P.dc.1v1.dist"};
+  TTreeReaderArray<Double_t> P_dc_1v2_dist      = {fReader, "P.dc.1v2.dist"};
+  TTreeReaderArray<Double_t> P_dc_1x1_dist      = {fReader, "P.dc.1x1.dist"};
+  TTreeReaderArray<Double_t> P_dc_1x2_dist      = {fReader, "P.dc.1x2.dist"};
+  TTreeReaderArray<Double_t> P_dc_2u1_dist      = {fReader, "P.dc.2u1.dist"};
+  TTreeReaderArray<Double_t> P_dc_2u2_dist      = {fReader, "P.dc.2u2.dist"};
+  TTreeReaderArray<Double_t> P_dc_2v1_dist      = {fReader, "P.dc.2v1.dist"};
+  TTreeReaderArray<Double_t> P_dc_2v2_dist      = {fReader, "P.dc.2v2.dist"};
+  TTreeReaderArray<Double_t> P_dc_2x1_dist      = {fReader, "P.dc.2x1.dist"};
+  TTreeReaderArray<Double_t> P_dc_2x2_dist      = {fReader, "P.dc.2x2.dist"};
+
   TTreeReaderArray<Double_t> P_dc_1u1_wirenum   = {fReader, "P.dc.1u1.wirenum"};
   TTreeReaderArray<Double_t> P_dc_1u2_wirenum   = {fReader, "P.dc.1u2.wirenum"};
   TTreeReaderArray<Double_t> P_dc_1v1_wirenum   = {fReader, "P.dc.1v1.wirenum"};
@@ -59,7 +86,7 @@ class DC_Calib_Comp_SHMS : public TSelector {
   TTreeReaderArray<Double_t> P_dc_residualExclPlane  = {fReader, "P.dc.residualExclPlane"};
 
   TTreeReaderArray<Double_t> P_hgcer_npeSum       = {fReader, "P.hgcer.npeSum"};
-  TTreeReaderArray<Double_t> T_shms_pEL_CLEAN_tdcTime = {fReader, "T.shms.pEL_CLEAN_tdcTime"};
+  TTreeReaderArray<Double_t> T_coin_pEL_CLEAN_tdcTime = {fReader, "T.coin.pEL_CLEAN_ROC2_tdcTime"};
 
   DC_Calib_Comp_SHMS(TTree * /*tree*/ =0) {}
   virtual ~DC_Calib_Comp_SHMS() { }

@@ -36,7 +36,7 @@ void LumiYield::Begin(TTree * /*tree*/)
   // When running with PROOF Begin() is only called on the client.
   // The tree argument is deprecated (on PROOF 0 is passed).
 
-  Init(tree);
+  // Init(tree);
   
   printf("\n\n");
 

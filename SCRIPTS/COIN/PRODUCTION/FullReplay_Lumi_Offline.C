@@ -251,8 +251,8 @@ void FullReplay_Lumi_Offline (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file+
   // analyzer->SetOdefFile("DEF-files/COIN/PRODUCTION/coin_production_hElec_pProt.def");
-  analyzer->SetOdefFile("DEF-files/COIN/PRODUCTION/coin_production.def");
-  // analyzer->SetOdefFile("UTIL_KAONLT/DEF-files/luminosity_coin_production.def");
+  // analyzer->SetOdefFile("DEF-files/COIN/PRODUCTION/coin_production.def");
+  analyzer->SetOdefFile("UTIL_KAONLT/DEF-files/luminosity_coin_production.def");
   // analyzer->SetOdefFile("UTIL_KAONLT/DEF-files/coin_production.def");
   // Define cuts file
   // analyzer->SetCutFile("UTIL_KAONLT/DEF-files/luminosity_coin_production_cuts.def");  // optional

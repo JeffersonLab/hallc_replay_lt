@@ -9,10 +9,10 @@ if [[ $1 -eq "" ]]; then
     echo "I need a Run Number!"
     exit 2
 fi
-if [[ $2 -eq "" ]]; then
-    echo "Only Run Number entered...I'll assume -1 events!" 
-    MAXEVENTS=-1 
-fi
+# if [[ $2 -eq "" ]]; then
+#     echo "Only Run Number entered...I'll assume -1 events!" 
+#     MAXEVENTS=-1 
+# fi
 cd ../../../
 #   Load params for BCM
 #   const char* CurrentFileNamePattern = "PARAM/HMS/BCM/CALIB/bcmcurrent_%d.param";

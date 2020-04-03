@@ -174,7 +174,7 @@ void replay_lumi_coin_offline(Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   THcPrimaryKine* pkin_primary = new THcPrimaryKine("P.kin.primary", "SHMS Single Arm Kinematics", "P", "P.rb");
   gHaPhysics->Add(hkin_primary);
   gHaPhysics->Add(pkin_primary);
-  Add Physics Module to calculate secondary (scattered hadrons) beam kinematics
+  // Add Physics Module to calculate secondary (scattered hadrons) beam kinematics
   THcSecondaryKine* hkin_secondary = new THcSecondaryKine("H.kin.secondary", "HMS Single Arm Kinematics", "H", "P.kin.primary");
   THcSecondaryKine* pkin_secondary = new THcSecondaryKine("P.kin.secondary", "SHMS Single Arm Kinematics", "P", "H.kin.primary");
   gHaPhysics->Add(hkin_secondary);

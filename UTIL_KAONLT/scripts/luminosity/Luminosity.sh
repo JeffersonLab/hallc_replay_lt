@@ -19,15 +19,15 @@ cd ../../../
 #   gHcParms->Load(Form(CurrentFileNamePattern, RunNumber));
 # When we comment out the below bit ONLY when the bit above is commented out in replay_luminosity_coin.C
 echo -e "\n\nStarting Scaler Replay Script\n\n"
-./hcana -q "SCRIPTS/COIN/SCALERS/replay_coin_scalers.C($RUNNUMBER,-1)"
+./hcana -q "SCRIPTS/COIN/SCALERS/replay_coin_scalers.C($RUNNUMBER,$MAXEVENTS)"
 cd CALIBRATION/bcm_current_map/
 root -b<<EOF
 .L ScalerCalib.C+
-.x run.C("../../ROOTfiles/coin_replay_scalers_${RUNNUMBER}_-1.root")
+.x run.C("../../ROOTfiles/coin_replay_scalers_${RUNNUMBER}_${MAXEVENTS}.root")
 EOF
 
 mv bcmcurrent_$RUNNUMBER.param ../../PARAM/HMS/BCM/CALIB/bcmcurrent_$RUNNUMBER.param
 cd ../../
 
 echo -e "\n\nStarting Replay Script\n\n"
-./hcana -q "UTIL_KAONLT/scripts/luminosity/replay/replay_lumi_coin_offline.C($RUNNUMBER,$OKEVENTS)" | tee UTIL_KAONLT/REPORT_OUTPUT/COIN/PRODUCTION/output_coin_production_${RUNNUMBER}_${MAXEVENTS}.report
+./hcana -q "UTIL_KAONLT/scripts/luminosity/replay/replay_lumi_coin_offline.C($RUNNUMBER,$MAXEVENTS)" | tee UTIL_KAONLT/REPORT_OUTPUT/COIN/PRODUCTION/output_coin_production_${RUNNUMBER}_${MAXEVENTS}.report

@@ -26,27 +26,6 @@ OUTPUT
 raw*
 raw.copiedtotape
 cache
-#PARAM/HMS/HODO/Calibration
-#PARAM/SHMS/HODO/Calibration
-DBASE/COIN/HMS_HodoCalib
-DBASE/COIN/SHMS_HodoCalib
-DBASE/COIN/HMS_DCCalib
-DBASE/COIN/SHMS_DCCalib
-#PARAM/HMS/DC/CALIB
-#PARAM/SHMS/DC/CALIB
-OUTPUT
-CALIBRATION/dc_calib/scripts/HMS_*
-CALIBRATION/dc_calib/scripts/SHMS_*
-PARAM/SHMS/DC/CALIB/Farm_Ouput/
-PARAM/HMS/DC/CALIB/Farm_Ouput/
-CALIBRATION/hms_cal_calib/Output/
-CALIBRATION/hms_cal_calib/Input/
-CALIBRATION/shms_cal_calib/Output/
-CALIBRATION/shms_cal_calib/Input/
-UTIL_BATCH/
-UTIL_KAONLT/
-UTIL_PION/
-UTIL_PROTON/
 
 # Symbolic links
 hcana

@@ -1,0 +1,57 @@
+H.cal.etotnorm
+H.cer.npeSum
+block H.gtr.*
+H.hod.goodscinhit
+H.hod.betanotrack
+H.dc.*
+H.bcm.*
+P.cal.etotnorm
+P.hgcer.npeSum
+P.aero.npeSum
+block P.gtr.*
+P.hod.goodscinhit
+P.hod.betanotrack
+P.dc.*
+block T.coin.*
+H.BCM4A.scalerCharge
+H.BCM4B.scalerCharge
+H.BCM4C.scalerCharge
+H.BCM1.scalerCharge
+H.BCM2.scalerCharge
+H.1MHz.scalerTime
+H.pTRIG1.scaler
+H.pTRIG2.scaler
+H.pTRIG3.scaler
+H.pTRIG4.scaler
+H.pTRIG5.scaler
+H.pTRIG6.scaler
+H.hL1ACCP.scaler
+H.hPRE40.scaler
+H.hPRE100.scaler
+H.hPRE150.scaler
+H.hPRE200.scaler
+H.hEL_LO_LO.scaler
+H.hEL_LO.scaler
+H.hEL_HI.scaler
+H.hEL_REAL.scaler
+H.hEL_CLEAN.scaler
+H.hSTOF.scaler
+H.pEL_LO_LO.scaler
+H.pEL_LO.scaler
+H.pEL_HI.scaler
+H.pEL_REAL.scaler
+H.pEL_CLEAN.scaler
+H.pSTOF.scaler
+H.PRHI.scaler
+H.PRLO.scaler
+H.EDTM.scaler
+fEvtHdr.fEvtType
+begin epics
+IBC3H00CRCUR4
+hac_bcm_average
+ibcm1
+ibcm2
+iunser
+itov3out
+itov4out
+end epics

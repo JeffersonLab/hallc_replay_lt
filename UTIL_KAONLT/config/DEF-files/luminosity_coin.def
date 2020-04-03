@@ -1,6 +1,7 @@
 block H.cal.etotnorm
 block H.cer.npeSum
 block H.gtr.*
+block H.tr.*
 block H.hod.goodscinhit
 block H.hod.betanotrack
 block H.dc.*

@@ -10,6 +10,7 @@ block P.cal.etotnorm
 block P.hgcer.npeSum
 block P.aero.npeSum
 block P.gtr.*
+block P.tr.*
 block P.hod.goodscinhit
 block P.hod.betanotrack
 block P.dc.*

@@ -3,7 +3,8 @@
 echo "Starting Luminosity Script"
 echo "I take as arguments the Run Number and max number of events!"
 RUNNUMBER=$1
-MAXEVENTS=$2
+# MAXEVENTS=$2
+MAXEVENTS=50000
 if [[ $1 -eq "" ]]; then
     echo "I need a Run Number!"
     exit 2
@@ -28,7 +29,5 @@ EOF
 mv bcmcurrent_$RUNNUMBER.param ../../PARAM/HMS/BCM/CALIB/bcmcurrent_$RUNNUMBER.param
 cd ../../
 
-OKEVENTS=50000
-# OKEVENTS=-1
 echo -e "\n\nStarting Replay Script\n\n"
-./hcana -q "UTIL_KAONLT/scripts/luminosity/replay/replay_lumi_coin_offline.C($RUNNUMBER,$OKEVENTS)" | tee UTIL_KAONLT/REPORT_OUTPUT/COIN/PRODUCTION/output_coin_production_${RUNNUMBER}_${OKEVENTS}.report
+./hcana -q "UTIL_KAONLT/scripts/luminosity/replay/replay_lumi_coin_offline.C($RUNNUMBER,$OKEVENTS)" | tee UTIL_KAONLT/REPORT_OUTPUT/COIN/PRODUCTION/output_coin_production_${RUNNUMBER}_${MAXEVENTS}.report

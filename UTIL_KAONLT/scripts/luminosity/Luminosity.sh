@@ -12,7 +12,7 @@ if [[ $2 -eq "" ]]; then
     echo "Only Run Number entered...I'll assume -1 events!" 
     MAXEVENTS=-1 
 fi
-cd ../
+cd ../../../
 #   Load params for BCM
 #   const char* CurrentFileNamePattern = "PARAM/HMS/BCM/CALIB/bcmcurrent_%d.param";
 #   gHcParms->Load(Form(CurrentFileNamePattern, RunNumber));
@@ -31,4 +31,4 @@ cd ../../
 OKEVENTS=50000
 # OKEVENTS=-1
 echo -e "\n\nStarting Replay Script\n\n"
-./hcana -q "UTIL_KAONLT/scripts/luminosity/replay_lumi_coin_offline.C($RUNNUMBER,$OKEVENTS)" | tee UTIL_KAONLT/REPORT_OUTPUT/COIN/PRODUCTION/output_coin_production_${RUNNUMBER}_${OKEVENTS}.report
+./hcana -q "UTIL_KAONLT/scripts/luminosity/replay/replay_lumi_coin_offline.C($RUNNUMBER,$OKEVENTS)" | tee UTIL_KAONLT/REPORT_OUTPUT/COIN/PRODUCTION/output_coin_production_${RUNNUMBER}_${OKEVENTS}.report

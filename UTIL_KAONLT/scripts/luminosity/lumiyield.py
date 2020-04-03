@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-03 16:15:22 trottar"
+# Time-stamp: "2020-04-03 17:28:46 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -17,7 +17,7 @@ import sys
 sys.path.insert(0, '/home/trottar/bin/python/')
 import root2py as r2p
 
-rootName = "../../ROOTfiles/Lumi_coin_replay_production_Offline_5158_50000.root"
+rootName = "../../ROOTfiles/lumi_coin_offline_5158_50000.root"
 
 PS1 = 1
 PS3 = 1

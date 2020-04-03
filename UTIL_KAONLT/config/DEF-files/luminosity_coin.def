@@ -1,50 +1,30 @@
-H.cal.etotnorm
-H.cer.npeSum
+block H.cal.etotnorm
+block H.cer.npeSum
 block H.gtr.*
-H.hod.goodscinhit
-H.hod.betanotrack
-H.dc.*
-H.bcm.*
-P.cal.etotnorm
-P.hgcer.npeSum
-P.aero.npeSum
+block H.hod.goodscinhit
+block H.hod.betanotrack
+block H.dc.*
+block H.bcm.*
+block P.cal.etotnorm
+block P.hgcer.npeSum
+block P.aero.npeSum
 block P.gtr.*
-P.hod.goodscinhit
-P.hod.betanotrack
-P.dc.*
+block P.hod.goodscinhit
+block P.hod.betanotrack
+block P.dc.*
 block T.coin.*
-H.BCM4A.scalerCharge
-H.BCM4B.scalerCharge
-H.BCM4C.scalerCharge
-H.BCM1.scalerCharge
-H.BCM2.scalerCharge
-H.1MHz.scalerTime
-H.pTRIG1.scaler
-H.pTRIG2.scaler
-H.pTRIG3.scaler
-H.pTRIG4.scaler
-H.pTRIG5.scaler
-H.pTRIG6.scaler
-H.hL1ACCP.scaler
-H.hPRE40.scaler
-H.hPRE100.scaler
-H.hPRE150.scaler
-H.hPRE200.scaler
-H.hEL_LO_LO.scaler
-H.hEL_LO.scaler
-H.hEL_HI.scaler
-H.hEL_REAL.scaler
-H.hEL_CLEAN.scaler
-H.hSTOF.scaler
-H.pEL_LO_LO.scaler
-H.pEL_LO.scaler
-H.pEL_HI.scaler
-H.pEL_REAL.scaler
-H.pEL_CLEAN.scaler
-H.pSTOF.scaler
-H.PRHI.scaler
-H.PRLO.scaler
-H.EDTM.scaler
+block H.BCM*.scalerCharge
+block H.1MHz.scalerTime
+block H.pTRIG*.scaler
+block H.hL1ACCP.scaler
+block H.hPRE*.scaler
+block H.hEL_*.scaler
+block H.hSTOF.scaler
+block H.pEL_*.scaler
+block H.pSTOF.scaler
+block H.PRHI.scaler
+block H.PRLO.scaler
+block H.EDTM.scaler
 fEvtHdr.fEvtType
 begin epics
 IBC3H00CRCUR4

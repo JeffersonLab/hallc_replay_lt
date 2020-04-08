@@ -27,7 +27,6 @@ void replay_lumi_coin_offline(Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./raw/../raw.copiedtotape");
   pathList.push_back("./cache");
 
-  //const char* RunFileNamePattern = "raw/coin_all_%05d.dat";
   const char* ROOTFileNamePattern = "ROOTfiles/lumi_coin_offline_%d_%d.root";
   
   // Load global parameters
@@ -36,12 +35,6 @@ void replay_lumi_coin_offline(Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHcParms->Load(gHcParms->GetString("g_ctp_database_filename"), RunNumber);
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
-  // The params below are called in DBASE/COIN/*.param
-  // Load params for COIN trigger configuration
-  // gHcParms->Load("g_ctp_trigdet_filename");
-  // Load fadc debug parameters
-  // gHcParms->Load("PARAM/HMS/GEN/h_fadc_debug.param");
-  // gHcParms->Load("PARAM/SHMS/GEN/p_fadc_debug.param");
 
   // Load params for BCM
   const char* CurrentFileNamePattern = "PARAM/HMS/BCM/CALIB/bcmcurrent_%d.param";
@@ -171,15 +164,15 @@ void replay_lumi_coin_offline(Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   //=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
 
   // Add Physics Module to calculate primary (scattered electrons) beam kinematics 
-  // THcPrimaryKine* hkin_primary = new THcPrimaryKine("H.kin.primary", "HMS Single Arm Kinematics", "H", "H.rb");
-  // THcPrimaryKine* pkin_primary = new THcPrimaryKine("P.kin.primary", "SHMS Single Arm Kinematics", "P", "P.rb");
-  // gHaPhysics->Add(hkin_primary);
-  // gHaPhysics->Add(pkin_primary);
+  THcPrimaryKine* hkin_primary = new THcPrimaryKine("H.kin.primary", "HMS Single Arm Kinematics", "H", "H.rb");
+  THcPrimaryKine* pkin_primary = new THcPrimaryKine("P.kin.primary", "SHMS Single Arm Kinematics", "P", "P.rb");
+  gHaPhysics->Add(hkin_primary);
+  gHaPhysics->Add(pkin_primary);
   // Add Physics Module to calculate secondary (scattered hadrons) beam kinematics
-  // THcSecondaryKine* hkin_secondary = new THcSecondaryKine("H.kin.secondary", "HMS Single Arm Kinematics", "H", "P.kin.primary");
-  // THcSecondaryKine* pkin_secondary = new THcSecondaryKine("P.kin.secondary", "SHMS Single Arm Kinematics", "P", "H.kin.primary");
-  // gHaPhysics->Add(hkin_secondary);
-  // gHaPhysics->Add(pkin_secondary);
+  THcSecondaryKine* hkin_secondary = new THcSecondaryKine("H.kin.secondary", "HMS Single Arm Kinematics", "H", "P.kin.primary");
+  THcSecondaryKine* pkin_secondary = new THcSecondaryKine("P.kin.secondary", "SHMS Single Arm Kinematics", "P", "H.kin.primary");
+  gHaPhysics->Add(hkin_secondary);
+  gHaPhysics->Add(pkin_secondary);
 
   //=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
   // Global Objects & Event Handlers
@@ -196,8 +189,8 @@ void replay_lumi_coin_offline(Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   TRG->AddDetector(coin); 
 
   // Add helicity detector to trigger apparatus
-  // THcHelicity* helicity = new THcHelicity("helicity","Helicity Detector");
-  // TRG->AddDetector(helicity);
+  THcHelicity* helicity = new THcHelicity("helicity","Helicity Detector");
+  TRG->AddDetector(helicity);
   
   //Add coin physics module THcCoinTime::THcCoinTime (const char *name, const char* description, const char* hadArmName, 
   // const char* elecArmName, const char* coinname) :

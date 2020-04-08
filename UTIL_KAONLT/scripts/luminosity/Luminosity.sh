@@ -21,12 +21,14 @@ cd ../../../
 echo -e "\n\nStarting Scaler Replay Script\n\n"
 ./hcana -q "SCRIPTS/COIN/SCALERS/replay_coin_scalers.C($RUNNUMBER,$MAXEVENTS)"
 cd CALIBRATION/bcm_current_map/
-root -b<<EOF
-.L ScalerCalib.C+
-.x run.C("../../ROOTfiles/coin_replay_scalers_${RUNNUMBER}_${MAXEVENTS}.root")
-EOF
+# HERE
+# root -b<<EOF
+# .L ScalerCalib.C+
+# .x run.C("../../ROOTfiles/coin_replay_scalers_${RUNNUMBER}_${MAXEVENTS}.root")
+# EOF
 
-mv bcmcurrent_$RUNNUMBER.param ../../PARAM/HMS/BCM/CALIB/bcmcurrent_$RUNNUMBER.param
+# HERE
+# mv bcmcurrent_$RUNNUMBER.param ../../PARAM/HMS/BCM/CALIB/bcmcurrent_$RUNNUMBER.param
 cd ../../
 
 echo -e "\n\nStarting Replay Script\n\n"

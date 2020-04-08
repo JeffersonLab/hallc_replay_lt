@@ -14,7 +14,7 @@ ALL_events             g.evtyp >= 1 && g.evtyp <= 7
 ALL_HMS_events       HMS_event || COIN_ONLY_event || HMS_COIN_event  || COIN_ALL_event
 ALL_SHMS_events     SHMS_event || COIN_ONLY_event || SHMS_COIN_event || COIN_ALL_event
 
-RawDecode_master COIN_ONLY_event
+RawDecode_master ALL_events_NO_EDTM
 
 Block: Decode
 
@@ -38,4 +38,14 @@ HMS_TRACK_FOUND      H.dc.ntrack > 0 && ALL_HMS_events_NOEDTM
 SHMS_TRACK_FOUND     P.dc.ntrack > 0 && ALL_SHMS_events_NOEDTM
 COIN_TRACK_FOUND     P.dc.ntrack > 0 && H.dc.ntrack > 0 && ALL_COIN_events_NO_EDTM
 
-CoarseTracking_master COIN_TRACK_FOUND
+CoarseTracking_master ALL_events_NO_EDTM
+
+Block: Physics
+
+AEROGEL_PION         P.aero.npeSum>1.2
+DELTA_SHMS           P.gtr.dp>-10.5&&P.gtr.dp<22.
+DELTA_HMS            H.gtr.dp>-8.5&&H.gtr.dp<8.
+HMS_ELEC              H.cal.etotnorm>.35&&H.cer.npeSum>1.2
+GOOD_EVENT           COIN_TRACK_FOUND&&AEROGEL_PION&&DELTA_SHMS&&DELTA_HMS&&HMS_ELEC
+
+Physics_master   ALL_events_NO_EDTM

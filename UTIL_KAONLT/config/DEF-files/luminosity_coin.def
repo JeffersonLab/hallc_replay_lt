@@ -15,4 +15,4 @@ block P.hod.goodscinhit
 block P.hod.betanotrack
 block P.dc.*
 block T.coin.*
-fEvtHdr.fEvtType
+block fEvtHdr.fEvtType

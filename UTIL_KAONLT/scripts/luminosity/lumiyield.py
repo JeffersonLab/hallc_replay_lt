@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-07 15:52:27 trottar"
+# Time-stamp: "2020-04-08 12:56:35 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -12,9 +12,10 @@
 #
 import uproot as up
 import numpy as np
-import sys, math
+import awkward1 as ak
 import scipy
 import scipy.integrate as integrate
+import sys, math
 
 sys.path.insert(0, '/home/trottar/bin/python/')
 import root2py as r2p
@@ -250,394 +251,244 @@ ANALYSIS TREE, T
 tree = up.open(rootName)["T"]
 branch = r2p.pyBranch(tree)
 
-H_cal_etotnorm = tree.array("H.cal.etotnorm")
-H_cer_npeSum = tree.array("H.cer.npeSum")
-H_gtr_dp = tree.array("H.gtr.dp")
-H_tr_tg_th = tree.array("H.gtr.th")
-H_tr_tg_ph = tree.array("H.gtr.ph")
-H_tr_beta = tree.array("H.tr.beta")
-H_tr_chi2 = tree.array("H.tr.chi2")
-H_tr_ndof = tree.array("H.tr.ndof")
-H_hod_goodscinhit = tree.array("H.hod.goodscinhit")
-H_hod_betanotrack = tree.array("H.hod.betanotrack")
-H_dc_ntrack = tree.array("H.dc.ntrack")
+arrays = {name: ak.from_awkward0(array) for name, array in tree.arrays(namedecode="utf-8").items()}
 
-H_dc_1x1_nhit = tree.array("H.dc.1x1.nhit")
-H_dc_1u2_nhit = tree.array("H.dc.1u2.nhit")
-H_dc_1u1_nhit = tree.array("H.dc.1u1.nhit")
-H_dc_1v1_nhit = tree.array("H.dc.1v1.nhit")
-H_dc_1x2_nhit = tree.array("H.dc.1x2.nhit")
-H_dc_1v2_nhit = tree.array("H.dc.1v2.nhit")
-H_dc_2x1_nhit = tree.array("H.dc.2x1.nhit")
-H_dc_2u2_nhit = tree.array("H.dc.2u2.nhit")
-H_dc_2u1_nhit = tree.array("H.dc.2u1.nhit")
-H_dc_2v1_nhit = tree.array("H.dc.2v1.nhit")
-H_dc_2x2_nhit = tree.array("H.dc.2x2.nhit")
-H_dc_2v2_nhit = tree.array("H.dc.2v2.nhit")
+events  = ak.zip({
+    "H_cal_etotnorm" : arrays["H.cal.etotnorm"],
+    "H_cer_npeSum" : arrays["H.cer.npeSum"],
+    "H_gtr_dp" : arrays["H.gtr.dp"],
+    "H_tr_tg_th" : arrays["H.gtr.th"],
+    "H_tr_tg_ph" : arrays["H.gtr.ph"],
+    "H_tr_beta" : arrays["H.tr.beta"],
+    "H_tr_chi2" : arrays["H.tr.chi2"],
+    "H_tr_ndof" : arrays["H.tr.ndof"],
+    "H_hod_goodscinhit" : arrays["H.hod.goodscinhit"],
+    "H_hod_betanotrack" : arrays["H.hod.betanotrack"],
+    "H_dc_ntrack" : arrays["H.dc.ntrack"],
+    "H_dc_1x1_nhit" : arrays["H.dc.1x1.nhit"],
+    "H_dc_1u2_nhit" : arrays["H.dc.1u2.nhit"],
+    "H_dc_1u1_nhit" : arrays["H.dc.1u1.nhit"],
+    "H_dc_1v1_nhit" : arrays["H.dc.1v1.nhit"],
+    "H_dc_1x2_nhit" : arrays["H.dc.1x2.nhit"],
+    "H_dc_1v2_nhit" : arrays["H.dc.1v2.nhit"],
+    "H_dc_2x1_nhit" : arrays["H.dc.2x1.nhit"],
+    "H_dc_2u2_nhit" : arrays["H.dc.2u2.nhit"],
+    "H_dc_2u1_nhit" : arrays["H.dc.2u1.nhit"],
+    "H_dc_2v1_nhit" : arrays["H.dc.2v1.nhit"],
+    "H_dc_2x2_nhit" : arrays["H.dc.2x2.nhit"],
+    "H_dc_2v2_nhit" : arrays["H.dc.2v2.nhit"],
+    "P_cal_etotnorm" : arrays["P.cal.etotnorm"],
+    "P_hgcer_npeSum" : arrays["P.hgcer.npeSum"],
+    "P_aero_npeSum" : arrays["P.aero.npeSum"],
+    "P_gtr_dp" : arrays["P.gtr.dp"],
+    "P_gtr_th" : arrays["P.gtr.th"],
+    "P_gtr_ph" : arrays["P.gtr.ph"],
+    "P_tr_beta" : arrays["P.tr.beta"],
+    "P_tr_chi2" : arrays["P.tr.chi2"],
+    "P_tr_ndof" : arrays["P.tr.ndof"],
+    "P_hod_goodscinhit" : arrays["P.hod.goodscinhit"],
+    "P_hod_betanotrack" : arrays["P.hod.betanotrack"],
+    "P_dc_ntrack" : arrays["P.dc.ntrack"],
+    "P_dc_1x1_nhit" : arrays["P.dc.1x1.nhit"],
+    "P_dc_1u2_nhit" : arrays["P.dc.1u2.nhit"],
+    "P_dc_1u1_nhit" : arrays["P.dc.1u1.nhit"],
+    "P_dc_1v1_nhit" : arrays["P.dc.1v1.nhit"],
+    "P_dc_1x2_nhit" : arrays["P.dc.1x2.nhit"],
+    "P_dc_1v2_nhit" : arrays["P.dc.1v2.nhit"],
+    "P_dc_2x1_nhit" : arrays["P.dc.2x1.nhit"],
+    "P_dc_2u2_nhit" : arrays["P.dc.2u2.nhit"],
+    "P_dc_2u1_nhit" : arrays["P.dc.2u1.nhit"],
+    "P_dc_2v1_nhit" : arrays["P.dc.2v1.nhit"],
+    "P_dc_2x2_nhit" : arrays["P.dc.2x2.nhit"],
+    "P_dc_2v2_nhit" : arrays["P.dc.2v2.nhit"],
+    "H_bcm_bcm4b_AvgCurrent" : arrays["H.bcm.bcm4b.AvgCurrent"],
+    "T_coin_pTRIG1_ROC1_tdcTime" : arrays["T.coin.pTRIG1_ROC1_tdcTime"],
+    "T_coin_pTRIG3_ROC1_tdcTime" : arrays["T.coin.pTRIG3_ROC1_tdcTime"],
+    "T_coin_pTRIG5_ROC1_tdcTime" : arrays["T.coin.pTRIG5_ROC1_tdcTime"],
+    "T_coin_pTRIG1_ROC2_tdcTime" : arrays["T.coin.pTRIG1_ROC2_tdcTime"],
+    "T_coin_pTRIG3_ROC2_tdcTime" : arrays["T.coin.pTRIG3_ROC2_tdcTime"],
+    "T_coin_pTRIG5_ROC2_tdcTime" : arrays["T.coin.pTRIG5_ROC2_tdcTime"],
+    "T_coin_pEDTM_tdcTime" : arrays["T.coin.pEDTM_tdcTime"],
+    "EvtType" : arrays["fEvtHdr.fEvtType"],
+})
 
-P_cal_etotnorm = tree.array("P.cal.etotnorm")
-P_hgcer_npeSum = tree.array("P.hgcer.npeSum")
-P_aero_npeSum = tree.array("P.aero.npeSum")
-P_gtr_dp = tree.array("P.gtr.dp")
-P_gtr_th = tree.array("P.gtr.th")
-P_gtr_ph = tree.array("P.gtr.ph")
-P_tr_beta = tree.array("P.tr.beta")
-P_tr_chi2 = tree.array("P.tr.chi2")
-P_tr_ndof = tree.array("P.tr.ndof")
-P_hod_goodscinhit = tree.array("P.hod.goodscinhit")
-P_hod_betanotrack = tree.array("P.hod.betanotrack")
-P_dc_ntrack = tree.array("P.dc.ntrack")
-
-P_dc_1x1_nhit = tree.array("P.dc.1x1.nhit")
-P_dc_1u2_nhit = tree.array("P.dc.1u2.nhit")
-P_dc_1u1_nhit = tree.array("P.dc.1u1.nhit")
-P_dc_1v1_nhit = tree.array("P.dc.1v1.nhit")
-P_dc_1x2_nhit = tree.array("P.dc.1x2.nhit")
-P_dc_1v2_nhit = tree.array("P.dc.1v2.nhit")
-P_dc_2x1_nhit = tree.array("P.dc.2x1.nhit")
-P_dc_2u2_nhit = tree.array("P.dc.2u2.nhit")
-P_dc_2u1_nhit = tree.array("P.dc.2u1.nhit")
-P_dc_2v1_nhit = tree.array("P.dc.2v1.nhit")
-P_dc_2x2_nhit = tree.array("P.dc.2x2.nhit")
-P_dc_2v2_nhit = tree.array("P.dc.2v2.nhit")
-
-H_bcm_bcm4b_AvgCurrent = tree.array("H.bcm.bcm4b.AvgCurrent")
-
-T_coin_pTRIG1_ROC1_tdcTime = tree.array("T.coin.pTRIG1_ROC1_tdcTime")
-T_coin_pTRIG3_ROC1_tdcTime = tree.array("T.coin.pTRIG3_ROC1_tdcTime")
-T_coin_pTRIG5_ROC1_tdcTime = tree.array("T.coin.pTRIG5_ROC1_tdcTime")
-T_coin_pTRIG1_ROC2_tdcTime = tree.array("T.coin.pTRIG1_ROC2_tdcTime")
-T_coin_pTRIG3_ROC2_tdcTime = tree.array("T.coin.pTRIG3_ROC2_tdcTime")
-T_coin_pTRIG5_ROC2_tdcTime = tree.array("T.coin.pTRIG5_ROC2_tdcTime")
-
-T_coin_pEDTM_tdcTime = tree.array("T.coin.pEDTM_tdcTime")
-
-EvtType = tree.array("fEvtHdr.fEvtType")
-
+print(events.P_hgcer_npeSum)
+print(events.T_coin_pEDTM_tdcTime)
 
 def analysis(PS1, PS3, thres_curr):
     
-    bcm_before = H_bcm_bcm4b_AvgCurrent
-    bcm_after = [x for x in H_bcm_bcm4b_AvgCurrent if x > thres_curr ]
-
-    EDTM = [x
-            for x,bcm in zip(T_coin_pEDTM_tdcTime,bcm_after)
-            if bcm > thres_curr
-            if x != 0.0]
+    bcm_before = events.H_bcm_bcm4b_AvgCurrent
+    if bcm_before > thres_curr:
+        bcm_after = bcm_before
+        
+        if events.T_coin_pEDTM_tdcTime != 0:
+            EDTM = events.T_coin_pEDTM_tdcTime
+        if events.T_coin_pTRIG1_ROC2_tdcTime !=0:
+            TRIG1 = events.T_coin_pTRIG1_ROC2_tdcTime
+        if events.T_coin_pTRIG3_ROC2_tdcTime !=0:
+            TRIG3 = events.T_coin_pTRIG3_ROC2_tdcTime
+        if events.T_coin_pTRIG5_ROC2_tdcTime !=0:
+            TRIG5 = events.T_coin_pTRIG5_ROC2_tdcTime
+        EventType = events.EvtType
+        if (EventType == 1
+            and events.T_coin_pEDTM_tdcTime > 140.0
+            and events.T_coin_pEDTM_tdcTime < 144.0):
+            SHMS_EDTM = events.T_coin_pEDTM_tdcTime
+        if EventType == 1:
+            TRIG1_cut = events.T_coin_pTRIG1_ROC2_tdcTime
     
-    TRIG1 = [x
-             for x in zip(T_coin_pTRIG1_ROC2_tdcTime,bcm_after)
-             if bcm > thres_curr             
-             if x != 0.0]
-    TRIG3 = [x
-             for x in zip(T_coin_pTRIG3_ROC2_tdcTime,bcm_after)
-             if bcm > thres_curr
-             if x !=0.0]
-    TRIG5 = [x
-             for x in zip(T_coin_pTRIG5_ROC2_tdcTime,bcm_after)
-             if bcm > thres_curr
-             if x !=0.0]
-    
-    EventType = [x
-             for x in zip(EvtType,bcm_after)
-             if bcm > thres_curr]
-    
-    SHMS_EDTM = [edtm
-                 for (edtm,evt,bcm) in zip(T_coin_pEDTM_tdcTime,EvtType,bcm_after)
-                 if bcm > thres_curr
-                 if (evt == 1 and edtm > 140.0 and edtm < 144.0)]
+        # p_track_before
+        if (events.P_hod_goodscinhit == 1
+            and events.P_hod_betanotrack > 0.5
+            and events.P_hod_betanotrack < 1.4
+            and (events.P_dc_1x1_nhit
+                 + events.P_dc_1u2_nhit + events.P_dc_1u1_nhit
+                 + events.P_dc_1v1_nhit + events.P_dc_1x2_nhit + events.P_dc_1v2_nhit) < 20
+            and (events.P_dc_2x1_nhit + events.P_dc_2u2_nhit
+                 + events.P_dc_2u1_nhit + events.P_dc_2v1_nhit
+                 + events.P_dc_2x2_nhit + events.P_dc_2v2_nhit,bcm_after) < 20):
+            p_track_before = events.P_dc_ntrack
 
-    TRIG1_cut = [trig1
-                 for (trig1,evt,bcm) in zip(T_coin_pTRIG1_ROC2_tdcTime,EvtType,bcm_after)
-                 if bcm > thres_curr
-                 if evt == 1]
-    
-    # p_track_before
-    p_track_before_iterate = [P_dc_ntrack, P_hod_goodscinhit, P_hod_betanotrack, P_dc_1x1_nhit, P_dc_1u2_nhit, P_dc_1u1_nhit, P_dc_1v1_nhit, P_dc_1x2_nhit, P_dc_1v2_nhit, P_dc_2x1_nhit, P_dc_2u2_nhit, P_dc_2u1_nhit, P_dc_2v1_nhit, P_dc_2x2_nhit,P_dc_2v2_nhit,bcm_after]
-    p_track_before = [dc
-                      for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2,bcm) in zip(*p_track_before_iterate)
-                      if bcm > thres_curr
-                      if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)]
+            # p_hadtrack_before
+            if events.P_cal_etotnorm > 0.05:
+                p_hadtrack_before = events.P_dc_ntrack
+                
+                # p_pitrack_before
+                if events.P_hgcer_npeSum > 1.5:
+                    p_pitrack_before = events.P_dc_ntrack
 
-    # p_hadtrack_before
-    p_hadtrack_before_iterate = [P_dc_ntrack, P_hod_goodscinhit, P_hod_betanotrack, P_dc_1x1_nhit, P_dc_1u2_nhit, P_dc_1u1_nhit, P_dc_1v1_nhit, P_dc_1x2_nhit, P_dc_1v2_nhit, P_dc_2x1_nhit, P_dc_2u2_nhit, P_dc_2u1_nhit, P_dc_2v1_nhit, P_dc_2x2_nhit, P_dc_2v2_nhit, P_cal_etotnorm, bcm_after]
-    p_hadtrack_before = [dc
-                         for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2, caletot,bcm) in zip(*p_hadtrack_before_iterate)
-                         if bcm > thres_curr
-                         if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)
-                         if caletot > 0.05]
+                if events.P_hgcer_npeSum < 1.5:
+                    # p_Ktrack_before
+                    if events.P_aero_npeSum > 1.5:
+                        p_Ktrack_before = events.P_dc_ntrack
 
-    # p_pitrack_before
-    p_pitrack_before_iterate = [P_dc_ntrack, P_hod_goodscinhit, P_hod_betanotrack, P_dc_1x1_nhit, P_dc_1u2_nhit, P_dc_1u1_nhit, P_dc_1v1_nhit, P_dc_1x2_nhit, P_dc_1v2_nhit, P_dc_2x1_nhit, P_dc_2u2_nhit, P_dc_2u1_nhit, P_dc_2v1_nhit, P_dc_2x2_nhit, P_dc_2v2_nhit, P_cal_etotnorm, P_hgcer_npeSum,bcm_after]
-    p_pitrack_before = [dc
-                        for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2, caletot, hgcer, bcm) in zip(*p_pitrack_before_iterate)
-                        if bcm > thres_curr                        
-                        if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)
-                        if caletot > 0.05
-                        if hgcer > 1.5]
+                    # p_ptrack_before
+                    if events.P_aero_npeSum < 1.5:
+                        p_ptrack_before = events.P_dc_ntrack
 
-    # p_Ktrack_before
-    p_Ktrack_before_iterate = [P_dc_ntrack, P_hod_goodscinhit, P_hod_betanotrack, P_dc_1x1_nhit, P_dc_1u2_nhit, P_dc_1u1_nhit, P_dc_1v1_nhit, P_dc_1x2_nhit, P_dc_1v2_nhit, P_dc_2x1_nhit, P_dc_2u2_nhit, P_dc_2u1_nhit, P_dc_2v1_nhit, P_dc_2x2_nhit, P_dc_2v2_nhit, P_cal_etotnorm, P_hgcer_npeSum, P_aero_npeSum,bcm_after]
-    p_Ktrack_before = [dc
-                       for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2, caletot, hgcer, aero, bcm) in zip(*p_Ktrack_before_iterate)
-                       if bcm > thres_curr
-                       if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)
-                       if caletot > 0.05
-                       if hgcer < 1.5
-                       if aero > 1.5]
+            # p_track_after
+            if events.P_dc_ntrack > 0.0:
+                p_track_after = events.P_dc_ntrack
+            
+                # p_hadtrack_after        
+                if events.P_cal_etotnorm > 0.05:
+                    p_hadtrack_after = events.P_dc_ntrack
 
-    # p_ptrack_before
-    p_ptrack_before_iterate = [P_dc_ntrack, P_hod_goodscinhit, P_hod_betanotrack, P_dc_1x1_nhit, P_dc_1u2_nhit, P_dc_1u1_nhit, P_dc_1v1_nhit, P_dc_1x2_nhit, P_dc_1v2_nhit, P_dc_2x1_nhit, P_dc_2u2_nhit, P_dc_2u1_nhit, P_dc_2v1_nhit, P_dc_2x2_nhit, P_dc_2v2_nhit, P_cal_etotnorm, P_hgcer_npeSum, P_aero_npeSum,bcm_after]
-    p_ptrack_before = [dc
-                       for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2, caletot, hgcer, aero,bcm) in zip(*p_ptrack_before_iterate)
-                       if bcm > thres_curr
-                       if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)
-                       if caletot > 0.05
-                       if hgcer < 1.5
-                       if aero > 1.5]
+                    # p_pitrack_after
+                    if events.P_hgcer_npeSum > 1.5:
+                        p_pitrack_after = events.P_dc_ntrack
 
-    # p_track_after
-    p_track_after_iterate = [P_dc_ntrack, P_hod_goodscinhit, P_hod_betanotrack, P_dc_1x1_nhit, P_dc_1u2_nhit, P_dc_1u1_nhit, P_dc_1v1_nhit, P_dc_1x2_nhit, P_dc_1v2_nhit, P_dc_2x1_nhit, P_dc_2u2_nhit, P_dc_2u1_nhit, P_dc_2v1_nhit, P_dc_2x2_nhit, P_dc_2v2_nhit, P_cal_etotnorm, P_hgcer_npeSum, P_aero_npeSum,bcm_after]
-    p_track_after = [dc
-                     for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2, caletot, hgcer, aero, bcm) in zip(*p_track_after_iterate)
-                     if bcm > thres_curr
-                     if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)
-                     if dc > 0.0]
+                    if events.P_hgcer_npeSum < 1.5:
+                        # p_Ktrack_after
+                        if events.P_aero_npeSum > 1.5:
+                            p_Ktrack_after = events.P_dc_ntrack
 
-    # p_hadtrack_after
-    p_hadtrack_after_iterate = [P_dc_ntrack, P_hod_goodscinhit, P_hod_betanotrack, P_dc_1x1_nhit, P_dc_1u2_nhit, P_dc_1u1_nhit, P_dc_1v1_nhit, P_dc_1x2_nhit, P_dc_1v2_nhit, P_dc_2x1_nhit, P_dc_2u2_nhit, P_dc_2u1_nhit, P_dc_2v1_nhit, P_dc_2x2_nhit, P_dc_2v2_nhit, P_cal_etotnorm, bcm_after]
-    p_hadtrack_after = [dc
-                        for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2, caletot, bcm) in zip(*p_hadtrack_after_iterate)
-                        if bcm > thres_curr
-                        if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)
-                        if dc > 0.0
-                        if caletot > 0.05]
-
-    # p_pitrack_after
-    p_pitrack_after_iterate = [P_dc_ntrack, P_hod_goodscinhit, P_hod_betanotrack, P_dc_1x1_nhit, P_dc_1u2_nhit, P_dc_1u1_nhit, P_dc_1v1_nhit, P_dc_1x2_nhit, P_dc_1v2_nhit, P_dc_2x1_nhit, P_dc_2u2_nhit, P_dc_2u1_nhit, P_dc_2v1_nhit, P_dc_2x2_nhit, P_dc_2v2_nhit, P_cal_etotnorm, P_hgcer_npeSum, bcm_after]
-    p_pitrack_after = [dc
-                       for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2, caletot, hgcer, bcm) in zip(*p_pitrack_after_iterate)
-                       if bcm > thres_curr
-                       if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)
-                       if dc > 0.0
-                       if caletot > 0.05
-                       if hgcer > 1.5]
-
-    # p_Ktrack_after
-    p_Ktrack_after_iterate = [P_dc_ntrack, P_hod_goodscinhit, P_hod_betanotrack, P_dc_1x1_nhit, P_dc_1u2_nhit, P_dc_1u1_nhit, P_dc_1v1_nhit, P_dc_1x2_nhit, P_dc_1v2_nhit, P_dc_2x1_nhit, P_dc_2u2_nhit, P_dc_2u1_nhit, P_dc_2v1_nhit, P_dc_2x2_nhit, P_dc_2v2_nhit, P_cal_etotnorm, P_hgcer_npeSum, P_aero_npeSum, bcm_after]
-    p_Ktrack_after = [dc
-                      for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2, caletot, hgcer, aero, bcm) in zip(*p_Ktrack_after_iterate)
-                      if bcm > thres_curr
-                      if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)
-                      if dc > 0.0
-                      if caletot > 0.05
-                      if hgcer < 1.5
-                      if aero > 1.5]
-
-    # p_ptrack_after
-    p_ptrack_after_iterate = [P_dc_ntrack, P_hod_goodscinhit, P_hod_betanotrack, P_dc_1x1_nhit, P_dc_1u2_nhit, P_dc_1u1_nhit, P_dc_1v1_nhit, P_dc_1x2_nhit, P_dc_1v2_nhit, P_dc_2x1_nhit, P_dc_2u2_nhit, P_dc_2u1_nhit, P_dc_2v1_nhit, P_dc_2x2_nhit, P_dc_2v2_nhit, P_cal_etotnorm, P_hgcer_npeSum, P_aero_npeSum, bcm_after]
-    p_ptrack_after = [dc
-                      for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2, caletot, hgcer, aero, bcm) in zip(*p_ptrack_after_iterate)
-                      if bcm > thres_curr
-                      if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)
-                      if dc > 0.0
-                      if caletot > 0.05
-                      if hgcer < 1.5
-                      if aero > 1.5]
-
-    # p_ecut_before
-    p_ecut_before_iterate = [P_hgcer_npeSum, P_hod_goodscinhit, P_hod_betanotrack, bcm_after]
-    p_ecut_before = [hgcer
-                     for (hgcer,hodgood,hodbeta, bcm) in zip(*p_ecut_before_iterate)
-                     if bcm > thres_curr
-                     if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4)]
-
-    # p_show_before
-    p_show_before_iterate = [P_cal_etotnorm, P_hod_goodscinhit, P_hod_betanotrack, bcm_after]
-    p_show_before = [caletot
-                     for (caletot,hodgood,hodbeta, bcm) in zip(*p_show_before_iterate)
-                     if bcm > thres_curr
-                     if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4)]
+                        # p_ptrack_after
+                        if events.P_aero_npeSum < 1.5:
+                            p_ptrack_after = events.P_dc_ntrack
 
 
-    # p_ecut_after
-    p_ecut_after_iterate = [P_hgcer_npeSum, P_cal_etotnorm, P_hod_goodscinhit, P_hod_betanotrack, bcm_after]
-    p_ecut_after  = [hgcer
-                     for (hgcer, caletot, hodgood, hodbeta, bcm) in zip(*p_ecut_after_iterate)
-                     if bcm > thres_curr
-                     if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4)
-                     if caletot < 0.7]
+        if (events.P_hod_goodscinhit == 1
+            and events.P_hod_betanotrack > 0.5
+            and events.P_hod_betanotrack < 1.4):
 
-    print(hgcer)
-    # p_ecut_eff
-    p_ecut_eff_iterate = [P_hgcer_npeSum, P_cal_etotnorm, P_hod_goodscinhit, P_hod_betanotrack, P_aero_npeSum, P_gtr_dp, P_gtr_th, P_gtr_ph, bcm_after]
-    p_ecut_eff  = [hgcer
-                   for (hgcer, caletot, hodgood, hodbeta, aero, dp, th, ph, bcm) in zip(*p_ecut_eff_iterate)
-                   if bcm > thres_curr
-                   if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4)
-                   if caletot < 0.7
-                   if aero < 1.5
-                   if (dp > -10.0 or dp < 20.0)
-                   if abs(th) < 0.080
-                   if abs(ph) < 0.035]
+            # p_ecut_before
+            p_ecut_before = events.P_hgcer_npeSum
 
-    # p_show_after
-    p_show_after_iterate = [P_hgcer_npeSum, P_cal_etotnorm, P_hod_goodscinhit, P_hod_betanotrack, P_aero_npeSum, P_gtr_dp, P_gtr_th, P_gtr_ph, bcm_after]
-    p_show_after  = [hgcer
-                     for (hgcer, caletot, hodgood, hodbeta, aero, dp, th, ph, bcm) in zip(*p_show_after_iterate)
-                     if bcm > thres_curr
-                     if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4)
-                     if caletot < 0.7
-                     if aero > 1.5
-                     if (dp > -10.0 or dp < 20.0)
-                     if abs(th) < 0.080
-                     if abs(ph) < 0.035]
-    
-    HMS_EDTM = [x
-                for (x, evt, bcm) in zip(T_coin_pEDTM_tdcTime, EvtType, bcm_after)
-                if bcm > thres_curr
-                if (evt == 2 and x > 140.0 and x < 144.0)]
+            # p_show_before
+            p_show_before = events.P_cal_etotnorm
 
-    TRIG3_cut = [ x
-                  for (x, evt, bcm ) in zip(T_coin_pTRIG3_ROC2_tdcTime, EvtType, bcm_after)
-                  if bcm > thres_curr
-                  if evt == 2]
+            # p_ecut_after
+            if events.P_cal_etotnorm < 0.7:
+                p_ecut_after  = events.P_hgcer_npeSum
+                print(p_ecut_after)
+                if events.P_aero_npeSum < 1.5:
+                    if (events.P_gtr_dp > -10.0 or events.P_gtr_dp < 20.0):
+                        if abs(events.P_gtr_th) < 0.080:
+                            if abs(events.P_gtr_ph) < 0.035:
+                                
+                                # p_ecut_eff
+                                p_ecut_eff = events.P_hgcer_npeSum
 
-    # h_track_before
-    h_track_before_iterate = [H_dc_ntrack, H_hod_goodscinhit, H_hod_betanotrack, H_dc_1x1_nhit, H_dc_1u2_nhit, H_dc_1u1_nhit, H_dc_1v1_nhit, H_dc_1x2_nhit, H_dc_1v2_nhit, H_dc_2x1_nhit, H_dc_2u2_nhit, H_dc_2u1_nhit, H_dc_2v1_nhit, H_dc_2x2_nhit,H_dc_2v2_nhit, bcm_after]
-    h_track_before = [dc
-                      for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2, bcm) in zip(*h_track_before_iterate)
-                      if bcm > thres_curr
-                      if (hodgood == 1 and hodbeta > 0.8 and hodbeta < 1.3 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)]
+                                # p_show_after
+                                p_show_after = events.P_cal_etotnorm
 
-    # h_etrack_before
-    h_etrack_before_iterate = [H_dc_ntrack, H_hod_goodscinhit, H_hod_betanotrack, H_dc_1x1_nhit, H_dc_1u2_nhit, H_dc_1u1_nhit, H_dc_1v1_nhit, H_dc_1x2_nhit, H_dc_1v2_nhit, H_dc_2x1_nhit, H_dc_2u2_nhit, H_dc_2u1_nhit, H_dc_2v1_nhit, H_dc_2x2_nhit, H_dc_2v2_nhit, H_cer_npeSum, H_cal_etotnorm, bcm_after]
-    h_etrack_before = [dc
-                         for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2, cer, h_caletot, bcm) in zip(*h_etrack_before_iterate)
-                         if bcm > thres_curr
-                         if (hodgood == 1 and hodbeta > 0.8 and hodbeta < 1.3 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)
-                         if (cer > 0.5 and h_caletot > 0.6 and h_caletot < 2.0)]
+        if (EventType == 2
+            and events.T_coin_pEDTM_tdcTime > 140.0
+            and events.T_coin_pEDTM_tdcTime < 144.0):
+            HMS_EDTM = events.T_coin_pEDTM_tdcTime
 
-    # h_track_after
-    h_track_after_iterate = [H_dc_ntrack, H_hod_goodscinhit, H_hod_betanotrack, H_dc_1x1_nhit, H_dc_1u2_nhit, H_dc_1u1_nhit, H_dc_1v1_nhit, H_dc_1x2_nhit, H_dc_1v2_nhit, H_dc_2x1_nhit, H_dc_2u2_nhit, H_dc_2u1_nhit, H_dc_2v1_nhit, H_dc_2x2_nhit,H_dc_2v2_nhit, bcm_after]
-    h_track_after = [dc
-                     for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2, bcm) in zip(*h_track_after_iterate)
-                     if bcm > thres_curr
-                     if (hodgood == 1 and hodbeta > 0.8 and hodbeta < 1.3 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)
-                     if dc > 0.0]
+        if EventType == 2:
+            TRIG3_cut = events.T_coin_pTRIG3_ROC2_tdcTime
+            
+            # h_track_before
+            if (events.H_hod_goodscinhit == 1
+                and events.H_hod_betanotrack > 0.8
+                and events.H_hod_betanotrack < 1.3
+                and (events.H_dc_1x1_nhit
+                     + events.H_dc_1u2_nhit + events.H_dc_1u1_nhit
+                     + events.H_dc_1v1_nhit + events.H_dc_1x2_nhit + events.H_dc_1v2_nhit) < 20
+                and (events.H_dc_2x1_nhit + events.H_dc_2u2_nhit
+                     + events.H_dc_2u1_nhit + events.H_dc_2v1_nhit
+                     + events.H_dc_2x2_nhit + events.H_dc_2v2_nhit,bcm_after) < 20):
+                h_track_before = events.H_dc_ntrack
 
+                # h_etrack_before
+                if (events.H_cer_npeSum > 0.5
+                    and events.H_cal_etotnorm > 0.6
+                    and events.H_cal_etotnorm < 2.0):
+                    h_etrack_before = events.H_dc_ntrack
 
-    # h_etrack_after
-    h_etrack_after_iterate = [H_dc_ntrack, H_hod_goodscinhit, H_hod_betanotrack, H_dc_1x1_nhit, H_dc_1u2_nhit, H_dc_1u1_nhit, H_dc_1v1_nhit, H_dc_1x2_nhit, H_dc_1v2_nhit, H_dc_2x1_nhit, H_dc_2u2_nhit, H_dc_2u1_nhit, H_dc_2v1_nhit, H_dc_2x2_nhit,H_dc_2v2_nhit, H_cer_npeSum, H_cal_etotnorm, bcm_after]
-    h_etrack_after = [dc
-                      for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2, cer, h_caletot, bcm) in zip(*h_etrack_after_iterate)
-                      if bcm > thres_curr
-                      if (hodgood == 1 and hodbeta > 0.8 and hodbeta < 1.3 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)
-                      if dc > 0.0
-                      if (cer > 0.5 and h_caletot > 0.6 and h_caletot < 2.0)]
-    
+                # h_track_after                
+                if dc > 0.0:
+                    h_track_after = events.H_dc_ntrack
 
-    # h_ecut_before
-    h_ecut_before_iterate = [H_cer_npeSum, bcm_after]
-    h_ecut_before = [cer
-                      for (cer, bcm) in zip(*h_ecut_before_iterate)
-                      if bcm > thres_curr]
+                    # h_etrack_after
+                    if (events.H_cer_npeSum > 0.5
+                        and events.H_cal_etotnorm > 0.6
+                        and events.H_cal_etotnorm < 2.0):
+                        h_etrack_after = events.H_dc_ntrack
 
-    # h_dp_before
-    h_dp_before_iterate = [H_gtr_dp, bcm_after]
-    h_dp_before = [h_dp
-                      for (h_dp, bcm) in zip(*h_dp_before_iterate)
-                      if bcm > thres_curr]
+            # h_ecut_before
+            h_ecut_before = events.H_cer_npeSum
 
-    # h_th_before
-    h_th_before_iterate = [H_tr_tg_th, bcm_after]
-    h_th_before = [h_th
-                      for (h_th, bcm) in zip(*h_th_before_iterate)
-                      if bcm > thres_curr]
+            # h_dp_before
+            h_dp_before = events.H_gtr_dp
 
-    # h_ph_before
-    h_ph_before_iterate = [H_tr_tg_ph, bcm_after]
-    h_ph_before = [h_ph
-                      for (h_ph, bcm) in zip(*h_ph_before_iterate)
-                      if bcm > thres_curr]
+            # h_th_before
+            h_th_before = events.H_tr_tg_th
 
-    # h_show_before
-    h_show_before_iterate = [H_tr_tg_th, bcm_after]
-    h_show_before = [h_caletot
-                      for (h_etotnorm, bcm) in zip(*h_show_before_iterate)
-                      if bcm > thres_curr]
-    # h_ecut_after
-    h_ecut_after_iterate = [H_cer_npeSum, H_cal_etotnorm, H_gtr_dp, H_tr_tg_th, H_tr_tg_ph, bcm_after]
-    h_ecut_after = [cer
-                    for (cer, h_caletot, h_dp, h_th, h_ph, bcm) in zip(*h_ecut_after_iterate)
-                    if bcm > thres_curr
-                    if h_caletot > 0.6
-                    if h_caletot < 2.0
-                    if cer > 1.5
-                    if abs(h_dp) < 8.0
-                    if abs(h_th) < 0.080
-                    if abs(h_ph) < 0.035]
+            # h_ph_before
+            h_ph_before = events.H_tr_tg_ph
 
-    # h_dp_after
-    h_dp_after_iterate = [H_cer_npeSum, H_cal_etotnorm, H_gtr_dp, H_tr_tg_th, H_tr_tg_ph, bcm_after]
-    h_dp_after = [h_dp
-                    for (cer, h_caletot, h_dp, h_th, h_ph, bcm) in zip(*h_dp_after_iterate)
-                    if bcm > thres_curr
-                    if h_caletot > 0.6
-                    if h_caletot < 2.0
-                    if cer > 1.5
-                    if abs(h_dp) < 8.0
-                    if abs(h_th) < 0.080
-                    if abs(h_ph) < 0.035]
+            # h_show_before
+            h_show_before = events.H_cal_etotnorm
 
-    # h_th_after
-    h_th_after_iterate = [H_cer_npeSum, H_cal_etotnorm, H_gtr_dp, H_tr_tg_th, H_tr_tg_ph, bcm_after]
-    h_th_after = [h_th
-                    for (cer, h_caletot, h_dp, h_th, h_ph, bcm) in zip(*h_th_after_iterate)
-                    if bcm > thres_curr
-                    if h_caletot > 0.6
-                    if h_caletot < 2.0
-                    if cer > 1.5
-                    if abs(h_dp) < 8.0
-                    if abs(h_th) < 0.080
-                    if abs(h_ph) < 0.035]
+            if events.H_cal_etotnorm > 0.6:
+                    if events.H_cal_etotnorm < 2.0:
+                        if events.H_cer_npeSum > 1.5:
+                            if abs(events.H_gtr_dp) < 8.0:
+                                if abs(events.H_tr_tg_th) < 0.080:
+                                    if abs(events.H_tr_tg_ph) < 0.035:
+                                        # h_ecut_after
+                                        h_ecut_after = events.H_cer_npeSum
+                                        
+                                        # h_dp_after
+                                        h_dp_after = events.H_gtr_dp
+                                        
+                                        # h_th_after
+                                        h_th_after = events.H_tr_tg_th
+                                        
+                                        # h_ph_after
+                                        h_ph_after = events.H_tr_tg_ph
 
-    # h_ph_after
-    h_ph_after_iterate = [H_cer_npeSum, H_cal_etotnorm, H_gtr_dp, H_tr_tg_th, H_tr_tg_ph, bcm_after]
-    h_ph_after = [h_ph
-                    for (cer, h_caletot, h_dp, h_th, h_ph, bcm) in zip(*h_ph_after_iterate)
-                    if bcm > thres_curr
-                    if h_caletot > 0.6
-                    if h_caletot < 2.0
-                    if cer > 1.5
-                    if abs(h_dp) < 8.0
-                    if abs(h_th) < 0.080
-                    if abs(h_ph) < 0.035]
-    
-    # h_show_after
-    h_show_after_iterate = [H_cer_npeSum, H_cal_etotnorm, H_gtr_dp, H_tr_tg_th, H_tr_tg_ph, bcm_after]
-    h_show_after = [h_caletot
-                    for (cer, h_caletot, h_dp, h_th, h_ph, bcm) in zip(*h_show_after_iterate)
-                    if bcm > thres_curr
-                    if h_caletot > 0.6
-                    if h_caletot < 2.0
-                    if cer > 1.5
-                    if abs(h_dp) < 8.0
-                    if abs(h_th) < 0.080
-                    if abs(h_ph) < 0.035]
+                                        # h_show_after
+                                        h_show_after = events.H_cal_etotnorm
 
-    # h_ecut_eff
-    h_ecut_eff_iterate = [H_cer_npeSum, H_cal_etotnorm, H_gtr_dp, H_tr_tg_th, H_tr_tg_ph, bcm_after]
-    h_ecut_eff = [h_caletot
-                  for (cer, h_caletot, h_dp, h_th, h_ph, bcm) in zip(*h_ecut_eff_iterate)
-                  if bcm > thres_curr
-                  if h_caletot > 0.6
-                  if h_caletot < 2.0
-                  if cer > 1.5
-                  if abs(h_dp) < 8.0
-                  if abs(h_th) < 0.080
-                  if abs(h_ph) < 0.035
-                  if cer > 1.5]
+                                        # h_ecut_eff                                        
+                                        if events.H_cer_npeSum > 1.5:
+                                            h_ecut_eff = events.H_cer_npeSum
+    print(type(np.asarray(SHMS_EDTM)))
 
     analysis = {
 
@@ -659,7 +510,7 @@ def analysis(PS1, PS3, thres_curr):
         # "Ktrack_uncern" : (len(p_Ktrack_after)/len(p_Ktrack_before))*math.sqrt((1/len(p_Ktrack_after)) + (1/len(p_Ktrack_before))),
         # "ptrack" : len(p_ptrack_after)/len(p_ptrack_before),
         # "ptrack_uncern" : (len(p_ptrack_after)/len(p_ptrack_before))*math.sqrt((1/len(p_ptrack_after)) + (1/len(p_ptrack_before))),
-        "accp_edtm" : (scipy.integrate.simps(SHMS_EDTM) + scipy.integrate.simps(HMS_EDTM)),
+        "accp_edtm" : (scipy.integrate.simps(SHMS_EDTM.content) + scipy.integrate.simps(HMS_EDTM.content)),
         "ps1" : PS1,
         "ps3" : PS3,
 

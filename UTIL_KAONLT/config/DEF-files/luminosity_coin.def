@@ -1,32 +1,20 @@
-block H.cal.etotnorm
-block H.cer.npeSum
+H.cal.etotnorm
+H.cer.npeSum
 block H.gtr.*
 block H.tr.*
-block H.hod.goodscinhit
-block H.hod.betanotrack
+H.hod.goodscinhit
+H.hod.betanotrack
 block H.dc.*
 block H.bcm.*
-block P.cal.etotnorm
-block P.hgcer.npeSum
-block P.aero.npeSum
+P.cal.etotnorm
+P.hgcer.npeSum
+P.aero.npeSum
 block P.gtr.*
 block P.tr.*
-block P.hod.goodscinhit
-block P.hod.betanotrack
+P.hod.goodscinhit
+P.hod.betanotrack
 block P.dc.*
 block T.coin.*
-block H.BCM*.scalerCharge
-block H.1MHz.scalerTime
-block H.pTRIG*.scaler
-block H.hL1ACCP.scaler
-block H.hPRE*.scaler
-block H.hEL_*.scaler
-block H.hSTOF.scaler
-block H.pEL_*.scaler
-block H.pSTOF.scaler
-block H.PRHI.scaler
-block H.PRLO.scaler
-block H.EDTM.scaler
 fEvtHdr.fEvtType
 begin epics
 IBC3H00CRCUR4

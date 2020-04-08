@@ -1,27 +1,16 @@
-H.cal.etotnorm
-H.cer.npeSum
+block H.cal.*
+block H.cer.*
 block H.gtr.*
 block H.tr.*
-H.hod.goodscinhit
-H.hod.betanotrack
+block H.hod.*
 block H.dc.*
 block H.bcm.*
-P.cal.etotnorm
-P.hgcer.npeSum
-P.aero.npeSum
+block P.cal.*
+block P.hgcer.*
+block P.aero.*
 block P.gtr.*
 block P.tr.*
-P.hod.goodscinhit
-P.hod.betanotrack
+block P.hod.*
 block P.dc.*
 block T.coin.*
 fEvtHdr.fEvtType
-begin epics
-IBC3H00CRCUR4
-hac_bcm_average
-ibcm1
-ibcm2
-iunser
-itov3out
-itov4out
-end epics

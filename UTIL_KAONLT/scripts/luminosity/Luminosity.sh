@@ -18,10 +18,10 @@ cd ../../../
 #   const char* CurrentFileNamePattern = "PARAM/HMS/BCM/CALIB/bcmcurrent_%d.param";
 #   gHcParms->Load(Form(CurrentFileNamePattern, RunNumber));
 # When we comment out the below bit ONLY when the bit above is commented out in replay_luminosity_coin.C
-echo -e "\n\nStarting Scaler Replay Script\n\n"
-./hcana -q "SCRIPTS/COIN/SCALERS/replay_coin_scalers.C($RUNNUMBER,$MAXEVENTS)"
-cd CALIBRATION/bcm_current_map/
 # HERE
+# echo -e "\n\nStarting Scaler Replay Script\n\n"
+# ./hcana -q "SCRIPTS/COIN/SCALERS/replay_coin_scalers.C($RUNNUMBER,$MAXEVENTS)"
+cd CALIBRATION/bcm_current_map/
 # root -b<<EOF
 # .L ScalerCalib.C+
 # .x run.C("../../ROOTfiles/coin_replay_scalers_${RUNNUMBER}_${MAXEVENTS}.root")

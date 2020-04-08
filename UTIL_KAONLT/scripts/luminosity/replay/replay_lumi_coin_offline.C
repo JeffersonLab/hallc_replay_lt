@@ -36,6 +36,7 @@ void replay_lumi_coin_offline(Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHcParms->Load(gHcParms->GetString("g_ctp_database_filename"), RunNumber);
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
+  // The params below are called in DBASE/COIN/*.param
   // Load params for COIN trigger configuration
   // gHcParms->Load("g_ctp_trigdet_filename");
   // Load fadc debug parameters

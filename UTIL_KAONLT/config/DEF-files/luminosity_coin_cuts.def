@@ -1,18 +1,29 @@
- 
 Block: RawDecode
-
-Pedestal_event         g.evtyp == 99
-SHMS_event             g.evtyp == 1
-HMS_event              g.evtyp == 2
-BOTH_SINGLES_event     g.evtyp == 3
-COIN_ONLY_event        g.evtyp == 4
-SHMS_COIN_event        g.evtyp == 5
-HMS_COIN_event         g.evtyp == 6 
-COIN_ALL_event         g.evtyp == 7
-ALL_COIN_events        g.evtyp >= 4 && g.evtyp <= 7 
-ALL_events             g.evtyp >= 1 && g.evtyp <= 7 
-
-ALL_HMS_events       HMS_event || COIN_ONLY_event || HMS_COIN_event  || COIN_ALL_event
-ALL_SHMS_events     SHMS_event || COIN_ONLY_event || SHMS_COIN_event || COIN_ALL_event
-
+#include "DEF-files/COIN/PRODUCTION/CUTS/coin_rawdecode_cuts.def"
 RawDecode_master ALL_events
+
+Block: Decode
+#include "DEF-files/COIN/PRODUCTION/CUTS/coin_decode_cuts.def"
+Decode_master ALL_events_NO_EDTM
+
+Block: CoarseTracking
+#include "DEF-files/SHMS/PRODUCTION/CUTS/pstackana_coarsetracking_cuts.def"
+#include "DEF-files/HMS/PRODUCTION/CUTS/hstackana_coarsetracking_cuts.def"
+CoarseTracking_master ALL_events_NO_EDTM
+
+Block: CoarseReconstruct
+CoarseReconstruct_master ALL_events_NO_EDTM
+
+Block: Tracking
+Tracking_master ALL_events_NO_EDTM
+
+Block: Reconstruct
+#include "DEF-files/SHMS/PRODUCTION/CUTS/pstackana_reconstruct_cuts.def"
+#include "DEF-files/HMS/PRODUCTION/CUTS/hstackana_reconstruct_cuts.def"
+#include "DEF-files/COIN/PRODUCTION/CUTS/coin_reconstruct_cuts.def"
+Reconstruct_master ALL_events_NO_EDTM
+
+Block: Physics
+#include "DEF-files/HMS/PRODUCTION/CUTS/hstackana_physics_cuts.def"
+#include "DEF-files/SHMS/PRODUCTION/CUTS/pstackana_physics_cuts.def"
+Physics_master ALL_events_NO_EDTM

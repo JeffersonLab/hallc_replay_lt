@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-09 23:01:47 trottar"
+# Time-stamp: "2020-04-09 23:12:44 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -54,8 +54,9 @@ ps5=int(ps5_tmp[1])
 
 print("HERE----->",ps1)
 
-for i,index in enumerate(psValue):
-    print("HERE----->",psActual[i])   
+for i,index in enumerate(psActual):
+    print("HERE----->",psValue[i])
+    #psValue
     if (index == ps1) :
         PS1 = psActual[i]
     if (index == ps3) :

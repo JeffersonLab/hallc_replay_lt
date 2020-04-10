@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-10 12:46:32 trottar"
+# Time-stamp: "2020-04-10 12:52:10 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -15,6 +15,8 @@ import numpy as np
 import pandas as pd
 import scipy
 import scipy.integrate as integrate
+from itertools import chain
+from collections import defaultdict
 import sys, math, os
 
 sys.path.insert(0, '/home/trottar/bin/python/')
@@ -769,9 +771,12 @@ def main():
     track_info = analysis(PS1, PS3, thres_curr)
     # lumi_data = {**scalers , **track_info} # only python 3.5+
 
-    lumi_data = {}
-    for d in (scalers, track_info): 
-        lumi_data.update(d)
+    lumi_data = defaultdict(list)
+    # for d in (scalers, track_info): 
+        # lumi_data.update(d)
+    for k, v in chain(scalers.items(), track_info.items()):
+        lumi_data[k].append(v)
+
 
     print(lumi_data)
 

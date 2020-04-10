@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-10 01:10:11 trottar"
+# Time-stamp: "2020-04-10 01:17:27 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -52,10 +52,7 @@ ps1=int(ps1_tmp[1])
 ps3=int(ps3_tmp[1])
 ps5=int(ps5_tmp[1])
 
-print("HERE----->",ps1)
-
 for i,index in enumerate(psActual):
-    print("HERE----->",psValue[i])
     #psValue
     if (index == ps1) :
         PS1 = psActual[i]
@@ -765,20 +762,10 @@ def analysis(PS1, PS3, thres_curr):
           
     return track_info
 
-def mergedicts(dict1, dict2):
-    for k in set(dict1.keys()).union(dict2.keys()):
-        if k in dict1 and k in dict2:
-            if isinstance(dict1[k], dict) and isinstance(dict2[k], dict):
-                yield (k, dict(mergedicts(dict1[k], dict2[k])))
-            else:
-                # If one of the values is not a dict, you can't continue merging it.
-                # Value from second dict overrides one in first and we move on.
-                yield (k, dict2[k])
-                # Alternatively, replace this with exception raiser to alert you of value conflicts
-        elif k in dict1:
-            yield (k, dict1[k])
-        else:
-            yield (k, dict2[k])
+def mergedicts(x, y):
+    z = x.copy()   # start with x's keys and values
+    z.update(y)    # modifies z with y's keys and values & returns None
+    return z
 
 def main():
 

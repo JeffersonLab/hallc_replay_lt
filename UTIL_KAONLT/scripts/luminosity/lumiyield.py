@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-10 12:56:16 trottar"
+# Time-stamp: "2020-04-10 13:02:36 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -15,7 +15,7 @@ import numpy as np
 import pandas as pd
 import scipy
 import scipy.integrate as integrate
-import sys, math, os, string
+import sys, math, os
 
 sys.path.insert(0, '/home/trottar/bin/python/')
 import root2py as r2p
@@ -772,7 +772,7 @@ def main():
     data = {}
     for d in (scalers, track_info): 
         data.update(d)
-    lumi_data = data.fromkeys(string.ascii_lowercase, 0)
+    lumi_data = sorted(data.keys(), key=lambda x:x.lower())
 
     print(lumi_data)
 

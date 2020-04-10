@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-10 01:29:37 trottar"
+# Time-stamp: "2020-04-10 12:42:58 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -762,21 +762,17 @@ def analysis(PS1, PS3, thres_curr):
           
     return track_info
 
-def mergedicts(x, y):
-    z = x.copy()   # start with x's keys and values
-    z.update(y)    # modifies z with y's keys and values & returns None
-    return z
-
 def main():
 
     # combine dictionaries
     scalers = scaler(runNum, PS1, PS3, thres_curr)
     track_info = analysis(PS1, PS3, thres_curr)
-    # lumi_data = {**scalers , **track_info}
-    # lumi_data  = dict(mergedicts(scalers,track_info))
-    lumi_data = {}
-    lumi_data.update(scalers)
-    lumi_data.update(track_info)
+    # lumi_data = {**scalers , **track_info} # only python 3.5+
+    lumi_data = {scalers , **track_info} 
+
+    # lumi_data = {}
+    # lumi_data.update(scalers)
+    # lumi_data.update(track_info)
 
     print(lumi_data)
 

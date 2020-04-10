@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-09 20:30:37 trottar"
+# Time-stamp: "2020-04-09 21:24:07 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -767,7 +767,8 @@ def main():
     # combine dictionaries
     scalers = scaler(runNum, PS1, PS3, thres_curr)
     track_info = analysis(PS1, PS3, thres_curr)
-    lumi_data = {**scalers , **track_info}
+    # lumi_data = {**scalers , **track_info}
+    lumi_data  = dict(mergedicts(scalers,track_info))
 
     table  = pd.DataFrame([lumi_data], columns=lumi_data.keys())
     

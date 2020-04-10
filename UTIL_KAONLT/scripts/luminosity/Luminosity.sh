@@ -33,7 +33,7 @@ mv bcmcurrent_$RUNNUMBER.param ../../PARAM/HMS/BCM/CALIB/bcmcurrent_$RUNNUMBER.p
 cd ../../
 
 echo -e "\n\nStarting Replay Script\n\n"
-./hcana -q "UTIL_KAONLT/scripts/luminosity/replay/replay_lumi_coin_offline.C($RUNNUMBER,$MAXEVENTS)" | tee UTIL_KAONLT/REPORT_OUTPUT/COIN/PRODUCTION/output_coin_production_${RUNNUMBER}_${MAXEVENTS}.report
+./hcana -q "UTIL_KAONLT/scripts/luminosity/replay/replay_lumi_coin_offline.C($RUNNUMBER,$MAXEVENTS)"
 
 cd UTIL_KAONLT/scripts/luminosity/
 python3 lumiyield.py ${RUNNUMBER} ${MAXEVENTS}

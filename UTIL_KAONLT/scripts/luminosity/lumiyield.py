@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-10 19:30:04 trottar"
+# Time-stamp: "2020-04-10 19:31:42 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -770,16 +770,15 @@ def main():
     track_info = analysis(PS1, PS3, thres_curr)
     # lumi_data = {**scalers , **track_info} # only python 3.5+
 
-    data = {}
-    for d in (scalers, track_info): 
-        data.update(d)
-    lumi_data  = OrderedDict(data.items())
+    # data = {}
+    # for d in (scalers, track_info): 
+    #     data.update(d)
+    # lumi_data  = OrderedDict(data.items())
 
 
     lumi_data = collections.OrderedDict()
-    for a,b in zip(scalers, track_info):
-        lumi_data.update(a)
-        lumi_data.update(b)
+    for d in (scalers, track_info):
+        lumi_data.update(d)
     print(lumi_data)
 
     table  = pd.DataFrame([lumi_data], columns=lumi_data.keys())

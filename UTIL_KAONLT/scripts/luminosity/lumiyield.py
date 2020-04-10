@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-10 19:34:49 trottar"
+# Time-stamp: "2020-04-10 19:41:57 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -15,7 +15,7 @@ import numpy as np
 import pandas as pd
 import scipy
 import scipy.integrate as integrate
-import sys, math, os, collections
+import sys, math, os
 
 sys.path.insert(0, '/home/trottar/bin/python/')
 import root2py as r2p
@@ -769,15 +769,15 @@ def main():
     track_info = analysis(PS1, PS3, thres_curr)
     # lumi_data = {**scalers , **track_info} # only python 3.5+
 
-    # data = {}
-    # for d in (scalers, track_info): 
-    #     data.update(d)
-    # lumi_data  = OrderedDict(data.items())
+    data = {}
+    for d in (scalers, track_info): 
+        data.update(d)
+    lumi_data = {}
 
+    for i in sorted(data.keys()):
+        print(i,data[i])
+    
 
-    lumi_data = collections.OrderedDict()
-    for d in (scalers, track_info):
-        lumi_data.update(d)
     print(lumi_data)
 
     table  = pd.DataFrame([lumi_data], columns=lumi_data.keys())

@@ -16,13 +16,13 @@ fi
 #     MAXEVENTS=-1 
 # fi
 
-cd ../../../
+cd /group/c-kaonlt/USERS/${USER}/hallc_replay_lt/
 #   Load params for BCM
 #   const char* CurrentFileNamePattern = "PARAM/HMS/BCM/CALIB/bcmcurrent_%d.param";
 #   gHcParms->Load(Form(CurrentFileNamePattern, RunNumber));
 # When we comment out the below bit ONLY when the bit above is commented out in replay_luminosity_coin.C
 echo -e "\n\nStarting Scaler Replay Script\n\n"
-./hcana -q "SCRIPTS/COIN/SCALERS/replay_coin_scalers.C($RUNNUMBER,$MAXEVENTS)"
+./hcana -q "/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/SCRIPTS/COIN/SCALERS/replay_coin_scalers.C($RUNNUMBER,$MAXEVENTS)"
 cd CALIBRATION/bcm_current_map/
 root -b<<EOF
 .L ScalerCalib.C+
@@ -33,7 +33,7 @@ mv bcmcurrent_$RUNNUMBER.param ../../PARAM/HMS/BCM/CALIB/bcmcurrent_$RUNNUMBER.p
 cd ../../
 
 echo -e "\n\nStarting Replay Script\n\n"
-./hcana -q "UTIL_KAONLT/scripts/luminosity/replay/replay_lumi_coin_offline.C($RUNNUMBER,$MAXEVENTS)"
+./hcana -q "/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/replay/replay_lumi_coin_offline.C($RUNNUMBER,$MAXEVENTS)"
 
-cd UTIL_KAONLT/scripts/luminosity/
+cd /group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/
 python3 lumiyield.py ${RUNNUMBER} ${MAXEVENTS}

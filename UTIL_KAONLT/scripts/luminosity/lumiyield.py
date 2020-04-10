@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-09 13:40:02 trottar"
+# Time-stamp: "2020-04-09 20:30:37 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -20,19 +20,37 @@ import sys, math, os
 sys.path.insert(0, '/home/trottar/bin/python/')
 import root2py as r2p
 
-filename = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.csv"
+filename = "/u/group/c-kaonlt/USERS/trottar/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.csv"
+rootName = "/u/group/c-kaonlt/USERS/trottar/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/lumi_coin_offline_%i_%i.root" % (runNum,MaxEvent)
+report = "/u/group/c-kaonlt/USERS/trottar/hallc_replay_lt/UTIL_KAONLT/REPORT_OUTPUT/COIN/PRODUCTION/Lumi_coin_replay_production_Offline_%s_%s.report" % (RunNumber,MaxEvent)
 
-runNum = 5158
-ps1 = 6
-ps3 = 4
-ps5 = 0
+runNum = sys.argv[1]
+MaxEvent=sys.argv[2]
+# MaxEvent=50000
+
 thres_curr = 2.5
 
-rootName = "../../ROOTfiles/lumi_coin_offline_%i_50000.root" % runNum
+f = open(report)
+
+psList = ['Ps1_factor','Ps3_factor','Ps5_factor']
 
 psActual = [-1,1,2,3,5,9,17,33,65,129,257,513,1025,2049,4097,8193,16385,32769]
-
 psValue = [-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+
+
+for line in f:
+    data = line.split('=')
+    for index, obj in enumerate(psList) :
+        if (psList[index] in data[0]) : 
+            if (index == 0) :  
+                ps1_tmp = data[1].split(" ")
+            if (index == 1) : 
+                ps3_tmp = data[1].split(" ")
+            if (index == 2) :
+                ps5_tmp = data[1].split(" ")
+ps1=float(ps1_tmp[1])
+ps3=float(ps3_tmp[1])
+ps5=float(ps5_tmp[1])
 
 for i,index in enumerate(psValue):
     if (index == (ps1)) :
@@ -41,6 +59,7 @@ for i,index in enumerate(psValue):
         PS3 = psActual[i]
     if (index == ps5) :
         PS5 = psActual[i]
+f.close()
 
 '''
 SCALER TREE, TSH

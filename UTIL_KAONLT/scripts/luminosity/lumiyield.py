@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-10 12:42:58 trottar"
+# Time-stamp: "2020-04-10 12:46:32 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -768,11 +768,10 @@ def main():
     scalers = scaler(runNum, PS1, PS3, thres_curr)
     track_info = analysis(PS1, PS3, thres_curr)
     # lumi_data = {**scalers , **track_info} # only python 3.5+
-    lumi_data = {scalers , **track_info} 
 
-    # lumi_data = {}
-    # lumi_data.update(scalers)
-    # lumi_data.update(track_info)
+    lumi_data = {}
+    for d in (scalers, track_info): 
+        lumi_data.update(d)
 
     print(lumi_data)
 

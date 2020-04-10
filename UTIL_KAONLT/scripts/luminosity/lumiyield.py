@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-09 22:09:07 trottar"
+# Time-stamp: "2020-04-09 22:18:34 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -26,7 +26,7 @@ MaxEvent=sys.argv[2]
 
 filename = "/u/group/c-kaonlt/USERS/trottar/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.csv"
 rootName = "/u/group/c-kaonlt/USERS/trottar/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/lumi_coin_offline_%s_%s.root" % (runNum,MaxEvent)
-report = "/group/c-kaonlt/USERS/trottar/kaonlt/REPORT_OUTPUT/COIN/PRODUCTION/Lumi_coin_replay_production_Offline_%s_%s.report" % (runNum,MaxEvent)
+report = "/group/c-kaonlt/USERS/trottar/kaonlt/REPORT_OUTPUT/lumi_coin_offline__%s_%s.report" % (runNum,MaxEvent)
 
 thres_curr = 2.5
 

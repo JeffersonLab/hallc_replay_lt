@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-10 18:43:31 trottar"
+# Time-stamp: "2020-04-10 19:23:45 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -15,6 +15,7 @@ import numpy as np
 import pandas as pd
 import scipy
 import scipy.integrate as integrate
+from collections import OrderedDict
 import sys, math, os
 
 sys.path.insert(0, '/home/trottar/bin/python/')
@@ -772,7 +773,7 @@ def main():
     data = {}
     for d in (scalers, track_info): 
         data.update(d)
-    lumi_data  = {key : value for key, value in sorted(data.items())}
+    lumi_data  = OrderedDict(data.items())
         
     print(lumi_data)
 

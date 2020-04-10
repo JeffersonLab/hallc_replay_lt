@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-09 22:28:36 trottar"
+# Time-stamp: "2020-04-09 22:35:56 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -51,6 +51,8 @@ for line in f:
 ps1=ps1_tmp[1]
 ps3=ps3_tmp[1]
 ps5=ps5_tmp[1]
+
+print("HER----->",ps1)
 
 for i,index in enumerate(psValue):
     if (index == ps1) :

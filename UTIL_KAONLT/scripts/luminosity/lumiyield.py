@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-10 13:02:36 trottar"
+# Time-stamp: "2020-04-10 18:39:27 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -772,8 +772,8 @@ def main():
     data = {}
     for d in (scalers, track_info): 
         data.update(d)
-    lumi_data = sorted(data.keys(), key=lambda x:x.lower())
-
+    lumi_data  = [key : value for key, value in sorted(data.items())]
+        
     print(lumi_data)
 
     table  = pd.DataFrame([lumi_data], columns=lumi_data.keys())

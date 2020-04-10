@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-09 22:43:50 trottar"
+# Time-stamp: "2020-04-09 22:52:20 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -48,9 +48,9 @@ for line in f:
                 ps3_tmp = data[1].split(" ")
             if (index == 2) :
                 ps5_tmp = data[1].split(" ")
-ps1=ps1_tmp[1]
-ps3=ps3_tmp[1]
-ps5=ps5_tmp[1]
+ps1=int(ps1_tmp[1])
+ps3=int(ps3_tmp[1])
+ps5=int(ps5_tmp[1])
 
 print("HERE----->",type(ps1))
 

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-10 19:31:42 trottar"
+# Time-stamp: "2020-04-10 19:34:49 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -15,8 +15,7 @@ import numpy as np
 import pandas as pd
 import scipy
 import scipy.integrate as integrate
-from collections import OrderedDict
-import sys, math, os
+import sys, math, os, collections
 
 sys.path.insert(0, '/home/trottar/bin/python/')
 import root2py as r2p

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-09 15:34:01 trottar"
+# Time-stamp: "2020-04-10 01:06:07 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -24,6 +24,7 @@ try:
     lumi_data = dict(pd.read_csv(inp_f))
 except IOError:
     print("Error: File does not appear to exist.")
+print(lumi_data.keys())
     
 # prints first instance of run number-> print(lumi_data["run number"][0])
 target = "carbon"

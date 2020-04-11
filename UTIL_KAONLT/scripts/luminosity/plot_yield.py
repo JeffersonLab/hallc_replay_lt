@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-10 01:06:07 trottar"
+# Time-stamp: "2020-04-11 02:37:02 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -136,11 +136,16 @@ def plot_yield():
 def main():
     
     yield_data = plot_yield()
+    data = {**lumi_data, **yield_data} # only python 3.5+
 
-    data = {**lumi_data, **yield_data}
+    # datadict = {}
+    # for d in (lumi_data, yield_data): 
+    #     datadict.update(d)
+    # data = {i : datadict[i] for i in sorted(datadict.keys())}
     
     table  = pd.DataFrame([(k, *v) for k, v in data.items()])
     table = table.T
+    table = table.reindex(sorted(table.columns), axis=1)
     
     file_exists = os.path.isfile(out_f)
 

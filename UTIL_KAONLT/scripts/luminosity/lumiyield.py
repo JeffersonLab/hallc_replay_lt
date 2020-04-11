@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-10 21:06:49 trottar"
+# Time-stamp: "2020-04-10 21:11:25 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -776,11 +776,7 @@ def main():
 
     table  = pd.DataFrame([lumi_data], columns=lumi_data.keys())
 
-    print(table)
-
     table = table.reindex(sorted(table.columns), axis=1)
-
-    print(table)
     
     file_exists = os.path.isfile(filename)
 

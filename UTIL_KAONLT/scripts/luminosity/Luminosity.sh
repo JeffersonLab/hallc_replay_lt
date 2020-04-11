@@ -3,8 +3,8 @@
 echo "Starting Luminosity Script"
 echo "I take as arguments the Run Number and max number of events!"
 RUNNUMBER=$1
-# MAXEVENTS=$2
-MAXEVENTS=50000
+MAXEVENTS=$2
+# MAXEVENTS=50000
 
 if [[ $1 -eq "" ]]; then
     echo "I need a Run Number!"

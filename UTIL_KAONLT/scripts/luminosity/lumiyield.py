@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-10 21:11:25 trottar"
+# Time-stamp: "2020-04-12 14:13:41 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -55,11 +55,20 @@ ps5=int(ps5_tmp[1])
 for i,index in enumerate(psActual):
     #psValue
     if (index == ps1) :
-        PS1 = psActual[i]
+        if(index == -1):
+            PS1 = 0
+        else:
+            PS1 = psActual[i]
     if (index == ps3) :
-        PS3 = psActual[i]
+        if(index == -1):
+            PS3 = 0
+        else:
+            PS3 = psActual[i]
     if (index == ps5) :
-        PS5 = psActual[i]
+        if(index == -1):
+            PS5 = 0
+        else:
+            PS5 = psActual[i]
 f.close()
 
 '''

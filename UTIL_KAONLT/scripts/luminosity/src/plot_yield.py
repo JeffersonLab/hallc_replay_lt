@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-15 19:44:51 trottar"
+# Time-stamp: "2020-04-15 19:50:50 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -16,10 +16,10 @@ import matplotlib.pyplot as plt
 from csv import DictReader
 import os
 
-inp_f = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.csv"
-out_f = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/yield_data.csv"
-# inp_f = "/u/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.csv"
-# out_f = "/u/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/yield_data.csv"
+# inp_f = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.csv"
+# out_f = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/yield_data.csv"
+inp_f = "/u/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.csv"
+out_f = "/u/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/yield_data.csv"
 
 try:
     # lumi_data = pd.read_csv(inp_f).to_dict()

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-15 19:52:22 trottar"
+# Time-stamp: "2020-04-15 19:58:31 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -14,7 +14,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from csv import DictReader
-import os
+import os, subprocess
 
 # inp_f = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.csv"
 # out_f = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/yield_data.csv"
@@ -22,7 +22,6 @@ inp_f = "/u/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_KAONLT/scripts/lum
 out_f = "/u/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/yield_data.csv"
 
 try:
-    # lumi_data = pd.read_csv(inp_f).to_dict()
     lumi_data = dict(pd.read_csv(inp_f))
 except IOError:
     print("Error: File does not appear to exist.")

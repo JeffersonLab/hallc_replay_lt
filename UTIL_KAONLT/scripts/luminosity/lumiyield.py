@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-12 14:13:41 trottar"
+# Time-stamp: "2020-04-15 13:01:40 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -252,7 +252,45 @@ def scaler(runNum, PS1, PS3, thres_curr):
         previous_time[ibcm] = evt
         previous_charge[ibcm] = bcm_value[ibcm][i]
 
-    scalers = {
+    if PS1 == 0 :
+        scalers = {
+            "run number" : runNum,
+            "ps1" : PS1,
+            "ps3" : PS3,
+            "time": time_sum[3],
+            "charge": charge_sum[3],
+            "TRIG1_scaler": sum(trig_sum[0]),
+            "TRIG3_scaler": sum(trig_sum[2]),
+            "CPULT_scaler": 1-sum(acctrig_sum)/(sum(trig_sum[2])/PS3),
+            "CPULT_scaler_uncern": (sum(acctrig_sum)/((sum(trig_sum[2])/PS3)))*np.sqrt((1/(sum(trig_sum[2])/PS3))+(1/sum(acctrig_sum))),
+            "HMS_eLT": 1 - ((6/5)*(sum(PRE_sum[1])-sum(PRE_sum[2]))/(sum(PRE_sum[1]))),
+            "HMS_eLT_uncern": (sum(PRE_sum[1])-sum(PRE_sum[2]))/(sum(PRE_sum[1]))*np.sqrt((np.sqrt(sum(PRE_sum[1])) + np.sqrt(sum(PRE_sum[2])))/(sum(PRE_sum[1]) - sum(PRE_sum[2])) + (np.sqrt(sum(PRE_sum[1]))/sum(PRE_sum[1]))),
+            "SHMS_eLT": 0,
+            "SHMS_eLT_uncern": 0,
+            "sent_edtm": sum(EDTM_sum)
+
+        }
+    elif PS3==0 :
+        scalers = {
+            "run number" : runNum,
+            "ps1" : PS1,
+            "ps3" : PS3,
+            "time": time_sum[3],
+            "charge": charge_sum[3],
+            "TRIG1_scaler": sum(trig_sum[0]),
+            "TRIG3_scaler": sum(trig_sum[2]),
+            "CPULT_scaler": 1-sum(acctrig_sum)/((sum(trig_sum[0])/PS1)),
+            "CPULT_scaler_uncern": (sum(acctrig_sum)/((sum(trig_sum[0])/PS1))*np.sqrt((1/(sum(trig_sum[0])/PS1)))+(1/sum(acctrig_sum))),
+            "HMS_eLT": 0,
+            "HMS_eLT_uncern": 0,
+            "SHMS_eLT": 1 - ((6/5)*(sum(SHMS_PRE_sum[1])-sum(SHMS_PRE_sum[2]))/(sum(SHMS_PRE_sum[1]))),
+            "SHMS_eLT_uncern": (sum(SHMS_PRE_sum[1])-sum(SHMS_PRE_sum[2]))/(sum(SHMS_PRE_sum[1]))*np.sqrt((np.sqrt(sum(SHMS_PRE_sum[1])) + np.sqrt(sum(SHMS_PRE_sum[2])))/(sum(SHMS_PRE_sum[1]) - sum(SHMS_PRE_sum[2])) + (np.sqrt(sum(SHMS_PRE_sum[1]))/sum(SHMS_PRE_sum[1]))),
+            "sent_edtm": sum(EDTM_sum)
+
+        }
+
+        else:
+                scalers = {
         "run number" : runNum,
         "ps1" : PS1,
         "ps3" : PS3,
@@ -269,6 +307,7 @@ def scaler(runNum, PS1, PS3, thres_curr):
         "sent_edtm": sum(EDTM_sum)
 
     }
+
 
     print("Using prescale factors: PS1 %.0f, PS3 %.0f\n" % (PS1, PS3))
     print("\n\nUsed current threshold value: %.2f uA" % thres_curr)

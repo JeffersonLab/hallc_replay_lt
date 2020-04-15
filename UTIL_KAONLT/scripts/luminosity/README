@@ -1,0 +1,60 @@
+=================================
+= Luminosity Analysis Directory =
+=================================
+
+
+Archive scripts:
+=================================
+Located in archive directory...
+
+Contains online scripts and c++ versions
+
+
+Running batch jobs: 
+=================================
+Located in batch directory...
+
+inputRuns                             : List of luminosity run numbers
+run_batch_replay_lumi_coin_offline.sh : Batch script that calls ../replay_lumi.sh which will run a
+                                        scaler replay for bcm values, a full replay, and the
+					../src/lumiyield.py script
+run_batch_lumi_script.sh              : Batch script that calls ../lumi_script.sh which will run
+                                        only the ../src/lumiyield.py script
+
+
+Source code: 
+=================================
+Located in src directory...
+
+lumiyield.py                      : which applies cuts to various ROOT leaves and calculates things
+                                    like tracking, HMS events, etc. This will output a csv file to
+				    ../OUTPUTS/lumi_data.csv which can be imported to an excel sheet or
+				    used as an input for the second Python script (plot_yield.py)
+plot_yield.py                     : Reads in the values of ../OUTPUTS/lumi_data.csv and plots yields
+                                    with uncertainty. These yield values, along with the values of
+				    ../OUTPUTS/lumi_data.csv, are printed to an output csv file
+				    ../OUTPUTS/yield_data.csv. It is suggested that this is run
+				    individually with python.
+replay/replay_lumi_coin_offline.C : Replay script that calls config files...
+                                    DBASE/COIN/standard_Offline.database, MAPS/COIN/DETEC/coin.map
+				    MAPS/db_cratemap.dat,
+				    UTIL_KAONLT/config/DEF-files/luminosity_coin.def,
+				    UTIL_KAONLT/config/DEF-files/luminosity_coin_cuts.def,
+				    UTIL_KAONLT/config/TEMPLATES/lumi_coin.template
+python/root2py                    : Custom script developed by Richard Trotta for easier binning of
+                                    histograms in MatPlotlib python package plus some other fun
+				    features. Don't edit unless you know what you're doing!
+
+
+How to run: 
+=================================
+
+replay_lumi.sh <runNumber> <numEvents>  : Calls scaler replay
+                                          SCRIPTS/COIN/SCALERS/replay_coin_scalers.C, full replay
+                                          ../src/replay/replay_lumi_coin_offline.C, and lumi analysis
+					  script ../src/lumiyield.py
+lumi_script.sh  <runNumber> <numEvents> : Calls just lumi analysis script ../src/lumiyield.py
+
+
+
+Any questions or concerns please contact Richard Trotta, trotta@cua.edu

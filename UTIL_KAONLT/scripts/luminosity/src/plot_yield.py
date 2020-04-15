@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-15 13:04:09 trottar"
+# Time-stamp: "2020-04-15 19:44:51 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -18,6 +18,8 @@ import os
 
 inp_f = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.csv"
 out_f = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/yield_data.csv"
+# inp_f = "/u/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.csv"
+# out_f = "/u/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/yield_data.csv"
 
 try:
     # lumi_data = pd.read_csv(inp_f).to_dict()
@@ -36,32 +38,51 @@ def calc_yield():
                for i,evts in enumerate(lumi_data["run number"])]
     rate_HMS = [lumi_data["HMS_evts"][i]/lumi_data["time"][i]
                 for i,evts in enumerate(lumi_data["run number"])]
+    rate_HMS = pd.Series(rate_HMS).fillna(0).tolist()
     rate_SHMS = [lumi_data["SHMS_evts"][i]/lumi_data["time"][i]
                 for i,evts in enumerate(lumi_data["run number"])]
+    rate_SHMS = pd.Series(rate_SHMS).fillna(0).tolist()
     cpuLT_HMS = [lumi_data["TRIG3_cut"][i]/((lumi_data["TRIG3_scaler"][i]-lumi_data["sent_edtm"][i])/lumi_data["ps3"][i])
                  for i,evt in enumerate(lumi_data["run number"])]
+    cpuLT_HMS  = pd.Series(cpuLT_HMS).fillna(0).tolist()
     cpuLT_HMS_uncern = [np.sqrt(cpuLT_HMS[i])/cpuLT_HMS[i]
                  for i,evt in enumerate(lumi_data["run number"])]
+    cpuLT_HMS_uncern = pd.Series(cpuLT_HMS_uncern).fillna(0).tolist()
     cpuLT_SHMS = [lumi_data["TRIG1_cut"][i]/((lumi_data["TRIG1_scaler"][i]-lumi_data["sent_edtm"][i])/lumi_data["ps1"][i])
-                 for i,evt in enumerate(lumi_data["run number"])]
-    cpuLT_SHMS_uncern = [np.sqrt(cpuLT_SHMS[i])/cpuLT_SHMS[i]
-                 for i,evt in enumerate(lumi_data["run number"])]
-    yield_HMS = [(lumi_data["HMS_evts"][i]*lumi_data["ps3"][i])/(lumi_data["charge"][i]*cpuLT_HMS[i]*lumi_data["HMS_track"][i])
-                 for i,evt in enumerate(lumi_data["run number"])]
-    yield_SHMS = [(lumi_data["SHMS_evts"][i]*lumi_data["ps1"][i])/(lumi_data["charge"][i]*cpuLT_SHMS[i]*lumi_data["SHMS_track"][i])
                   for i,evt in enumerate(lumi_data["run number"])]
+    cpuLT_SHMS = pd.Series(cpuLT_SHMS).fillna(0).tolist()
+    cpuLT_SHMS_uncern = [np.sqrt(cpuLT_SHMS[i])/cpuLT_SHMS[i]
+                         for i,evt in enumerate(lumi_data["run number"])]
+    cpuLT_SHMS_uncern = pd.Series(cpuLT_SHMS_uncern).fillna(0).tolist()
     uncern_HMS_evts = [np.sqrt(lumi_data["HMS_evts"][i])/lumi_data["HMS_evts"][i]
                        for i,evt in enumerate(lumi_data["run number"])]
+    uncern_HMS_evts  = pd.Series(uncern_HMS_evts).fillna(0).tolist()
     uncern_SHMS_evts = [np.sqrt(lumi_data["SHMS_evts"][i])/lumi_data["SHMS_evts"][i]
-                           for i,evt in enumerate(lumi_data["run number"])]
+                        for i,evt in enumerate(lumi_data["run number"])]
+    uncern_SHMS_evts = pd.Series(uncern_SHMS_evts).fillna(0).tolist()
+    yield_HMS = [(lumi_data["HMS_evts"][i]*lumi_data["ps3"][i])/(lumi_data["charge"][i]*cpuLT_HMS[i]*lumi_data["HMS_track"][i])
+                 for i,evt in enumerate(lumi_data["run number"])]
+    yield_HMS = pd.Series(yield_HMS).fillna(0).tolist()
+    yield_SHMS = [(lumi_data["SHMS_evts"][i]*lumi_data["ps1"][i])/(lumi_data["charge"][i]*cpuLT_SHMS[i]*lumi_data["SHMS_track"][i])
+                  for i,evt in enumerate(lumi_data["run number"])]
+    yield_SHMS = pd.Series(yield_SHMS).fillna(0).tolist()
+    print(yield_SHMS)
 
     for i,curr in enumerate(current):
         if curr == min(current):
-            min_yield_HMS = yield_HMS[i]
-            min_yield_SHMS = yield_SHMS[i]
+            if lumi_data["ps3"][i] !=0:
+                min_yield_HMS = yield_HMS[i]
+            else:
+                min_yield_HMS = 1
+            if lumi_data["ps1"][i] !=0:
+                min_yield_SHMS = yield_SHMS[i]
+            else:
+                min_yield_SHMS = 1
 
     yieldRel_HMS = [yield_HMS[i]/min_yield_HMS for i,evt in enumerate(lumi_data["run number"])]
+    # yieldRel_HMS = pd.Series(yieldRel_HMS).fillna(0).tolist()
     yieldRel_SHMS = [yield_SHMS[i]/min_yield_SHMS for i,evt in enumerate(lumi_data["run number"])]
+    # yieldRel_SHMS = pd.Series(yieldRel_SHMS).fillna(0).tolist()
 
     return [current,rate_HMS,rate_SHMS,cpuLT_HMS,cpuLT_SHMS,yield_HMS,yield_SHMS,uncern_HMS_evts,uncern_SHMS_evts,yield_HMS,yield_SHMS,yieldRel_HMS,yieldRel_SHMS]
 

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-15 13:43:57 trottar"
+# Time-stamp: "2020-04-15 19:45:04 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -17,16 +17,16 @@ import scipy
 import scipy.integrate as integrate
 import sys, math, os
 
-sys.path.insert(0, '/home/trottar/bin/python/')
+sys.path.insert(0, 'python/')
 import root2py as r2p
 
 runNum = sys.argv[1]
 MaxEvent=sys.argv[2]
 # MaxEvent=50000
 
-filename = "/u/group/c-kaonlt/USERS/trottar/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.csv"
-rootName = "/u/group/c-kaonlt/USERS/trottar/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/lumi_coin_offline_%s_%s.root" % (runNum,MaxEvent)
-report = "/group/c-kaonlt/USERS/trottar/kaonlt/REPORT_OUTPUT/lumi_coin_offline_%s_%s.report" % (runNum,MaxEvent)
+filename = "/u/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.csv"
+rootName = "/u/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/lumi_coin_offline_%s_%s.root" % (runNum,MaxEvent)
+report = "/u/group/c-kaonlt/USERS/${USER}/kaonlt/REPORT_OUTPUT/lumi_coin_offline_%s_%s.report" % (runNum,MaxEvent)
 
 thres_curr = 2.5
 

@@ -1,1 +1,3 @@
-*.csv
+# Exclude inputs and outputs for plot_yield.py as order of dictionaries may change
+lumi_data.csv
+yield_data.csv

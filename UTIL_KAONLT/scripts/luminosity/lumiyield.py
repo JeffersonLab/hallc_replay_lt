@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-15 13:01:40 trottar"
+# Time-stamp: "2020-04-15 13:11:21 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -290,23 +290,23 @@ def scaler(runNum, PS1, PS3, thres_curr):
         }
 
         else:
-                scalers = {
-        "run number" : runNum,
-        "ps1" : PS1,
-        "ps3" : PS3,
-        "time": time_sum[3],
-        "charge": charge_sum[3],
-        "TRIG1_scaler": sum(trig_sum[0]),
-        "TRIG3_scaler": sum(trig_sum[2]),
-        "CPULT_scaler": 1-sum(acctrig_sum)/((sum(trig_sum[0])/PS1) + (sum(trig_sum[2])/PS3)),
-        "CPULT_scaler_uncern": (sum(acctrig_sum)/((sum(trig_sum[0])/PS1) + (sum(trig_sum[2])/PS3)))*np.sqrt((1/(sum(trig_sum[0])/PS1))+(1/(sum(trig_sum[2])/PS3))+(1/sum(acctrig_sum))),
-        "HMS_eLT": 1 - ((6/5)*(sum(PRE_sum[1])-sum(PRE_sum[2]))/(sum(PRE_sum[1]))),
-        "HMS_eLT_uncern": (sum(PRE_sum[1])-sum(PRE_sum[2]))/(sum(PRE_sum[1]))*np.sqrt((np.sqrt(sum(PRE_sum[1])) + np.sqrt(sum(PRE_sum[2])))/(sum(PRE_sum[1]) - sum(PRE_sum[2])) + (np.sqrt(sum(PRE_sum[1]))/sum(PRE_sum[1]))),
-        "SHMS_eLT": 1 - ((6/5)*(sum(SHMS_PRE_sum[1])-sum(SHMS_PRE_sum[2]))/(sum(SHMS_PRE_sum[1]))),
-        "SHMS_eLT_uncern": (sum(SHMS_PRE_sum[1])-sum(SHMS_PRE_sum[2]))/(sum(SHMS_PRE_sum[1]))*np.sqrt((np.sqrt(sum(SHMS_PRE_sum[1])) + np.sqrt(sum(SHMS_PRE_sum[2])))/(sum(SHMS_PRE_sum[1]) - sum(SHMS_PRE_sum[2])) + (np.sqrt(sum(SHMS_PRE_sum[1]))/sum(SHMS_PRE_sum[1]))),
-        "sent_edtm": sum(EDTM_sum)
-
-    }
+            scalers = {
+                "run number" : runNum,
+                "ps1" : PS1,
+                "ps3" : PS3,
+                "time": time_sum[3],
+                "charge": charge_sum[3],
+                "TRIG1_scaler": sum(trig_sum[0]),
+                "TRIG3_scaler": sum(trig_sum[2]),
+                "CPULT_scaler": 1-sum(acctrig_sum)/((sum(trig_sum[0])/PS1) + (sum(trig_sum[2])/PS3)),
+                "CPULT_scaler_uncern": (sum(acctrig_sum)/((sum(trig_sum[0])/PS1) + (sum(trig_sum[2])/PS3)))*np.sqrt((1/(sum(trig_sum[0])/PS1))+(1/(sum(trig_sum[2])/PS3))+(1/sum(acctrig_sum))),
+                "HMS_eLT": 1 - ((6/5)*(sum(PRE_sum[1])-sum(PRE_sum[2]))/(sum(PRE_sum[1]))),
+                "HMS_eLT_uncern": (sum(PRE_sum[1])-sum(PRE_sum[2]))/(sum(PRE_sum[1]))*np.sqrt((np.sqrt(sum(PRE_sum[1])) + np.sqrt(sum(PRE_sum[2])))/(sum(PRE_sum[1]) - sum(PRE_sum[2])) + (np.sqrt(sum(PRE_sum[1]))/sum(PRE_sum[1]))),
+                "SHMS_eLT": 1 - ((6/5)*(sum(SHMS_PRE_sum[1])-sum(SHMS_PRE_sum[2]))/(sum(SHMS_PRE_sum[1]))),
+                "SHMS_eLT_uncern": (sum(SHMS_PRE_sum[1])-sum(SHMS_PRE_sum[2]))/(sum(SHMS_PRE_sum[1]))*np.sqrt((np.sqrt(sum(SHMS_PRE_sum[1])) + np.sqrt(sum(SHMS_PRE_sum[2])))/(sum(SHMS_PRE_sum[1]) - sum(SHMS_PRE_sum[2])) + (np.sqrt(sum(SHMS_PRE_sum[1]))/sum(SHMS_PRE_sum[1]))),
+                "sent_edtm": sum(EDTM_sum)
+                
+            }
 
 
     print("Using prescale factors: PS1 %.0f, PS3 %.0f\n" % (PS1, PS3))
@@ -730,32 +730,84 @@ def analysis(PS1, PS3, thres_curr):
                   if abs(h_th) < 0.080
                   if abs(h_ph) < 0.035
                   if cer > 1.5]
+    if PS1 == 0:
+        track_info = {
+            
+            "HMS_evts" : len(h_ecut_eff),
+            "HMS_evts_uncern" : math.sqrt(len(h_ecut_eff)),
+            "SHMS_evts" : 0,
+            "SHMS_evts_uncern" : 0,
+            "TRIG1_cut" : len(TRIG1_cut),
+            "TRIG3_cut" : len(TRIG3_cut),
+            "HMS_track" : len(h_track_after)/len(h_track_before),
+            "HMS_track_uncern" : (len(h_track_after)/len(h_track_before))*math.sqrt((1/len(h_track_after)) + (1/len(h_track_before))),
+            "etrack" : len(h_etrack_after)/len(h_etrack_before),
+            "etrack_uncern" : (len(h_etrack_after)/len(h_etrack_before))*math.sqrt((1/len(h_etrack_after)) + (1/len(h_etrack_before))),
+            "SHMS_track" : 0,
+            "SHMS_track_uncern" : 0,
+            "hadtrack" : 0,
+            "hadtrack_uncern" : 0,
+            "pitrack" : 0,
+            "pitrack_uncern" : 0,
+            "Ktrack" : 0,
+            "Ktrack_uncern" : 0,
+            "ptrack" : 0,
+            "ptrack_uncern" : 0,
+            "accp_edtm" : (scipy.integrate.simps(SHMS_EDTM) + scipy.integrate.simps(HMS_EDTM)),
+            
+        }
+    elif PS3 == 0:
+        track_info = {
 
-    track_info = {
+            "HMS_evts" : 0,
+            "HMS_evts_uncern" : 0,
+            "SHMS_evts" : len(p_ecut_eff),
+            "SHMS_evts_uncern" : math.sqrt(len(p_ecut_eff)),
+            "TRIG1_cut" : len(TRIG1_cut),
+            "TRIG3_cut" : len(TRIG3_cut),
+            "HMS_track" : 0,
+            "HMS_track_uncern" : 0,
+            "etrack" : 0,
+            "etrack_uncern" : 0,
+            "SHMS_track" : len(p_track_after)/len(p_track_before),
+            "SHMS_track_uncern" : (len(p_track_after)/len(p_track_before))*math.sqrt((1/len(p_track_after)) + (1/len(p_track_before))),
+            "hadtrack" : len(p_hadtrack_after)/len(p_hadtrack_before),
+            "hadtrack_uncern" : (len(p_hadtrack_after)/len(p_hadtrack_before))*math.sqrt((1/len(p_hadtrack_after)) + (1/len(p_hadtrack_before))),
+            "pitrack" : len(p_pitrack_after)/len(p_pitrack_before),
+            "pitrack_uncern" : (len(p_pitrack_after)/len(p_pitrack_before))*math.sqrt((1/len(p_pitrack_after)) + (1/len(p_pitrack_before))),
+            "Ktrack" : len(p_Ktrack_after)/len(p_Ktrack_before),
+            "Ktrack_uncern" : (len(p_Ktrack_after)/len(p_Ktrack_before))*math.sqrt((1/len(p_Ktrack_after)) + (1/len(p_Ktrack_before))),
+            "ptrack" : len(p_ptrack_after)/len(p_ptrack_before),
+            "ptrack_uncern" : (len(p_ptrack_after)/len(p_ptrack_before))*math.sqrt((1/len(p_ptrack_after)) + (1/len(p_ptrack_before))),
+            "accp_edtm" : (scipy.integrate.simps(SHMS_EDTM) + scipy.integrate.simps(HMS_EDTM)),
 
-        "HMS_evts" : len(h_ecut_eff),
-        "HMS_evts_uncern" : math.sqrt(len(h_ecut_eff)),
-        "SHMS_evts" : len(p_ecut_eff),
-        "SHMS_evts_uncern" : math.sqrt(len(p_ecut_eff)),
-        "TRIG1_cut" : len(TRIG1_cut),
-        "TRIG3_cut" : len(TRIG3_cut),
-        "HMS_track" : len(h_track_after)/len(h_track_before),
-        "HMS_track_uncern" : (len(h_track_after)/len(h_track_before))*math.sqrt((1/len(h_track_after)) + (1/len(h_track_before))),
-        "etrack" : len(h_etrack_after)/len(h_etrack_before),
-        "etrack_uncern" : (len(h_etrack_after)/len(h_etrack_before))*math.sqrt((1/len(h_etrack_after)) + (1/len(h_etrack_before))),
-        "SHMS_track" : len(p_track_after)/len(p_track_before),
-        "SHMS_track_uncern" : (len(p_track_after)/len(p_track_before))*math.sqrt((1/len(p_track_after)) + (1/len(p_track_before))),
-        "hadtrack" : len(p_hadtrack_after)/len(p_hadtrack_before),
-        "hadtrack_uncern" : (len(p_hadtrack_after)/len(p_hadtrack_before))*math.sqrt((1/len(p_hadtrack_after)) + (1/len(p_hadtrack_before))),
-        "pitrack" : len(p_pitrack_after)/len(p_pitrack_before),
-        "pitrack_uncern" : (len(p_pitrack_after)/len(p_pitrack_before))*math.sqrt((1/len(p_pitrack_after)) + (1/len(p_pitrack_before))),
-        "Ktrack" : len(p_Ktrack_after)/len(p_Ktrack_before),
-        "Ktrack_uncern" : (len(p_Ktrack_after)/len(p_Ktrack_before))*math.sqrt((1/len(p_Ktrack_after)) + (1/len(p_Ktrack_before))),
-        "ptrack" : len(p_ptrack_after)/len(p_ptrack_before),
-        "ptrack_uncern" : (len(p_ptrack_after)/len(p_ptrack_before))*math.sqrt((1/len(p_ptrack_after)) + (1/len(p_ptrack_before))),
-        "accp_edtm" : (scipy.integrate.simps(SHMS_EDTM) + scipy.integrate.simps(HMS_EDTM)),
-
-    }
+        }
+    else:
+        track_info = {
+            
+            "HMS_evts" : len(h_ecut_eff),
+            "HMS_evts_uncern" : math.sqrt(len(h_ecut_eff)),
+            "SHMS_evts" : len(p_ecut_eff),
+            "SHMS_evts_uncern" : math.sqrt(len(p_ecut_eff)),
+            "TRIG1_cut" : len(TRIG1_cut),
+            "TRIG3_cut" : len(TRIG3_cut),
+            "HMS_track" : len(h_track_after)/len(h_track_before),
+            "HMS_track_uncern" : (len(h_track_after)/len(h_track_before))*math.sqrt((1/len(h_track_after)) + (1/len(h_track_before))),
+            "etrack" : len(h_etrack_after)/len(h_etrack_before),
+            "etrack_uncern" : (len(h_etrack_after)/len(h_etrack_before))*math.sqrt((1/len(h_etrack_after)) + (1/len(h_etrack_before))),
+            "SHMS_track" : len(p_track_after)/len(p_track_before),
+            "SHMS_track_uncern" : (len(p_track_after)/len(p_track_before))*math.sqrt((1/len(p_track_after)) + (1/len(p_track_before))),
+            "hadtrack" : len(p_hadtrack_after)/len(p_hadtrack_before),
+            "hadtrack_uncern" : (len(p_hadtrack_after)/len(p_hadtrack_before))*math.sqrt((1/len(p_hadtrack_after)) + (1/len(p_hadtrack_before))),
+            "pitrack" : len(p_pitrack_after)/len(p_pitrack_before),
+            "pitrack_uncern" : (len(p_pitrack_after)/len(p_pitrack_before))*math.sqrt((1/len(p_pitrack_after)) + (1/len(p_pitrack_before))),
+            "Ktrack" : len(p_Ktrack_after)/len(p_Ktrack_before),
+            "Ktrack_uncern" : (len(p_Ktrack_after)/len(p_Ktrack_before))*math.sqrt((1/len(p_Ktrack_after)) + (1/len(p_Ktrack_before))),
+            "ptrack" : len(p_ptrack_after)/len(p_ptrack_before),
+            "ptrack_uncern" : (len(p_ptrack_after)/len(p_ptrack_before))*math.sqrt((1/len(p_ptrack_after)) + (1/len(p_ptrack_before))),
+            "accp_edtm" : (scipy.integrate.simps(SHMS_EDTM) + scipy.integrate.simps(HMS_EDTM)),
+            
+        }
 
     print("Terminate","Selection rules have been applied, plotting results")
     print("Using prescale factors: PS1 %.0f, PS3 %.0f\n" % (PS1,PS3))

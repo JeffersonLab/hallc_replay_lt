@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-15 20:13:41 trottar"
+# Time-stamp: "2020-04-15 20:14:53 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -17,6 +17,7 @@ from csv import DictReader
 import os, subprocess
 
 USER = subprocess.check_output("whoami")
+print(USER)
 
 # inp_f = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.csv"
 # out_f = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/yield_data.csv"

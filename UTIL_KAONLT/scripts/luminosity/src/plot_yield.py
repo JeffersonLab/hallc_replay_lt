@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-15 20:09:51 trottar"
+# Time-stamp: "2020-04-15 20:11:01 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -17,7 +17,7 @@ from csv import DictReader
 import os, subprocess
 
 USER = subprocess.call("whoami")
-print(USER)
+print(USER[0])
 
 # inp_f = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.csv"
 # out_f = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/yield_data.csv"
@@ -27,7 +27,7 @@ out_f = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/luminosi
 try:
     lumi_data = dict(pd.read_csv(inp_f))
 except IOError:
-    print("Error: File does not appear to exist.")
+    print("Error: %s does not appear to exist." % inp_f)
 print(lumi_data.keys())
     
 # prints first instance of run number-> print(lumi_data["run number"][0])

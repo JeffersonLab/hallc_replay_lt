@@ -89,5 +89,3 @@ while true; do
         * ) echo "Please answer yes or no.";;
     esac
 done
-
-rm -rf tmp

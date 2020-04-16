@@ -79,8 +79,7 @@ while true; do
 		    echo "############################################ END OF JOB SUBMISSIONS ###########################################"
 		    echo "###############################################################################################################"
 		    echo " "
-
-		    rm -rf tmp
+		    
 		fi
 	    done < "$inputFile"
 	    )
@@ -90,3 +89,5 @@ while true; do
         * ) echo "Please answer yes or no.";;
     esac
 done
+
+rm -rf tmp

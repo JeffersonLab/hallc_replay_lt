@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-15 20:11:01 trottar"
+# Time-stamp: "2020-04-15 20:13:41 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -16,8 +16,7 @@ import matplotlib.pyplot as plt
 from csv import DictReader
 import os, subprocess
 
-USER = subprocess.call("whoami")
-print(USER[0])
+USER = subprocess.check_output("whoami")
 
 # inp_f = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.csv"
 # out_f = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/yield_data.csv"

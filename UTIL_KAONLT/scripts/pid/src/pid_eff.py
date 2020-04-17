@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-17 17:04:36 trottar"
+# Time-stamp: "2020-04-17 17:34:09 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -31,15 +31,16 @@ c = r2p.pyPlot(None)
 
 USER = subprocess.getstatusoutput("whoami")
 
-# pdf = matplotlib.backends.backend_pdf.PdfPages("/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_plots_%s.pdf"  % (runNum))
+pdf = matplotlib.backends.backend_pdf.PdfPages("/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_plots_%s.pdf"  % (runNum))
 
-pdf = matplotlib.backends.backend_pdf.PdfPages("/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_plots_%s.pdf"  % (USER[1],runNum))
+filename = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_data.csv" 
+rootName = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/pid_coin_offline_%s_%s.root" % (runNum,MaxEvent)
 
-# filename = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_data.csv" 
-# rootName = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/pid_coin_offline_%s_%s.root" % (runNum,MaxEvent)
+# pdf = matplotlib.backends.backend_pdf.PdfPages("/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_plots_%s.pdf"  % (USER[1],runNum))
 
-filename = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_data.csv" % USER[1]
-rootName = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/pid_coin_offline_%s_%s.root" % (USER[1], runNum,MaxEvent)
+
+# filename = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_data.csv" % USER[1]
+# rootName = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/pid_coin_offline_%s_%s.root" % (USER[1], runNum,MaxEvent)
 
 '''
 ANALYSIS TREE, T
@@ -151,11 +152,11 @@ def hms_cer():
     plt.legend(loc=1)
     plt.title('Missing Mass ($GeV^2$)', fontsize =20)
 
-    noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Electron Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out Cherenkov cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  b,-10,10,0,2.0)
+    noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Electron Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out HMS Cherenkov cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  b,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
-    PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Electron Coincident Time vs Mass ($GeV^2$) for ROC1 (with Cherenkov cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  b,-10,10,0,2.0)
+    PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Electron Coincident Time vs Mass ($GeV^2$) for ROC1 (with HMS Cherenkov cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  b,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
@@ -167,9 +168,98 @@ def hms_cer():
           
     return h_cer_data
 
+def hms_cal():
+
+    missmass = np.array([math.sqrt(abs(emm*emm-pmm*pmm)) for (emm, pmm) in zip(emiss, pmiss)])
+    
+    noID_electron_iterate = [CTime_eKCoinTime_ROC1, H_gtr_dp, P_gtr_dp, P_cal_etotnorm, P_gtr_beta, H_cer_npeSum, emiss, pmiss]
+    
+    # coin_noID_electron
+    coin_noID_electron = np.array([coin-47.5
+                                   for (coin, h_dp, p_dp, p_cal, p_beta, h_cer, emm, pmm)
+                                   in zip(*noID_electron_iterate)
+                                   if abs(h_dp) < 10.0
+                                   if p_dp >-10.0 or p_dp < 20.0
+                                   if p_cal <0.6
+                                   if (abs(p_beta)-1.00) < 0.1
+                                   if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
+                                   if h_cer > 1.5])
+
+    # mm_noID_electron
+    mm_noID_electron = np.array([math.sqrt(abs(emm*emm-pmm*pmm))
+                                 for (coin, h_dp, p_dp, p_cal, p_beta, h_cer, emm, pmm)
+                                 in zip(*noID_electron_iterate)
+                                 if abs(h_dp) < 10.0
+                                 if p_dp >-10.0 or p_dp < 20.0
+                                 if p_cal <0.6
+                                 if (abs(p_beta)-1.00) < 0.1
+                                 if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
+                                 if h_cer > 1.5])
+
+    PID_electron_iterate = [CTime_eKCoinTime_ROC1, H_gtr_dp, P_gtr_dp, P_cal_etotnorm, P_gtr_beta, H_cer_npeSum, H_cal_etotnorm, emiss, pmiss]
+    
+    # coin_PID_electron
+    coin_PID_electron = np.array([coin-47.5
+                                  for (coin, h_dp, p_dp, p_cal, p_beta, h_cer, h_cal, emm, pmm)
+                                  in zip(*PID_electron_iterate)
+                                  if abs(h_dp) < 10.0
+                                  if p_dp >-10.0 or p_dp < 20.0
+                                  if p_cal <0.6
+                                  if (abs(p_beta)-1.00) < 0.1
+                                  if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
+                                  if h_cer > 1.5
+                                  if h_cal > 1.1])
+
+    # mm_PID_electron
+    mm_PID_electron = np.array([math.sqrt(emm*emm-pmm*pmm)
+                                for (coin, h_dp, p_dp, p_cal, p_beta, h_cer, h_cal, emm, pmm)
+                                in zip(*PID_electron_iterate)
+                                if abs(h_dp) < 10.0
+                                if p_dp >-10.0 or p_dp < 20.0
+                                if p_cal <0.6
+                                if (abs(p_beta)-1.00) < 0.1
+                                if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
+                                if h_cer > 1.5
+                                if h_cal > 1.1])
+
+    h_cal_data = {
+
+        "HMS cal e coin noID" : coin_noID_electron,
+        "HMS cal e coin PID" : coin_PID_electron,
+        "HMS cal missing mass noID" : mm_noID_electron,
+        "HMS cal missing mass PID" : mm_PID_electron,
+    }
+
+    f = plt.figure(figsize=(11.69,8.27))
+    plt.style.use('default')
+
+    plt.hist(missmass,bins=b.setbin(missmass,800,0,2.0),label='no cuts',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(mm_noID_electron,bins=b.setbin(mm_noID_electron,800,0,2.0),label='no ID',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(mm_PID_electron,bins=b.setbin(mm_PID_electron,800,0,2.0),label='PID',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.legend(loc=1)
+    plt.title('Missing Mass ($GeV^2$)', fontsize =20)
+
+    noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Electron Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out HMS Calorimeter cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  b,-10,10,0,2.0)
+    # plt.ylim(-180.,180.)
+    # plt.xlim(0.,50.)
+
+    PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Electron Coincident Time vs Mass ($GeV^2$) for ROC1 (with HMS Calorimeter cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  b,-10,10,0,2.0)
+    # plt.ylim(-180.,180.)
+    # plt.xlim(0.,50.)
+
+    for f in range(1, plt.figure().number):
+        pdf.savefig(f)
+    pdf.close();
+    
+    print("============================================================================\n\n")
+          
+    return h_cal_data
+
+
 def main():
 
-    pid_data = hms_cer()
+    # h_cer_data = hms_cer()
+    pid_data = hms_cal()
 
     plt.show()
 

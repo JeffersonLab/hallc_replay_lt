@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-17 16:58:40 trottar"
+# Time-stamp: "2020-04-17 16:59:42 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -33,7 +33,9 @@ USER = subprocess.getstatusoutput("whoami")
 
 # pdf = matplotlib.backends.backend_pdf.PdfPages("/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_plots_%s.pdf"  % (runNum))
 
-pdf = matplotlib.backends.backend_pdf.PdfPages("/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_plots_%s.pdf"  % (USER[1],runNum))
+# pdf = matplotlib.backends.backend_pdf.PdfPages("/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_plots_%s.pdf"  % (USER[1],runNum))#
+
+pdf = matplotlib.backends.backend_pdf.PdfPages("/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/")
 
 # filename = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_data.csv" 
 # rootName = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/pid_coin_offline_%s_%s.root" % (runNum,MaxEvent)

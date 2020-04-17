@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-17 14:57:16 trottar"
+# Time-stamp: "2020-04-17 14:59:37 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -134,8 +134,8 @@ def hms_cer():
     print(h_cer_data)
 
     print("Terminate","Selection rules have been applied, plotting results")
-    print("Electron coin ratio: %.0f\n" % np.average(coin_noID_electron)/np.average(coin_PID_electron))
-    print("Electron missing mass ratio: %.0f\n" % np.average(mm_noID_electron)/np.average(mm_PID_electron))
+    print("Electron coin ratio: %f\n" % np.average(coin_noID_electron)/np.average(coin_PID_electron))
+    print("Electron missing mass ratio: %f\n" % np.average(mm_noID_electron)/np.average(mm_PID_electron))
 
     f = plt.figure(figsize=(11.69,8.27))
     plt.style.use('default')

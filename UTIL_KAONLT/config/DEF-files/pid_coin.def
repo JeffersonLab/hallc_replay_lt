@@ -7,6 +7,6 @@ block P.cal.etotnorm
 block P.hgcer.*
 block P.aero.npeSum
 block P.gtr.*
-block P.kin.secondary.
+block P.kin.secondary.*
 block T.coin.*
 block fEvtHdr.fEvtType

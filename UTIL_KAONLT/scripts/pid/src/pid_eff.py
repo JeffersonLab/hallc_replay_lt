@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-17 15:00:48 trottar"
+# Time-stamp: "2020-04-17 15:02:06 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -137,8 +137,8 @@ def hms_cer():
     plt.style.use('default')
 
     ax = f.add_subplot(211)
-    ax.hist(mm_noID_electron,bins=b.setbin(pion_theta_cut,200),label='no ID',histtype='step', alpha=0.5, stacked=True, fill=True)
-    ax.hist(mm_PID_electron,bins=b.setbin(pion_theta_cut,200),label='no ID',histtype='step', alpha=0.5, stacked=True, fill=True)
+    ax.hist(mm_noID_electron,bins=b.setbin(mm_noID_electron,200),label='no ID',histtype='step', alpha=0.5, stacked=True, fill=True)
+    ax.hist(mm_PID_electron,bins=b.setbin(mm_PID_electron,200),label='PID',histtype='step', alpha=0.5, stacked=True, fill=True)
     ax.legend(loc=1)
     plt.title('Missing Mass ($GeV^2$)', fontsize =20)#
 

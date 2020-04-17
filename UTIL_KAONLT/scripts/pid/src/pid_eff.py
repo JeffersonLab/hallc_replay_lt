@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-17 15:20:58 trottar"
+# Time-stamp: "2020-04-17 15:22:09 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -133,7 +133,7 @@ def hms_cer():
         "e coin no cuts" : CTime_eKCoinTime_ROC1,
         "e coin noID" : coin_noID_electron,
         "e coin PID" : coin_PID_electron,
-        "missing mass no cuts" : math.sqrt(emm*emm-pmm*pmm),
+        "missing mass no cuts" : math.sqrt(emiss*emiss-pmiss*pmiss),
         "missing mass noID" : mm_noID_electron,
         "missing mass PID" : mm_PID_electron,
     }

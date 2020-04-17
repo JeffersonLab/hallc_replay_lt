@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-17 15:13:53 trottar"
+# Time-stamp: "2020-04-17 15:16:27 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -137,14 +137,16 @@ def hms_cer():
 
     print(h_cer_data)
 
+    print(mm_noID_electron[0])
+
     f = plt.figure(figsize=(11.69,8.27))
     plt.style.use('default')
 
-    # ax = f.add_subplot(211)
-    # ax.hist(mm_noID_electron,bins=b.setbin(mm_noID_electron,200),label='no ID',histtype='step', alpha=0.5, stacked=True, fill=True)
-    # ax.hist(mm_PID_electron,bins=b.setbin(mm_PID_electron,200),label='PID',histtype='step', alpha=0.5, stacked=True, fill=True)
-    # ax.legend(loc=1)
-    # plt.title('Missing Mass ($GeV^2$)', fontsize =20)
+    ax = f.add_subplot(211)
+    ax.hist(mm_noID_electron,bins=b.setbin(mm_noID_electron,200),label='no ID',histtype='step', alpha=0.5, stacked=True, fill=True)
+    ax.hist(mm_PID_electron,bins=b.setbin(mm_PID_electron,200),label='PID',histtype='step', alpha=0.5, stacked=True, fill=True)
+    ax.legend(loc=1)
+    plt.title('Missing Mass ($GeV^2$)', fontsize =20)
 
     noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Electron Coincident Time vs Mass ($GeV^{2}$) for ROC1 (w/out Cherenkov cuts)','Time (ns)','Mass (GeV/c^{2})', 200, 200,  b)
     # plt.ylim(-180.,180.)

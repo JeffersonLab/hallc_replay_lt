@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-17 14:19:24 trottar"
+# Time-stamp: "2020-04-17 14:21:07 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -31,7 +31,7 @@ c = r2p.pyPlot(None)
 
 USER = subprocess.getstatusoutput("whoami")
 
-pdf = matplotlib.backends.backend_pdf.PdfPages("/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_plots.pdf"  % USER[1]) 
+# pdf = matplotlib.backends.backend_pdf.PdfPages("/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_plots.pdf"  % USER[1]) 
 
 filename = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_data.csv" % USER[1]
 rootName = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/pid_coin_offline_%s_%s.root" % (runNum,MaxEvent, USER[1])
@@ -155,9 +155,9 @@ def hms_cer():
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
-    for f in range(1, plt.figure().number):
-        pdf.savefig(f)
-    pdf.close()
+    # for f in range(1, plt.figure().number):
+    #     pdf.savefig(f)
+    # pdf.close()
     
     print("============================================================================\n\n")
           

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-17 15:22:09 trottar"
+# Time-stamp: "2020-04-17 15:23:51 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -73,6 +73,7 @@ MandelT            = tree.array("P.kin.secondary.MandelT")
 pEDTM              = tree.array("T.coin.pEDTM_tdcTime")
 pTRIG5             = tree.array("T.coin.pTRIG5_ROC1_tdcTime")
 EvtType            = tree.array("fEvtHdr.fEvtType")
+missmass = math.sqrt(emiss*emiss-pmiss*pmiss)
 
 
 def hms_cer():
@@ -133,7 +134,7 @@ def hms_cer():
         "e coin no cuts" : CTime_eKCoinTime_ROC1,
         "e coin noID" : coin_noID_electron,
         "e coin PID" : coin_PID_electron,
-        "missing mass no cuts" : math.sqrt(emiss*emiss-pmiss*pmiss),
+        "missing mass no cuts" : missmass,
         "missing mass noID" : mm_noID_electron,
         "missing mass PID" : mm_PID_electron,
     }

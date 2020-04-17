@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-17 14:04:52 trottar"
+# Time-stamp: "2020-04-17 14:19:24 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -155,6 +155,9 @@ def hms_cer():
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
+    for f in range(1, plt.figure().number):
+        pdf.savefig(f)
+    pdf.close()
     
     print("============================================================================\n\n")
           

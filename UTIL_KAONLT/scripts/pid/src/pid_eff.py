@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-17 15:00:13 trottar"
+# Time-stamp: "2020-04-17 15:00:48 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -161,6 +161,8 @@ def hms_cer():
 def main():
 
     h_cer_data = hms_cer()
+
+    plt.show()
 
     table  = pd.DataFrame([pid_data], columns=pid_data.keys())
 

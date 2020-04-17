@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-17 15:24:37 trottar"
+# Time-stamp: "2020-04-17 15:26:43 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -138,7 +138,7 @@ def hms_cer():
         "missing mass PID" : mm_PID_electron,
     }
 
-    print(h_cer_data)
+    # print(h_cer_data)
 
     f = plt.figure(figsize=(11.69,8.27))
     plt.style.use('default')

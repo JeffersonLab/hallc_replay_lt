@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-17 15:39:47 trottar"
+# Time-stamp: "2020-04-17 15:42:52 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -82,13 +82,12 @@ def hms_cer():
     coin_noID_electron = np.array([coin
                           for coin, h_dp, p_dp, p_cal, p_beta, h_cal, emm, pmm
                           in zip(*noID_electron_iterate)
-                          # if abs(h_dp) < 10.0
-                          # if p_dp >-10.0 or p_dp < 20.0
-                          # if p_cal <0.6
-                          # if (abs(p_beta)-1.00) < 0.1
-                          # if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
-                          if h_cal > 0.995 and h_cal < 1.015
-    ])
+                          if abs(h_dp) < 10.0
+                          if p_dp >-10.0 or p_dp < 20.0
+                          if p_cal <0.6
+                          if (abs(p_beta)-1.00) < 0.1
+                          if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
+                          if h_cal > 0.995 and h_cal < 1.015])
 
     # mm_noID_electron
     mm_noID_electron = np.array([math.sqrt(emm*emm-pmm*pmm)
@@ -125,8 +124,6 @@ def hms_cer():
                        if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
                        if h_cal > 0.995 and h_cal < 1.015
                        if h_cer > 3.0])
-
-    print(type(mm_PID_electron))
 
     h_cer_data = {
 

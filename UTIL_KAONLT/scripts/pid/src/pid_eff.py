@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-17 15:02:06 trottar"
+# Time-stamp: "2020-04-17 15:04:24 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -90,7 +90,7 @@ def hms_cer():
                           if h_cal > 0.995 and h_cal < 1.015]
 
     # mm_noID_electron
-    mm_noID_electron = [np.sqrt(emm*emm-pmm*pmm)
+    mm_noID_electron = [math.sqrt(emm*emm-pmm*pmm)
                           for coin, h_dp, p_dp, p_cal, p_beta, h_cal, emm, pmm
                           in zip(*noID_electron_iterate)
                           if abs(h_dp) < 10.0
@@ -114,7 +114,7 @@ def hms_cer():
                          if h_cer > 3.0]
 
     # mm_PID_electron
-    mm_PID_electron = [np.sqrt(emm*emm-pmm*pmm)
+    mm_PID_electron = [math.sqrt(emm*emm-pmm*pmm)
                        for coin, h_dp, p_dp, p_cal, p_beta, h_cal, h_cer, emm, pmm
                        in zip(*PID_electron_iterate)
                        if abs(h_dp) < 10.0
@@ -127,8 +127,10 @@ def hms_cer():
 
     h_cer_data = {
         
-        "e coin ratio" : np.average(coin_noID_electron)/np.average(coin_PID_electron),
-        "e missing mass ratio" : np.average(mm_noID_electron)/np.average(mm_PID_electron),
+        "e coin noID" : coin_noID_electron,
+        "e coin PID" : coin_PID_electron,
+        "e missing mass noID" : mm_noID_electron,
+        "e missing mass PID" : mm_PID_electron,
     }
 
     print(h_cer_data)

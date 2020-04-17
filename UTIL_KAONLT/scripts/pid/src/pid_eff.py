@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-17 14:26:29 trottar"
+# Time-stamp: "2020-04-17 14:40:02 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -66,7 +66,6 @@ P_gtr_p            = tree.array("P.gtr.p")
 Q2                 = tree.array("H.kin.primary.Q2")
 W                  = tree.array("H.kin.primary.W")
 epsilon            = tree.array("H.kin.primary.epsilon")
-ph_q               = tree.array("P.kin.secondary.ph_bq")
 ph_q               = tree.array("P.kin.secondary.ph_xq")
 emiss              = tree.array("P.kin.secondary.emiss")
 pmiss              = tree.array("P.kin.secondary.pmiss")

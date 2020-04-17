@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-17 14:21:07 trottar"
+# Time-stamp: "2020-04-17 14:26:29 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -34,7 +34,7 @@ USER = subprocess.getstatusoutput("whoami")
 # pdf = matplotlib.backends.backend_pdf.PdfPages("/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_plots.pdf"  % USER[1]) 
 
 filename = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_data.csv" % USER[1]
-rootName = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/pid_coin_offline_%s_%s.root" % (runNum,MaxEvent, USER[1])
+rootName = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/pid_coin_offline_%s_%s.root" % (USER[1], runNum,MaxEvent)
 
 '''
 ANALYSIS TREE, T

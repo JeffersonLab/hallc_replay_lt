@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-15 21:02:41 trottar"
+# Time-stamp: "2020-04-17 14:26:58 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -27,8 +27,8 @@ MaxEvent=sys.argv[2]
 USER = subprocess.getstatusoutput("whoami")
 
 filename = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.csv" % USER[1]
-rootName = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/lumi_coin_offline_%s_%s.root" % (runNum,MaxEvent, USER[1])
-report = "/u/group/c-kaonlt/USERS/%s/kaonlt/REPORT_OUTPUT/lumi_coin_offline_%s_%s.report" % (runNum,MaxEvent, USER[1])
+rootName = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/lumi_coin_offline_%s_%s.root" % (USER[1],runNum,MaxEvent)
+report = "/u/group/c-kaonlt/USERS/%s/kaonlt/REPORT_OUTPUT/lumi_coin_offline_%s_%s.report" % (USER[1],runNum,MaxEvent)
 
 thres_curr = 2.5
 

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-17 15:18:25 trottar"
+# Time-stamp: "2020-04-17 15:20:58 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -25,6 +25,9 @@ import root2py as r2p
 runNum = sys.argv[1]
 MaxEvent=sys.argv[2]
 # MaxEvent=50000
+
+b = r2p.pyBin()
+c = r2p.pyPlot(None)
 
 USER = subprocess.getstatusoutput("whoami")
 
@@ -71,9 +74,6 @@ pEDTM              = tree.array("T.coin.pEDTM_tdcTime")
 pTRIG5             = tree.array("T.coin.pTRIG5_ROC1_tdcTime")
 EvtType            = tree.array("fEvtHdr.fEvtType")
 
-b = r2p.pyBin()
-c = r2p.pyPlot(None)
-
 
 def hms_cer():
 
@@ -84,12 +84,13 @@ def hms_cer():
     coin_noID_electron = [coin
                           for coin, h_dp, p_dp, p_cal, p_beta, h_cal, emm, pmm
                           in zip(*noID_electron_iterate)
-                          if abs(h_dp) < 10.0
-                          if p_dp >-10.0 or p_dp < 20.0
-                          if p_cal <0.6
-                          if (abs(p_beta)-1.00) < 0.1
-                          if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
-                          if h_cal > 0.995 and h_cal < 1.015]
+                          # if abs(h_dp) < 10.0
+                          # if p_dp >-10.0 or p_dp < 20.0
+                          # if p_cal <0.6
+                          # if (abs(p_beta)-1.00) < 0.1
+                          # if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
+                          if h_cal > 0.995 and h_cal < 1.015
+    ]
 
     # mm_noID_electron
     mm_noID_electron = [math.sqrt(emm*emm-pmm*pmm)
@@ -128,11 +129,13 @@ def hms_cer():
                        if h_cer > 3.0]
 
     h_cer_data = {
-        
+
+        "e coin no cuts" : CTime_eKCoinTime_ROC1,
         "e coin noID" : coin_noID_electron,
         "e coin PID" : coin_PID_electron,
-        "e missing mass noID" : mm_noID_electron,
-        "e missing mass PID" : mm_PID_electron,
+        "missing mass no cuts" : math.sqrt(emm*emm-pmm*pmm),
+        "missing mass noID" : mm_noID_electron,
+        "missing mass PID" : mm_PID_electron,
     }
 
     print(h_cer_data)

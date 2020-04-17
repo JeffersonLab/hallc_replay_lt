@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-17 15:16:27 trottar"
+# Time-stamp: "2020-04-17 15:18:25 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -26,12 +26,9 @@ runNum = sys.argv[1]
 MaxEvent=sys.argv[2]
 # MaxEvent=50000
 
-b = r2p.pyBin()
-c = r2p.pyPlot(None)
-
 USER = subprocess.getstatusoutput("whoami")
 
-# pdf = matplotlib.backends.backend_pdf.PdfPages("/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_plots.pdf"  % USER[1]) 
+# pdf = matplotlib.backends.backend_pdf.PdfPages("/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_plots_%i.pdf"  % (USER[1],runNum)) 
 
 filename = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_data.csv" % USER[1]
 rootName = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/pid_coin_offline_%s_%s.root" % (USER[1], runNum,MaxEvent)
@@ -73,6 +70,9 @@ MandelT            = tree.array("P.kin.secondary.MandelT")
 pEDTM              = tree.array("T.coin.pEDTM_tdcTime")
 pTRIG5             = tree.array("T.coin.pTRIG5_ROC1_tdcTime")
 EvtType            = tree.array("fEvtHdr.fEvtType")
+
+b = r2p.pyBin()
+c = r2p.pyPlot(None)
 
 
 def hms_cer():
@@ -136,8 +136,6 @@ def hms_cer():
     }
 
     print(h_cer_data)
-
-    print(mm_noID_electron[0])
 
     f = plt.figure(figsize=(11.69,8.27))
     plt.style.use('default')

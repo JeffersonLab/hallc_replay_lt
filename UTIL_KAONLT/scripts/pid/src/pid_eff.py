@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-17 15:04:24 trottar"
+# Time-stamp: "2020-04-17 15:10:04 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -77,6 +77,8 @@ EvtType            = tree.array("fEvtHdr.fEvtType")
 
 def hms_cer():
 
+    print("CTime_eKCoinTime_ROC1",len(CTime_eKCoinTime_ROC1))
+    
     noID_electron_iterate = [CTime_eKCoinTime_ROC1, H_gtr_dp, P_gtr_dp, P_cal_etotnorm, P_gtr_beta, H_cal_etotnorm, emiss, pmiss]
     # coin_noID_electron
     coin_noID_electron = [coin

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-17 15:38:45 trottar"
+# Time-stamp: "2020-04-17 15:39:47 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -126,7 +126,7 @@ def hms_cer():
                        if h_cal > 0.995 and h_cal < 1.015
                        if h_cer > 3.0])
 
-    print(mm_PID_electron)
+    print(type(mm_PID_electron))
 
     h_cer_data = {
 

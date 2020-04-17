@@ -82,7 +82,7 @@ class pyBin():
         else:
             leaf = plot
             
-        binwidth = (np.abs(leaf).max()-np.abs(leaf).min())/numbin
+        binwidth = (abs(leaf).max()-abs(leaf).min())/numbin
         
         bins = np.arange(min(leaf), max(leaf) + binwidth, binwidth)
 

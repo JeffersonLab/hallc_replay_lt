@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-17 15:10:04 trottar"
+# Time-stamp: "2020-04-17 15:13:53 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -87,7 +87,7 @@ def hms_cer():
                           if abs(h_dp) < 10.0
                           if p_dp >-10.0 or p_dp < 20.0
                           if p_cal <0.6
-                          if (abs(p_beta)-1) < 0.1
+                          if (abs(p_beta)-1.00) < 0.1
                           if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
                           if h_cal > 0.995 and h_cal < 1.015]
 
@@ -98,7 +98,7 @@ def hms_cer():
                           if abs(h_dp) < 10.0
                           if p_dp >-10.0 or p_dp < 20.0
                           if p_cal <0.6
-                          if (abs(p_beta)-1) < 0.1
+                          if (abs(p_beta)-1.00) < 0.1
                           if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
                           if h_cal > 0.995 and h_cal < 1.015]
 
@@ -110,7 +110,7 @@ def hms_cer():
                          if abs(h_dp) < 10.0
                          if p_dp >-10.0 or p_dp < 20.0
                          if p_cal <0.6
-                         if (abs(p_beta)-1) < 0.1
+                         if (abs(p_beta)-1.00) < 0.1
                          if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
                          if h_cal > 0.995 and h_cal < 1.015
                          if h_cer > 3.0]
@@ -122,7 +122,7 @@ def hms_cer():
                        if abs(h_dp) < 10.0
                        if p_dp >-10.0 or p_dp < 20.0
                        if p_cal <0.6
-                       if (abs(p_beta)-1) < 0.1
+                       if (abs(p_beta)-1.00) < 0.1
                        if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
                        if h_cal > 0.995 and h_cal < 1.015
                        if h_cer > 3.0]
@@ -140,11 +140,11 @@ def hms_cer():
     f = plt.figure(figsize=(11.69,8.27))
     plt.style.use('default')
 
-    ax = f.add_subplot(211)
-    ax.hist(mm_noID_electron,bins=b.setbin(mm_noID_electron,200),label='no ID',histtype='step', alpha=0.5, stacked=True, fill=True)
-    ax.hist(mm_PID_electron,bins=b.setbin(mm_PID_electron,200),label='PID',histtype='step', alpha=0.5, stacked=True, fill=True)
-    ax.legend(loc=1)
-    plt.title('Missing Mass ($GeV^2$)', fontsize =20)#
+    # ax = f.add_subplot(211)
+    # ax.hist(mm_noID_electron,bins=b.setbin(mm_noID_electron,200),label='no ID',histtype='step', alpha=0.5, stacked=True, fill=True)
+    # ax.hist(mm_PID_electron,bins=b.setbin(mm_PID_electron,200),label='PID',histtype='step', alpha=0.5, stacked=True, fill=True)
+    # ax.legend(loc=1)
+    # plt.title('Missing Mass ($GeV^2$)', fontsize =20)
 
     noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Electron Coincident Time vs Mass ($GeV^{2}$) for ROC1 (w/out Cherenkov cuts)','Time (ns)','Mass (GeV/c^{2})', 200, 200,  b)
     # plt.ylim(-180.,180.)

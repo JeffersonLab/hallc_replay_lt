@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-17 15:42:52 trottar"
+# Time-stamp: "2020-04-17 16:03:37 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -31,7 +31,10 @@ c = r2p.pyPlot(None)
 
 USER = subprocess.getstatusoutput("whoami")
 
-# pdf = matplotlib.backends.backend_pdf.PdfPages("/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_plots_%i.pdf"  % (USER[1],runNum)) 
+# pdf = matplotlib.backends.backend_pdf.PdfPages("/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_plots_%i.pdf"  % (USER[1],runNum))
+
+# filename = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_data.csv" 
+# rootName = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/pid_coin_offline_%s_%s.root" % (runNum,MaxEvent)
 
 filename = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_data.csv" % USER[1]
 rootName = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/pid_coin_offline_%s_%s.root" % (USER[1], runNum,MaxEvent)
@@ -79,8 +82,8 @@ def hms_cer():
     
     noID_electron_iterate = [CTime_eKCoinTime_ROC1, H_gtr_dp, P_gtr_dp, P_cal_etotnorm, P_gtr_beta, H_cal_etotnorm, emiss, pmiss]
     # coin_noID_electron
-    coin_noID_electron = np.array([coin
-                          for coin, h_dp, p_dp, p_cal, p_beta, h_cal, emm, pmm
+    coin_noID_electron = np.array([coin-47.5
+                          for (coin, h_dp, p_dp, p_cal, p_beta, h_cal, emm, pmm)
                           in zip(*noID_electron_iterate)
                           if abs(h_dp) < 10.0
                           if p_dp >-10.0 or p_dp < 20.0
@@ -91,7 +94,7 @@ def hms_cer():
 
     # mm_noID_electron
     mm_noID_electron = np.array([math.sqrt(emm*emm-pmm*pmm)
-                          for coin, h_dp, p_dp, p_cal, p_beta, h_cal, emm, pmm
+                          for (coin, h_dp, p_dp, p_cal, p_beta, h_cal, emm, pmm)
                           in zip(*noID_electron_iterate)
                           if abs(h_dp) < 10.0
                           if p_dp >-10.0 or p_dp < 20.0
@@ -102,8 +105,8 @@ def hms_cer():
 
     PID_electron_iterate = [CTime_eKCoinTime_ROC1, H_gtr_dp, P_gtr_dp, P_cal_etotnorm, P_gtr_beta, H_cal_etotnorm, H_cer_npeSum, emiss, pmiss]
     # coin_PID_electron
-    coin_PID_electron = np.array([coin
-                         for coin, h_dp, p_dp, p_cal, p_beta, h_cal, h_cer, emm, pmm
+    coin_PID_electron = np.array([coin-47.5
+                         for (coin, h_dp, p_dp, p_cal, p_beta, h_cal, h_cer, emm, pmm)
                          in zip(*PID_electron_iterate)
                          if abs(h_dp) < 10.0
                          if p_dp >-10.0 or p_dp < 20.0
@@ -115,7 +118,7 @@ def hms_cer():
 
     # mm_PID_electron
     mm_PID_electron = np.array([math.sqrt(emm*emm-pmm*pmm)
-                       for coin, h_dp, p_dp, p_cal, p_beta, h_cal, h_cer, emm, pmm
+                       for (coin, h_dp, p_dp, p_cal, p_beta, h_cal, h_cer, emm, pmm)
                        in zip(*PID_electron_iterate)
                        if abs(h_dp) < 10.0
                        if p_dp >-10.0 or p_dp < 20.0
@@ -162,7 +165,7 @@ def hms_cer():
 
 def main():
 
-    h_cer_data = hms_cer()
+    pid_data = hms_cer()
 
     plt.show()
 

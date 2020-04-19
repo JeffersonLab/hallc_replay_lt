@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-19 12:14:43 trottar"
+# Time-stamp: "2020-04-19 12:31:57 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -538,8 +538,12 @@ def main():
     p_aero_data = shms_aero()
     p_cal_data = shms_cal()
 
+    runNum_dict = {
+        "run_number" : runNum
+    }
+
     datadict = {}
-    for d in (h_cer_data[0], h_cal_data[0], p_hgcer_data[0], p_aero_data[0], p_cal_data[0]): 
+    for d in (runNum_dict, h_cer_data[0], h_cal_data[0], p_hgcer_data[0], p_aero_data[0], p_cal_data[0]): 
         datadict.update(d)
     data = {i : datadict[i] for i in sorted(datadict.keys())}
 

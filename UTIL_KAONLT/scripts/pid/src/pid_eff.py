@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-19 12:01:59 trottar"
+# Time-stamp: "2020-04-19 12:10:39 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -16,7 +16,6 @@ import pandas as pd
 import scipy
 import scipy.integrate as integrate
 import matplotlib.pyplot as plt
-import matplotlib.backends.backend_pdf
 import sys, math, os, subprocess
 
 sys.path.insert(0, 'python/')
@@ -31,13 +30,8 @@ c = r2p.pyPlot(None)
 
 USER = subprocess.getstatusoutput("whoami")
 
-# pdf = matplotlib.backends.backend_pdf.PdfPages("/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_plots_%s.pdf"  % (runNum))
-
 # filename = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_data.csv" 
 # rootName = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/pid_coin_offline_%s_%s.root" % (runNum,MaxEvent)
-
-pdf = matplotlib.backends.backend_pdf.PdfPages("/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_plots_%s.pdf"  % (USER[1],runNum))
-
 
 filename = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_data.csv" % USER[1]
 rootName = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/pid_coin_offline_%s_%s.root" % (USER[1], runNum,MaxEvent)
@@ -137,11 +131,7 @@ def hms_cer():
 
     h_cer_data = {
 
-        "HMS cer e coin noID" : coin_noID_electron,
-        "HMS cer e coin PID" : coin_PID_electron,
-        "HMS cer missing mass noID" : mm_noID_electron,
-        "HMS cer missing mass PID" : mm_PID_electron,
-        "HMS cer efficiency" : len(mm_noID_electron)/len(mm_PID_electron),
+        "h_cer_eff" : len(mm_noID_electron)/len(mm_PID_electron),
     }
 
     f = plt.figure(figsize=(11.69,8.27))
@@ -229,11 +219,7 @@ def hms_cal():
 
     h_cal_data = {
 
-        "HMS cal e coin noID" : coin_noID_electron,
-        "HMS cal e coin PID" : coin_PID_electron,
-        "HMS cal missing mass noID" : mm_noID_electron,
-        "HMS cal missing mass PID" : mm_PID_electron,
-        "HMS cal efficiency" : len(mm_noID_electron)/len(mm_PID_electron),
+        "h_cal_eff" : len(mm_noID_electron)/len(mm_PID_electron),
     }
 
     f = plt.figure(figsize=(11.69,8.27))
@@ -326,11 +312,7 @@ def shms_hgcer():
 
     p_hgcer_data = {
 
-        "SHMS hgcer pion coin noID" : coin_noID_electron,
-        "SHMS hgcer pion coin PID" : coin_PID_electron,
-        "SHMS hgcer missing mass noID" : mm_noID_electron,
-        "SHMS hgcer missing mass PID" : mm_PID_electron,
-        "SHMS hgcer efficiency" : len(mm_noID_electron)/len(mm_PID_electron),
+        "p_hgcer_eff" : len(mm_noID_electron)/len(mm_PID_electron),
     }
 
     f = plt.figure(figsize=(11.69,8.27))
@@ -423,11 +405,7 @@ def shms_aero():
 
     p_aero_data = {
 
-        "SHMS aero pion coin noID" : coin_noID_electron,
-        "SHMS aero pion coin PID" : coin_PID_electron,
-        "SHMS aero missing mass noID" : mm_noID_electron,
-        "SHMS aero missing mass PID" : mm_PID_electron,
-        "SHMS aero efficiency" : len(mm_noID_electron)/len(mm_PID_electron),
+        "p_aero_eff" : len(mm_noID_electron)/len(mm_PID_electron),
     }
 
     f = plt.figure(figsize=(11.69,8.27))
@@ -520,11 +498,7 @@ def shms_cal():
 
     p_cal_data = {
 
-        "SHMS cal pion coin noID" : coin_noID_electron,
-        "SHMS cal pion coin PID" : coin_PID_electron,
-        "SHMS cal missing mass noID" : mm_noID_electron,
-        "SHMS cal missing mass PID" : mm_PID_electron,
-        "SHMS cal efficiency" : len(mm_noID_electron)/len(mm_PID_electron),
+        "p_cal_eff" : len(mm_noID_electron)/len(mm_PID_electron),
     }
 
     f = plt.figure(tight_layout=True, figsize=(11.69,8.27))

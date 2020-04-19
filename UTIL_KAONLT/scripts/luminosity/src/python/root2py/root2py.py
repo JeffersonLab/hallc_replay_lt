@@ -188,7 +188,7 @@ class pyPlot(pyDict):
             binVal = [pyMisc.setbin(x,binx,xmin,xmax),pyMisc.setbin(y,biny,ymin,ymax)]
         else:
             binVal = [pyMisc.setbin(x,binx),pyMisc.setbin(y,biny)]
-        return binVal
+        return [binVal, fig]
 
 
     def polarPlot(self,theta,r,title,thetalabel,rlabel,bintheta,binr,pyMisc,
@@ -217,4 +217,6 @@ class pyPlot(pyDict):
         plt.title(title)
         plt.xlabel(thetalabel)
         plt.ylabel(rlabel)
-        # plt.colorbar()    
+        # plt.colorbar()
+
+        return fig

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-19 12:10:39 trottar"
+# Time-stamp: "2020-04-19 12:14:43 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -243,7 +243,7 @@ def hms_cal():
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
-    PID_plot[1].savefig('../OUTPUTS/PID_shms_cal_%s.png' % runNum)
+    PID_plot[1].savefig('../OUTPUTS/PID_hms_cal_%s.png' % runNum)
     
     print("=====================")
     print("= %s HMS CAL DONE =" % runNum)

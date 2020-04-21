@@ -43,6 +43,7 @@ CALIBRATION/hms_cal_calib/Output/
 CALIBRATION/hms_cal_calib/Input/
 CALIBRATION/shms_cal_calib/Output/
 CALIBRATION/shms_cal_calib/Input/
+PARAM/HMS/BCM/CALIB/
 UTIL_BATCH/
 UTIL_KAONLT/
 UTIL_PION/

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-21 22:34:56 trottar"
+# Time-stamp: "2020-04-21 22:40:57 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -18,7 +18,7 @@ sys.path.insert(0, 'python/')
 import root2py as r2p
 r = r2p.pyRoot()
 
-csv = sys.argv[0]
+csv = sys.argv[1]
 
 print("\n",csv,"\n")
 

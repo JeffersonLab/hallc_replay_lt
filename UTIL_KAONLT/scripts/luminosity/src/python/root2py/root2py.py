@@ -83,18 +83,18 @@ class pyRoot():
             hist_val = []*len(inputDict)
             for i, (key,val) in enumerate(inputDict.items()):
                 tmp = "hist_%s" % key
-                tmp = TH1F( tmp, '%s' % key, 100, 0., max(val))
-                print(key,val)
+                tmp = TH1F( tmp, '%s' % key, 100, val)
+                print(key,max(val)) # debugging blank histograms
                 hist_key.append(tmp)
                 hist_val.append(val)
 
             f = TFile( rootName, 'recreate' )
 
-            for i, evt in enumerate(hist_val):
-                for j, hevt in enumerate(hist_val[i]):
-                    print(hist_key[i], "-> ", float(hevt))
-                    hist_key[i].Fill(float(hevt))
-                hist_key[i].Write()
+            # for i, evt in enumerate(hist_val):
+            #     for j, hevt in enumerate(hist_val[i]):
+            #         print(hist_key[i], "-> ", float(hevt))
+            #         hist_key[i].Fill(float(hevt))
+            #     hist_key[i].Write()
  
             f.Write()
             f.Close()

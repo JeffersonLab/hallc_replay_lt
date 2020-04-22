@@ -84,7 +84,6 @@ class pyRoot():
             for i, (key,val) in enumerate(inputDict.items()):
                 tmp = "hist_%s" % key
                 tmp = TH1F( tmp, '%s' % key, len(val), 0., max(val))
-                print(key,max(val)) # debugging blank histograms
                 hist_key.append(tmp)
                 hist_val.append(val)
 

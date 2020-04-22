@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-21 23:37:19 trottar"
+# Time-stamp: "2020-04-21 23:59:36 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -39,6 +39,7 @@ elif csv == "yield_data":
     except IOError:
         print("Error: %s does not appear to exist." % inp_f)
     print(yield_data.keys())
+    print(yield_data)
     r.py2root(yield_data,out_f)
 else:
     print("ERROR: Invalid csv")

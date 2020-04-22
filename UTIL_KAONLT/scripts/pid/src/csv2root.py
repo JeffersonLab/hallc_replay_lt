@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-21 21:44:32 trottar"
+# Time-stamp: "2020-04-21 21:49:27 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -27,5 +27,6 @@ try:
 except IOError:
     print("Error: %s does not appear to exist." % inp_f)
 print(pid_data.keys())
+print(pid_data.values())
 
 r.py2root(pid_data,"../OUTPUTS/pid_data.root")

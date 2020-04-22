@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-22 12:58:03 trottar"
+# Time-stamp: "2020-04-22 13:22:45 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -104,7 +104,7 @@ def hms_cer():
     coin_noID_electron = np.array([coin-47.5
                                    for (coin, h_dp, p_dp, p_cal, h_beta, h_cal, emm, pmm)
                                    in zip(*noID_electron_iterate)
-                                   if [evt for i,evt
+                                   if [eval(evt) for i,evt
                                        in enumerate(tempDict["ecut_no_cer"])]
                                    
     ])

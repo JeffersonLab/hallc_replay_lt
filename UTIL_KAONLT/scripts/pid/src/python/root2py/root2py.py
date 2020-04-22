@@ -88,9 +88,8 @@ class pyRoot():
                 hist_val.append(float(val))
 
             f = TFile( rootName, 'recreate' )
-
+            print("HERE")
             for i, evt in enumerate(hist_val):
-                print("HERE")
                 for j, hevt in enumerate(hist_val[i]):
                     print(hist_key[i], "-> ", hevt)
                     hist_key[i].Fill(hevt)

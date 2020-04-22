@@ -81,8 +81,7 @@ class pyRoot():
             tmp = ""
             hist_key = []*len(inputDict)
             hist_val = []*len(inputDict)
-            for i, (key,val) in enumerate(inputDict.items()):
-                print(type(val))
+            for key,val in inputDict.items():
                 tmp = "hist_%s" % key
                 tmp = TH1F( tmp, '%s' % key, len(val), 0., max(float(val)))
                 hist_key.append(tmp)

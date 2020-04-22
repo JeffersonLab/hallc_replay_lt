@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-22 00:18:21 trottar"
+# Time-stamp: "2020-04-22 00:20:25 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -41,6 +41,7 @@ elif csv == "yield_data":
     print(yield_data.keys())
     for key,val in yield_data.items():
         yield_data[key] = val.tolist()
+        print(yield_data[key])
     print(yield_data)
     r.py2root(yield_data,out_f)
 else:

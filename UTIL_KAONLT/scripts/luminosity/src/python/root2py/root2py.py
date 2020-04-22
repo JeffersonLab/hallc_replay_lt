@@ -85,10 +85,10 @@ class pyRoot():
                 tmp = "hist_%s" % key
                 tmp = TH1F( tmp, '%s' % key, len(val), 0., max(val))
                 hist_key.append(tmp)
+                print("HERE")
                 hist_val.append(float(val))
 
             f = TFile( rootName, 'recreate' )
-            print("HERE")
             for i, evt in enumerate(hist_val):
                 for j, hevt in enumerate(hist_val[i]):
                     print(hist_key[i], "-> ", hevt)

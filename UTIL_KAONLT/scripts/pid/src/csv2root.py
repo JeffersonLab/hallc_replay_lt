@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-21 21:43:25 trottar"
+# Time-stamp: "2020-04-21 21:44:32 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -26,6 +26,6 @@ try:
     pid_data = dict(pd.read_csv(inp_f))
 except IOError:
     print("Error: %s does not appear to exist." % inp_f)
-print(lumi_data.keys())
+print(pid_data.keys())
 
 r.py2root(pid_data,"../OUTPUTS/pid_data.root")

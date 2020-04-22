@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-21 21:43:21 trottar"
+# Time-stamp: "2020-04-21 21:45:51 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -25,17 +25,21 @@ USER = subprocess.getstatusoutput("whoami")
 if csv == "lumi_data":
     inp_f = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.csv" % str(USER[1])
     out_f = "../OUTPUTS/lumi_data.root"
+    try:
+        lumi_data = dict(pd.read_csv(inp_f))
+    except IOError:
+        print("Error: %s does not appear to exist." % inp_f)
+    print(lumi_data.keys())
+    r.py2root(lumi_data,out_f)
 elif csv == "yield_data":
     inp_f = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/yield_data.csv" % str(USER[1])
     out_f = "../OUTPUTS/yield_data.root"
+    try:
+        yield_data = dict(pd.read_csv(inp_f))
+    except IOError:
+        print("Error: %s does not appear to exist." % inp_f)
+    print(yield_data.keys())
+    r.py2root(yield_data,out_f)
 else:
     print("ERROR: Invalid csv")
     exit
-    
-try:
-    pid_data = dict(pd.read_csv(inp_f))
-except IOError:
-    print("Error: %s does not appear to exist." % inp_f)
-print(lumi_data.keys())
-
-r.py2root(pid_data,out_f)

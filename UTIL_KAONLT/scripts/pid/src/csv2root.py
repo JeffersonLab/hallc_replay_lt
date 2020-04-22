@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-21 22:02:50 trottar"
+# Time-stamp: "2020-04-21 22:15:40 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -21,6 +21,7 @@ r = r2p.pyRoot()
 USER = subprocess.getstatusoutput("whoami")
 
 inp_f = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_data.csv" % str(USER[1])
+out_f = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_data.root" % str(USER[1])
 
 try:
     pid_data = dict(pd.read_csv(inp_f))
@@ -28,4 +29,4 @@ except IOError:
     print("Error: %s does not appear to exist." % inp_f)
 print(pid_data.keys())
 
-r.py2root(pid_data,"../OUTPUTS/pid_data.root")
+r.py2root(pid_data,out_f)

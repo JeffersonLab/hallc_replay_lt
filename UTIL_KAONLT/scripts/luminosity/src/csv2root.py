@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-21 21:49:15 trottar"
+# Time-stamp: "2020-04-21 22:15:07 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -24,7 +24,7 @@ USER = subprocess.getstatusoutput("whoami")
 
 if csv == "lumi_data":
     inp_f = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.csv" % str(USER[1])
-    out_f = "../OUTPUTS/lumi_data.root"
+    out_f = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.root" % str(USER[1])
     try:
         lumi_data = dict(pd.read_csv(inp_f))
     except IOError:
@@ -33,7 +33,7 @@ if csv == "lumi_data":
     r.py2root(lumi_data,out_f)
 elif csv == "yield_data":
     inp_f = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/yield_data.csv" % str(USER[1])
-    out_f = "../OUTPUTS/yield_data.root"
+    out_f = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/yield_data.root" % str(USER[1])
     try:
         yield_data = dict(pd.read_csv(inp_f))
     except IOError:

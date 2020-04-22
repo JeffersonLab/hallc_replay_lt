@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-22 00:17:26 trottar"
+# Time-stamp: "2020-04-22 00:18:21 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -39,7 +39,7 @@ elif csv == "yield_data":
     except IOError:
         print("Error: %s does not appear to exist." % inp_f)
     print(yield_data.keys())
-    for key,val in yield_data:
+    for key,val in yield_data.items():
         yield_data[key] = val.tolist()
     print(yield_data)
     r.py2root(yield_data,out_f)

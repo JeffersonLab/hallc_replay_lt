@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-21 23:04:11 trottar"
+# Time-stamp: "2020-04-21 23:34:51 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -14,6 +14,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from csv import DictReader
+from itertools import chain
 import os, subprocess
 
 USER = subprocess.getstatusoutput("whoami")
@@ -157,12 +158,13 @@ def main():
     yield_data = plot_yield()
     # data = {**lumi_data, **yield_data} # only python 3.5+
 
+    for key, val in lumi_data.items():
+        lumi_data[key] = val.tolist()
+
     datadict = {}
     for d in (lumi_data, yield_data): 
         datadict.update(d)
     data = {i : datadict[i] for i in sorted(datadict.keys())}
-
-    print("data",data)
     
     table  = pd.DataFrame([lumi_data], columns=lumi_data.keys())
 

@@ -91,8 +91,8 @@ class pyRoot():
 
             for i, evt in enumerate(hist_val):
                 for j, hevt in enumerate(hist_val[i]):
-                    print(hist_key[i], "-> ", hevt)
-                    hist_key[i].Fill(hevt)
+                    print(hist_key[i], "-> ", float(hevt))
+                    hist_key[i].Fill(float(hevt))
                 hist_key[i].Write()
  
             f.Write()

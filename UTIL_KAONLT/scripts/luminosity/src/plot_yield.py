@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-21 21:18:16 trottar"
+# Time-stamp: "2020-04-21 21:25:48 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -15,11 +15,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from csv import DictReader
 import os, subprocess
-
-sys.path.insert(0, 'python/')
-import root2py as r2p
-
-r = r2p.pyRoot()
 
 USER = subprocess.getstatusoutput("whoami")
 
@@ -169,10 +164,6 @@ def main():
     for d in (lumi_data, yield_data): 
         datadict.update(d)
     data = {i : datadict[i] for i in sorted(datadict.keys())}
-
-    print(data)
-
-    r.py2root(data, "../OUTPUTS/yield_data.root")
     
     table  = pd.DataFrame([lumi_data], columns=lumi_data.keys())
 

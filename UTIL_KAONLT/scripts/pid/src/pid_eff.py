@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-21 21:00:21 trottar"
+# Time-stamp: "2020-04-21 21:05:27 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -158,7 +158,7 @@ def hms_cer():
     print("= %s HMS CER DONE =" % runNum)
     print("=====================\n\n")
           
-    return [h_cer_data,f]
+    return h_cer_data
 
 def hms_cal():
 
@@ -246,7 +246,7 @@ def hms_cal():
     print("= %s HMS CAL DONE =" % runNum)
     print("=====================\n\n")
           
-    return [h_cal_data, f]
+    return h_cal_data
 
 def shms_hgcer():
 
@@ -339,7 +339,7 @@ def shms_hgcer():
     print("= %s SHMS HGCER DONE =" % runNum)
     print("========================\n\n")
           
-    return [p_hgcer_data, f]
+    return p_hgcer_data
 
 def shms_aero():
 
@@ -432,7 +432,7 @@ def shms_aero():
     print("= %s SHMS AERO DONE =" % runNum)
     print("=======================\n\n")
           
-    return [p_aero_data, f]
+    return p_aero_data
 
 def shms_cal():
 
@@ -525,7 +525,7 @@ def shms_cal():
     print("= %s SHMS CAL DONE =" % runNum)
     print("======================\n\n")
           
-    return [p_cal_data, f]
+    return p_cal_data
 
 def main():
 
@@ -540,7 +540,7 @@ def main():
     }
 
     datadict = {}
-    for d in (runNum_dict, h_cer_data[0], h_cal_data[0], p_hgcer_data[0], p_aero_data[0], p_cal_data[0]): 
+    for d in (runNum_dict, h_cer_data, h_cal_data, p_hgcer_data, p_aero_data, p_cal_data): 
         datadict.update(d)
     data = {i : datadict[i] for i in sorted(datadict.keys())}
 

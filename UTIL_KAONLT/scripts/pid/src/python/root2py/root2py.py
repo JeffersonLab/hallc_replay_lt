@@ -78,12 +78,13 @@ class pyRoot():
 
     def py2root(self,inputDict,rootName):
         try:
+            print(inputDict)
             tmp = ""
             hist_key = []*len(inputDict)
             hist_val = []*len(inputDict)
             for key,val in inputDict.items():
                 tmp = "hist_%s" % key
-                tmp = TH1F( tmp, '%s' % key, len(val), 0., max(float(val)))
+                tmp = TH1F( tmp, '%s' % key, len(val), 0., max(val))
                 hist_key.append(tmp)
                 hist_val.append(float(val))
 

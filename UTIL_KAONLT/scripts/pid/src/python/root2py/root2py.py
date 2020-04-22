@@ -40,6 +40,7 @@ import warnings
 import numpy as np
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
+from ROOT import TFile, TH1D
 import matplotlib.pyplot as plt
 from matplotlib import interactive
 from matplotlib import colors
@@ -72,6 +73,33 @@ class pyBranch(pyDict):
         leafHist = branch[leafVal]
 
         return np.array(leafHist)
+    
+class pyRoot():
+
+    def py2root(self,inputDict,rootName):
+        try:
+            tmp = ""
+            hist_key = []*len(inputDict)
+            hist_val = []*len(inputDict)
+            for i, (key,val) in enumerate(inputDict.items()):
+                tmp = "hist_%s" % key
+                tmp = TH1D( tmp, '%s' % key, 100, -10., 10. )
+                hist_key.append(tmp)
+                hist_val.append(val)
+
+            f = TFile( rootName, 'recreate' )
+
+            for i, evt in enumerate(hist_val):
+                for j, hevt in enumerate(hist_val[i]):
+                    print(hist_key[i], "-> ", hevt)
+                    hist_key[i].Fill(hevt)
+                hist_key[i].Write()
+ 
+            f.Write()
+            f.Close()
+        except TypeError:
+            print("\nERROR: Only current accepting 1D array/list values\n")
+
 
 class pyBin():
 
@@ -97,7 +125,7 @@ class pyBin():
 
         return arrPlot
     
-class pyPlot(pyDict):
+class pyPlot():
     
     def __init__(self, cutDict=None):
         self.cutDict = cutDict

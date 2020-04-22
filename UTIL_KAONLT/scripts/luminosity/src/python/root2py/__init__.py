@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-03-25 17:30:46 trottar"
+# Time-stamp: "2020-04-21 20:13:29 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -11,14 +11,15 @@
 # Copyright (c) trottar
 #
 
+from ROOT import TFile, TH1D
 import numpy as np
 import matplotlib.pyplot as plt
 import uproot as up
 import time, math, sys
 
-from .root2py import pyDict, pyBranch, pyBin, pyPlot
+from .root2py import pyDict, pyBranch, pyBin, pyPlot, pyRoot
 
-__version__ = '0.1.0'
+__version__ = '0.2.0'
 __author__ = 'trottar'
 __license__ = 'CUA'
 __copyright__ = 'Copyright 2020 trottar'

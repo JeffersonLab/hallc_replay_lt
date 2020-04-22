@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-17 14:26:58 trottar"
+# Time-stamp: "2020-04-21 20:36:52 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -19,6 +19,8 @@ import sys, math, os, subprocess
 
 sys.path.insert(0, 'python/')
 import root2py as r2p
+
+r = r2p.pyRoot()
 
 runNum = sys.argv[1]
 MaxEvent=sys.argv[2]
@@ -875,6 +877,8 @@ def main():
     for d in (scalers, track_info): 
         data.update(d)
     lumi_data = {i : data[i] for i in sorted(data.keys())}
+
+    r.py2root(lumi_data, "../OUTPUTS/lumi_data.root")
 
     table  = pd.DataFrame([lumi_data], columns=lumi_data.keys())
 

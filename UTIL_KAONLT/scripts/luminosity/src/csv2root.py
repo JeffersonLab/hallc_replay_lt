@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-21 22:40:57 trottar"
+# Time-stamp: "2020-04-21 23:06:12 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -20,8 +20,6 @@ r = r2p.pyRoot()
 
 csv = sys.argv[1]
 
-print("\n",csv,"\n")
-
 USER = subprocess.getstatusoutput("whoami")
 
 if csv == "lumi_data":
@@ -32,6 +30,7 @@ if csv == "lumi_data":
     except IOError:
         print("Error: %s does not appear to exist." % inp_f)
     print(lumi_data.keys())
+    print(lumi_data)
     r.py2root(lumi_data,out_f)
 elif csv == "yield_data":
     inp_f = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/yield_data.csv" % str(USER[1])

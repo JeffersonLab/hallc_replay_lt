@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-21 23:01:59 trottar"
+# Time-stamp: "2020-04-21 23:04:11 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -157,13 +157,12 @@ def main():
     yield_data = plot_yield()
     # data = {**lumi_data, **yield_data} # only python 3.5+
 
-    print("yield_data",yield_data)
-    # print("yield_data pop",yield_data)    
-
     datadict = {}
     for d in (lumi_data, yield_data): 
         datadict.update(d)
     data = {i : datadict[i] for i in sorted(datadict.keys())}
+
+    print("data",data)
     
     table  = pd.DataFrame([lumi_data], columns=lumi_data.keys())
 

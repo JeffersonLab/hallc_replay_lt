@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-21 20:58:25 trottar"
+# Time-stamp: "2020-04-21 21:00:21 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -544,6 +544,8 @@ def main():
         datadict.update(d)
     data = {i : datadict[i] for i in sorted(datadict.keys())}
 
+    print(data)
+    
     r.py2root(data, "../OUTPUTS/pid_data.root")
 
     # plt.show()

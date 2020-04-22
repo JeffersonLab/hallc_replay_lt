@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-22 00:23:28 trottar"
+# Time-stamp: "2020-04-22 00:46:46 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -156,9 +156,6 @@ def main():
     
     yield_data = plot_yield()
     # data = {**lumi_data, **yield_data} # only python 3.5+
-
-    # for key, val in yield_data.items():
-    #     yield_data[key] = pd.Series(val)
     
     for key, val in lumi_data.items():
         lumi_data[key] = val.tolist()

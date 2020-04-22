@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-21 22:15:07 trottar"
+# Time-stamp: "2020-04-21 22:34:56 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -19,6 +19,8 @@ import root2py as r2p
 r = r2p.pyRoot()
 
 csv = sys.argv[0]
+
+print("\n",csv,"\n")
 
 USER = subprocess.getstatusoutput("whoami")
 

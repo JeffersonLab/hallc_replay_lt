@@ -16,10 +16,10 @@ if [[ $2 -eq "" ]]; then
     MAXEVENTS=-1 
 fi
 
-source /apps/root/6.18.04/setroot_CUE.csh
 cd /group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/src/
+source /apps/root/6.18.04/setroot_CUE.csh
 python3 lumiyield.py ${RUNNUMBER} ${MAXEVENTS}
 
-source /apps/root/6.18.04/setroot_CUE.csh
 cd /group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/src/
+source /apps/root/6.18.04/setroot_CUE.csh
 python3 csv2root.py "lumi_data"

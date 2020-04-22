@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-21 23:39:01 trottar"
+# Time-stamp: "2020-04-21 23:56:13 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -165,11 +165,8 @@ def main():
     for d in (lumi_data, yield_data): 
         datadict.update(d)
     data = {i : datadict[i] for i in sorted(datadict.keys())}
-
-    print(data)
     
-    table  = pd.DataFrame([lumi_data], columns=lumi_data.keys())
-
+    table  = pd.DataFrame([data], columns=data.keys())
     table = table.reindex(sorted(table.columns), axis=1)
     
     file_exists = os.path.isfile(out_f)

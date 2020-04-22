@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-21 21:25:04 trottar"
+# Time-stamp: "2020-04-21 21:54:25 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -27,7 +27,6 @@ MaxEvent=sys.argv[2]
 
 b = r2p.pyBin()
 c = r2p.pyPlot(None)
-r = r2p.pyRoot()
 
 USER = subprocess.getstatusoutput("whoami")
 

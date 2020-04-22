@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-21 23:34:51 trottar"
+# Time-stamp: "2020-04-21 23:39:01 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -20,7 +20,7 @@ import os, subprocess
 USER = subprocess.getstatusoutput("whoami")
 
 inp_f = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.csv"
-out_f = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/yield_data.csv"
+out_f = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/src/test/OUTPUTS/yield_data.csv"
 
 try:
     lumi_data = dict(pd.read_csv(inp_f))
@@ -165,6 +165,8 @@ def main():
     for d in (lumi_data, yield_data): 
         datadict.update(d)
     data = {i : datadict[i] for i in sorted(datadict.keys())}
+
+    print(data)
     
     table  = pd.DataFrame([lumi_data], columns=lumi_data.keys())
 

@@ -78,20 +78,19 @@ class pyRoot():
 
     def py2root(self,inputDict,rootName):
         try:
-            print(inputDict)
             tmp = ""
             hist_key = []*len(inputDict)
             hist_val = []*len(inputDict)
             for key,val in inputDict.items():
                 tmp = "hist_%s" % key
                 tmp = TH1F( tmp, '%s' % key, len(val), 0., max(val))
-                print("HERE")
                 hist_key.append(tmp)
                 hist_val.append(float(val))
 
             f = TFile( rootName, 'recreate' )
 
             for i, evt in enumerate(hist_val):
+                print("HERE")
                 for j, hevt in enumerate(hist_val[i]):
                     print(hist_key[i], "-> ", hevt)
                     hist_key[i].Fill(hevt)

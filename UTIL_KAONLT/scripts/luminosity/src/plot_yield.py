@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-21 22:20:28 trottar"
+# Time-stamp: "2020-04-21 23:00:24 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -65,7 +65,6 @@ def calc_yield():
     yield_SHMS = [(lumi_data["SHMS_evts"][i]*lumi_data["ps1"][i])/(lumi_data["charge"][i]*cpuLT_SHMS[i]*lumi_data["SHMS_track"][i])
                   for i,evt in enumerate(lumi_data["run number"])]
     yield_SHMS = pd.Series(yield_SHMS).fillna(0).tolist()
-    print(yield_SHMS)
 
     for i,curr in enumerate(current):
         if curr == min(current):

@@ -40,7 +40,7 @@ import warnings
 import numpy as np
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-from ROOT import TFile, TH1D
+from ROOT import TFile, TH1F
 import matplotlib.pyplot as plt
 from matplotlib import interactive
 from matplotlib import colors
@@ -83,7 +83,7 @@ class pyRoot():
             hist_val = []*len(inputDict)
             for i, (key,val) in enumerate(inputDict.items()):
                 tmp = "hist_%s" % key
-                tmp = TH1D( tmp, '%s' % key, 100, -10., 10. )
+                tmp = TH1F( tmp, '%s' % key, 100, -10., 10. )
                 hist_key.append(tmp)
                 hist_val.append(val)
 

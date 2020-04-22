@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-21 22:20:39 trottar"
+# Time-stamp: "2020-04-21 22:56:53 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -157,6 +157,11 @@ def main():
     
     yield_data = plot_yield()
     # data = {**lumi_data, **yield_data} # only python 3.5+
+
+    print(lumi_data)
+    lumi_data.pop(0)
+    print(lumi_data)
+    
 
     datadict = {}
     for d in (lumi_data, yield_data): 

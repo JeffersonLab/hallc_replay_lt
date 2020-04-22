@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-21 20:42:34 trottar"
+# Time-stamp: "2020-04-22 12:58:03 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -73,8 +73,14 @@ pTRIG5             = tree.array("T.coin.pTRIG5_ROC1_tdcTime")
 EvtType            = tree.array("fEvtHdr.fEvtType")
 
 tempDict = {
-    "ecut_no_cer" : ["(abs(h_dp) < 10.0)", "(p_dp >-10.0 or p_dp < 20.0)",  "(p_cal <0.6)",  "((abs(h_beta)-1.00) < 0.1)",  "((coin-47.5) > -0.5 and (coin-47.5) < 0.5)",  "(h_cal > 0.995 and h_cal < 1.015)", "", "", ""]
+    "ecut_no_cer" : ["(abs(h_dp) < 10.0)", "(p_dp >-10.0 or p_dp < 20.0)",  "(p_cal <0.6)",  "((abs(h_beta)-1.00) < 0.1)",  "((coin-47.5) > -0.5 and (coin-47.5) < 0.5)",  "(h_cal > 0.995 and h_cal < 1.015)", "","" ,"" ]
 }
+# tempDict = {
+#     "ecut_no_cer" : [(abs(h_dp) < 10.0), (p_dp >-10.0 or p_dp < 20.0),  (p_cal <0.6),  ((abs(h_beta)-1.00) < 0.1),  ((coin-47.5) > -0.5 and (coin-47.5) < 0.5),  (h_cal > 0.995 and h_cal < 1.015), True,True ,True ]
+# }
+# tempDict = {
+#     "ecut_no_cer" : ["(abs(H_gtr_dp) < 10.0)", "(P_gtr_dp >-10.0 or P_gtr_dp < 20.0)",  "(P_cal_etotnorm <0.6)",  "((abs(H_gtr_beta)-1.00) < 0.1)",  "((CTime_eKCoinTime_ROC1-47.5) > -0.5 and (CTime_eKCoinTime_ROC1-47.5) < 0.5)",  "(H_cal_etotnorm > 0.995 and H_cal_etotnorm < 1.015)", "", "", ""]
+# }
 
 
 def hms_cer():
@@ -82,24 +88,28 @@ def hms_cer():
     missmass = np.array([math.sqrt(abs(emm*emm-pmm*pmm)) for (emm, pmm) in zip(emiss, pmiss)])
     
     noID_electron_iterate = [CTime_eKCoinTime_ROC1, H_gtr_dp, P_gtr_dp, P_cal_etotnorm, H_gtr_beta, H_cal_etotnorm, emiss, pmiss]
+
+    [print(evt) for i,evt in enumerate(tempDict["ecut_no_cer"])]
     
     # coin_noID_electron
-    # coin_noID_electron = np.array([coin-47.5
-    #                                for (coin, h_dp, p_dp, p_cal, h_beta, h_cal, emm, pmm)
-    #                                in zip(*noID_electron_iterate)
-    #                                if abs(h_dp) < 10.0
-    #                                if p_dp >-10.0 or p_dp < 20.0
-    #                                if p_cal <0.6
-    #                                if (abs(h_beta)-1.00) < 0.1
-    #                                if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
-    #                                if h_cal > 0.995 and h_cal < 1.015])
+    test_coin_noID_electron = np.array([coin-47.5
+                                   for (coin, h_dp, p_dp, p_cal, h_beta, h_cal, emm, pmm)
+                                   in zip(*noID_electron_iterate)
+                                   if abs(h_dp) < 10.0
+                                   if p_dp >-10.0 or p_dp < 20.0
+                                   if p_cal <0.6
+                                   if (abs(h_beta)-1.00) < 0.1
+                                   if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
+                                   if h_cal > 0.995 and h_cal < 1.015])
     coin_noID_electron = np.array([coin-47.5
                                    for (coin, h_dp, p_dp, p_cal, h_beta, h_cal, emm, pmm)
                                    in zip(*noID_electron_iterate)
-                                   if [eval(tempDict["ecut_no_cer"][i]) for i
-                                       in range(0,len(tempDict["ecut_no_cer"]))]
+                                   if [evt for i,evt
+                                       in enumerate(tempDict["ecut_no_cer"])]
                                    
     ])
+    print(test_coin_noID_electron)
+    print(coin_noID_electron)
 
     # mm_noID_electron
     mm_noID_electron = np.array([math.sqrt(abs(emm*emm-pmm*pmm))

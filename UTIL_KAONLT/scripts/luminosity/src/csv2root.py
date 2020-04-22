@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-21 21:38:13 trottar"
+# Time-stamp: "2020-04-21 21:42:07 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -15,10 +15,11 @@ import os, subprocess, sys
 
 sys.path.insert(0, 'python/')
 import root2py as r2p
+r = r2p.pyRoot()
 
 csv = sys.argv[0]
 
-r = r2p.pyRoot()
+USER = subprocess.getstatusoutput("whoami")
 
 if csv == "lumi_data":
     inp_f = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.csv" % str(USER[1])

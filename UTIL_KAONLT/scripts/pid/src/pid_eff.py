@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-21 21:06:01 trottar"
+# Time-stamp: "2020-04-21 21:07:17 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -536,7 +536,7 @@ def main():
     p_cal_data = shms_cal()
 
     runNum_dict = {
-        "run_number" : runNum
+        "run_number" : int(runNum)
     }
 
     datadict = {}

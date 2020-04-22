@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-21 21:05:27 trottar"
+# Time-stamp: "2020-04-21 21:06:01 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -542,7 +542,7 @@ def main():
     datadict = {}
     for d in (runNum_dict, h_cer_data, h_cal_data, p_hgcer_data, p_aero_data, p_cal_data): 
         datadict.update(d)
-    data = {i : datadict[i] for i in sorted(datadict.keys())}
+    data = {i : [datadict[i]] for i in sorted(datadict.keys())}
 
     print(data)
     

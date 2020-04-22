@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-22 13:22:45 trottar"
+# Time-stamp: "2020-04-22 14:08:26 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -90,6 +90,7 @@ def hms_cer():
     noID_electron_iterate = [CTime_eKCoinTime_ROC1, H_gtr_dp, P_gtr_dp, P_cal_etotnorm, H_gtr_beta, H_cal_etotnorm, emiss, pmiss]
 
     [print(evt) for i,evt in enumerate(tempDict["ecut_no_cer"])]
+    print(tempDict.get("ecut_no_cer","Leaf name not found"))
     
     # coin_noID_electron
     test_coin_noID_electron = np.array([coin-47.5

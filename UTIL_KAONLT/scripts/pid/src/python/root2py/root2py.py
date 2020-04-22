@@ -132,7 +132,7 @@ class pyPlot():
         
     def cut(self,key):
             
-        return[self.cutDict.get(key,"Leaf name not found")]
+        return self.cutDict.get(key,"Leaf name not found")
 
     def applyCuts(self,leaf,cuts=None):
         
@@ -141,9 +141,9 @@ class pyPlot():
             applycut = 'tmp['
             i=0
             while i < (len(cuts)-1):
-                applycut += 'self.cut("%s")[0] & ' % cuts[i]
+                applycut += 'self.cut("%s") & ' % cuts[i]
                 i+=1
-            applycut += 'self.cut("%s")[0]]' % cuts[len(cuts)-1]
+            applycut += 'self.cut("%s")' % cuts[len(cuts)-1]
             tmp = eval(applycut)
         else:
             print('No cuts applied to %s' % leaf)

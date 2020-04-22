@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-21 20:40:03 trottar"
+# Time-stamp: "2020-04-21 20:58:25 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -30,9 +30,6 @@ c = r2p.pyPlot(None)
 r = r2p.pyRoot()
 
 USER = subprocess.getstatusoutput("whoami")
-
-# filename = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_data.csv" 
-# rootName = "/home/trottar/Analysis/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/pid_coin_offline_%s_%s.root" % (runNum,MaxEvent)
 
 filename = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/pid/OUTPUTS/pid_data.csv" % USER[1]
 rootName = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/ROOTfiles/pid_coin_offline_%s_%s.root" % (USER[1], runNum,MaxEvent)
@@ -81,7 +78,7 @@ def hms_cer():
     
     noID_electron_iterate = [CTime_eKCoinTime_ROC1, H_gtr_dp, P_gtr_dp, P_cal_etotnorm, H_gtr_beta, H_cal_etotnorm, emiss, pmiss]
     
-    coin_noID_electron
+    # coin_noID_electron
     coin_noID_electron = np.array([coin-47.5
                                    for (coin, h_dp, p_dp, p_cal, h_beta, h_cal, emm, pmm)
                                    in zip(*noID_electron_iterate)

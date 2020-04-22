@@ -35,7 +35,7 @@ cd ../../
 echo -e "\n\nStarting Replay Script\n\n"
 ./hcana -q "/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/src/replay/replay_lumi_coin_offline.C($RUNNUMBER,$MAXEVENTS)"
 
-source /apps/root/6.18.04/setroot_CUE.csh
+source /apps/root/6.18.04/setroot_CUE.sh
 cd /group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/src/
 python3 lumiyield.py ${RUNNUMBER} ${MAXEVENTS}
 

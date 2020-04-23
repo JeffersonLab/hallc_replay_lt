@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-22 14:08:26 trottar"
+# Time-stamp: "2020-04-23 17:33:32 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -24,10 +24,6 @@ import root2py as r2p
 runNum = sys.argv[1]
 MaxEvent=sys.argv[2]
 # MaxEvent=50000
-
-b = r2p.pyBin()
-c = r2p.pyPlot(None)
-r = r2p.pyRoot()
 
 USER = subprocess.getstatusoutput("whoami")
 
@@ -73,55 +69,56 @@ pTRIG5             = tree.array("T.coin.pTRIG5_ROC1_tdcTime")
 EvtType            = tree.array("fEvtHdr.fEvtType")
 
 tempDict = {
-    "ecut_no_cer" : ["(abs(h_dp) < 10.0)", "(p_dp >-10.0 or p_dp < 20.0)",  "(p_cal <0.6)",  "((abs(h_beta)-1.00) < 0.1)",  "((coin-47.5) > -0.5 and (coin-47.5) < 0.5)",  "(h_cal > 0.995 and h_cal < 1.015)", "","" ,"" ]
+    "ecut_no_cer" :
+    {
+        '{"H_gtr_dp" : (abs(H_gtr_dp) < 10.0)}',
+        '{"P_gtr_dp" : ((P_gtr_dp >-10.0) | (P_gtr_dp < 20.0))}',
+        '{"P_cal_etotnorm" : (P_cal_etotnorm <0.6)}',
+        '{"H_gtr_beta" : ((abs(H_gtr_beta)-1.00) < 0.1)}',
+        '{"CTime_eKCoinTime_ROC1" : (((CTime_eKCoinTime_ROC1-47.5) > -0.5) & ((CTime_eKCoinTime_ROC1-47.5) < 0.5))}',
+        '{"H_cal_etotnorm" : ((H_cal_etotnorm > 0.995) & (H_cal_etotnorm < 1.015))}'
+    },
+    "ecut_cer" :
+    {
+        '{"H_gtr_dp" : (abs(H_gtr_dp) < 10.0)}',
+        '{"P_gtr_dp" : ((P_gtr_dp >-10.0) | (P_gtr_dp < 20.0))}',
+        '{"P_cal_etotnorm" : (P_cal_etotnorm <0.6)}',
+        '{"H_gtr_beta" : ((abs(H_gtr_beta)-1.00) < 0.1)}',
+        '{"CTime_eKCoinTime_ROC1" : (((CTime_eKCoinTime_ROC1-47.5) > -0.5) & ((CTime_eKCoinTime_ROC1-47.5) < 0.5))}',
+        '{"H_cal_etotnorm" : ((H_cal_etotnorm > 0.995) & (H_cal_etotnorm < 1.015))}'
+        '{"H_cer_npeSum" : (H_cer_npeSum > 3.0)}'
+    }
 }
-# tempDict = {
-#     "ecut_no_cer" : [(abs(h_dp) < 10.0), (p_dp >-10.0 or p_dp < 20.0),  (p_cal <0.6),  ((abs(h_beta)-1.00) < 0.1),  ((coin-47.5) > -0.5 and (coin-47.5) < 0.5),  (h_cal > 0.995 and h_cal < 1.015), True,True ,True ]
-# }
-# tempDict = {
-#     "ecut_no_cer" : ["(abs(H_gtr_dp) < 10.0)", "(P_gtr_dp >-10.0 or P_gtr_dp < 20.0)",  "(P_cal_etotnorm <0.6)",  "((abs(H_gtr_beta)-1.00) < 0.1)",  "((CTime_eKCoinTime_ROC1-47.5) > -0.5 and (CTime_eKCoinTime_ROC1-47.5) < 0.5)",  "(H_cal_etotnorm > 0.995 and H_cal_etotnorm < 1.015)", "", "", ""]
-# }
 
+r = r2p.pyRoot()
+
+def make_cutDict(inputDict,cut):
+
+    global c
+    c = r2p.pyPlot(inputDict)
+    
+    x = c.w_dict(cut)
+    inputDict[cut] = {}
+    for i,val in enumerate(x):
+        tmp = x[i]
+        inputDict[cut].update(eval(tmp))
+
+    return inputDict
+
+tempDict = make_cutDict(tempDict,"ecut_no_cer")
 
 def hms_cer():
 
-    missmass = np.array([math.sqrt(abs(emm*emm-pmm*pmm)) for (emm, pmm) in zip(emiss, pmiss)])
+    missmass = np.array(np.sqrt(abs(emiss*emiss-pmiss*pmiss)))
     
     noID_electron_iterate = [CTime_eKCoinTime_ROC1, H_gtr_dp, P_gtr_dp, P_cal_etotnorm, H_gtr_beta, H_cal_etotnorm, emiss, pmiss]
-
-    [print(evt) for i,evt in enumerate(tempDict["ecut_no_cer"])]
-    print(tempDict.get("ecut_no_cer","Leaf name not found"))
     
     # coin_noID_electron
-    test_coin_noID_electron = np.array([coin-47.5
-                                   for (coin, h_dp, p_dp, p_cal, h_beta, h_cal, emm, pmm)
-                                   in zip(*noID_electron_iterate)
-                                   if abs(h_dp) < 10.0
-                                   if p_dp >-10.0 or p_dp < 20.0
-                                   if p_cal <0.6
-                                   if (abs(h_beta)-1.00) < 0.1
-                                   if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
-                                   if h_cal > 0.995 and h_cal < 1.015])
-    coin_noID_electron = np.array([coin-47.5
-                                   for (coin, h_dp, p_dp, p_cal, h_beta, h_cal, emm, pmm)
-                                   in zip(*noID_electron_iterate)
-                                   if [eval(evt) for i,evt
-                                       in enumerate(tempDict["ecut_no_cer"])]
-                                   
-    ])
-    print(test_coin_noID_electron)
-    print(coin_noID_electron)
+    coin_noID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"ecut_no_cer")-47.5)
+
 
     # mm_noID_electron
-    mm_noID_electron = np.array([math.sqrt(abs(emm*emm-pmm*pmm))
-                                 for (coin, h_dp, p_dp, p_cal, h_beta, h_cal, emm, pmm)
-                                 in zip(*noID_electron_iterate)
-                                 if abs(h_dp) < 10.0
-                                 if p_dp >-10.0 or p_dp < 20.0
-                                 if p_cal <0.6
-                                 if (abs(h_beta)-1.00) < 0.1
-                                 if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
-                                 if h_cal > 0.995 and h_cal < 1.015])
+    mm_noID_electron = np.array(c.add_cut(missmass,"ecut_no_cer"))
 
     PID_electron_iterate = [CTime_eKCoinTime_ROC1, H_gtr_dp, P_gtr_dp, P_cal_etotnorm, H_gtr_beta, H_cal_etotnorm, H_cer_npeSum, emiss, pmiss]
     
@@ -157,21 +154,21 @@ def hms_cer():
     f = plt.figure(figsize=(11.69,8.27))
     plt.style.use('default')
 
-    plt.hist(missmass,bins=b.setbin(missmass,800,0,2.0),label='no cuts',histtype='step', alpha=0.7, stacked=True, fill=True)
-    plt.hist(mm_noID_electron,bins=b.setbin(mm_noID_electron,800,0,2.0),label='no ID',histtype='step', alpha=0.7, stacked=True, fill=True)
-    plt.hist(mm_PID_electron,bins=b.setbin(mm_PID_electron,800,0,2.0),label='PID',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(missmass,bins=c.setbin(missmass,800,0,2.0),label='no cuts',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(mm_noID_electron,bins=c.setbin(mm_noID_electron,800,0,2.0),label='no ID',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(mm_PID_electron,bins=c.setbin(mm_PID_electron,800,0,2.0),label='PID',histtype='step', alpha=0.7, stacked=True, fill=True)
     plt.legend(loc=1)
     plt.title('Missing Mass ($GeV^2$)', fontsize =20)
 
     f.savefig('OUTPUTS/missmass_%s.png' % runNum)
 
-    noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Electron Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out HMS Cherenkov cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  b,-10,10,0,2.0)
+    noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Electron Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out HMS Cherenkov cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
     noID_plot[1].savefig('OUTPUTS/noID_hms_cer_%s.png' % runNum)
 
-    PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Electron Coincident Time vs Mass ($GeV^2$) for ROC1 (with HMS Cherenkov cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  b,-10,10,0,2.0)
+    PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Electron Coincident Time vs Mass ($GeV^2$) for ROC1 (with HMS Cherenkov cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
@@ -245,21 +242,21 @@ def hms_cal():
     f = plt.figure(figsize=(11.69,8.27))
     plt.style.use('default')
 
-    plt.hist(missmass,bins=b.setbin(missmass,800,0,2.0),label='no cuts',histtype='step', alpha=0.7, stacked=True, fill=True)
-    plt.hist(mm_noID_electron,bins=b.setbin(mm_noID_electron,800,0,2.0),label='no ID',histtype='step', alpha=0.7, stacked=True, fill=True)
-    plt.hist(mm_PID_electron,bins=b.setbin(mm_PID_electron,800,0,2.0),label='PID',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(missmass,bins=c.setbin(missmass,800,0,2.0),label='no cuts',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(mm_noID_electron,bins=c.setbin(mm_noID_electron,800,0,2.0),label='no ID',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(mm_PID_electron,bins=c.setbin(mm_PID_electron,800,0,2.0),label='PID',histtype='step', alpha=0.7, stacked=True, fill=True)
     plt.legend(loc=1)
     plt.title('Missing Mass ($GeV^2$)', fontsize =20)
 
     f.savefig('OUTPUTS/missmass_%s.png' % runNum)
 
-    noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Electron Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out HMS Calorimeter cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  b,-10,10,0,2.0)
+    noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Electron Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out HMS Calorimeter cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
     noID_plot[1].savefig('OUTPUTS/noID_hms_cal_%s.png' % runNum)
 
-    PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Electron Coincident Time vs Mass ($GeV^2$) for ROC1 (with HMS Calorimeter cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  b,-10,10,0,2.0)
+    PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Electron Coincident Time vs Mass ($GeV^2$) for ROC1 (with HMS Calorimeter cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
@@ -338,21 +335,21 @@ def shms_hgcer():
     f = plt.figure(figsize=(11.69,8.27))
     plt.style.use('default')
 
-    plt.hist(missmass,bins=b.setbin(missmass,800,0,2.0),label='no cuts',histtype='step', alpha=0.7, stacked=True, fill=True)
-    plt.hist(mm_noID_electron,bins=b.setbin(mm_noID_electron,800,0,2.0),label='no ID',histtype='step', alpha=0.7, stacked=True, fill=True)
-    plt.hist(mm_PID_electron,bins=b.setbin(mm_PID_electron,800,0,2.0),label='PID',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(missmass,bins=c.setbin(missmass,800,0,2.0),label='no cuts',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(mm_noID_electron,bins=c.setbin(mm_noID_electron,800,0,2.0),label='no ID',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(mm_PID_electron,bins=c.setbin(mm_PID_electron,800,0,2.0),label='PID',histtype='step', alpha=0.7, stacked=True, fill=True)
     plt.legend(loc=1)
     plt.title('Missing Mass ($GeV^2$)', fontsize =20)
 
     f.savefig('OUTPUTS/missmass_%s.png' % runNum)
 
-    noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out SHMS HGCer cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  b,-10,10,0,2.0)
+    noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out SHMS HGCer cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
     noID_plot[1].savefig('OUTPUTS/noID_shms_hgcer_%s.png' % runNum)
 
-    PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (with SHMS HGCer cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  b,-10,10,0,2.0)
+    PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (with SHMS HGCer cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
@@ -431,21 +428,21 @@ def shms_aero():
     f = plt.figure(figsize=(11.69,8.27))
     plt.style.use('default')
 
-    plt.hist(missmass,bins=b.setbin(missmass,800,0,2.0),label='no cuts',histtype='step', alpha=0.7, stacked=True, fill=True)
-    plt.hist(mm_noID_electron,bins=b.setbin(mm_noID_electron,800,0,2.0),label='no ID',histtype='step', alpha=0.7, stacked=True, fill=True)
-    plt.hist(mm_PID_electron,bins=b.setbin(mm_PID_electron,800,0,2.0),label='PID',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(missmass,bins=c.setbin(missmass,800,0,2.0),label='no cuts',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(mm_noID_electron,bins=c.setbin(mm_noID_electron,800,0,2.0),label='no ID',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(mm_PID_electron,bins=c.setbin(mm_PID_electron,800,0,2.0),label='PID',histtype='step', alpha=0.7, stacked=True, fill=True)
     plt.legend(loc=1)
     plt.title('Missing Mass ($GeV^2$)', fontsize =20)
 
     f.savefig('OUTPUTS/missmass_%s.png' % runNum)
 
-    noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out SHMS Aerogel cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  b,-10,10,0,2.0)
+    noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out SHMS Aerogel cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
     noID_plot[1].savefig('OUTPUTS/noID_shms_aero_%s.png' % runNum)
 
-    PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (with SHMS Aerogel cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  b,-10,10,0,2.0)
+    PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (with SHMS Aerogel cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
@@ -524,21 +521,21 @@ def shms_cal():
     f = plt.figure(tight_layout=True, figsize=(11.69,8.27))
     plt.style.use('default')
 
-    plt.hist(missmass,bins=b.setbin(missmass,800,0,2.0),label='no cuts',histtype='step', alpha=0.7, stacked=True, fill=True)
-    plt.hist(mm_noID_electron,bins=b.setbin(mm_noID_electron,800,0,2.0),label='no ID',histtype='step', alpha=0.7, stacked=True, fill=True)
-    plt.hist(mm_PID_electron,bins=b.setbin(mm_PID_electron,800,0,2.0),label='PID',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(missmass,bins=c.setbin(missmass,800,0,2.0),label='no cuts',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(mm_noID_electron,bins=c.setbin(mm_noID_electron,800,0,2.0),label='no ID',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(mm_PID_electron,bins=c.setbin(mm_PID_electron,800,0,2.0),label='PID',histtype='step', alpha=0.7, stacked=True, fill=True)
     plt.legend(loc=1)
     plt.title('Missing Mass ($GeV^2$)', fontsize =20)
 
     f.savefig('OUTPUTS/missmass_%s.png' % runNum)
 
-    noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out SHMS Calorimeter cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  b,-10,10,0,2.0)
+    noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out SHMS Calorimeter cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
     noID_plot[1].savefig('OUTPUTS/noID_shms_cal_%s.png' % runNum)
 
-    PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (with SHMS Calorimeter cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  b,-10,10,0,2.0)
+    PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (with SHMS Calorimeter cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 

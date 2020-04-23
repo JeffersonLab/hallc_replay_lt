@@ -86,7 +86,6 @@ class pyRoot():
                 tmp = TH1F( tmp, '%s' % key, len(val), 0., max(val))
                 hist_key.append(tmp)
                 hist_val.append(val)
-                print("HERE")
 
             f = TFile( rootName, 'recreate' )
             for i, evt in enumerate(hist_val):
@@ -99,9 +98,11 @@ class pyRoot():
             f.Close()
         except TypeError:
             print("\nERROR: Only current accepting 1D array/list values\n")
-
-
-class pyBin():
+    
+class pyPlot(pyDict):
+    
+    def __init__(self, cutDict=None):
+        self.cutDict = cutDict
 
     def setbin(self,plot,numbin,xmin=None,xmax=None):
         
@@ -120,19 +121,27 @@ class pyBin():
             
         arrCut = cut
         arrPlot = plot
-        
         arrPlot = arrPlot[(arrCut > low) & (arrCut < high)]
 
         return arrPlot
-    
-class pyPlot():
-    
-    def __init__(self, cutDict=None):
-        self.cutDict = cutDict
-        
-    def cut(self,key):
+
+    def w_dict(self,cuts):
+
+        inputDict = self.cutDict
+        subDict = inputDict[cuts]
+        cut_arr = [evt for evt in subDict]
+        return cut_arr
             
-        return self.cutDict.get(key,"Leaf name not found")
+        
+    def cut(self,key,cuts=None):
+
+        if cuts:
+            inputDict = self.cutDict
+            subDict = inputDict[cuts]
+            value = subDict.get(key,"Leaf name not found")
+            return value
+        else:
+            return self.cutDict.get(key,"Leaf name not found")
 
     def applyCuts(self,leaf,cuts=None):
         
@@ -143,13 +152,28 @@ class pyPlot():
             while i < (len(cuts)-1):
                 applycut += 'self.cut("%s") & ' % cuts[i]
                 i+=1
-            applycut += 'self.cut("%s")' % cuts[len(cuts)-1]
+            applycut += 'self.cut("%s")]' % cuts[len(cuts)-1]
             tmp = eval(applycut)
         else:
             print('No cuts applied to %s' % leaf)
             tmp = leaf
         
         return tmp
+
+    def add_cut(self,arr, cuts):
+        
+        arr_cut = arr  
+        applycut = "arr_cut["
+        inputDict = self.cutDict
+        subDict = inputDict[cuts]
+        for i,(key,val) in enumerate(subDict.items()):
+            if i == len(subDict)-1:
+                applycut += 'self.cut("%s","%s")]' % (key,cuts)
+            else:
+                applycut += 'self.cut("%s","%s") & ' % (key,cuts)
+        arr_cut = eval(applycut)        
+        return arr_cut
+
 
     def progressBar(self,value, endvalue, bar_length):
 

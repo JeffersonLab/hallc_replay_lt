@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-21 21:58:18 trottar"
+# Time-stamp: "2020-04-22 16:13:05 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -133,21 +133,21 @@ def hms_cer():
     f = plt.figure(figsize=(11.69,8.27))
     plt.style.use('default')
 
-    plt.hist(missmass,bins=b.setbin(missmass,800,0,2.0),label='no cuts',histtype='step', alpha=0.7, stacked=True, fill=True)
-    plt.hist(mm_noID_electron,bins=b.setbin(mm_noID_electron,800,0,2.0),label='no ID',histtype='step', alpha=0.7, stacked=True, fill=True)
-    plt.hist(mm_PID_electron,bins=b.setbin(mm_PID_electron,800,0,2.0),label='PID',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(missmass,bins=c.setbin(missmass,800,0,2.0),label='no cuts',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(mm_noID_electron,bins=c.setbin(mm_noID_electron,800,0,2.0),label='no ID',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(mm_PID_electron,bins=c.setbin(mm_PID_electron,800,0,2.0),label='PID',histtype='step', alpha=0.7, stacked=True, fill=True)
     plt.legend(loc=1)
     plt.title('Missing Mass ($GeV^2$)', fontsize =20)
 
     f.savefig('../OUTPUTS/missmass_%s.png' % runNum)
 
-    noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Electron Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out HMS Cherenkov cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  b,-10,10,0,2.0)
+    noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Electron Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out HMS Cherenkov cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
     noID_plot[1].savefig('../OUTPUTS/noID_hms_cer_%s.png' % runNum)
 
-    PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Electron Coincident Time vs Mass ($GeV^2$) for ROC1 (with HMS Cherenkov cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  b,-10,10,0,2.0)
+    PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Electron Coincident Time vs Mass ($GeV^2$) for ROC1 (with HMS Cherenkov cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
@@ -221,21 +221,21 @@ def hms_cal():
     f = plt.figure(figsize=(11.69,8.27))
     plt.style.use('default')
 
-    plt.hist(missmass,bins=b.setbin(missmass,800,0,2.0),label='no cuts',histtype='step', alpha=0.7, stacked=True, fill=True)
-    plt.hist(mm_noID_electron,bins=b.setbin(mm_noID_electron,800,0,2.0),label='no ID',histtype='step', alpha=0.7, stacked=True, fill=True)
-    plt.hist(mm_PID_electron,bins=b.setbin(mm_PID_electron,800,0,2.0),label='PID',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(missmass,bins=c.setbin(missmass,800,0,2.0),label='no cuts',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(mm_noID_electron,bins=c.setbin(mm_noID_electron,800,0,2.0),label='no ID',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(mm_PID_electron,bins=c.setbin(mm_PID_electron,800,0,2.0),label='PID',histtype='step', alpha=0.7, stacked=True, fill=True)
     plt.legend(loc=1)
     plt.title('Missing Mass ($GeV^2$)', fontsize =20)
 
     f.savefig('../OUTPUTS/missmass_%s.png' % runNum)
 
-    noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Electron Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out HMS Calorimeter cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  b,-10,10,0,2.0)
+    noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Electron Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out HMS Calorimeter cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
     noID_plot[1].savefig('../OUTPUTS/noID_hms_cal_%s.png' % runNum)
 
-    PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Electron Coincident Time vs Mass ($GeV^2$) for ROC1 (with HMS Calorimeter cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  b,-10,10,0,2.0)
+    PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Electron Coincident Time vs Mass ($GeV^2$) for ROC1 (with HMS Calorimeter cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
@@ -314,21 +314,21 @@ def shms_hgcer():
     f = plt.figure(figsize=(11.69,8.27))
     plt.style.use('default')
 
-    plt.hist(missmass,bins=b.setbin(missmass,800,0,2.0),label='no cuts',histtype='step', alpha=0.7, stacked=True, fill=True)
-    plt.hist(mm_noID_electron,bins=b.setbin(mm_noID_electron,800,0,2.0),label='no ID',histtype='step', alpha=0.7, stacked=True, fill=True)
-    plt.hist(mm_PID_electron,bins=b.setbin(mm_PID_electron,800,0,2.0),label='PID',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(missmass,bins=c.setbin(missmass,800,0,2.0),label='no cuts',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(mm_noID_electron,bins=c.setbin(mm_noID_electron,800,0,2.0),label='no ID',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(mm_PID_electron,bins=c.setbin(mm_PID_electron,800,0,2.0),label='PID',histtype='step', alpha=0.7, stacked=True, fill=True)
     plt.legend(loc=1)
     plt.title('Missing Mass ($GeV^2$)', fontsize =20)
 
     f.savefig('../OUTPUTS/missmass_%s.png' % runNum)
 
-    noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out SHMS HGCer cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  b,-10,10,0,2.0)
+    noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out SHMS HGCer cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
     noID_plot[1].savefig('../OUTPUTS/noID_shms_hgcer_%s.png' % runNum)
 
-    PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (with SHMS HGCer cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  b,-10,10,0,2.0)
+    PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (with SHMS HGCer cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
@@ -407,21 +407,21 @@ def shms_aero():
     f = plt.figure(figsize=(11.69,8.27))
     plt.style.use('default')
 
-    plt.hist(missmass,bins=b.setbin(missmass,800,0,2.0),label='no cuts',histtype='step', alpha=0.7, stacked=True, fill=True)
-    plt.hist(mm_noID_electron,bins=b.setbin(mm_noID_electron,800,0,2.0),label='no ID',histtype='step', alpha=0.7, stacked=True, fill=True)
-    plt.hist(mm_PID_electron,bins=b.setbin(mm_PID_electron,800,0,2.0),label='PID',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(missmass,bins=c.setbin(missmass,800,0,2.0),label='no cuts',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(mm_noID_electron,bins=c.setbin(mm_noID_electron,800,0,2.0),label='no ID',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(mm_PID_electron,bins=c.setbin(mm_PID_electron,800,0,2.0),label='PID',histtype='step', alpha=0.7, stacked=True, fill=True)
     plt.legend(loc=1)
     plt.title('Missing Mass ($GeV^2$)', fontsize =20)
 
     f.savefig('../OUTPUTS/missmass_%s.png' % runNum)
 
-    noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out SHMS Aerogel cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  b,-10,10,0,2.0)
+    noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out SHMS Aerogel cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
     noID_plot[1].savefig('../OUTPUTS/noID_shms_aero_%s.png' % runNum)
 
-    PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (with SHMS Aerogel cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  b,-10,10,0,2.0)
+    PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (with SHMS Aerogel cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
@@ -500,21 +500,21 @@ def shms_cal():
     f = plt.figure(tight_layout=True, figsize=(11.69,8.27))
     plt.style.use('default')
 
-    plt.hist(missmass,bins=b.setbin(missmass,800,0,2.0),label='no cuts',histtype='step', alpha=0.7, stacked=True, fill=True)
-    plt.hist(mm_noID_electron,bins=b.setbin(mm_noID_electron,800,0,2.0),label='no ID',histtype='step', alpha=0.7, stacked=True, fill=True)
-    plt.hist(mm_PID_electron,bins=b.setbin(mm_PID_electron,800,0,2.0),label='PID',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(missmass,bins=c.setbin(missmass,800,0,2.0),label='no cuts',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(mm_noID_electron,bins=c.setbin(mm_noID_electron,800,0,2.0),label='no ID',histtype='step', alpha=0.7, stacked=True, fill=True)
+    plt.hist(mm_PID_electron,bins=c.setbin(mm_PID_electron,800,0,2.0),label='PID',histtype='step', alpha=0.7, stacked=True, fill=True)
     plt.legend(loc=1)
     plt.title('Missing Mass ($GeV^2$)', fontsize =20)
 
     f.savefig('../OUTPUTS/missmass_%s.png' % runNum)
 
-    noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out SHMS Calorimeter cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  b,-10,10,0,2.0)
+    noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out SHMS Calorimeter cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
     noID_plot[1].savefig('../OUTPUTS/noID_shms_cal_%s.png' % runNum)
 
-    PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (with SHMS Calorimeter cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  b,-10,10,0,2.0)
+    PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (with SHMS Calorimeter cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 

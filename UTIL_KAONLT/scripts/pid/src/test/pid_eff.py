@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-23 17:59:18 trottar"
+# Time-stamp: "2020-04-24 14:26:43 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -16,7 +16,7 @@ import pandas as pd
 import scipy
 import scipy.integrate as integrate
 import matplotlib.pyplot as plt
-import sys, math, os, subprocess
+import sys, math, os, subprocess, time
 
 sys.path.insert(0, '../python/')
 import root2py as r2p
@@ -79,8 +79,19 @@ pEDTM              = tree.array("T.coin.pEDTM_tdcTime")
 pTRIG5             = tree.array("T.coin.pTRIG5_ROC1_tdcTime")
 EvtType            = tree.array("fEvtHdr.fEvtType")
 
-tempDict = {
-    "ecut_no_cer" :
+missmass = np.array(np.sqrt(abs(emiss*emiss-pmiss*pmiss)))
+
+#
+# Mp = 0.93828
+# MPi = 0.13957018
+# MK = 0.493677
+# MMpi = np.array([math.sqrt(abs((em + math.sqrt(abs((MK*MK) + (gtrp*gtrp))) - math.sqrt(abs((MPi*MPi) + (gtrp*gtrp) - (pm*pm))) ))**2) for (em, pm, gtrp) in zip(emiss, pmiss, P_gtr_p)])
+# MMK = np.array([math.sqrt(abs((em*em)-(pm*pm))) for (em, pm) in zip(emiss, pmiss)])
+# MMp = np.array([math.sqrt(abs((em + math.sqrt(abs((MK*MK) + (gtrp*gtrp))) - math.sqrt(abs((Mp*Mp) + (gtrp*gtrp) - (pm*pm))) ))**2) for (em, pm, gtrp) in zip(emiss, pmiss, P_gtr_p)])
+
+
+cutDict = {
+    "h_ecut_no_cer" :
     {
         '{"H_gtr_dp" : (abs(H_gtr_dp) < 10.0)}',
         '{"P_gtr_dp" : ((P_gtr_dp >-10.0) | (P_gtr_dp < 20.0))}',
@@ -89,7 +100,7 @@ tempDict = {
         '{"CTime_eKCoinTime_ROC1" : (((CTime_eKCoinTime_ROC1-47.5) > -0.5) & ((CTime_eKCoinTime_ROC1-47.5) < 0.5))}',
         '{"H_cal_etotnorm" : ((H_cal_etotnorm > 0.995) & (H_cal_etotnorm < 1.015))}'
     },
-    "ecut_cer" :
+    "h_ecut_cer" :
     {
         '{"H_gtr_dp" : (abs(H_gtr_dp) < 10.0)}',
         '{"P_gtr_dp" : ((P_gtr_dp >-10.0) | (P_gtr_dp < 20.0))}',
@@ -97,8 +108,84 @@ tempDict = {
         '{"H_gtr_beta" : ((abs(H_gtr_beta)-1.00) < 0.1)}',
         '{"CTime_eKCoinTime_ROC1" : (((CTime_eKCoinTime_ROC1-47.5) > -0.5) & ((CTime_eKCoinTime_ROC1-47.5) < 0.5))}',
         '{"H_cal_etotnorm" : ((H_cal_etotnorm > 0.995) & (H_cal_etotnorm < 1.015))}',
-        '{"H_cer_npeSum" : (H_cer_npeSum > 3.0)}'
-    }
+        '{"H_cer_npeSum" : (H_cer_npeSum > 3.0)}',
+    },
+    "h_ecut_no_cal" :
+    {
+        '{"H_gtr_dp" : (abs(H_gtr_dp) < 10.0)}',
+        '{"P_gtr_dp" : ((P_gtr_dp >-10.0) | (P_gtr_dp < 20.0))}',
+        '{"P_cal_etotnorm" : (P_cal_etotnorm <0.6)}',
+        '{"H_gtr_beta" : ((abs(H_gtr_beta)-1.00) < 0.1)}',
+        '{"CTime_eKCoinTime_ROC1" : (((CTime_eKCoinTime_ROC1-47.5) > -0.5) & ((CTime_eKCoinTime_ROC1-47.5) < 0.5))}',
+        '{"H_cer_npeSum" : (H_cer_npeSum > 1.5)}'
+    },
+    "h_ecut_cal" :
+    {
+        '{"H_gtr_dp" : (abs(H_gtr_dp) < 10.0)}',
+        '{"P_gtr_dp" : ((P_gtr_dp >-10.0) | (P_gtr_dp < 20.0))}',
+        '{"P_cal_etotnorm" : (P_cal_etotnorm <0.6)}',
+        '{"H_gtr_beta" : ((abs(H_gtr_beta)-1.00) < 0.1)}',
+        '{"CTime_eKCoinTime_ROC1" : (((CTime_eKCoinTime_ROC1-47.5) > -0.5) & ((CTime_eKCoinTime_ROC1-47.5) < 0.5))}',
+        '{"H_cer_npeSum" : (H_cer_npeSum > 1.5)}',
+        '{"H_cal_etotnorm" : (H_cal_etotnorm > 1.1)}'
+    },
+    "p_kcut_no_hgcer" :
+    {
+        '{"H_gtr_dp" : (abs(H_gtr_dp) < 10.0)}',
+        '{"P_gtr_dp" : ((P_gtr_dp >-10.0) | (P_gtr_dp < 20.0))}',
+        '{"H_cal_etotnorm and H_cer_npeSum" : (H_cal_etotnorm > 0.7) & (H_cer_npeSum > 1.5)}',
+        '{"P_gtr_beta" : ((abs(P_gtr_beta)-1.00) < 0.1)}',
+        '{"CTime_eKCoinTime_ROC1" : (((CTime_eKCoinTime_ROC1-47.5) > -0.5) & ((CTime_eKCoinTime_ROC1-47.5) < 0.5))}',
+        '{"P_cal_etotnorm and P_aero_npeSum" : ((P_cal_etotnorm > 0.7) & (P_aero_npeSum >1.5))}'
+    },
+    "p_kcut_hgcer" :
+    {
+        '{"H_gtr_dp" : (abs(H_gtr_dp) < 10.0)}',
+        '{"P_gtr_dp" : ((P_gtr_dp >-10.0) | (P_gtr_dp < 20.0))}',
+        '{"H_cal_etotnorm and H_cer_npeSum" : (H_cal_etotnorm > 0.7) & (H_cer_npeSum > 1.5)}',
+        '{"P_gtr_beta" : ((abs(P_gtr_beta)-1.00) < 0.1)}',
+        '{"CTime_eKCoinTime_ROC1" : (((CTime_eKCoinTime_ROC1-47.5) > -0.5) & ((CTime_eKCoinTime_ROC1-47.5) < 0.5))}',
+        '{"P_cal_etotnorm and P_aero_npeSum" : ((P_cal_etotnorm > 0.7) & (P_aero_npeSum >1.5))}',
+        '{"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}'
+    },
+    "p_kcut_no_aero" :
+    {
+        '{"H_gtr_dp" : (abs(H_gtr_dp) < 10.0)}',
+        '{"P_gtr_dp" : ((P_gtr_dp >-10.0) | (P_gtr_dp < 20.0))}',
+        '{"H_cal_etotnorm and H_cer_npeSum" : (H_cal_etotnorm > 0.7) & (H_cer_npeSum > 1.5)}',
+        '{"P_gtr_beta" : ((abs(P_gtr_beta)-1.00) < 0.1)}',
+        '{"CTime_eKCoinTime_ROC1" : (((CTime_eKCoinTime_ROC1-47.5) > -0.5) & ((CTime_eKCoinTime_ROC1-47.5) < 0.5))}',
+        '{"P_cal_etotnorm and P_hgcer_npeSum" : ((P_cal_etotnorm > 0.7) & (P_hgcer_npeSum > 1.5))}'
+    },
+    "p_kcut_aero" :
+    {
+        '{"H_gtr_dp" : (abs(H_gtr_dp) < 10.0)}',
+        '{"P_gtr_dp" : ((P_gtr_dp >-10.0) | (P_gtr_dp < 20.0))}',
+        '{"H_cal_etotnorm and H_cer_npeSum" : (H_cal_etotnorm > 0.7) & (H_cer_npeSum > 1.5)}',
+        '{"P_gtr_beta" : ((abs(P_gtr_beta)-1.00) < 0.1)}',
+        '{"CTime_eKCoinTime_ROC1" : (((CTime_eKCoinTime_ROC1-47.5) > -0.5) & ((CTime_eKCoinTime_ROC1-47.5) < 0.5))}',
+        '{"P_cal_etotnorm and P_hgcer_npeSum" : ((P_cal_etotnorm > 0.7) & (P_hgcer_npeSum > 1.5))}',
+        '{"P_aero_npeSum" : (P_aero_npeSum > 1.5)}'
+    },
+    "p_kcut_no_cal" :
+    {
+        '{"H_gtr_dp" : (abs(H_gtr_dp) < 10.0)}',
+        '{"P_gtr_dp" : ((P_gtr_dp >-10.0) | (P_gtr_dp < 20.0))}',
+        '{"H_cal_etotnorm and H_cer_npeSum" : (H_cal_etotnorm > 0.7) & (H_cer_npeSum > 1.5)}',
+        '{"P_gtr_beta" : ((abs(P_gtr_beta)-1.00) < 0.1)}',
+        '{"CTime_eKCoinTime_ROC1" : (((CTime_eKCoinTime_ROC1-47.5) > -0.5) & ((CTime_eKCoinTime_ROC1-47.5) < 0.5))}',
+        '{"P_hgcer_npeSum and P_aero_npeSum" : ((P_hgcer_npeSum > 1.5) & (P_aero_npeSum >1.5))}'
+    },
+    "p_kcut_cal" :
+    {
+        '{"H_gtr_dp" : (abs(H_gtr_dp) < 10.0)}',
+        '{"P_gtr_dp" : ((P_gtr_dp >-10.0) | (P_gtr_dp < 20.0))}',
+        '{"H_cal_etotnorm and H_cer_npeSum" : (H_cal_etotnorm > 0.7) & (H_cer_npeSum > 1.5)}',
+        '{"P_gtr_beta" : ((abs(P_gtr_beta)-1.00) < 0.1)}',
+        '{"CTime_eKCoinTime_ROC1" : (((CTime_eKCoinTime_ROC1-47.5) > -0.5) & ((CTime_eKCoinTime_ROC1-47.5) < 0.5))}',
+        '{"P_hgcer_npeSum and P_aero_npeSum" : ((P_hgcer_npeSum > 1.5) & (P_aero_npeSum >1.5))}',
+        '{"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}'
+    },
 }
 
 r = r2p.pyRoot()
@@ -116,37 +203,48 @@ def make_cutDict(inputDict,cut):
 
     return inputDict
 
-tempDict = make_cutDict(tempDict,"ecut_no_cer")
-tempDict = make_cutDict(tempDict,"ecut_cer")
+cutDict = make_cutDict(cutDict,"h_ecut_no_cer")
+cutDict = make_cutDict(cutDict,"h_ecut_cer")
+cutDict = make_cutDict(cutDict,"h_ecut_no_cal")
+cutDict = make_cutDict(cutDict,"h_ecut_cal")
+cutDict = make_cutDict(cutDict,"p_kcut_no_hgcer")
+cutDict = make_cutDict(cutDict,"p_kcut_hgcer")
+cutDict = make_cutDict(cutDict,"p_kcut_no_aero")
+cutDict = make_cutDict(cutDict,"p_kcut_aero")
+cutDict = make_cutDict(cutDict,"p_kcut_no_cal")
+cutDict = make_cutDict(cutDict,"p_kcut_cal")
 
 def hms_cer():
 
-    missmass = np.array(np.sqrt(abs(emiss*emiss-pmiss*pmiss)))
-
-    #
-    # Mp = 0.93828
-    # MPi = 0.13957018
-    # MK = 0.493677
-    # MMpi = np.array([math.sqrt(abs((em + math.sqrt(abs((MK*MK) + (gtrp*gtrp))) - math.sqrt(abs((MPi*MPi) + (gtrp*gtrp) - (pm*pm))) ))**2) for (em, pm, gtrp) in zip(emiss, pmiss, P_gtr_p)])
-    # MMK = np.array([math.sqrt(abs((em*em)-(pm*pm))) for (em, pm) in zip(emiss, pmiss)])
-    # MMp = np.array([math.sqrt(abs((em + math.sqrt(abs((MK*MK) + (gtrp*gtrp))) - math.sqrt(abs((Mp*Mp) + (gtrp*gtrp) - (pm*pm))) ))**2) for (em, pm, gtrp) in zip(emiss, pmiss, P_gtr_p)])
-
-    
+    t0 = time.time()
     # coin_noID_electron
-    coin_noID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"ecut_no_cer")-47.5)
+    coin_noID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"h_ecut_no_cer")-47.5)
+    t1 = time.time()
+    print("root2py: ",t1-t0)
 
-
+    noID_electron_iterate = [CTime_eKCoinTime_ROC1, H_gtr_dp, P_gtr_dp, P_cal_etotnorm, H_gtr_beta, H_cal_etotnorm, emiss, pmiss]
+    t2 = time.time()
+    # coin_noID_electron
+    test_coin_noID_electron = np.array([coin-47.5
+                                   for (coin, h_dp, p_dp, p_cal, h_beta, h_cal, emm, pmm)
+                                   in zip(*noID_electron_iterate)
+                                   if abs(h_dp) < 10.0
+                                   if p_dp >-10.0 or p_dp < 20.0
+                                   if p_cal <0.6
+                                   if (abs(h_beta)-1.00) < 0.1
+                                   if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
+                                   if h_cal > 0.995 and h_cal < 1.015])
+    t3 = time.time()
+    print("[]: ",t3-t2)
+    
     # mm_noID_electron
-    mm_noID_electron = np.array(c.add_cut(missmass,"ecut_no_cer"))
+    mm_noID_electron = np.array(c.add_cut(missmass,"h_ecut_no_cer"))
     
     # coin_PID_electron
-    coin_PID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"ecut_cer")-47.5)
+    coin_PID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"h_ecut_cer")-47.5)
     
     # mm_PID_electron
-    mm_PID_electron = np.array(c.add_cut(missmass,"ecut_cer"))
-
-    print(len(coin_PID_electron))
-    print(len(mm_PID_electron))
+    mm_PID_electron = np.array(c.add_cut(missmass,"h_ecut_cer"))
 
     h_cer_data = {
 
@@ -180,62 +278,22 @@ def hms_cer():
     print("= %s HMS CER DONE =" % runNum)
     print("=====================\n\n")
           
-    return [h_cer_data,f]
+    return h_cer_data
 
 def hms_cal():
-
-    missmass = np.array([math.sqrt(abs(emm*emm-pmm*pmm)) for (emm, pmm) in zip(emiss, pmiss)])
-    
-    noID_electron_iterate = [CTime_eKCoinTime_ROC1, H_gtr_dp, P_gtr_dp, P_cal_etotnorm, H_gtr_beta, H_cer_npeSum, emiss, pmiss]
     
     # coin_noID_electron
-    coin_noID_electron = np.array([coin-47.5
-                                   for (coin, h_dp, p_dp, p_cal, h_beta, h_cer, emm, pmm)
-                                   in zip(*noID_electron_iterate)
-                                   if abs(h_dp) < 10.0
-                                   if p_dp >-10.0 or p_dp < 20.0
-                                   if p_cal <0.6
-                                   if (abs(h_beta)-1.00) < 0.1
-                                   if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
-                                   if h_cer > 1.5])
+    coin_noID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"h_ecut_no_cal")-47.5)
 
     # mm_noID_electron
-    mm_noID_electron = np.array([math.sqrt(abs(emm*emm-pmm*pmm))
-                                 for (coin, h_dp, p_dp, p_cal, h_beta, h_cer, emm, pmm)
-                                 in zip(*noID_electron_iterate)
-                                 if abs(h_dp) < 10.0
-                                 if p_dp >-10.0 or p_dp < 20.0
-                                 if p_cal <0.6
-                                 if (abs(h_beta)-1.00) < 0.1
-                                 if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
-                                 if h_cer > 1.5])
-
-    PID_electron_iterate = [CTime_eKCoinTime_ROC1, H_gtr_dp, P_gtr_dp, P_cal_etotnorm, H_gtr_beta, H_cer_npeSum, H_cal_etotnorm, emiss, pmiss]
+    mm_noID_electron = np.array(c.add_cut(missmass,"h_ecut_no_cal"))
     
     # coin_PID_electron
-    coin_PID_electron = np.array([coin-47.5
-                                  for (coin, h_dp, p_dp, p_cal, h_beta, h_cer, h_cal, emm, pmm)
-                                  in zip(*PID_electron_iterate)
-                                  if abs(h_dp) < 10.0
-                                  if p_dp >-10.0 or p_dp < 20.0
-                                  if p_cal <0.6
-                                  if (abs(h_beta)-1.00) < 0.1
-                                  if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
-                                  if h_cer > 1.5
-                                  if h_cal > 1.1])
-
+    coin_PID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"h_ecut_cal")-47.5)
+    
     # mm_PID_electron
-    mm_PID_electron = np.array([math.sqrt(emm*emm-pmm*pmm)
-                                for (coin, h_dp, p_dp, p_cal, h_beta, h_cer, h_cal, emm, pmm)
-                                in zip(*PID_electron_iterate)
-                                if abs(h_dp) < 10.0
-                                if p_dp >-10.0 or p_dp < 20.0
-                                if p_cal <0.6
-                                if (abs(h_beta)-1.00) < 0.1
-                                if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
-                                if h_cer > 1.5
-                                if h_cal > 1.1])
-
+    mm_PID_electron = np.array(c.add_cut(missmass,"h_ecut_cal"))
+    
     h_cal_data = {
 
         "h_cal_eff" : len(mm_noID_electron)/len(mm_PID_electron),
@@ -268,66 +326,21 @@ def hms_cal():
     print("= %s HMS CAL DONE =" % runNum)
     print("=====================\n\n")
           
-    return [h_cal_data, f]
+    return h_cal_data
 
 def shms_hgcer():
-
-    missmass = np.array([math.sqrt(abs(emm*emm-pmm*pmm)) for (emm, pmm) in zip(emiss, pmiss)])
-    
-    noID_electron_iterate = [CTime_eKCoinTime_ROC1, H_gtr_dp, P_gtr_dp, H_cal_etotnorm, H_cer_npeSum, P_gtr_beta, P_cal_etotnorm, P_aero_npeSum, emiss, pmiss]
     
     # coin_noID_electron
-    coin_noID_electron = np.array([coin-47.5
-                                   for (coin, h_dp, p_dp, h_cal, h_cer, p_beta, p_cal, p_aero, emm, pmm)
-                                   in zip(*noID_electron_iterate)
-                                   if abs(h_dp) < 10.0
-                                   if p_dp >-10.0 or p_dp < 20.0
-                                   if h_cal > 0.7 or h_cer > 1.5
-                                   if (abs(p_beta)-1.00) < 0.1
-                                   if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
-                                   if p_cal > 0.7 or p_aero > 1.5])
+    coin_noID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"p_kcut_no_hgcer")-47.5)
 
     # mm_noID_electron
-    mm_noID_electron = np.array([math.sqrt(abs(emm*emm-pmm*pmm))
-                                 for (coin, h_dp, p_dp, h_cal, h_cer, p_beta, p_cal, p_aero, emm, pmm)
-                                 in zip(*noID_electron_iterate)
-                                 if abs(h_dp) < 10.0
-                                 if abs(h_dp) < 10.0
-                                 if p_dp >-10.0 or p_dp < 20.0
-                                 if h_cal > 0.7 or h_cer > 1.5
-                                 if (abs(p_beta)-1.00) < 0.1
-                                 if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
-                                 if p_cal > 0.7 or p_aero > 1.5])
-    
-    PID_electron_iterate = [CTime_eKCoinTime_ROC1, H_gtr_dp, P_gtr_dp, H_cal_etotnorm, H_cer_npeSum, P_gtr_beta, P_cal_etotnorm, P_aero_npeSum, P_hgcer_npeSum, emiss, pmiss]
+    mm_noID_electron = np.array(c.add_cut(missmass,"p_kcut_no_hgcer"))
     
     # coin_PID_electron
-    coin_PID_electron = np.array([coin-47.5
-                                  for (coin, h_dp, p_dp, h_cal, h_cer, p_beta, p_cal, p_aero, p_hgcer, emm, pmm)
-                                  in zip(*PID_electron_iterate)
-                                  if abs(h_dp) < 10.0
-                                  if abs(h_dp) < 10.0
-                                  if p_dp >-10.0 or p_dp < 20.0
-                                  if h_cal > 0.7 or h_cer > 1.5
-                                  if (abs(p_beta)-1.00) < 0.1
-                                  if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
-                                  if p_cal > 0.7 or p_aero > 1.5
-                                  if p_hgcer >1.5])
+    coin_PID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"p_kcut_hgcer")-47.5)
     
-
     # mm_PID_electron
-    mm_PID_electron = np.array([math.sqrt(emm*emm-pmm*pmm)
-                                for (coin, h_dp, p_dp, h_cal, h_cer, p_beta, p_cal, p_aero, p_hgcer, emm, pmm)
-                                in zip(*PID_electron_iterate)
-                                if abs(h_dp) < 10.0
-                                if abs(h_dp) < 10.0
-                                if p_dp >-10.0 or p_dp < 20.0
-                                if h_cal > 0.7 or h_cer > 1.5
-                                if (abs(p_beta)-1.00) < 0.1
-                                if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
-                                if p_cal > 0.7 or p_aero > 1.5
-                                if p_hgcer >1.5])
-    
+    mm_PID_electron = np.array(c.add_cut(missmass,"p_kcut_hgcer"))    
 
     p_hgcer_data = {
 
@@ -361,66 +374,21 @@ def shms_hgcer():
     print("= %s SHMS HGCER DONE =" % runNum)
     print("========================\n\n")
           
-    return [p_hgcer_data, f]
+    return p_hgcer_data
 
 def shms_aero():
-
-    missmass = np.array([math.sqrt(abs(emm*emm-pmm*pmm)) for (emm, pmm) in zip(emiss, pmiss)])
-    
-    noID_electron_iterate = [CTime_eKCoinTime_ROC1, H_gtr_dp, P_gtr_dp, H_cal_etotnorm, H_cer_npeSum, P_gtr_beta, P_cal_etotnorm, P_hgcer_npeSum, emiss, pmiss]
     
     # coin_noID_electron
-    coin_noID_electron = np.array([coin-47.5
-                                   for (coin, h_dp, p_dp, h_cal, h_cer, p_beta, p_cal, p_hgcer, emm, pmm)
-                                   in zip(*noID_electron_iterate)
-                                   if abs(h_dp) < 10.0
-                                   if p_dp >-10.0 or p_dp < 20.0
-                                   if h_cal > 0.7 or h_cer > 1.5
-                                   if (abs(p_beta)-1.00) < 0.1
-                                   if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
-                                   if p_cal > 0.7 or p_hgcer > 1.5])
+    coin_noID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"p_kcut_no_aero")-47.5)
 
     # mm_noID_electron
-    mm_noID_electron = np.array([math.sqrt(abs(emm*emm-pmm*pmm))
-                                 for (coin, h_dp, p_dp, h_cal, h_cer, p_beta, p_cal, p_hgcer, emm, pmm)
-                                 in zip(*noID_electron_iterate)
-                                 if abs(h_dp) < 10.0
-                                 if abs(h_dp) < 10.0
-                                 if p_dp >-10.0 or p_dp < 20.0
-                                 if h_cal > 0.7 or h_cer > 1.5
-                                 if (abs(p_beta)-1.00) < 0.1
-                                 if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
-                                 if p_cal > 0.7 or p_hgcer > 1.5])
-    
-    PID_electron_iterate = [CTime_eKCoinTime_ROC1, H_gtr_dp, P_gtr_dp, H_cal_etotnorm, H_cer_npeSum, P_gtr_beta, P_cal_etotnorm, P_hgcer_npeSum, P_aero_npeSum, emiss, pmiss]
+    mm_noID_electron = np.array(c.add_cut(missmass,"p_kcut_no_aero"))
     
     # coin_PID_electron
-    coin_PID_electron = np.array([coin-47.5
-                                  for (coin, h_dp, p_dp, h_cal, h_cer, p_beta, p_cal, p_hgcer, p_aero, emm, pmm)
-                                  in zip(*PID_electron_iterate)
-                                  if abs(h_dp) < 10.0
-                                  if abs(h_dp) < 10.0
-                                  if p_dp >-10.0 or p_dp < 20.0
-                                  if h_cal > 0.7 or h_cer > 1.5
-                                  if (abs(p_beta)-1.00) < 0.1
-                                  if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
-                                  if p_cal > 0.7 or p_hgcer > 1.5
-                                  if p_aero > 1.5])
+    coin_PID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"p_kcut_aero")-47.5)
     
-
     # mm_PID_electron
-    mm_PID_electron = np.array([math.sqrt(emm*emm-pmm*pmm)
-                                for (coin, h_dp, p_dp, h_cal, h_cer, p_beta, p_cal, p_hgcer, p_aero, emm, pmm)
-                                in zip(*PID_electron_iterate)
-                                if abs(h_dp) < 10.0
-                                if abs(h_dp) < 10.0
-                                if p_dp >-10.0 or p_dp < 20.0
-                                if h_cal > 0.7 or h_cer > 1.5
-                                if (abs(p_beta)-1.00) < 0.1
-                                if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
-                                if p_cal > 0.7 or p_hgcer > 1.5
-                                if p_aero > 1.5])
-    
+    mm_PID_electron = np.array(c.add_cut(missmass,"p_kcut_aero"))        
 
     p_aero_data = {
 
@@ -454,66 +422,21 @@ def shms_aero():
     print("= %s SHMS AERO DONE =" % runNum)
     print("=======================\n\n")
           
-    return [p_aero_data, f]
+    return p_aero_data
 
 def shms_cal():
-
-    missmass = np.array([math.sqrt(abs(emm*emm-pmm*pmm)) for (emm, pmm) in zip(emiss, pmiss)])
-    
-    noID_electron_iterate = [CTime_eKCoinTime_ROC1, H_gtr_dp, P_gtr_dp, H_cal_etotnorm, H_cer_npeSum, P_gtr_beta, P_aero_npeSum, P_hgcer_npeSum, emiss, pmiss]
     
     # coin_noID_electron
-    coin_noID_electron = np.array([coin-47.5
-                                   for (coin, h_dp, p_dp, h_cal, h_cer, p_beta, p_aero, p_hgcer, emm, pmm)
-                                   in zip(*noID_electron_iterate)
-                                   if abs(h_dp) < 10.0
-                                   if p_dp >-10.0 or p_dp < 20.0
-                                   if h_cal > 0.7 or h_cer > 1.5
-                                   if (abs(p_beta)-1.00) < 0.1
-                                   if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
-                                   if p_aero > 1.5 or p_hgcer > 1.5])
+    coin_noID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"p_kcut_no_cal")-47.5)
 
     # mm_noID_electron
-    mm_noID_electron = np.array([math.sqrt(abs(emm*emm-pmm*pmm))
-                                 for (coin, h_dp, p_dp, h_cal, h_cer, p_beta, p_aero, p_hgcer, emm, pmm)
-                                 in zip(*noID_electron_iterate)
-                                 if abs(h_dp) < 10.0
-                                 if abs(h_dp) < 10.0
-                                 if p_dp >-10.0 or p_dp < 20.0
-                                 if h_cal > 0.7 or h_cer > 1.5
-                                 if (abs(p_beta)-1.00) < 0.1
-                                 if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
-                                 if p_aero > 1.5 or p_hgcer > 1.5])
-    
-    PID_electron_iterate = [CTime_eKCoinTime_ROC1, H_gtr_dp, P_gtr_dp, H_cal_etotnorm, H_cer_npeSum, P_gtr_beta, P_aero_npeSum, P_hgcer_npeSum, P_cal_etotnorm, emiss, pmiss]
+    mm_noID_electron = np.array(c.add_cut(missmass,"p_kcut_no_cal"))
     
     # coin_PID_electron
-    coin_PID_electron = np.array([coin-47.5
-                                 for (coin, h_dp, p_dp, h_cal, h_cer, p_beta, p_aero, p_hgcer, p_cal, emm, pmm)
-                                  in zip(*PID_electron_iterate)
-                                  if abs(h_dp) < 10.0
-                                  if abs(h_dp) < 10.0
-                                  if p_dp >-10.0 or p_dp < 20.0
-                                  if h_cal > 0.7 or h_cer > 1.5
-                                  if (abs(p_beta)-1.00) < 0.1
-                                  if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
-                                  if p_aero > 1.5 or p_hgcer > 1.5
-                                  if p_cal > 0.7])
+    coin_PID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"p_kcut_cal")-47.5)
     
-
     # mm_PID_electron
-    mm_PID_electron = np.array([math.sqrt(emm*emm-pmm*pmm)
-                                for (coin, h_dp, p_dp, h_cal, h_cer, p_beta, p_aero, p_hgcer, p_cal, emm, pmm)
-                                in zip(*PID_electron_iterate)
-                                if abs(h_dp) < 10.0
-                                if abs(h_dp) < 10.0
-                                if p_dp >-10.0 or p_dp < 20.0
-                                if h_cal > 0.7 or h_cer > 1.5
-                                if (abs(p_beta)-1.00) < 0.1
-                                if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
-                                if p_aero > 1.5 or p_hgcer > 1.5
-                                if p_cal > 0.7])
-    
+    mm_PID_electron = np.array(c.add_cut(missmass,"p_kcut_cal"))        
 
     p_cal_data = {
 
@@ -547,7 +470,7 @@ def shms_cal():
     print("= %s SHMS CAL DONE =" % runNum)
     print("======================\n\n")
           
-    return [p_cal_data, f]
+    return p_cal_data
 
 def main():
 
@@ -558,15 +481,13 @@ def main():
     p_cal_data = shms_cal()
 
     runNum_dict = {
-        "run_number" : runNum
+        "run_number" : int(runNum)
     }
 
     datadict = {}
-    for d in (runNum_dict, h_cer_data[0], h_cal_data[0], p_hgcer_data[0], p_aero_data[0], p_cal_data[0]): 
+    for d in (runNum_dict, h_cer_data, h_cal_data, p_hgcer_data, p_aero_data, p_cal_data): 
         datadict.update(d)
     data = {i : datadict[i] for i in sorted(datadict.keys())}
-
-    r.py2root(data, "OUTPUTS/pid_data.root")
 
     # plt.show()
 

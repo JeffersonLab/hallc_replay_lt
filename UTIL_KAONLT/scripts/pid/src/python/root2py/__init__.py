@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-22 16:08:02 trottar"
+# Time-stamp: "2020-04-24 13:58:28 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -19,7 +19,7 @@ import time, math, sys
 
 from .root2py import pyDict, pyBranch, pyPlot, pyRoot
 
-__version__ = '0.2.0'
+__version__ = '0.3.0'
 __author__ = 'trottar'
 __license__ = 'CUA'
 __copyright__ = 'Copyright 2020 trottar'

@@ -16,13 +16,38 @@ if [[ $2 -eq "" ]]; then
     MAXEVENTS=-1 
 fi
 
-cd /group/c-kaonlt/USERS/${USER}/hallc_replay_lt/
+# Set path depending upon hostname. Change or add more as needed  
+if [[ "${HOSTNAME}" = *"farm"* ]]; then  
+    REPLAYPATH="/group/c-kaonlt/USERS/${USER}/hallc_replay_lt"
+    if [[ "${HOSTNAME}" != *"ifarm"* ]]; then
+	source /site/12gev_phys/softenv.sh 2.1
+    fi
+    cd "/group/c-kaonlt/hcana/"
+    source "/group/c-kaonlt/hcana/setup.sh"
+    cd "$REPLAYPATH"
+    source "$REPLAYPATH/setup.sh"
+elif [[ "${HOSTNAME}" = *"qcd"* ]]; then
+    REPLAYPATH="/group/c-kaonlt/USERS/${USER}/hallc_replay_lt"
+    source /site/12gev_phys/softenv.sh 2.1
+    cd "/group/c-kaonlt/hcana/"
+    source "/group/c-kaonlt/hcana/setup.sh" 
+    cd "$REPLAYPATH"
+    source "$REPLAYPATH/setup.sh" 
+elif [[ "${HOSTNAME}" = *"cdaq"* ]]; then
+    REPLAYPATH="/home/cdaq/hallc-online/hallc_replay_lt"
+elif [[ "${HOSTNAME}" = *"phys.uregina.ca"* ]]; then
+    REPLAYPATH="/home/${USER}/work/JLab/hallc_replay_lt"
+elif [[ "${HOSTNAME}" = *"trottar"* ]]; then
+    REPLAYPATH="/home/trottar/Analysis/hallc_replay_lt"
+fi
+
+cd ${REPLAYPATH}/
 #   Load params for BCM
 #   const char* CurrentFileNamePattern = "PARAM/HMS/BCM/CALIB/bcmcurrent_%d.param";
 #   gHcParms->Load(Form(CurrentFileNamePattern, RunNumber));
 # When we comment out the below bit ONLY when the bit above is commented out in replay_luminosity_coin.C
 echo -e "\n\nStarting Scaler Replay Script\n\n"
-./hcana -q "/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/SCRIPTS/COIN/SCALERS/replay_coin_scalers.C($RUNNUMBER,$MAXEVENTS)"
+./hcana -q "${REPLAYPATH}/SCRIPTS/COIN/SCALERS/replay_coin_scalers.C($RUNNUMBER,$MAXEVENTS)"
 cd CALIBRATION/bcm_current_map/
 root -b<<EOF
 .L ScalerCalib.C+
@@ -33,11 +58,11 @@ mv bcmcurrent_$RUNNUMBER.param ../../PARAM/HMS/BCM/CALIB/bcmcurrent_$RUNNUMBER.p
 cd ../../
 
 echo -e "\n\nStarting Replay Script\n\n"
-./hcana -q "/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/src/replay/replay_lumi_coin_offline.C($RUNNUMBER,$MAXEVENTS)"
+./hcana -q "${REPLAYPATH}/UTIL_KAONLT/scripts/luminosity/src/replay/replay_lumi_coin_offline.C($RUNNUMBER,$MAXEVENTS)"
 
 source /apps/root/6.18.04/setroot_CUE.bash
-cd /group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/src/
+cd ${REPLAYPATH}/UTIL_KAONLT/scripts/luminosity/src/
 python3 lumiyield.py ${RUNNUMBER} ${MAXEVENTS}
 
-cd /group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/src/
+cd ${REPLAYPATH}/UTIL_KAONLT/scripts/luminosity/src/
 python3 csv2root.py "lumi_data"

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-22 00:46:46 trottar"
+# Time-stamp: "2020-04-24 15:41:15 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -16,10 +16,21 @@ import matplotlib.pyplot as plt
 from csv import DictReader
 import os, subprocess
 
-USER = subprocess.getstatusoutput("whoami")
+# Add this to all files for more dynamic pathing
+USER = subprocess.getstatusoutput("whoami") # Grab user info for file finding
+HOST = subprocess.getstatusoutput("hostname")
 
-inp_f = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.csv" % str(USER[1])
-out_f = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/yield_data.csv" % str(USER[1])
+if ("farm" in HOST[1]):
+    REPLAYPATH = "/group/c-kaonlt/USERS/%s/hallc_replay_lt" % USER[1]
+elif ("lark" in HOST[1]):
+    REPLAYPATH = "/home/%s/work/JLab/hallc_replay_lt" % USER[1]
+elif ("trottar" in HOST[1]):
+    REPLAYPATH = "/home/trottar/Analysis/hallc_replay_lt"
+
+print("Running as %s on %s, hallc_replay_lt path assumed as %s" % (USER[1], HOST[1], REPLAYPATH))
+
+inp_f = "%s/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.csv" % str(REPLAYPATH)
+out_f = "%s/UTIL_KAONLT/scripts/luminosity/OUTPUTS/yield_data.csv" % str(REPLAYPATH)
 
 try:
     lumi_data = dict(pd.read_csv(inp_f))

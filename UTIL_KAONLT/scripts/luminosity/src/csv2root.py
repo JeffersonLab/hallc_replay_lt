@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-22 14:26:01 trottar"
+# Time-stamp: "2020-04-24 15:39:48 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -20,11 +20,22 @@ r = r2p.pyRoot()
 
 csv = sys.argv[1]
 
-USER = subprocess.getstatusoutput("whoami")
+# Add this to all files for more dynamic pathing
+USER = subprocess.getstatusoutput("whoami") # Grab user info for file finding
+HOST = subprocess.getstatusoutput("hostname")
+
+if ("farm" in HOST[1]):
+    REPLAYPATH = "/group/c-kaonlt/USERS/%s/hallc_replay_lt" % USER[1]
+elif ("lark" in HOST[1]):
+    REPLAYPATH = "/home/%s/work/JLab/hallc_replay_lt" % USER[1]
+elif ("trottar" in HOST[1]):
+    REPLAYPATH = "/home/trottar/Analysis/hallc_replay_lt"
+    
+print("Running as %s on %s, hallc_replay_lt path assumed as %s" % (USER[1], HOST[1], REPLAYPATH))
 
 if csv == "lumi_data":
-    inp_f = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.csv" % str(USER[1])
-    out_f = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.root" % str(USER[1])
+    inp_f = "%s/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.csv" % str(REPLAYPATH)
+    out_f = "%s/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.root" % str(REPLAYPATH)
     try:
         lumi_data = dict(pd.read_csv(inp_f))
     except IOError:
@@ -32,8 +43,8 @@ if csv == "lumi_data":
     print(lumi_data.keys())
     r.py2root(lumi_data,out_f)
 elif csv == "yield_data":
-    inp_f = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/yield_data.csv" % str(USER[1])
-    out_f = "/u/group/c-kaonlt/USERS/%s/hallc_replay_lt/UTIL_KAONLT/scripts/luminosity/OUTPUTS/yield_data.root" % str(USER[1])
+    inp_f = "%s/UTIL_KAONLT/scripts/luminosity/OUTPUTS/yield_data.csv" % str(REPLAYPATH)
+    out_f = "%s/UTIL_KAONLT/scripts/luminosity/OUTPUTS/yield_data.root" % str(REPLAYPATH)
     try:
         yield_data = dict(pd.read_csv(inp_f))
     except IOError:

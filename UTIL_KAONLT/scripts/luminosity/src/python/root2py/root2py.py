@@ -99,7 +99,12 @@ class pyRoot():
             f.Close()
         except TypeError:
             print("\nERROR: Only current accepting 1D array/list values\n")
-    
+
+class pyEquation():
+
+    def missmass():
+        print("missmass")
+            
 class pyPlot(pyDict):
     
     def __init__(self, cutDict=None):
@@ -126,11 +131,23 @@ class pyPlot(pyDict):
 
         return arrPlot
 
+    def read_dict(self,f):
+
+        cutDict = {}
+        cut_new = ()
+        for line in f:
+            line  = line.split("=")
+            cuts = line[1]
+            cutName = {line[0].rstrip() : cuts}
+            cutDict.update(cutName)
+        return cutDict
+
     # Create a working dictionary for cuts
     def w_dict(self,cuts):
 
         inputDict = self.cutDict
         subDict = inputDict[cuts]
+        subDict = subDict.split(",")
         cut_arr = [evt for evt in subDict]
         return cut_arr
             

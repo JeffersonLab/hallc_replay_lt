@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-26 21:47:47 trottar"
+# Time-stamp: "2020-04-24 16:19:15 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -417,190 +417,10 @@ T_coin_pEDTM_tdcTime = tree.array("T.coin.pEDTM_tdcTime")
 EvtType = tree.array("fEvtHdr.fEvtType")
 
 cutDict = {
-    "p_track_before" :
+    "bcm threshold" :
     {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"P_hod_goodscinhit" : (P_hod_goodscinhit == 0)}',
-        '{"P_hod_betanotrack" : ((P_hod_betanotrack > 0.5) & (P_hod_betanotrack < 1.4))}',
-        '{"P_dc_1*_nhit" : ((P_dc_1x1_nhit + P_dc_1u2_nhit + P_dc_1u1_nhit + P_dc_1v1_nhit + P_dc_1x2_nhit + P_dc_1v2_nhit) <  20)}',        
-        '{"P_dc_2*_nhit" : ((P_dc_2x1_nhit + P_dc_2u2_nhit + P_dc_2u1_nhit + P_dc_2v1_nhit + P_dc_2x2_nhit + P_dc_2v2_nhit) < 20)}',
-    },
-    "p_hadtrack_before" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"P_hod_goodscinhit" : (P_hod_goodscinhit == 0)}',
-        '{"P_hod_betanotrack" : ((P_hod_betanotrack > 0.5) & (P_hod_betanotrack < 1.4))}',
-        '{"P_dc_1*_nhit" : ((P_dc_1x1_nhit + P_dc_1u2_nhit + P_dc_1u1_nhit + P_dc_1v1_nhit + P_dc_1x2_nhit + P_dc_1v2_nhit) <  20)}',        
-        '{"P_dc_2*_nhit" : ((P_dc_2x1_nhit + P_dc_2u2_nhit + P_dc_2u1_nhit + P_dc_2v1_nhit + P_dc_2x2_nhit + P_dc_2v2_nhit) < 20)}',
-        '{"P_cal_etotnorm" : (P_cal_etotnorm > 0.05)}',        
-    },
-    "p_pitrack_before" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"P_hod_goodscinhit" : (P_hod_goodscinhit == 0)}',
-        '{"P_hod_betanotrack" : ((P_hod_betanotrack > 0.5) & (P_hod_betanotrack < 1.4))}',
-        '{"P_dc_1*_nhit" : ((P_dc_1x1_nhit + P_dc_1u2_nhit + P_dc_1u1_nhit + P_dc_1v1_nhit + P_dc_1x2_nhit + P_dc_1v2_nhit) <  20)}',        
-        '{"P_dc_2*_nhit" : ((P_dc_2x1_nhit + P_dc_2u2_nhit + P_dc_2u1_nhit + P_dc_2v1_nhit + P_dc_2x2_nhit + P_dc_2v2_nhit) < 20)}',
-        '{"P_cal_etotnorm" : (P_cal_etotnorm > 0.05)}',
-        '{"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}',        
-    },
-    "p_Ktrack_before" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"P_hod_goodscinhit" : (P_hod_goodscinhit == 0)}',
-        '{"P_hod_betanotrack" : ((P_hod_betanotrack > 0.5) & (P_hod_betanotrack < 1.4))}',
-        '{"P_dc_1*_nhit" : ((P_dc_1x1_nhit + P_dc_1u2_nhit + P_dc_1u1_nhit + P_dc_1v1_nhit + P_dc_1x2_nhit + P_dc_1v2_nhit) <  20)}',        
-        '{"P_dc_2*_nhit" : ((P_dc_2x1_nhit + P_dc_2u2_nhit + P_dc_2u1_nhit + P_dc_2v1_nhit + P_dc_2x2_nhit + P_dc_2v2_nhit) < 20)}',
-        '{"P_cal_etotnorm" : (P_cal_etotnorm > 0.05)}',
-        '{"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}',
-        '{"P_aero_npeSum" : (P_aero_npeSum > 1.5)}',        
-    },
-    "p_Ktrack_before" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"P_hod_goodscinhit" : (P_hod_goodscinhit == 0)}',
-        '{"P_hod_betanotrack" : ((P_hod_betanotrack > 0.5) & (P_hod_betanotrack < 1.4))}',
-        '{"P_dc_1*_nhit" : ((P_dc_1x1_nhit + P_dc_1u2_nhit + P_dc_1u1_nhit + P_dc_1v1_nhit + P_dc_1x2_nhit + P_dc_1v2_nhit) <  20)}',        
-        '{"P_dc_2*_nhit" : ((P_dc_2x1_nhit + P_dc_2u2_nhit + P_dc_2u1_nhit + P_dc_2v1_nhit + P_dc_2x2_nhit + P_dc_2v2_nhit) < 20)}',
-        '{"P_cal_etotnorm" : (P_cal_etotnorm > 0.05)}',
-        '{"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}',
-        '{"P_aero_npeSum" : (P_aero_npeSum < 1.5)}',        
-    },
-    "p_track_after" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"P_hod_goodscinhit" : (P_hod_goodscinhit == 0)}',
-        '{"P_hod_betanotrack" : ((P_hod_betanotrack > 0.5) & (P_hod_betanotrack < 1.4))}',
-        '{"P_dc_1*_nhit" : ((P_dc_1x1_nhit + P_dc_1u2_nhit + P_dc_1u1_nhit + P_dc_1v1_nhit + P_dc_1x2_nhit + P_dc_1v2_nhit) <  20)}',        
-        '{"P_dc_2*_nhit" : ((P_dc_2x1_nhit + P_dc_2u2_nhit + P_dc_2u1_nhit + P_dc_2v1_nhit + P_dc_2x2_nhit + P_dc_2v2_nhit) < 20)}',
-        '{"P_dc_ntrack" : (P_dc_ntrack > 0.0)}',        
-    },
-    "p_hadtrack_after" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"P_hod_goodscinhit" : (P_hod_goodscinhit == 0)}',
-        '{"P_hod_betanotrack" : ((P_hod_betanotrack > 0.5) & (P_hod_betanotrack < 1.4))}',
-        '{"P_dc_1*_nhit" : ((P_dc_1x1_nhit + P_dc_1u2_nhit + P_dc_1u1_nhit + P_dc_1v1_nhit + P_dc_1x2_nhit + P_dc_1v2_nhit) <  20)}',        
-        '{"P_dc_2*_nhit" : ((P_dc_2x1_nhit + P_dc_2u2_nhit + P_dc_2u1_nhit + P_dc_2v1_nhit + P_dc_2x2_nhit + P_dc_2v2_nhit) < 20)}',
-        '{"P_dc_ntrack" : (P_dc_ntrack > 0.0)}',        
-        '{"P_cal_etotnorm" : (P_cal_etotnorm > 0.05)}',        
-    },
-    "p_pitrack_after" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"P_hod_goodscinhit" : (P_hod_goodscinhit == 0)}',
-        '{"P_hod_betanotrack" : ((P_hod_betanotrack > 0.5) & (P_hod_betanotrack < 1.4))}',
-        '{"P_dc_1*_nhit" : ((P_dc_1x1_nhit + P_dc_1u2_nhit + P_dc_1u1_nhit + P_dc_1v1_nhit + P_dc_1x2_nhit + P_dc_1v2_nhit) <  20)}',        
-        '{"P_dc_2*_nhit" : ((P_dc_2x1_nhit + P_dc_2u2_nhit + P_dc_2u1_nhit + P_dc_2v1_nhit + P_dc_2x2_nhit + P_dc_2v2_nhit) < 20)}',
-        '{"P_dc_ntrack" : (P_dc_ntrack > 0.0)}',        
-        '{"P_cal_etotnorm" : (P_cal_etotnorm > 0.05)}',
-        '{"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}',        
-    },
-    "p_Ktrack_after" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"P_hod_goodscinhit" : (P_hod_goodscinhit == 0)}',
-        '{"P_hod_betanotrack" : ((P_hod_betanotrack > 0.5) & (P_hod_betanotrack < 1.4))}',
-        '{"P_dc_1*_nhit" : ((P_dc_1x1_nhit + P_dc_1u2_nhit + P_dc_1u1_nhit + P_dc_1v1_nhit + P_dc_1x2_nhit + P_dc_1v2_nhit) <  20)}',        
-        '{"P_dc_2*_nhit" : ((P_dc_2x1_nhit + P_dc_2u2_nhit + P_dc_2u1_nhit + P_dc_2v1_nhit + P_dc_2x2_nhit + P_dc_2v2_nhit) < 20)}',
-        '{"P_dc_ntrack" : (P_dc_ntrack > 0.0)}',        
-        '{"P_cal_etotnorm" : (P_cal_etotnorm > 0.05)}',
-        '{"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}',
-        '{"P_aero_npeSum" : (P_aero_npeSum > 1.5)}',        
-    },
-    "p_Ktrack_after" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"P_hod_goodscinhit" : (P_hod_goodscinhit == 0)}',
-        '{"P_hod_betanotrack" : ((P_hod_betanotrack > 0.5) & (P_hod_betanotrack < 1.4))}',
-        '{"P_dc_1*_nhit" : ((P_dc_1x1_nhit + P_dc_1u2_nhit + P_dc_1u1_nhit + P_dc_1v1_nhit + P_dc_1x2_nhit + P_dc_1v2_nhit) <  20)}',        
-        '{"P_dc_2*_nhit" : ((P_dc_2x1_nhit + P_dc_2u2_nhit + P_dc_2u1_nhit + P_dc_2v1_nhit + P_dc_2x2_nhit + P_dc_2v2_nhit) < 20)}',
-        '{"P_dc_ntrack" : (P_dc_ntrack > 0.0)}',        
-        '{"P_cal_etotnorm" : (P_cal_etotnorm > 0.05)}',
-        '{"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}',
-        '{"P_aero_npeSum" : (P_aero_npeSum < 1.5)}',        
-    },
-    "p_ecut_before" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"P_hod_goodscinhit" : (P_hod_goodscinhit == 0)}',
-        '{"P_hod_betanotrack" : ((P_hod_betanotrack > 0.5) & (P_hod_betanotrack < 1.4))}',
-    },
-    "p_ecut_after" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"P_hod_goodscinhit" : (P_hod_goodscinhit == 0)}',
-        '{"P_hod_betanotrack" : ((P_hod_betanotrack > 0.5) & (P_hod_betanotrack < 1.4))}',
-        '{"P_cal_etotnorm" : (P_cal_etotnorm < 0.7)}',
-    },
-    "p_ecut_eff" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"P_hod_goodscinhit" : (P_hod_goodscinhit == 0)}',
-        '{"P_hod_betanotrack" : ((P_hod_betanotrack > 0.5) & (P_hod_betanotrack < 1.4))}',
-        '{"P_cal_etotnorm" : (P_cal_etotnorm < 0.7)}',
-        '{"P_aero_npeSum" : (P_aero_npeSum < 1.5)}',
-        '{"P_gtr_dp" : ((P_gtr_dp > -10.0) | (P_gtr_dp < 20.0))}',
-        '{"P_gtr_th" : (abs(P_gtr_th) < 0.080)}',
-        '{"P_gtr_ph" : (abs(P_gtr_ph) < 0.035)}',
-    },
-    "h_track_before" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"H_hod_goodscinhit" : (H_hod_goodscinhit == 0)}',
-        '{"H_hod_betanotrack" : ((H_hod_betanotrack > 0.8) & (H_hod_betanotrack < 1.3))}',
-        '{"H_dc_1*_nhit" : ((H_dc_1x1_nhit + H_dc_1u2_nhit + H_dc_1u1_nhit + H_dc_1v1_nhit + H_dc_1x2_nhit + H_dc_1v2_nhit) <  20)}',        
-        '{"H_dc_2*_nhit" : ((H_dc_2x1_nhit + H_dc_2u2_nhit + H_dc_2u1_nhit + H_dc_2v1_nhit + H_dc_2x2_nhit + H_dc_2v2_nhit) < 20)}',
-    },
-    "h_etrack_before" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"H_hod_goodscinhit" : (H_hod_goodscinhit == 0)}',
-        '{"H_hod_betanotrack" : ((H_hod_betanotrack > 0.8) & (H_hod_betanotrack < 1.3))}',
-        '{"H_dc_1*_nhit" : ((H_dc_1x1_nhit + H_dc_1u2_nhit + H_dc_1u1_nhit + H_dc_1v1_nhit + H_dc_1x2_nhit + H_dc_1v2_nhit) <  20)}',        
-        '{"H_dc_2*_nhit" : ((H_dc_2x1_nhit + H_dc_2u2_nhit + H_dc_2u1_nhit + H_dc_2v1_nhit + H_dc_2x2_nhit + H_dc_2v2_nhit) < 20)}',
-        '{"H_cer_npeSum" : (H_cer_npeSum > 0.5)}', 
-        '{"H_cal_etotnorm" : ((H_cal_etotnorm > 0.6) & (H_cal_etotnorm < 2.0))}',
-    },
-    "h_track_after" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"H_hod_goodscinhit" : (H_hod_goodscinhit == 0)}',
-        '{"H_hod_betanotrack" : ((H_hod_betanotrack > 0.8) & (H_hod_betanotrack < 1.3))}',
-        '{"H_dc_1*_nhit" : ((H_dc_1x1_nhit + H_dc_1u2_nhit + H_dc_1u1_nhit + H_dc_1v1_nhit + H_dc_1x2_nhit + H_dc_1v2_nhit) <  20)}',        
-        '{"H_dc_2*_nhit" : ((H_dc_2x1_nhit + H_dc_2u2_nhit + H_dc_2u1_nhit + H_dc_2v1_nhit + H_dc_2x2_nhit + H_dc_2v2_nhit) < 20)}',
-        '{"H_dc_ntrack" : (H_dc_ntrack > 0.0)}',        
-    },
-    "h_etrack_after" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"H_hod_goodscinhit" : (H_hod_goodscinhit == 0)}',
-        '{"H_hod_betanotrack" : ((H_hod_betanotrack > 0.8) & (H_hod_betanotrack < 1.3))}',
-        '{"H_dc_1*_nhit" : ((H_dc_1x1_nhit + H_dc_1u2_nhit + H_dc_1u1_nhit + H_dc_1v1_nhit + H_dc_1x2_nhit + H_dc_1v2_nhit) <  20)}',        
-        '{"H_dc_2*_nhit" : ((H_dc_2x1_nhit + H_dc_2u2_nhit + H_dc_2u1_nhit + H_dc_2v1_nhit + H_dc_2x2_nhit + H_dc_2v2_nhit) < 20)}',
-        '{"H_dc_ntrack" : (H_dc_ntrack > 0.0)}',        
-        '{"H_cer_npeSum" : (H_cer_npeSum > 0.5)}', 
-        '{"H_cal_etotnorm" : ((H_cal_etotnorm > 0.6) & (H_cal_etotnorm < 2.0))}',
-    },
-    "h_ecut_after" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"H_cal_etotnorm" : ((H_cal_etotnorm > 0.6) & (H_cal_etotnorm < 2.0))}',
-        '{"H_cer_npeSum" : (H_cer_npeSum > 1.5)}', 
-        '{"H_gtr_dp" : (abs(H_gtr_dp) < 8.0)}',
-        '{"H_gtr_th" : (abs(H_gtr_th) < 0.080)}',
-        '{"H_gtr_ph" : (abs(H_gtr_ph) < 0.035)}',
-    },
-    "h_ecut_eff" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"H_cal_etotnorm" : ((H_cal_etotnorm > 0.6) & (H_cal_etotnorm < 2.0))}',
-        '{"H_cer_npeSum" : (H_cer_npeSum > 1.5)}', 
-        '{"H_gtr_dp" : (abs(H_gtr_dp) < 8.0)}',
-        '{"H_gtr_th" : (abs(H_gtr_th) < 0.080)}',
-        '{"H_gtr_ph" : (abs(H_gtr_ph) < 0.035)}',
-        '{"H_cer_npeSum" : (H_cer_npeSum > 1.5)}',
-    },
+        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent < thres_curr)}',
+    }
 }
 
 r = r2p.pyRoot()
@@ -660,53 +480,151 @@ def analysis(PS1, PS3, thres_curr):
                  if evt == 1]
     
     # p_track_before
-    p_track_before = c.add_cut(P_dc_ntrack,"p_track_before")
+    p_track_before_iterate = [P_dc_ntrack, P_hod_goodscinhit, P_hod_betanotrack, P_dc_1x1_nhit, P_dc_1u2_nhit, P_dc_1u1_nhit, P_dc_1v1_nhit, P_dc_1x2_nhit, P_dc_1v2_nhit, P_dc_2x1_nhit, P_dc_2u2_nhit, P_dc_2u1_nhit, P_dc_2v1_nhit, P_dc_2x2_nhit,P_dc_2v2_nhit,bcm_after]
+    p_track_before = [dc
+                      for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2,bcm) in zip(*p_track_before_iterate)
+                      if bcm > thres_curr
+                      if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)]
+
     # p_hadtrack_before
-    p_hadtrack_before = c.add_cut(P_dc_ntrack,"p_hadtrack_before")
+    p_hadtrack_before_iterate = [P_dc_ntrack, P_hod_goodscinhit, P_hod_betanotrack, P_dc_1x1_nhit, P_dc_1u2_nhit, P_dc_1u1_nhit, P_dc_1v1_nhit, P_dc_1x2_nhit, P_dc_1v2_nhit, P_dc_2x1_nhit, P_dc_2u2_nhit, P_dc_2u1_nhit, P_dc_2v1_nhit, P_dc_2x2_nhit, P_dc_2v2_nhit, P_cal_etotnorm, bcm_after]
+    p_hadtrack_before = [dc
+                         for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2, caletot,bcm) in zip(*p_hadtrack_before_iterate)
+                         if bcm > thres_curr
+                         if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)
+                         if caletot > 0.05]
 
     # p_pitrack_before
-    p_pitrack_before = c.add_cut(P_dc_ntrack,"p_pitrack_before")
+    p_pitrack_before_iterate = [P_dc_ntrack, P_hod_goodscinhit, P_hod_betanotrack, P_dc_1x1_nhit, P_dc_1u2_nhit, P_dc_1u1_nhit, P_dc_1v1_nhit, P_dc_1x2_nhit, P_dc_1v2_nhit, P_dc_2x1_nhit, P_dc_2u2_nhit, P_dc_2u1_nhit, P_dc_2v1_nhit, P_dc_2x2_nhit, P_dc_2v2_nhit, P_cal_etotnorm, P_hgcer_npeSum,bcm_after]
+    p_pitrack_before = [dc
+                        for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2, caletot, hgcer, bcm) in zip(*p_pitrack_before_iterate)
+                        if bcm > thres_curr                        
+                        if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)
+                        if caletot > 0.05
+                        if hgcer > 1.5]
 
     # p_Ktrack_before
-    p_Ktrack_before = c.add_cut(P_dc_ntrack,"p_Ktrack_before")
+    p_Ktrack_before_iterate = [P_dc_ntrack, P_hod_goodscinhit, P_hod_betanotrack, P_dc_1x1_nhit, P_dc_1u2_nhit, P_dc_1u1_nhit, P_dc_1v1_nhit, P_dc_1x2_nhit, P_dc_1v2_nhit, P_dc_2x1_nhit, P_dc_2u2_nhit, P_dc_2u1_nhit, P_dc_2v1_nhit, P_dc_2x2_nhit, P_dc_2v2_nhit, P_cal_etotnorm, P_hgcer_npeSum, P_aero_npeSum,bcm_after]
+    p_Ktrack_before = [dc
+                       for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2, caletot, hgcer, aero, bcm) in zip(*p_Ktrack_before_iterate)
+                       if bcm > thres_curr
+                       if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)
+                       if caletot > 0.05
+                       if hgcer < 1.5
+                       if aero > 1.5]
 
     # p_ptrack_before
-    p_ptrack_before = c.add_cut(P_dc_ntrack,"p_ptrack_before")
+    p_ptrack_before_iterate = [P_dc_ntrack, P_hod_goodscinhit, P_hod_betanotrack, P_dc_1x1_nhit, P_dc_1u2_nhit, P_dc_1u1_nhit, P_dc_1v1_nhit, P_dc_1x2_nhit, P_dc_1v2_nhit, P_dc_2x1_nhit, P_dc_2u2_nhit, P_dc_2u1_nhit, P_dc_2v1_nhit, P_dc_2x2_nhit, P_dc_2v2_nhit, P_cal_etotnorm, P_hgcer_npeSum, P_aero_npeSum,bcm_after]
+    p_ptrack_before = [dc
+                       for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2, caletot, hgcer, aero,bcm) in zip(*p_ptrack_before_iterate)
+                       if bcm > thres_curr
+                       if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)
+                       if caletot > 0.05
+                       if hgcer < 1.5
+                       if aero < 1.5]
 
     # p_track_after
-    p_track_after = c.add_cut(P_dc_ntrack,"p_track_after")
+    p_track_after_iterate = [P_dc_ntrack, P_hod_goodscinhit, P_hod_betanotrack, P_dc_1x1_nhit, P_dc_1u2_nhit, P_dc_1u1_nhit, P_dc_1v1_nhit, P_dc_1x2_nhit, P_dc_1v2_nhit, P_dc_2x1_nhit, P_dc_2u2_nhit, P_dc_2u1_nhit, P_dc_2v1_nhit, P_dc_2x2_nhit, P_dc_2v2_nhit, P_cal_etotnorm, P_hgcer_npeSum, P_aero_npeSum,bcm_after]
+    p_track_after = [dc
+                     for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2, caletot, hgcer, aero, bcm) in zip(*p_track_after_iterate)
+                     if bcm > thres_curr
+                     if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)
+                     if dc > 0.0]
 
     # p_hadtrack_after
-    p_hadtrack_after = c.add_cut(P_dc_ntrack,"p_hadtrack_after")
+    p_hadtrack_after_iterate = [P_dc_ntrack, P_hod_goodscinhit, P_hod_betanotrack, P_dc_1x1_nhit, P_dc_1u2_nhit, P_dc_1u1_nhit, P_dc_1v1_nhit, P_dc_1x2_nhit, P_dc_1v2_nhit, P_dc_2x1_nhit, P_dc_2u2_nhit, P_dc_2u1_nhit, P_dc_2v1_nhit, P_dc_2x2_nhit, P_dc_2v2_nhit, P_cal_etotnorm, bcm_after]
+    p_hadtrack_after = [dc
+                        for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2, caletot, bcm) in zip(*p_hadtrack_after_iterate)
+                        if bcm > thres_curr
+                        if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)
+                        if dc > 0.0
+                        if caletot > 0.05]
 
     # p_pitrack_after
-    p_pitrack_after = c.add_cut(P_dc_ntrack,"p_pitrack_after")
+    p_pitrack_after_iterate = [P_dc_ntrack, P_hod_goodscinhit, P_hod_betanotrack, P_dc_1x1_nhit, P_dc_1u2_nhit, P_dc_1u1_nhit, P_dc_1v1_nhit, P_dc_1x2_nhit, P_dc_1v2_nhit, P_dc_2x1_nhit, P_dc_2u2_nhit, P_dc_2u1_nhit, P_dc_2v1_nhit, P_dc_2x2_nhit, P_dc_2v2_nhit, P_cal_etotnorm, P_hgcer_npeSum, bcm_after]
+    p_pitrack_after = [dc
+                       for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2, caletot, hgcer, bcm) in zip(*p_pitrack_after_iterate)
+                       if bcm > thres_curr
+                       if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)
+                       if dc > 0.0
+                       if caletot > 0.05
+                       if hgcer > 1.5]
 
     # p_Ktrack_after
-    p_Ktrack_after = c.add_cut(P_dc_ntrack,"p_Ktrack_after")
+    p_Ktrack_after_iterate = [P_dc_ntrack, P_hod_goodscinhit, P_hod_betanotrack, P_dc_1x1_nhit, P_dc_1u2_nhit, P_dc_1u1_nhit, P_dc_1v1_nhit, P_dc_1x2_nhit, P_dc_1v2_nhit, P_dc_2x1_nhit, P_dc_2u2_nhit, P_dc_2u1_nhit, P_dc_2v1_nhit, P_dc_2x2_nhit, P_dc_2v2_nhit, P_cal_etotnorm, P_hgcer_npeSum, P_aero_npeSum, bcm_after]
+    p_Ktrack_after = [dc
+                      for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2, caletot, hgcer, aero, bcm) in zip(*p_Ktrack_after_iterate)
+                      if bcm > thres_curr
+                      if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)
+                      if dc > 0.0
+                      if caletot > 0.05
+                      if hgcer < 1.5
+                      if aero > 1.5]
 
     # p_ptrack_after
-    p_ptrack_after = c.add_cut(P_dc_ntrack,"p_ptrack_after")
+    p_ptrack_after_iterate = [P_dc_ntrack, P_hod_goodscinhit, P_hod_betanotrack, P_dc_1x1_nhit, P_dc_1u2_nhit, P_dc_1u1_nhit, P_dc_1v1_nhit, P_dc_1x2_nhit, P_dc_1v2_nhit, P_dc_2x1_nhit, P_dc_2u2_nhit, P_dc_2u1_nhit, P_dc_2v1_nhit, P_dc_2x2_nhit, P_dc_2v2_nhit, P_cal_etotnorm, P_hgcer_npeSum, P_aero_npeSum, bcm_after]
+    p_ptrack_after = [dc
+                      for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2, caletot, hgcer, aero, bcm) in zip(*p_ptrack_after_iterate)
+                      if bcm > thres_curr
+                      if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)
+                      if dc > 0.0
+                      if caletot > 0.05
+                      if hgcer < 1.5
+                      if aero > 1.5]
 
     # p_ecut_before
-    p_ecut_before = c.add_cut(P_hgcer_npeSum,"p_ecut_before")
+    p_ecut_before_iterate = [P_hgcer_npeSum, P_hod_goodscinhit, P_hod_betanotrack, bcm_after]
+    p_ecut_before = [hgcer
+                     for (hgcer,hodgood,hodbeta, bcm) in zip(*p_ecut_before_iterate)
+                     if bcm > thres_curr
+                     if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4)]
 
     # p_show_before
-    p_show_before = c.add_cut(P_cal_etotnorm,"p_ecut_before")
+    p_show_before_iterate = [P_cal_etotnorm, P_hod_goodscinhit, P_hod_betanotrack, bcm_after]
+    p_show_before = [caletot
+                     for (caletot,hodgood,hodbeta, bcm) in zip(*p_show_before_iterate)
+                     if bcm > thres_curr
+                     if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4)]
+
 
     # p_ecut_after
-    p_ecut_after  = c.add_cut(P_hgcer_npeSum,"p_ecut_after")
+    p_ecut_after_iterate = [P_hgcer_npeSum, P_cal_etotnorm, P_hod_goodscinhit, P_hod_betanotrack, bcm_after]
+    p_ecut_after  = [hgcer
+                     for (hgcer, caletot, hodgood, hodbeta, bcm) in zip(*p_ecut_after_iterate)
+                     if bcm > thres_curr
+                     if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4)
+                     if caletot < 0.7]
 
     # p_ecut_eff
-    p_ecut_eff  = c.add_cut(P_hgcer_npeSum,"p_ecut_eff")
+    p_ecut_eff_iterate = [P_hgcer_npeSum, P_cal_etotnorm, P_hod_goodscinhit, P_hod_betanotrack, P_aero_npeSum, P_gtr_dp, P_gtr_th, P_gtr_ph, bcm_after]
+    p_ecut_eff  = [hgcer
+                   for (hgcer, caletot, hodgood, hodbeta, aero, dp, th, ph, bcm) in zip(*p_ecut_eff_iterate)
+                   if bcm > thres_curr
+                   if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4)
+                   if caletot < 0.7
+                   if aero < 1.5
+                   if (dp > -10.0 or dp < 20.0)
+                   if abs(th) < 0.080
+                   if abs(ph) < 0.035]
 
     # p_show_after
-    p_show_after  = c.add_cut(P_cal_etotnorm,"p_ecut_eff")
+    p_show_after_iterate = [P_hgcer_npeSum, P_cal_etotnorm, P_hod_goodscinhit, P_hod_betanotrack, P_aero_npeSum, P_gtr_dp, P_gtr_th, P_gtr_ph, bcm_after]
+    p_show_after  = [hgcer
+                     for (hgcer, caletot, hodgood, hodbeta, aero, dp, th, ph, bcm) in zip(*p_show_after_iterate)
+                     if bcm > thres_curr
+                     if (hodgood == 1 and hodbeta > 0.5 and hodbeta < 1.4)
+                     if caletot < 0.7
+                     if aero > 1.5
+                     if (dp > -10.0 or dp < 20.0)
+                     if abs(th) < 0.080
+                     if abs(ph) < 0.035]
     
     HMS_EDTM = [x
                 for (x, evt, bcm) in zip(T_coin_pEDTM_tdcTime, EvtType, bcm_after)
                 if bcm > thres_curr
                 if (evt == 2)]
+                    # and x > 140.0
+                    # and x < 144.0)]
 
     TRIG3_cut = [ x
                   for (x, evt, bcm ) in zip(T_coin_pTRIG3_ROC2_tdcTime, EvtType, bcm_after)
@@ -714,17 +632,38 @@ def analysis(PS1, PS3, thres_curr):
                   if evt == 2]
 
     # h_track_before
-    h_track_before = c.add_cut(H_dc_ntrack,"h_track_before")
+    h_track_before_iterate = [H_dc_ntrack, H_hod_goodscinhit, H_hod_betanotrack, H_dc_1x1_nhit, H_dc_1u2_nhit, H_dc_1u1_nhit, H_dc_1v1_nhit, H_dc_1x2_nhit, H_dc_1v2_nhit, H_dc_2x1_nhit, H_dc_2u2_nhit, H_dc_2u1_nhit, H_dc_2v1_nhit, H_dc_2x2_nhit,H_dc_2v2_nhit, bcm_after]
+    h_track_before = [dc
+                      for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2, bcm) in zip(*h_track_before_iterate)
+                      if bcm > thres_curr
+                      if (hodgood == 1 and hodbeta > 0.8 and hodbeta < 1.3 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)]
 
     # h_etrack_before
-    h_etrack_before = c.add_cut(H_dc_ntrack,"h_etrack_before")
-    
+    h_etrack_before_iterate = [H_dc_ntrack, H_hod_goodscinhit, H_hod_betanotrack, H_dc_1x1_nhit, H_dc_1u2_nhit, H_dc_1u1_nhit, H_dc_1v1_nhit, H_dc_1x2_nhit, H_dc_1v2_nhit, H_dc_2x1_nhit, H_dc_2u2_nhit, H_dc_2u1_nhit, H_dc_2v1_nhit, H_dc_2x2_nhit, H_dc_2v2_nhit, H_cer_npeSum, H_cal_etotnorm, bcm_after]
+    h_etrack_before = [dc
+                         for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2, cer, h_caletot, bcm) in zip(*h_etrack_before_iterate)
+                         if bcm > thres_curr
+                         if (hodgood == 1 and hodbeta > 0.8 and hodbeta < 1.3 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)
+                         if (cer > 0.5 and h_caletot > 0.6 and h_caletot < 2.0)]
+
     # h_track_after
-    h_track_after = c.add_cut(H_dc_ntrack,"h_track_after")
+    h_track_after_iterate = [H_dc_ntrack, H_hod_goodscinhit, H_hod_betanotrack, H_dc_1x1_nhit, H_dc_1u2_nhit, H_dc_1u1_nhit, H_dc_1v1_nhit, H_dc_1x2_nhit, H_dc_1v2_nhit, H_dc_2x1_nhit, H_dc_2u2_nhit, H_dc_2u1_nhit, H_dc_2v1_nhit, H_dc_2x2_nhit,H_dc_2v2_nhit, bcm_after]
+    h_track_after = [dc
+                     for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2, bcm) in zip(*h_track_after_iterate)
+                     if bcm > thres_curr
+                     if (hodgood == 1 and hodbeta > 0.8 and hodbeta < 1.3 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)
+                     if dc > 0.0]
 
 
     # h_etrack_after
-    h_etrack_after = c.add_cut(H_dc_ntrack,"h_etrack_after")    
+    h_etrack_after_iterate = [H_dc_ntrack, H_hod_goodscinhit, H_hod_betanotrack, H_dc_1x1_nhit, H_dc_1u2_nhit, H_dc_1u1_nhit, H_dc_1v1_nhit, H_dc_1x2_nhit, H_dc_1v2_nhit, H_dc_2x1_nhit, H_dc_2u2_nhit, H_dc_2u1_nhit, H_dc_2v1_nhit, H_dc_2x2_nhit,H_dc_2v2_nhit, H_cer_npeSum, H_cal_etotnorm, bcm_after]
+    h_etrack_after = [dc
+                      for (dc,hodgood,hodbeta,dc_1x1,dc_1u2,dc_1u1,dc_1v1,dc_1x2,dc_1v2,dc_2x1,dc_2u2,dc_2u1,dc_2v1,dc_2x2,dc_2v2, cer, h_caletot, bcm) in zip(*h_etrack_after_iterate)
+                      if bcm > thres_curr
+                      if (hodgood == 1 and hodbeta > 0.8 and hodbeta < 1.3 and (dc_1x1 + dc_1u2 + dc_1u1 + dc_1v1 + dc_1x2 + dc_1v2) < 20 and (dc_2x1 + dc_2u2 + dc_2u1 + dc_2v1 + dc_2x2 + dc_2v2) < 20)
+                      if dc > 0.0
+                      if (cer > 0.5 and h_caletot > 0.6 and h_caletot < 2.0)]
+    
 
     # h_ecut_before
     h_ecut_before_iterate = [H_cer_npeSum, bcm_after]
@@ -756,23 +695,77 @@ def analysis(PS1, PS3, thres_curr):
                       for (h_caletot, bcm) in zip(*h_show_before_iterate)
                       if bcm > thres_curr]
     # h_ecut_after
-    h_ecut_after = c.add_cut(H_cer_npeSum,"h_ecut_after")
-    
+    h_ecut_after_iterate = [H_cer_npeSum, H_cal_etotnorm, H_gtr_dp, H_tr_tg_th, H_tr_tg_ph, bcm_after]
+    h_ecut_after = [cer
+                    for (cer, h_caletot, h_dp, h_th, h_ph, bcm) in zip(*h_ecut_after_iterate)
+                    if bcm > thres_curr
+                    if h_caletot > 0.6
+                    if h_caletot < 2.0
+                    if cer > 1.5
+                    if abs(h_dp) < 8.0
+                    if abs(h_th) < 0.080
+                    if abs(h_ph) < 0.035]
+
     # h_dp_after
-    h_dp_after = c.add_cut(H_gtr_dp,"h_ecut_after")
-    
+    h_dp_after_iterate = [H_cer_npeSum, H_cal_etotnorm, H_gtr_dp, H_tr_tg_th, H_tr_tg_ph, bcm_after]
+    h_dp_after = [h_dp
+                    for (cer, h_caletot, h_dp, h_th, h_ph, bcm) in zip(*h_dp_after_iterate)
+                    if bcm > thres_curr
+                    if h_caletot > 0.6
+                    if h_caletot < 2.0
+                    if cer > 1.5
+                    if abs(h_dp) < 8.0
+                    if abs(h_th) < 0.080
+                    if abs(h_ph) < 0.035]
+
     # h_th_after
-    h_th_after = c.add_cut(H_tr_tg_th,"h_ecut_after")
-    
+    h_th_after_iterate = [H_cer_npeSum, H_cal_etotnorm, H_gtr_dp, H_tr_tg_th, H_tr_tg_ph, bcm_after]
+    h_th_after = [h_th
+                    for (cer, h_caletot, h_dp, h_th, h_ph, bcm) in zip(*h_th_after_iterate)
+                    if bcm > thres_curr
+                    if h_caletot > 0.6
+                    if h_caletot < 2.0
+                    if cer > 1.5
+                    if abs(h_dp) < 8.0
+                    if abs(h_th) < 0.080
+                    if abs(h_ph) < 0.035]
+
     # h_ph_after
-    h_ph_after = c.add_cut(H_tr_tg_ph,"h_ecut_after")
+    h_ph_after_iterate = [H_cer_npeSum, H_cal_etotnorm, H_gtr_dp, H_tr_tg_th, H_tr_tg_ph, bcm_after]
+    h_ph_after = [h_ph
+                    for (cer, h_caletot, h_dp, h_th, h_ph, bcm) in zip(*h_ph_after_iterate)
+                    if bcm > thres_curr
+                    if h_caletot > 0.6
+                    if h_caletot < 2.0
+                    if cer > 1.5
+                    if abs(h_dp) < 8.0
+                    if abs(h_th) < 0.080
+                    if abs(h_ph) < 0.035]
     
     # h_show_after
-    h_show_after = c.add_cut(H_cal_etotnorm,"h_ecut_after")
-    
+    h_show_after_iterate = [H_cer_npeSum, H_cal_etotnorm, H_gtr_dp, H_tr_tg_th, H_tr_tg_ph, bcm_after]
+    h_show_after = [h_caletot
+                    for (cer, h_caletot, h_dp, h_th, h_ph, bcm) in zip(*h_show_after_iterate)
+                    if bcm > thres_curr
+                    if h_caletot > 0.6
+                    if h_caletot < 2.0
+                    if cer > 1.5
+                    if abs(h_dp) < 8.0
+                    if abs(h_th) < 0.080
+                    if abs(h_ph) < 0.035]
+
     # h_ecut_eff
-    h_ecut_eff = c.add_cut(H_cal_etotnorm,"h_ecut_eff")
-                                                        
+    h_ecut_eff_iterate = [H_cer_npeSum, H_cal_etotnorm, H_gtr_dp, H_tr_tg_th, H_tr_tg_ph, bcm_after]
+    h_ecut_eff = [h_caletot
+                  for (cer, h_caletot, h_dp, h_th, h_ph, bcm) in zip(*h_ecut_eff_iterate)
+                  if bcm > thres_curr
+                  if h_caletot > 0.6
+                  if h_caletot < 2.0
+                  if cer > 1.5
+                  if abs(h_dp) < 8.0
+                  if abs(h_th) < 0.080
+                  if abs(h_ph) < 0.035
+                  if cer > 1.5]
     if PS1 == 0:
         track_info = {
             

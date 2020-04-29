@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-28 18:40:55 trottar"
+# Time-stamp: "2020-04-29 12:35:06 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -18,7 +18,7 @@ import scipy.integrate as integrate
 import matplotlib.pyplot as plt
 import sys, math, os, subprocess, time
 
-sys.path.insert(0, '../python/')
+sys.path.insert(0, '../../../../bin/python/')
 import root2py as r2p
 
 runNum = sys.argv[1]
@@ -189,7 +189,7 @@ missmass = np.array(np.sqrt(abs(emiss*emiss-pmiss*pmiss)))
 
 r = r2p.pyRoot()
 
-f = open('pid.cuts.tmp')
+f = open('../../../../DB/CUTS/pid.cuts.tmp')
 
 # read in cuts file and make dictionary
 c = r2p.pyPlot(None)

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-26 21:47:47 trottar"
+# Time-stamp: "2020-04-29 12:52:55 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -17,7 +17,7 @@ import scipy
 import scipy.integrate as integrate
 import sys, math, os, subprocess
 
-sys.path.insert(0, 'python/')
+sys.path.insert(0, '../../../bin/python/')
 import root2py as r2p
 
 runNum = sys.argv[1]
@@ -416,209 +416,51 @@ T_coin_pEDTM_tdcTime = tree.array("T.coin.pEDTM_tdcTime")
 
 EvtType = tree.array("fEvtHdr.fEvtType")
 
-cutDict = {
-    "p_track_before" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"P_hod_goodscinhit" : (P_hod_goodscinhit == 0)}',
-        '{"P_hod_betanotrack" : ((P_hod_betanotrack > 0.5) & (P_hod_betanotrack < 1.4))}',
-        '{"P_dc_1*_nhit" : ((P_dc_1x1_nhit + P_dc_1u2_nhit + P_dc_1u1_nhit + P_dc_1v1_nhit + P_dc_1x2_nhit + P_dc_1v2_nhit) <  20)}',        
-        '{"P_dc_2*_nhit" : ((P_dc_2x1_nhit + P_dc_2u2_nhit + P_dc_2u1_nhit + P_dc_2v1_nhit + P_dc_2x2_nhit + P_dc_2v2_nhit) < 20)}',
-    },
-    "p_hadtrack_before" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"P_hod_goodscinhit" : (P_hod_goodscinhit == 0)}',
-        '{"P_hod_betanotrack" : ((P_hod_betanotrack > 0.5) & (P_hod_betanotrack < 1.4))}',
-        '{"P_dc_1*_nhit" : ((P_dc_1x1_nhit + P_dc_1u2_nhit + P_dc_1u1_nhit + P_dc_1v1_nhit + P_dc_1x2_nhit + P_dc_1v2_nhit) <  20)}',        
-        '{"P_dc_2*_nhit" : ((P_dc_2x1_nhit + P_dc_2u2_nhit + P_dc_2u1_nhit + P_dc_2v1_nhit + P_dc_2x2_nhit + P_dc_2v2_nhit) < 20)}',
-        '{"P_cal_etotnorm" : (P_cal_etotnorm > 0.05)}',        
-    },
-    "p_pitrack_before" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"P_hod_goodscinhit" : (P_hod_goodscinhit == 0)}',
-        '{"P_hod_betanotrack" : ((P_hod_betanotrack > 0.5) & (P_hod_betanotrack < 1.4))}',
-        '{"P_dc_1*_nhit" : ((P_dc_1x1_nhit + P_dc_1u2_nhit + P_dc_1u1_nhit + P_dc_1v1_nhit + P_dc_1x2_nhit + P_dc_1v2_nhit) <  20)}',        
-        '{"P_dc_2*_nhit" : ((P_dc_2x1_nhit + P_dc_2u2_nhit + P_dc_2u1_nhit + P_dc_2v1_nhit + P_dc_2x2_nhit + P_dc_2v2_nhit) < 20)}',
-        '{"P_cal_etotnorm" : (P_cal_etotnorm > 0.05)}',
-        '{"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}',        
-    },
-    "p_Ktrack_before" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"P_hod_goodscinhit" : (P_hod_goodscinhit == 0)}',
-        '{"P_hod_betanotrack" : ((P_hod_betanotrack > 0.5) & (P_hod_betanotrack < 1.4))}',
-        '{"P_dc_1*_nhit" : ((P_dc_1x1_nhit + P_dc_1u2_nhit + P_dc_1u1_nhit + P_dc_1v1_nhit + P_dc_1x2_nhit + P_dc_1v2_nhit) <  20)}',        
-        '{"P_dc_2*_nhit" : ((P_dc_2x1_nhit + P_dc_2u2_nhit + P_dc_2u1_nhit + P_dc_2v1_nhit + P_dc_2x2_nhit + P_dc_2v2_nhit) < 20)}',
-        '{"P_cal_etotnorm" : (P_cal_etotnorm > 0.05)}',
-        '{"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}',
-        '{"P_aero_npeSum" : (P_aero_npeSum > 1.5)}',        
-    },
-    "p_Ktrack_before" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"P_hod_goodscinhit" : (P_hod_goodscinhit == 0)}',
-        '{"P_hod_betanotrack" : ((P_hod_betanotrack > 0.5) & (P_hod_betanotrack < 1.4))}',
-        '{"P_dc_1*_nhit" : ((P_dc_1x1_nhit + P_dc_1u2_nhit + P_dc_1u1_nhit + P_dc_1v1_nhit + P_dc_1x2_nhit + P_dc_1v2_nhit) <  20)}',        
-        '{"P_dc_2*_nhit" : ((P_dc_2x1_nhit + P_dc_2u2_nhit + P_dc_2u1_nhit + P_dc_2v1_nhit + P_dc_2x2_nhit + P_dc_2v2_nhit) < 20)}',
-        '{"P_cal_etotnorm" : (P_cal_etotnorm > 0.05)}',
-        '{"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}',
-        '{"P_aero_npeSum" : (P_aero_npeSum < 1.5)}',        
-    },
-    "p_track_after" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"P_hod_goodscinhit" : (P_hod_goodscinhit == 0)}',
-        '{"P_hod_betanotrack" : ((P_hod_betanotrack > 0.5) & (P_hod_betanotrack < 1.4))}',
-        '{"P_dc_1*_nhit" : ((P_dc_1x1_nhit + P_dc_1u2_nhit + P_dc_1u1_nhit + P_dc_1v1_nhit + P_dc_1x2_nhit + P_dc_1v2_nhit) <  20)}',        
-        '{"P_dc_2*_nhit" : ((P_dc_2x1_nhit + P_dc_2u2_nhit + P_dc_2u1_nhit + P_dc_2v1_nhit + P_dc_2x2_nhit + P_dc_2v2_nhit) < 20)}',
-        '{"P_dc_ntrack" : (P_dc_ntrack > 0.0)}',        
-    },
-    "p_hadtrack_after" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"P_hod_goodscinhit" : (P_hod_goodscinhit == 0)}',
-        '{"P_hod_betanotrack" : ((P_hod_betanotrack > 0.5) & (P_hod_betanotrack < 1.4))}',
-        '{"P_dc_1*_nhit" : ((P_dc_1x1_nhit + P_dc_1u2_nhit + P_dc_1u1_nhit + P_dc_1v1_nhit + P_dc_1x2_nhit + P_dc_1v2_nhit) <  20)}',        
-        '{"P_dc_2*_nhit" : ((P_dc_2x1_nhit + P_dc_2u2_nhit + P_dc_2u1_nhit + P_dc_2v1_nhit + P_dc_2x2_nhit + P_dc_2v2_nhit) < 20)}',
-        '{"P_dc_ntrack" : (P_dc_ntrack > 0.0)}',        
-        '{"P_cal_etotnorm" : (P_cal_etotnorm > 0.05)}',        
-    },
-    "p_pitrack_after" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"P_hod_goodscinhit" : (P_hod_goodscinhit == 0)}',
-        '{"P_hod_betanotrack" : ((P_hod_betanotrack > 0.5) & (P_hod_betanotrack < 1.4))}',
-        '{"P_dc_1*_nhit" : ((P_dc_1x1_nhit + P_dc_1u2_nhit + P_dc_1u1_nhit + P_dc_1v1_nhit + P_dc_1x2_nhit + P_dc_1v2_nhit) <  20)}',        
-        '{"P_dc_2*_nhit" : ((P_dc_2x1_nhit + P_dc_2u2_nhit + P_dc_2u1_nhit + P_dc_2v1_nhit + P_dc_2x2_nhit + P_dc_2v2_nhit) < 20)}',
-        '{"P_dc_ntrack" : (P_dc_ntrack > 0.0)}',        
-        '{"P_cal_etotnorm" : (P_cal_etotnorm > 0.05)}',
-        '{"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}',        
-    },
-    "p_Ktrack_after" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"P_hod_goodscinhit" : (P_hod_goodscinhit == 0)}',
-        '{"P_hod_betanotrack" : ((P_hod_betanotrack > 0.5) & (P_hod_betanotrack < 1.4))}',
-        '{"P_dc_1*_nhit" : ((P_dc_1x1_nhit + P_dc_1u2_nhit + P_dc_1u1_nhit + P_dc_1v1_nhit + P_dc_1x2_nhit + P_dc_1v2_nhit) <  20)}',        
-        '{"P_dc_2*_nhit" : ((P_dc_2x1_nhit + P_dc_2u2_nhit + P_dc_2u1_nhit + P_dc_2v1_nhit + P_dc_2x2_nhit + P_dc_2v2_nhit) < 20)}',
-        '{"P_dc_ntrack" : (P_dc_ntrack > 0.0)}',        
-        '{"P_cal_etotnorm" : (P_cal_etotnorm > 0.05)}',
-        '{"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}',
-        '{"P_aero_npeSum" : (P_aero_npeSum > 1.5)}',        
-    },
-    "p_Ktrack_after" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"P_hod_goodscinhit" : (P_hod_goodscinhit == 0)}',
-        '{"P_hod_betanotrack" : ((P_hod_betanotrack > 0.5) & (P_hod_betanotrack < 1.4))}',
-        '{"P_dc_1*_nhit" : ((P_dc_1x1_nhit + P_dc_1u2_nhit + P_dc_1u1_nhit + P_dc_1v1_nhit + P_dc_1x2_nhit + P_dc_1v2_nhit) <  20)}',        
-        '{"P_dc_2*_nhit" : ((P_dc_2x1_nhit + P_dc_2u2_nhit + P_dc_2u1_nhit + P_dc_2v1_nhit + P_dc_2x2_nhit + P_dc_2v2_nhit) < 20)}',
-        '{"P_dc_ntrack" : (P_dc_ntrack > 0.0)}',        
-        '{"P_cal_etotnorm" : (P_cal_etotnorm > 0.05)}',
-        '{"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}',
-        '{"P_aero_npeSum" : (P_aero_npeSum < 1.5)}',        
-    },
-    "p_ecut_before" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"P_hod_goodscinhit" : (P_hod_goodscinhit == 0)}',
-        '{"P_hod_betanotrack" : ((P_hod_betanotrack > 0.5) & (P_hod_betanotrack < 1.4))}',
-    },
-    "p_ecut_after" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"P_hod_goodscinhit" : (P_hod_goodscinhit == 0)}',
-        '{"P_hod_betanotrack" : ((P_hod_betanotrack > 0.5) & (P_hod_betanotrack < 1.4))}',
-        '{"P_cal_etotnorm" : (P_cal_etotnorm < 0.7)}',
-    },
-    "p_ecut_eff" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"P_hod_goodscinhit" : (P_hod_goodscinhit == 0)}',
-        '{"P_hod_betanotrack" : ((P_hod_betanotrack > 0.5) & (P_hod_betanotrack < 1.4))}',
-        '{"P_cal_etotnorm" : (P_cal_etotnorm < 0.7)}',
-        '{"P_aero_npeSum" : (P_aero_npeSum < 1.5)}',
-        '{"P_gtr_dp" : ((P_gtr_dp > -10.0) | (P_gtr_dp < 20.0))}',
-        '{"P_gtr_th" : (abs(P_gtr_th) < 0.080)}',
-        '{"P_gtr_ph" : (abs(P_gtr_ph) < 0.035)}',
-    },
-    "h_track_before" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"H_hod_goodscinhit" : (H_hod_goodscinhit == 0)}',
-        '{"H_hod_betanotrack" : ((H_hod_betanotrack > 0.8) & (H_hod_betanotrack < 1.3))}',
-        '{"H_dc_1*_nhit" : ((H_dc_1x1_nhit + H_dc_1u2_nhit + H_dc_1u1_nhit + H_dc_1v1_nhit + H_dc_1x2_nhit + H_dc_1v2_nhit) <  20)}',        
-        '{"H_dc_2*_nhit" : ((H_dc_2x1_nhit + H_dc_2u2_nhit + H_dc_2u1_nhit + H_dc_2v1_nhit + H_dc_2x2_nhit + H_dc_2v2_nhit) < 20)}',
-    },
-    "h_etrack_before" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"H_hod_goodscinhit" : (H_hod_goodscinhit == 0)}',
-        '{"H_hod_betanotrack" : ((H_hod_betanotrack > 0.8) & (H_hod_betanotrack < 1.3))}',
-        '{"H_dc_1*_nhit" : ((H_dc_1x1_nhit + H_dc_1u2_nhit + H_dc_1u1_nhit + H_dc_1v1_nhit + H_dc_1x2_nhit + H_dc_1v2_nhit) <  20)}',        
-        '{"H_dc_2*_nhit" : ((H_dc_2x1_nhit + H_dc_2u2_nhit + H_dc_2u1_nhit + H_dc_2v1_nhit + H_dc_2x2_nhit + H_dc_2v2_nhit) < 20)}',
-        '{"H_cer_npeSum" : (H_cer_npeSum > 0.5)}', 
-        '{"H_cal_etotnorm" : ((H_cal_etotnorm > 0.6) & (H_cal_etotnorm < 2.0))}',
-    },
-    "h_track_after" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"H_hod_goodscinhit" : (H_hod_goodscinhit == 0)}',
-        '{"H_hod_betanotrack" : ((H_hod_betanotrack > 0.8) & (H_hod_betanotrack < 1.3))}',
-        '{"H_dc_1*_nhit" : ((H_dc_1x1_nhit + H_dc_1u2_nhit + H_dc_1u1_nhit + H_dc_1v1_nhit + H_dc_1x2_nhit + H_dc_1v2_nhit) <  20)}',        
-        '{"H_dc_2*_nhit" : ((H_dc_2x1_nhit + H_dc_2u2_nhit + H_dc_2u1_nhit + H_dc_2v1_nhit + H_dc_2x2_nhit + H_dc_2v2_nhit) < 20)}',
-        '{"H_dc_ntrack" : (H_dc_ntrack > 0.0)}',        
-    },
-    "h_etrack_after" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"H_hod_goodscinhit" : (H_hod_goodscinhit == 0)}',
-        '{"H_hod_betanotrack" : ((H_hod_betanotrack > 0.8) & (H_hod_betanotrack < 1.3))}',
-        '{"H_dc_1*_nhit" : ((H_dc_1x1_nhit + H_dc_1u2_nhit + H_dc_1u1_nhit + H_dc_1v1_nhit + H_dc_1x2_nhit + H_dc_1v2_nhit) <  20)}',        
-        '{"H_dc_2*_nhit" : ((H_dc_2x1_nhit + H_dc_2u2_nhit + H_dc_2u1_nhit + H_dc_2v1_nhit + H_dc_2x2_nhit + H_dc_2v2_nhit) < 20)}',
-        '{"H_dc_ntrack" : (H_dc_ntrack > 0.0)}',        
-        '{"H_cer_npeSum" : (H_cer_npeSum > 0.5)}', 
-        '{"H_cal_etotnorm" : ((H_cal_etotnorm > 0.6) & (H_cal_etotnorm < 2.0))}',
-    },
-    "h_ecut_after" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"H_cal_etotnorm" : ((H_cal_etotnorm > 0.6) & (H_cal_etotnorm < 2.0))}',
-        '{"H_cer_npeSum" : (H_cer_npeSum > 1.5)}', 
-        '{"H_gtr_dp" : (abs(H_gtr_dp) < 8.0)}',
-        '{"H_gtr_th" : (abs(H_gtr_th) < 0.080)}',
-        '{"H_gtr_ph" : (abs(H_gtr_ph) < 0.035)}',
-    },
-    "h_ecut_eff" :
-    {
-        '{"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}',        
-        '{"H_cal_etotnorm" : ((H_cal_etotnorm > 0.6) & (H_cal_etotnorm < 2.0))}',
-        '{"H_cer_npeSum" : (H_cer_npeSum > 1.5)}', 
-        '{"H_gtr_dp" : (abs(H_gtr_dp) < 8.0)}',
-        '{"H_gtr_th" : (abs(H_gtr_th) < 0.080)}',
-        '{"H_gtr_ph" : (abs(H_gtr_ph) < 0.035)}',
-        '{"H_cer_npeSum" : (H_cer_npeSum > 1.5)}',
-    },
-}
+f = open('../../../DB/CUTS/lumi.cuts')
 
-r = r2p.pyRoot()
+# read in cuts file and make dictionary
+c = r2p.pyPlot(None)
+readDict = c.read_dict(f)
 
-def make_cutDict(inputDict,cut):
+def make_cutDict(cut,f,inputDict=None):
 
     global c
-    c = r2p.pyPlot(inputDict)
-    
+
+    c = r2p.pyPlot(readDict)
     x = c.w_dict(cut)
-    inputDict[cut] = {}
+    
+    if inputDict == None:
+        inputDict = {}
+        
+    for key,val in readDict.items():
+        if key == cut:
+            inputDict.update({key : {}})
+
     for i,val in enumerate(x):
         tmp = x[i]
         inputDict[cut].update(eval(tmp))
-
+        
     return inputDict
 
-cutDict = make_cutDict(cutDict,"h_ecut_no_cer")
+cutDict = make_cutDict("p_track_before",f)
+cutDict = make_cutDict("p_hadtrack_before",f,cutDict)
+cutDict = make_cutDict("p_Ktrack_before",f,cutDict)
+cutDict = make_cutDict("p_ptrack_before",f,cutDict)
+cutDict = make_cutDict("p_track_after",f,cutDict)
+cutDict = make_cutDict("p_hadtrack_after",f,cutDict)
+cutDict = make_cutDict("p_pitrack_after",f,cutDict)
+cutDict = make_cutDict("p_Ktrack_after",f,cutDict)
+cutDict = make_cutDict("p_ptrack_after",f,cutDict)
+cutDict = make_cutDict("p_ecut_before",f,cutDict)
+cutDict = make_cutDict("p_ecut_after",f,cutDict)
+cutDict = make_cutDict("p_ecut_eff",f,cutDict)
+cutDict = make_cutDict("h_track_before",f,cutDict)
+cutDict = make_cutDict("h_etrack_before",f,cutDict)
+cutDict = make_cutDict("h_track_after",f,cutDict)
+cutDict = make_cutDict("h_etrack_after",f,cutDict)
+cutDict = make_cutDict("h_ecut_after",f,cutDict)
+cutDict = make_cutDict("h_ecut_eff",f,cutDict)
+c = r2p.pyPlot(cutDict)
 
 def analysis(PS1, PS3, thres_curr):
     
@@ -661,6 +503,7 @@ def analysis(PS1, PS3, thres_curr):
     
     # p_track_before
     p_track_before = c.add_cut(P_dc_ntrack,"p_track_before")
+    
     # p_hadtrack_before
     p_hadtrack_before = c.add_cut(P_dc_ntrack,"p_hadtrack_before")
 

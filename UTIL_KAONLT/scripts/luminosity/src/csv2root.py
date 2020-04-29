@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-24 15:39:48 trottar"
+# Time-stamp: "2020-04-29 12:09:33 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -14,7 +14,7 @@ import pandas as pd
 from csv import DictReader
 import os, subprocess, sys
 
-sys.path.insert(0, 'python/')
+sys.path.insert(0, '../../../bin/python/')
 import root2py as r2p
 r = r2p.pyRoot()
 

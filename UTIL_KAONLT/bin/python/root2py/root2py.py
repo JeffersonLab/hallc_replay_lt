@@ -136,10 +136,13 @@ class pyPlot(pyDict):
         cutDict = {}
         cut_new = ()
         for line in f:
-            line  = line.split("=")
-            cuts = line[1]
-            cutName = {line[0].rstrip() : cuts}
-            cutDict.update(cutName)
+            if "#" in line:
+                continue
+            else:
+                line  = line.split("=")
+                cuts = line[1]
+                cutName = {line[0].rstrip() : cuts}
+                cutDict.update(cutName)
         return cutDict
 
     # Create a working dictionary for cuts

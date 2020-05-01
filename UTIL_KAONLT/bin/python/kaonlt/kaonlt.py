@@ -3,23 +3,8 @@
 #
 # Description:This will read in the array data file that contains all the leave histogram information
 # include...
-'''
-
-# My class function
-sys.path.insert(0,'/home/{USER}/bin/python/root2py/')
-from root2py import pyPlot, pyBranch, pyBin
-
-rootName = "Path/to/root/file"
-treeName = <NameofTree>
-inputLeaf = <LeafName>
-
-tree = up.open(rootName)[treeName]
-hist_var = branch.findBranch(branch,inputLeaf) # For branch variable
-hist_var = tree.array(inputLeaf)
-
-'''
 # ================================================================
-# Time-stamp: "2019-08-14 21:10:09 trottar"
+# Time-stamp: "2020-05-01 19:28:54 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -131,18 +116,127 @@ class pyPlot(pyDict):
 
         return arrPlot
 
-    def read_dict(self,f):
-
+    def read_dict(self,fout):
+        
+        f = open(fout)
         cutDict = {}
-        cut_new = ()
         for line in f:
             if "#" in line:
                 continue
             else:
-                line  = line.split("=")
-                cuts = line[1]
-                cutName = {line[0].rstrip() : cuts}
-                cutDict.update(cutName)
+                line = line.split("=")
+                typName = line[0].rstrip()
+                typName = typName.lstrip()
+                typCuts = line[1].split("+")
+                print("Type ", typName)
+                print("Cuts ", typCuts)
+                for evt in typCuts:
+                    minusCuts = evt.split("-")
+                    cutplus = minusCuts[0].rstrip()
+                    cutplus = cutplus.lstrip()
+                    if len(minusCuts) == 2:
+                        cutminus = minusCuts[1].lstrip()
+                    elif len(minusCuts) > 2:
+                        for minus in cutminus:
+                            cutminus = minus.lstrip()
+                    else:
+                        cutminus = "none"
+                    print("+ ",cutplus)
+                    print("- ",cutminus)
+                    if "pid" in cutplus:
+                        plusfout = "../../../../DB/CUTS/general/pid.cuts"
+                    elif "track" in cutplus:
+                        plusfout = "../../../../DB/CUTS/general/track.cuts"
+                    elif "accept" in cutplus:
+                        plusfout = "../../../../DB/CUTS/general/accept.cuts"
+                    elif "coin_time" in cutplus:
+                        plusfout = "../../../../DB/CUTS/general/coin_time.cuts"
+                    elif "current" in cutplus:
+                        plusfout = "../../../../DB/CUTS/general/current.cuts"
+                    else:
+                        print("ERROR: Cut %s not found" % cutplus)
+                        continue
+                    if "pid" in cutminus:
+                        minusfout = "../../../../DB/CUTS/general/pid.cuts"
+                    elif "track" in cutminus:
+                        minusfout = "../../../../DB/CUTS/general/track.cuts"
+                    elif "accept" in cutminus:
+                        minusfout = "../../../../DB/CUTS/general/accept.cuts"
+                    elif "coin_time" in cutminus:
+                        minusfout = "../../../../DB/CUTS/general/coin_time.cuts"
+                    elif "current" in cutminus:
+                        minusfout = "../../../../DB/CUTS/general/current.cuts"
+                    elif "none" in cutminus:
+                        minusfout = "none"
+                    else:
+                        print("ERROR: Cut %s not found" % cutminus)
+                        continue
+                    
+                    minuscut = cutminus.split(".")
+                    if len(minuscut) == 3:
+                        cutminus = minuscut[1]
+                        leafminus = minuscut[2].rstrip()
+                    elif minuscut == ['none']:
+                        cutminus = "none"
+                    else:
+                        print("ERROR: Invalid syntax for removing cut %s " % (minuscut))
+                        continue
+                    cutplus = cutplus.split(".")
+                    if len(cutplus) == 2:
+                        cutplus = str(cutplus[1])
+                        print("cutplus ", cutplus)
+                    elif len(cutplus) > 2:
+                        cutplus = str(cutplus[2])
+                        print("cutplus ", cutplus)
+                    else:
+                        print("ERROR: %s cut not found in %s" % (cutplus,plusfout))
+                        continue
+                    
+                    fplus = open(plusfout)
+                    if minusfout == "none":
+                        fminus = fplus             
+                    else:
+                        fminus = open(minusfout)
+                    for lplus in fplus:
+                        if "#" in lplus:
+                            continue
+                        else:
+                            lplus  = lplus.split("=")
+                            cuts = lplus[1]
+                            print(cutplus, " ++ ", lplus[0])
+                            if cutplus in lplus[0]:
+                                if typName in cutDict.keys():
+                                    if cuts not in cutDict.items():
+                                        print(typName, " already found!!!!")
+                                        cutDict[typName] += ","+cuts
+                                else:
+                                    cutName = {typName : cuts}
+                                    cutDict.update(cutName)
+                                print(lplus[0],"++>",cutDict[typName])
+                            else:
+                                print("ERROR: %s cut does not match %s" % (cutplus,lplus[0]))
+                                continue
+                    for lminus in fminus:
+                        if "#" in lminus:
+                            continue
+                        else:
+                            lminus  = lminus.split("=")
+                            cuts = lminus[1]
+                            arr_cuts = cuts.split(",")
+                            print(leafminus,": ",cutminus, " -- ", lminus[0])
+                            if cutminus in lminus[0]:
+                                for remove in arr_cuts:
+                                    if leafminus in remove:
+                                        print("```````````````",remove)
+                                        cutDict[typName] = cutDict[typName].replace(remove,"")
+                                print(lminus[0],"-->",cutDict[typName])
+                            else:
+                                print("ERROR: %s cut does not match %s" % (cutminus,lminus[0]))
+                                continue
+                print("\n\n")
+        fplus.close()
+        f.close()
+        print(cutDict.keys())
         return cutDict
 
     # Create a working dictionary for cuts

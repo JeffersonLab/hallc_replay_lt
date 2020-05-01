@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-29 12:35:06 trottar"
+# Time-stamp: "2020-05-01 18:01:36 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -19,7 +19,7 @@ import matplotlib.pyplot as plt
 import sys, math, os, subprocess, time
 
 sys.path.insert(0, '../../../../bin/python/')
-import root2py as r2p
+import kaonlt as klt
 
 runNum = sys.argv[1]
 MaxEvent=sys.argv[2]
@@ -46,7 +46,7 @@ ANALYSIS TREE, T
 '''
 
 tree = up.open(rootName)["T"]
-branch = r2p.pyBranch(tree)
+branch = klt.pyBranch(tree)
 
 CTime_ePositronCoinTime_ROC1  = tree.array("CTime.ePositronCoinTime_ROC1")
 CTime_eKCoinTime_ROC1  = tree.array("CTime.eKCoinTime_ROC1")
@@ -89,118 +89,24 @@ missmass = np.array(np.sqrt(abs(emiss*emiss-pmiss*pmiss)))
 # MMK = np.array([math.sqrt(abs((em*em)-(pm*pm))) for (em, pm) in zip(emiss, pmiss)])
 # MMp = np.array([math.sqrt(abs((em + math.sqrt(abs((MK*MK) + (gtrp*gtrp))) - math.sqrt(abs((Mp*Mp) + (gtrp*gtrp) - (pm*pm))) ))**2) for (em, pm, gtrp) in zip(emiss, pmiss, P_gtr_p)])
 
-# cutDict = {
-#     "h_ecut_no_cer" :
-#     {
-#         '{"H_gtr_dp" : (abs(H_gtr_dp) < 10.0)}',
-#         '{"P_gtr_dp" : ((P_gtr_dp >-10.0) | (P_gtr_dp < 20.0))}',
-#         '{"P_cal_etotnorm" : (P_cal_etotnorm <0.6)}',
-#         '{"H_gtr_beta" : ((abs(H_gtr_beta)-1.00) < 0.1)}',
-#         '{"CTime_eKCoinTime_ROC1" : (((CTime_eKCoinTime_ROC1-47.5) > -0.5) & ((CTime_eKCoinTime_ROC1-47.5) < 0.5))}',
-#         '{"H_cal_etotnorm" : ((H_cal_etotnorm > 0.995) & (H_cal_etotnorm < 1.015))}'
-#     },
-#     "h_ecut_cer" :
-#     {
-#         '{"H_gtr_dp" : (abs(H_gtr_dp) < 10.0)}',
-#         '{"P_gtr_dp" : ((P_gtr_dp >-10.0) | (P_gtr_dp < 20.0))}',
-#         '{"P_cal_etotnorm" : (P_cal_etotnorm <0.6)}',
-#         '{"H_gtr_beta" : ((abs(H_gtr_beta)-1.00) < 0.1)}',
-#         '{"CTime_eKCoinTime_ROC1" : (((CTime_eKCoinTime_ROC1-47.5) > -0.5) & ((CTime_eKCoinTime_ROC1-47.5) < 0.5))}',
-#         '{"H_cal_etotnorm" : ((H_cal_etotnorm > 0.995) & (H_cal_etotnorm < 1.015))}',
-#         '{"H_cer_npeSum" : (H_cer_npeSum > 3.0)}',
-#     },
-#     "h_ecut_no_cal" :
-#     {
-#         '{"H_gtr_dp" : (abs(H_gtr_dp) < 10.0)}',
-#         '{"P_gtr_dp" : ((P_gtr_dp >-10.0) | (P_gtr_dp < 20.0))}',
-#         '{"P_cal_etotnorm" : (P_cal_etotnorm <0.6)}',
-#         '{"H_gtr_beta" : ((abs(H_gtr_beta)-1.00) < 0.1)}',
-#         '{"CTime_eKCoinTime_ROC1" : (((CTime_eKCoinTime_ROC1-47.5) > -0.5) & ((CTime_eKCoinTime_ROC1-47.5) < 0.5))}',
-#         '{"H_cer_npeSum" : (H_cer_npeSum > 1.5)}'
-#     },
-#     "h_ecut_cal" :
-#     {
-#         '{"H_gtr_dp" : (abs(H_gtr_dp) < 10.0)}',
-#         '{"P_gtr_dp" : ((P_gtr_dp >-10.0) | (P_gtr_dp < 20.0))}',
-#         '{"P_cal_etotnorm" : (P_cal_etotnorm <0.6)}',
-#         '{"H_gtr_beta" : ((abs(H_gtr_beta)-1.00) < 0.1)}',
-#         '{"CTime_eKCoinTime_ROC1" : (((CTime_eKCoinTime_ROC1-47.5) > -0.5) & ((CTime_eKCoinTime_ROC1-47.5) < 0.5))}',
-#         '{"H_cer_npeSum" : (H_cer_npeSum > 1.5)}',
-#         '{"H_cal_etotnorm" : (H_cal_etotnorm > 1.1)}'
-#     },
-#     "p_kcut_no_hgcer" :
-#     {
-#         '{"H_gtr_dp" : (abs(H_gtr_dp) < 10.0)}',
-#         '{"P_gtr_dp" : ((P_gtr_dp >-10.0) | (P_gtr_dp < 20.0))}',
-#         '{"H_cal_etotnorm and H_cer_npeSum" : (H_cal_etotnorm > 0.7) & (H_cer_npeSum > 1.5)}',
-#         '{"P_gtr_beta" : ((abs(P_gtr_beta)-1.00) < 0.1)}',
-#         '{"CTime_eKCoinTime_ROC1" : (((CTime_eKCoinTime_ROC1-47.5) > -0.5) & ((CTime_eKCoinTime_ROC1-47.5) < 0.5))}',
-#         '{"P_cal_etotnorm and P_aero_npeSum" : ((P_cal_etotnorm > 0.7) & (P_aero_npeSum >1.5))}'
-#     },
-#     "p_kcut_hgcer" :
-#     {
-#         '{"H_gtr_dp" : (abs(H_gtr_dp) < 10.0)}',
-#         '{"P_gtr_dp" : ((P_gtr_dp >-10.0) | (P_gtr_dp < 20.0))}',
-#         '{"H_cal_etotnorm and H_cer_npeSum" : (H_cal_etotnorm > 0.7) & (H_cer_npeSum > 1.5)}',
-#         '{"P_gtr_beta" : ((abs(P_gtr_beta)-1.00) < 0.1)}',
-#         '{"CTime_eKCoinTime_ROC1" : (((CTime_eKCoinTime_ROC1-47.5) > -0.5) & ((CTime_eKCoinTime_ROC1-47.5) < 0.5))}',
-#         '{"P_cal_etotnorm and P_aero_npeSum" : ((P_cal_etotnorm > 0.7) & (P_aero_npeSum >1.5))}',
-#         '{"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}'
-#     },
-#     "p_kcut_no_aero" :
-#     {
-#         '{"H_gtr_dp" : (abs(H_gtr_dp) < 10.0)}',
-#         '{"P_gtr_dp" : ((P_gtr_dp >-10.0) | (P_gtr_dp < 20.0))}',
-#         '{"H_cal_etotnorm and H_cer_npeSum" : (H_cal_etotnorm > 0.7) & (H_cer_npeSum > 1.5)}',
-#         '{"P_gtr_beta" : ((abs(P_gtr_beta)-1.00) < 0.1)}',
-#         '{"CTime_eKCoinTime_ROC1" : (((CTime_eKCoinTime_ROC1-47.5) > -0.5) & ((CTime_eKCoinTime_ROC1-47.5) < 0.5))}',
-#         '{"P_cal_etotnorm and P_hgcer_npeSum" : ((P_cal_etotnorm > 0.7) & (P_hgcer_npeSum > 1.5))}'
-#     },
-#     "p_kcut_aero" :
-#     {
-#         '{"H_gtr_dp" : (abs(H_gtr_dp) < 10.0)}',
-#         '{"P_gtr_dp" : ((P_gtr_dp >-10.0) | (P_gtr_dp < 20.0))}',
-#         '{"H_cal_etotnorm and H_cer_npeSum" : (H_cal_etotnorm > 0.7) & (H_cer_npeSum > 1.5)}',
-#         '{"P_gtr_beta" : ((abs(P_gtr_beta)-1.00) < 0.1)}',
-#         '{"CTime_eKCoinTime_ROC1" : (((CTime_eKCoinTime_ROC1-47.5) > -0.5) & ((CTime_eKCoinTime_ROC1-47.5) < 0.5))}',
-#         '{"P_cal_etotnorm and P_hgcer_npeSum" : ((P_cal_etotnorm > 0.7) & (P_hgcer_npeSum > 1.5))}',
-#         '{"P_aero_npeSum" : (P_aero_npeSum > 1.5)}'
-#     },
-#     "p_kcut_no_cal" :
-#     {
-#         '{"H_gtr_dp" : (abs(H_gtr_dp) < 10.0)}',
-#         '{"P_gtr_dp" : ((P_gtr_dp >-10.0) | (P_gtr_dp < 20.0))}',
-#         '{"H_cal_etotnorm and H_cer_npeSum" : (H_cal_etotnorm > 0.7) & (H_cer_npeSum > 1.5)}',
-#         '{"P_gtr_beta" : ((abs(P_gtr_beta)-1.00) < 0.1)}',
-#         '{"CTime_eKCoinTime_ROC1" : (((CTime_eKCoinTime_ROC1-47.5) > -0.5) & ((CTime_eKCoinTime_ROC1-47.5) < 0.5))}',
-#         '{"P_hgcer_npeSum and P_aero_npeSum" : ((P_hgcer_npeSum > 1.5) & (P_aero_npeSum >1.5))}'
-#     },
-#     "p_kcut_cal" :
-#     {
-#         '{"H_gtr_dp" : (abs(H_gtr_dp) < 10.0)}',
-#         '{"P_gtr_dp" : ((P_gtr_dp >-10.0) | (P_gtr_dp < 20.0))}',
-#         '{"H_cal_etotnorm and H_cer_npeSum" : (H_cal_etotnorm > 0.7) & (H_cer_npeSum > 1.5)}',
-#         '{"P_gtr_beta" : ((abs(P_gtr_beta)-1.00) < 0.1)}',
-#         '{"CTime_eKCoinTime_ROC1" : (((CTime_eKCoinTime_ROC1-47.5) > -0.5) & ((CTime_eKCoinTime_ROC1-47.5) < 0.5))}',
-#         '{"P_hgcer_npeSum and P_aero_npeSum" : ((P_hgcer_npeSum > 1.5) & (P_aero_npeSum >1.5))}',
-#         '{"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}'
-#     },
-# }
+r = klt.pyRoot()
 
-r = r2p.pyRoot()
+fout = '../../../../DB/CUTS/run_type/pid_eff.cuts'
 
-f = open('../../../../DB/CUTS/pid.cuts.tmp')
+# f = open('../../../../DB/CUTS/pid.cuts.tmp')
 
 # read in cuts file and make dictionary
-c = r2p.pyPlot(None)
-readDict = c.read_dict(f)
+c = klt.pyPlot(None)
+readDict = c.read_dict(fout)
 
-def make_cutDict(cut,f,inputDict=None):
+def make_cutDict(cut,inputDict=None):
 
     global c
 
-    c = r2p.pyPlot(readDict)
+    c = klt.pyPlot(readDict)
     x = c.w_dict(cut)
+    print("%s" % cut)
+    print("x ", x)
     
     if inputDict == None:
         inputDict = {}
@@ -215,17 +121,14 @@ def make_cutDict(cut,f,inputDict=None):
         
     return inputDict
 
-cutDict = make_cutDict("h_ecut_no_cer",f)
-cutDict = make_cutDict("h_ecut_cer",f,cutDict)
-cutDict = make_cutDict("h_ecut_no_cal",f,cutDict)
-cutDict = make_cutDict("h_ecut_cal",f,cutDict)
-cutDict = make_cutDict("p_kcut_no_hgcer",f,cutDict)
-cutDict = make_cutDict("p_kcut_hgcer",f,cutDict)
-cutDict = make_cutDict("p_kcut_no_aero",f,cutDict)
-cutDict = make_cutDict("p_kcut_aero",f,cutDict)
-cutDict = make_cutDict("p_kcut_no_cal",f,cutDict)
-cutDict = make_cutDict("p_kcut_cal",f,cutDict)
-c = r2p.pyPlot(cutDict)
+cutDict = make_cutDict("h_ecut_eff")
+cutDict = make_cutDict("h_ecut_eff_no_cer",cutDict)
+cutDict = make_cutDict("h_ecut_eff_no_cal",cutDict)
+cutDict = make_cutDict("p_kcut_eff_no_hgcer",cutDict)
+cutDict = make_cutDict("p_kcut_eff_no_aero",cutDict)
+cutDict = make_cutDict("p_kcut_eff_no_cal",cutDict)
+c = klt.pyPlot(cutDict)
+print(cutDict)
 
 def hms_cer():
 

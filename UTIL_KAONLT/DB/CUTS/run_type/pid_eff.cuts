@@ -1,0 +1,75 @@
+############
+# HMS ecut #
+############
+h_ecut_no_cer = pid.h_ecut+coin_time-pid.h_ecut.H_cer_npeSum
+#
+h_ecut_no_cal = pid.h_ecut+coin_time-pid.h_ecut.H_cal_etotnorm
+#
+h_ecut = pid.h_ecut+coin_time
+#
+#############
+# HMS picut #
+#############
+h_picut_no_cer = pid.h_picut+coin_time-pid.h_picut.H_cer_npeSum
+#
+h_picut_no_cal = pid.h_picut+coin_time-pid.h_picut.H_cal_etotnorm
+#
+h_picut = pid.h_picut+coin_time
+##############
+# HMS hadcut #
+##############
+h_hadcut_no_cer = pid.h_hadcut+coin_time-pid.h_hadcut.H_cer_npeSum
+#
+h_hadcut_no_cal = pid.h_hadcut+coin_time-pid.h_hadcut.H_cal_etotnorm
+#
+h_hadcut = pid.h_hadcut+coin_time
+#############
+# SHMS ecut #
+#############
+p_ecut_no_hgcer = pid.p_ecut+coin_time-pid.p_ecut.P_hgcer_npeSum
+#
+p_ecut_no_aero = pid.p_ecut+coin_time-pid.p_ecut.P_aero_npeSum
+#
+p_ecut_no_cal = pid.p_ecut+coin_time-pid.p_ecut.P_cal_etotnorm
+#
+p_ecut = pid.p_ecut+coin_time
+##############
+# SHMS picut #
+##############
+p_picut_no_hgcer = pid.p_picut+coin_time-pid.p_picut.P_hgcer_npeSum
+#
+p_picut_no_aero = pid.p_picut+coin_time-pid.p_picut.P_aero_npeSum
+#
+p_picut_no_cal = pid.p_picut+coin_time-pid.p_picut.P_cal_etotnorm
+#
+p_picut = pid.p_picut+coin_time
+#############
+# SHMS kcut #
+#############
+p_kcut_no_hgcer = pid.p_kcut+coin_time-pid.p_kcut.P_hgcer_npeSum
+#
+p_kcut_no_aero = pid.p_kcut+coin_time-pid.p_kcut.P_aero_npeSum
+#
+p_kcut_no_cal = pid.p_kcut+coin_time-pid.p_kcut.P_cal_etotnorm
+#
+p_kcut = pid.p_kcut+coin_time
+#############
+# SHMS pcut #
+#############
+p_pcut_no_hgcer = pid.p_pcut+coin_time-pid.p_pcut.P_hgcer_npeSum
+#
+p_pcut_no_aero = pid.p_pcut+coin_time-pid.p_pcut.P_aero_npeSum
+#
+p_pcut_no_cal = pid.p_pcut+coin_time-pid.p_pcut.P_cal_etotnorm
+#
+p_pcut = pid.p_pcut+coin_time
+###############
+# SHMS hadcut #
+###############
+p_hadcut_no_hgcer = pid.p_hadcut+coin_time-pid.p_hadcut.P_hgcer_npeSum
+#
+p_hadcut_no_aero = pid.p_hadcut+coin_time-pid.p_hadcut.P_aero_npeSum
+#
+p_hadcut_no_cal = pid.p_hadcut+coin_time-pid.p_hadcut.P_cal_etotnorm
+#
+p_hadcut = pid.p_hadcut+coin_time

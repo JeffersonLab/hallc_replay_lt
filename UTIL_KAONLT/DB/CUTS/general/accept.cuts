@@ -1,0 +1,5 @@
+# delta cuts
+delta = {"H_gtr_dp" : (abs(H_gtr_dp) < hms_dp_delta)}, {"P_gtr_dp" : ((P_gtr_dp > shms_dp_delta) | (P_gtr_dp < shms_dp_delta))}
+# xptar,yptar
+hms_ptar = {"H_gtr_th" : (abs(H_gtr_th) < hms_xptar_hms_ptar)}', {"H_gtr_ph" : (abs(H_gtr_ph) < hms_yptar_hms_ptar)}'
+shms_ptar = {"P_gtr_th" : (abs(P_gtr_th) < shms_xptar_shms_ptar)}', {"P_gtr_ph" : (abs(P_gtr_ph) < shms_yptar_shms_ptar)}'

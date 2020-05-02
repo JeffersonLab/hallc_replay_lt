@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-05-01 18:01:36 trottar"
+# Time-stamp: "2020-05-02 15:00:51 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -99,6 +99,11 @@ fout = '../../../../DB/CUTS/run_type/pid_eff.cuts'
 c = klt.pyPlot(None)
 readDict = c.read_dict(fout)
 
+# This method calls several methods in kaonlt package. It is required to create properly formated
+# dictionaries. The evaluation must be in the analysis script because the analysis variables (i.e. the
+# leaves of interest) are not defined in the kaonlt package. This makes the system more flexible
+# overall, but a bit more cumbersome in the analysis script. Perhaps one day a better solution will be
+# implimented.
 def make_cutDict(cut,inputDict=None):
 
     global c

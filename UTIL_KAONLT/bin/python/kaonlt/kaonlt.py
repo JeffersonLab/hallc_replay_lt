@@ -1,10 +1,66 @@
 #! /usr/bin/python
 
 #
-# Description:This will read in the array data file that contains all the leave histogram information
-# include...
+# Description: This package will perform many tasks required for physics analysis in hall c
+#              (although can also be expanded to any analysis using root files to varying success)
+# Analysis script required format for applying cuts...
+
+'''
+import uproot as up
+sys.path.insert(0, 'path_to/bin/python/')
+import kaonlt as klt
+
+# Convert root leaf to array with uproot
+array  = tree.array("leaf")
+
+# Not required for applying cuts, but required for converting back to root files
+r = klt.pyRoot()
+
+fout = "<path_to_run_type_cut>"
+c = klt.pyPlot(None) # See below for pyPlot class definition
+readDict = c.read_dict(fout) # read in run type cuts file and makes dictionary
+
+# This method calls several methods in kaonlt package. It is required to create properly formated
+# dictionaries. The evaluation must be in the analysis script because the analysis variables (i.e. the
+# leaves of interest) are not defined in the kaonlt package. This makes the system more flexible
+# overall, but a bit more cumbersome in the analysis script. Perhaps one day a better solution will be
+# implimented.
+def make_cutDict(cut,inputDict=None):
+
+    global c
+
+    c = klt.pyPlot(readDict)
+    x = c.w_dict(cut)
+    
+    # Only for first key of dictionary
+    if inputDict == None:
+        inputDict = {}
+        
+    # Update dictionary with cuts (as strings) from readDict
+    for key,val in readDict.items():
+        if key == cut:
+            inputDict.update({key : {}})
+
+    # Evaluate strings to cut values. Creates a dictionary in a dictionary...dict-ception!
+    for i,val in enumerate(x):
+        tmp = x[i]
+        inputDict[cut].update(eval(tmp))
+        
+    return inputDict
+
+cutDict = make_cutDict("cut1")
+cutDict = make_cutDict("cut2",cutDict)
+# Continue this for all run type cuts required
+
+# ---> If multple run type files are required then define a new run type file altogether. Do not try to 
+# chain run type files. It can be done, but is computationally wasteful and pointless.
+
+# To apply cuts to array...
+c.add_cut(array,"cut#")
+
+'''
 # ================================================================
-# Time-stamp: "2020-05-01 19:28:54 trottar"
+# Time-stamp: "2020-05-02 15:00:37 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -36,12 +92,21 @@ import time, math, sys
 import gc
 gc.collect()
 
+'''
+When calling kaonlt package, you may define a dictionary in the script. This dictionary will contain
+the cuts of interest (defined in a CUTS directory).  These cuts are read in through the read_dict()
+method of the pyPlot() class. The pyDict class is not explicitly called, but rather called implicitly
+by other classes.
+'''
 class pyDict(dict):
     
     def __init__(self,inputTree):
         self.inputTree = inputTree
-
-class pyBranch(pyDict):
+        
+'''
+This class, with its findBranch method, will grab the leaves in a branch using uproot package
+'''
+class pyBranch():
 
     def findBranch(self,inputBranch, inputLeaf):
         tree = self.inputTree
@@ -58,11 +123,14 @@ class pyBranch(pyDict):
         leafHist = branch[leafVal]
 
         return np.array(leafHist)
-    
+
+'''    
+This class is for converting files into root files after the analysis steps
+'''
 class pyRoot():
 
-    # Save arrays,lists,etc. to root file as histograms
-    def py2root(self,inputDict,rootName):
+    # Save arrays,lists,etc. from csv to root file as histograms
+    def csv2root(self,inputDict,rootName):
         try:
             tmp = ""
             hist_key = []*len(inputDict)
@@ -85,16 +153,27 @@ class pyRoot():
         except TypeError:
             print("\nERROR: Only current accepting 1D array/list values\n")
 
+'''            
+This class stores a variety of equations often used in the KaonLT analysis procedure
+'''
 class pyEquation():
 
+    # Define missing mass calculation
     def missmass():
         print("missmass")
-            
+
+'''
+This is the most extensive class of the kaonlt package. This class will perform many required tasks
+for doing in depth analysis in python. This class does not require, but will use the pyDict class to
+apply cuts. Set the dictionary to None if no cuts are required.
+'''
 class pyPlot(pyDict):
     
     def __init__(self, cutDict=None):
         self.cutDict = cutDict
 
+    # A method for defining a bin. This may be called in any matplotlib package plots.
+    # This will calculate a suitable bin width and use that to equally distribute the bin size
     def setbin(self,plot,numbin,xmin=None,xmax=None):
         
         if (xmin or xmax):
@@ -108,6 +187,8 @@ class pyPlot(pyDict):
 
         return bins
 
+    # This method is complimentary to setbin(). This will cut the distribution based off the min and max
+    # array values
     def fixBin(self,cut,plot,low,high):
             
         arrCut = cut
@@ -116,8 +197,10 @@ class pyPlot(pyDict):
 
         return arrPlot
 
+    # This method reads in the CUTS and converts them to a dictionary. 
     def read_dict(self,fout):
-        
+
+        # Open run type cuts of interest
         f = open(fout)
         cutDict = {}
         for line in f:
@@ -125,15 +208,23 @@ class pyPlot(pyDict):
                 continue
             else:
                 line = line.split("=")
+                # Grab run type cut name
                 typName = line[0].rstrip()
                 typName = typName.lstrip()
+                # Grab run type cuts required, note at this stage the cuts to be removed are bunched
+                # together still
                 typCuts = line[1].split("+")
                 print("Type ", typName)
                 print("Cuts ", typCuts)
+                # Loop over run type cuts
                 for evt in typCuts:
+                    # Split any cuts to be removed
                     minusCuts = evt.split("-")
+                    # Define first cut to be added, any other cuts to be added will be done in future
+                    # iteration over run type cuts
                     cutplus = minusCuts[0].rstrip()
                     cutplus = cutplus.lstrip()
+                    # Checks if there are multiple cuts to be removed
                     if len(minusCuts) == 2:
                         cutminus = minusCuts[1].lstrip()
                     elif len(minusCuts) > 2:
@@ -143,6 +234,7 @@ class pyPlot(pyDict):
                         cutminus = "none"
                     print("+ ",cutplus)
                     print("- ",cutminus)
+                    # Matches run type cuts with the general cuts (e.g pid, track, etc.)
                     if "pid" in cutplus:
                         plusfout = "../../../../DB/CUTS/general/pid.cuts"
                     elif "track" in cutplus:
@@ -171,7 +263,8 @@ class pyPlot(pyDict):
                     else:
                         print("ERROR: Cut %s not found" % cutminus)
                         continue
-                    
+                    # Break down the cut to be removed to find specific leaf to be subtracted from
+                    # dictionary
                     minuscut = cutminus.split(".")
                     if len(minuscut) == 3:
                         cutminus = minuscut[1]
@@ -191,12 +284,16 @@ class pyPlot(pyDict):
                     else:
                         print("ERROR: %s cut not found in %s" % (cutplus,plusfout))
                         continue
-                    
+
+                    # Open general cuts file of interest to be added to dictionary
                     fplus = open(plusfout)
+                    # Open general cuts file of interest to be removed from dictionary. If there are no
+                    # cuts to be removed then this step is skipped
                     if minusfout == "none":
                         fminus = fplus             
                     else:
                         fminus = open(minusfout)
+                        
                     for lplus in fplus:
                         if "#" in lplus:
                             continue
@@ -204,30 +301,39 @@ class pyPlot(pyDict):
                             lplus  = lplus.split("=")
                             cuts = lplus[1]
                             print(cutplus, " ++ ", lplus[0])
+                            # Check if cut is in file
                             if cutplus in lplus[0]:
+                                # Check if run type is already defined in dictionary
                                 if typName in cutDict.keys():
                                     if cuts not in cutDict.items():
+                                        # If run type already defined, then append dictionary key
                                         print(typName, " already found!!!!")
                                         cutDict[typName] += ","+cuts
                                 else:
+                                    # If run type not defined, then add key to dictionary
                                     cutName = {typName : cuts}
                                     cutDict.update(cutName)
                                 print(lplus[0],"++>",cutDict[typName])
                             else:
                                 print("ERROR: %s cut does not match %s" % (cutplus,lplus[0]))
                                 continue
+                    
                     for lminus in fminus:
                         if "#" in lminus:
                             continue
                         else:
                             lminus  = lminus.split("=")
                             cuts = lminus[1]
+                            # Split cuts to check for the one to be removed.
                             arr_cuts = cuts.split(",")
                             print(leafminus,": ",cutminus, " -- ", lminus[0])
+                            # Check if cut is in file
                             if cutminus in lminus[0]:
                                 for remove in arr_cuts:
+                                    # Check which cut matches the one wanted to be removed
                                     if leafminus in remove:
                                         print("```````````````",remove)
+                                        # Replace unwanted cut with blank string
                                         cutDict[typName] = cutDict[typName].replace(remove,"")
                                 print(lminus[0],"-->",cutDict[typName])
                             else:
@@ -239,7 +345,7 @@ class pyPlot(pyDict):
         print(cutDict.keys())
         return cutDict
 
-    # Create a working dictionary for cuts
+    # Create a working dictionary for cuts by converting string to array of cuts.
     def w_dict(self,cuts):
 
         inputDict = self.cutDict
@@ -247,16 +353,6 @@ class pyPlot(pyDict):
         subDict = subDict.split(",")
         cut_arr = [evt for evt in subDict]
         return cut_arr
-            
-    def cut(self,key,cuts=None):
-
-        if cuts:
-            inputDict = self.cutDict
-            subDict = inputDict[cuts]
-            value = subDict.get(key,"Leaf name not found")
-            return value
-        else:
-            return self.cutDict.get(key,"Leaf name not found")
 
     # Old version of apply cuts
     def applyCuts(self,leaf,cuts=None):
@@ -276,9 +372,12 @@ class pyPlot(pyDict):
         
         return tmp
 
-    # New version of applying cuts
+    # New version of applying cuts. The general idea is to apply cuts without sacrificing computation
+    # time. Array indexing is much faster than most methods in python. This method formats a string with
+    # the cuts required. This string is evaluated and the array index calls the cut() method.See
+    # description above for how the analysis script should be formatted. 
     def add_cut(self,arr, cuts):
-        
+
         arr_cut = arr  
         applycut = "arr_cut["
         inputDict = self.cutDict
@@ -291,7 +390,20 @@ class pyPlot(pyDict):
         arr_cut = eval(applycut)        
         return arr_cut
 
+    # The array index that was evaluated in the add_cut() method calls this method. This method then
+    # grabs the properly formated dictionary (from class pyDict) and outputs arrays with cuts.
+    def cut(self,key,cuts=None):
 
+        if cuts:
+            inputDict = self.cutDict
+            subDict = inputDict[cuts]
+            value = subDict.get(key,"Leaf name not found")
+            return value
+        # Just for old version for applying cuts (i.e. applyCuts() method)
+        else:
+            return self.cutDict.get(key,"Leaf name not found")
+
+    # A simple progress bar to use in loops
     def progressBar(self,value, endvalue, bar_length):
 
         percent = float(value) / endvalue
@@ -301,31 +413,7 @@ class pyPlot(pyDict):
         sys.stdout.write(" \r[{0}] {1}%".format(arrow + spaces, int(round(percent * 100))))
         sys.stdout.flush()
 
-    # Recreates the histograms of the root file
-    def recreateLeaves(self):
-                
-        binwidth = 1.0
-    
-        i=1
-        print("Looing at TTree %s" % self.tree1)
-        print("Enter n to see next plot and q to exit program\n")
-        # for key,arr in self.T1_leafdict.dictionary().items():
-        for key,arr in self.T1_leafdict.items():
-            # print key, -
-            if (np.all(arr == 0.)):
-                print("Histogram %s: Empty array" % key)
-            elif ( 2. > len(arr)) :
-                print("Histogram %s: Only one element" % key)
-            else:
-                binwidth = (abs(arr).max())/100
-                plt.figure()
-                plt.hist(arr,bins=np.arange(min(arr), max(arr) + binwidth, binwidth),histtype='step', stacked=True, fill=False )
-                plt.title(key, fontsize =16)
-                foutname = 'fig_'+key+'.png'
-                i+=1
-
-        print("\nTTree %s completed" % self.tree1)
-
+    # Creates nice density plots using matplotlib
     def densityPlot(self,x,y,title,xlabel,ylabel,binx,biny,pyMisc,
                     xmin=None,xmax=None,ymin=None,ymax=None,cuts=None,figure=None,ax=None,layered=True):
         if cuts:
@@ -359,7 +447,7 @@ class pyPlot(pyDict):
             binVal = [pyMisc.setbin(x,binx),pyMisc.setbin(y,biny)]
         return [binVal, fig]
 
-
+    # Creates polar plots (useful for kaonlt analysis). Old script, has not been checked in a while.
     def polarPlot(self,theta,r,title,thetalabel,rlabel,bintheta,binr,pyMisc,
                   thetamin=None,thetamax=None,rmin=None,rmax=None,cuts=None,figure=None,ax=None):
 

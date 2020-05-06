@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-05-02 15:00:51 trottar"
+# Time-stamp: "2020-05-06 17:26:49 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -91,13 +91,14 @@ missmass = np.array(np.sqrt(abs(emiss*emiss-pmiss*pmiss)))
 
 r = klt.pyRoot()
 
-fout = '../../../../DB/CUTS/run_type/pid_eff.cuts'
+# fout = '../../../../DB/CUTS/run_type/pid_eff.cuts'
+fout = '../../../../DB/CUTS/run_type/test.cuts'
 
 # f = open('../../../../DB/CUTS/pid.cuts.tmp')
 
 # read in cuts file and make dictionary
 c = klt.pyPlot(None)
-readDict = c.read_dict(fout)
+readDict = c.read_dict(fout,runNum)
 
 # This method calls several methods in kaonlt package. It is required to create properly formated
 # dictionaries. The evaluation must be in the analysis script because the analysis variables (i.e. the
@@ -126,17 +127,23 @@ def make_cutDict(cut,inputDict=None):
         
     return inputDict
 
-cutDict = make_cutDict("h_ecut_eff")
-cutDict = make_cutDict("h_ecut_eff_no_cer",cutDict)
-cutDict = make_cutDict("h_ecut_eff_no_cal",cutDict)
-cutDict = make_cutDict("p_kcut_eff_no_hgcer",cutDict)
-cutDict = make_cutDict("p_kcut_eff_no_aero",cutDict)
-cutDict = make_cutDict("p_kcut_eff_no_cal",cutDict)
+# cutDict = make_cutDict("h_ecut_eff")
+# cutDict = make_cutDict("h_ecut_eff_no_cer",cutDict)
+# cutDict = make_cutDict("h_ecut_eff_no_cal",cutDict)
+# cutDict = make_cutDict("p_kcut_eff_no_hgcer",cutDict)
+# cutDict = make_cutDict("p_kcut_eff_no_aero",cutDict)
+# cutDict = make_cutDict("p_kcut_eff_no_cal",cutDict)
+# cutDict = make_cutDict("h_track_lumi_before",cutDict)
+cutDict = make_cutDict("p_ecut_lumi_eff")
 c = klt.pyPlot(cutDict)
 print(cutDict)
 
 def hms_cer():
 
+
+    test = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"p_ecut_lumi_eff"))
+    print("\n\ntest",test)
+    
     t0 = time.time()
     # coin_noID_electron
     coin_noID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"h_ecut_no_cer")-47.5)

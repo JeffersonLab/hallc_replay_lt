@@ -1,2 +1,6 @@
-# eK coin time
-coin_ek_ROC1 = {"CTime_eKCoinTime_ROC1" : (((CTime_eKCoinTime_ROC1-ek_ROC1_offset) > ek_ROC1) & ((CTime_eKCoinTime_ROC1-ek_ROC1_offset) < ek_ROC1))}
+# pion coin time
+coin_pion_ROC1 = {"CTime_eKCoinTime_ROC1" : (abs(CTime_eKCoinTime_ROC1-CT.Pion_Prompt_Peak) > CT.RF_Offset)}
+# kaon coin time
+coin_kaon_ROC1 = {"CTime_eKCoinTime_ROC1" : (abs(CTime_eKCoinTime_ROC1-CT.Kaon_Prompt_Peak) > CT.RF_Offset)}
+# proton coin time
+coin_Proton_ROC1 = {"CTime_eKCoinTime_ROC1" : (abs(CTime_eKCoinTime_ROC1-CT.Proton_Prompt_Peak) > CT.RF_Offset)}

@@ -1,5 +1,5 @@
 # delta cuts
-delta = {"H_gtr_dp" : (abs(H_gtr_dp) < hms_dp_delta)}, {"P_gtr_dp" : ((P_gtr_dp > shms_dp_delta) | (P_gtr_dp < shms_dp_delta))}
-# xptar,yptar
-hms_ptar = {"H_gtr_th" : (abs(H_gtr_th) < hms_xptar_hms_ptar)}', {"H_gtr_ph" : (abs(H_gtr_ph) < hms_yptar_hms_ptar)}'
-shms_ptar = {"P_gtr_th" : (abs(P_gtr_th) < shms_xptar_shms_ptar)}', {"P_gtr_ph" : (abs(P_gtr_ph) < shms_yptar_shms_ptar)}'
+delta = {"H_gtr_dp" : ((H_gtr_dp > accept.H_del_low) & (H_gtr_dp < accept.H_del_high))}, {"P_gtr_dp" : ((P_gtr_dp > accept.P_del_low) & (P_gtr_dp < accept.P_del_high))}
+# xpfp,ypfp
+hms_pfp = {"H_gtr_th" : ((H_gtr_th > accept.H_xpfp_low) & (H_gtr_th < accept.H_xpfp_high))}, {"H_gtr_ph" : ((H_gtr_ph > accept.H_ypfp_low) & (H_gtr_ph < accept.H_ypfp_high))}
+P_pfp = {"P_gtr_th" : ((P_gtr_th > accept.P_xpfp_low) & (P_gtr_th < accept.P_xpfp_high))}, {"P_gtr_ph" : ((P_gtr_ph > accept.P_ypfp_low) & (P_gtr_ph < accept.P_ypfp_high))}

@@ -1,0 +1,2 @@
+# eK coin time
+coin_ek_ROC1 = {"CTime_eKCoinTime_ROC1" : (((CTime_eKCoinTime_ROC1-ek_ROC1_offset) > ek_ROC1) & ((CTime_eKCoinTime_ROC1-ek_ROC1_offset) < ek_ROC1))}

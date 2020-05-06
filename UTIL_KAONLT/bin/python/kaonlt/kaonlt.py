@@ -86,6 +86,8 @@ import matplotlib.pyplot as plt
 from matplotlib import interactive
 from matplotlib import colors
 import uproot as up
+import pandas as pd
+from csv import DictReader
 import time, math, sys
 
 # garbage collector
@@ -104,9 +106,10 @@ class pyDict(dict):
         self.inputTree = inputTree
         
 '''
-This class, with its findBranch method, will grab the leaves in a branch using uproot package
+This class, with its findBranch method, will grab the leaves in a branch using uproot package. This
+takes the tree as an input.
 '''
-class pyBranch():
+class pyBranch(pyDict):
 
     def findBranch(self,inputBranch, inputLeaf):
         tree = self.inputTree
@@ -151,7 +154,7 @@ class pyRoot():
             f.Write()
             f.Close()
         except TypeError:
-            print("\nERROR: Only current accepting 1D array/list values\n")
+            print("\nERROR 1: Only current accepting 1D array/list values\n")
 
 '''            
 This class stores a variety of equations often used in the KaonLT analysis procedure
@@ -198,7 +201,7 @@ class pyPlot(pyDict):
         return arrPlot
 
     # This method reads in the CUTS and converts them to a dictionary. 
-    def read_dict(self,fout):
+    def read_dict(self,fout,runNum):
 
         # Open run type cuts of interest
         f = open(fout)
@@ -246,7 +249,7 @@ class pyPlot(pyDict):
                     elif "current" in cutplus:
                         plusfout = "../../../../DB/CUTS/general/current.cuts"
                     else:
-                        print("ERROR: Cut %s not found" % cutplus)
+                        print("ERROR 2: Cut %s not found" % cutplus)
                         continue
                     if "pid" in cutminus:
                         minusfout = "../../../../DB/CUTS/general/pid.cuts"
@@ -261,7 +264,7 @@ class pyPlot(pyDict):
                     elif "none" in cutminus:
                         minusfout = "none"
                     else:
-                        print("ERROR: Cut %s not found" % cutminus)
+                        print("ERROR 3: Cut %s not found" % cutminus)
                         continue
                     # Break down the cut to be removed to find specific leaf to be subtracted from
                     # dictionary
@@ -272,7 +275,7 @@ class pyPlot(pyDict):
                     elif minuscut == ['none']:
                         cutminus = "none"
                     else:
-                        print("ERROR: Invalid syntax for removing cut %s " % (minuscut))
+                        print("ERROR 4: Invalid syntax for removing cut %s " % (minuscut))
                         continue
                     cutplus = cutplus.split(".")
                     if len(cutplus) == 2:
@@ -282,7 +285,7 @@ class pyPlot(pyDict):
                         cutplus = str(cutplus[2])
                         print("cutplus ", cutplus)
                     else:
-                        print("ERROR: %s cut not found in %s" % (cutplus,plusfout))
+                        print("ERROR 5: %s cut not found in %s" % (cutplus,plusfout))
                         continue
 
                     # Open general cuts file of interest to be added to dictionary
@@ -307,15 +310,19 @@ class pyPlot(pyDict):
                                 if typName in cutDict.keys():
                                     if cuts not in cutDict.items():
                                         # If run type already defined, then append dictionary key
+                                        print("cuts",cuts)
+                                        db_cut = self.search_DB(cuts,runNum)
                                         print(typName, " already found!!!!")
-                                        cutDict[typName] += ","+cuts
+                                        cutDict[typName] += ","+db_cut
                                 else:
                                     # If run type not defined, then add key to dictionary
-                                    cutName = {typName : cuts}
+                                    print("cuts",cuts)
+                                    db_cut = self.search_DB(cuts,runNum)
+                                    cutName = {typName : db_cut}
                                     cutDict.update(cutName)
                                 print(lplus[0],"++>",cutDict[typName])
                             else:
-                                print("ERROR: %s cut does not match %s" % (cutplus,lplus[0]))
+                                print("ERROR 6: %s cut does not match %s" % (cutplus,lplus[0]))
                                 continue
                     
                     for lminus in fminus:
@@ -332,18 +339,495 @@ class pyPlot(pyDict):
                                 for remove in arr_cuts:
                                     # Check which cut matches the one wanted to be removed
                                     if leafminus in remove:
-                                        print("```````````````",remove)
+                                        print("Removing... ",remove)
                                         # Replace unwanted cut with blank string
                                         cutDict[typName] = cutDict[typName].replace(remove,"")
                                 print(lminus[0],"-->",cutDict[typName])
                             else:
-                                print("ERROR: %s cut does not match %s" % (cutminus,lminus[0]))
+                                print("ERROR 7: %s cut does not match %s" % (cutminus,lminus[0]))
                                 continue
                 print("\n\n")
         fplus.close()
         f.close()
         print(cutDict.keys())
         return cutDict
+
+    def search_DB(self,cuts,runNum):
+
+        # Split all cuts
+        cuts = cuts.split(",")
+        db_cuts = []
+        for cut in cuts:
+            # Find which cut is being called
+            if "H_track" in cut:
+                if ("&" or "|") in cut:
+                    if "&" in cut:
+                        conj = cut.split("&")
+                    if "|" in cut:
+                        conj = cut.split("|")
+                    for a in conj:
+                        tmp = a.split(".")
+                        tmp = tmp[1].split(")")[0]
+                        fout = "../../../../../UTIL_PROTON/config/cuts/Tracking_Parameters.csv"
+                        try:
+                            data = dict(pd.read_csv(fout))
+                        except IOError:
+                            print("ERROR 9: %s not found in %s" % (tmp,fout))
+                        for i,evt in enumerate(data['Run_Start']):
+                            if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                                cut  = cut.replace("H_track."+tmp,str(data[tmp][i]))
+                                pass
+                            else:
+                                print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                                continue
+                    db_cuts.append(cut)
+                else:
+                    tmp = cut.split(".")
+                    tmp = tmp[1].split(")")[0]
+                    fout = "../../../../../UTIL_PROTON/config/cuts/Tracking_Parameters.csv"
+                    try:
+                        data = dict(pd.read_csv(fout))
+                    except IOError:
+                        print("ERROR 9: %s not found in %s" % (tmp,fout))
+                    for i,evt in enumerate(data['Run_Start']):
+                        if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                            cut  = cut.replace("H_track."+tmp,str(data[tmp][i]))
+                            pass
+                        else:
+                            print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                            continue
+                    db_cuts.append(cut)
+            elif "P_track" in cut:
+                if ("&" or "|") in cut:
+                    if "&" in cut:
+                        conj = cut.split("&")
+                    if "|" in cut:
+                        conj = cut.split("|")
+                    for a in conj:
+                        tmp = a.split(".")
+                        tmp = tmp[1].split(")")[0]
+                        fout = "../../../../../UTIL_PROTON/config/cuts/Tracking_Parameters.csv"
+                        try:
+                            data = dict(pd.read_csv(fout))
+                        except IOError:
+                            print("ERROR 9: %s not found in %s" % (tmp,fout))
+                        for i,evt in enumerate(data['Run_Start']):
+                            if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                                cut  = cut.replace("P_track."+tmp,str(data[tmp][i]))
+                                pass
+                            else:
+                                print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                                continue
+                    db_cuts.append(cut)
+                else:
+                    tmp = cut.split(".")
+                    tmp = tmp[1].split(")")[0]
+                    fout = "../../../../../UTIL_PROTON/config/cuts/Tracking_Parameters.csv"
+                    try:
+                        data = dict(pd.read_csv(fout))
+                    except IOError:
+                        print("ERROR 9: %s not found in %s" % (tmp,fout))
+                    for i,evt in enumerate(data['Run_Start']):
+                        if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                            cut  = cut.replace("P_track."+tmp,str(data[tmp][i]))
+                            pass
+                        else:
+                            print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                            continue
+                    db_cuts.append(cut)
+            elif "accept" in cut:
+                if ("&" or "|") in cut:
+                    if "&" in cut:
+                        conj = cut.split("&")
+                    if "|" in cut:
+                        conj = cut.split("|")
+                    for a in conj:
+                        tmp = a.split(".")
+                        tmp = tmp[1].split(")")[0]
+                        fout = "../../../../../UTIL_PROTON/config/cuts/Acceptance_Parameters.csv"
+                        try:
+                            data = dict(pd.read_csv(fout))
+                        except IOError:
+                            print("ERROR 9: %s not found in %s" % (tmp,fout))
+                        for i,evt in enumerate(data['Run_Start']):
+                            if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                                cut  = cut.replace("accept."+tmp,str(data[tmp][i]))
+                                pass
+                            else:
+                                print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                                continue
+                    db_cuts.append(cut)
+                else:
+                    tmp = cut.split(".")
+                    tmp = tmp[1].split(")")[0]
+                    fout = "../../../../../UTIL_PROTON/config/cuts/Acceptance_Parameters.csv"
+                    try:
+                        data = dict(pd.read_csv(fout))
+                    except IOError:
+                        print("ERROR 9: %s not found in %s" % (tmp,fout))
+                    for i,evt in enumerate(data['Run_Start']):
+                        if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                            cut  = cut.replace("accept."+tmp,str(data[tmp][i]))
+                            pass
+                        else:
+                            print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                            continue
+                    db_cuts.append(cut)
+            elif "CT" in cut:
+                if ("&" or "|") in cut:
+                    if "&" in cut:
+                        conj = cut.split("&")
+                    if "|" in cut:
+                        conj = cut.split("|")
+                    for a in conj:
+                        tmp = a.split(".")
+                        tmp = tmp[1].split(")")[0]
+                        fout = "../../../../../UTIL_PROTON/config/cuts/Timing_Parameters.csv"
+                        try:
+                            data = dict(pd.read_csv(fout))
+                        except IOError:
+                            print("ERROR 9: %s not found in %s" % (tmp,fout))
+                        for i,evt in enumerate(data['Run_Start']):
+                            if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                                cut  = cut.replace("CT."+tmp,str(data[tmp][i]))
+                                pass
+                            else:
+                                print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                                continue
+                    db_cuts.append(cut)
+                else:
+                    tmp = cut.split(".")
+                    tmp = tmp[1].split(")")[0]
+                    fout = "../../../../../UTIL_PROTON/config/cuts/Timing_Parameters.csv"
+                    try:
+                        data = dict(pd.read_csv(fout))
+                    except IOError:
+                        print("ERROR 9: %s not found in %s" % (tmp,fout))
+                    for i,evt in enumerate(data['Run_Start']):
+                        if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                            cut  = cut.replace("CT."+tmp,str(data[tmp][i]))
+                            pass
+                        else:
+                            print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                            continue
+                    db_cuts.append(cut)
+            elif "H_ecut" in cut:
+                if ("&" or "|") in cut:
+                    if "&" in cut:
+                        conj = cut.split("&")
+                    if "|" in cut:
+                        conj = cut.split("|")
+                    for a in conj:
+                        tmp = a.split(".")
+                        tmp = tmp[1].split(")")[0]
+                        fout = "../../../../../UTIL_PROTON/config/cuts/PID_Parameters.csv"
+                        try:
+                            data = dict(pd.read_csv(fout))
+                        except IOError:
+                            print("ERROR 9: %s not found in %s" % (tmp,fout))
+                        for i,evt in enumerate(data['Run_Start']):
+                            if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                                cut  = cut.replace("H_ecut."+tmp,str(data[tmp][i]))
+                                pass
+                            else:
+                                print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                                continue
+                    db_cuts.append(cut)
+                else:
+                    tmp = cut.split(".")
+                    tmp = tmp[1].split(")")[0]
+                    fout = "../../../../../UTIL_PROTON/config/cuts/PID_Parameters.csv"
+                    try:
+                        data = dict(pd.read_csv(fout))
+                    except IOError:
+                        print("ERROR 9: %s not found in %s" % (tmp,fout))
+                    for i,evt in enumerate(data['Run_Start']):
+                        if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                            cut  = cut.replace("H_ecut."+tmp,str(data[tmp][i]))
+                            pass
+                        else:
+                            print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                            continue
+                    db_cuts.append(cut)
+            elif "P_ecut" in cut:
+                if ("&" or "|") in cut:
+                    if "&" in cut:
+                        conj = cut.split("&")
+                    if "|" in cut:
+                        conj = cut.split("|")
+                    for a in conj:
+                        tmp = a.split(".")
+                        tmp = tmp[1].split(")")[0]
+                        fout = "../../../../../UTIL_PROTON/config/cuts/PID_Parameters.csv"
+                        try:
+                            data = dict(pd.read_csv(fout))
+                        except IOError:
+                            print("ERROR 9: %s not found in %s" % (tmp,fout))
+                        for i,evt in enumerate(data['Run_Start']):
+                            if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                                cut  = cut.replace("P_ecut."+tmp,str(data[tmp][i]))
+                                pass
+                            else:
+                                print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                                continue
+                    db_cuts.append(cut)
+                else:
+                    tmp = cut.split(".")
+                    tmp = tmp[1].split(")")[0]
+                    fout = "../../../../../UTIL_PROTON/config/cuts/PID_Parameters.csv"
+                    try:
+                        data = dict(pd.read_csv(fout))
+                    except IOError:
+                        print("ERROR 9: %s not found in %s" % (tmp,fout))
+                    for i,evt in enumerate(data['Run_Start']):
+                        if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                            cut  = cut.replace("P_ecut."+tmp,str(data[tmp][i]))
+                            pass
+                        else:
+                            print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                            continue
+                    db_cuts.append(cut)
+            elif "H_picut" in cut:
+                if ("&" or "|") in cut:
+                    if "&" in cut:
+                        conj = cut.split("&")
+                    if "|" in cut:
+                        conj = cut.split("|")
+                    for a in conj:
+                        tmp = a.split(".")
+                        tmp = tmp[1].split(")")[0]
+                        fout = "../../../../../UTIL_PROTON/config/cuts/PID_Parameters.csv"
+                        try:
+                            data = dict(pd.read_csv(fout))
+                        except IOError:
+                            print("ERROR 9: %s not found in %s" % (tmp,fout))
+                        for i,evt in enumerate(data['Run_Start']):
+                            if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                                cut  = cut.replace("H_picut."+tmp,str(data[tmp][i]))
+                                pass
+                            else:
+                                print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                                continue
+                    db_cuts.append(cut)
+                else:
+                    tmp = cut.split(".")
+                    tmp = tmp[1].split(")")[0]
+                    fout = "../../../../../UTIL_PROTON/config/cuts/PID_Parameters.csv"
+                    try:
+                        data = dict(pd.read_csv(fout))
+                    except IOError:
+                        print("ERROR 9: %s not found in %s" % (tmp,fout))
+                    for i,evt in enumerate(data['Run_Start']):
+                        if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                            cut  = cut.replace("H_picut."+tmp,str(data[tmp][i]))
+                            pass
+                        else:
+                            print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                            continue
+                    db_cuts.append(cut)
+            elif "P_picut" in cut:
+                if ("&" or "|") in cut:
+                    if "&" in cut:
+                        conj = cut.split("&")
+                    if "|" in cut:
+                        conj = cut.split("|")
+                    for a in conj:
+                        tmp = a.split(".")
+                        tmp = tmp[1].split(")")[0]
+                        fout = "../../../../../UTIL_PROTON/config/cuts/PID_Parameters.csv"
+                        try:
+                            data = dict(pd.read_csv(fout))
+                        except IOError:
+                            print("ERROR 9: %s not found in %s" % (tmp,fout))
+                        for i,evt in enumerate(data['Run_Start']):
+                            if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                                cut  = cut.replace("P_picut."+tmp,str(data[tmp][i]))
+                                pass
+                            else:
+                                print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                                continue
+                    db_cuts.append(cut)
+                else:
+                    tmp = cut.split(".")
+                    tmp = tmp[1].split(")")[0]
+                    fout = "../../../../../UTIL_PROTON/config/cuts/PID_Parameters.csv"
+                    try:
+                        data = dict(pd.read_csv(fout))
+                    except IOError:
+                        print("ERROR 9: %s not found in %s" % (tmp,fout))
+                    for i,evt in enumerate(data['Run_Start']):
+                        if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                            cut  = cut.replace("P_picut."+tmp,str(data[tmp][i]))
+                            pass
+                        else:
+                            print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                            continue
+                    db_cuts.append(cut)
+            elif "H_hadcut" in cut:
+                if ("&" or "|") in cut:
+                    if "&" in cut:
+                        conj = cut.split("&")
+                    if "|" in cut:
+                        conj = cut.split("|")
+                    for a in conj:
+                        tmp = a.split(".")
+                        tmp = tmp[1].split(")")[0]
+                        fout = "../../../../../UTIL_PROTON/config/cuts/PID_Parameters.csv"
+                        try:
+                            data = dict(pd.read_csv(fout))
+                        except IOError:
+                            print("ERROR 9: %s not found in %s" % (tmp,fout))
+                        for i,evt in enumerate(data['Run_Start']):
+                            if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                                cut  = cut.replace("H_hadcut."+tmp,str(data[tmp][i]))
+                                pass
+                            else:
+                                print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                                continue
+                    db_cuts.append(cut)
+                else:
+                    tmp = cut.split(".")
+                    tmp = tmp[1].split(")")[0]
+                    fout = "../../../../../UTIL_PROTON/config/cuts/PID_Parameters.csv"
+                    try:
+                        data = dict(pd.read_csv(fout))
+                    except IOError:
+                        print("ERROR 9: %s not found in %s" % (tmp,fout))
+                    for i,evt in enumerate(data['Run_Start']):
+                        if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                            cut  = cut.replace("H_hadcut."+tmp,str(data[tmp][i]))
+                            pass
+                        else:
+                            print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                            continue
+                    db_cuts.append(cut)
+            elif "P_hadcut" in cut:
+                if ("&" or "|") in cut:
+                    if "&" in cut:
+                        conj = cut.split("&")
+                    if "|" in cut:
+                        conj = cut.split("|")
+                    for a in conj:
+                        tmp = a.split(".")
+                        tmp = tmp[1].split(")")[0]
+                        fout = "../../../../../UTIL_PROTON/config/cuts/PID_Parameters.csv"
+                        try:
+                            data = dict(pd.read_csv(fout))
+                        except IOError:
+                            print("ERROR 9: %s not found in %s" % (tmp,fout))
+                        for i,evt in enumerate(data['Run_Start']):
+                            if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                                cut  = cut.replace("P_hadcut."+tmp,str(data[tmp][i]))
+                                pass
+                            else:
+                                print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                                continue
+                    db_cuts.append(cut)
+                else:
+                    tmp = cut.split(".")
+                    tmp = tmp[1].split(")")[0]
+                    fout = "../../../../../UTIL_PROTON/config/cuts/PID_Parameters.csv"
+                    try:
+                        data = dict(pd.read_csv(fout))
+                    except IOError:
+                        print("ERROR 9: %s not found in %s" % (tmp,fout))
+                    for i,evt in enumerate(data['Run_Start']):
+                        if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                            cut  = cut.replace("P_hadcut."+tmp,str(data[tmp][i]))
+                            pass
+                        else:
+                            print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                            continue
+                    db_cuts.append(cut)
+            elif "P_kcut" in cut:
+                if ("&" or "|") in cut:
+                    if "&" in cut:
+                        conj = cut.split("&")
+                    if "|" in cut:
+                        conj = cut.split("|")
+                    for a in conj:
+                        tmp = a.split(".")
+                        tmp = tmp[1].split(")")[0]
+                        fout = "../../../../../UTIL_PROTON/config/cuts/PID_Parameters.csv"
+                        try:
+                            data = dict(pd.read_csv(fout))
+                        except IOError:
+                            print("ERROR 9: %s not found in %s" % (tmp,fout))
+                        for i,evt in enumerate(data['Run_Start']):
+                            if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                                cut  = cut.replace("P_kcut."+tmp,str(data[tmp][i]))
+                                pass
+                            else:
+                                print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                                continue
+                    db_cuts.append(cut)
+                else:
+                    tmp = cut.split(".")
+                    tmp = tmp[1].split(")")[0]
+                    fout = "../../../../../UTIL_PROTON/config/cuts/PID_Parameters.csv"
+                    try:
+                        data = dict(pd.read_csv(fout))
+                    except IOError:
+                        print("ERROR 9: %s not found in %s" % (tmp,fout))
+                    for i,evt in enumerate(data['Run_Start']):
+                        if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                            cut  = cut.replace("P_kcut."+tmp,str(data[tmp][i]))
+                            pass
+                        else:
+                            print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                            continue
+                    db_cuts.append(cut)
+            elif "P_pcut" in cut:
+                if ("&" or "|") in cut:
+                    if "&" in cut:
+                        conj = cut.split("&")
+                    if "|" in cut:
+                        conj = cut.split("|")
+                    for a in conj:
+                        tmp = a.split(".")
+                        tmp = tmp[1].split(")")[0]
+                        fout = "../../../../../UTIL_PROTON/config/cuts/PID_Parameters.csv"
+                        try:
+                            data = dict(pd.read_csv(fout))
+                        except IOError:
+                            print("ERROR 9: %s not found in %s" % (tmp,fout))
+                        for i,evt in enumerate(data['Run_Start']):
+                            if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                                cut  = cut.replace("P_pcut."+tmp,str(data[tmp][i]))
+                                pass
+                            else:
+                                print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                                continue
+                    db_cuts.append(cut)
+                else:
+                    tmp = cut.split(".")
+                    tmp = tmp[1].split(")")[0]
+                    fout = "../../../../../UTIL_PROTON/config/cuts/PID_Parameters.csv"
+                    try:
+                        data = dict(pd.read_csv(fout))
+                    except IOError:
+                        print("ERROR 9: %s not found in %s" % (tmp,fout))
+                    for i,evt in enumerate(data['Run_Start']):
+                        if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                            cut  = cut.replace("P_pcut."+tmp,str(data[tmp][i]))
+                            pass
+                        else:
+                            print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                            continue
+                    db_cuts.append(cut)
+            elif "current" in cut:
+                tmp = cut.split(".")
+                tmp = tmp[1].split(")")[0]
+                print("****tmp",tmp)
+                cut  = cut.replace("current."+tmp,"2.5")
+                db_cuts.append(cut)
+                print("!!!!",cut)
+            else:
+                print("ERROR 11: %s not defined" % cut)
+                continue
+            
+        db_cuts  = ','.join(db_cuts)
+        return db_cuts
 
     # Create a working dictionary for cuts by converting string to array of cuts.
     def w_dict(self,cuts):

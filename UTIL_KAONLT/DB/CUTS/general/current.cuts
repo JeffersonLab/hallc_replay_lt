@@ -1,5 +1,5 @@
-bcm1 = {"H_bcm_bcm1_AvgCurrent" : (H_bcm_bcm1_AvgCurrent > thres_curr)}
-bcm2 = {"H_bcm_bcm2_AvgCurrent" : (H_bcm_bcm2_AvgCurrent > thres_curr)}
-bcm4a = {"H_bcm_bcm4a_AvgCurrent" : (H_bcm_bcm4a_AvgCurrent > thres_curr)}
-bcm4b = {"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > thres_curr)}
-bcm4c = {"H_bcm_bcm4c_AvgCurrent" : (H_bcm_bcm4c_AvgCurrent > thres_curr)}
+bcm1 = {"H_bcm_bcm1_AvgCurrent" : (H_bcm_bcm1_AvgCurrent > current.thres)}
+bcm2 = {"H_bcm_bcm2_AvgCurrent" : (H_bcm_bcm2_AvgCurrent > current.thres)}
+bcm4a = {"H_bcm_bcm4a_AvgCurrent" : (H_bcm_bcm4a_AvgCurrent > current.thres)}
+bcm4b = {"H_bcm_bcm4b_AvgCurrent" : (H_bcm_bcm4b_AvgCurrent > current.thres)}
+bcm4c = {"H_bcm_bcm4c_AvgCurrent" : (H_bcm_bcm4c_AvgCurrent > current.thres)}

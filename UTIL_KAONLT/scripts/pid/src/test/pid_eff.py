@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-05-06 17:26:49 trottar"
+# Time-stamp: "2020-05-06 17:44:08 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -133,7 +133,6 @@ def make_cutDict(cut,inputDict=None):
 # cutDict = make_cutDict("p_kcut_eff_no_hgcer",cutDict)
 # cutDict = make_cutDict("p_kcut_eff_no_aero",cutDict)
 # cutDict = make_cutDict("p_kcut_eff_no_cal",cutDict)
-# cutDict = make_cutDict("h_track_lumi_before",cutDict)
 cutDict = make_cutDict("p_ecut_lumi_eff")
 c = klt.pyPlot(cutDict)
 print(cutDict)
@@ -142,7 +141,7 @@ def hms_cer():
 
 
     test = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"p_ecut_lumi_eff"))
-    print("\n\ntest",test)
+    print("\n\ntest",len(test))
     
     t0 = time.time()
     # coin_noID_electron

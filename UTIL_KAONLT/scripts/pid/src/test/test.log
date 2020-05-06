@@ -395,5 +395,4 @@ x  [' {"H_gtr_dp" : ((H_gtr_dp > -8) & (H_gtr_dp < 8))}', ' {"P_gtr_dp" : ((P_gt
 {'p_ecut_lumi_eff': {'H_gtr_dp': array([ True, False, False, ...,  True,  True,  True]), 'P_gtr_dp': array([ True, False, False, ...,  True,  True, False]), 'H_gtr_th': array([ True, False, False, ...,  True,  True, False]), 'H_gtr_ph': array([ True, False, False, ...,  True,  True, False])}}
 
 
-test [60.68604437 23.48432935 92.96880096 ... 44.21901574 31.67387538
- 41.52836019]
+test 8632

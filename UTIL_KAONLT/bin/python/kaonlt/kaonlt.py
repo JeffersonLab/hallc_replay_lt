@@ -311,12 +311,14 @@ class pyPlot(pyDict):
                                     if cuts not in cutDict.items():
                                         # If run type already defined, then append dictionary key
                                         print("cuts",cuts)
+                                        # Grabs parameters from DB (see below)
                                         db_cut = self.search_DB(cuts,runNum)
                                         print(typName, " already found!!!!")
                                         cutDict[typName] += ","+db_cut
                                 else:
                                     # If run type not defined, then add key to dictionary
                                     print("cuts",cuts)
+                                    # Grabs parameters from DB (see below)
                                     db_cut = self.search_DB(cuts,runNum)
                                     cutName = {typName : db_cut}
                                     cutDict.update(cutName)
@@ -352,29 +354,37 @@ class pyPlot(pyDict):
         print(cutDict.keys())
         return cutDict
 
+    # Grabs the cut parameters from the database. In essence this method simply replaces one string
+    # with another
     def search_DB(self,cuts,runNum):
 
-        # Split all cuts
+        # Split all cuts into a list
         cuts = cuts.split(",")
         db_cuts = []
         for cut in cuts:
             # Find which cut is being called
             if "H_track" in cut:
+                # Check if multiple cuts
                 if ("&" or "|") in cut:
                     if "&" in cut:
                         conj = cut.split("&")
                     if "|" in cut:
                         conj = cut.split("|")
+                    # Split multiple cuts
                     for a in conj:
                         tmp = a.split(".")
                         tmp = tmp[1].split(")")[0]
+                        # Convert database to a dictionary
                         fout = "../../../../../UTIL_PROTON/config/cuts/Tracking_Parameters.csv"
                         try:
                             data = dict(pd.read_csv(fout))
                         except IOError:
                             print("ERROR 9: %s not found in %s" % (tmp,fout))
+                        # Loop over values in dictionary
                         for i,evt in enumerate(data['Run_Start']):
+                            # Find data for specific run number
                             if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                                # Replace variable name with DB value
                                 cut  = cut.replace("H_track."+tmp,str(data[tmp][i]))
                                 pass
                             else:
@@ -389,14 +399,19 @@ class pyPlot(pyDict):
                         data = dict(pd.read_csv(fout))
                     except IOError:
                         print("ERROR 9: %s not found in %s" % (tmp,fout))
+                    # Loop over values in dictionary
                     for i,evt in enumerate(data['Run_Start']):
+                        # Find data for specific run number
                         if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                            # Replace variable name with DB value
                             cut  = cut.replace("H_track."+tmp,str(data[tmp][i]))
                             pass
                         else:
                             print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
                             continue
                     db_cuts.append(cut)
+            # Find which cut is being called. The next few elif statements are set up exactly the same
+            # as H_track. See above for comments on implimentation.
             elif "P_track" in cut:
                 if ("&" or "|") in cut:
                     if "&" in cut:
@@ -815,6 +830,8 @@ class pyPlot(pyDict):
                             print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
                             continue
                     db_cuts.append(cut)
+            # Find which cut is being called. This elif statement is a little different since it only
+            # grabs a threshold current value. This is hardcoded for now, eventually need to change.
             elif "current" in cut:
                 tmp = cut.split(".")
                 tmp = tmp[1].split(")")[0]
@@ -825,7 +842,7 @@ class pyPlot(pyDict):
             else:
                 print("ERROR 11: %s not defined" % cut)
                 continue
-            
+        # Rejoins list of cuts to a string separated by commas
         db_cuts  = ','.join(db_cuts)
         return db_cuts
 

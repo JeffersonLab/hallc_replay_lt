@@ -1,20 +1,20 @@
 ################
 # HMS pid cuts #
 ################
-h_ecut = {"P_cal_etotnorm" : (P_cal_etotnorm < H_ecut.P_cal)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < H_ecut.H_beta)}, {"H_cer_npeSum" : (H_cer_npeSum > H_ecut.H_cer)}, {"H_cal_etotnorm" : (H_cal_etotnorm > H_ecut.H_cal)}
+h_ecut = {"P_cal_etotnorm" : (P_cal_etotnorm < pid.H_ecut_P_cal)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < pid.H_ecut_H_beta)}, {"H_cer_npeSum" : (H_cer_npeSum > pid.H_ecut_H_cer)}, {"H_cal_etotnorm" : (H_cal_etotnorm > pid.H_ecut_H_cal)}
 #
-h_picut = {"P_cal_etotnorm" : (P_cal_etotnorm < H_picut.P_cal)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < H_picut.H_beta)}, {"H_cer_npeSum" : (H_cer_npeSum > H_picut.H_cer)}, {"H_cal_etotnorm" : (H_cal_etotnorm > H_picut.H_cal)}
+h_picut = {"P_cal_etotnorm" : (P_cal_etotnorm < pid.H_picut_P_cal)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < pid.H_picut_H_beta)}, {"H_cer_npeSum" : (H_cer_npeSum > pid.H_picut_H_cer)}, {"H_cal_etotnorm" : (H_cal_etotnorm > pid.H_picut_H_cal)}
 #
-h_hadcut = {"P_cal_etotnorm" : (P_cal_etotnorm < H_hadcut.P_cal)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < H_hadcut.H_beta)}, {"H_cer_npeSum" : (H_cer_npeSum > H_hadcut.H_cer)}, {"H_cal_etotnorm" : (H_cal_etotnorm > H_hadcut.H_cal)}
+h_hadcut = {"P_cal_etotnorm" : (P_cal_etotnorm < pid.H_hadcut_P_cal)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < pid.H_hadcut_H_beta)}, {"H_cer_npeSum" : (H_cer_npeSum > pid.H_hadcut_H_cer)}, {"H_cal_etotnorm" : (H_cal_etotnorm > pid.H_hadcut_H_cal)}
 #################
 # SHMSe pid cuts #
 #################
-p_ecut = {"H_cal_etotnorm" : (H_cal_etotnorm > P_ecut.H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > P_ecut.H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < P_ecut.P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > P_ecut.P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > P_ecut.P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > P_ecut.P_cal)}
+p_ecut = {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_ecut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_ecut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_ecut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_ecut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_ecut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_ecut_P_cal)}
 #
-p_picut = {"H_cal_etotnorm" : (H_cal_etotnorm > P_picut.H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > P_picut.H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < P_picut.P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > P_picut.P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > P_picut.P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > P_picut.P_cal)}
+p_picut = {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_picut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_picut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_picut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_picut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_picut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_picut_P_cal)}
 #
-p_kcut = {"H_cal_etotnorm" : (H_cal_etotnorm > P_kcut.H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > P_kcut.H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < P_kcut.P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > P_kcut.P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > P_kcut.P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > P_kcut.P_cal)}
+p_kcut = {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_kcut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_kcut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_kcut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_kcut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_kcut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_kcut_P_cal)}
 #
-p_pcut = {"H_cal_etotnorm" : (H_cal_etotnorm > P_pcut.H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > P_pcut.H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < P_pcut.P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > P_pcut.P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > P_pcut.P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > P_pcut.P_cal)}
+p_pcut = {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_pcut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_pcut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_pcut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_pcut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_pcut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_pcut_P_cal)}
 #
-p_hadcut = {"H_cal_etotnorm" : (H_cal_etotnorm > P_hadcut.H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > P_hadcut.H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < P_hadcut.P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > P_hadcut.P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > P_hadcut.P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > P_hadcut.P_cal)}
+p_hadcut = {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_hadcut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_hadcut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_hadcut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_hadcut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_hadcut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_hadcut_P_cal)}

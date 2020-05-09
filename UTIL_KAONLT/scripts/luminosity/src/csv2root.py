@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-05-04 19:49:31 trottar"
+# Time-stamp: "2020-05-08 21:29:01 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -15,8 +15,8 @@ from csv import DictReader
 import os, subprocess, sys
 
 sys.path.insert(0, '../../../bin/python/')
-import root2py as r2p
-r = r2p.pyRoot()
+import kaonlt as klt
+r = klt.pyRoot()
 
 csv = sys.argv[1]
 
@@ -41,7 +41,7 @@ if csv == "lumi_data":
     except IOError:
         print("Error: %s does not appear to exist." % inp_f)
     print(lumi_data.keys())
-    r.py2root(lumi_data,out_f)
+    r.csv2root(lumi_data,out_f)
 elif csv == "yield_data":
     inp_f = "%s/UTIL_KAONLT/scripts/luminosity/OUTPUTS/yield_data.csv" % str(REPLAYPATH)
     out_f = "%s/UTIL_KAONLT/scripts/luminosity/OUTPUTS/yield_data.root" % str(REPLAYPATH)
@@ -52,7 +52,7 @@ elif csv == "yield_data":
     print(yield_data.keys())
     for key,val in yield_data.items():
         yield_data[key] = eval(val.tolist()[0])
-    r.py2root(yield_data,out_f)
+    r.csv2root(yield_data,out_f)
 else:
     print("ERROR: Invalid csv")
     exit

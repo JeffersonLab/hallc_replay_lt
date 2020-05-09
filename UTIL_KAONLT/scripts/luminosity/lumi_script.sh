@@ -46,4 +46,4 @@ cd ${REPLAYPATH}/UTIL_KAONLT/scripts/luminosity/src/
 python3 lumiyield.py ${RUNNUMBER} ${MAXEVENTS}
 
 cd ${REPLAYPATH}/UTIL_KAONLT/scripts/luminosity/src/
-python3 csv2root.py "lumi_data"
+# python3 csv2root.py "lumi_data"

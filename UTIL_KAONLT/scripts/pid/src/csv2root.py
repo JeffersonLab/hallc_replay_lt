@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-29 12:09:45 trottar"
+# Time-stamp: "2020-05-08 21:29:13 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -15,8 +15,8 @@ from csv import DictReader
 import os, subprocess, sys
 
 sys.path.insert(0, '../../../bin/python/')
-import root2py as r2p
-r = r2p.pyRoot()
+import kaonlt as klt
+r = klt.pyRoot()
 
 # Add this to all files for more dynamic pathing
 USER = subprocess.getstatusoutput("whoami") # Grab user info for file finding
@@ -39,4 +39,4 @@ try:
 except IOError:
     print("Error: %s does not appear to exist." % inp_f)
 print(pid_data.keys())
-r.py2root(pid_data,out_f)
+r.csv2root(pid_data,out_f)

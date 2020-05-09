@@ -1,0 +1,52 @@
+All file should be COMMA separated with no tabs.
+Comments should be included with # at the END of a line
+Anything after a # is considered to be a comment
+E.g.
+4, 5, 6 #, 7, 7 ,8
+Will be interpreted as 4, 5, 6
+
+#######################################################################################
+
+Format of TIMING parameter file is -
+
+Run_Start Run_End	   Bunch_Spacing	CT_Offset	Pion_Prompt_Peak	Kaon_Prompt_Peak	Proton_Prompt_Peak RF_Offset
+	  
+where values here have beent tab separated for clarity.
+
+Run_Start -> First run number in setting/group
+Run_End -> Last run number in setting/group
+Bunch_Spacing -> Timing between each beam bucket hitting the target
+CT_Offset -> Adjustment to width of prompt timing window, prompt is between PromptPeak -(CT_Offset+Bunch_Spacing/2) and PromptPeak + (CT_Offset+Bunch_Spacing/2), adjust offset if not all of the peak is correctly being included
+Pion_Prompt_Peak -> Centroid of the prompt peak for the coin time calculated for pions. Note, you should base this upon the timing peak after PID (but without any BG subtraction)
+Pion_Prompt_Peak -> Centroid of the prompt peak for the coin time calculated for kaons. Note, you should base this upon the timing peak after PID (but without any BG subtraction)
+Pion_Prompt_Peak -> Centroid of the prompt peak for the coin time calculated for protons. Note, you should base this upon the timing peak after PID (but without any BG subtraction)
+RF_Offset -> Offset added to RF_Time difference to try and center all RF distributions (before cuts) at the same point
+
+#######################################################################################
+
+Format of PID parameter file is -
+
+#######################################################################################
+
+Format of ACCEPTANCE parameter file is -
+
+Run_Start Run_End    H_del_low H_del_high	H_xpfp_low	H_xpfp_high	H_ypfp_low	H_ypfp_high	P_del_low P_del_high	P_xpfp_low	P_xpfp_high	P_ypfp_low	P_ypfp_high
+
+where values here have beent tab separated for clarity.
+
+Run_Start -> First run number in setting/group
+Run_End -> Last run number in setting/group
+H_del_low -> Lower limit of delta range for HMS
+H_del_high -> Upper limit of delta range for HMS
+H_xpfp_low -> Lower limit of xpfp (theta) for HMS
+H_xpfp_high -> Upper limit of xpfp (theta) for HMS
+H_ypfp_low -> Lower limit of ypfp (phi) for HMS
+H_ypfp_high -> Upper limit of ypfp (phi) for HMS
+P_del_low -> Lower limit of delta range for SHMS
+P_del_high -> Upper limit of delta range for SHMS
+P_xpfp_low -> Lower limit of xpfp (theta) for SHMS
+P_xpfp_high -> Upper limit of xpfp (theta) for SHMS
+P_ypfp_low -> Lower limit of ypfp (phi) for SHMS
+P_ypfp_high -> Upper limit of ypfp (phi) for SHMS
+
+#######################################################################################

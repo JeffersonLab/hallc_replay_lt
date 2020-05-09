@@ -1,398 +1,1481 @@
-Type  p_ecut_lumi_eff
-Cuts  [' accept.delta', 'accept.hms_pfp']
-+  accept.delta
+Type  h_ecut_eff_no_cer
+Cuts  [' pid.h_ecut', 'coin_time.coin_ek_ROC1-pid.h_ecut.H_cer_npeSum\n']
++  pid.h_ecut
 -  none
-cutplus  delta
-delta  ++  delta 
-cuts  {"H_gtr_dp" : ((H_gtr_dp > accept.H_del_low) & (H_gtr_dp < accept.H_del_high))}, {"P_gtr_dp" : ((P_gtr_dp > accept.P_del_low) & (P_gtr_dp < accept.P_del_high))}
+cutplus  h_ecut
+h_ecut  ++  h_ecut 
+cuts  {"P_cal_etotnorm" : (P_cal_etotnorm < pid.H_ecut_P_cal)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < pid.H_ecut_H_beta)}, {"H_cer_npeSum" : (H_cer_npeSum > pid.H_ecut_H_cer)}, {"H_cal_etotnorm" : (H_cal_etotnorm > pid.H_ecut_H_cal)}
 
-ERROR 10: 6749 not found in range 4865-4870
-ERROR 10: 6749 not found in range 4871-4880
-ERROR 10: 6749 not found in range 4881-4890
-ERROR 10: 6749 not found in range 4891-4891
-ERROR 10: 6749 not found in range 4892-4912
-ERROR 10: 6749 not found in range 4913-4924
-ERROR 10: 6749 not found in range 4925-4944
-ERROR 10: 6749 not found in range 4945-4947
-ERROR 10: 6749 not found in range 4948-4959
-ERROR 10: 6749 not found in range 4965-4980
-ERROR 10: 6749 not found in range 4981-4998
-ERROR 10: 6749 not found in range 4999-5012
-ERROR 10: 6749 not found in range 5013-5039
-ERROR 10: 6749 not found in range 5040-5077
-ERROR 10: 6749 not found in range 5078-5123
-ERROR 10: 6749 not found in range 5124-5145
-ERROR 10: 6749 not found in range 5182-5220
-ERROR 10: 6749 not found in range 5221-5235
-ERROR 10: 6749 not found in range 5236-5250
-ERROR 10: 6749 not found in range 5251-5261
-ERROR 10: 6749 not found in range 5262-5263
-ERROR 10: 6749 not found in range 5264-5264
-ERROR 10: 6749 not found in range 5265-5270
-ERROR 10: 6749 not found in range 5271-5274
-ERROR 10: 6749 not found in range 5275-5294
-ERROR 10: 6749 not found in range 5304-5334
-ERROR 10: 6749 not found in range 6638-6708
-ERROR 10: 6749 not found in range 6790-6857
-ERROR 10: 6749 not found in range 6885-6920
-ERROR 10: 6749 not found in range 6921-6947
-ERROR 10: 6749 not found in range 6948-6971
-ERROR 10: 6749 not found in range 6972-6978
-ERROR 10: 6749 not found in range 6979-7045
-ERROR 10: 6749 not found in range 7871-7881
-ERROR 10: 6749 not found in range 7882-7888
-ERROR 10: 6749 not found in range 7891-7908
-ERROR 10: 6749 not found in range 7909-7938
-ERROR 10: 6749 not found in range 7978-7989
-ERROR 10: 6749 not found in range 7990-8002
-ERROR 10: 6749 not found in range 8003-8037
-ERROR 10: 6749 not found in range 8038-8110
-ERROR 10: 6749 not found in range 8111-8185
-ERROR 10: 6749 not found in range 8186-8246
-ERROR 10: 6749 not found in range 8251-8298
-ERROR 10: 6749 not found in range 8304-8356
-ERROR 10: 6749 not found in range 4865-4870
-ERROR 10: 6749 not found in range 4871-4880
-ERROR 10: 6749 not found in range 4881-4890
-ERROR 10: 6749 not found in range 4891-4891
-ERROR 10: 6749 not found in range 4892-4912
-ERROR 10: 6749 not found in range 4913-4924
-ERROR 10: 6749 not found in range 4925-4944
-ERROR 10: 6749 not found in range 4945-4947
-ERROR 10: 6749 not found in range 4948-4959
-ERROR 10: 6749 not found in range 4965-4980
-ERROR 10: 6749 not found in range 4981-4998
-ERROR 10: 6749 not found in range 4999-5012
-ERROR 10: 6749 not found in range 5013-5039
-ERROR 10: 6749 not found in range 5040-5077
-ERROR 10: 6749 not found in range 5078-5123
-ERROR 10: 6749 not found in range 5124-5145
-ERROR 10: 6749 not found in range 5182-5220
-ERROR 10: 6749 not found in range 5221-5235
-ERROR 10: 6749 not found in range 5236-5250
-ERROR 10: 6749 not found in range 5251-5261
-ERROR 10: 6749 not found in range 5262-5263
-ERROR 10: 6749 not found in range 5264-5264
-ERROR 10: 6749 not found in range 5265-5270
-ERROR 10: 6749 not found in range 5271-5274
-ERROR 10: 6749 not found in range 5275-5294
-ERROR 10: 6749 not found in range 5304-5334
-ERROR 10: 6749 not found in range 6638-6708
-ERROR 10: 6749 not found in range 6790-6857
-ERROR 10: 6749 not found in range 6885-6920
-ERROR 10: 6749 not found in range 6921-6947
-ERROR 10: 6749 not found in range 6948-6971
-ERROR 10: 6749 not found in range 6972-6978
-ERROR 10: 6749 not found in range 6979-7045
-ERROR 10: 6749 not found in range 7871-7881
-ERROR 10: 6749 not found in range 7882-7888
-ERROR 10: 6749 not found in range 7891-7908
-ERROR 10: 6749 not found in range 7909-7938
-ERROR 10: 6749 not found in range 7978-7989
-ERROR 10: 6749 not found in range 7990-8002
-ERROR 10: 6749 not found in range 8003-8037
-ERROR 10: 6749 not found in range 8038-8110
-ERROR 10: 6749 not found in range 8111-8185
-ERROR 10: 6749 not found in range 8186-8246
-ERROR 10: 6749 not found in range 8251-8298
-ERROR 10: 6749 not found in range 8304-8356
-ERROR 10: 6749 not found in range 4865-4870
-ERROR 10: 6749 not found in range 4871-4880
-ERROR 10: 6749 not found in range 4881-4890
-ERROR 10: 6749 not found in range 4891-4891
-ERROR 10: 6749 not found in range 4892-4912
-ERROR 10: 6749 not found in range 4913-4924
-ERROR 10: 6749 not found in range 4925-4944
-ERROR 10: 6749 not found in range 4945-4947
-ERROR 10: 6749 not found in range 4948-4959
-ERROR 10: 6749 not found in range 4965-4980
-ERROR 10: 6749 not found in range 4981-4998
-ERROR 10: 6749 not found in range 4999-5012
-ERROR 10: 6749 not found in range 5013-5039
-ERROR 10: 6749 not found in range 5040-5077
-ERROR 10: 6749 not found in range 5078-5123
-ERROR 10: 6749 not found in range 5124-5145
-ERROR 10: 6749 not found in range 5182-5220
-ERROR 10: 6749 not found in range 5221-5235
-ERROR 10: 6749 not found in range 5236-5250
-ERROR 10: 6749 not found in range 5251-5261
-ERROR 10: 6749 not found in range 5262-5263
-ERROR 10: 6749 not found in range 5264-5264
-ERROR 10: 6749 not found in range 5265-5270
-ERROR 10: 6749 not found in range 5271-5274
-ERROR 10: 6749 not found in range 5275-5294
-ERROR 10: 6749 not found in range 5304-5334
-ERROR 10: 6749 not found in range 6638-6708
-ERROR 10: 6749 not found in range 6790-6857
-ERROR 10: 6749 not found in range 6885-6920
-ERROR 10: 6749 not found in range 6921-6947
-ERROR 10: 6749 not found in range 6948-6971
-ERROR 10: 6749 not found in range 6972-6978
-ERROR 10: 6749 not found in range 6979-7045
-ERROR 10: 6749 not found in range 7871-7881
-ERROR 10: 6749 not found in range 7882-7888
-ERROR 10: 6749 not found in range 7891-7908
-ERROR 10: 6749 not found in range 7909-7938
-ERROR 10: 6749 not found in range 7978-7989
-ERROR 10: 6749 not found in range 7990-8002
-ERROR 10: 6749 not found in range 8003-8037
-ERROR 10: 6749 not found in range 8038-8110
-ERROR 10: 6749 not found in range 8111-8185
-ERROR 10: 6749 not found in range 8186-8246
-ERROR 10: 6749 not found in range 8251-8298
-ERROR 10: 6749 not found in range 8304-8356
-ERROR 10: 6749 not found in range 4865-4870
-ERROR 10: 6749 not found in range 4871-4880
-ERROR 10: 6749 not found in range 4881-4890
-ERROR 10: 6749 not found in range 4891-4891
-ERROR 10: 6749 not found in range 4892-4912
-ERROR 10: 6749 not found in range 4913-4924
-ERROR 10: 6749 not found in range 4925-4944
-ERROR 10: 6749 not found in range 4945-4947
-ERROR 10: 6749 not found in range 4948-4959
-ERROR 10: 6749 not found in range 4965-4980
-ERROR 10: 6749 not found in range 4981-4998
-ERROR 10: 6749 not found in range 4999-5012
-ERROR 10: 6749 not found in range 5013-5039
-ERROR 10: 6749 not found in range 5040-5077
-ERROR 10: 6749 not found in range 5078-5123
-ERROR 10: 6749 not found in range 5124-5145
-ERROR 10: 6749 not found in range 5182-5220
-ERROR 10: 6749 not found in range 5221-5235
-ERROR 10: 6749 not found in range 5236-5250
-ERROR 10: 6749 not found in range 5251-5261
-ERROR 10: 6749 not found in range 5262-5263
-ERROR 10: 6749 not found in range 5264-5264
-ERROR 10: 6749 not found in range 5265-5270
-ERROR 10: 6749 not found in range 5271-5274
-ERROR 10: 6749 not found in range 5275-5294
-ERROR 10: 6749 not found in range 5304-5334
-ERROR 10: 6749 not found in range 6638-6708
-ERROR 10: 6749 not found in range 6790-6857
-ERROR 10: 6749 not found in range 6885-6920
-ERROR 10: 6749 not found in range 6921-6947
-ERROR 10: 6749 not found in range 6948-6971
-ERROR 10: 6749 not found in range 6972-6978
-ERROR 10: 6749 not found in range 6979-7045
-ERROR 10: 6749 not found in range 7871-7881
-ERROR 10: 6749 not found in range 7882-7888
-ERROR 10: 6749 not found in range 7891-7908
-ERROR 10: 6749 not found in range 7909-7938
-ERROR 10: 6749 not found in range 7978-7989
-ERROR 10: 6749 not found in range 7990-8002
-ERROR 10: 6749 not found in range 8003-8037
-ERROR 10: 6749 not found in range 8038-8110
-ERROR 10: 6749 not found in range 8111-8185
-ERROR 10: 6749 not found in range 8186-8246
-ERROR 10: 6749 not found in range 8251-8298
-ERROR 10: 6749 not found in range 8304-8356
-delta  ++>  {"H_gtr_dp" : ((H_gtr_dp > -8) & (H_gtr_dp < 8))}, {"P_gtr_dp" : ((P_gtr_dp > -10) & (P_gtr_dp < 20))}
+h_ecut  ++>  {"P_cal_etotnorm" : (P_cal_etotnorm < 0.7)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < 0.3)}, {"H_cer_npeSum" : (H_cer_npeSum > 1.5)}, {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}
 
-delta  ++  hms_pfp 
-ERROR 6: delta cut does not match hms_pfp 
-delta  ++  P_pfp 
-ERROR 6: delta cut does not match P_pfp 
-+  accept.hms_pfp
+h_ecut  ++  h_picut 
+ERROR 6: h_ecut cut does not match h_picut 
+h_ecut  ++  h_hadcut 
+ERROR 6: h_ecut cut does not match h_hadcut 
+h_ecut  ++  p_ecut 
+ERROR 6: h_ecut cut does not match p_ecut 
+h_ecut  ++  p_picut 
+ERROR 6: h_ecut cut does not match p_picut 
+h_ecut  ++  p_kcut 
+ERROR 6: h_ecut cut does not match p_kcut 
+h_ecut  ++  p_pcut 
+ERROR 6: h_ecut cut does not match p_pcut 
+h_ecut  ++  p_hadcut 
+ERROR 6: h_ecut cut does not match p_hadcut 
++  coin_time.coin_ek_ROC1
+-  pid.h_ecut.H_cer_npeSum
+
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+H_cer_npeSum :  h_ecut  --  h_ecut 
+Removing...   {"H_cer_npeSum" : (H_cer_npeSum > pid.H_ecut_H_cer)}
+h_ecut  -->  {"P_cal_etotnorm" : (P_cal_etotnorm < 0.7)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < 0.3)}, {"H_cer_npeSum" : (H_cer_npeSum > 1.5)}, {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}
+
+H_cer_npeSum :  h_ecut  --  h_picut 
+ERROR 7: h_ecut cut does not match h_picut 
+H_cer_npeSum :  h_ecut  --  h_hadcut 
+ERROR 7: h_ecut cut does not match h_hadcut 
+H_cer_npeSum :  h_ecut  --  p_ecut 
+ERROR 7: h_ecut cut does not match p_ecut 
+H_cer_npeSum :  h_ecut  --  p_picut 
+ERROR 7: h_ecut cut does not match p_picut 
+H_cer_npeSum :  h_ecut  --  p_kcut 
+ERROR 7: h_ecut cut does not match p_kcut 
+H_cer_npeSum :  h_ecut  --  p_pcut 
+ERROR 7: h_ecut cut does not match p_pcut 
+H_cer_npeSum :  h_ecut  --  p_hadcut 
+ERROR 7: h_ecut cut does not match p_hadcut 
+
+
+
+Type  h_ecut_eff_no_cal
+Cuts  [' pid.h_ecut', 'coin_time.coin_ek_ROC1-pid.h_ecut.H_cal_etotnorm\n']
++  pid.h_ecut
 -  none
-cutplus  hms_pfp
-hms_pfp  ++  delta 
-ERROR 6: hms_pfp cut does not match delta 
-hms_pfp  ++  hms_pfp 
-cuts  {"H_gtr_th" : ((H_gtr_th > accept.H_xpfp_low) & (H_gtr_th < accept.H_xpfp_high))}, {"H_gtr_ph" : ((H_gtr_ph > accept.H_ypfp_low) & (H_gtr_ph < accept.H_ypfp_high))}
+cutplus  h_ecut
+h_ecut  ++  h_ecut 
+cuts  {"P_cal_etotnorm" : (P_cal_etotnorm < pid.H_ecut_P_cal)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < pid.H_ecut_H_beta)}, {"H_cer_npeSum" : (H_cer_npeSum > pid.H_ecut_H_cer)}, {"H_cal_etotnorm" : (H_cal_etotnorm > pid.H_ecut_H_cal)}
 
-ERROR 10: 6749 not found in range 4865-4870
-ERROR 10: 6749 not found in range 4871-4880
-ERROR 10: 6749 not found in range 4881-4890
-ERROR 10: 6749 not found in range 4891-4891
-ERROR 10: 6749 not found in range 4892-4912
-ERROR 10: 6749 not found in range 4913-4924
-ERROR 10: 6749 not found in range 4925-4944
-ERROR 10: 6749 not found in range 4945-4947
-ERROR 10: 6749 not found in range 4948-4959
-ERROR 10: 6749 not found in range 4965-4980
-ERROR 10: 6749 not found in range 4981-4998
-ERROR 10: 6749 not found in range 4999-5012
-ERROR 10: 6749 not found in range 5013-5039
-ERROR 10: 6749 not found in range 5040-5077
-ERROR 10: 6749 not found in range 5078-5123
-ERROR 10: 6749 not found in range 5124-5145
-ERROR 10: 6749 not found in range 5182-5220
-ERROR 10: 6749 not found in range 5221-5235
-ERROR 10: 6749 not found in range 5236-5250
-ERROR 10: 6749 not found in range 5251-5261
-ERROR 10: 6749 not found in range 5262-5263
-ERROR 10: 6749 not found in range 5264-5264
-ERROR 10: 6749 not found in range 5265-5270
-ERROR 10: 6749 not found in range 5271-5274
-ERROR 10: 6749 not found in range 5275-5294
-ERROR 10: 6749 not found in range 5304-5334
-ERROR 10: 6749 not found in range 6638-6708
-ERROR 10: 6749 not found in range 6790-6857
-ERROR 10: 6749 not found in range 6885-6920
-ERROR 10: 6749 not found in range 6921-6947
-ERROR 10: 6749 not found in range 6948-6971
-ERROR 10: 6749 not found in range 6972-6978
-ERROR 10: 6749 not found in range 6979-7045
-ERROR 10: 6749 not found in range 7871-7881
-ERROR 10: 6749 not found in range 7882-7888
-ERROR 10: 6749 not found in range 7891-7908
-ERROR 10: 6749 not found in range 7909-7938
-ERROR 10: 6749 not found in range 7978-7989
-ERROR 10: 6749 not found in range 7990-8002
-ERROR 10: 6749 not found in range 8003-8037
-ERROR 10: 6749 not found in range 8038-8110
-ERROR 10: 6749 not found in range 8111-8185
-ERROR 10: 6749 not found in range 8186-8246
-ERROR 10: 6749 not found in range 8251-8298
-ERROR 10: 6749 not found in range 8304-8356
-ERROR 10: 6749 not found in range 4865-4870
-ERROR 10: 6749 not found in range 4871-4880
-ERROR 10: 6749 not found in range 4881-4890
-ERROR 10: 6749 not found in range 4891-4891
-ERROR 10: 6749 not found in range 4892-4912
-ERROR 10: 6749 not found in range 4913-4924
-ERROR 10: 6749 not found in range 4925-4944
-ERROR 10: 6749 not found in range 4945-4947
-ERROR 10: 6749 not found in range 4948-4959
-ERROR 10: 6749 not found in range 4965-4980
-ERROR 10: 6749 not found in range 4981-4998
-ERROR 10: 6749 not found in range 4999-5012
-ERROR 10: 6749 not found in range 5013-5039
-ERROR 10: 6749 not found in range 5040-5077
-ERROR 10: 6749 not found in range 5078-5123
-ERROR 10: 6749 not found in range 5124-5145
-ERROR 10: 6749 not found in range 5182-5220
-ERROR 10: 6749 not found in range 5221-5235
-ERROR 10: 6749 not found in range 5236-5250
-ERROR 10: 6749 not found in range 5251-5261
-ERROR 10: 6749 not found in range 5262-5263
-ERROR 10: 6749 not found in range 5264-5264
-ERROR 10: 6749 not found in range 5265-5270
-ERROR 10: 6749 not found in range 5271-5274
-ERROR 10: 6749 not found in range 5275-5294
-ERROR 10: 6749 not found in range 5304-5334
-ERROR 10: 6749 not found in range 6638-6708
-ERROR 10: 6749 not found in range 6790-6857
-ERROR 10: 6749 not found in range 6885-6920
-ERROR 10: 6749 not found in range 6921-6947
-ERROR 10: 6749 not found in range 6948-6971
-ERROR 10: 6749 not found in range 6972-6978
-ERROR 10: 6749 not found in range 6979-7045
-ERROR 10: 6749 not found in range 7871-7881
-ERROR 10: 6749 not found in range 7882-7888
-ERROR 10: 6749 not found in range 7891-7908
-ERROR 10: 6749 not found in range 7909-7938
-ERROR 10: 6749 not found in range 7978-7989
-ERROR 10: 6749 not found in range 7990-8002
-ERROR 10: 6749 not found in range 8003-8037
-ERROR 10: 6749 not found in range 8038-8110
-ERROR 10: 6749 not found in range 8111-8185
-ERROR 10: 6749 not found in range 8186-8246
-ERROR 10: 6749 not found in range 8251-8298
-ERROR 10: 6749 not found in range 8304-8356
-ERROR 10: 6749 not found in range 4865-4870
-ERROR 10: 6749 not found in range 4871-4880
-ERROR 10: 6749 not found in range 4881-4890
-ERROR 10: 6749 not found in range 4891-4891
-ERROR 10: 6749 not found in range 4892-4912
-ERROR 10: 6749 not found in range 4913-4924
-ERROR 10: 6749 not found in range 4925-4944
-ERROR 10: 6749 not found in range 4945-4947
-ERROR 10: 6749 not found in range 4948-4959
-ERROR 10: 6749 not found in range 4965-4980
-ERROR 10: 6749 not found in range 4981-4998
-ERROR 10: 6749 not found in range 4999-5012
-ERROR 10: 6749 not found in range 5013-5039
-ERROR 10: 6749 not found in range 5040-5077
-ERROR 10: 6749 not found in range 5078-5123
-ERROR 10: 6749 not found in range 5124-5145
-ERROR 10: 6749 not found in range 5182-5220
-ERROR 10: 6749 not found in range 5221-5235
-ERROR 10: 6749 not found in range 5236-5250
-ERROR 10: 6749 not found in range 5251-5261
-ERROR 10: 6749 not found in range 5262-5263
-ERROR 10: 6749 not found in range 5264-5264
-ERROR 10: 6749 not found in range 5265-5270
-ERROR 10: 6749 not found in range 5271-5274
-ERROR 10: 6749 not found in range 5275-5294
-ERROR 10: 6749 not found in range 5304-5334
-ERROR 10: 6749 not found in range 6638-6708
-ERROR 10: 6749 not found in range 6790-6857
-ERROR 10: 6749 not found in range 6885-6920
-ERROR 10: 6749 not found in range 6921-6947
-ERROR 10: 6749 not found in range 6948-6971
-ERROR 10: 6749 not found in range 6972-6978
-ERROR 10: 6749 not found in range 6979-7045
-ERROR 10: 6749 not found in range 7871-7881
-ERROR 10: 6749 not found in range 7882-7888
-ERROR 10: 6749 not found in range 7891-7908
-ERROR 10: 6749 not found in range 7909-7938
-ERROR 10: 6749 not found in range 7978-7989
-ERROR 10: 6749 not found in range 7990-8002
-ERROR 10: 6749 not found in range 8003-8037
-ERROR 10: 6749 not found in range 8038-8110
-ERROR 10: 6749 not found in range 8111-8185
-ERROR 10: 6749 not found in range 8186-8246
-ERROR 10: 6749 not found in range 8251-8298
-ERROR 10: 6749 not found in range 8304-8356
-ERROR 10: 6749 not found in range 4865-4870
-ERROR 10: 6749 not found in range 4871-4880
-ERROR 10: 6749 not found in range 4881-4890
-ERROR 10: 6749 not found in range 4891-4891
-ERROR 10: 6749 not found in range 4892-4912
-ERROR 10: 6749 not found in range 4913-4924
-ERROR 10: 6749 not found in range 4925-4944
-ERROR 10: 6749 not found in range 4945-4947
-ERROR 10: 6749 not found in range 4948-4959
-ERROR 10: 6749 not found in range 4965-4980
-ERROR 10: 6749 not found in range 4981-4998
-ERROR 10: 6749 not found in range 4999-5012
-ERROR 10: 6749 not found in range 5013-5039
-ERROR 10: 6749 not found in range 5040-5077
-ERROR 10: 6749 not found in range 5078-5123
-ERROR 10: 6749 not found in range 5124-5145
-ERROR 10: 6749 not found in range 5182-5220
-ERROR 10: 6749 not found in range 5221-5235
-ERROR 10: 6749 not found in range 5236-5250
-ERROR 10: 6749 not found in range 5251-5261
-ERROR 10: 6749 not found in range 5262-5263
-ERROR 10: 6749 not found in range 5264-5264
-ERROR 10: 6749 not found in range 5265-5270
-ERROR 10: 6749 not found in range 5271-5274
-ERROR 10: 6749 not found in range 5275-5294
-ERROR 10: 6749 not found in range 5304-5334
-ERROR 10: 6749 not found in range 6638-6708
-ERROR 10: 6749 not found in range 6790-6857
-ERROR 10: 6749 not found in range 6885-6920
-ERROR 10: 6749 not found in range 6921-6947
-ERROR 10: 6749 not found in range 6948-6971
-ERROR 10: 6749 not found in range 6972-6978
-ERROR 10: 6749 not found in range 6979-7045
-ERROR 10: 6749 not found in range 7871-7881
-ERROR 10: 6749 not found in range 7882-7888
-ERROR 10: 6749 not found in range 7891-7908
-ERROR 10: 6749 not found in range 7909-7938
-ERROR 10: 6749 not found in range 7978-7989
-ERROR 10: 6749 not found in range 7990-8002
-ERROR 10: 6749 not found in range 8003-8037
-ERROR 10: 6749 not found in range 8038-8110
-ERROR 10: 6749 not found in range 8111-8185
-ERROR 10: 6749 not found in range 8186-8246
-ERROR 10: 6749 not found in range 8251-8298
-ERROR 10: 6749 not found in range 8304-8356
-p_ecut_lumi_eff  already found!!!!
-hms_pfp  ++>  {"H_gtr_dp" : ((H_gtr_dp > -8) & (H_gtr_dp < 8))}, {"P_gtr_dp" : ((P_gtr_dp > -10) & (P_gtr_dp < 20))}
-, {"H_gtr_th" : ((H_gtr_th > -0.08) & (H_gtr_th < 0.08))}, {"H_gtr_ph" : ((H_gtr_ph > -0.045) & (H_gtr_ph < 0.045))}
+h_ecut  ++>  {"P_cal_etotnorm" : (P_cal_etotnorm < 0.7)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < 0.3)}, {"H_cer_npeSum" : (H_cer_npeSum > 1.5)}, {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}
 
-hms_pfp  ++  P_pfp 
-ERROR 6: hms_pfp cut does not match P_pfp 
+h_ecut  ++  h_picut 
+ERROR 6: h_ecut cut does not match h_picut 
+h_ecut  ++  h_hadcut 
+ERROR 6: h_ecut cut does not match h_hadcut 
+h_ecut  ++  p_ecut 
+ERROR 6: h_ecut cut does not match p_ecut 
+h_ecut  ++  p_picut 
+ERROR 6: h_ecut cut does not match p_picut 
+h_ecut  ++  p_kcut 
+ERROR 6: h_ecut cut does not match p_kcut 
+h_ecut  ++  p_pcut 
+ERROR 6: h_ecut cut does not match p_pcut 
+h_ecut  ++  p_hadcut 
+ERROR 6: h_ecut cut does not match p_hadcut 
++  coin_time.coin_ek_ROC1
+-  pid.h_ecut.H_cal_etotnorm
+
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+H_cal_etotnorm :  h_ecut  --  h_ecut 
+Removing...   {"H_cal_etotnorm" : (H_cal_etotnorm > pid.H_ecut_H_cal)}
+
+h_ecut  -->  {"P_cal_etotnorm" : (P_cal_etotnorm < 0.7)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < 0.3)}, {"H_cer_npeSum" : (H_cer_npeSum > 1.5)}, {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}
+
+H_cal_etotnorm :  h_ecut  --  h_picut 
+ERROR 7: h_ecut cut does not match h_picut 
+H_cal_etotnorm :  h_ecut  --  h_hadcut 
+ERROR 7: h_ecut cut does not match h_hadcut 
+H_cal_etotnorm :  h_ecut  --  p_ecut 
+ERROR 7: h_ecut cut does not match p_ecut 
+H_cal_etotnorm :  h_ecut  --  p_picut 
+ERROR 7: h_ecut cut does not match p_picut 
+H_cal_etotnorm :  h_ecut  --  p_kcut 
+ERROR 7: h_ecut cut does not match p_kcut 
+H_cal_etotnorm :  h_ecut  --  p_pcut 
+ERROR 7: h_ecut cut does not match p_pcut 
+H_cal_etotnorm :  h_ecut  --  p_hadcut 
+ERROR 7: h_ecut cut does not match p_hadcut 
 
 
 
-dict_keys(['p_ecut_lumi_eff'])
-p_ecut_lumi_eff
-x  [' {"H_gtr_dp" : ((H_gtr_dp > -8) & (H_gtr_dp < 8))}', ' {"P_gtr_dp" : ((P_gtr_dp > -10) & (P_gtr_dp < 20))}\n', ' {"H_gtr_th" : ((H_gtr_th > -0.08) & (H_gtr_th < 0.08))}', ' {"H_gtr_ph" : ((H_gtr_ph > -0.045) & (H_gtr_ph < 0.045))}\n']
-{'p_ecut_lumi_eff': {'H_gtr_dp': array([ True, False, False, ...,  True,  True,  True]), 'P_gtr_dp': array([ True, False, False, ...,  True,  True, False]), 'H_gtr_th': array([ True, False, False, ...,  True,  True, False]), 'H_gtr_ph': array([ True, False, False, ...,  True,  True, False])}}
+Type  h_ecut_eff
+Cuts  [' pid.h_ecut', 'coin_time.coin_ek_ROC1\n']
++  pid.h_ecut
+-  none
+cutplus  h_ecut
+h_ecut  ++  h_ecut 
+cuts  {"P_cal_etotnorm" : (P_cal_etotnorm < pid.H_ecut_P_cal)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < pid.H_ecut_H_beta)}, {"H_cer_npeSum" : (H_cer_npeSum > pid.H_ecut_H_cer)}, {"H_cal_etotnorm" : (H_cal_etotnorm > pid.H_ecut_H_cal)}
+
+h_ecut  ++>  {"P_cal_etotnorm" : (P_cal_etotnorm < 0.7)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < 0.3)}, {"H_cer_npeSum" : (H_cer_npeSum > 1.5)}, {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}
+
+h_ecut  ++  h_picut 
+ERROR 6: h_ecut cut does not match h_picut 
+h_ecut  ++  h_hadcut 
+ERROR 6: h_ecut cut does not match h_hadcut 
+h_ecut  ++  p_ecut 
+ERROR 6: h_ecut cut does not match p_ecut 
+h_ecut  ++  p_picut 
+ERROR 6: h_ecut cut does not match p_picut 
+h_ecut  ++  p_kcut 
+ERROR 6: h_ecut cut does not match p_kcut 
+h_ecut  ++  p_pcut 
+ERROR 6: h_ecut cut does not match p_pcut 
+h_ecut  ++  p_hadcut 
+ERROR 6: h_ecut cut does not match p_hadcut 
++  coin_time.coin_ek_ROC1
+-  none
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
 
 
-test 8632
+
+Type  h_picut_eff_no_cer
+Cuts  [' pid.h_picut', 'coin_time.coin_ek_ROC1-pid.h_picut.H_cer_npeSum\n']
++  pid.h_picut
+-  none
+cutplus  h_picut
+h_picut  ++  h_ecut 
+ERROR 6: h_picut cut does not match h_ecut 
+h_picut  ++  h_picut 
+cuts  {"P_cal_etotnorm" : (P_cal_etotnorm < pid.H_picut_P_cal)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < pid.H_picut_H_beta)}, {"H_cer_npeSum" : (H_cer_npeSum > pid.H_picut_H_cer)}, {"H_cal_etotnorm" : (H_cal_etotnorm > pid.H_picut_H_cal)}
+
+h_picut  ++>  {"P_cal_etotnorm" : (P_cal_etotnorm < 0.7)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < 0.3)}, {"H_cer_npeSum" : (H_cer_npeSum > 1.5)}, {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}
+
+h_picut  ++  h_hadcut 
+ERROR 6: h_picut cut does not match h_hadcut 
+h_picut  ++  p_ecut 
+ERROR 6: h_picut cut does not match p_ecut 
+h_picut  ++  p_picut 
+ERROR 6: h_picut cut does not match p_picut 
+h_picut  ++  p_kcut 
+ERROR 6: h_picut cut does not match p_kcut 
+h_picut  ++  p_pcut 
+ERROR 6: h_picut cut does not match p_pcut 
+h_picut  ++  p_hadcut 
+ERROR 6: h_picut cut does not match p_hadcut 
++  coin_time.coin_ek_ROC1
+-  pid.h_picut.H_cer_npeSum
+
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+H_cer_npeSum :  h_picut  --  h_ecut 
+ERROR 7: h_picut cut does not match h_ecut 
+H_cer_npeSum :  h_picut  --  h_picut 
+Removing...   {"H_cer_npeSum" : (H_cer_npeSum > pid.H_picut_H_cer)}
+h_picut  -->  {"P_cal_etotnorm" : (P_cal_etotnorm < 0.7)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < 0.3)}, {"H_cer_npeSum" : (H_cer_npeSum > 1.5)}, {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}
+
+H_cer_npeSum :  h_picut  --  h_hadcut 
+ERROR 7: h_picut cut does not match h_hadcut 
+H_cer_npeSum :  h_picut  --  p_ecut 
+ERROR 7: h_picut cut does not match p_ecut 
+H_cer_npeSum :  h_picut  --  p_picut 
+ERROR 7: h_picut cut does not match p_picut 
+H_cer_npeSum :  h_picut  --  p_kcut 
+ERROR 7: h_picut cut does not match p_kcut 
+H_cer_npeSum :  h_picut  --  p_pcut 
+ERROR 7: h_picut cut does not match p_pcut 
+H_cer_npeSum :  h_picut  --  p_hadcut 
+ERROR 7: h_picut cut does not match p_hadcut 
+
+
+
+Type  h_picut_eff_no_cal
+Cuts  [' pid.h_picut', 'coin_time.coin_ek_ROC1-pid.h_picut.H_cal_etotnorm\n']
++  pid.h_picut
+-  none
+cutplus  h_picut
+h_picut  ++  h_ecut 
+ERROR 6: h_picut cut does not match h_ecut 
+h_picut  ++  h_picut 
+cuts  {"P_cal_etotnorm" : (P_cal_etotnorm < pid.H_picut_P_cal)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < pid.H_picut_H_beta)}, {"H_cer_npeSum" : (H_cer_npeSum > pid.H_picut_H_cer)}, {"H_cal_etotnorm" : (H_cal_etotnorm > pid.H_picut_H_cal)}
+
+h_picut  ++>  {"P_cal_etotnorm" : (P_cal_etotnorm < 0.7)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < 0.3)}, {"H_cer_npeSum" : (H_cer_npeSum > 1.5)}, {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}
+
+h_picut  ++  h_hadcut 
+ERROR 6: h_picut cut does not match h_hadcut 
+h_picut  ++  p_ecut 
+ERROR 6: h_picut cut does not match p_ecut 
+h_picut  ++  p_picut 
+ERROR 6: h_picut cut does not match p_picut 
+h_picut  ++  p_kcut 
+ERROR 6: h_picut cut does not match p_kcut 
+h_picut  ++  p_pcut 
+ERROR 6: h_picut cut does not match p_pcut 
+h_picut  ++  p_hadcut 
+ERROR 6: h_picut cut does not match p_hadcut 
++  coin_time.coin_ek_ROC1
+-  pid.h_picut.H_cal_etotnorm
+
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+H_cal_etotnorm :  h_picut  --  h_ecut 
+ERROR 7: h_picut cut does not match h_ecut 
+H_cal_etotnorm :  h_picut  --  h_picut 
+Removing...   {"H_cal_etotnorm" : (H_cal_etotnorm > pid.H_picut_H_cal)}
+
+h_picut  -->  {"P_cal_etotnorm" : (P_cal_etotnorm < 0.7)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < 0.3)}, {"H_cer_npeSum" : (H_cer_npeSum > 1.5)}, {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}
+
+H_cal_etotnorm :  h_picut  --  h_hadcut 
+ERROR 7: h_picut cut does not match h_hadcut 
+H_cal_etotnorm :  h_picut  --  p_ecut 
+ERROR 7: h_picut cut does not match p_ecut 
+H_cal_etotnorm :  h_picut  --  p_picut 
+ERROR 7: h_picut cut does not match p_picut 
+H_cal_etotnorm :  h_picut  --  p_kcut 
+ERROR 7: h_picut cut does not match p_kcut 
+H_cal_etotnorm :  h_picut  --  p_pcut 
+ERROR 7: h_picut cut does not match p_pcut 
+H_cal_etotnorm :  h_picut  --  p_hadcut 
+ERROR 7: h_picut cut does not match p_hadcut 
+
+
+
+Type  h_picut_eff
+Cuts  [' pid.h_picut', 'coin_time.coin_ek_ROC1\n']
++  pid.h_picut
+-  none
+cutplus  h_picut
+h_picut  ++  h_ecut 
+ERROR 6: h_picut cut does not match h_ecut 
+h_picut  ++  h_picut 
+cuts  {"P_cal_etotnorm" : (P_cal_etotnorm < pid.H_picut_P_cal)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < pid.H_picut_H_beta)}, {"H_cer_npeSum" : (H_cer_npeSum > pid.H_picut_H_cer)}, {"H_cal_etotnorm" : (H_cal_etotnorm > pid.H_picut_H_cal)}
+
+h_picut  ++>  {"P_cal_etotnorm" : (P_cal_etotnorm < 0.7)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < 0.3)}, {"H_cer_npeSum" : (H_cer_npeSum > 1.5)}, {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}
+
+h_picut  ++  h_hadcut 
+ERROR 6: h_picut cut does not match h_hadcut 
+h_picut  ++  p_ecut 
+ERROR 6: h_picut cut does not match p_ecut 
+h_picut  ++  p_picut 
+ERROR 6: h_picut cut does not match p_picut 
+h_picut  ++  p_kcut 
+ERROR 6: h_picut cut does not match p_kcut 
+h_picut  ++  p_pcut 
+ERROR 6: h_picut cut does not match p_pcut 
+h_picut  ++  p_hadcut 
+ERROR 6: h_picut cut does not match p_hadcut 
++  coin_time.coin_ek_ROC1
+-  none
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+
+
+
+Type  h_hadcut_eff_no_cer
+Cuts  [' pid.h_hadcut', 'coin_time.coin_ek_ROC1-pid.h_hadcut.H_cer_npeSum\n']
++  pid.h_hadcut
+-  none
+cutplus  h_hadcut
+h_hadcut  ++  h_ecut 
+ERROR 6: h_hadcut cut does not match h_ecut 
+h_hadcut  ++  h_picut 
+ERROR 6: h_hadcut cut does not match h_picut 
+h_hadcut  ++  h_hadcut 
+cuts  {"P_cal_etotnorm" : (P_cal_etotnorm < pid.H_hadcut_P_cal)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < pid.H_hadcut_H_beta)}, {"H_cer_npeSum" : (H_cer_npeSum > pid.H_hadcut_H_cer)}, {"H_cal_etotnorm" : (H_cal_etotnorm > pid.H_hadcut_H_cal)}
+
+h_hadcut  ++>  {"P_cal_etotnorm" : (P_cal_etotnorm < 0.7)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < 0.3)}, {"H_cer_npeSum" : (H_cer_npeSum > 1.5)}, {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}
+
+h_hadcut  ++  p_ecut 
+ERROR 6: h_hadcut cut does not match p_ecut 
+h_hadcut  ++  p_picut 
+ERROR 6: h_hadcut cut does not match p_picut 
+h_hadcut  ++  p_kcut 
+ERROR 6: h_hadcut cut does not match p_kcut 
+h_hadcut  ++  p_pcut 
+ERROR 6: h_hadcut cut does not match p_pcut 
+h_hadcut  ++  p_hadcut 
+ERROR 6: h_hadcut cut does not match p_hadcut 
++  coin_time.coin_ek_ROC1
+-  pid.h_hadcut.H_cer_npeSum
+
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+H_cer_npeSum :  h_hadcut  --  h_ecut 
+ERROR 7: h_hadcut cut does not match h_ecut 
+H_cer_npeSum :  h_hadcut  --  h_picut 
+ERROR 7: h_hadcut cut does not match h_picut 
+H_cer_npeSum :  h_hadcut  --  h_hadcut 
+Removing...   {"H_cer_npeSum" : (H_cer_npeSum > pid.H_hadcut_H_cer)}
+h_hadcut  -->  {"P_cal_etotnorm" : (P_cal_etotnorm < 0.7)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < 0.3)}, {"H_cer_npeSum" : (H_cer_npeSum > 1.5)}, {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}
+
+H_cer_npeSum :  h_hadcut  --  p_ecut 
+ERROR 7: h_hadcut cut does not match p_ecut 
+H_cer_npeSum :  h_hadcut  --  p_picut 
+ERROR 7: h_hadcut cut does not match p_picut 
+H_cer_npeSum :  h_hadcut  --  p_kcut 
+ERROR 7: h_hadcut cut does not match p_kcut 
+H_cer_npeSum :  h_hadcut  --  p_pcut 
+ERROR 7: h_hadcut cut does not match p_pcut 
+H_cer_npeSum :  h_hadcut  --  p_hadcut 
+ERROR 7: h_hadcut cut does not match p_hadcut 
+
+
+
+Type  h_hadcut_eff_no_cal
+Cuts  [' pid.h_hadcut', 'coin_time.coin_ek_ROC1-pid.h_hadcut.H_cal_etotnorm\n']
++  pid.h_hadcut
+-  none
+cutplus  h_hadcut
+h_hadcut  ++  h_ecut 
+ERROR 6: h_hadcut cut does not match h_ecut 
+h_hadcut  ++  h_picut 
+ERROR 6: h_hadcut cut does not match h_picut 
+h_hadcut  ++  h_hadcut 
+cuts  {"P_cal_etotnorm" : (P_cal_etotnorm < pid.H_hadcut_P_cal)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < pid.H_hadcut_H_beta)}, {"H_cer_npeSum" : (H_cer_npeSum > pid.H_hadcut_H_cer)}, {"H_cal_etotnorm" : (H_cal_etotnorm > pid.H_hadcut_H_cal)}
+
+h_hadcut  ++>  {"P_cal_etotnorm" : (P_cal_etotnorm < 0.7)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < 0.3)}, {"H_cer_npeSum" : (H_cer_npeSum > 1.5)}, {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}
+
+h_hadcut  ++  p_ecut 
+ERROR 6: h_hadcut cut does not match p_ecut 
+h_hadcut  ++  p_picut 
+ERROR 6: h_hadcut cut does not match p_picut 
+h_hadcut  ++  p_kcut 
+ERROR 6: h_hadcut cut does not match p_kcut 
+h_hadcut  ++  p_pcut 
+ERROR 6: h_hadcut cut does not match p_pcut 
+h_hadcut  ++  p_hadcut 
+ERROR 6: h_hadcut cut does not match p_hadcut 
++  coin_time.coin_ek_ROC1
+-  pid.h_hadcut.H_cal_etotnorm
+
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+H_cal_etotnorm :  h_hadcut  --  h_ecut 
+ERROR 7: h_hadcut cut does not match h_ecut 
+H_cal_etotnorm :  h_hadcut  --  h_picut 
+ERROR 7: h_hadcut cut does not match h_picut 
+H_cal_etotnorm :  h_hadcut  --  h_hadcut 
+Removing...   {"H_cal_etotnorm" : (H_cal_etotnorm > pid.H_hadcut_H_cal)}
+
+h_hadcut  -->  {"P_cal_etotnorm" : (P_cal_etotnorm < 0.7)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < 0.3)}, {"H_cer_npeSum" : (H_cer_npeSum > 1.5)}, {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}
+
+H_cal_etotnorm :  h_hadcut  --  p_ecut 
+ERROR 7: h_hadcut cut does not match p_ecut 
+H_cal_etotnorm :  h_hadcut  --  p_picut 
+ERROR 7: h_hadcut cut does not match p_picut 
+H_cal_etotnorm :  h_hadcut  --  p_kcut 
+ERROR 7: h_hadcut cut does not match p_kcut 
+H_cal_etotnorm :  h_hadcut  --  p_pcut 
+ERROR 7: h_hadcut cut does not match p_pcut 
+H_cal_etotnorm :  h_hadcut  --  p_hadcut 
+ERROR 7: h_hadcut cut does not match p_hadcut 
+
+
+
+Type  h_hadcut_eff
+Cuts  [' pid.h_hadcut', 'coin_time.coin_ek_ROC1\n']
++  pid.h_hadcut
+-  none
+cutplus  h_hadcut
+h_hadcut  ++  h_ecut 
+ERROR 6: h_hadcut cut does not match h_ecut 
+h_hadcut  ++  h_picut 
+ERROR 6: h_hadcut cut does not match h_picut 
+h_hadcut  ++  h_hadcut 
+cuts  {"P_cal_etotnorm" : (P_cal_etotnorm < pid.H_hadcut_P_cal)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < pid.H_hadcut_H_beta)}, {"H_cer_npeSum" : (H_cer_npeSum > pid.H_hadcut_H_cer)}, {"H_cal_etotnorm" : (H_cal_etotnorm > pid.H_hadcut_H_cal)}
+
+h_hadcut  ++>  {"P_cal_etotnorm" : (P_cal_etotnorm < 0.7)}, {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < 0.3)}, {"H_cer_npeSum" : (H_cer_npeSum > 1.5)}, {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}
+
+h_hadcut  ++  p_ecut 
+ERROR 6: h_hadcut cut does not match p_ecut 
+h_hadcut  ++  p_picut 
+ERROR 6: h_hadcut cut does not match p_picut 
+h_hadcut  ++  p_kcut 
+ERROR 6: h_hadcut cut does not match p_kcut 
+h_hadcut  ++  p_pcut 
+ERROR 6: h_hadcut cut does not match p_pcut 
+h_hadcut  ++  p_hadcut 
+ERROR 6: h_hadcut cut does not match p_hadcut 
++  coin_time.coin_ek_ROC1
+-  none
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+
+
+
+Type  p_ecut_eff_no_hgcer
+Cuts  [' pid.p_ecut', 'coin_time.coin_ek_ROC1-pid.p_ecut.P_hgcer_npeSum\n']
++  pid.p_ecut
+-  none
+cutplus  p_ecut
+p_ecut  ++  h_ecut 
+ERROR 6: p_ecut cut does not match h_ecut 
+p_ecut  ++  h_picut 
+ERROR 6: p_ecut cut does not match h_picut 
+p_ecut  ++  h_hadcut 
+ERROR 6: p_ecut cut does not match h_hadcut 
+p_ecut  ++  p_ecut 
+cuts  {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_ecut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_ecut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_ecut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_ecut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_ecut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_ecut_P_cal)}
+
+p_ecut  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+p_ecut  ++  p_picut 
+ERROR 6: p_ecut cut does not match p_picut 
+p_ecut  ++  p_kcut 
+ERROR 6: p_ecut cut does not match p_kcut 
+p_ecut  ++  p_pcut 
+ERROR 6: p_ecut cut does not match p_pcut 
+p_ecut  ++  p_hadcut 
+ERROR 6: p_ecut cut does not match p_hadcut 
++  coin_time.coin_ek_ROC1
+-  pid.p_ecut.P_hgcer_npeSum
+
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+P_hgcer_npeSum :  p_ecut  --  h_ecut 
+ERROR 7: p_ecut cut does not match h_ecut 
+P_hgcer_npeSum :  p_ecut  --  h_picut 
+ERROR 7: p_ecut cut does not match h_picut 
+P_hgcer_npeSum :  p_ecut  --  h_hadcut 
+ERROR 7: p_ecut cut does not match h_hadcut 
+P_hgcer_npeSum :  p_ecut  --  p_ecut 
+Removing...   {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_ecut_P_hgcer)}
+p_ecut  -->  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+P_hgcer_npeSum :  p_ecut  --  p_picut 
+ERROR 7: p_ecut cut does not match p_picut 
+P_hgcer_npeSum :  p_ecut  --  p_kcut 
+ERROR 7: p_ecut cut does not match p_kcut 
+P_hgcer_npeSum :  p_ecut  --  p_pcut 
+ERROR 7: p_ecut cut does not match p_pcut 
+P_hgcer_npeSum :  p_ecut  --  p_hadcut 
+ERROR 7: p_ecut cut does not match p_hadcut 
+
+
+
+Type  p_ecut_eff_no_aero
+Cuts  [' pid.p_ecut', 'coin_time.coin_ek_ROC1-pid.p_ecut.P_aero_npeSum\n']
++  pid.p_ecut
+-  none
+cutplus  p_ecut
+p_ecut  ++  h_ecut 
+ERROR 6: p_ecut cut does not match h_ecut 
+p_ecut  ++  h_picut 
+ERROR 6: p_ecut cut does not match h_picut 
+p_ecut  ++  h_hadcut 
+ERROR 6: p_ecut cut does not match h_hadcut 
+p_ecut  ++  p_ecut 
+cuts  {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_ecut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_ecut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_ecut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_ecut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_ecut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_ecut_P_cal)}
+
+p_ecut  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+p_ecut  ++  p_picut 
+ERROR 6: p_ecut cut does not match p_picut 
+p_ecut  ++  p_kcut 
+ERROR 6: p_ecut cut does not match p_kcut 
+p_ecut  ++  p_pcut 
+ERROR 6: p_ecut cut does not match p_pcut 
+p_ecut  ++  p_hadcut 
+ERROR 6: p_ecut cut does not match p_hadcut 
++  coin_time.coin_ek_ROC1
+-  pid.p_ecut.P_aero_npeSum
+
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+P_aero_npeSum :  p_ecut  --  h_ecut 
+ERROR 7: p_ecut cut does not match h_ecut 
+P_aero_npeSum :  p_ecut  --  h_picut 
+ERROR 7: p_ecut cut does not match h_picut 
+P_aero_npeSum :  p_ecut  --  h_hadcut 
+ERROR 7: p_ecut cut does not match h_hadcut 
+P_aero_npeSum :  p_ecut  --  p_ecut 
+Removing...   {"P_aero_npeSum" : (P_aero_npeSum > pid.P_ecut_P_aero)}
+p_ecut  -->  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+P_aero_npeSum :  p_ecut  --  p_picut 
+ERROR 7: p_ecut cut does not match p_picut 
+P_aero_npeSum :  p_ecut  --  p_kcut 
+ERROR 7: p_ecut cut does not match p_kcut 
+P_aero_npeSum :  p_ecut  --  p_pcut 
+ERROR 7: p_ecut cut does not match p_pcut 
+P_aero_npeSum :  p_ecut  --  p_hadcut 
+ERROR 7: p_ecut cut does not match p_hadcut 
+
+
+
+Type  p_ecut_eff_no_cal
+Cuts  [' pid.p_ecut', 'coin_time.coin_ek_ROC1-pid.p_ecut.P_cal_etotnorm\n']
++  pid.p_ecut
+-  none
+cutplus  p_ecut
+p_ecut  ++  h_ecut 
+ERROR 6: p_ecut cut does not match h_ecut 
+p_ecut  ++  h_picut 
+ERROR 6: p_ecut cut does not match h_picut 
+p_ecut  ++  h_hadcut 
+ERROR 6: p_ecut cut does not match h_hadcut 
+p_ecut  ++  p_ecut 
+cuts  {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_ecut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_ecut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_ecut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_ecut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_ecut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_ecut_P_cal)}
+
+p_ecut  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+p_ecut  ++  p_picut 
+ERROR 6: p_ecut cut does not match p_picut 
+p_ecut  ++  p_kcut 
+ERROR 6: p_ecut cut does not match p_kcut 
+p_ecut  ++  p_pcut 
+ERROR 6: p_ecut cut does not match p_pcut 
+p_ecut  ++  p_hadcut 
+ERROR 6: p_ecut cut does not match p_hadcut 
++  coin_time.coin_ek_ROC1
+-  pid.p_ecut.P_cal_etotnorm
+
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+P_cal_etotnorm :  p_ecut  --  h_ecut 
+ERROR 7: p_ecut cut does not match h_ecut 
+P_cal_etotnorm :  p_ecut  --  h_picut 
+ERROR 7: p_ecut cut does not match h_picut 
+P_cal_etotnorm :  p_ecut  --  h_hadcut 
+ERROR 7: p_ecut cut does not match h_hadcut 
+P_cal_etotnorm :  p_ecut  --  p_ecut 
+Removing...   {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_ecut_P_cal)}
+
+p_ecut  -->  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+P_cal_etotnorm :  p_ecut  --  p_picut 
+ERROR 7: p_ecut cut does not match p_picut 
+P_cal_etotnorm :  p_ecut  --  p_kcut 
+ERROR 7: p_ecut cut does not match p_kcut 
+P_cal_etotnorm :  p_ecut  --  p_pcut 
+ERROR 7: p_ecut cut does not match p_pcut 
+P_cal_etotnorm :  p_ecut  --  p_hadcut 
+ERROR 7: p_ecut cut does not match p_hadcut 
+
+
+
+Type  p_ecut_eff
+Cuts  [' pid.p_ecut', 'coin_time.coin_ek_ROC1\n']
++  pid.p_ecut
+-  none
+cutplus  p_ecut
+p_ecut  ++  h_ecut 
+ERROR 6: p_ecut cut does not match h_ecut 
+p_ecut  ++  h_picut 
+ERROR 6: p_ecut cut does not match h_picut 
+p_ecut  ++  h_hadcut 
+ERROR 6: p_ecut cut does not match h_hadcut 
+p_ecut  ++  p_ecut 
+cuts  {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_ecut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_ecut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_ecut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_ecut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_ecut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_ecut_P_cal)}
+
+p_ecut  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+p_ecut  ++  p_picut 
+ERROR 6: p_ecut cut does not match p_picut 
+p_ecut  ++  p_kcut 
+ERROR 6: p_ecut cut does not match p_kcut 
+p_ecut  ++  p_pcut 
+ERROR 6: p_ecut cut does not match p_pcut 
+p_ecut  ++  p_hadcut 
+ERROR 6: p_ecut cut does not match p_hadcut 
++  coin_time.coin_ek_ROC1
+-  none
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+
+
+
+Type  p_picut_eff_no_hgcer
+Cuts  [' pid.p_picut', 'coin_time.coin_ek_ROC1-pid.p_picut.P_hgcer_npeSum\n']
++  pid.p_picut
+-  none
+cutplus  p_picut
+p_picut  ++  h_ecut 
+ERROR 6: p_picut cut does not match h_ecut 
+p_picut  ++  h_picut 
+ERROR 6: p_picut cut does not match h_picut 
+p_picut  ++  h_hadcut 
+ERROR 6: p_picut cut does not match h_hadcut 
+p_picut  ++  p_ecut 
+ERROR 6: p_picut cut does not match p_ecut 
+p_picut  ++  p_picut 
+cuts  {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_picut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_picut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_picut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_picut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_picut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_picut_P_cal)}
+
+p_picut  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+p_picut  ++  p_kcut 
+ERROR 6: p_picut cut does not match p_kcut 
+p_picut  ++  p_pcut 
+ERROR 6: p_picut cut does not match p_pcut 
+p_picut  ++  p_hadcut 
+ERROR 6: p_picut cut does not match p_hadcut 
++  coin_time.coin_ek_ROC1
+-  pid.p_picut.P_hgcer_npeSum
+
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+P_hgcer_npeSum :  p_picut  --  h_ecut 
+ERROR 7: p_picut cut does not match h_ecut 
+P_hgcer_npeSum :  p_picut  --  h_picut 
+ERROR 7: p_picut cut does not match h_picut 
+P_hgcer_npeSum :  p_picut  --  h_hadcut 
+ERROR 7: p_picut cut does not match h_hadcut 
+P_hgcer_npeSum :  p_picut  --  p_ecut 
+ERROR 7: p_picut cut does not match p_ecut 
+P_hgcer_npeSum :  p_picut  --  p_picut 
+Removing...   {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_picut_P_hgcer)}
+p_picut  -->  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+P_hgcer_npeSum :  p_picut  --  p_kcut 
+ERROR 7: p_picut cut does not match p_kcut 
+P_hgcer_npeSum :  p_picut  --  p_pcut 
+ERROR 7: p_picut cut does not match p_pcut 
+P_hgcer_npeSum :  p_picut  --  p_hadcut 
+ERROR 7: p_picut cut does not match p_hadcut 
+
+
+
+Type  p_picut_eff_no_aero
+Cuts  [' pid.p_picut', 'coin_time.coin_ek_ROC1-pid.p_picut.P_aero_npeSum\n']
++  pid.p_picut
+-  none
+cutplus  p_picut
+p_picut  ++  h_ecut 
+ERROR 6: p_picut cut does not match h_ecut 
+p_picut  ++  h_picut 
+ERROR 6: p_picut cut does not match h_picut 
+p_picut  ++  h_hadcut 
+ERROR 6: p_picut cut does not match h_hadcut 
+p_picut  ++  p_ecut 
+ERROR 6: p_picut cut does not match p_ecut 
+p_picut  ++  p_picut 
+cuts  {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_picut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_picut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_picut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_picut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_picut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_picut_P_cal)}
+
+p_picut  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+p_picut  ++  p_kcut 
+ERROR 6: p_picut cut does not match p_kcut 
+p_picut  ++  p_pcut 
+ERROR 6: p_picut cut does not match p_pcut 
+p_picut  ++  p_hadcut 
+ERROR 6: p_picut cut does not match p_hadcut 
++  coin_time.coin_ek_ROC1
+-  pid.p_picut.P_aero_npeSum
+
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+P_aero_npeSum :  p_picut  --  h_ecut 
+ERROR 7: p_picut cut does not match h_ecut 
+P_aero_npeSum :  p_picut  --  h_picut 
+ERROR 7: p_picut cut does not match h_picut 
+P_aero_npeSum :  p_picut  --  h_hadcut 
+ERROR 7: p_picut cut does not match h_hadcut 
+P_aero_npeSum :  p_picut  --  p_ecut 
+ERROR 7: p_picut cut does not match p_ecut 
+P_aero_npeSum :  p_picut  --  p_picut 
+Removing...   {"P_aero_npeSum" : (P_aero_npeSum > pid.P_picut_P_aero)}
+p_picut  -->  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+P_aero_npeSum :  p_picut  --  p_kcut 
+ERROR 7: p_picut cut does not match p_kcut 
+P_aero_npeSum :  p_picut  --  p_pcut 
+ERROR 7: p_picut cut does not match p_pcut 
+P_aero_npeSum :  p_picut  --  p_hadcut 
+ERROR 7: p_picut cut does not match p_hadcut 
+
+
+
+Type  p_picut_eff_no_cal
+Cuts  [' pid.p_picut', 'coin_time.coin_ek_ROC1-pid.p_picut.P_cal_etotnorm\n']
++  pid.p_picut
+-  none
+cutplus  p_picut
+p_picut  ++  h_ecut 
+ERROR 6: p_picut cut does not match h_ecut 
+p_picut  ++  h_picut 
+ERROR 6: p_picut cut does not match h_picut 
+p_picut  ++  h_hadcut 
+ERROR 6: p_picut cut does not match h_hadcut 
+p_picut  ++  p_ecut 
+ERROR 6: p_picut cut does not match p_ecut 
+p_picut  ++  p_picut 
+cuts  {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_picut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_picut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_picut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_picut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_picut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_picut_P_cal)}
+
+p_picut  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+p_picut  ++  p_kcut 
+ERROR 6: p_picut cut does not match p_kcut 
+p_picut  ++  p_pcut 
+ERROR 6: p_picut cut does not match p_pcut 
+p_picut  ++  p_hadcut 
+ERROR 6: p_picut cut does not match p_hadcut 
++  coin_time.coin_ek_ROC1
+-  pid.p_picut.P_cal_etotnorm
+
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+P_cal_etotnorm :  p_picut  --  h_ecut 
+ERROR 7: p_picut cut does not match h_ecut 
+P_cal_etotnorm :  p_picut  --  h_picut 
+ERROR 7: p_picut cut does not match h_picut 
+P_cal_etotnorm :  p_picut  --  h_hadcut 
+ERROR 7: p_picut cut does not match h_hadcut 
+P_cal_etotnorm :  p_picut  --  p_ecut 
+ERROR 7: p_picut cut does not match p_ecut 
+P_cal_etotnorm :  p_picut  --  p_picut 
+Removing...   {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_picut_P_cal)}
+
+p_picut  -->  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+P_cal_etotnorm :  p_picut  --  p_kcut 
+ERROR 7: p_picut cut does not match p_kcut 
+P_cal_etotnorm :  p_picut  --  p_pcut 
+ERROR 7: p_picut cut does not match p_pcut 
+P_cal_etotnorm :  p_picut  --  p_hadcut 
+ERROR 7: p_picut cut does not match p_hadcut 
+
+
+
+Type  p_picut_eff
+Cuts  [' pid.p_picut', 'coin_time.coin_ek_ROC1\n']
++  pid.p_picut
+-  none
+cutplus  p_picut
+p_picut  ++  h_ecut 
+ERROR 6: p_picut cut does not match h_ecut 
+p_picut  ++  h_picut 
+ERROR 6: p_picut cut does not match h_picut 
+p_picut  ++  h_hadcut 
+ERROR 6: p_picut cut does not match h_hadcut 
+p_picut  ++  p_ecut 
+ERROR 6: p_picut cut does not match p_ecut 
+p_picut  ++  p_picut 
+cuts  {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_picut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_picut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_picut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_picut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_picut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_picut_P_cal)}
+
+p_picut  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+p_picut  ++  p_kcut 
+ERROR 6: p_picut cut does not match p_kcut 
+p_picut  ++  p_pcut 
+ERROR 6: p_picut cut does not match p_pcut 
+p_picut  ++  p_hadcut 
+ERROR 6: p_picut cut does not match p_hadcut 
++  coin_time.coin_ek_ROC1
+-  none
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+
+
+
+Type  p_kcut_eff_no_hgcer
+Cuts  [' pid.p_kcut', 'coin_time.coin_ek_ROC1-pid.p_kcut.P_hgcer_npeSum\n']
++  pid.p_kcut
+-  none
+cutplus  p_kcut
+p_kcut  ++  h_ecut 
+ERROR 6: p_kcut cut does not match h_ecut 
+p_kcut  ++  h_picut 
+ERROR 6: p_kcut cut does not match h_picut 
+p_kcut  ++  h_hadcut 
+ERROR 6: p_kcut cut does not match h_hadcut 
+p_kcut  ++  p_ecut 
+ERROR 6: p_kcut cut does not match p_ecut 
+p_kcut  ++  p_picut 
+ERROR 6: p_kcut cut does not match p_picut 
+p_kcut  ++  p_kcut 
+cuts  {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_kcut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_kcut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_kcut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_kcut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_kcut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_kcut_P_cal)}
+
+p_kcut  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+p_kcut  ++  p_pcut 
+ERROR 6: p_kcut cut does not match p_pcut 
+p_kcut  ++  p_hadcut 
+ERROR 6: p_kcut cut does not match p_hadcut 
++  coin_time.coin_ek_ROC1
+-  pid.p_kcut.P_hgcer_npeSum
+
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+P_hgcer_npeSum :  p_kcut  --  h_ecut 
+ERROR 7: p_kcut cut does not match h_ecut 
+P_hgcer_npeSum :  p_kcut  --  h_picut 
+ERROR 7: p_kcut cut does not match h_picut 
+P_hgcer_npeSum :  p_kcut  --  h_hadcut 
+ERROR 7: p_kcut cut does not match h_hadcut 
+P_hgcer_npeSum :  p_kcut  --  p_ecut 
+ERROR 7: p_kcut cut does not match p_ecut 
+P_hgcer_npeSum :  p_kcut  --  p_picut 
+ERROR 7: p_kcut cut does not match p_picut 
+P_hgcer_npeSum :  p_kcut  --  p_kcut 
+Removing...   {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_kcut_P_hgcer)}
+p_kcut  -->  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+P_hgcer_npeSum :  p_kcut  --  p_pcut 
+ERROR 7: p_kcut cut does not match p_pcut 
+P_hgcer_npeSum :  p_kcut  --  p_hadcut 
+ERROR 7: p_kcut cut does not match p_hadcut 
+
+
+
+Type  p_kcut_eff_no_aero
+Cuts  [' pid.p_kcut', 'coin_time.coin_ek_ROC1-pid.p_kcut.P_aero_npeSum\n']
++  pid.p_kcut
+-  none
+cutplus  p_kcut
+p_kcut  ++  h_ecut 
+ERROR 6: p_kcut cut does not match h_ecut 
+p_kcut  ++  h_picut 
+ERROR 6: p_kcut cut does not match h_picut 
+p_kcut  ++  h_hadcut 
+ERROR 6: p_kcut cut does not match h_hadcut 
+p_kcut  ++  p_ecut 
+ERROR 6: p_kcut cut does not match p_ecut 
+p_kcut  ++  p_picut 
+ERROR 6: p_kcut cut does not match p_picut 
+p_kcut  ++  p_kcut 
+cuts  {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_kcut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_kcut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_kcut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_kcut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_kcut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_kcut_P_cal)}
+
+p_kcut  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+p_kcut  ++  p_pcut 
+ERROR 6: p_kcut cut does not match p_pcut 
+p_kcut  ++  p_hadcut 
+ERROR 6: p_kcut cut does not match p_hadcut 
++  coin_time.coin_ek_ROC1
+-  pid.p_kcut.P_aero_npeSum
+
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+P_aero_npeSum :  p_kcut  --  h_ecut 
+ERROR 7: p_kcut cut does not match h_ecut 
+P_aero_npeSum :  p_kcut  --  h_picut 
+ERROR 7: p_kcut cut does not match h_picut 
+P_aero_npeSum :  p_kcut  --  h_hadcut 
+ERROR 7: p_kcut cut does not match h_hadcut 
+P_aero_npeSum :  p_kcut  --  p_ecut 
+ERROR 7: p_kcut cut does not match p_ecut 
+P_aero_npeSum :  p_kcut  --  p_picut 
+ERROR 7: p_kcut cut does not match p_picut 
+P_aero_npeSum :  p_kcut  --  p_kcut 
+Removing...   {"P_aero_npeSum" : (P_aero_npeSum > pid.P_kcut_P_aero)}
+p_kcut  -->  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+P_aero_npeSum :  p_kcut  --  p_pcut 
+ERROR 7: p_kcut cut does not match p_pcut 
+P_aero_npeSum :  p_kcut  --  p_hadcut 
+ERROR 7: p_kcut cut does not match p_hadcut 
+
+
+
+Type  p_kcut_eff_no_cal
+Cuts  [' pid.p_kcut', 'coin_time.coin_ek_ROC1-pid.p_kcut.P_cal_etotnorm\n']
++  pid.p_kcut
+-  none
+cutplus  p_kcut
+p_kcut  ++  h_ecut 
+ERROR 6: p_kcut cut does not match h_ecut 
+p_kcut  ++  h_picut 
+ERROR 6: p_kcut cut does not match h_picut 
+p_kcut  ++  h_hadcut 
+ERROR 6: p_kcut cut does not match h_hadcut 
+p_kcut  ++  p_ecut 
+ERROR 6: p_kcut cut does not match p_ecut 
+p_kcut  ++  p_picut 
+ERROR 6: p_kcut cut does not match p_picut 
+p_kcut  ++  p_kcut 
+cuts  {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_kcut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_kcut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_kcut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_kcut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_kcut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_kcut_P_cal)}
+
+p_kcut  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+p_kcut  ++  p_pcut 
+ERROR 6: p_kcut cut does not match p_pcut 
+p_kcut  ++  p_hadcut 
+ERROR 6: p_kcut cut does not match p_hadcut 
++  coin_time.coin_ek_ROC1
+-  pid.p_kcut.P_cal_etotnorm
+
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+P_cal_etotnorm :  p_kcut  --  h_ecut 
+ERROR 7: p_kcut cut does not match h_ecut 
+P_cal_etotnorm :  p_kcut  --  h_picut 
+ERROR 7: p_kcut cut does not match h_picut 
+P_cal_etotnorm :  p_kcut  --  h_hadcut 
+ERROR 7: p_kcut cut does not match h_hadcut 
+P_cal_etotnorm :  p_kcut  --  p_ecut 
+ERROR 7: p_kcut cut does not match p_ecut 
+P_cal_etotnorm :  p_kcut  --  p_picut 
+ERROR 7: p_kcut cut does not match p_picut 
+P_cal_etotnorm :  p_kcut  --  p_kcut 
+Removing...   {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_kcut_P_cal)}
+
+p_kcut  -->  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+P_cal_etotnorm :  p_kcut  --  p_pcut 
+ERROR 7: p_kcut cut does not match p_pcut 
+P_cal_etotnorm :  p_kcut  --  p_hadcut 
+ERROR 7: p_kcut cut does not match p_hadcut 
+
+
+
+Type  p_kcut_eff
+Cuts  [' pid.p_kcut', 'coin_time.coin_ek_ROC1\n']
++  pid.p_kcut
+-  none
+cutplus  p_kcut
+p_kcut  ++  h_ecut 
+ERROR 6: p_kcut cut does not match h_ecut 
+p_kcut  ++  h_picut 
+ERROR 6: p_kcut cut does not match h_picut 
+p_kcut  ++  h_hadcut 
+ERROR 6: p_kcut cut does not match h_hadcut 
+p_kcut  ++  p_ecut 
+ERROR 6: p_kcut cut does not match p_ecut 
+p_kcut  ++  p_picut 
+ERROR 6: p_kcut cut does not match p_picut 
+p_kcut  ++  p_kcut 
+cuts  {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_kcut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_kcut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_kcut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_kcut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_kcut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_kcut_P_cal)}
+
+p_kcut  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+p_kcut  ++  p_pcut 
+ERROR 6: p_kcut cut does not match p_pcut 
+p_kcut  ++  p_hadcut 
+ERROR 6: p_kcut cut does not match p_hadcut 
++  coin_time.coin_ek_ROC1
+-  none
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+
+
+
+Type  p_pcut_eff_no_hgcer
+Cuts  [' pid.p_pcut', 'coin_time.coin_ek_ROC1-pid.p_pcut.P_hgcer_npeSum\n']
++  pid.p_pcut
+-  none
+cutplus  p_pcut
+p_pcut  ++  h_ecut 
+ERROR 6: p_pcut cut does not match h_ecut 
+p_pcut  ++  h_picut 
+ERROR 6: p_pcut cut does not match h_picut 
+p_pcut  ++  h_hadcut 
+ERROR 6: p_pcut cut does not match h_hadcut 
+p_pcut  ++  p_ecut 
+ERROR 6: p_pcut cut does not match p_ecut 
+p_pcut  ++  p_picut 
+ERROR 6: p_pcut cut does not match p_picut 
+p_pcut  ++  p_kcut 
+ERROR 6: p_pcut cut does not match p_kcut 
+p_pcut  ++  p_pcut 
+cuts  {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_pcut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_pcut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_pcut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_pcut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_pcut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_pcut_P_cal)}
+
+p_pcut  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+p_pcut  ++  p_hadcut 
+ERROR 6: p_pcut cut does not match p_hadcut 
++  coin_time.coin_ek_ROC1
+-  pid.p_pcut.P_hgcer_npeSum
+
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+P_hgcer_npeSum :  p_pcut  --  h_ecut 
+ERROR 7: p_pcut cut does not match h_ecut 
+P_hgcer_npeSum :  p_pcut  --  h_picut 
+ERROR 7: p_pcut cut does not match h_picut 
+P_hgcer_npeSum :  p_pcut  --  h_hadcut 
+ERROR 7: p_pcut cut does not match h_hadcut 
+P_hgcer_npeSum :  p_pcut  --  p_ecut 
+ERROR 7: p_pcut cut does not match p_ecut 
+P_hgcer_npeSum :  p_pcut  --  p_picut 
+ERROR 7: p_pcut cut does not match p_picut 
+P_hgcer_npeSum :  p_pcut  --  p_kcut 
+ERROR 7: p_pcut cut does not match p_kcut 
+P_hgcer_npeSum :  p_pcut  --  p_pcut 
+Removing...   {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_pcut_P_hgcer)}
+p_pcut  -->  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+P_hgcer_npeSum :  p_pcut  --  p_hadcut 
+ERROR 7: p_pcut cut does not match p_hadcut 
+
+
+
+Type  p_pcut_eff_no_aero
+Cuts  [' pid.p_pcut', 'coin_time.coin_ek_ROC1-pid.p_pcut.P_aero_npeSum\n']
++  pid.p_pcut
+-  none
+cutplus  p_pcut
+p_pcut  ++  h_ecut 
+ERROR 6: p_pcut cut does not match h_ecut 
+p_pcut  ++  h_picut 
+ERROR 6: p_pcut cut does not match h_picut 
+p_pcut  ++  h_hadcut 
+ERROR 6: p_pcut cut does not match h_hadcut 
+p_pcut  ++  p_ecut 
+ERROR 6: p_pcut cut does not match p_ecut 
+p_pcut  ++  p_picut 
+ERROR 6: p_pcut cut does not match p_picut 
+p_pcut  ++  p_kcut 
+ERROR 6: p_pcut cut does not match p_kcut 
+p_pcut  ++  p_pcut 
+cuts  {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_pcut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_pcut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_pcut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_pcut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_pcut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_pcut_P_cal)}
+
+p_pcut  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+p_pcut  ++  p_hadcut 
+ERROR 6: p_pcut cut does not match p_hadcut 
++  coin_time.coin_ek_ROC1
+-  pid.p_pcut.P_aero_npeSum
+
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+P_aero_npeSum :  p_pcut  --  h_ecut 
+ERROR 7: p_pcut cut does not match h_ecut 
+P_aero_npeSum :  p_pcut  --  h_picut 
+ERROR 7: p_pcut cut does not match h_picut 
+P_aero_npeSum :  p_pcut  --  h_hadcut 
+ERROR 7: p_pcut cut does not match h_hadcut 
+P_aero_npeSum :  p_pcut  --  p_ecut 
+ERROR 7: p_pcut cut does not match p_ecut 
+P_aero_npeSum :  p_pcut  --  p_picut 
+ERROR 7: p_pcut cut does not match p_picut 
+P_aero_npeSum :  p_pcut  --  p_kcut 
+ERROR 7: p_pcut cut does not match p_kcut 
+P_aero_npeSum :  p_pcut  --  p_pcut 
+Removing...   {"P_aero_npeSum" : (P_aero_npeSum > pid.P_pcut_P_aero)}
+p_pcut  -->  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+P_aero_npeSum :  p_pcut  --  p_hadcut 
+ERROR 7: p_pcut cut does not match p_hadcut 
+
+
+
+Type  p_pcut_eff_no_cal
+Cuts  [' pid.p_pcut', 'coin_time.coin_ek_ROC1-pid.p_pcut.P_cal_etotnorm\n']
++  pid.p_pcut
+-  none
+cutplus  p_pcut
+p_pcut  ++  h_ecut 
+ERROR 6: p_pcut cut does not match h_ecut 
+p_pcut  ++  h_picut 
+ERROR 6: p_pcut cut does not match h_picut 
+p_pcut  ++  h_hadcut 
+ERROR 6: p_pcut cut does not match h_hadcut 
+p_pcut  ++  p_ecut 
+ERROR 6: p_pcut cut does not match p_ecut 
+p_pcut  ++  p_picut 
+ERROR 6: p_pcut cut does not match p_picut 
+p_pcut  ++  p_kcut 
+ERROR 6: p_pcut cut does not match p_kcut 
+p_pcut  ++  p_pcut 
+cuts  {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_pcut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_pcut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_pcut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_pcut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_pcut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_pcut_P_cal)}
+
+p_pcut  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+p_pcut  ++  p_hadcut 
+ERROR 6: p_pcut cut does not match p_hadcut 
++  coin_time.coin_ek_ROC1
+-  pid.p_pcut.P_cal_etotnorm
+
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+P_cal_etotnorm :  p_pcut  --  h_ecut 
+ERROR 7: p_pcut cut does not match h_ecut 
+P_cal_etotnorm :  p_pcut  --  h_picut 
+ERROR 7: p_pcut cut does not match h_picut 
+P_cal_etotnorm :  p_pcut  --  h_hadcut 
+ERROR 7: p_pcut cut does not match h_hadcut 
+P_cal_etotnorm :  p_pcut  --  p_ecut 
+ERROR 7: p_pcut cut does not match p_ecut 
+P_cal_etotnorm :  p_pcut  --  p_picut 
+ERROR 7: p_pcut cut does not match p_picut 
+P_cal_etotnorm :  p_pcut  --  p_kcut 
+ERROR 7: p_pcut cut does not match p_kcut 
+P_cal_etotnorm :  p_pcut  --  p_pcut 
+Removing...   {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_pcut_P_cal)}
+
+p_pcut  -->  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+P_cal_etotnorm :  p_pcut  --  p_hadcut 
+ERROR 7: p_pcut cut does not match p_hadcut 
+
+
+
+Type  p_pcut_eff
+Cuts  [' pid.p_pcut', 'coin_time.coin_ek_ROC1\n']
++  pid.p_pcut
+-  none
+cutplus  p_pcut
+p_pcut  ++  h_ecut 
+ERROR 6: p_pcut cut does not match h_ecut 
+p_pcut  ++  h_picut 
+ERROR 6: p_pcut cut does not match h_picut 
+p_pcut  ++  h_hadcut 
+ERROR 6: p_pcut cut does not match h_hadcut 
+p_pcut  ++  p_ecut 
+ERROR 6: p_pcut cut does not match p_ecut 
+p_pcut  ++  p_picut 
+ERROR 6: p_pcut cut does not match p_picut 
+p_pcut  ++  p_kcut 
+ERROR 6: p_pcut cut does not match p_kcut 
+p_pcut  ++  p_pcut 
+cuts  {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_pcut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_pcut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_pcut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_pcut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_pcut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_pcut_P_cal)}
+
+p_pcut  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+p_pcut  ++  p_hadcut 
+ERROR 6: p_pcut cut does not match p_hadcut 
++  coin_time.coin_ek_ROC1
+-  none
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+
+
+
+Type  p_hadcut_eff_no_hgcer
+Cuts  [' pid.p_hadcut', 'coin_time.coin_ek_ROC1-pid.p_hadcut.P_hgcer_npeSum\n']
++  pid.p_hadcut
+-  none
+cutplus  p_hadcut
+p_hadcut  ++  h_ecut 
+ERROR 6: p_hadcut cut does not match h_ecut 
+p_hadcut  ++  h_picut 
+ERROR 6: p_hadcut cut does not match h_picut 
+p_hadcut  ++  h_hadcut 
+ERROR 6: p_hadcut cut does not match h_hadcut 
+p_hadcut  ++  p_ecut 
+ERROR 6: p_hadcut cut does not match p_ecut 
+p_hadcut  ++  p_picut 
+ERROR 6: p_hadcut cut does not match p_picut 
+p_hadcut  ++  p_kcut 
+ERROR 6: p_hadcut cut does not match p_kcut 
+p_hadcut  ++  p_pcut 
+ERROR 6: p_hadcut cut does not match p_pcut 
+p_hadcut  ++  p_hadcut 
+cuts  {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_hadcut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_hadcut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_hadcut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_hadcut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_hadcut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_hadcut_P_cal)}
+p_hadcut  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
++  coin_time.coin_ek_ROC1
+-  pid.p_hadcut.P_hgcer_npeSum
+
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+P_hgcer_npeSum :  p_hadcut  --  h_ecut 
+ERROR 7: p_hadcut cut does not match h_ecut 
+P_hgcer_npeSum :  p_hadcut  --  h_picut 
+ERROR 7: p_hadcut cut does not match h_picut 
+P_hgcer_npeSum :  p_hadcut  --  h_hadcut 
+ERROR 7: p_hadcut cut does not match h_hadcut 
+P_hgcer_npeSum :  p_hadcut  --  p_ecut 
+ERROR 7: p_hadcut cut does not match p_ecut 
+P_hgcer_npeSum :  p_hadcut  --  p_picut 
+ERROR 7: p_hadcut cut does not match p_picut 
+P_hgcer_npeSum :  p_hadcut  --  p_kcut 
+ERROR 7: p_hadcut cut does not match p_kcut 
+P_hgcer_npeSum :  p_hadcut  --  p_pcut 
+ERROR 7: p_hadcut cut does not match p_pcut 
+P_hgcer_npeSum :  p_hadcut  --  p_hadcut 
+Removing...   {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_hadcut_P_hgcer)}
+p_hadcut  -->  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+
+
+Type  p_hadcut_eff_no_aero
+Cuts  [' pid.p_hadcut', 'coin_time.coin_ek_ROC1-pid.p_hadcut.P_aero_npeSum\n']
++  pid.p_hadcut
+-  none
+cutplus  p_hadcut
+p_hadcut  ++  h_ecut 
+ERROR 6: p_hadcut cut does not match h_ecut 
+p_hadcut  ++  h_picut 
+ERROR 6: p_hadcut cut does not match h_picut 
+p_hadcut  ++  h_hadcut 
+ERROR 6: p_hadcut cut does not match h_hadcut 
+p_hadcut  ++  p_ecut 
+ERROR 6: p_hadcut cut does not match p_ecut 
+p_hadcut  ++  p_picut 
+ERROR 6: p_hadcut cut does not match p_picut 
+p_hadcut  ++  p_kcut 
+ERROR 6: p_hadcut cut does not match p_kcut 
+p_hadcut  ++  p_pcut 
+ERROR 6: p_hadcut cut does not match p_pcut 
+p_hadcut  ++  p_hadcut 
+cuts  {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_hadcut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_hadcut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_hadcut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_hadcut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_hadcut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_hadcut_P_cal)}
+p_hadcut  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
++  coin_time.coin_ek_ROC1
+-  pid.p_hadcut.P_aero_npeSum
+
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+P_aero_npeSum :  p_hadcut  --  h_ecut 
+ERROR 7: p_hadcut cut does not match h_ecut 
+P_aero_npeSum :  p_hadcut  --  h_picut 
+ERROR 7: p_hadcut cut does not match h_picut 
+P_aero_npeSum :  p_hadcut  --  h_hadcut 
+ERROR 7: p_hadcut cut does not match h_hadcut 
+P_aero_npeSum :  p_hadcut  --  p_ecut 
+ERROR 7: p_hadcut cut does not match p_ecut 
+P_aero_npeSum :  p_hadcut  --  p_picut 
+ERROR 7: p_hadcut cut does not match p_picut 
+P_aero_npeSum :  p_hadcut  --  p_kcut 
+ERROR 7: p_hadcut cut does not match p_kcut 
+P_aero_npeSum :  p_hadcut  --  p_pcut 
+ERROR 7: p_hadcut cut does not match p_pcut 
+P_aero_npeSum :  p_hadcut  --  p_hadcut 
+Removing...   {"P_aero_npeSum" : (P_aero_npeSum > pid.P_hadcut_P_aero)}
+p_hadcut  -->  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+
+
+Type  p_hadcut_eff_no_cal
+Cuts  [' pid.p_hadcut', 'coin_time.coin_ek_ROC1-pid.p_hadcut.P_cal_etotnorm\n']
++  pid.p_hadcut
+-  none
+cutplus  p_hadcut
+p_hadcut  ++  h_ecut 
+ERROR 6: p_hadcut cut does not match h_ecut 
+p_hadcut  ++  h_picut 
+ERROR 6: p_hadcut cut does not match h_picut 
+p_hadcut  ++  h_hadcut 
+ERROR 6: p_hadcut cut does not match h_hadcut 
+p_hadcut  ++  p_ecut 
+ERROR 6: p_hadcut cut does not match p_ecut 
+p_hadcut  ++  p_picut 
+ERROR 6: p_hadcut cut does not match p_picut 
+p_hadcut  ++  p_kcut 
+ERROR 6: p_hadcut cut does not match p_kcut 
+p_hadcut  ++  p_pcut 
+ERROR 6: p_hadcut cut does not match p_pcut 
+p_hadcut  ++  p_hadcut 
+cuts  {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_hadcut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_hadcut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_hadcut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_hadcut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_hadcut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_hadcut_P_cal)}
+p_hadcut  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
++  coin_time.coin_ek_ROC1
+-  pid.p_hadcut.P_cal_etotnorm
+
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+P_cal_etotnorm :  p_hadcut  --  h_ecut 
+ERROR 7: p_hadcut cut does not match h_ecut 
+P_cal_etotnorm :  p_hadcut  --  h_picut 
+ERROR 7: p_hadcut cut does not match h_picut 
+P_cal_etotnorm :  p_hadcut  --  h_hadcut 
+ERROR 7: p_hadcut cut does not match h_hadcut 
+P_cal_etotnorm :  p_hadcut  --  p_ecut 
+ERROR 7: p_hadcut cut does not match p_ecut 
+P_cal_etotnorm :  p_hadcut  --  p_picut 
+ERROR 7: p_hadcut cut does not match p_picut 
+P_cal_etotnorm :  p_hadcut  --  p_kcut 
+ERROR 7: p_hadcut cut does not match p_kcut 
+P_cal_etotnorm :  p_hadcut  --  p_pcut 
+ERROR 7: p_hadcut cut does not match p_pcut 
+P_cal_etotnorm :  p_hadcut  --  p_hadcut 
+Removing...   {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_hadcut_P_cal)}
+p_hadcut  -->  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+
+
+Type  p_hadcut_eff
+Cuts  [' pid.p_hadcut', 'coin_time.coin_ek_ROC1']
++  pid.p_hadcut
+-  none
+cutplus  p_hadcut
+p_hadcut  ++  h_ecut 
+ERROR 6: p_hadcut cut does not match h_ecut 
+p_hadcut  ++  h_picut 
+ERROR 6: p_hadcut cut does not match h_picut 
+p_hadcut  ++  h_hadcut 
+ERROR 6: p_hadcut cut does not match h_hadcut 
+p_hadcut  ++  p_ecut 
+ERROR 6: p_hadcut cut does not match p_ecut 
+p_hadcut  ++  p_picut 
+ERROR 6: p_hadcut cut does not match p_picut 
+p_hadcut  ++  p_kcut 
+ERROR 6: p_hadcut cut does not match p_kcut 
+p_hadcut  ++  p_pcut 
+ERROR 6: p_hadcut cut does not match p_pcut 
+p_hadcut  ++  p_hadcut 
+cuts  {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_hadcut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_hadcut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_hadcut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_hadcut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_hadcut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_hadcut_P_cal)}
+p_hadcut  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
++  coin_time.coin_ek_ROC1
+-  none
+cutplus  coin_ek_ROC1
+coin_ek_ROC1  ++  coin_pion_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_pion_ROC1 
+coin_ek_ROC1  ++  coin_kaon_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_kaon_ROC1 
+coin_ek_ROC1  ++  coin_Proton_ROC1 
+ERROR 6: coin_ek_ROC1 cut does not match coin_Proton_ROC1 
+
+
+
+dict_keys(['h_ecut_eff_no_cer', 'h_ecut_eff_no_cal', 'h_ecut_eff', 'h_picut_eff_no_cer', 'h_picut_eff_no_cal', 'h_picut_eff', 'h_hadcut_eff_no_cer', 'h_hadcut_eff_no_cal', 'h_hadcut_eff', 'p_ecut_eff_no_hgcer', 'p_ecut_eff_no_aero', 'p_ecut_eff_no_cal', 'p_ecut_eff', 'p_picut_eff_no_hgcer', 'p_picut_eff_no_aero', 'p_picut_eff_no_cal', 'p_picut_eff', 'p_kcut_eff_no_hgcer', 'p_kcut_eff_no_aero', 'p_kcut_eff_no_cal', 'p_kcut_eff', 'p_pcut_eff_no_hgcer', 'p_pcut_eff_no_aero', 'p_pcut_eff_no_cal', 'p_pcut_eff', 'p_hadcut_eff_no_hgcer', 'p_hadcut_eff_no_aero', 'p_hadcut_eff_no_cal', 'p_hadcut_eff'])
+h_ecut_eff
+x  [' {"P_cal_etotnorm" : (P_cal_etotnorm < 0.7)}', ' {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < 0.3)}', ' {"H_cer_npeSum" : (H_cer_npeSum > 1.5)}', ' {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}\n']
+h_ecut_eff_no_cer
+x  [' {"P_cal_etotnorm" : (P_cal_etotnorm < 0.7)}', ' {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < 0.3)}', ' {"H_cer_npeSum" : (H_cer_npeSum > 1.5)}', ' {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}\n']
+h_ecut_eff_no_cal
+x  [' {"P_cal_etotnorm" : (P_cal_etotnorm < 0.7)}', ' {"H_gtr_beta" : ((abs(H_gtr_beta)-1) < 0.3)}', ' {"H_cer_npeSum" : (H_cer_npeSum > 1.5)}', ' {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}\n']
+p_kcut_eff
+x  [' {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}', '{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}', ' {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}', ' {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}', ' {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}', ' {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}\n']
+p_kcut_eff_no_hgcer
+x  [' {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}', '{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}', ' {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}', ' {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}', ' {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}', ' {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}\n']
+p_kcut_eff_no_aero
+x  [' {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}', '{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}', ' {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}', ' {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}', ' {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}', ' {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}\n']
+p_kcut_eff_no_cal
+x  [' {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}', '{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}', ' {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}', ' {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}', ' {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}', ' {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}\n']
+kaonlt:  0.00030112266540527344
+[]:  0.051514625549316406
+=====================
+= 6749 HMS CER DONE =
+=====================
+
+
+=====================
+= 6749 HMS CAL DONE =
+=====================
+
+
+========================
+= 6749 SHMS HGCER DONE =
+========================
+
+
+=======================
+= 6749 SHMS AERO DONE =
+=======================
+
+
+======================
+= 6749 SHMS CAL DONE =
+======================
+
+

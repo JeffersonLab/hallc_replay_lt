@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-29 12:12:12 trottar"
+# Time-stamp: "2020-05-08 21:16:37 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -19,7 +19,7 @@ import matplotlib.pyplot as plt
 import sys, math, os, subprocess
 
 sys.path.insert(0, '../../../bin/python/')
-import root2py as r2p
+import kaonlt as klt
 
 runNum = sys.argv[1]
 MaxEvent=sys.argv[2]
@@ -46,7 +46,7 @@ ANALYSIS TREE, T
 '''
 
 tree = up.open(rootName)["T"]
-branch = r2p.pyBranch(tree)
+branch = klt.pyBranch(tree)
 
 CTime_ePositronCoinTime_ROC1  = tree.array("CTime.ePositronCoinTime_ROC1")
 CTime_eKCoinTime_ROC1  = tree.array("CTime.eKCoinTime_ROC1")
@@ -90,20 +90,27 @@ missmass = np.array(np.sqrt(abs(emiss*emiss-pmiss*pmiss)))
 # MMp = np.array([math.sqrt(abs((em + math.sqrt(abs((MK*MK) + (gtrp*gtrp))) - math.sqrt(abs((Mp*Mp) + (gtrp*gtrp) - (pm*pm))) ))**2) for (em, pm, gtrp) in zip(emiss, pmiss, P_gtr_p)])
 
 
-r = r2p.pyRoot()
+r = klt.pyRoot()
 
-f = open('../../../DB/CUTS/pid.cuts.tmp')
+fout = REPLAYPATH+'/UTIL_KAONLT/DB/CUTS/run_type/pid_eff.cuts'
 
 # read in cuts file and make dictionary
-c = r2p.pyPlot(None)
-readDict = c.read_dict(f)
+c = klt.pyPlot(None)
+readDict = c.read_dict(fout,runNum)
 
-def make_cutDict(cut,f,inputDict=None):
+# This method calls several methods in kaonlt package. It is required to create properly formated
+# dictionaries. The evaluation must be in the analysis script because the analysis variables (i.e. the
+# leaves of interest) are not defined in the kaonlt package. This makes the system more flexible
+# overall, but a bit more cumbersome in the analysis script. Perhaps one day a better solution will be
+# implimented.
+def make_cutDict(cut,inputDict=None):
 
     global c
 
-    c = r2p.pyPlot(readDict)
+    c = klt.pyPlot(readDict)
     x = c.w_dict(cut)
+    print("%s" % cut)
+    print("x ", x)
     
     if inputDict == None:
         inputDict = {}
@@ -118,33 +125,31 @@ def make_cutDict(cut,f,inputDict=None):
         
     return inputDict
 
-cutDict = make_cutDict("h_ecut_no_cer",f)
-cutDict = make_cutDict("h_ecut_cer",f,cutDict)
-cutDict = make_cutDict("h_ecut_no_cal",f,cutDict)
-cutDict = make_cutDict("h_ecut_cal",f,cutDict)
-cutDict = make_cutDict("p_kcut_no_hgcer",f,cutDict)
-cutDict = make_cutDict("p_kcut_hgcer",f,cutDict)
-cutDict = make_cutDict("p_kcut_no_aero",f,cutDict)
-cutDict = make_cutDict("p_kcut_aero",f,cutDict)
-cutDict = make_cutDict("p_kcut_no_cal",f,cutDict)
-cutDict = make_cutDict("p_kcut_cal",f,cutDict)
-c = r2p.pyPlot(cutDict)
+cutDict = make_cutDict("h_ecut_eff")
+cutDict = make_cutDict("h_ecut_eff_no_cer",cutDict)
+cutDict = make_cutDict("h_ecut_eff_no_cal",cutDict)
+cutDict = make_cutDict("p_kcut_eff",cutDict)
+cutDict = make_cutDict("p_kcut_eff_no_hgcer",cutDict)
+cutDict = make_cutDict("p_kcut_eff_no_aero",cutDict)
+cutDict = make_cutDict("p_kcut_eff_no_cal",cutDict)
+c = klt.pyPlot(cutDict)
 
 def hms_cer():
 
     # coin_noID_electron
-    coin_noID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"h_ecut_no_cer")-47.5)
+    coin_noID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"h_ecut_eff_no_cer")-47.5)
+
+    noID_electron_iterate = [CTime_eKCoinTime_ROC1, H_gtr_dp, P_gtr_dp, P_cal_etotnorm, H_gtr_beta, H_cal_etotnorm, emiss, pmiss]
     
     # mm_noID_electron
-    mm_noID_electron = np.array(c.add_cut(missmass,"h_ecut_no_cer"))
+    mm_noID_electron = np.array(c.add_cut(missmass,"h_ecut_eff_no_cer"))
     
     # coin_PID_electron
-    coin_PID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"h_ecut_cer")-47.5)
+    coin_PID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"h_ecut_eff")-47.5)
     
     # mm_PID_electron
-    mm_PID_electron = np.array(c.add_cut(missmass,"h_ecut_cer"))
+    mm_PID_electron = np.array(c.add_cut(missmass,"h_ecut_eff"))
 
-    
     h_cer_data = {
 
         "h_cer_eff" : len(mm_noID_electron)/len(mm_PID_electron),
@@ -159,19 +164,19 @@ def hms_cer():
     plt.legend(loc=1)
     plt.title('Missing Mass ($GeV^2$)', fontsize =20)
 
-    f.savefig('../OUTPUTS/missmass_%s.png' % runNum)
+    f.savefig(REPLAYPATH+'/UTIL_KAONLT/scripts/pid/OUTPUTS/missmass_%s.png' % runNum)
 
     noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Electron Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out HMS Cherenkov cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
-    noID_plot[1].savefig('../OUTPUTS/noID_hms_cer_%s.png' % runNum)
+    noID_plot[1].savefig(REPLAYPATH+'/UTIL_KAONLT/scripts/pid/OUTPUTS/noID_hms_cer_%s.png' % runNum)
 
     PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Electron Coincident Time vs Mass ($GeV^2$) for ROC1 (with HMS Cherenkov cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
-    PID_plot[1].savefig('../OUTPUTS/PID_hms_cer_%s.png' % runNum)
+    PID_plot[1].savefig(REPLAYPATH+'/UTIL_KAONLT/scripts/pid/OUTPUTS/PID_hms_cer_%s.png' % runNum)
     
     print("=====================")
     print("= %s HMS CER DONE =" % runNum)
@@ -180,19 +185,19 @@ def hms_cer():
     return h_cer_data
 
 def hms_cal():
-
+    
     # coin_noID_electron
-    coin_noID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"h_ecut_no_cal")-47.5)
+    coin_noID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"h_ecut_eff_no_cal")-47.5)
 
     # mm_noID_electron
-    mm_noID_electron = np.array(c.add_cut(missmass,"h_ecut_no_cal"))
+    mm_noID_electron = np.array(c.add_cut(missmass,"h_ecut_eff_no_cal"))
     
     # coin_PID_electron
-    coin_PID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"h_ecut_cal")-47.5)
+    coin_PID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"h_ecut_eff")-47.5)
     
     # mm_PID_electron
-    mm_PID_electron = np.array(c.add_cut(missmass,"h_ecut_cal"))
-
+    mm_PID_electron = np.array(c.add_cut(missmass,"h_ecut_eff"))
+    
     h_cal_data = {
 
         "h_cal_eff" : len(mm_noID_electron)/len(mm_PID_electron),
@@ -207,19 +212,19 @@ def hms_cal():
     plt.legend(loc=1)
     plt.title('Missing Mass ($GeV^2$)', fontsize =20)
 
-    f.savefig('../OUTPUTS/missmass_%s.png' % runNum)
+    f.savefig(REPLAYPATH+'/UTIL_KAONLT/scripts/pid/OUTPUTS/missmass_%s.png' % runNum)
 
     noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Electron Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out HMS Calorimeter cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
-    noID_plot[1].savefig('../OUTPUTS/noID_hms_cal_%s.png' % runNum)
+    noID_plot[1].savefig(REPLAYPATH+'/UTIL_KAONLT/scripts/pid/OUTPUTS/noID_hms_cal_%s.png' % runNum)
 
     PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Electron Coincident Time vs Mass ($GeV^2$) for ROC1 (with HMS Calorimeter cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
-    PID_plot[1].savefig('../OUTPUTS/PID_hms_cal_%s.png' % runNum)
+    PID_plot[1].savefig(REPLAYPATH+'/UTIL_KAONLT/scripts/pid/OUTPUTS/PID_hms_cal_%s.png' % runNum)
     
     print("=====================")
     print("= %s HMS CAL DONE =" % runNum)
@@ -228,18 +233,18 @@ def hms_cal():
     return h_cal_data
 
 def shms_hgcer():
-
+    
     # coin_noID_electron
-    coin_noID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"p_kcut_no_hgcer")-47.5)
+    coin_noID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"p_kcut_eff_no_hgcer")-47.5)
 
     # mm_noID_electron
-    mm_noID_electron = np.array(c.add_cut(missmass,"p_kcut_no_hgcer"))
+    mm_noID_electron = np.array(c.add_cut(missmass,"p_kcut_eff_no_hgcer"))
     
     # coin_PID_electron
-    coin_PID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"p_kcut_hgcer")-47.5)
+    coin_PID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"p_kcut_eff")-47.5)
     
     # mm_PID_electron
-    mm_PID_electron = np.array(c.add_cut(missmass,"p_kcut_hgcer"))        
+    mm_PID_electron = np.array(c.add_cut(missmass,"p_kcut_eff"))    
 
     p_hgcer_data = {
 
@@ -255,19 +260,19 @@ def shms_hgcer():
     plt.legend(loc=1)
     plt.title('Missing Mass ($GeV^2$)', fontsize =20)
 
-    f.savefig('../OUTPUTS/missmass_%s.png' % runNum)
+    f.savefig(REPLAYPATH+'/UTIL_KAONLT/scripts/pid/OUTPUTS/missmass_%s.png' % runNum)
 
     noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out SHMS HGCer cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
-    noID_plot[1].savefig('../OUTPUTS/noID_shms_hgcer_%s.png' % runNum)
+    noID_plot[1].savefig(REPLAYPATH+'/UTIL_KAONLT/scripts/pid/OUTPUTS/noID_shms_hgcer_%s.png' % runNum)
 
     PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (with SHMS HGCer cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
-    PID_plot[1].savefig('../OUTPUTS/PID_shms_hgcer_%s.png' % runNum)
+    PID_plot[1].savefig(REPLAYPATH+'/UTIL_KAONLT/scripts/pid/OUTPUTS/PID_shms_hgcer_%s.png' % runNum)
     
     print("========================")
     print("= %s SHMS HGCER DONE =" % runNum)
@@ -276,18 +281,18 @@ def shms_hgcer():
     return p_hgcer_data
 
 def shms_aero():
-
+    
     # coin_noID_electron
-    coin_noID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"p_kcut_no_aero")-47.5)
+    coin_noID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"p_kcut_eff_no_aero")-47.5)
 
     # mm_noID_electron
-    mm_noID_electron = np.array(c.add_cut(missmass,"p_kcut_no_aero"))
+    mm_noID_electron = np.array(c.add_cut(missmass,"p_kcut_eff_no_aero"))
     
     # coin_PID_electron
-    coin_PID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"p_kcut_aero")-47.5)
+    coin_PID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"p_kcut_eff")-47.5)
     
     # mm_PID_electron
-    mm_PID_electron = np.array(c.add_cut(missmass,"p_kcut_aero"))            
+    mm_PID_electron = np.array(c.add_cut(missmass,"p_kcut_eff"))        
 
     p_aero_data = {
 
@@ -303,19 +308,19 @@ def shms_aero():
     plt.legend(loc=1)
     plt.title('Missing Mass ($GeV^2$)', fontsize =20)
 
-    f.savefig('../OUTPUTS/missmass_%s.png' % runNum)
+    f.savefig(REPLAYPATH+'/UTIL_KAONLT/scripts/pid/OUTPUTS/missmass_%s.png' % runNum)
 
     noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out SHMS Aerogel cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
-    noID_plot[1].savefig('../OUTPUTS/noID_shms_aero_%s.png' % runNum)
+    noID_plot[1].savefig(REPLAYPATH+'/UTIL_KAONLT/scripts/pid/OUTPUTS/noID_shms_aero_%s.png' % runNum)
 
     PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (with SHMS Aerogel cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
-    PID_plot[1].savefig('../OUTPUTS/PID_shms_aero_%s.png' % runNum)
+    PID_plot[1].savefig(REPLAYPATH+'/UTIL_KAONLT/scripts/pid/OUTPUTS/PID_shms_aero_%s.png' % runNum)
     
     print("=======================")
     print("= %s SHMS AERO DONE =" % runNum)
@@ -324,18 +329,18 @@ def shms_aero():
     return p_aero_data
 
 def shms_cal():
-
+    
     # coin_noID_electron
-    coin_noID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"p_kcut_no_cal")-47.5)
+    coin_noID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"p_kcut_eff_no_cal")-47.5)
 
     # mm_noID_electron
-    mm_noID_electron = np.array(c.add_cut(missmass,"p_kcut_no_cal"))
+    mm_noID_electron = np.array(c.add_cut(missmass,"p_kcut_eff_no_cal"))
     
     # coin_PID_electron
-    coin_PID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"p_kcut_cal")-47.5)
+    coin_PID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"p_kcut_eff")-47.5)
     
     # mm_PID_electron
-    mm_PID_electron = np.array(c.add_cut(missmass,"p_kcut_cal"))            
+    mm_PID_electron = np.array(c.add_cut(missmass,"p_kcut_eff"))        
 
     p_cal_data = {
 
@@ -351,19 +356,19 @@ def shms_cal():
     plt.legend(loc=1)
     plt.title('Missing Mass ($GeV^2$)', fontsize =20)
 
-    f.savefig('../OUTPUTS/missmass_%s.png' % runNum)
+    f.savefig(REPLAYPATH+'/UTIL_KAONLT/scripts/pid/OUTPUTS/missmass_%s.png' % runNum)
 
     noID_plot = c.densityPlot(coin_noID_electron, mm_noID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (w/out SHMS Calorimeter cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
-    noID_plot[1].savefig('../OUTPUTS/noID_shms_cal_%s.png' % runNum)
+    noID_plot[1].savefig(REPLAYPATH+'/UTIL_KAONLT/scripts/pid/OUTPUTS/noID_shms_cal_%s.png' % runNum)
 
     PID_plot = c.densityPlot(coin_PID_electron, mm_PID_electron, 'Pion Coincident Time vs Mass ($GeV^2$) for ROC1 (with SHMS Calorimeter cuts)','Time (ns)','Mass (GeV/c^2)', 200, 800,  c,-10,10,0,2.0)
     # plt.ylim(-180.,180.)
     # plt.xlim(0.,50.)
 
-    PID_plot[1].savefig('../OUTPUTS/PID_shms_cal_%s.png' % runNum)
+    PID_plot[1].savefig(REPLAYPATH+'/UTIL_KAONLT/scripts/pid/OUTPUTS/PID_shms_cal_%s.png' % runNum)
     
     print("======================")
     print("= %s SHMS CAL DONE =" % runNum)

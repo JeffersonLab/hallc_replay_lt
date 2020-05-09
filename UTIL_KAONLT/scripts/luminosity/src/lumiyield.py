@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-04-30 18:51:34 trottar"
+# Time-stamp: "2020-05-08 21:44:10 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -18,7 +18,7 @@ import scipy.integrate as integrate
 import sys, math, os, subprocess
 
 sys.path.insert(0, '../../../bin/python/')
-import root2py as r2p
+import kaonlt as klt
 
 runNum = sys.argv[1]
 MaxEvent=sys.argv[2]
@@ -89,7 +89,7 @@ SCALER TREE, TSH
 '''
 
 s_tree = up.open(rootName)["TSH"]
-s_branch = r2p.pyBranch(s_tree)
+s_branch = klt.pyBranch(s_tree)
 
 H_BCM4A_scalerCharge = s_tree.array("H.BCM4A.scalerCharge")
 H_BCM2_scalerCharge = s_tree.array("H.BCM2.scalerCharge")
@@ -350,7 +350,7 @@ ANALYSIS TREE, T
 '''
 
 tree = up.open(rootName)["T"]
-branch = r2p.pyBranch(tree)
+branch = klt.pyBranch(tree)
 
 H_cal_etotnorm = tree.array("H.cal.etotnorm")
 H_cer_npeSum = tree.array("H.cer.npeSum")
@@ -416,18 +416,25 @@ T_coin_pEDTM_tdcTime = tree.array("T.coin.pEDTM_tdcTime")
 
 EvtType = tree.array("fEvtHdr.fEvtType")
 
-f = open('../../../DB/CUTS/lumi.cuts')
+fout = REPLAYPATH+'/UTIL_KAONLT/DB/CUTS/run_type/lumi.cuts'
 
 # read in cuts file and make dictionary
-c = r2p.pyPlot(None)
-readDict = c.read_dict(f)
+c = klt.pyPlot(None)
+readDict = c.read_dict(fout,runNum)
 
-def make_cutDict(cut,f,inputDict=None):
+# This method calls several methods in kaonlt package. It is required to create properly formated
+# dictionaries. The evaluation must be in the analysis script because the analysis variables (i.e. the
+# leaves of interest) are not defined in the kaonlt package. This makes the system more flexible
+# overall, but a bit more cumbersome in the analysis script. Perhaps one day a better solution will be
+# implimented.
+def make_cutDict(cut,inputDict=None):
 
     global c
 
-    c = r2p.pyPlot(readDict)
+    c = klt.pyPlot(readDict)
     x = c.w_dict(cut)
+    print("%s" % cut)
+    print("x ", x)
     
     if inputDict == None:
         inputDict = {}
@@ -442,25 +449,25 @@ def make_cutDict(cut,f,inputDict=None):
         
     return inputDict
 
-cutDict = make_cutDict("p_track_before",f)
-cutDict = make_cutDict("p_hadtrack_before",f,cutDict)
-cutDict = make_cutDict("p_Ktrack_before",f,cutDict)
-cutDict = make_cutDict("p_ptrack_before",f,cutDict)
-cutDict = make_cutDict("p_track_after",f,cutDict)
-cutDict = make_cutDict("p_hadtrack_after",f,cutDict)
-cutDict = make_cutDict("p_pitrack_after",f,cutDict)
-cutDict = make_cutDict("p_Ktrack_after",f,cutDict)
-cutDict = make_cutDict("p_ptrack_after",f,cutDict)
-cutDict = make_cutDict("p_ecut_before",f,cutDict)
-cutDict = make_cutDict("p_ecut_after",f,cutDict)
-cutDict = make_cutDict("p_ecut_eff",f,cutDict)
-cutDict = make_cutDict("h_track_before",f,cutDict)
-cutDict = make_cutDict("h_etrack_before",f,cutDict)
-cutDict = make_cutDict("h_track_after",f,cutDict)
-cutDict = make_cutDict("h_etrack_after",f,cutDict)
-cutDict = make_cutDict("h_ecut_after",f,cutDict)
-cutDict = make_cutDict("h_ecut_eff",f,cutDict)
-c = r2p.pyPlot(cutDict)
+cutDict = make_cutDict("p_track_lumi_before")
+cutDict = make_cutDict("p_hadtrack_lumi_before",cutDict)
+cutDict = make_cutDict("p_Ktrack_lumi_before",cutDict)
+cutDict = make_cutDict("p_ptrack_lumi_before",cutDict)
+cutDict = make_cutDict("p_track_lumi_after",cutDict)
+cutDict = make_cutDict("p_hadtrack_lumi_after",cutDict)
+cutDict = make_cutDict("p_pitrack_lumi_after",cutDict)
+cutDict = make_cutDict("p_Ktrack_lumi_after",cutDict)
+cutDict = make_cutDict("p_ptrack_lumi_after",cutDict)
+cutDict = make_cutDict("p_ecut_lumi_before",cutDict)
+cutDict = make_cutDict("p_ecut_lumi_after",cutDict)
+cutDict = make_cutDict("p_ecut_lumi_eff",cutDict)
+cutDict = make_cutDict("h_track_lumi_before",cutDict)
+cutDict = make_cutDict("h_etrack_lumi_before",cutDict)
+cutDict = make_cutDict("h_track_lumi_after",cutDict)
+cutDict = make_cutDict("h_etrack_lumi_after",cutDict)
+cutDict = make_cutDict("h_ecut_lumi_after",cutDict)
+cutDict = make_cutDict("h_ecut_lumi_eff",cutDict)
+c = klt.pyPlot(cutDict)
 
 def analysis(PS1, PS3, thres_curr):
     
@@ -501,50 +508,50 @@ def analysis(PS1, PS3, thres_curr):
                  if bcm > thres_curr
                  if evt == 1]
     
-    # p_track_before
-    p_track_before = c.add_cut(P_dc_ntrack,"p_track_before")
+    # p_track_lumi_before
+    p_track_lumi_before = c.add_cut(P_dc_ntrack,"p_track_lumi_before")
     
-    # p_hadtrack_before
-    p_hadtrack_before = c.add_cut(P_dc_ntrack,"p_hadtrack_before")
+    # p_hadtrack_lumi_before
+    p_hadtrack_lumi_before = c.add_cut(P_dc_ntrack,"p_hadtrack_lumi_before")
 
-    # p_pitrack_before
-    p_pitrack_before = c.add_cut(P_dc_ntrack,"p_pitrack_before")
+    # p_pitrack_lumi_before
+    p_pitrack_lumi_before = c.add_cut(P_dc_ntrack,"p_pitrack_lumi_before")
 
-    # p_Ktrack_before
-    p_Ktrack_before = c.add_cut(P_dc_ntrack,"p_Ktrack_before")
+    # p_Ktrack_lumi_before
+    p_Ktrack_lumi_before = c.add_cut(P_dc_ntrack,"p_Ktrack_lumi_before")
 
-    # p_ptrack_before
-    p_ptrack_before = c.add_cut(P_dc_ntrack,"p_ptrack_before")
+    # p_ptrack_lumi_before
+    p_ptrack_lumi_before = c.add_cut(P_dc_ntrack,"p_ptrack_lumi_before")
 
-    # p_track_after
-    p_track_after = c.add_cut(P_dc_ntrack,"p_track_after")
+    # p_track_lumi_after
+    p_track_lumi_after = c.add_cut(P_dc_ntrack,"p_track_lumi_after")
 
-    # p_hadtrack_after
-    p_hadtrack_after = c.add_cut(P_dc_ntrack,"p_hadtrack_after")
+    # p_hadtrack_lumi_after
+    p_hadtrack_lumi_after = c.add_cut(P_dc_ntrack,"p_hadtrack_lumi_after")
 
-    # p_pitrack_after
-    p_pitrack_after = c.add_cut(P_dc_ntrack,"p_pitrack_after")
+    # p_pitrack_lumi_after
+    p_pitrack_lumi_after = c.add_cut(P_dc_ntrack,"p_pitrack_lumi_after")
 
-    # p_Ktrack_after
-    p_Ktrack_after = c.add_cut(P_dc_ntrack,"p_Ktrack_after")
+    # p_Ktrack_lumi_after
+    p_Ktrack_lumi_after = c.add_cut(P_dc_ntrack,"p_Ktrack_lumi_after")
 
-    # p_ptrack_after
-    p_ptrack_after = c.add_cut(P_dc_ntrack,"p_ptrack_after")
+    # p_ptrack_lumi_after
+    p_ptrack_lumi_after = c.add_cut(P_dc_ntrack,"p_ptrack_lumi_after")
 
-    # p_ecut_before
-    p_ecut_before = c.add_cut(P_hgcer_npeSum,"p_ecut_before")
+    # p_ecut_lumi_before
+    p_ecut_lumi_before = c.add_cut(P_hgcer_npeSum,"p_ecut_lumi_before")
 
     # p_show_before
-    p_show_before = c.add_cut(P_cal_etotnorm,"p_ecut_before")
+    p_show_before = c.add_cut(P_cal_etotnorm,"p_ecut_lumi_before")
 
-    # p_ecut_after
-    p_ecut_after  = c.add_cut(P_hgcer_npeSum,"p_ecut_after")
+    # p_ecut_lumi_after
+    p_ecut_lumi_after  = c.add_cut(P_hgcer_npeSum,"p_ecut_lumi_after")
 
-    # p_ecut_eff
-    p_ecut_eff  = c.add_cut(P_hgcer_npeSum,"p_ecut_eff")
+    # p_ecut_lumi_eff
+    p_ecut_lumi_eff  = c.add_cut(P_hgcer_npeSum,"p_ecut_lumi_eff")
 
     # p_show_after
-    p_show_after  = c.add_cut(P_cal_etotnorm,"p_ecut_eff")
+    p_show_after  = c.add_cut(P_cal_etotnorm,"p_ecut_lumi_eff")
     
     HMS_EDTM = [x
                 for (x, evt, bcm) in zip(T_coin_pEDTM_tdcTime, EvtType, bcm_after)
@@ -556,23 +563,23 @@ def analysis(PS1, PS3, thres_curr):
                   if bcm > thres_curr
                   if evt == 2]
 
-    # h_track_before
-    h_track_before = c.add_cut(H_dc_ntrack,"h_track_before")
+    # h_track_lumi_before
+    h_track_lumi_before = c.add_cut(H_dc_ntrack,"h_track_lumi_before")
 
-    # h_etrack_before
-    h_etrack_before = c.add_cut(H_dc_ntrack,"h_etrack_before")
+    # h_etrack_lumi_before
+    h_etrack_lumi_before = c.add_cut(H_dc_ntrack,"h_etrack_lumi_before")
     
-    # h_track_after
-    h_track_after = c.add_cut(H_dc_ntrack,"h_track_after")
+    # h_track_lumi_after
+    h_track_lumi_after = c.add_cut(H_dc_ntrack,"h_track_lumi_after")
 
 
-    # h_etrack_after
-    h_etrack_after = c.add_cut(H_dc_ntrack,"h_etrack_after")    
+    # h_etrack_lumi_after
+    h_etrack_lumi_after = c.add_cut(H_dc_ntrack,"h_etrack_lumi_after")    
 
-    # h_ecut_before
-    h_ecut_before_iterate = [H_cer_npeSum, bcm_after]
-    h_ecut_before = [cer
-                      for (cer, bcm) in zip(*h_ecut_before_iterate)
+    # h_ecut_lumi_before
+    h_ecut_lumi_before_iterate = [H_cer_npeSum, bcm_after]
+    h_ecut_lumi_before = [cer
+                      for (cer, bcm) in zip(*h_ecut_lumi_before_iterate)
                       if bcm > thres_curr]
 
     # h_dp_before
@@ -598,37 +605,37 @@ def analysis(PS1, PS3, thres_curr):
     h_show_before = [h_caletot
                       for (h_caletot, bcm) in zip(*h_show_before_iterate)
                       if bcm > thres_curr]
-    # h_ecut_after
-    h_ecut_after = c.add_cut(H_cer_npeSum,"h_ecut_after")
+    # h_ecut_lumi_after
+    h_ecut_lumi_after = c.add_cut(H_cer_npeSum,"h_ecut_lumi_after")
     
     # h_dp_after
-    h_dp_after = c.add_cut(H_gtr_dp,"h_ecut_after")
+    h_dp_after = c.add_cut(H_gtr_dp,"h_ecut_lumi_after")
     
     # h_th_after
-    h_th_after = c.add_cut(H_tr_tg_th,"h_ecut_after")
+    h_th_after = c.add_cut(H_tr_tg_th,"h_ecut_lumi_after")
     
     # h_ph_after
-    h_ph_after = c.add_cut(H_tr_tg_ph,"h_ecut_after")
+    h_ph_after = c.add_cut(H_tr_tg_ph,"h_ecut_lumi_after")
     
     # h_show_after
-    h_show_after = c.add_cut(H_cal_etotnorm,"h_ecut_after")
+    h_show_after = c.add_cut(H_cal_etotnorm,"h_ecut_lumi_after")
     
-    # h_ecut_eff
-    h_ecut_eff = c.add_cut(H_cal_etotnorm,"h_ecut_eff")
+    # h_ecut_lumi_eff
+    h_ecut_lumi_eff = c.add_cut(H_cal_etotnorm,"h_ecut_lumi_eff")
                                                         
     if PS1 == 0:
         track_info = {
             
-            "HMS_evts" : len(h_ecut_eff),
-            "HMS_evts_uncern" : math.sqrt(len(h_ecut_eff)),
+            "HMS_evts" : len(h_ecut_lumi_eff),
+            "HMS_evts_uncern" : math.sqrt(len(h_ecut_lumi_eff)),
             "SHMS_evts" : 0,
             "SHMS_evts_uncern" : 0,
             "TRIG1_cut" : len(TRIG1_cut),
             "TRIG3_cut" : len(TRIG3_cut),
-            "HMS_track" : len(h_track_after)/len(h_track_before),
-            "HMS_track_uncern" : (len(h_track_after)/len(h_track_before))*math.sqrt((1/len(h_track_after)) + (1/len(h_track_before))),
-            "etrack" : len(h_etrack_after)/len(h_etrack_before),
-            "etrack_uncern" : (len(h_etrack_after)/len(h_etrack_before))*math.sqrt((1/len(h_etrack_after)) + (1/len(h_etrack_before))),
+            "HMS_track" : len(h_track_lumi_after)/len(h_track_lumi_before),
+            "HMS_track_uncern" : (len(h_track_lumi_after)/len(h_track_lumi_before))*math.sqrt((1/len(h_track_lumi_after)) + (1/len(h_track_lumi_before))),
+            "etrack" : len(h_etrack_lumi_after)/len(h_etrack_lumi_before),
+            "etrack_uncern" : (len(h_etrack_lumi_after)/len(h_etrack_lumi_before))*math.sqrt((1/len(h_etrack_lumi_after)) + (1/len(h_etrack_lumi_before))),
             "SHMS_track" : 0,
             "SHMS_track_uncern" : 0,
             "hadtrack" : 0,
@@ -647,50 +654,50 @@ def analysis(PS1, PS3, thres_curr):
             
             "HMS_evts" : 0,
             "HMS_evts_uncern" : 0,
-            "SHMS_evts" : len(p_ecut_eff),
-            "SHMS_evts_uncern" : math.sqrt(len(p_ecut_eff)),
+            "SHMS_evts" : len(p_ecut_lumi_eff),
+            "SHMS_evts_uncern" : math.sqrt(len(p_ecut_lumi_eff)),
             "TRIG1_cut" : len(TRIG1_cut),
             "TRIG3_cut" : len(TRIG3_cut),
             "HMS_track" : 0,
             "HMS_track_uncern" : 0,
             "etrack" : 0,
             "etrack_uncern" : 0,
-            "SHMS_track" : len(p_track_after)/len(p_track_before),
-            "SHMS_track_uncern" : (len(p_track_after)/len(p_track_before))*math.sqrt((1/len(p_track_after)) + (1/len(p_track_before))),
-            "hadtrack" : len(p_hadtrack_after)/len(p_hadtrack_before),
-            "hadtrack_uncern" : (len(p_hadtrack_after)/len(p_hadtrack_before))*math.sqrt((1/len(p_hadtrack_after)) + (1/len(p_hadtrack_before))),
-            "pitrack" : len(p_pitrack_after)/len(p_pitrack_before),
-            "pitrack_uncern" : (len(p_pitrack_after)/len(p_pitrack_before))*math.sqrt((1/len(p_pitrack_after)) + (1/len(p_pitrack_before))),
-            "Ktrack" : len(p_Ktrack_after)/len(p_Ktrack_before),
-            "Ktrack_uncern" : (len(p_Ktrack_after)/len(p_Ktrack_before))*math.sqrt((1/len(p_Ktrack_after)) + (1/len(p_Ktrack_before))),
-            "ptrack" : len(p_ptrack_after)/len(p_ptrack_before),
-            "ptrack_uncern" : (len(p_ptrack_after)/len(p_ptrack_before))*math.sqrt((1/len(p_ptrack_after)) + (1/len(p_ptrack_before))),
+            "SHMS_track" : len(p_track_lumi_after)/len(p_track_lumi_before),
+            "SHMS_track_uncern" : (len(p_track_lumi_after)/len(p_track_lumi_before))*math.sqrt((1/len(p_track_lumi_after)) + (1/len(p_track_lumi_before))),
+            "hadtrack" : len(p_hadtrack_lumi_after)/len(p_hadtrack_lumi_before),
+            "hadtrack_uncern" : (len(p_hadtrack_lumi_after)/len(p_hadtrack_lumi_before))*math.sqrt((1/len(p_hadtrack_lumi_after)) + (1/len(p_hadtrack_lumi_before))),
+            "pitrack" : len(p_pitrack_lumi_after)/len(p_pitrack_lumi_before),
+            "pitrack_uncern" : (len(p_pitrack_lumi_after)/len(p_pitrack_lumi_before))*math.sqrt((1/len(p_pitrack_lumi_after)) + (1/len(p_pitrack_lumi_before))),
+            "Ktrack" : len(p_Ktrack_lumi_after)/len(p_Ktrack_lumi_before),
+            "Ktrack_uncern" : (len(p_Ktrack_lumi_after)/len(p_Ktrack_lumi_before))*math.sqrt((1/len(p_Ktrack_lumi_after)) + (1/len(p_Ktrack_lumi_before))),
+            "ptrack" : len(p_ptrack_lumi_after)/len(p_ptrack_lumi_before),
+            "ptrack_uncern" : (len(p_ptrack_lumi_after)/len(p_ptrack_lumi_before))*math.sqrt((1/len(p_ptrack_lumi_after)) + (1/len(p_ptrack_lumi_before))),
             "accp_edtm" : (scipy.integrate.simps(SHMS_EDTM) + scipy.integrate.simps(HMS_EDTM)),
 
         }
     else:
         track_info = {
             
-            "HMS_evts" : len(h_ecut_eff),
-            "HMS_evts_uncern" : math.sqrt(len(h_ecut_eff)),
-            "SHMS_evts" : len(p_ecut_eff),
-            "SHMS_evts_uncern" : math.sqrt(len(p_ecut_eff)),
+            "HMS_evts" : len(h_ecut_lumi_eff),
+            "HMS_evts_uncern" : math.sqrt(len(h_ecut_lumi_eff)),
+            "SHMS_evts" : len(p_ecut_lumi_eff),
+            "SHMS_evts_uncern" : math.sqrt(len(p_ecut_lumi_eff)),
             "TRIG1_cut" : len(TRIG1_cut),
             "TRIG3_cut" : len(TRIG3_cut),
-            "HMS_track" : len(h_track_after)/len(h_track_before),
-            "HMS_track_uncern" : (len(h_track_after)/len(h_track_before))*math.sqrt((1/len(h_track_after)) + (1/len(h_track_before))),
-            "etrack" : len(h_etrack_after)/len(h_etrack_before),
-            "etrack_uncern" : (len(h_etrack_after)/len(h_etrack_before))*math.sqrt((1/len(h_etrack_after)) + (1/len(h_etrack_before))),
-            "SHMS_track" : len(p_track_after)/len(p_track_before),
-            "SHMS_track_uncern" : (len(p_track_after)/len(p_track_before))*math.sqrt((1/len(p_track_after)) + (1/len(p_track_before))),
-            "hadtrack" : len(p_hadtrack_after)/len(p_hadtrack_before),
-            "hadtrack_uncern" : (len(p_hadtrack_after)/len(p_hadtrack_before))*math.sqrt((1/len(p_hadtrack_after)) + (1/len(p_hadtrack_before))),
-            "pitrack" : len(p_pitrack_after)/len(p_pitrack_before),
-            "pitrack_uncern" : (len(p_pitrack_after)/len(p_pitrack_before))*math.sqrt((1/len(p_pitrack_after)) + (1/len(p_pitrack_before))),
-            "Ktrack" : len(p_Ktrack_after)/len(p_Ktrack_before),
-            "Ktrack_uncern" : (len(p_Ktrack_after)/len(p_Ktrack_before))*math.sqrt((1/len(p_Ktrack_after)) + (1/len(p_Ktrack_before))),
-            "ptrack" : len(p_ptrack_after)/len(p_ptrack_before),
-            "ptrack_uncern" : (len(p_ptrack_after)/len(p_ptrack_before))*math.sqrt((1/len(p_ptrack_after)) + (1/len(p_ptrack_before))),
+            "HMS_track" : len(h_track_lumi_after)/len(h_track_lumi_before),
+            "HMS_track_uncern" : (len(h_track_lumi_after)/len(h_track_lumi_before))*math.sqrt((1/len(h_track_lumi_after)) + (1/len(h_track_lumi_before))),
+            "etrack" : len(h_etrack_lumi_after)/len(h_etrack_lumi_before),
+            "etrack_uncern" : (len(h_etrack_lumi_after)/len(h_etrack_lumi_before))*math.sqrt((1/len(h_etrack_lumi_after)) + (1/len(h_etrack_lumi_before))),
+            "SHMS_track" : len(p_track_lumi_after)/len(p_track_lumi_before),
+            "SHMS_track_uncern" : (len(p_track_lumi_after)/len(p_track_lumi_before))*math.sqrt((1/len(p_track_lumi_after)) + (1/len(p_track_lumi_before))),
+            "hadtrack" : len(p_hadtrack_lumi_after)/len(p_hadtrack_lumi_before),
+            "hadtrack_uncern" : (len(p_hadtrack_lumi_after)/len(p_hadtrack_lumi_before))*math.sqrt((1/len(p_hadtrack_lumi_after)) + (1/len(p_hadtrack_lumi_before))),
+            "pitrack" : len(p_pitrack_lumi_after)/len(p_pitrack_lumi_before),
+            "pitrack_uncern" : (len(p_pitrack_lumi_after)/len(p_pitrack_lumi_before))*math.sqrt((1/len(p_pitrack_lumi_after)) + (1/len(p_pitrack_lumi_before))),
+            "Ktrack" : len(p_Ktrack_lumi_after)/len(p_Ktrack_lumi_before),
+            "Ktrack_uncern" : (len(p_Ktrack_lumi_after)/len(p_Ktrack_lumi_before))*math.sqrt((1/len(p_Ktrack_lumi_after)) + (1/len(p_Ktrack_lumi_before))),
+            "ptrack" : len(p_ptrack_lumi_after)/len(p_ptrack_lumi_before),
+            "ptrack_uncern" : (len(p_ptrack_lumi_after)/len(p_ptrack_lumi_before))*math.sqrt((1/len(p_ptrack_lumi_after)) + (1/len(p_ptrack_lumi_before))),
             "accp_edtm" : (scipy.integrate.simps(SHMS_EDTM) + scipy.integrate.simps(HMS_EDTM)),
             
         }
@@ -704,46 +711,46 @@ def analysis(PS1, PS3, thres_curr):
     print("Number of TRIG3 Events: %.0f\n" % (PS3*scipy.integrate.simps(TRIG3_cut)))
     print("Number of TRIG5 Events: %.0f\n\n" % scipy.integrate.simps(TRIG5))
 
-    print("Number of HMS good events: %.0f +/- %.0f " % ((PS3*len(h_ecut_eff))
-                                                         ,math.sqrt(PS3*len(h_ecut_eff))))
+    print("Number of HMS good events: %.0f +/- %.0f " % ((PS3*len(h_ecut_lumi_eff))
+                                                         ,math.sqrt(PS3*len(h_ecut_lumi_eff))))
     print("Calculated tracking efficiency: %f +/- %f\n" %
-          (len(h_track_after)/len(h_track_before),
-           (len(h_track_after)/len(h_track_before))*math.sqrt((1/len(h_track_after))
-                                                         + (1/len(h_track_before)))))
+          (len(h_track_lumi_after)/len(h_track_lumi_before),
+           (len(h_track_lumi_after)/len(h_track_lumi_before))*math.sqrt((1/len(h_track_lumi_after))
+                                                         + (1/len(h_track_lumi_before)))))
     print("Calculated electron tracking efficiency: %f +/- %f\n" %
-          (len(h_etrack_after)/len(h_etrack_before),
-           (len(h_etrack_after)/len(h_etrack_before))*math.sqrt((1/len(h_etrack_after))
-                                                           + (1/len(h_etrack_before)))))
+          (len(h_etrack_lumi_after)/len(h_etrack_lumi_before),
+           (len(h_etrack_lumi_after)/len(h_etrack_lumi_before))*math.sqrt((1/len(h_etrack_lumi_after))
+                                                           + (1/len(h_etrack_lumi_before)))))
     print("Calculated HMS Cherenkov efficiency: %f +/- %f\n\n" %
-          (len(h_ecut_eff)/len(h_ecut_after),
-           (len(h_ecut_eff)/len(h_ecut_after))*math.sqrt((1/len(h_ecut_eff))
-                                                    + (1/len(h_ecut_after)))))
-    print("Number of SHMS good events: %.0f +/- %.0f" % ((PS1*len(p_ecut_eff)),
-                                                         math.sqrt(PS1*len(p_ecut_eff))))
+          (len(h_ecut_lumi_eff)/len(h_ecut_lumi_after),
+           (len(h_ecut_lumi_eff)/len(h_ecut_lumi_after))*math.sqrt((1/len(h_ecut_lumi_eff))
+                                                    + (1/len(h_ecut_lumi_after)))))
+    print("Number of SHMS good events: %.0f +/- %.0f" % ((PS1*len(p_ecut_lumi_eff)),
+                                                         math.sqrt(PS1*len(p_ecut_lumi_eff))))
     print("Calculated tracking efficiency: %f +/- %f\n" %
-          (len(p_track_after)/len(p_track_before),
-           (len(p_track_after)/len(p_track_before))*math.sqrt((1/len(p_track_after))
-                                                         + (1/len(p_track_before)))))
+          (len(p_track_lumi_after)/len(p_track_lumi_before),
+           (len(p_track_lumi_after)/len(p_track_lumi_before))*math.sqrt((1/len(p_track_lumi_after))
+                                                         + (1/len(p_track_lumi_before)))))
     print("Calculated hadron tracking efficiency: %f +/- %f\n" %
-          (len(p_hadtrack_after)/len(p_hadtrack_before),
-           (len(p_hadtrack_after)/len(p_hadtrack_before))*math.sqrt((1/len(p_hadtrack_after))
-                                                               + (1/len(p_hadtrack_before)))))
+          (len(p_hadtrack_lumi_after)/len(p_hadtrack_lumi_before),
+           (len(p_hadtrack_lumi_after)/len(p_hadtrack_lumi_before))*math.sqrt((1/len(p_hadtrack_lumi_after))
+                                                               + (1/len(p_hadtrack_lumi_before)))))
     print("Calculated pion tracking efficiency: %f +/- %f\n" %
-          (len(p_pitrack_after)/len(p_pitrack_before),
-           (len(p_pitrack_after)/len(p_pitrack_before))*math.sqrt((1/len(p_pitrack_after))
-                                                             + (1/len(p_pitrack_before)))))
+          (len(p_pitrack_lumi_after)/len(p_pitrack_lumi_before),
+           (len(p_pitrack_lumi_after)/len(p_pitrack_lumi_before))*math.sqrt((1/len(p_pitrack_lumi_after))
+                                                             + (1/len(p_pitrack_lumi_before)))))
     print("Calculated kaon tracking efficiency: %f +/- %f\n" %
-          (len(p_Ktrack_after)/len(p_Ktrack_before),
-           (len(p_Ktrack_after)/len(p_Ktrack_before))*math.sqrt((1/len(p_Ktrack_after))
-                                                           + (1/len(p_Ktrack_before)))))
+          (len(p_Ktrack_lumi_after)/len(p_Ktrack_lumi_before),
+           (len(p_Ktrack_lumi_after)/len(p_Ktrack_lumi_before))*math.sqrt((1/len(p_Ktrack_lumi_after))
+                                                           + (1/len(p_Ktrack_lumi_before)))))
     print("Calculated proton tracking efficiency: %f +/- %f\n" %
-          (len(p_ptrack_after)/len(p_ptrack_before),
-           (len(p_ptrack_after)/len(p_ptrack_before))*math.sqrt((1/len(p_ptrack_after))
-                                                           + (1/len(p_ptrack_before)))))
+          (len(p_ptrack_lumi_after)/len(p_ptrack_lumi_before),
+           (len(p_ptrack_lumi_after)/len(p_ptrack_lumi_before))*math.sqrt((1/len(p_ptrack_lumi_after))
+                                                           + (1/len(p_ptrack_lumi_before)))))
     print("Calculated SHMS Cherenkov efficiency: %f +/- %f\n\n" %
-          (len(p_ecut_eff)/len(p_ecut_after),
-           (len(p_ecut_eff)/len(p_ecut_after))*math.sqrt((1/len(p_ecut_eff))
-                                                + (1/len(p_ecut_after)))))
+          (len(p_ecut_lumi_eff)/len(p_ecut_lumi_after),
+           (len(p_ecut_lumi_eff)/len(p_ecut_lumi_after))*math.sqrt((1/len(p_ecut_lumi_eff))
+                                                + (1/len(p_ecut_lumi_after)))))
     print("============================================================================\n\n")
           
     return track_info

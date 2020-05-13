@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-05-08 21:16:37 trottar"
+# Time-stamp: "2020-05-12 20:03:29 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -121,7 +121,10 @@ def make_cutDict(cut,inputDict=None):
 
     for i,val in enumerate(x):
         tmp = x[i]
-        inputDict[cut].update(eval(tmp))
+        if tmp == "":
+            continue
+        else:
+            inputDict[cut].update(eval(tmp))
         
     return inputDict
 

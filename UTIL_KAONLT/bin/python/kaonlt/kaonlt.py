@@ -44,7 +44,11 @@ def make_cutDict(cut,inputDict=None):
     # Evaluate strings to cut values. Creates a dictionary in a dictionary...dict-ception!
     for i,val in enumerate(x):
         tmp = x[i]
-        inputDict[cut].update(eval(tmp))
+        # Checks for removed leaves
+        if tmp == "":
+            continue
+        else:
+            inputDict[cut].update(eval(tmp))
         
     return inputDict
 
@@ -353,6 +357,8 @@ class pyPlot(pyDict):
                                 for remove in arr_cuts:
                                     # Check which cut matches the one wanted to be removed
                                     if leafminus in remove:
+                                        # Grabs parameters from DB (see below)
+                                        remove = self.search_DB(remove,runNum)
                                         print("Removing... ",remove)
                                         # Replace unwanted cut with blank string
                                         cutDict[typName] = cutDict[typName].replace(remove,"")

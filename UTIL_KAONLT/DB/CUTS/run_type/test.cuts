@@ -1,1 +1,2 @@
-p_ecut_lumi_eff = accept.delta+accept.hms_pfp
+# p_ecut_lumi_eff = accept.delta+accept.hms_pfp
+h_ecut_eff_no_cer = pid.h_ecut+coin_time.coin_ek_ROC1-pid.h_ecut.H_cal_etotnorm

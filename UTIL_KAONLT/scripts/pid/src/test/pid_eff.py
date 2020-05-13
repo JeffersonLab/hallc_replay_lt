@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-05-08 20:21:52 trottar"
+# Time-stamp: "2020-05-12 20:00:29 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -123,7 +123,10 @@ def make_cutDict(cut,inputDict=None):
 
     for i,val in enumerate(x):
         tmp = x[i]
-        inputDict[cut].update(eval(tmp))
+        if tmp == "":
+            continue
+        else:
+            inputDict[cut].update(eval(tmp))
         
     return inputDict
 
@@ -134,6 +137,7 @@ cutDict = make_cutDict("p_kcut_eff",cutDict)
 cutDict = make_cutDict("p_kcut_eff_no_hgcer",cutDict)
 cutDict = make_cutDict("p_kcut_eff_no_aero",cutDict)
 cutDict = make_cutDict("p_kcut_eff_no_cal",cutDict)
+# cutDict = make_cutDict("h_ecut_eff_no_cer")
 c = klt.pyPlot(cutDict)
 
 def hms_cer():

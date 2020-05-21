@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-05-12 20:00:29 trottar"
+# Time-stamp: "2020-05-21 16:54:55 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -146,7 +146,7 @@ def hms_cer():
     # coin_noID_electron
     coin_noID_electron = np.array(c.add_cut(CTime_eKCoinTime_ROC1,"h_ecut_eff_no_cer")-47.5)
     t1 = time.time()
-    print("kaonlt: ",t1-t0)
+    print("kaonlt: ",t1-t0,len(coin_noID_electron))
 
     noID_electron_iterate = [CTime_eKCoinTime_ROC1, H_gtr_dp, P_gtr_dp, P_cal_etotnorm, H_gtr_beta, H_cal_etotnorm, emiss, pmiss]
     t2 = time.time()
@@ -159,9 +159,23 @@ def hms_cer():
                                    if p_cal <0.6
                                    if (abs(h_beta)-1.00) < 0.1
                                    if (coin-47.5) > -0.5 and (coin-47.5) < 0.5
-                                   if h_cal > 0.995 and h_cal < 1.015])
+                                        if h_cal < 1.5])
     t3 = time.time()
-    print("[]: ",t3-t2)
+    print("[]: ",t3-t2,len(test_coin_noID_electron))
+
+    t4 = time.time()
+    test2_coin_noID_electron = []    
+    for i,evt in enumerate(CTime_eKCoinTime_ROC1):
+        if abs(H_gtr_dp[i]) < 10.0:
+            if P_gtr_dp[i] >-10.0 or P_gtr_dp[i] < 20.0:
+                if P_cal_etotnorm[i] <0.6:
+                    if (abs(H_gtr_beta[i])-1.00) < 0.1:
+                        if (CTime_eKCoinTime_ROC1[i]-47.5) > -0.5 and (CTime_eKCoinTime_ROC1[i]-47.5) < 0.5:
+                            if H_cal_etotnorm[i] < 1.5:
+                                test2_coin_noID_electron.append(evt-47.5)
+                                
+    t5 = time.time()
+    print("loop", t5-t4,len(test2_coin_noID_electron))
     
     # mm_noID_electron
     mm_noID_electron = np.array(c.add_cut(missmass,"h_ecut_eff_no_cer"))

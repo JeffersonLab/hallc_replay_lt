@@ -348,7 +348,7 @@ class pyPlot(pyDict):
 
                         # Open general cuts file of interest to be removed from dictionary.
                         fminus = open(minusfout)
-                    
+                            
                         for lminus in fminus:
                             if "#" in lminus:
                                 continue
@@ -372,9 +372,9 @@ class pyPlot(pyDict):
                                 else:
                                     print("ERROR 7: %s cut does not match %s" % (cutminus,lminus[0]))
                                     continue
+                        fplus.close()
+                        fminus.close()
                 print("\n\n")
-            fplus.close()
-            fminus.close()
         f.close()
         print(cutDict.keys())
         return cutDict

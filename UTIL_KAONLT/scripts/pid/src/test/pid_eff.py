@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-05-21 16:54:55 trottar"
+# Time-stamp: "2020-05-27 15:41:47 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -91,8 +91,8 @@ missmass = np.array(np.sqrt(abs(emiss*emiss-pmiss*pmiss)))
 
 r = klt.pyRoot()
 
-fout = '../../../../DB/CUTS/run_type/pid_eff.cuts'
-# fout = '../../../../DB/CUTS/run_type/test.cuts'
+# fout = '../../../../DB/CUTS/run_type/pid_eff.cuts'
+fout = '../../../../DB/CUTS/run_type/test.cuts'
 
 # f = open('../../../../DB/CUTS/pid.cuts.tmp')
 
@@ -130,14 +130,14 @@ def make_cutDict(cut,inputDict=None):
         
     return inputDict
 
-cutDict = make_cutDict("h_ecut_eff")
-cutDict = make_cutDict("h_ecut_eff_no_cer",cutDict)
-cutDict = make_cutDict("h_ecut_eff_no_cal",cutDict)
-cutDict = make_cutDict("p_kcut_eff",cutDict)
-cutDict = make_cutDict("p_kcut_eff_no_hgcer",cutDict)
-cutDict = make_cutDict("p_kcut_eff_no_aero",cutDict)
-cutDict = make_cutDict("p_kcut_eff_no_cal",cutDict)
-# cutDict = make_cutDict("h_ecut_eff_no_cer")
+# cutDict = make_cutDict("h_ecut_eff")
+# cutDict = make_cutDict("h_ecut_eff_no_cer",cutDict)
+# cutDict = make_cutDict("h_ecut_eff_no_cal",cutDict)
+# cutDict = make_cutDict("p_kcut_eff",cutDict)
+# cutDict = make_cutDict("p_kcut_eff_no_hgcer",cutDict)
+# cutDict = make_cutDict("p_kcut_eff_no_aero",cutDict)
+# cutDict = make_cutDict("p_kcut_eff_no_cal",cutDict)
+cutDict = make_cutDict("h_ecut_eff_no_cer")
 c = klt.pyPlot(cutDict)
 
 def hms_cer():

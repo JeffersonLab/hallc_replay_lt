@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-06-08 13:54:10 trottar"
+# Time-stamp: "2020-06-08 13:55:50 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -462,8 +462,8 @@ cutDict = make_cutDict("p_hadtrack_lumi_after",cutDict)
 cutDict = make_cutDict("p_pitrack_lumi_after",cutDict)
 cutDict = make_cutDict("p_ktrack_lumi_after",cutDict)
 cutDict = make_cutDict("p_ptrack_lumi_after",cutDict)
-cutDict = make_cutDict("p_ecut_lumi_before",cutDict)
-cutDict = make_cutDict("p_ecut_lumi_after",cutDict)
+cutDict = make_cutDict("p_etrack_lumi_before",cutDict)
+cutDict = make_cutDict("p_etrack_lumi_after",cutDict)
 cutDict = make_cutDict("p_ecut_lumi_eff",cutDict)
 cutDict = make_cutDict("h_track_lumi_before",cutDict)
 cutDict = make_cutDict("h_etrack_lumi_before",cutDict)
@@ -542,14 +542,14 @@ def analysis(PS1, PS3, thres_curr):
     # p_ptrack_lumi_after
     p_ptrack_lumi_after = c.add_cut(P_dc_ntrack,"p_ptrack_lumi_after")
 
-    # p_ecut_lumi_before
-    p_ecut_lumi_before = c.add_cut(P_hgcer_npeSum,"p_ecut_lumi_before")
+    # p_etrack_lumi_before
+    p_etrack_lumi_before = c.add_cut(P_hgcer_npeSum,"p_etrack_lumi_before")
 
     # p_show_before
-    p_show_before = c.add_cut(P_cal_etotnorm,"p_ecut_lumi_before")
+    p_show_before = c.add_cut(P_cal_etotnorm,"p_etrack_lumi_before")
 
-    # p_ecut_lumi_after
-    p_ecut_lumi_after  = c.add_cut(P_hgcer_npeSum,"p_ecut_lumi_after")
+    # p_etrack_lumi_after
+    p_etrack_lumi_after  = c.add_cut(P_hgcer_npeSum,"p_etrack_lumi_after")
 
     # p_ecut_lumi_eff
     p_ecut_lumi_eff  = c.add_cut(P_hgcer_npeSum,"p_ecut_lumi_eff")
@@ -752,9 +752,9 @@ def analysis(PS1, PS3, thres_curr):
            (len(p_ptrack_lumi_after)/len(p_ptrack_lumi_before))*math.sqrt((1/len(p_ptrack_lumi_after))
                                                            + (1/len(p_ptrack_lumi_before)))))
     print("Calculated SHMS Cherenkov efficiency: %f +/- %f\n\n" %
-          (len(p_ecut_lumi_eff)/len(p_ecut_lumi_after),
-           (len(p_ecut_lumi_eff)/len(p_ecut_lumi_after))*math.sqrt((1/len(p_ecut_lumi_eff))
-                                                + (1/len(p_ecut_lumi_after)))))
+          (len(p_ecut_lumi_eff)/len(p_etrack_lumi_after),
+           (len(p_ecut_lumi_eff)/len(p_etrack_lumi_after))*math.sqrt((1/len(p_ecut_lumi_eff))
+                                                + (1/len(p_etrack_lumi_after)))))
     print("============================================================================\n\n")
           
     return track_info

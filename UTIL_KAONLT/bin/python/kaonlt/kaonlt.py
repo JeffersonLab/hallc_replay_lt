@@ -285,7 +285,7 @@ class pyPlot(pyDict):
                         if "#" in lplus:
                             continue
                         else:
-                            lplus  = lplus.split("=")
+                            lplus  = lplus.split("=",1)
                             cuts = lplus[1]
                             print(cutplus, " ++ ", lplus[0])
                             # Check if cut is in file
@@ -353,7 +353,7 @@ class pyPlot(pyDict):
                             if "#" in lminus:
                                 continue
                             else:
-                                lminus  = lminus.split("=")
+                                lminus  = lminus.split("=",1)
                                 cuts = lminus[1]
                                 # Split cuts to check for the one to be removed.
                                 arr_cuts = cuts.split(",")

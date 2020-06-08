@@ -393,6 +393,8 @@ class pyPlot(pyDict):
                 tmp = cut.split("accept")
                 for val in tmp:
                     if "." in val:
+                        tmp = val.split(")")[0]
+                        tmp = tmp.split(".")[1]
                         fout = REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/Acceptance_Parameters.csv"
                         try:
                             data = dict(pd.read_csv(fout))
@@ -412,6 +414,8 @@ class pyPlot(pyDict):
                 tmp = cut.split("track")
                 for val in tmp:
                     if "." in val:
+                        tmp = val.split(")")[0]
+                        tmp = tmp.split(".")[1]
                         fout = REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/Tracking_Parameters.csv"
                         try:
                             data = dict(pd.read_csv(fout))
@@ -452,6 +456,8 @@ class pyPlot(pyDict):
                 tmp = cut.split("pid")
                 for val in tmp:
                     if "." in val:
+                        tmp = val.split(")")[0]
+                        tmp = tmp.split(".")[1]
                         fout = REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/PID_Parameters.csv"
                         try:
                             data = dict(pd.read_csv(fout))

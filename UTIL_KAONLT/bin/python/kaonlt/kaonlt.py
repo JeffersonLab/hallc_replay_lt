@@ -395,6 +395,7 @@ class pyPlot(pyDict):
                     if "." in val:
                         tmp = val.split(")")[0]
                         tmp = tmp.split(".")[1]
+                        print("xxxx",tmp)
                         fout = REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/Acceptance_Parameters.csv"
                         try:
                             data = dict(pd.read_csv(fout))
@@ -408,6 +409,7 @@ class pyPlot(pyDict):
                                 print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
                                 continue
                     else:
+                        print("aaaa",tmp)
                         continue
                 db_cuts.append(cut.rstrip())
             elif "track" in cut:

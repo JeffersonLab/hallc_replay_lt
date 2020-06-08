@@ -299,6 +299,7 @@ class pyPlot(pyDict):
                                         db_cut = self.search_DB(cuts,runNum)
                                         print(typName, " already found!!!!")
                                         cutDict[typName] += ","+db_cut
+                                        print(lplus[0],"++>",cutDict[typName])
                                 else:
                                     # If run type not defined, then add key to dictionary
                                     print("cuts",cuts)

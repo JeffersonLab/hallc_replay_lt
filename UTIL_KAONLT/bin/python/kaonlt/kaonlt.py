@@ -425,20 +425,22 @@ class pyPlot(pyDict):
             elif "CT" in cut:
                 tmp = cut.split(".")
                 print("xxxxx",tmp)
-                tmp = tmp[1].split(")")[0]
-                print("xxxxx",tmp)
-                fout = REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/Timing_Parameters.csv"
-                try:
-                    data = dict(pd.read_csv(fout))
-                except IOError:
-                    print("ERROR 9: %s not found in %s" % (tmp,fout))
-                for i,evt in enumerate(data['Run_Start']):
-                    if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
-                        cut  = cut.replace("CT."+tmp,str(data[tmp][i]))
-                        pass
-                    else:
-                        print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
-                        continue
+                for val in tmp:
+                    tmp = val.split(")")[0]
+                    print("xxxxx",tmp)
+                    print("xxxxx",tmp)
+                    fout = REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/Timing_Parameters.csv"
+                    try:
+                        data = dict(pd.read_csv(fout))
+                    except IOError:
+                        print("ERROR 9: %s not found in %s" % (tmp,fout))
+                    for i,evt in enumerate(data['Run_Start']):
+                        if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                            cut  = cut.replace("CT."+tmp,str(data[tmp][i]))
+                            pass
+                        else:
+                            print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                            continue
                 db_cuts.append(cut)
             elif "pid" in cut:
                 tmp = cut.split(".")

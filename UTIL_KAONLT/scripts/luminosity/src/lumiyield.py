@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-06-08 14:36:16 trottar"
+# Time-stamp: "2020-06-08 17:04:28 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -19,6 +19,9 @@ import sys, math, os, subprocess
 
 sys.path.insert(0, '../../../bin/python/')
 import kaonlt as klt
+
+import logging
+logging.getLogger("klt").setLevel(logging.WARNING)
 
 runNum = sys.argv[1]
 MaxEvent=sys.argv[2]

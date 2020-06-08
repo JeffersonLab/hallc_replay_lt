@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-06-08 14:28:13 trottar"
+# Time-stamp: "2020-06-08 14:33:02 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -357,7 +357,7 @@ H_cer_npeSum = tree.array("H.cer.npeSum")
 H_gtr_dp = tree.array("H.gtr.dp")
 H_tr_tg_th = tree.array("H.gtr.th")
 H_tr_tg_ph = tree.array("H.gtr.ph")
-H_tr_beta = tree.array("H.tr.beta")
+H_gtr_beta = tree.array("H.gtr.beta")
 H_tr_chi2 = tree.array("H.tr.chi2")
 H_tr_ndof = tree.array("H.tr.ndof")
 H_hod_goodscinhit = tree.array("H.hod.goodscinhit")

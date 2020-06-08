@@ -391,157 +391,69 @@ class pyPlot(pyDict):
         for cut in cuts:
             # Find which cut is being called
             if "accept" in cut:
-                if ("&" or "|") in cut:
-                    if "&" in cut:
-                        conj = cut.split("&")
-                    if "|" in cut:
-                        conj = cut.split("|")
-                    for a in conj:
-                        tmp = a.split(".")
-                        tmp = tmp[1].split(")")[0]
-                        fout = REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/Acceptance_Parameters.csv"
-                        try:
-                            data = dict(pd.read_csv(fout))
-                        except IOError:
-                            print("ERROR 9: %s not found in %s" % (tmp,fout))
-                        for i,evt in enumerate(data['Run_Start']):
-                            if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
-                                cut  = cut.replace("accept."+tmp,str(data[tmp][i]))
-                                pass
-                            else:
-                                print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
-                                continue
-                    db_cuts.append(cut)
-                else:
-                    tmp = cut.split(".")
-                    tmp = tmp[1].split(")")[0]
-                    fout = REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/Acceptance_Parameters.csv"
-                    try:
-                        data = dict(pd.read_csv(fout))
-                    except IOError:
-                        print("ERROR 9: %s not found in %s" % (tmp,fout))
-                    for i,evt in enumerate(data['Run_Start']):
-                        if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
-                            cut  = cut.replace("accept."+tmp,str(data[tmp][i]))
-                            pass
-                        else:
-                            print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
-                            continue
-                    db_cuts.append(cut)
+                tmp = cut.split(".")
+                tmp = tmp[1].split(")")[0]
+                fout = REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/Acceptance_Parameters.csv"
+                try:
+                    data = dict(pd.read_csv(fout))
+                except IOError:
+                    print("ERROR 9: %s not found in %s" % (tmp,fout))
+                for i,evt in enumerate(data['Run_Start']):
+                    if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                        cut  = cut.replace("accept."+tmp,str(data[tmp][i]))
+                        pass
+                    else:
+                        print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                        continue
+                db_cuts.append(cut)
             elif "track" in cut:
-                if ("&" or "|") in cut:
-                    if "&" in cut:
-                        conj = cut.split("&")
-                    if "|" in cut:
-                        conj = cut.split("|")
-                    for a in conj:
-                        tmp = a.split(".")
-                        tmp = tmp[1].split(")")[0]
-                        fout = REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/Tracking_Parameters.csv"
-                        try:
-                            data = dict(pd.read_csv(fout))
-                        except IOError:
-                            print("ERROR 9: %s not found in %s" % (tmp,fout))
-                        for i,evt in enumerate(data['Run_Start']):
-                            if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
-                                cut  = cut.replace("track."+tmp,str(data[tmp][i]))
-                                pass
-                            else:
-                                print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
-                                continue
-                    db_cuts.append(cut)
-                else:
-                    tmp = cut.split(".")
-                    tmp = tmp[1].split(")")[0]
-                    fout = REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/Tracking_Parameters.csv"
-                    try:
-                        data = dict(pd.read_csv(fout))
-                    except IOError:
-                        print("ERROR 9: %s not found in %s" % (tmp,fout))
-                    for i,evt in enumerate(data['Run_Start']):
-                        if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
-                            cut  = cut.replace("track."+tmp,str(data[tmp][i]))
-                            pass
-                        else:
-                            print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
-                            continue
-                    db_cuts.append(cut)
+                tmp = cut.split(".")
+                tmp = tmp[1].split(")")[0]
+                fout = REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/Tracking_Parameters.csv"
+                try:
+                    data = dict(pd.read_csv(fout))
+                except IOError:
+                    print("ERROR 9: %s not found in %s" % (tmp,fout))
+                for i,evt in enumerate(data['Run_Start']):
+                    if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                        cut  = cut.replace("track."+tmp,str(data[tmp][i]))
+                        pass
+                    else:
+                        print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                        continue
+                db_cuts.append(cut)
             elif "CT" in cut:
-                if ("&" or "|") in cut:
-                    if "&" in cut:
-                        conj = cut.split("&")
-                    if "|" in cut:
-                        conj = cut.split("|")
-                    for a in conj:
-                        tmp = a.split(".")
-                        tmp = tmp[1].split(")")[0]
-                        fout = REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/Timing_Parameters.csv"
-                        try:
-                            data = dict(pd.read_csv(fout))
-                        except IOError:
-                            print("ERROR 9: %s not found in %s" % (tmp,fout))
-                        for i,evt in enumerate(data['Run_Start']):
-                            if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
-                                cut  = cut.replace("CT."+tmp,str(data[tmp][i]))
-                                pass
-                            else:
-                                print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
-                                continue
-                    db_cuts.append(cut)
-                else:
-                    tmp = cut.split(".")
-                    tmp = tmp[1].split(")")[0]
-                    fout = REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/Timing_Parameters.csv"
-                    try:
-                        data = dict(pd.read_csv(fout))
-                    except IOError:
-                        print("ERROR 9: %s not found in %s" % (tmp,fout))
-                    for i,evt in enumerate(data['Run_Start']):
-                        if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
-                            cut  = cut.replace("CT."+tmp,str(data[tmp][i]))
-                            pass
-                        else:
-                            print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
-                            continue
-                    db_cuts.append(cut)
+                tmp = cut.split(".")
+                tmp = tmp[1].split(")")[0]
+                fout = REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/Timing_Parameters.csv"
+                try:
+                    data = dict(pd.read_csv(fout))
+                except IOError:
+                    print("ERROR 9: %s not found in %s" % (tmp,fout))
+                for i,evt in enumerate(data['Run_Start']):
+                    if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                        cut  = cut.replace("CT."+tmp,str(data[tmp][i]))
+                        pass
+                    else:
+                        print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                        continue
+                db_cuts.append(cut)
             elif "pid" in cut:
-                if ("&" or "|") in cut:
-                    if "&" in cut:
-                        conj = cut.split("&")
-                    if "|" in cut:
-                        conj = cut.split("|")
-                    for a in conj:
-                        tmp = a.split(".")
-                        tmp = tmp[1].split(")")[0]
-                        fout = REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/PID_Parameters.csv"
-                        try:
-                            data = dict(pd.read_csv(fout))
-                        except IOError:
-                            print("ERROR 9: %s not found in %s" % (tmp,fout))
-                        for i,evt in enumerate(data['Run_Start']):
-                            if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
-                                cut  = cut.replace("pid."+tmp,str(data[tmp][i]))
-                                pass
-                            else:
-                                print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
-                                continue
-                    db_cuts.append(cut)
-                else:
-                    tmp = cut.split(".")
-                    tmp = tmp[1].split(")")[0]
-                    fout = REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/PID_Parameters.csv"
-                    try:
-                        data = dict(pd.read_csv(fout))
-                    except IOError:
-                        print("ERROR 9: %s not found in %s" % (tmp,fout))
-                    for i,evt in enumerate(data['Run_Start']):
-                        if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
-                            cut  = cut.replace("pid."+tmp,str(data[tmp][i]))
-                            pass
-                        else:
-                            print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
-                            continue
-                    db_cuts.append(cut)
+                tmp = cut.split(".")
+                tmp = tmp[1].split(")")[0]
+                fout = REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/PID_Parameters.csv"
+                try:
+                    data = dict(pd.read_csv(fout))
+                except IOError:
+                    print("ERROR 9: %s not found in %s" % (tmp,fout))
+                for i,evt in enumerate(data['Run_Start']):
+                    if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                        cut  = cut.replace("pid."+tmp,str(data[tmp][i]))
+                        pass
+                    else:
+                        print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                        continue
+                db_cuts.append(cut)
             # Find which cut is being called. This elif statement is a little different since it only
             # grabs a threshold current value. This is hardcoded for now, eventually need to change.
             elif "current" in cut:

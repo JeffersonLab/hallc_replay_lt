@@ -426,8 +426,8 @@ class pyPlot(pyDict):
                 print("xxxx",tmp)
                 for val in tmp:
                     if "." in val:
-                        tmp = val.split(".")
-                        tmp = tmp.split(")")
+                        tmp = val.split(")")[0]
+                        tmp = tmp.split(".")
                         print("xxxx",tmp)
                         fout = REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/Timing_Parameters.csv"
                         try:

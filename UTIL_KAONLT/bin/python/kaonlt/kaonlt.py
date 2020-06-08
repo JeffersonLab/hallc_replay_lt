@@ -427,6 +427,7 @@ class pyPlot(pyDict):
                 print("xxxx",tmp)
                 for val in tmp:
                     tmp = val.split(")")[0]
+                    print("xxxx",tmp)
                     fout = REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/Timing_Parameters.csv"
                     try:
                         data = dict(pd.read_csv(fout))

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-06-08 14:34:11 trottar"
+# Time-stamp: "2020-06-08 14:36:16 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -454,6 +454,7 @@ def make_cutDict(cut,inputDict=None):
 
 cutDict = make_cutDict("p_track_lumi_before")
 cutDict = make_cutDict("p_hadtrack_lumi_before",cutDict)
+cutDict = make_cutDict("p_pitrack_lumi_before",cutDict)
 cutDict = make_cutDict("p_ktrack_lumi_before",cutDict)
 cutDict = make_cutDict("p_ptrack_lumi_before",cutDict)
 cutDict = make_cutDict("p_track_lumi_after",cutDict)

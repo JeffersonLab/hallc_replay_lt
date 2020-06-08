@@ -412,6 +412,7 @@ class pyPlot(pyDict):
                 db_cuts.append(cut)
             elif "track" in cut:
                 tmp = cut.split("track")
+                print("xxxx",tmp)
                 for val in tmp:
                     if "." in val:
                         tmp = val.split(")")[0]

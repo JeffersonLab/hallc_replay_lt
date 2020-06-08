@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-06-08 13:44:36 trottar"
+# Time-stamp: "2020-06-08 13:45:29 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -432,7 +432,7 @@ def make_cutDict(cut,inputDict=None):
     global c
 
     c = klt.pyPlot(readDict)
-    x = list(c.w_dict(cut))
+    x = c.w_dict(cut)
     print("%s" % cut)
     print("x ", x)
     
@@ -448,6 +448,7 @@ def make_cutDict(cut,inputDict=None):
         if tmp == "":
             continue
         else:
+            print("xxxx",tmp)
             inputDict[cut].update(eval(tmp))
         
     return inputDict

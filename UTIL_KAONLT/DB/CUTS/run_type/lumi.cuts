@@ -12,9 +12,9 @@ h_etrack_lumi_after = current.bcm4b+track.h_track_after+pid.h_ecut
 h_pitrack_lumi_after = current.bcm4b+track.h_track_after+pid.h_picut
 h_hadtrack_lumi_after = current.bcm4b+track.h_track_after+pid.h_hadcut
 # eff cut
-h_ecut_lumi_eff = current.bcm4b+accept.delta+accept.hms_pfp+pid.h_ecut-pid.h_ecut.H_gtr_beta-pid.h_ecut.P_cal_etotnorm
-h_picut_lumi_eff = current.bcm4b+accept.delta+accept.hms_pfp+pid.h_picut-pid.h_picut.H_gtr_beta-pid.h_picut.P_cal_etotnorm
-h_hadcut_lumi_eff = current.bcm4b+accept.delta+accept.hms_pfp+pid.h_hadcut-pid.h_hadcut.H_gtr_beta-pid.h_hadcut.P_cal_etotnorm
+h_ecut_lumi_eff = current.bcm4b+accept.delta+accept.hms_pfp+pid.h_ecut-pid.h_ecut.H_gtr_beta
+h_picut_lumi_eff = current.bcm4b+accept.delta+accept.hms_pfp+pid.h_picut-pid.h_picut.H_gtr_beta
+h_hadcut_lumi_eff = current.bcm4b+accept.delta+accept.hms_pfp+pid.h_hadcut-pid.h_hadcut.H_gtr_beta
 ##################
 # SHMS track cuts #
 ##################
@@ -33,8 +33,8 @@ p_ktrack_lumi_after = current.bcm4b+track.p_track_after+pid.p_kcut
 p_ptrack_lumi_after = current.bcm4b+track.p_track_after+pid.p_pcut
 p_hadtrack_lumi_after = current.bcm4b+track.p_track_after+pid.p_hadcut
 # eff cut
-p_ecut_lumi_eff = current.bcm4b+accept.delta+accept.hms_pfp+pid.p_ecut-pid.p_ecut.P_gtr_beta-pid.p_ecut.H_cal_etotnorm-pid.p_ecut.H_cer_npeSum
-p_picut_lumi_eff = current.bcm4b+accept.delta+accept.hms_pfp+pid.p_picut-pid.p_picut.P_gtr_beta-pid.p_picut.H_cal_etotnorm-pid.p_ecut.H_cer_npeSum
-p_kcut_lumi_eff = current.bcm4b+accept.delta+accept.hms_pfp+pid.p_kcut-pid.p_kcut.P_gtr_beta-pid.p_kcut.H_cal_etotnorm-pid.p_ecut.H_cer_npeSum
-p_kcut_lumi_eff = current.bcm4b+accept.delta+accept.hms_pfp+pid.p_kcut-pid.p_picut.P_gtr_beta-pid.p_kcut.H_cal_etotnorm-pid.p_ecut.H_cer_npeSum
-p_hadcut_lumi_eff = current.bcm4b+accept.delta+accept.hms_pfp+pid.p_hadcut-pid.p_hadcut.P_gtr_beta-pid.p_hadcut.H_cal_etotnorm-pid.p_ecut.H_cer_npeSum
+p_ecut_lumi_eff = current.bcm4b+accept.delta+accept.hms_pfp+pid.p_ecut-pid.p_ecut.P_gtr_beta
+p_picut_lumi_eff = current.bcm4b+accept.delta+accept.hms_pfp+pid.p_picut-pid.p_picut.P_gtr_beta
+p_kcut_lumi_eff = current.bcm4b+accept.delta+accept.hms_pfp+pid.p_kcut-pid.p_kcut.P_gtr_beta
+p_kcut_lumi_eff = current.bcm4b+accept.delta+accept.hms_pfp+pid.p_kcut-pid.p_picut.P_gtr_beta
+p_hadcut_lumi_eff = current.bcm4b+accept.delta+accept.hms_pfp+pid.p_hadcut-pid.p_hadcut.P_gtr_beta

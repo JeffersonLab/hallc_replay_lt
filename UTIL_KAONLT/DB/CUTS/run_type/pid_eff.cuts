@@ -1,75 +1,75 @@
 ############
 # HMS ecut #
 ############
-h_ecut_eff_no_cer = pid.h_ecut+coin_time.coin_ek_ROC1-pid.h_ecut.H_cer_npeSum
+h_ecut_eff_no_cer = pid.h_ecut+coin_time.coin_pion_ROC1-pid.h_ecut.H_cer_npeSum
 #
-h_ecut_eff_no_cal = pid.h_ecut+coin_time.coin_ek_ROC1-pid.h_ecut.H_cal_etotnorm
+h_ecut_eff_no_cal = pid.h_ecut+coin_time.coin_pion_ROC1-pid.h_ecut.H_cal_etotnorm
 #
-h_ecut_eff = pid.h_ecut+coin_time.coin_ek_ROC1
+h_ecut_eff = pid.h_ecut+coin_time.coin_pion_ROC1
 #
 #############
 # HMS picut #
 #############
-h_picut_eff_no_cer = pid.h_picut+coin_time.coin_ek_ROC1-pid.h_picut.H_cer_npeSum
+h_picut_eff_no_cer = pid.h_picut+coin_time.coin_pion_ROC1-pid.h_picut.H_cer_npeSum
 #
-h_picut_eff_no_cal = pid.h_picut+coin_time.coin_ek_ROC1-pid.h_picut.H_cal_etotnorm
+h_picut_eff_no_cal = pid.h_picut+coin_time.coin_pion_ROC1-pid.h_picut.H_cal_etotnorm
 #
-h_picut_eff = pid.h_picut+coin_time.coin_ek_ROC1
+h_picut_eff = pid.h_picut+coin_time.coin_pion_ROC1
 ##############
 # HMS hadcut #
 ##############
-h_hadcut_eff_no_cer = pid.h_hadcut+coin_time.coin_ek_ROC1-pid.h_hadcut.H_cer_npeSum
+h_hadcut_eff_no_cer = pid.h_hadcut+coin_time.coin_pion_ROC1-pid.h_hadcut.H_cer_npeSum
 #
-h_hadcut_eff_no_cal = pid.h_hadcut+coin_time.coin_ek_ROC1-pid.h_hadcut.H_cal_etotnorm
+h_hadcut_eff_no_cal = pid.h_hadcut+coin_time.coin_pion_ROC1-pid.h_hadcut.H_cal_etotnorm
 #
-h_hadcut_eff = pid.h_hadcut+coin_time.coin_ek_ROC1
+h_hadcut_eff = pid.h_hadcut+coin_time.coin_pion_ROC1
 #############
 # SHMS ecut #
 #############
-p_ecut_eff_no_hgcer = pid.p_ecut+coin_time.coin_ek_ROC1-pid.p_ecut.P_hgcer_npeSum
+p_ecut_eff_no_hgcer = pid.p_ecut+coin_time.coin_pion_ROC1-pid.p_ecut.P_hgcer_npeSum
 #
-p_ecut_eff_no_aero = pid.p_ecut+coin_time.coin_ek_ROC1-pid.p_ecut.P_aero_npeSum
+p_ecut_eff_no_aero = pid.p_ecut+coin_time.coin_pion_ROC1-pid.p_ecut.P_aero_npeSum
 #
-p_ecut_eff_no_cal = pid.p_ecut+coin_time.coin_ek_ROC1-pid.p_ecut.P_cal_etotnorm
+p_ecut_eff_no_cal = pid.p_ecut+coin_time.coin_pion_ROC1-pid.p_ecut.P_cal_etotnorm
 #
-p_ecut_eff = pid.p_ecut+coin_time.coin_ek_ROC1
+p_ecut_eff = pid.p_ecut+coin_time.coin_pion_ROC1
 ##############
 # SHMS picut #
 ##############
-p_picut_eff_no_hgcer = pid.p_picut+coin_time.coin_ek_ROC1-pid.p_picut.P_hgcer_npeSum
+p_picut_eff_no_hgcer = pid.p_picut+coin_time.coin_pion_ROC1-pid.p_picut.P_hgcer_npeSum
 #
-p_picut_eff_no_aero = pid.p_picut+coin_time.coin_ek_ROC1-pid.p_picut.P_aero_npeSum
+p_picut_eff_no_aero = pid.p_picut+coin_time.coin_pion_ROC1-pid.p_picut.P_aero_npeSum
 #
-p_picut_eff_no_cal = pid.p_picut+coin_time.coin_ek_ROC1-pid.p_picut.P_cal_etotnorm
+p_picut_eff_no_cal = pid.p_picut+coin_time.coin_pion_ROC1-pid.p_picut.P_cal_etotnorm
 #
-p_picut_eff = pid.p_picut+coin_time.coin_ek_ROC1
+p_picut_eff = pid.p_picut+coin_time.coin_pion_ROC1
 #############
 # SHMS kcut #
 #############
-p_kcut_eff_no_hgcer = pid.p_kcut+coin_time.coin_ek_ROC1-pid.p_kcut.P_hgcer_npeSum
+p_kcut_eff_no_hgcer = pid.p_kcut+coin_time.coin_pion_ROC1-pid.p_kcut.P_hgcer_npeSum
 #
-p_kcut_eff_no_aero = pid.p_kcut+coin_time.coin_ek_ROC1-pid.p_kcut.P_aero_npeSum
+p_kcut_eff_no_aero = pid.p_kcut+coin_time.coin_pion_ROC1-pid.p_kcut.P_aero_npeSum
 #
-p_kcut_eff_no_cal = pid.p_kcut+coin_time.coin_ek_ROC1-pid.p_kcut.P_cal_etotnorm
+p_kcut_eff_no_cal = pid.p_kcut+coin_time.coin_pion_ROC1-pid.p_kcut.P_cal_etotnorm
 #
-p_kcut_eff = pid.p_kcut+coin_time.coin_ek_ROC1
+p_kcut_eff = pid.p_kcut+coin_time.coin_pion_ROC1
 #############
 # SHMS pcut #
 #############
-p_pcut_eff_no_hgcer = pid.p_pcut+coin_time.coin_ek_ROC1-pid.p_pcut.P_hgcer_npeSum
+p_pcut_eff_no_hgcer = pid.p_pcut+coin_time.coin_pion_ROC1-pid.p_pcut.P_hgcer_npeSum
 #
-p_pcut_eff_no_aero = pid.p_pcut+coin_time.coin_ek_ROC1-pid.p_pcut.P_aero_npeSum
+p_pcut_eff_no_aero = pid.p_pcut+coin_time.coin_pion_ROC1-pid.p_pcut.P_aero_npeSum
 #
-p_pcut_eff_no_cal = pid.p_pcut+coin_time.coin_ek_ROC1-pid.p_pcut.P_cal_etotnorm
+p_pcut_eff_no_cal = pid.p_pcut+coin_time.coin_pion_ROC1-pid.p_pcut.P_cal_etotnorm
 #
-p_pcut_eff = pid.p_pcut+coin_time.coin_ek_ROC1
+p_pcut_eff = pid.p_pcut+coin_time.coin_pion_ROC1
 ###############
 # SHMS hadcut #
 ###############
-p_hadcut_eff_no_hgcer = pid.p_hadcut+coin_time.coin_ek_ROC1-pid.p_hadcut.P_hgcer_npeSum
+p_hadcut_eff_no_hgcer = pid.p_hadcut+coin_time.coin_pion_ROC1-pid.p_hadcut.P_hgcer_npeSum
 #
-p_hadcut_eff_no_aero = pid.p_hadcut+coin_time.coin_ek_ROC1-pid.p_hadcut.P_aero_npeSum
+p_hadcut_eff_no_aero = pid.p_hadcut+coin_time.coin_pion_ROC1-pid.p_hadcut.P_aero_npeSum
 #
-p_hadcut_eff_no_cal = pid.p_hadcut+coin_time.coin_ek_ROC1-pid.p_hadcut.P_cal_etotnorm
+p_hadcut_eff_no_cal = pid.p_hadcut+coin_time.coin_pion_ROC1-pid.p_hadcut.P_cal_etotnorm
 #
-p_hadcut_eff = pid.p_hadcut+coin_time.coin_ek_ROC1
+p_hadcut_eff = pid.p_hadcut+coin_time.coin_pion_ROC1

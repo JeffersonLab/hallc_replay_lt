@@ -424,6 +424,7 @@ class pyPlot(pyDict):
                 db_cuts.append(cut)
             elif "CT" in cut:
                 tmp = cut.split(".")
+                print("xxxxx",tmp)
                 tmp = tmp[1].split(")")[0]
                 fout = REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/Timing_Parameters.csv"
                 try:

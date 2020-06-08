@@ -228,7 +228,7 @@ class pyPlot(pyDict):
                 continue
             else:
                 
-                line = line.split("=")
+                line = line.split("=",1)
                 # Grab run type cut name
                 typName = line[0].rstrip()
                 typName = typName.lstrip()

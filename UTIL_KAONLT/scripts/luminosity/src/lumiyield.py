@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-06-08 13:30:32 trottar"
+# Time-stamp: "2020-06-08 13:44:36 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -432,7 +432,7 @@ def make_cutDict(cut,inputDict=None):
     global c
 
     c = klt.pyPlot(readDict)
-    x = c.w_dict(cut)
+    x = list(c.w_dict(cut))
     print("%s" % cut)
     print("x ", x)
     
@@ -453,9 +453,9 @@ def make_cutDict(cut,inputDict=None):
     return inputDict
 
 cutDict = make_cutDict("p_track_lumi_before")
-# cutDict = make_cutDict("p_hadtrack_lumi_before",cutDict)
-# cutDict = make_cutDict("p_Ktrack_lumi_before",cutDict)
-# cutDict = make_cutDict("p_ptrack_lumi_before",cutDict)
+cutDict = make_cutDict("p_hadtrack_lumi_before",cutDict)
+cutDict = make_cutDict("p_Ktrack_lumi_before",cutDict)
+cutDict = make_cutDict("p_ptrack_lumi_before",cutDict)
 cutDict = make_cutDict("p_track_lumi_after",cutDict)
 cutDict = make_cutDict("p_hadtrack_lumi_after",cutDict)
 cutDict = make_cutDict("p_pitrack_lumi_after",cutDict)

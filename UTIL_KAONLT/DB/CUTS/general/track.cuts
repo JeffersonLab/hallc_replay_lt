@@ -1,20 +1,12 @@
 #####################
 # HMS tracking cuts #
 #####################
-# h_track_before = {"H_hod_goodscinhit" : (H_hod_goodscinhit == track.H_hodscin)}, {"H_hod_betanotrack" : ((H_hod_betanotrack > track.H_hodbeta_low) & (H_hod_betanotrack < track.H_hodbeta_high))}, {"H_dc_1*_nhit" : ((H_dc_1x1_nhit + H_dc_1u2_nhit + H_dc_1u1_nhit + H_dc_1v1_nhit + H_dc_1x2_nhit + H_dc_1v2_nhit) <  track.H_dc1)}, {"H_dc_2*_nhit" : ((H_dc_2x1_nhit + H_dc_2u2_nhit + H_dc_2u1_nhit + H_dc_2v1_nhit + H_dc_2x2_nhit + H_dc_2v2_nhit) < track.H_dc2)}
+h_track_before = {"H_hod_goodscinhit" : (H_hod_goodscinhit == track.H_hodscin)}, {"H_hod_betanotrack" : ((H_hod_betanotrack > track.H_hodbeta_low) & (H_hod_betanotrack < track.H_hodbeta_high))}, {"H_dc_1*_nhit" : ((H_dc_1x1_nhit + H_dc_1u2_nhit + H_dc_1u1_nhit + H_dc_1v1_nhit + H_dc_1x2_nhit + H_dc_1v2_nhit) <  track.H_dc1)}, {"H_dc_2*_nhit" : ((H_dc_2x1_nhit + H_dc_2u2_nhit + H_dc_2u1_nhit + H_dc_2v1_nhit + H_dc_2x2_nhit + H_dc_2v2_nhit) < track.H_dc2)}
 #
-# h_track_after = {"H_hod_goodscinhit" : (H_hod_goodscinhit == track.H_hodscin)}, {"H_hod_betanotrack" : ((H_hod_betanotrack > track.H_hodbeta_low) & (H_hod_betanotrack < track.H_hodbeta_high))}, {"H_dc_1*_nhit" : ((H_dc_1x1_nhit + H_dc_1u2_nhit + H_dc_1u1_nhit + H_dc_1v1_nhit + H_dc_1x2_nhit + H_dc_1v2_nhit) <  track.H_dc1)}, {"H_dc_2*_nhit" : ((H_dc_2x1_nhit + H_dc_2u2_nhit + H_dc_2u1_nhit + H_dc_2v1_nhit + H_dc_2x2_nhit + H_dc_2v2_nhit) < track.H_dc2)}, {"H_dc_ntrack" : (H_dc_ntrack > track.H_dcn)}
-#
-h_track_before = {"H_hod_goodscinhit" : (H_hod_goodscinhit == track.H_hodscin)}, {"H_hod_betanotrack" : ((H_hod_betanotrack > track.H_hodbeta_low) & (H_hod_betanotrack < track.H_hodbeta_high))}
-#
-h_track_after = {"H_hod_goodscinhit" : (H_hod_goodscinhit == track.H_hodscin)}, {"H_hod_betanotrack" : ((H_hod_betanotrack > track.H_hodbeta_low) & (H_hod_betanotrack < track.H_hodbeta_high))}, {"H_dc_ntrack" : (H_dc_ntrack > track.H_dcn)}
+h_track_after = {"H_hod_goodscinhit" : (H_hod_goodscinhit == track.H_hodscin)}, {"H_hod_betanotrack" : ((H_hod_betanotrack > track.H_hodbeta_low) & (H_hod_betanotrack < track.H_hodbeta_high))}, {"H_dc_1*_nhit" : ((H_dc_1x1_nhit + H_dc_1u2_nhit + H_dc_1u1_nhit + H_dc_1v1_nhit + H_dc_1x2_nhit + H_dc_1v2_nhit) <  track.H_dc1)}, {"H_dc_2*_nhit" : ((H_dc_2x1_nhit + H_dc_2u2_nhit + H_dc_2u1_nhit + H_dc_2v1_nhit + H_dc_2x2_nhit + H_dc_2v2_nhit) < track.H_dc2)}, {"H_dc_ntrack" : (H_dc_ntrack > track.H_dcn)}
 ######################
 # SHMS tracking cuts #
 ######################
-# p_track_before = {"P_hod_goodscinhit" : (P_hod_goodscinhit == track.P_hodscin)}, {"P_hod_betanotrack" : ((P_hod_betanotrack > track.P_hodbeta_low) & (P_hod_betanotrack < track.P_hodbeta_high))}, {"P_dc_1*_nhit" : ((P_dc_1x1_nhit + P_dc_1u2_nhit + P_dc_1u1_nhit + P_dc_1v1_nhit + P_dc_1x2_nhit + P_dc_1v2_nhit) <  track.P_dc1)}, {"P_dc_2*_nhit" : ((P_dc_2x1_nhit + P_dc_2u2_nhit + P_dc_2u1_nhit + P_dc_2v1_nhit + P_dc_2x2_nhit + P_dc_2v2_nhit) < track.P_dc2)}
+p_track_before = {"P_hod_goodscinhit" : (P_hod_goodscinhit == track.P_hodscin)}, {"P_hod_betanotrack" : ((P_hod_betanotrack > track.P_hodbeta_low) & (P_hod_betanotrack < track.P_hodbeta_high))}, {"P_dc_1*_nhit" : ((P_dc_1x1_nhit + P_dc_1u2_nhit + P_dc_1u1_nhit + P_dc_1v1_nhit + P_dc_1x2_nhit + P_dc_1v2_nhit) <  track.P_dc1)}, {"P_dc_2*_nhit" : ((P_dc_2x1_nhit + P_dc_2u2_nhit + P_dc_2u1_nhit + P_dc_2v1_nhit + P_dc_2x2_nhit + P_dc_2v2_nhit) < track.P_dc2)}
 #
-# p_track_after = {"P_hod_goodscinhit" : (P_hod_goodscinhit == track.P_hodscin)}, {"P_hod_betanotrack" : ((P_hod_betanotrack > track.P_hodbeta_low) & (P_hod_betanotrack < track.P_hodbeta_high))}, {"P_dc_1*_nhit" : ((P_dc_1x1_nhit + P_dc_1u2_nhit + P_dc_1u1_nhit + P_dc_1v1_nhit + P_dc_1x2_nhit + P_dc_1v2_nhit) <  track.P_dc1)}, {"P_dc_2*_nhit" : ((P_dc_2x1_nhit + P_dc_2u2_nhit + P_dc_2u1_nhit + P_dc_2v1_nhit + P_dc_2x2_nhit + P_dc_2v2_nhit) < track.P_dc2)}, {"P_dc_ntrack" : (P_dc_ntrack > track.P_dcn)}
-#
-p_track_before = {"P_hod_goodscinhit" : (P_hod_goodscinhit == track.P_hodscin)}, {"P_hod_betanotrack" : ((P_hod_betanotrack > track.P_hodbeta_low) & (P_hod_betanotrack < track.P_hodbeta_high))}
-#
-p_track_after = {"P_hod_goodscinhit" : (P_hod_goodscinhit == track.P_hodscin)}, {"P_hod_betanotrack" : ((P_hod_betanotrack > track.P_hodbeta_low) & (P_hod_betanotrack < track.P_hodbeta_high))},{"P_dc_ntrack" : (P_dc_ntrack > track.P_dcn)}
+p_track_after = {"P_hod_goodscinhit" : (P_hod_goodscinhit == track.P_hodscin)}, {"P_hod_betanotrack" : ((P_hod_betanotrack > track.P_hodbeta_low) & (P_hod_betanotrack < track.P_hodbeta_high))}, {"P_dc_1*_nhit" : ((P_dc_1x1_nhit + P_dc_1u2_nhit + P_dc_1u1_nhit + P_dc_1v1_nhit + P_dc_1x2_nhit + P_dc_1v2_nhit) <  track.P_dc1)}, {"P_dc_2*_nhit" : ((P_dc_2x1_nhit + P_dc_2u2_nhit + P_dc_2u1_nhit + P_dc_2v1_nhit + P_dc_2x2_nhit + P_dc_2v2_nhit) < track.P_dc2)}, {"P_dc_ntrack" : (P_dc_ntrack > track.P_dcn)}

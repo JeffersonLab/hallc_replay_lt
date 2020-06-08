@@ -594,7 +594,6 @@ class pyPlot(pyDict):
             elif "current" in cut:
                 tmp = cut.split(".")
                 tmp = tmp[1].split(")")[0]
-                print("****tmp",tmp)
                 cut  = cut.replace("current."+tmp,"2.5")
                 db_cuts.append(cut)
                 print("!!!!",cut)

@@ -50,4 +50,4 @@ convert noID_hms_cer_${RUNNUMBER}.png PID_hms_cer_${RUNNUMBER}.png noID_hms_cal_
 rm -rf *.png
 
 cd ${REPLAYPATH}/UTIL_KAONLT/scripts/pid/src/
-# python3 csv2root.py
+python3 csv2root.py

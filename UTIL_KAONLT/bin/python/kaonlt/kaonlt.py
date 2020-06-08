@@ -423,12 +423,10 @@ class pyPlot(pyDict):
                         continue
                 db_cuts.append(cut)
             elif "CT" in cut:
-                tmp = cut.split(".")
-                print("xxxxx",tmp)
+                tmp = cut.split("CT.")
+                print("xxxx",tmp)
                 for val in tmp:
                     tmp = val.split(")")[0]
-                    print("xxxxx",tmp)
-                    print("xxxxx",tmp)
                     fout = REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/Timing_Parameters.csv"
                     try:
                         data = dict(pd.read_csv(fout))

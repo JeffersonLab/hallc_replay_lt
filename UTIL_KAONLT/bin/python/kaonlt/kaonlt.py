@@ -409,7 +409,7 @@ class pyPlot(pyDict):
                                 continue
                     else:
                         continue
-                db_cuts.append(cut)
+                db_cuts.append(cut.rstrip())
             elif "track" in cut:
                 tmp = cut.split("track")
                 print("xxxx",tmp)
@@ -433,7 +433,7 @@ class pyPlot(pyDict):
                     else:
                         print("aaaa",val)
                         continue
-                db_cuts.append(cut)
+                db_cuts.append(cut.rstrip())
             elif "CT" in cut:
                 tmp = cut.split("CT")
                 for val in tmp:
@@ -454,7 +454,7 @@ class pyPlot(pyDict):
                                 continue
                     else:
                         continue
-                db_cuts.append(cut)
+                db_cuts.append(cut.rstrip())
             elif "pid" in cut:
                 tmp = cut.split("pid")
                 for val in tmp:
@@ -475,14 +475,14 @@ class pyPlot(pyDict):
                                 continue
                     else:
                         continue
-                db_cuts.append(cut)
+                db_cuts.append(cut.rstrip())
             # Find which cut is being called. This elif statement is a little different since it only
             # grabs a threshold current value. This is hardcoded for now, eventually need to change.
             elif "current" in cut:
                 tmp = cut.split(".")
                 tmp = tmp[1].split(")")[0]
                 cut  = cut.replace("current."+tmp,"2.5")
-                db_cuts.append(cut)
+                db_cuts.append(cut.rstrip())
                 print("!!!!",cut)
             else:
                 print("ERROR 11: %s not defined" % cut)

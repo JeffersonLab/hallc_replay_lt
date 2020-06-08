@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-06-08 13:52:33 trottar"
+# Time-stamp: "2020-06-08 13:54:10 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -455,12 +455,12 @@ def make_cutDict(cut,inputDict=None):
 
 cutDict = make_cutDict("p_track_lumi_before")
 cutDict = make_cutDict("p_hadtrack_lumi_before",cutDict)
-cutDict = make_cutDict("p_Ktrack_lumi_before",cutDict)
+cutDict = make_cutDict("p_ktrack_lumi_before",cutDict)
 cutDict = make_cutDict("p_ptrack_lumi_before",cutDict)
 cutDict = make_cutDict("p_track_lumi_after",cutDict)
 cutDict = make_cutDict("p_hadtrack_lumi_after",cutDict)
 cutDict = make_cutDict("p_pitrack_lumi_after",cutDict)
-cutDict = make_cutDict("p_Ktrack_lumi_after",cutDict)
+cutDict = make_cutDict("p_ktrack_lumi_after",cutDict)
 cutDict = make_cutDict("p_ptrack_lumi_after",cutDict)
 cutDict = make_cutDict("p_ecut_lumi_before",cutDict)
 cutDict = make_cutDict("p_ecut_lumi_after",cutDict)
@@ -521,8 +521,8 @@ def analysis(PS1, PS3, thres_curr):
     # p_pitrack_lumi_before
     p_pitrack_lumi_before = c.add_cut(P_dc_ntrack,"p_pitrack_lumi_before")
 
-    # p_Ktrack_lumi_before
-    p_Ktrack_lumi_before = c.add_cut(P_dc_ntrack,"p_Ktrack_lumi_before")
+    # p_ktrack_lumi_before
+    p_ktrack_lumi_before = c.add_cut(P_dc_ntrack,"p_ktrack_lumi_before")
 
     # p_ptrack_lumi_before
     p_ptrack_lumi_before = c.add_cut(P_dc_ntrack,"p_ptrack_lumi_before")
@@ -536,8 +536,8 @@ def analysis(PS1, PS3, thres_curr):
     # p_pitrack_lumi_after
     p_pitrack_lumi_after = c.add_cut(P_dc_ntrack,"p_pitrack_lumi_after")
 
-    # p_Ktrack_lumi_after
-    p_Ktrack_lumi_after = c.add_cut(P_dc_ntrack,"p_Ktrack_lumi_after")
+    # p_ktrack_lumi_after
+    p_ktrack_lumi_after = c.add_cut(P_dc_ntrack,"p_ktrack_lumi_after")
 
     # p_ptrack_lumi_after
     p_ptrack_lumi_after = c.add_cut(P_dc_ntrack,"p_ptrack_lumi_after")
@@ -672,8 +672,8 @@ def analysis(PS1, PS3, thres_curr):
             "hadtrack_uncern" : (len(p_hadtrack_lumi_after)/len(p_hadtrack_lumi_before))*math.sqrt((1/len(p_hadtrack_lumi_after)) + (1/len(p_hadtrack_lumi_before))),
             "pitrack" : len(p_pitrack_lumi_after)/len(p_pitrack_lumi_before),
             "pitrack_uncern" : (len(p_pitrack_lumi_after)/len(p_pitrack_lumi_before))*math.sqrt((1/len(p_pitrack_lumi_after)) + (1/len(p_pitrack_lumi_before))),
-            "Ktrack" : len(p_Ktrack_lumi_after)/len(p_Ktrack_lumi_before),
-            "Ktrack_uncern" : (len(p_Ktrack_lumi_after)/len(p_Ktrack_lumi_before))*math.sqrt((1/len(p_Ktrack_lumi_after)) + (1/len(p_Ktrack_lumi_before))),
+            "Ktrack" : len(p_ktrack_lumi_after)/len(p_ktrack_lumi_before),
+            "Ktrack_uncern" : (len(p_ktrack_lumi_after)/len(p_ktrack_lumi_before))*math.sqrt((1/len(p_ktrack_lumi_after)) + (1/len(p_ktrack_lumi_before))),
             "ptrack" : len(p_ptrack_lumi_after)/len(p_ptrack_lumi_before),
             "ptrack_uncern" : (len(p_ptrack_lumi_after)/len(p_ptrack_lumi_before))*math.sqrt((1/len(p_ptrack_lumi_after)) + (1/len(p_ptrack_lumi_before))),
             "accp_edtm" : (scipy.integrate.simps(SHMS_EDTM) + scipy.integrate.simps(HMS_EDTM)),
@@ -698,8 +698,8 @@ def analysis(PS1, PS3, thres_curr):
             "hadtrack_uncern" : (len(p_hadtrack_lumi_after)/len(p_hadtrack_lumi_before))*math.sqrt((1/len(p_hadtrack_lumi_after)) + (1/len(p_hadtrack_lumi_before))),
             "pitrack" : len(p_pitrack_lumi_after)/len(p_pitrack_lumi_before),
             "pitrack_uncern" : (len(p_pitrack_lumi_after)/len(p_pitrack_lumi_before))*math.sqrt((1/len(p_pitrack_lumi_after)) + (1/len(p_pitrack_lumi_before))),
-            "Ktrack" : len(p_Ktrack_lumi_after)/len(p_Ktrack_lumi_before),
-            "Ktrack_uncern" : (len(p_Ktrack_lumi_after)/len(p_Ktrack_lumi_before))*math.sqrt((1/len(p_Ktrack_lumi_after)) + (1/len(p_Ktrack_lumi_before))),
+            "Ktrack" : len(p_ktrack_lumi_after)/len(p_ktrack_lumi_before),
+            "Ktrack_uncern" : (len(p_ktrack_lumi_after)/len(p_ktrack_lumi_before))*math.sqrt((1/len(p_ktrack_lumi_after)) + (1/len(p_ktrack_lumi_before))),
             "ptrack" : len(p_ptrack_lumi_after)/len(p_ptrack_lumi_before),
             "ptrack_uncern" : (len(p_ptrack_lumi_after)/len(p_ptrack_lumi_before))*math.sqrt((1/len(p_ptrack_lumi_after)) + (1/len(p_ptrack_lumi_before))),
             "accp_edtm" : (scipy.integrate.simps(SHMS_EDTM) + scipy.integrate.simps(HMS_EDTM)),
@@ -744,9 +744,9 @@ def analysis(PS1, PS3, thres_curr):
            (len(p_pitrack_lumi_after)/len(p_pitrack_lumi_before))*math.sqrt((1/len(p_pitrack_lumi_after))
                                                              + (1/len(p_pitrack_lumi_before)))))
     print("Calculated kaon tracking efficiency: %f +/- %f\n" %
-          (len(p_Ktrack_lumi_after)/len(p_Ktrack_lumi_before),
-           (len(p_Ktrack_lumi_after)/len(p_Ktrack_lumi_before))*math.sqrt((1/len(p_Ktrack_lumi_after))
-                                                           + (1/len(p_Ktrack_lumi_before)))))
+          (len(p_ktrack_lumi_after)/len(p_ktrack_lumi_before),
+           (len(p_ktrack_lumi_after)/len(p_ktrack_lumi_before))*math.sqrt((1/len(p_ktrack_lumi_after))
+                                                           + (1/len(p_ktrack_lumi_before)))))
     print("Calculated proton tracking efficiency: %f +/- %f\n" %
           (len(p_ptrack_lumi_after)/len(p_ptrack_lumi_before),
            (len(p_ptrack_lumi_after)/len(p_ptrack_lumi_before))*math.sqrt((1/len(p_ptrack_lumi_after))

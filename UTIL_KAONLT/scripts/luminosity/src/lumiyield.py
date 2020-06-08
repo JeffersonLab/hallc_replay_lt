@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-06-08 14:33:02 trottar"
+# Time-stamp: "2020-06-08 14:34:11 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -468,7 +468,7 @@ cutDict = make_cutDict("h_track_lumi_before",cutDict)
 cutDict = make_cutDict("h_etrack_lumi_before",cutDict)
 cutDict = make_cutDict("h_track_lumi_after",cutDict)
 cutDict = make_cutDict("h_etrack_lumi_after",cutDict)
-cutDict = make_cutDict("h_ecut_lumi_after",cutDict)
+cutDict = make_cutDict("h_etrack_lumi_after",cutDict)
 cutDict = make_cutDict("h_ecut_lumi_eff",cutDict)
 c = klt.pyPlot(cutDict)
 
@@ -579,10 +579,10 @@ def analysis(PS1, PS3, thres_curr):
     # h_etrack_lumi_after
     h_etrack_lumi_after = c.add_cut(H_dc_ntrack,"h_etrack_lumi_after")    
 
-    # h_ecut_lumi_before
-    h_ecut_lumi_before_iterate = [H_cer_npeSum, bcm_after]
-    h_ecut_lumi_before = [cer
-                      for (cer, bcm) in zip(*h_ecut_lumi_before_iterate)
+    # h_etrack_lumi_before
+    h_etrack_lumi_before_iterate = [H_cer_npeSum, bcm_after]
+    h_etrack_lumi_before = [cer
+                      for (cer, bcm) in zip(*h_etrack_lumi_before_iterate)
                       if bcm > thres_curr]
 
     # h_dp_before
@@ -608,20 +608,20 @@ def analysis(PS1, PS3, thres_curr):
     h_show_before = [h_caletot
                       for (h_caletot, bcm) in zip(*h_show_before_iterate)
                       if bcm > thres_curr]
-    # h_ecut_lumi_after
-    h_ecut_lumi_after = c.add_cut(H_cer_npeSum,"h_ecut_lumi_after")
+    # h_etrack_lumi_after
+    h_etrack_lumi_after = c.add_cut(H_cer_npeSum,"h_etrack_lumi_after")
     
     # h_dp_after
-    h_dp_after = c.add_cut(H_gtr_dp,"h_ecut_lumi_after")
+    h_dp_after = c.add_cut(H_gtr_dp,"h_etrack_lumi_after")
     
     # h_th_after
-    h_th_after = c.add_cut(H_tr_tg_th,"h_ecut_lumi_after")
+    h_th_after = c.add_cut(H_tr_tg_th,"h_etrack_lumi_after")
     
     # h_ph_after
-    h_ph_after = c.add_cut(H_tr_tg_ph,"h_ecut_lumi_after")
+    h_ph_after = c.add_cut(H_tr_tg_ph,"h_etrack_lumi_after")
     
     # h_show_after
-    h_show_after = c.add_cut(H_cal_etotnorm,"h_ecut_lumi_after")
+    h_show_after = c.add_cut(H_cal_etotnorm,"h_etrack_lumi_after")
     
     # h_ecut_lumi_eff
     h_ecut_lumi_eff = c.add_cut(H_cal_etotnorm,"h_ecut_lumi_eff")
@@ -725,9 +725,9 @@ def analysis(PS1, PS3, thres_curr):
            (len(h_etrack_lumi_after)/len(h_etrack_lumi_before))*math.sqrt((1/len(h_etrack_lumi_after))
                                                            + (1/len(h_etrack_lumi_before)))))
     print("Calculated HMS Cherenkov efficiency: %f +/- %f\n\n" %
-          (len(h_ecut_lumi_eff)/len(h_ecut_lumi_after),
-           (len(h_ecut_lumi_eff)/len(h_ecut_lumi_after))*math.sqrt((1/len(h_ecut_lumi_eff))
-                                                    + (1/len(h_ecut_lumi_after)))))
+          (len(h_ecut_lumi_eff)/len(h_etrack_lumi_after),
+           (len(h_ecut_lumi_eff)/len(h_etrack_lumi_after))*math.sqrt((1/len(h_ecut_lumi_eff))
+                                                    + (1/len(h_etrack_lumi_after)))))
     print("Number of SHMS good events: %.0f +/- %.0f" % ((PS1*len(p_ecut_lumi_eff)),
                                                          math.sqrt(PS1*len(p_ecut_lumi_eff))))
     print("Calculated tracking efficiency: %f +/- %f\n" %

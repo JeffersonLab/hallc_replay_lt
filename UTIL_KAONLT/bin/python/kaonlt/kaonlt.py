@@ -442,6 +442,7 @@ class pyPlot(pyDict):
                                 print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
                                 continue
                     else:
+                        print("aaaaaa",val)
                         continue
                 db_cuts.append(cut)
             elif "pid" in cut:

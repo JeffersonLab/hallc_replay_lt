@@ -1,5 +1,5 @@
-Timing_Cuts = cuts/Timing_Parameters.csv
-PID_Cuts = cuts/PID_Parameters.csv
-Acceptance_Cuts = cuts/Acceptance_Parameters.csv
-Tracking_Cuts = cuts/Tracking_Parameters.csv
+Timing_Cuts = PARAM/Timing_Parameters.csv
+PID_Cuts = PARAM/PID_Parameters.csv
+Acceptance_Cuts = PARAM/Acceptance_Parameters.csv
+Tracking_Cuts = PARAM/Tracking_Parameters.csv
 Current_cuts = 2.5

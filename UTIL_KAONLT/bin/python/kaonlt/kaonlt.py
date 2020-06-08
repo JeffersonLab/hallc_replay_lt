@@ -307,6 +307,7 @@ class pyPlot(pyDict):
                                     cutName = {typName : db_cut}
                                     cutDict.update(cutName)
                                     print(lplus[0],"++>",cutDict[typName])
+                                break
                             else:
                                 print("ERROR 6: %s cut does not match %s" % (cutplus,lplus[0]))
                                 continue

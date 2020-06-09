@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-06-09 11:44:16 trottar"
+# Time-stamp: "2020-06-09 11:44:49 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -22,7 +22,6 @@ import kaonlt as klt
 
 runNum = sys.argv[1]
 MaxEvent=sys.argv[2]
-# MaxEvent=50000
 
 # Add this to all files for more dynamic pathing
 USER = subprocess.getstatusoutput("whoami") # Grab user info for file finding

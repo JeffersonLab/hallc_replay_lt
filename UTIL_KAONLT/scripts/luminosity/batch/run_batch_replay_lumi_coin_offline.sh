@@ -47,7 +47,7 @@ while true; do
                 echo "JOBNAME: KaonLT_${runNum}" >> ${batch}
                 echo "DISK_SPACE: 25 GB" >>${batch}                                                                                                                                                              
                 echo "MEMORY: 2500 MB" >> ${batch}
-                echo "OS: centos7" >> ${batch}
+                echo "OS: centos77" >> ${batch}
                 echo "CPU: 1" >> ${batch} ### hcana single core, setting CPU higher will lower priority!                                                                                                          
 		echo "INPUT_FILES: ${tape_file}" >> ${batch}
 		#echo "TIME: 1" >> ${batch} 

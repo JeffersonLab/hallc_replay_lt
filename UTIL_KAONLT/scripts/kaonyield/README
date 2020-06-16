@@ -1,0 +1,90 @@
+Richard Trotta (Catholic University) and Stephen Kay (University of Regina)
+For questions/comments/suggestions/complaints about scripts in this folder, please contact - stephen.kay@uregina.ca
+
+############################################### INTRO ###########################################################
+
+This directory contains the scripts to analyse the physics yield of kaon events from the KaonLT data. The basic process of what these scripts are trying to do is -
+
+- src/Kaonyield.py reads in a replay from hcana and trims the data
+  - It will output a rootfile with trees corresponding to relevant info for different particle types under different conditions
+  - E.g. you will get - Uncut Events
+    	     	      - Cut Kaon Events (all)
+		      - Cut Kaon Events (prompt)
+		      - Cut Kaon Events (random)
+
+and others as root trees in the file. Each tree will have info such as detector signals, timing and so on. You can add or remove branches as needed. Follow the comments and methods in the python file.
+
+The next step - PlotKaons.C is a quick root macro which takes our new trimmed root file and plots some of the data from whichever trees we choose. Again, this can be customised to your liking but should be a simple and clear starting point.
+
+There is a shell script which will execute both steps if you just provide it a run number, see RUNNING below.
+
+############################################### SETUP ###########################################################
+
+Before running anything make sure you have -
+
+- An OUTPUT directory within this scripts directory, it can be a symlink of course
+  - To be explicit it should be - UTIL_KAONLT/scripts/kaonyield/OUTPUT
+  - The output is typically quite small (10's of MBs per file from the python script) but if you're running lots of files, I would consider a sym link to a suitable directory
+- A ROOTfiles directory (or sym link) in the top level UTIL_KAONLT folder
+  - You should also check the file prefix of the root file the python script for looks for before running too
+  - See ~ line 45  in src/Kaonyield.py - the relevant line is the one with rootName = "...", check this looks OK!
+    - Of course, if it doesn't you'll have the script complaining at you that the file does not exist
+- If you want to examine what each cut is doing in more detail, see their definitions in UTIL_KAONLT/DB/CUTS
+  - The parameters that are read in for the cuts are also located in UTIL_KAONLT/DB/PARAM
+############################################### RUNNING #########################################################
+
+Simply execute the shell script with a run number and it'll work its magic -
+
+./Analyse_Kaons.sh 7899
+
+will run the python analysis script on run 7899 (to select good events based on cuts for that run) and produce some plots too.
+
+By default, the shell script runs over all (-1) events. 
+
+You can also run all runs in a kinematic with another shell script, see the kinematics folder for an example.
+
+You can also run the python or root macros on their own, they will complain at you if you don't provide the required arguments.
+
+For the python script, provide a run number and max events.
+
+For the root plotting macro, provide it an input root file (the output of the python script), just the name is sufficient. It is assumed to be in the OUTPUT directory. 
+You also need to provide a name for the output file, do not include a suffix. It will produce a pdf and a root file.
+
+For example if you provide TEST_OUTPUT it will produce TEST_OUTPUT.pdf and TEST_OUTPUT.root as output files in the OUTPUT directory.
+
+############################################### DEBUGGING #########################################################
+
+Typically, I've tried to have the file spit out sensible info.
+
+For example, it will tell you the path it's assuming for where your hallc_replay is.
+You should check this is correct, pathing errors of files not existing should also be fairly obvious if they occur.
+
+One common error that may occur is if you add branches to your trees in the analysis loop but do not add a header for them later. E.g. say you produce 
+
+Test_Branches = [H_gtr_beta, H_gtr_xp, H_gtr_yp]
+
+but later you specify 
+
+Test_Tree_Header = ["H_gtr_beta","H_gtr_xp"]
+
+and try to save this as a root file via the pd->root routine. You will have some complaint along the lines of arrays not being the correct size.
+This is telling you your branches in the tree you're trying to make and the number of headers for them don't match up.
+This type of error will look something like the following -
+
+Traceback (most recent call last):
+  File "/group/c-kaonlt/USERS/sjdkay/hallc_replay_lt/UTIL_KAONLT/scripts/kaonyield/src/Kaonyield.py", line 427, in <module>
+  File "/group/c-kaonlt/USERS/sjdkay/hallc_replay_lt/UTIL_KAONLT/scripts/kaonyield/src/Kaonyield.py", line 424, in main
+    
+  File "/apps/python/3.4.3/lib/python3.4/site-packages/pandas/core/frame.py", line 369, in __init__
+    arrays, columns = _to_arrays(data, columns, dtype=dtype)
+  File "/apps/python/3.4.3/lib/python3.4/site-packages/pandas/core/frame.py", line 6284, in _to_arrays
+    dtype=dtype)
+  File "/apps/python/3.4.3/lib/python3.4/site-packages/pandas/core/frame.py", line 6363, in _list_to_arrays
+    coerce_float=coerce_float)
+  File "/apps/python/3.4.3/lib/python3.4/site-packages/pandas/core/frame.py", line 6420, in _convert_object_array
+    'columns' % (len(columns), len(content)))
+AssertionError: 28 columns passed, passed data had 29 columns
+
+Notice the last line in particular.
+
+If someone has a nice fix to this problem - aka they know how you could force the branch names in the header to exactly match the ones you had earlier, please let me know since this would be a nice thing to fix!   

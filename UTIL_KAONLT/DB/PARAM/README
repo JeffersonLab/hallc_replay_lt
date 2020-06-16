@@ -16,7 +16,9 @@ where values here have beent tab separated for clarity.
 Run_Start -> First run number in setting/group
 Run_End -> Last run number in setting/group
 Bunch_Spacing -> Timing between each beam bucket hitting the target
-CT_Offset -> Adjustment to width of prompt timing window, prompt is between PromptPeak -(CT_Offset+Bunch_Spacing/2) and PromptPeak + (CT_Offset+Bunch_Spacing/2), adjust offset if not all of the peak is correctly being included
+Coin_Offset -> Adjustment to width of prompt timing window, prompt is between PromptPeak -(CT_Offset+Bunch_Spacing/2) and PromptPeak + (CT_Offset+Bunch_Spacing/2), adjust offset if not all of the peak is correctly being included
+nSkip -> Number of random windows to skip before defining random window area
+nWindows -> Total number of random windows to examine
 Pion_Prompt_Peak -> Centroid of the prompt peak for the coin time calculated for pions. Note, you should base this upon the timing peak after PID (but without any BG subtraction)
 Pion_Prompt_Peak -> Centroid of the prompt peak for the coin time calculated for kaons. Note, you should base this upon the timing peak after PID (but without any BG subtraction)
 Pion_Prompt_Peak -> Centroid of the prompt peak for the coin time calculated for protons. Note, you should base this upon the timing peak after PID (but without any BG subtraction)
@@ -25,6 +27,63 @@ RF_Offset -> Offset added to RF_Time difference to try and center all RF distrib
 #######################################################################################
 
 Format of PID parameter file is -
+
+Note, all of these headers (H_....) are on one line! I've split them up into groups here for readability. For readability of the actual .csv file open in open office excel (whatever they call it)/excel or similar
+
+Run_Start Run_End H_ecut_H_cal H_ecut_P_cal H_ecut_H_beta H_ecut_H_cer H_picut_H_cal H_picut_P_cal H_picut_H_beta H_picut_H_cer H_hadcut_H_cal H_hadcut_P_cal H_hadcut_H_beta H_hadcut_H_cer 
+
+Run_Start -> First run number in setting/group
+Run_End -> Last run number in setting/group
+H_ecut_H_cal -> HMS electron event HMS calorimeter cut, accept events with normalised energy ABOVE this
+H_ecut_P_cal -> 
+H_ecut_H_Beta -> HMS electron event beta cut, accept events with abs(1-beta) BELOW this
+H_ecut_H_cer -> HMS electron event HMS cherenkov cut, accept events with NPE ABOVE this
+H_picut_H_cal -> HMS pion event HMS calorimeter cut, accept event with normalised energy BELOW this
+H_picut_P_cal -> ?????
+H_picut_H_Beta -> HMS pion event beta cut, accept events with abs(1-beta) BELOW this                                                                                                                                                      
+H_hadcut_H_cer -> HMS haron event HMS cherenkov cut, accept events with NPE BELOW this
+H_hadcut_H_cal -> HMS haron event HMS calorimeter cut, accept event with normalised energy BELOW this
+H_hadcut_P_cal -> ???????
+H_hadcut_H_Beta -> HMS haron event beta cut, accept events with abs(1-beta) BELOW this                                                                                                                                                      
+H_hadcut_H_cer -> HMS haron event HMS cherenkov cut, accept events with NPE BELOW this
+
+P_ecut_H_cal P_ecut_P_cal P_ecut_H_cer P_ecut_P_beta P_ecut_P_hgcer P_ecut_P_aero P_picut_H_cal P_picut_P_cal P_picut_H_cer P_picut_P_beta P_picut_P_hgcer P_picut_P_aero 
+
+P_ecut_H_cal -> SHMS electron event HMS calorimeter cut, accept events with normalised energy ???? this
+P_ecut_P_cal -> SHMS electron event SHMS calorimeter cut, accept events with normalised energy ABOVE this
+P_ecut_H_cer -> SHMS electron event HMS cherenkov cut, accept events with NPE ????? this
+P_ecut_P_beta -> SHMS electron events SHMS beta cut, accept events with abs(1-beta) BELOW this 
+P_ecut_P_hgcer  -> SHMS electron event with SHMS HGC NPE cut, accept events with NPE ABOVE this
+P_ecut_P_aero -> SHMS electron event with SHMS aerogel NPE cut, accept events with NPE ABOVE this 
+P_picut_H_cal -> SHMS pion event HMS calorimeter cut, accept events with normalised energy ABOVE this (expect electron in HMS)
+P_picut_P_cal -> SHMS pion event SHMS calorimeter cut, accept events with normalised energy ABOVE this
+P_picut_H_cer -> SHMS pion event HMS cherenkov cut, accept events with NPE ABOVE this (expect electron in HMS)
+P_picut_P_beta -> SHMS pion events SHMS beta cut, accept events with abs(1-beta) BELOW this 
+P_picut_P_hgcer -> SHMS pion event with SHMS HGC NPE cut, accept events with NPE ABOVE this
+P_picut_P_aero -> SHMS pion event with SHMS aerogel NPE cut, accept events with NPE ABOVE this 
+
+P_kcut_H_cal P_kcut_P_cal P_kcut_H_cer P_kcut_P_beta P_kcut_P_hgcer P_kcut_P_aero 
+ 
+P_kcut_H_cal -> SHMS kaon event HMS calorimeter cut, accept events with normalised energy ABOVE this (expect electron in HMS)
+P_kcut_P_cal -> SHMS kaon event SHMS calorimeter cut, accept events with normalised energy ABOVE this
+P_kcut_H_cer -> SHMS kaon event HMS cherenkov cut, accept events with NPE ABOVE this (expect electron in HMS)
+P_kcut_P_beta -> SHMS kaon events SHMS beta cut, accept events with abs(1-beta) BELOW this 
+P_kcut_P_hgcer -> SHMS kaon event with SHMS HGC NPE cut, accept events with NPE BELOW this
+P_kcut_P_aero -> SHMS kaon event with SHMS aerogel NPE cut, accept events with NPE ABOVE this
+
+P_pcut_H_cal P_pcut_P_cal P_pcut_H_cer P_pcut_P_beta P_pcut_P_hgcer P_pcut_P_aero P_hadcut_H_cal P_hadcut_P_cal P_hadcut_H_cer P_hadcut_P_beta P_hadcut_P_hgcer P_hadcut_P_aero
+
+P_pcut_H_cal -> SHMS proton event HMS calorimeter cut, accept events with normalised energy ABOVE this (expect electron in HMS)
+P_pcut_P_cal -> SHMS proton event SHMS calorimeter cut, accept events with normalised energy ABOVE this
+P_pcut_H_cer -> SHMS proton event HMS cherenkov cut, accept events with NPE ABOVE this (expect electron in HMS)
+P_pcut_P_beta -> SHMS proton events SHMS beta cut, accept events with abs(1-beta) BELOW this 
+P_pcut_P_hgcer -> SHMS proton event with SHMS HGC NPE cut, accept events with NPE BELOW this
+P_pcut_P_aero -> SHMS proton event with SHMS aerogel NPE cut, accept events with NPE BELOW this
+P_hadcut_H_cal -> SHMS hadron event HMS calorimeter cut, accept events with normalised energy ABOVE this (expect electron in HMS)
+P_hadcut_P_cal -> SHMS hadron event SHMS calorimeter cut, accept events with normalised energy ABOVE this
+P_hadcut_H_cer -> SHMS hadron event HMS cherenkov cut, accept events with NPE ABOVE this (expect electron in HMS)
+P_hadcut_P_beta -> SHMS hadron events SHMS beta cut, accept events with abs(1-beta) BELOW this 
+P_hadcut_P_hgcer -> SHMS hadron event with SHMS HGC NPE cut, accept events with NPE ABOVE this
 
 #######################################################################################
 

@@ -1,4 +1,1 @@
-# p_ecut_lumi_eff = accept.delta+accept.hms_pfp
-# h_ecut_eff_no_cer = pid.h_ecut+coin_time.coin_ek_ROC1-pid.h_ecut.H_cal_etotnorm-pid.h_ecut.P_cal_etotnorm-pid.h_ecut.H_gtr_beta-pid.h_ecut.H_cer_npeSum
-# h_ecut_eff_no_cer = pid.h_ecut+coin_time.coin_ek_ROC1-pid.h_ecut.H_cal_etotnorm
-h_ecut_eff_no_cer = pid.h_ecut+coin_time.coin_ek_ROC1
+p_ecut_lumi_eff = accept.delta+accept.hms_pfp

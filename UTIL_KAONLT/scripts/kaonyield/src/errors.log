@@ -1,0 +1,3101 @@
+Running as sjdkay on ifarm1901.jlab.org, hallc_replay_lt path assumed as /group/c-kaonlt/USERS/sjdkay/hallc_replay_lt
+Type  coin_epi_cut
+Cuts  [' pid.p_picut', 'accept.delta', 'accept.h_pfp', 'accept.p_pfp\n']
++  pid.p_picut
+-  none
+cutplus  p_picut
+p_picut  ++  h_ecut 
+ERROR 6: p_picut cut does not match h_ecut 
+p_picut  ++  h_picut 
+ERROR 6: p_picut cut does not match h_picut 
+p_picut  ++  h_hadcut 
+ERROR 6: p_picut cut does not match h_hadcut 
+p_picut  ++  p_ecut 
+ERROR 6: p_picut cut does not match p_ecut 
+p_picut  ++  p_picut 
+cuts  {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_picut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_picut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_picut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_picut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_picut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_picut_P_cal)}
+
+p_picut  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+p_picut  ++  p_kcut 
+ERROR 6: p_picut cut does not match p_kcut 
+p_picut  ++  p_pcut 
+ERROR 6: p_picut cut does not match p_pcut 
+p_picut  ++  p_hadcut 
+ERROR 6: p_picut cut does not match p_hadcut 
++  accept.delta
+-  none
+cutplus  delta
+delta  ++  delta 
+cuts  {"H_gtr_dp" : ((H_gtr_dp > accept.H_del_low) & (H_gtr_dp < accept.H_del_high))}, {"P_gtr_dp" : ((P_gtr_dp > accept.P_del_low) & (P_gtr_dp < accept.P_del_high))}
+
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+coin_epi_cut  already found!!!!
+delta  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+, {"H_gtr_dp" : ((H_gtr_dp > -8) & (H_gtr_dp < 8))}, {"P_gtr_dp" : ((P_gtr_dp > -10) & (P_gtr_dp < 20))}
+
+delta  ++  h_pfp 
+ERROR 6: delta cut does not match h_pfp 
+delta  ++  p_pfp 
+ERROR 6: delta cut does not match p_pfp 
++  accept.h_pfp
+-  none
+cutplus  h_pfp
+h_pfp  ++  delta 
+ERROR 6: h_pfp cut does not match delta 
+h_pfp  ++  h_pfp 
+cuts  {"H_gtr_th" : ((H_gtr_xp > accept.H_xpfp_low) & (H_gtr_xp < accept.H_xpfp_high))}, {"H_gtr_ph" : ((H_gtr_yp > accept.H_ypfp_low) & (H_gtr_yp < accept.H_ypfp_high))}
+
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+coin_epi_cut  already found!!!!
+h_pfp  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+, {"H_gtr_dp" : ((H_gtr_dp > -8) & (H_gtr_dp < 8))}, {"P_gtr_dp" : ((P_gtr_dp > -10) & (P_gtr_dp < 20))}
+, {"H_gtr_th" : ((H_gtr_xp > -0.08) & (H_gtr_xp < 0.08))}, {"H_gtr_ph" : ((H_gtr_yp > -0.045) & (H_gtr_yp < 0.045))}
+
+h_pfp  ++  p_pfp 
+ERROR 6: h_pfp cut does not match p_pfp 
++  accept.p_pfp
+-  none
+cutplus  p_pfp
+p_pfp  ++  delta 
+ERROR 6: p_pfp cut does not match delta 
+p_pfp  ++  h_pfp 
+ERROR 6: p_pfp cut does not match h_pfp 
+p_pfp  ++  p_pfp 
+cuts  {"P_gtr_th" : ((P_gtr_xp > accept.P_xpfp_low) & (P_gtr_xp < accept.P_xpfp_high))}, {"P_gtr_ph" : ((P_gtr_yp > accept.P_ypfp_low) & (P_gtr_yp < accept.P_ypfp_high))}
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+coin_epi_cut  already found!!!!
+p_pfp  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+, {"H_gtr_dp" : ((H_gtr_dp > -8) & (H_gtr_dp < 8))}, {"P_gtr_dp" : ((P_gtr_dp > -10) & (P_gtr_dp < 20))}
+, {"H_gtr_th" : ((H_gtr_xp > -0.08) & (H_gtr_xp < 0.08))}, {"H_gtr_ph" : ((H_gtr_yp > -0.045) & (H_gtr_yp < 0.045))}
+, {"P_gtr_th" : ((P_gtr_xp > -0.06) & (P_gtr_xp < 0.06))}, {"P_gtr_ph" : ((P_gtr_yp > -0.04) & (P_gtr_yp < 0.04))}
+
+
+
+Type  coin_epi_cut_orig
+Cuts  [' pid.p_picut', 'accept.delta', 'accept.h_pfp', 'accept.p_pfp-pid.p_picut.P_cal_etotnorm-pid.p_picut.H_cer_npeSum\n']
++  pid.p_picut
+-  none
+cutplus  p_picut
+p_picut  ++  h_ecut 
+ERROR 6: p_picut cut does not match h_ecut 
+p_picut  ++  h_picut 
+ERROR 6: p_picut cut does not match h_picut 
+p_picut  ++  h_hadcut 
+ERROR 6: p_picut cut does not match h_hadcut 
+p_picut  ++  p_ecut 
+ERROR 6: p_picut cut does not match p_ecut 
+p_picut  ++  p_picut 
+cuts  {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_picut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_picut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_picut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > pid.P_picut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_picut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_picut_P_cal)}
+
+p_picut  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+p_picut  ++  p_kcut 
+ERROR 6: p_picut cut does not match p_kcut 
+p_picut  ++  p_pcut 
+ERROR 6: p_picut cut does not match p_pcut 
+p_picut  ++  p_hadcut 
+ERROR 6: p_picut cut does not match p_hadcut 
++  accept.delta
+-  none
+cutplus  delta
+delta  ++  delta 
+cuts  {"H_gtr_dp" : ((H_gtr_dp > accept.H_del_low) & (H_gtr_dp < accept.H_del_high))}, {"P_gtr_dp" : ((P_gtr_dp > accept.P_del_low) & (P_gtr_dp < accept.P_del_high))}
+
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+coin_epi_cut_orig  already found!!!!
+delta  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+, {"H_gtr_dp" : ((H_gtr_dp > -8) & (H_gtr_dp < 8))}, {"P_gtr_dp" : ((P_gtr_dp > -10) & (P_gtr_dp < 20))}
+
+delta  ++  h_pfp 
+ERROR 6: delta cut does not match h_pfp 
+delta  ++  p_pfp 
+ERROR 6: delta cut does not match p_pfp 
++  accept.h_pfp
+-  none
+cutplus  h_pfp
+h_pfp  ++  delta 
+ERROR 6: h_pfp cut does not match delta 
+h_pfp  ++  h_pfp 
+cuts  {"H_gtr_th" : ((H_gtr_xp > accept.H_xpfp_low) & (H_gtr_xp < accept.H_xpfp_high))}, {"H_gtr_ph" : ((H_gtr_yp > accept.H_ypfp_low) & (H_gtr_yp < accept.H_ypfp_high))}
+
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+coin_epi_cut_orig  already found!!!!
+h_pfp  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+, {"H_gtr_dp" : ((H_gtr_dp > -8) & (H_gtr_dp < 8))}, {"P_gtr_dp" : ((P_gtr_dp > -10) & (P_gtr_dp < 20))}
+, {"H_gtr_th" : ((H_gtr_xp > -0.08) & (H_gtr_xp < 0.08))}, {"H_gtr_ph" : ((H_gtr_yp > -0.045) & (H_gtr_yp < 0.045))}
+
+h_pfp  ++  p_pfp 
+ERROR 6: h_pfp cut does not match p_pfp 
++  accept.p_pfp
+-  e
+ERROR 3: Cut e not found
+
+
+
+Type  coin_ek_cut
+Cuts  [' pid.p_kcut', 'accept.delta', 'accept.h_pfp', 'accept.p_pfp\n']
++  pid.p_kcut
+-  none
+cutplus  p_kcut
+p_kcut  ++  h_ecut 
+ERROR 6: p_kcut cut does not match h_ecut 
+p_kcut  ++  h_picut 
+ERROR 6: p_kcut cut does not match h_picut 
+p_kcut  ++  h_hadcut 
+ERROR 6: p_kcut cut does not match h_hadcut 
+p_kcut  ++  p_ecut 
+ERROR 6: p_kcut cut does not match p_ecut 
+p_kcut  ++  p_picut 
+ERROR 6: p_kcut cut does not match p_picut 
+p_kcut  ++  p_kcut 
+cuts  {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_kcut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_kcut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_kcut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum < pid.P_kcut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_kcut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_kcut_P_cal)}
+
+p_kcut  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum < 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+p_kcut  ++  p_pcut 
+ERROR 6: p_kcut cut does not match p_pcut 
+p_kcut  ++  p_hadcut 
+ERROR 6: p_kcut cut does not match p_hadcut 
++  accept.delta
+-  none
+cutplus  delta
+delta  ++  delta 
+cuts  {"H_gtr_dp" : ((H_gtr_dp > accept.H_del_low) & (H_gtr_dp < accept.H_del_high))}, {"P_gtr_dp" : ((P_gtr_dp > accept.P_del_low) & (P_gtr_dp < accept.P_del_high))}
+
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+coin_ek_cut  already found!!!!
+delta  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum < 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+, {"H_gtr_dp" : ((H_gtr_dp > -8) & (H_gtr_dp < 8))}, {"P_gtr_dp" : ((P_gtr_dp > -10) & (P_gtr_dp < 20))}
+
+delta  ++  h_pfp 
+ERROR 6: delta cut does not match h_pfp 
+delta  ++  p_pfp 
+ERROR 6: delta cut does not match p_pfp 
++  accept.h_pfp
+-  none
+cutplus  h_pfp
+h_pfp  ++  delta 
+ERROR 6: h_pfp cut does not match delta 
+h_pfp  ++  h_pfp 
+cuts  {"H_gtr_th" : ((H_gtr_xp > accept.H_xpfp_low) & (H_gtr_xp < accept.H_xpfp_high))}, {"H_gtr_ph" : ((H_gtr_yp > accept.H_ypfp_low) & (H_gtr_yp < accept.H_ypfp_high))}
+
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+coin_ek_cut  already found!!!!
+h_pfp  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum < 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+, {"H_gtr_dp" : ((H_gtr_dp > -8) & (H_gtr_dp < 8))}, {"P_gtr_dp" : ((P_gtr_dp > -10) & (P_gtr_dp < 20))}
+, {"H_gtr_th" : ((H_gtr_xp > -0.08) & (H_gtr_xp < 0.08))}, {"H_gtr_ph" : ((H_gtr_yp > -0.045) & (H_gtr_yp < 0.045))}
+
+h_pfp  ++  p_pfp 
+ERROR 6: h_pfp cut does not match p_pfp 
++  accept.p_pfp
+-  none
+cutplus  p_pfp
+p_pfp  ++  delta 
+ERROR 6: p_pfp cut does not match delta 
+p_pfp  ++  h_pfp 
+ERROR 6: p_pfp cut does not match h_pfp 
+p_pfp  ++  p_pfp 
+cuts  {"P_gtr_th" : ((P_gtr_xp > accept.P_xpfp_low) & (P_gtr_xp < accept.P_xpfp_high))}, {"P_gtr_ph" : ((P_gtr_yp > accept.P_ypfp_low) & (P_gtr_yp < accept.P_ypfp_high))}
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+coin_ek_cut  already found!!!!
+p_pfp  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum < 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+, {"H_gtr_dp" : ((H_gtr_dp > -8) & (H_gtr_dp < 8))}, {"P_gtr_dp" : ((P_gtr_dp > -10) & (P_gtr_dp < 20))}
+, {"H_gtr_th" : ((H_gtr_xp > -0.08) & (H_gtr_xp < 0.08))}, {"H_gtr_ph" : ((H_gtr_yp > -0.045) & (H_gtr_yp < 0.045))}
+, {"P_gtr_th" : ((P_gtr_xp > -0.06) & (P_gtr_xp < 0.06))}, {"P_gtr_ph" : ((P_gtr_yp > -0.04) & (P_gtr_yp < 0.04))}
+
+
+
+Type  coin_ek_cut_orig
+Cuts  [' pid.p_kcut', 'accept.delta', 'accept.h_pfp', 'accept.p_pfp-pid.p_kcut.P_cal_etotnorm-pid.p_kcut.H_cer_npeSum\n']
++  pid.p_kcut
+-  none
+cutplus  p_kcut
+p_kcut  ++  h_ecut 
+ERROR 6: p_kcut cut does not match h_ecut 
+p_kcut  ++  h_picut 
+ERROR 6: p_kcut cut does not match h_picut 
+p_kcut  ++  h_hadcut 
+ERROR 6: p_kcut cut does not match h_hadcut 
+p_kcut  ++  p_ecut 
+ERROR 6: p_kcut cut does not match p_ecut 
+p_kcut  ++  p_picut 
+ERROR 6: p_kcut cut does not match p_picut 
+p_kcut  ++  p_kcut 
+cuts  {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_kcut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_kcut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_kcut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum < pid.P_kcut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum > pid.P_kcut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_kcut_P_cal)}
+
+p_kcut  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum < 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+p_kcut  ++  p_pcut 
+ERROR 6: p_kcut cut does not match p_pcut 
+p_kcut  ++  p_hadcut 
+ERROR 6: p_kcut cut does not match p_hadcut 
++  accept.delta
+-  none
+cutplus  delta
+delta  ++  delta 
+cuts  {"H_gtr_dp" : ((H_gtr_dp > accept.H_del_low) & (H_gtr_dp < accept.H_del_high))}, {"P_gtr_dp" : ((P_gtr_dp > accept.P_del_low) & (P_gtr_dp < accept.P_del_high))}
+
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+coin_ek_cut_orig  already found!!!!
+delta  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum < 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+, {"H_gtr_dp" : ((H_gtr_dp > -8) & (H_gtr_dp < 8))}, {"P_gtr_dp" : ((P_gtr_dp > -10) & (P_gtr_dp < 20))}
+
+delta  ++  h_pfp 
+ERROR 6: delta cut does not match h_pfp 
+delta  ++  p_pfp 
+ERROR 6: delta cut does not match p_pfp 
++  accept.h_pfp
+-  none
+cutplus  h_pfp
+h_pfp  ++  delta 
+ERROR 6: h_pfp cut does not match delta 
+h_pfp  ++  h_pfp 
+cuts  {"H_gtr_th" : ((H_gtr_xp > accept.H_xpfp_low) & (H_gtr_xp < accept.H_xpfp_high))}, {"H_gtr_ph" : ((H_gtr_yp > accept.H_ypfp_low) & (H_gtr_yp < accept.H_ypfp_high))}
+
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+coin_ek_cut_orig  already found!!!!
+h_pfp  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum < 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+, {"H_gtr_dp" : ((H_gtr_dp > -8) & (H_gtr_dp < 8))}, {"P_gtr_dp" : ((P_gtr_dp > -10) & (P_gtr_dp < 20))}
+, {"H_gtr_th" : ((H_gtr_xp > -0.08) & (H_gtr_xp < 0.08))}, {"H_gtr_ph" : ((H_gtr_yp > -0.045) & (H_gtr_yp < 0.045))}
+
+h_pfp  ++  p_pfp 
+ERROR 6: h_pfp cut does not match p_pfp 
++  accept.p_pfp
+-  e
+ERROR 3: Cut e not found
+
+
+
+Type  coin_ep_cut
+Cuts  [' pid.p_pcut', 'accept.delta', 'accept.h_pfp', 'accept.p_pfp\n']
++  pid.p_pcut
+-  none
+cutplus  p_pcut
+p_pcut  ++  h_ecut 
+ERROR 6: p_pcut cut does not match h_ecut 
+p_pcut  ++  h_picut 
+ERROR 6: p_pcut cut does not match h_picut 
+p_pcut  ++  h_hadcut 
+ERROR 6: p_pcut cut does not match h_hadcut 
+p_pcut  ++  p_ecut 
+ERROR 6: p_pcut cut does not match p_ecut 
+p_pcut  ++  p_picut 
+ERROR 6: p_pcut cut does not match p_picut 
+p_pcut  ++  p_kcut 
+ERROR 6: p_pcut cut does not match p_kcut 
+p_pcut  ++  p_pcut 
+cuts  {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_pcut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_pcut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_pcut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum < pid.P_pcut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum < pid.P_pcut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_pcut_P_cal)}
+
+p_pcut  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum < 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum < 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+p_pcut  ++  p_hadcut 
+ERROR 6: p_pcut cut does not match p_hadcut 
++  accept.delta
+-  none
+cutplus  delta
+delta  ++  delta 
+cuts  {"H_gtr_dp" : ((H_gtr_dp > accept.H_del_low) & (H_gtr_dp < accept.H_del_high))}, {"P_gtr_dp" : ((P_gtr_dp > accept.P_del_low) & (P_gtr_dp < accept.P_del_high))}
+
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+coin_ep_cut  already found!!!!
+delta  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum < 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum < 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+, {"H_gtr_dp" : ((H_gtr_dp > -8) & (H_gtr_dp < 8))}, {"P_gtr_dp" : ((P_gtr_dp > -10) & (P_gtr_dp < 20))}
+
+delta  ++  h_pfp 
+ERROR 6: delta cut does not match h_pfp 
+delta  ++  p_pfp 
+ERROR 6: delta cut does not match p_pfp 
++  accept.h_pfp
+-  none
+cutplus  h_pfp
+h_pfp  ++  delta 
+ERROR 6: h_pfp cut does not match delta 
+h_pfp  ++  h_pfp 
+cuts  {"H_gtr_th" : ((H_gtr_xp > accept.H_xpfp_low) & (H_gtr_xp < accept.H_xpfp_high))}, {"H_gtr_ph" : ((H_gtr_yp > accept.H_ypfp_low) & (H_gtr_yp < accept.H_ypfp_high))}
+
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+coin_ep_cut  already found!!!!
+h_pfp  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum < 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum < 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+, {"H_gtr_dp" : ((H_gtr_dp > -8) & (H_gtr_dp < 8))}, {"P_gtr_dp" : ((P_gtr_dp > -10) & (P_gtr_dp < 20))}
+, {"H_gtr_th" : ((H_gtr_xp > -0.08) & (H_gtr_xp < 0.08))}, {"H_gtr_ph" : ((H_gtr_yp > -0.045) & (H_gtr_yp < 0.045))}
+
+h_pfp  ++  p_pfp 
+ERROR 6: h_pfp cut does not match p_pfp 
++  accept.p_pfp
+-  none
+cutplus  p_pfp
+p_pfp  ++  delta 
+ERROR 6: p_pfp cut does not match delta 
+p_pfp  ++  h_pfp 
+ERROR 6: p_pfp cut does not match h_pfp 
+p_pfp  ++  p_pfp 
+cuts  {"P_gtr_th" : ((P_gtr_xp > accept.P_xpfp_low) & (P_gtr_xp < accept.P_xpfp_high))}, {"P_gtr_ph" : ((P_gtr_yp > accept.P_ypfp_low) & (P_gtr_yp < accept.P_ypfp_high))}
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+coin_ep_cut  already found!!!!
+p_pfp  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum < 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum < 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+, {"H_gtr_dp" : ((H_gtr_dp > -8) & (H_gtr_dp < 8))}, {"P_gtr_dp" : ((P_gtr_dp > -10) & (P_gtr_dp < 20))}
+, {"H_gtr_th" : ((H_gtr_xp > -0.08) & (H_gtr_xp < 0.08))}, {"H_gtr_ph" : ((H_gtr_yp > -0.045) & (H_gtr_yp < 0.045))}
+, {"P_gtr_th" : ((P_gtr_xp > -0.06) & (P_gtr_xp < 0.06))}, {"P_gtr_ph" : ((P_gtr_yp > -0.04) & (P_gtr_yp < 0.04))}
+
+
+
+Type  coin_ep_cut_orig
+Cuts  [' pid.p_pcut', 'accept.delta', 'accept.h_pfp', 'accept.p_pfp-pid.p_pcut.P_cal_etotnorm-pid.p_pcut.H_cer_npeSum']
++  pid.p_pcut
+-  none
+cutplus  p_pcut
+p_pcut  ++  h_ecut 
+ERROR 6: p_pcut cut does not match h_ecut 
+p_pcut  ++  h_picut 
+ERROR 6: p_pcut cut does not match h_picut 
+p_pcut  ++  h_hadcut 
+ERROR 6: p_pcut cut does not match h_hadcut 
+p_pcut  ++  p_ecut 
+ERROR 6: p_pcut cut does not match p_ecut 
+p_pcut  ++  p_picut 
+ERROR 6: p_pcut cut does not match p_picut 
+p_pcut  ++  p_kcut 
+ERROR 6: p_pcut cut does not match p_kcut 
+p_pcut  ++  p_pcut 
+cuts  {"H_cal_etotnorm" : (H_cal_etotnorm > pid.P_pcut_H_cal)},{"H_cer_npeSum" : (H_cer_npeSum > pid.P_pcut_H_cer)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < pid.P_pcut_P_beta)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum < pid.P_pcut_P_hgcer)}, {"P_aero_npeSum" : (P_aero_npeSum < pid.P_pcut_P_aero)}, {"P_cal_etotnorm" : (P_cal_etotnorm > pid.P_pcut_P_cal)}
+
+p_pcut  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum < 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum < 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+
+p_pcut  ++  p_hadcut 
+ERROR 6: p_pcut cut does not match p_hadcut 
++  accept.delta
+-  none
+cutplus  delta
+delta  ++  delta 
+cuts  {"H_gtr_dp" : ((H_gtr_dp > accept.H_del_low) & (H_gtr_dp < accept.H_del_high))}, {"P_gtr_dp" : ((P_gtr_dp > accept.P_del_low) & (P_gtr_dp < accept.P_del_high))}
+
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+coin_ep_cut_orig  already found!!!!
+delta  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum < 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum < 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+, {"H_gtr_dp" : ((H_gtr_dp > -8) & (H_gtr_dp < 8))}, {"P_gtr_dp" : ((P_gtr_dp > -10) & (P_gtr_dp < 20))}
+
+delta  ++  h_pfp 
+ERROR 6: delta cut does not match h_pfp 
+delta  ++  p_pfp 
+ERROR 6: delta cut does not match p_pfp 
++  accept.h_pfp
+-  none
+cutplus  h_pfp
+h_pfp  ++  delta 
+ERROR 6: h_pfp cut does not match delta 
+h_pfp  ++  h_pfp 
+cuts  {"H_gtr_th" : ((H_gtr_xp > accept.H_xpfp_low) & (H_gtr_xp < accept.H_xpfp_high))}, {"H_gtr_ph" : ((H_gtr_yp > accept.H_ypfp_low) & (H_gtr_yp < accept.H_ypfp_high))}
+
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+ERROR 10: 7909 not found in range 4865-4870
+ERROR 10: 7909 not found in range 4871-4880
+ERROR 10: 7909 not found in range 4881-4890
+ERROR 10: 7909 not found in range 4891-4891
+ERROR 10: 7909 not found in range 4892-4912
+ERROR 10: 7909 not found in range 4913-4924
+ERROR 10: 7909 not found in range 4925-4944
+ERROR 10: 7909 not found in range 4945-4947
+ERROR 10: 7909 not found in range 4948-4959
+ERROR 10: 7909 not found in range 4965-4980
+ERROR 10: 7909 not found in range 4981-4998
+ERROR 10: 7909 not found in range 4999-5012
+ERROR 10: 7909 not found in range 5013-5039
+ERROR 10: 7909 not found in range 5040-5077
+ERROR 10: 7909 not found in range 5078-5123
+ERROR 10: 7909 not found in range 5124-5145
+ERROR 10: 7909 not found in range 5182-5220
+ERROR 10: 7909 not found in range 5221-5235
+ERROR 10: 7909 not found in range 5236-5250
+ERROR 10: 7909 not found in range 5251-5261
+ERROR 10: 7909 not found in range 5262-5263
+ERROR 10: 7909 not found in range 5264-5264
+ERROR 10: 7909 not found in range 5265-5270
+ERROR 10: 7909 not found in range 5271-5274
+ERROR 10: 7909 not found in range 5275-5294
+ERROR 10: 7909 not found in range 5304-5334
+ERROR 10: 7909 not found in range 6638-6708
+ERROR 10: 7909 not found in range 6709-6789
+ERROR 10: 7909 not found in range 6790-6857
+ERROR 10: 7909 not found in range 6885-6920
+ERROR 10: 7909 not found in range 6921-6947
+ERROR 10: 7909 not found in range 6948-6971
+ERROR 10: 7909 not found in range 6972-6978
+ERROR 10: 7909 not found in range 6979-7045
+ERROR 10: 7909 not found in range 7871-7881
+ERROR 10: 7909 not found in range 7882-7888
+ERROR 10: 7909 not found in range 7891-7908
+ERROR 10: 7909 not found in range 7978-7989
+ERROR 10: 7909 not found in range 7990-8002
+ERROR 10: 7909 not found in range 8003-8037
+ERROR 10: 7909 not found in range 8038-8110
+ERROR 10: 7909 not found in range 8111-8185
+ERROR 10: 7909 not found in range 8186-8246
+ERROR 10: 7909 not found in range 8251-8298
+ERROR 10: 7909 not found in range 8304-8356
+coin_ep_cut_orig  already found!!!!
+h_pfp  ++>  {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)},{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}, {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}, {"P_hgcer_npeSum" : (P_hgcer_npeSum < 1.5)}, {"P_aero_npeSum" : (P_aero_npeSum < 1.5)}, {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}
+, {"H_gtr_dp" : ((H_gtr_dp > -8) & (H_gtr_dp < 8))}, {"P_gtr_dp" : ((P_gtr_dp > -10) & (P_gtr_dp < 20))}
+, {"H_gtr_th" : ((H_gtr_xp > -0.08) & (H_gtr_xp < 0.08))}, {"H_gtr_ph" : ((H_gtr_yp > -0.045) & (H_gtr_yp < 0.045))}
+
+h_pfp  ++  p_pfp 
+ERROR 6: h_pfp cut does not match p_pfp 
++  accept.p_pfp
+-  e
+ERROR 3: Cut e not found
+
+
+
+dict_keys(['coin_epi_cut', 'coin_epi_cut_orig', 'coin_ep_cut', 'coin_ek_cut', 'coin_ep_cut_orig', 'coin_ek_cut_orig'])
+coin_epi_cut
+x  [' {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}', '{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}', ' {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}', ' {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}', ' {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}', ' {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}\n', ' {"H_gtr_dp" : ((H_gtr_dp > -8) & (H_gtr_dp < 8))}', ' {"P_gtr_dp" : ((P_gtr_dp > -10) & (P_gtr_dp < 20))}\n', ' {"H_gtr_th" : ((H_gtr_xp > -0.08) & (H_gtr_xp < 0.08))}', ' {"H_gtr_ph" : ((H_gtr_yp > -0.045) & (H_gtr_yp < 0.045))}\n', ' {"P_gtr_th" : ((P_gtr_xp > -0.06) & (P_gtr_xp < 0.06))}', ' {"P_gtr_ph" : ((P_gtr_yp > -0.04) & (P_gtr_yp < 0.04))}']
+coin_epi_cut_orig
+x  [' {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}', '{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}', ' {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}', ' {"P_hgcer_npeSum" : (P_hgcer_npeSum > 1.5)}', ' {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}', ' {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}\n', ' {"H_gtr_dp" : ((H_gtr_dp > -8) & (H_gtr_dp < 8))}', ' {"P_gtr_dp" : ((P_gtr_dp > -10) & (P_gtr_dp < 20))}\n', ' {"H_gtr_th" : ((H_gtr_xp > -0.08) & (H_gtr_xp < 0.08))}', ' {"H_gtr_ph" : ((H_gtr_yp > -0.045) & (H_gtr_yp < 0.045))}\n']
+coin_ek_cut
+x  [' {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}', '{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}', ' {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}', ' {"P_hgcer_npeSum" : (P_hgcer_npeSum < 1.5)}', ' {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}', ' {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}\n', ' {"H_gtr_dp" : ((H_gtr_dp > -8) & (H_gtr_dp < 8))}', ' {"P_gtr_dp" : ((P_gtr_dp > -10) & (P_gtr_dp < 20))}\n', ' {"H_gtr_th" : ((H_gtr_xp > -0.08) & (H_gtr_xp < 0.08))}', ' {"H_gtr_ph" : ((H_gtr_yp > -0.045) & (H_gtr_yp < 0.045))}\n', ' {"P_gtr_th" : ((P_gtr_xp > -0.06) & (P_gtr_xp < 0.06))}', ' {"P_gtr_ph" : ((P_gtr_yp > -0.04) & (P_gtr_yp < 0.04))}']
+coin_ek_cut_orig
+x  [' {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}', '{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}', ' {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}', ' {"P_hgcer_npeSum" : (P_hgcer_npeSum < 1.5)}', ' {"P_aero_npeSum" : (P_aero_npeSum > 1.5)}', ' {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}\n', ' {"H_gtr_dp" : ((H_gtr_dp > -8) & (H_gtr_dp < 8))}', ' {"P_gtr_dp" : ((P_gtr_dp > -10) & (P_gtr_dp < 20))}\n', ' {"H_gtr_th" : ((H_gtr_xp > -0.08) & (H_gtr_xp < 0.08))}', ' {"H_gtr_ph" : ((H_gtr_yp > -0.045) & (H_gtr_yp < 0.045))}\n']
+coin_ep_cut
+x  [' {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}', '{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}', ' {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}', ' {"P_hgcer_npeSum" : (P_hgcer_npeSum < 1.5)}', ' {"P_aero_npeSum" : (P_aero_npeSum < 1.5)}', ' {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}\n', ' {"H_gtr_dp" : ((H_gtr_dp > -8) & (H_gtr_dp < 8))}', ' {"P_gtr_dp" : ((P_gtr_dp > -10) & (P_gtr_dp < 20))}\n', ' {"H_gtr_th" : ((H_gtr_xp > -0.08) & (H_gtr_xp < 0.08))}', ' {"H_gtr_ph" : ((H_gtr_yp > -0.045) & (H_gtr_yp < 0.045))}\n', ' {"P_gtr_th" : ((P_gtr_xp > -0.06) & (P_gtr_xp < 0.06))}', ' {"P_gtr_ph" : ((P_gtr_yp > -0.04) & (P_gtr_yp < 0.04))}']
+coin_ep_cut_orig
+x  [' {"H_cal_etotnorm" : (H_cal_etotnorm > 0.7)}', '{"H_cer_npeSum" : (H_cer_npeSum > 0.7)}', ' {"P_gtr_beta" : ((abs(P_gtr_beta)-1) < 0.3)}', ' {"P_hgcer_npeSum" : (P_hgcer_npeSum < 1.5)}', ' {"P_aero_npeSum" : (P_aero_npeSum < 1.5)}', ' {"P_cal_etotnorm" : (P_cal_etotnorm > 0.7)}\n', ' {"H_gtr_dp" : ((H_gtr_dp > -8) & (H_gtr_dp < 8))}', ' {"P_gtr_dp" : ((P_gtr_dp > -10) & (P_gtr_dp < 20))}\n', ' {"H_gtr_th" : ((H_gtr_xp > -0.08) & (H_gtr_xp < 0.08))}', ' {"H_gtr_ph" : ((H_gtr_yp > -0.045) & (H_gtr_yp < 0.045))}\n']

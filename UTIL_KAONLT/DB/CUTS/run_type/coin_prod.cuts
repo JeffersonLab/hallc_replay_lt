@@ -1,0 +1,24 @@
+##############
+# COIN picut #
+##############
+coin_epi_cut_all = pid.p_coin_picut+accept.delta+accept.h_pfp+accept.p_pfp-pid.p_picut.P_cal_etotnorm
+#
+coin_epi_cut_prompt = pid.p_coin_picut+accept.delta+accept.h_pfp+accept.p_pfp-pid.p_picut.P_cal_etotnorm+coin_time.Coin_Pion_Prompt
+#
+coin_epi_cut_rand = pid.p_coin_picut+accept.delta+accept.h_pfp+accept.p_pfp-pid.p_picut.P_cal_etotnorm+coin_time.Coin_Pion_Rand
+##############
+# COIN kcut  #
+##############
+coin_ek_cut_all = pid.p_coin_kcut+accept.delta+accept.h_pfp+accept.p_pfp-pid.p_kcut.P_cal_etotnorm
+#
+coin_ek_cut_prompt = pid.p_coin_kcut+accept.delta+accept.h_pfp+accept.p_pfp-pid.p_kcut.P_cal_etotnorm+coin_time.Coin_Kaon_Prompt
+#
+coin_ek_cut_rand = pid.p_coin_kcut+accept.delta+accept.h_pfp+accept.p_pfp-pid.p_kcut.P_cal_etotnorm+coin_time.Coin_Kaon_Rand
+##############
+# COIN pcut  #
+##############
+coin_ep_cut_all = pid.p_coin_pcut+accept.delta+accept.h_pfp+accept.p_pfp-pid.p_pcut.P_cal_etotnorm
+#
+coin_ep_cut_prompt = pid.p_coin_pcut+accept.delta+accept.h_pfp+accept.p_pfp-pid.p_pcut.P_cal_etotnorm+coin_time.Coin_Proton_Prompt
+#
+coin_ep_cut_rand = pid.p_coin_pcut+accept.delta+accept.h_pfp+accept.p_pfp-pid.p_pcut.P_cal_etotnorm+coin_time.Coin_Proton_Rand

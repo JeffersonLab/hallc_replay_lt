@@ -41,6 +41,7 @@ elif [[ "${HOSTNAME}" = *"trottar"* ]]; then
     REPLAYPATH="/home/trottar/Analysis/hallc_replay_lt"
 fi
 
+source /apps/root/6.18.04/setroot_CUE.bash
 cd ${REPLAYPATH}/UTIL_KAONLT/scripts/luminosity/src/
 python3 lumiyield.py ${RUNNUMBER} ${MAXEVENTS}
 

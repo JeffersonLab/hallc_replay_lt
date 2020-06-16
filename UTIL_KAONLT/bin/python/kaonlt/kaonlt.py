@@ -217,7 +217,7 @@ class pyPlot(pyDict):
 
         return arrPlot
 
-    def cut_RF(TimingCutFile):
+    def cut_RF(self,TimingCutFile):
         TimingCutf = open(TimingCutFile)
         PromptPeak = [0, 0, 0]
         linenum = 0 # Count line number we're on

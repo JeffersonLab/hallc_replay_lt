@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-06-09 11:44:49 trottar"
+# Time-stamp: "2020-06-16 13:54:19 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -416,9 +416,12 @@ T_coin_pEDTM_tdcTime = tree.array("T.coin.pEDTM_tdcTime")
 EvtType = tree.array("fEvtHdr.fEvtType")
 
 fout = REPLAYPATH+'/UTIL_KAONLT/DB/CUTS/run_type/lumi.cuts'
+TimingCutFile = REPLAYPATH+'/UTIL_KAONLT/DB/PARAM/Timing_Parameters.csv'
 
 # read in cuts file and make dictionary
 c = klt.pyPlot(None)
+# apply RF cuts to timing cuts file
+c.cut_RF(TimingCutFile)
 readDict = c.read_dict(fout,runNum)
 
 # This method calls several methods in kaonlt package. It is required to create properly formated

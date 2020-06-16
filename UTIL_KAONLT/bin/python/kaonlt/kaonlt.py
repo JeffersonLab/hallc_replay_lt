@@ -217,6 +217,32 @@ class pyPlot(pyDict):
 
         return arrPlot
 
+    def cut_RF(TimingCutFile):
+        TimingCutf = open(TimingCutFile)
+        PromptPeak = [0, 0, 0]
+        linenum = 0 # Count line number we're on
+        TempPar = -1 # To check later
+        for line in TimingCutf: # Read all lines in the cut file
+            linenum += 1 # Add one to line number at start of loop
+            if(linenum > 1): # Skip first line
+                line = line.partition('#')[0] # Treat anything after a # as a comment and ignore it
+                line = line.rstrip()
+                array = line.split(",") # Convert line into an array, anything after a comma is a new entry
+                if(int(runNum) in range (int(array[0]), int(array[1])+1)): # Check if run number for file is within any of the ranges specified in the cut file
+                    TempPar += 2 # If run number is in range, set to non -1 value
+                    BunchSpacing = float(array[2]) # Bunch spacing in ns
+                    RF_Offset = float(array[9]) # Offset for RF timing cut
+        TimingCutf.close() # After scanning all lines in file, close file
+        if(TempPar == -1): # If value is still -1, run number provided din't match any ranges specified so exit
+            print("!!!!! ERROR !!!!!\n Run number specified does not fall within a set of runs for which cuts are defined in %s\n!!!!! ERROR !!!!!" % TimingCutFile)
+            sys.exit(3)
+        elif(TempPar > 1):
+            print("!!! WARNING!!! Run number was found within the range of two (or more) line entries of %s !!! WARNING !!!" % TimingCutFile)
+            print("The last matching entry will be treated as the input, you should ensure this is what you want")
+        P_RF_tdcTime = e_tree.array("T.coin.pRF_tdcTime")
+        P_hod_fpHitsTime = e_tree.array("P.hod.fpHitsTime")
+        RF_CutDist = np.array([ ((RFTime-StartTime + RF_Offset)%(BunchSpacing)) for (RFTime, StartTime) in zip(P_RF_tdcTime, P_hod_fpHitsTime)]) # In python x % y is taking the modulo y of x
+
     # This method reads in the CUTS and converts them to a dictionary. 
     def read_dict(self,fout,runNum):
 

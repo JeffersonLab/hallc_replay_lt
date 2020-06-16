@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-06-16 17:39:09 trottar"
+# Time-stamp: "2020-06-16 17:45:09 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -95,7 +95,7 @@ r = klt.pyRoot()
 fout = REPLAYPATH+'/UTIL_KAONLT/DB/CUTS/run_type/pid_eff.cuts'
 
 # read in cuts file and make dictionary
-c = klt.pyPlot(None,REPLAYPATH)
+c = klt.pyPlot(REPLAYPATH,None)
 # apply RF cuts to timing cuts file
 c.cut_RF(runNum,MaxEvent)
 readDict = c.read_dict(fout,runNum)
@@ -109,7 +109,7 @@ def make_cutDict(cut,inputDict=None):
 
     global c
 
-    c = klt.pyPlot(readDict,REPLAYPATH)
+    c = klt.pyPlot(REPLAYPATH,readDict)
     x = c.w_dict(cut)
     print("%s" % cut)
     print("x ", x)
@@ -137,7 +137,7 @@ cutDict = make_cutDict("p_kcut_eff",cutDict)
 cutDict = make_cutDict("p_kcut_eff_no_hgcer",cutDict)
 cutDict = make_cutDict("p_kcut_eff_no_aero",cutDict)
 cutDict = make_cutDict("p_kcut_eff_no_cal",cutDict)
-c = klt.pyPlot(cutDict,REPLAYPATH)
+c = klt.pyPlot(REPLAYPATH,cutDict)
 
 def hms_cer():
 

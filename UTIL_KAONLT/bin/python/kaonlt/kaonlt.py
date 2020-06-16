@@ -189,9 +189,9 @@ apply cuts. Set the dictionary to None if no cuts are required.
 '''
 class pyPlot(pyDict):
     
-    def __init__(self, cutDict=None,REPLAYPATH):
-        self.cutDict = cutDict
+    def __init__(self, REPLAYPATH,cutDict=None):
         self.REPLAYPATH = REPLAYPATH
+        self.cutDict = cutDict
 
     # A method for defining a bin. This may be called in any matplotlib package plots.
     # This will calculate a suitable bin width and use that to equally distribute the bin size

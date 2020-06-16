@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-06-16 17:09:06 trottar"
+# Time-stamp: "2020-06-16 17:30:16 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -420,7 +420,7 @@ fout = REPLAYPATH+'/UTIL_KAONLT/DB/CUTS/run_type/lumi.cuts'
 # read in cuts file and make dictionary
 c = klt.pyPlot(None)
 # apply RF cuts to timing cuts file
-c.cut_RF(REPLAYPATH,runNum,MaxEvent)
+c.cut_RF(runNum,MaxEvent)
 readDict = c.read_dict(fout,runNum)
 
 # This method calls several methods in kaonlt package. It is required to create properly formated

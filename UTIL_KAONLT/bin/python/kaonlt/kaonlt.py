@@ -217,7 +217,7 @@ class pyPlot(pyDict):
 
         return arrPlot
 
-    def cut_RF(self,REPLAYPATH,runNum,MaxEvent):
+    def cut_RF(self,runNum,MaxEvent):
         TimingCutFile = REPLAYPATH+'/UTIL_KAONLT/DB/PARAM/Timing_Parameters.csv'
         rootName = "%s/UTIL_KAONLT/ROOTfiles/Proton_coin_replay_production_%s_%s.root" % (REPLAYPATH, runNum, MaxEvent)
         e_tree = up.open(rootName)["T"]

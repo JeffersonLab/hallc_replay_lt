@@ -46,8 +46,8 @@ while true; do
                 cp /dev/null ${batch}
                 ##Creation of batch script for submission##                                                                                                                                                       
                 echo "PROJECT: c-kaonlt" >> ${batch}
-                # echo "TRACK: analysis" >> ${batch}
-                echo "TRACK: debug" >> ${batch} ### Use for testing                                                                                                                                              
+                echo "TRACK: analysis" >> ${batch}
+                # echo "TRACK: debug" >> ${batch} ### Use for testing                                                                                                                                              
                 echo "JOBNAME: KaonLT_${runNum}" >> ${batch}
 		# Request double the tape file size in space, for trunctuated replays edit down as needed
 		# Note, unless this is set typically replays will produce broken root files

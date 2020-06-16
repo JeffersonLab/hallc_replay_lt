@@ -217,7 +217,10 @@ class pyPlot(pyDict):
 
         return arrPlot
 
-    def cut_RF(self,TimingCutFile,runNum):
+    def cut_RF(self,REPLAYPATH,runNum,MaxEvent):
+        TimingCutFile = REPLAYPATH+'/UTIL_KAONLT/DB/PARAM/Timing_Parameters.csv'
+        rootName = "%s/UTIL_KAONLT/ROOTfiles/Proton_coin_replay_production_%s_%s.root" % (REPLAYPATH, runNum, MaxEvent)
+        e_tree = up.open(rootName)["T"]
         TimingCutf = open(TimingCutFile)
         PromptPeak = [0, 0, 0]
         linenum = 0 # Count line number we're on

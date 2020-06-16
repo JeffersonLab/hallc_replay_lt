@@ -233,7 +233,7 @@ class pyPlot(pyDict):
                     BunchSpacing = float(array[2]) # Bunch spacing in ns
                     RF_Offset = float(array[9]) # Offset for RF timing cut
         TimingCutf.close() # After scanning all lines in file, close file
-        if(TempPar == -1): # If value is still -1, run number provided din't match any ranges specified so exit
+        if(TempPar == -1): # If value is still -1, run number provided didn't match any ranges specified so exit
             print("!!!!! ERROR !!!!!\n Run number specified does not fall within a set of runs for which cuts are defined in %s\n!!!!! ERROR !!!!!" % TimingCutFile)
             sys.exit(3)
         elif(TempPar > 1):

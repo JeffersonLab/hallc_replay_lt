@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-06-16 17:38:53 trottar"
+# Time-stamp: "2020-06-16 17:39:51 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -432,7 +432,7 @@ def make_cutDict(cut,inputDict=None):
 
     global c
 
-    c = klt.pyPlot(readDict,REPLAYPATH
+    c = klt.pyPlot(readDict,REPLAYPATH)
     x = c.w_dict(cut)
     print("%s" % cut)
     print("x ", x)
@@ -472,7 +472,7 @@ cutDict = make_cutDict("h_track_lumi_after",cutDict)
 cutDict = make_cutDict("h_etrack_lumi_after",cutDict)
 cutDict = make_cutDict("h_etrack_lumi_after",cutDict)
 cutDict = make_cutDict("h_ecut_lumi_eff",cutDict)
-c = klt.pyPlot(cutDict,REPLAYPATH
+c = klt.pyPlot(cutDict,REPLAYPATH)
 
 def analysis(PS1, PS3, thres_curr):
     

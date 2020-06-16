@@ -99,16 +99,16 @@ import time, math, sys, subprocess
 import gc
 gc.collect()
 
-# Add this to all files for more dynamic pathing
-USER = subprocess.getstatusoutput("whoami") # Grab user info for file finding
-HOST = subprocess.getstatusoutput("hostname")
+# # Add this to all files for more dynamic pathing
+# USER = subprocess.getstatusoutput("whoami") # Grab user info for file finding
+# HOST = subprocess.getstatusoutput("hostname")
 
-if ("farm" in HOST[1]):
-    REPLAYPATH = "/group/c-kaonlt/USERS/%s/hallc_replay_lt" % USER[1]
-elif ("lark" in HOST[1]):
-    REPLAYPATH = "/home/%s/work/JLab/hallc_replay_lt" % USER[1]
-elif ("trottar" in HOST[1]):
-    REPLAYPATH = "/home/trottar/Analysis/hallc_replay_lt"
+# if ("farm" in HOST[1]):
+#     REPLAYPATH = "/group/c-kaonlt/USERS/%s/hallc_replay_lt" % USER[1]
+# elif ("lark" in HOST[1]):
+#     REPLAYPATH = "/home/%s/work/JLab/hallc_replay_lt" % USER[1]
+# elif ("trottar" in HOST[1]):
+#     REPLAYPATH = "/home/trottar/Analysis/hallc_replay_lt"
 
 
 '''
@@ -189,8 +189,9 @@ apply cuts. Set the dictionary to None if no cuts are required.
 '''
 class pyPlot(pyDict):
     
-    def __init__(self, cutDict=None):
+    def __init__(self, cutDict=None,REPLAYPATH):
         self.cutDict = cutDict
+        self.REPLAYPATH = REPLAYPATH
 
     # A method for defining a bin. This may be called in any matplotlib package plots.
     # This will calculate a suitable bin width and use that to equally distribute the bin size
@@ -218,8 +219,8 @@ class pyPlot(pyDict):
         return arrPlot
 
     def cut_RF(self,runNum,MaxEvent):
-        TimingCutFile = REPLAYPATH+'/UTIL_KAONLT/DB/PARAM/Timing_Parameters.csv'
-        rootName = "%s/UTIL_KAONLT/ROOTfiles/Proton_coin_replay_production_%s_%s.root" % (REPLAYPATH, runNum, MaxEvent)
+        TimingCutFile = self.REPLAYPATH+'/UTIL_KAONLT/DB/PARAM/Timing_Parameters.csv'
+        rootName = "%s/UTIL_KAONLT/ROOTfiles/Proton_coin_replay_production_%s_%s.root" % (self.REPLAYPATH, runNum, MaxEvent)
         e_tree = up.open(rootName)["T"]
         TimingCutf = open(TimingCutFile)
         PromptPeak = [0, 0, 0]
@@ -285,15 +286,15 @@ class pyPlot(pyDict):
                     
                     # Matches run type cuts with the general cuts (e.g pid, track, etc.)
                     if "pid" in cutplus:
-                        plusfout = REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/pid.cuts"
+                        plusfout = self.REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/pid.cuts"
                     elif "track" in cutplus:
-                        plusfout = REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/track.cuts"
+                        plusfout = self.REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/track.cuts"
                     elif "accept" in cutplus:
-                        plusfout = REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/accept.cuts"
+                        plusfout = self.REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/accept.cuts"
                     elif "coin_time" in cutplus:
-                        plusfout = REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/coin_time.cuts"
+                        plusfout = self.REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/coin_time.cuts"
                     elif "current" in cutplus:
-                        plusfout = REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/current.cuts"
+                        plusfout = self.REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/current.cuts"
                     else:
                         print("ERROR 2: Cut %s not found" % cutplus)
                         continue
@@ -350,15 +351,15 @@ class pyPlot(pyDict):
                         print("- ",cutminus)
                         # Matches run type cuts with the general cuts (e.g pid, track, etc.)
                         if "pid" in cutminus:
-                            minusfout = REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/pid.cuts"
+                            minusfout = self.REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/pid.cuts"
                         elif "track" in cutminus:
-                            minusfout = REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/track.cuts"
+                            minusfout = self.REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/track.cuts"
                         elif "accept" in cutminus:
-                            minusfout = REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/accept.cuts"
+                            minusfout = self.REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/accept.cuts"
                         elif "coin_time" in cutminus:
-                            minusfout = REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/coin_time.cuts"
+                            minusfout = self.REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/coin_time.cuts"
                         elif "current" in cutminus:
-                            minusfout = REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/current.cuts"
+                            minusfout = self.REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/current.cuts"
                         elif "none" in cutminus:
                             minusfout = "none"
                         else:
@@ -424,7 +425,7 @@ class pyPlot(pyDict):
                     if "." in val:
                         tmp = val.split(")")[0]
                         tmp = tmp.split(".")[1]
-                        fout = REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/Acceptance_Parameters.csv"
+                        fout = self.REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/Acceptance_Parameters.csv"
                         try:
                             data = dict(pd.read_csv(fout))
                         except IOError:
@@ -446,7 +447,7 @@ class pyPlot(pyDict):
                     if "." in val:
                         tmp = val.split(")")[0]
                         tmp = tmp.split(".")[1]
-                        fout = REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/Tracking_Parameters.csv"
+                        fout = self.REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/Tracking_Parameters.csv"
                         try:
                             data = dict(pd.read_csv(fout))
                         except IOError:
@@ -467,7 +468,7 @@ class pyPlot(pyDict):
                     if "." in val:
                         tmp = val.split(")")[0]
                         tmp = tmp.split(".")[1]
-                        fout = REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/Timing_Parameters.csv"
+                        fout = self.REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/Timing_Parameters.csv"
                         try:
                             data = dict(pd.read_csv(fout))
                         except IOError:
@@ -488,7 +489,7 @@ class pyPlot(pyDict):
                     if "." in val:
                         tmp = val.split(")")[0]
                         tmp = tmp.split(".")[1]
-                        fout = REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/PID_Parameters.csv"
+                        fout = self.REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/PID_Parameters.csv"
                         try:
                             data = dict(pd.read_csv(fout))
                         except IOError:

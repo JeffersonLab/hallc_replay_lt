@@ -43,8 +43,5 @@ fi
 
 root -l -b -q "run_RefT_Cuts.C(\"$ROOTPREFIX\", $RUNNUMBER, $MAXEVENTS)"
 sleep 5
-#mv "TimeWindowHistos_Coin_Run$RUNNUMBER.root" "Rootfiles/TimeWindowHistos_Coin_Run$RUNNUMBER.root"
-#mv "TimeWindowPlots_Coin_Run$RUNNUMBER.pdf" "Plots/TimeWindowPlots_Coin_Run$RUNNUMBER.pdf"
-#mv "SHMSHGC_xyPlots_Coin_Run$RUNNUMBER.pdf" "Plots/SHMSHGC_xyPlots_Coin_Run$RUNNUMBER.pdf"
 
 exit 0 

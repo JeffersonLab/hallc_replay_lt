@@ -43,6 +43,18 @@ TString HMSDC_Name;
 TString HMSCal_Name;
 TString HMSHodo_Name;
 
+// Some double arrays to store offset and other info
+Double_t HMS_Hodo_Offset_Raw[4][2];
+Double_t SHMS_Hodo_Offset_Raw[4][2];
+Double_t HMS_Hodo_OffsetErr_Raw[4][2];
+Double_t SHMS_Hodo_OffsetErr_Raw[4][2];
+Double_t HMSWeightSum1[4];
+Double_t HMSWeightSum2[4];
+Double_t SHMSWeightSum1[4];
+Double_t SHMSWeightSum2[4];
+Double_t HMS_Hodo_Offset[4];
+Double_t SHMS_Hodo_Offset[4];
+
 class DetRefT_Cuts : public TSelector {
 public :
    TTreeReader    fReader;
@@ -55,6 +67,8 @@ public :
    TH1F           *h1PHGCRefTime;
    TH1F           *h1PDCRefTime[12];
    TH1F           *h1PHodRefTime[4][2][2];
+   TH1F           *h1HHodADCTDCDiffTime[4][2];
+   TH1F           *h1PHodADCTDCDiffTime[4][2];
  
    // Readers to access the data
    // Readers for PID/Delta cuts
@@ -128,8 +142,26 @@ public :
    TTreeReaderArray<Double_t> P_hod_2x_PosTdcRefTime = {fReader, "P.hod.2x.PosTdcRefTime"};
    TTreeReaderArray<Double_t> P_hod_2y_PosTdcRefTime = {fReader, "P.hod.2y.PosTdcRefTime"};
 
- DetRefT_Cuts(TTree * /*tree*/ =0) : fChain(0) {}
-   virtual ~DetRefT_Cuts() { }
+   TTreeReaderArray<Double_t> H_hod_1x_NegAdcTdcDiffTime = {fReader, "H.hod.1x.GoodNegAdcTdcDiffTime"};
+   TTreeReaderArray<Double_t> H_hod_1y_NegAdcTdcDiffTime = {fReader, "H.hod.1y.GoodNegAdcTdcDiffTime"};
+   TTreeReaderArray<Double_t> H_hod_2x_NegAdcTdcDiffTime = {fReader, "H.hod.2x.GoodNegAdcTdcDiffTime"};
+   TTreeReaderArray<Double_t> H_hod_2y_NegAdcTdcDiffTime = {fReader, "H.hod.2y.GoodNegAdcTdcDiffTime"};
+   TTreeReaderArray<Double_t> H_hod_1x_PosAdcTdcDiffTime = {fReader, "H.hod.1x.GoodPosAdcTdcDiffTime"};
+   TTreeReaderArray<Double_t> H_hod_1y_PosAdcTdcDiffTime = {fReader, "H.hod.1y.GoodPosAdcTdcDiffTime"};
+   TTreeReaderArray<Double_t> H_hod_2x_PosAdcTdcDiffTime = {fReader, "H.hod.2x.GoodPosAdcTdcDiffTime"};
+   TTreeReaderArray<Double_t> H_hod_2y_PosAdcTdcDiffTime = {fReader, "H.hod.2y.GoodPosAdcTdcDiffTime"};
+
+   TTreeReaderArray<Double_t> P_hod_1x_NegAdcTdcDiffTime = {fReader, "P.hod.1x.GoodNegAdcTdcDiffTime"};
+   TTreeReaderArray<Double_t> P_hod_1y_NegAdcTdcDiffTime = {fReader, "P.hod.1y.GoodNegAdcTdcDiffTime"};
+   TTreeReaderArray<Double_t> P_hod_2x_NegAdcTdcDiffTime = {fReader, "P.hod.2x.GoodNegAdcTdcDiffTime"};
+   TTreeReaderArray<Double_t> P_hod_2y_NegAdcTdcDiffTime = {fReader, "P.hod.2y.GoodNegAdcTdcDiffTime"};
+   TTreeReaderArray<Double_t> P_hod_1x_PosAdcTdcDiffTime = {fReader, "P.hod.1x.GoodPosAdcTdcDiffTime"};
+   TTreeReaderArray<Double_t> P_hod_1y_PosAdcTdcDiffTime = {fReader, "P.hod.1y.GoodPosAdcTdcDiffTime"};
+   TTreeReaderArray<Double_t> P_hod_2x_PosAdcTdcDiffTime = {fReader, "P.hod.2x.GoodPosAdcTdcDiffTime"};
+   TTreeReaderArray<Double_t> P_hod_2y_PosAdcTdcDiffTime = {fReader, "P.hod.2y.GoodPosAdcTdcDiffTime"};
+
+ DetRefT_Cuts(TTree * /*tree*/ =0) : fChain(0) {h1HCerRefTime=0, h1PHGCRefTime=0;}
+   virtual ~DetRefT_Cuts() { } 
    virtual Int_t   Version() const { return 2; }
    virtual void    Begin(TTree *tree);
    virtual void    SlaveBegin(TTree *tree);

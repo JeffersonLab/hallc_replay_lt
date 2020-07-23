@@ -53,6 +53,16 @@ void DetRefT_Cuts::SlaveBegin(TTree * /*tree*/)
       }
     }
   }
+
+  for (Int_t i = 0; i < 4; i++){ // Loop over planes
+    for (Int_t j = 0; j < 2; j++){ // Loop over ends
+      h1HHodADCTDCDiffTime[i][j] = new TH1F(Form("HHod_%s_%s_GoodAdcTdcDiffTime", hod_pl_names[i].c_str(),hod_side[j].c_str()), Form("HMS Hodo Plane %s %s AdcTdcDiffTime", hod_pl_names[i].c_str(),hod_side[j].c_str()), 200, -100, 100);
+      h1PHodADCTDCDiffTime[i][j] = new TH1F(Form("PHod_%s_%s_GoodAdcTdcDiffTime", hod_pl_names[i].c_str(),hod_side[j].c_str()), Form("SHMS Hodo Plane %s %s AdcTdcDiffTime", hod_pl_names[i].c_str(),hod_side[j].c_str()), 200, -100, 100);
+      GetOutputList()->Add(h1HHodADCTDCDiffTime[i][j]);
+      GetOutputList()->Add(h1PHodADCTDCDiffTime[i][j]);
+    }
+  }
+
 }
 
 Bool_t DetRefT_Cuts::Process(Long64_t entry)
@@ -118,6 +128,8 @@ Bool_t DetRefT_Cuts::Process(Long64_t entry)
       for (Int_t k = 0; k < 2; k++){ // Loop over digitiser
 	
 	if (i == 0 && j == 0){
+	  h1HHodADCTDCDiffTime[i][j]->Fill(H_hod_1x_NegAdcTdcDiffTime[0]);
+	  h1PHodADCTDCDiffTime[i][j]->Fill(P_hod_1x_NegAdcTdcDiffTime[0]);
 	  if (k == 0){
 	    h1HHodRefTime[i][j][k]->Fill(H_hod_1x_NegAdcRefTime[0]);
 	    h1PHodRefTime[i][j][k]->Fill(P_hod_1x_NegAdcRefTime[0]);
@@ -128,6 +140,8 @@ Bool_t DetRefT_Cuts::Process(Long64_t entry)
 	  }
 	}
 	else if (i == 0 && j == 1){
+	  h1HHodADCTDCDiffTime[i][j]->Fill(H_hod_1x_PosAdcTdcDiffTime[0]);
+	  h1PHodADCTDCDiffTime[i][j]->Fill(P_hod_1x_PosAdcTdcDiffTime[0]);
 	  if (k == 0){
 	    h1HHodRefTime[i][j][k]->Fill(H_hod_1x_PosAdcRefTime[0]);
 	    h1PHodRefTime[i][j][k]->Fill(P_hod_1x_PosAdcRefTime[0]);
@@ -139,6 +153,8 @@ Bool_t DetRefT_Cuts::Process(Long64_t entry)
 	}
       
 	else if (i == 1 && j == 0){
+	  h1HHodADCTDCDiffTime[i][j]->Fill(H_hod_1y_NegAdcTdcDiffTime[0]);
+	  h1PHodADCTDCDiffTime[i][j]->Fill(P_hod_1y_NegAdcTdcDiffTime[0]);
 	  if (k == 0){
 	    h1HHodRefTime[i][j][k]->Fill(H_hod_1y_NegAdcRefTime[0]);
 	    h1PHodRefTime[i][j][k]->Fill(P_hod_1y_NegAdcRefTime[0]);
@@ -149,6 +165,8 @@ Bool_t DetRefT_Cuts::Process(Long64_t entry)
 	  }
 	}
 	else if (i == 1 && j == 1){
+	  h1HHodADCTDCDiffTime[i][j]->Fill(H_hod_1y_PosAdcTdcDiffTime[0]);
+	  h1PHodADCTDCDiffTime[i][j]->Fill(P_hod_1y_PosAdcTdcDiffTime[0]);
 	  if (k == 0){
 	    h1HHodRefTime[i][j][k]->Fill(H_hod_1y_PosAdcRefTime[0]);
 	    h1PHodRefTime[i][j][k]->Fill(P_hod_1y_PosAdcRefTime[0]);
@@ -160,7 +178,9 @@ Bool_t DetRefT_Cuts::Process(Long64_t entry)
 	}
       
 	else if (i == 2 && j == 0){
-	  if (k == 0){
+	  h1HHodADCTDCDiffTime[i][j]->Fill(H_hod_2x_NegAdcTdcDiffTime[0]);
+	  h1PHodADCTDCDiffTime[i][j]->Fill(P_hod_2x_NegAdcTdcDiffTime[0]);
+	   if (k == 0){
 	    h1HHodRefTime[i][j][k]->Fill(H_hod_2x_NegAdcRefTime[0]);
 	    h1PHodRefTime[i][j][k]->Fill(P_hod_2x_NegAdcRefTime[0]);
 	  }
@@ -170,6 +190,8 @@ Bool_t DetRefT_Cuts::Process(Long64_t entry)
 	  }
 	}
 	else if (i == 2 && j == 1){
+	  h1HHodADCTDCDiffTime[i][j]->Fill(H_hod_2x_PosAdcTdcDiffTime[0]);
+	  h1PHodADCTDCDiffTime[i][j]->Fill(P_hod_2x_PosAdcTdcDiffTime[0]);
 	  if (k == 0){
 	    h1HHodRefTime[i][j][k]->Fill(H_hod_2x_PosAdcRefTime[0]);
 	    h1PHodRefTime[i][j][k]->Fill(P_hod_2x_PosAdcRefTime[0]);
@@ -181,6 +203,8 @@ Bool_t DetRefT_Cuts::Process(Long64_t entry)
 	}
 
 	else if (i == 3 && j == 0){
+	  h1HHodADCTDCDiffTime[i][j]->Fill(H_hod_2y_NegAdcTdcDiffTime[0]);
+	  h1PHodADCTDCDiffTime[i][j]->Fill(P_hod_2y_NegAdcTdcDiffTime[0]);
 	  if (k == 0){
 	    h1HHodRefTime[i][j][k]->Fill(H_hod_2y_NegAdcRefTime[0]);
 	    h1PHodRefTime[i][j][k]->Fill(P_hod_2y_NegAdcRefTime[0]);
@@ -191,6 +215,8 @@ Bool_t DetRefT_Cuts::Process(Long64_t entry)
 	  }
 	}
 	else if (i == 3 && j == 1){
+	  h1HHodADCTDCDiffTime[i][j]->Fill(H_hod_2y_PosAdcTdcDiffTime[0]);
+	  h1PHodADCTDCDiffTime[i][j]->Fill(P_hod_2y_PosAdcTdcDiffTime[0]);
 	  if (k == 0){
 	    h1HHodRefTime[i][j][k]->Fill(H_hod_2y_PosAdcRefTime[0]);
 	    h1PHodRefTime[i][j][k]->Fill(P_hod_2y_PosAdcRefTime[0]);
@@ -218,7 +244,7 @@ void DetRefT_Cuts::Terminate()
   TString option = GetOption();
 
   TFile *Histogram_file = new TFile(Form("RefTimeHistos_Run%i.root",option.Atoi()),"RECREATE");
-  TDirectory *DHMS = Histogram_file->mkdir("HMS Ref Time Histos"); DHMS->cd();
+  TDirectory *DHMSRT = Histogram_file->mkdir("HMS Ref Time Histos"); DHMSRT->cd();
   h1HCerRefTime->Write("HMS Cherenkov RefTime");
   for (Int_t i = 0; i < 12; i++){ 
     TH1F *HMSDCRT = dynamic_cast<TH1F *>(TProof::GetOutput(Form("HDC%s_RefTime", dc_pl_names[i].c_str()), fOutput));
@@ -232,8 +258,7 @@ void DetRefT_Cuts::Terminate()
       }
     }
   }
-
-  TDirectory *DSHMS = Histogram_file->mkdir("SHMS Ref Time Histos"); DSHMS->cd();
+  TDirectory *DSHMSRT = Histogram_file->mkdir("SHMS Ref Time Histos"); DSHMSRT->cd();
   h1PHGCRefTime->Write("SHMS HGC RefTime");
   for (Int_t i = 0; i < 12; i++){ 
     TH1F *SHMSDCRT = dynamic_cast<TH1F *>(TProof::GetOutput(Form("PDC%s_RefTime", dc_pl_names[i].c_str()), fOutput));
@@ -241,6 +266,8 @@ void DetRefT_Cuts::Terminate()
   }
   for (Int_t i = 0; i < 4; i++){ // Loop over planes
     for (Int_t j = 0; j < 2; j++){ // Loop over ends
+      TH1F *SHMSHODODIFF = dynamic_cast<TH1F *>(TProof::GetOutput(Form("PHod_%s_%s_GoodAdcTdcDiffTime", hod_pl_names[i].c_str(), hod_side[j].c_str()), fOutput));
+      SHMSHODODIFF->Write(Form("SHMS Hodo %s %s ADCTDCDiffTime", hod_pl_names[i].c_str(), hod_side[j].c_str()));
       for (Int_t k = 0; k < 2; k++){ // Loop over digitiser
 	TH1F *SHMSHODORT = dynamic_cast<TH1F *>(TProof::GetOutput(Form("PHod%s%s%s_RefTime", hod_pl_names[i].c_str(), hod_side[j].c_str(), hod_digi[k].c_str()), fOutput));
 	SHMSHODORT->Write(Form("SHMS Hodo %s %s %s RefTime", hod_pl_names[i].c_str(), hod_side[j].c_str(), hod_digi[k].c_str()));
@@ -248,6 +275,88 @@ void DetRefT_Cuts::Terminate()
     }
   }
 
+  TDirectory *DHMSDiff = Histogram_file->mkdir("HMS ADCTDCDiff Histos"); DHMSDiff->cd();
+  for (Int_t i = 0; i < 4; i++){ // Loop over planes
+    for (Int_t j = 0; j < 2; j++){ // Loop over ends
+      TH1F *HMSHODODIFF = dynamic_cast<TH1F *>(TProof::GetOutput(Form("HHod_%s_%s_GoodAdcTdcDiffTime", hod_pl_names[i].c_str(), hod_side[j].c_str()), fOutput));
+      HMS_Hodo_Offset_Raw[i][j] = (HMSHODODIFF->GetMean());
+      HMS_Hodo_OffsetErr_Raw[i][j] = (HMSHODODIFF->GetMeanError());
+      HMSHODODIFF->Write(Form("HMS Hodo %s %s ADCTDCDiffTime", hod_pl_names[i].c_str(), hod_side[j].c_str()));
+    }
+  }
+
+  TDirectory *DSHMSDiff = Histogram_file->mkdir("SHMS ADCTDCDiff Histos"); DSHMSDiff->cd();
+  for (Int_t i = 0; i < 4; i++){ // Loop over planes
+    for (Int_t j = 0; j < 2; j++){ // Loop over ends
+      TH1F *SHMSHODODIFF = dynamic_cast<TH1F *>(TProof::GetOutput(Form("PHod_%s_%s_GoodAdcTdcDiffTime", hod_pl_names[i].c_str(), hod_side[j].c_str()), fOutput));
+      SHMS_Hodo_Offset_Raw[i][j] = (SHMSHODODIFF->GetMean());
+      SHMS_Hodo_OffsetErr_Raw[i][j] = (SHMSHODODIFF->GetMeanError());
+      SHMSHODODIFF->Write(Form("SHMS Hodo %s %s ADCTDCDiffTime", hod_pl_names[i].c_str(), hod_side[j].c_str()));
+    }
+  }
+
   Histogram_file->Close();
+
+  for (Int_t i = 0; i < 4; i++){ // Loop over planes
+    // Calculated weighted average of +ve/-ve for each plane to determine offset
+    HMSWeightSum1[i]=0;
+    HMSWeightSum2[i]=0;
+    if(HMS_Hodo_OffsetErr_Raw[i][0] == 0 || HMS_Hodo_OffsetErr_Raw[i][1] == 0) continue;
+    for (Int_t j = 0; j < 2; j++){
+      HMSWeightSum1[i]+=(HMS_Hodo_Offset_Raw[i][j])/(HMS_Hodo_OffsetErr_Raw[i][j]*HMS_Hodo_OffsetErr_Raw[i][j]);
+      HMSWeightSum2[i]+=1/(HMS_Hodo_OffsetErr_Raw[i][j]*HMS_Hodo_OffsetErr_Raw[i][j]);
+    }
+    if(HMSWeightSum2[i] != 0){
+      HMS_Hodo_Offset[i] = 200 + (HMSWeightSum1[i]/HMSWeightSum2[i]);
+    }
+    else{
+      HMS_Hodo_Offset[i] = 0;
+    }
+  }
+
+  for (Int_t i = 0; i < 4; i++){ // Loop over planes
+    // Calculated weighted average of +ve/-ve for each plane to determine offset
+    SHMSWeightSum1[i]=0;
+    SHMSWeightSum2[i]=0;
+    if(SHMS_Hodo_OffsetErr_Raw[i][0] == 0 || SHMS_Hodo_OffsetErr_Raw[i][1] == 0) continue;
+    for (Int_t j = 0; j < 2; j++){
+      SHMSWeightSum1[i]+=(SHMS_Hodo_Offset_Raw[i][j])/(SHMS_Hodo_OffsetErr_Raw[i][j]*SHMS_Hodo_OffsetErr_Raw[i][j]);
+      SHMSWeightSum2[i]+=1/(SHMS_Hodo_OffsetErr_Raw[i][j]*SHMS_Hodo_OffsetErr_Raw[i][j]);
+    }
+    if(SHMSWeightSum2[i] != 0){
+      SHMS_Hodo_Offset[i] = 200 + (SHMSWeightSum1[i]/SHMSWeightSum2[i]);
+    }
+    else{
+      SHMS_Hodo_Offset[i] = 0;
+    }
+  }
+
+  ofstream out_hhodo;
+  ofstream out_phodo;
+  // HMS Hodo
+  out_hhodo.open(Form("HMS_Hodo_AdcTdc_Offset_%d.param", option.Atoi()));
+  out_hhodo << "; HMS Hodoscope AdcTdc Offset times" << endl;
+  out_hhodo << "hhodo_adc_tdc_offset = ";
+  for (Int_t i = 0; i < 4; i++){ // Loop over planes
+    if(i != 3){
+      out_hhodo << Form("%.0f", HMS_Hodo_Offset[i]) << "., ";
+    }
+    else{
+      out_hhodo << Form("%.0f", HMS_Hodo_Offset[i]) << "." << endl;
+    }
+  }
+  
+  // SHMS Hodo
+  out_phodo.open(Form("SHMS_Hodo_AdcTdc_Offset_%d.param", option.Atoi()));
+  out_phodo << "; SHMS Hodoscope AdcTdc Offset times" << endl;
+  out_phodo << "phodo_adc_tdc_offset = ";
+  for (Int_t i = 0; i < 4; i++){ // Loop over planes
+    if(i != 3){
+      out_phodo << Form("%.0f", SHMS_Hodo_Offset[i]) << "., ";
+    }
+    else{
+      out_phodo << Form("%.0f", SHMS_Hodo_Offset[i]) << "." << endl;
+    }
+  }
 
 }

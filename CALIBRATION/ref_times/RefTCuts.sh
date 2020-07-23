@@ -1,12 +1,15 @@
 #!/bin/bash
 
-ROOTPREFIX=$1
+DEFAULTPREFIX="Full_coin_replay_Offline"
+DEFAULTROOTDIR="ROOTfilesMKJTest"
+ROOTPREFIX=${1:-$DEFAULTPREFIX}
 RUNNUMBER=$2
 MAXEVENTS=$3
 
 if [[ -z "$1" ]]; then
     echo "I need a replay file prefix!"
     echo "Please provide a replay file prefix as input"
+    echo "Default prefix is assumed as ${ROOTPREFIX}"
     exit 1
 fi
 

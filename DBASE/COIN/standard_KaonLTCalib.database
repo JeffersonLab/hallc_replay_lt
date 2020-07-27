@@ -59,7 +59,7 @@ g_ctp_parm_filename       = "DBASE/COIN/KaonLT_Calib/Offline4916.param"
 g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
 
 ### Calib from run 4923 - Autumn 18 RP ###
-4923-4297
+4923-4927
 g_ctp_parm_filename       = "DBASE/COIN/KaonLT_Calib/Offline4923.param"
 g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
 

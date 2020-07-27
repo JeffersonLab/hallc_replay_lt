@@ -1,0 +1,9 @@
+; SHMS Aerogel Cer Parameter File Containing TimeWindow Min/Max Cuts 
+ 
+ 
+ 
+
+paero_adcPosTimeWindowMin = 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
+paero_adcPosTimeWindowMax = 31.5, 29.1, 28.0, 26.4, 27.6, 27.0, 25.7
+paero_adcNegTimeWindowMin = 165.0, 165.5, 168.0, 168.1, 166.8, 165.6, 166.3
+paero_adcNegTimeWindowMax = 229.8, 228.0, 228.8, 229.1, 226.1, 228.5, 229.0

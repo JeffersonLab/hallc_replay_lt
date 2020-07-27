@@ -1,5 +1,9 @@
-// Vijay Kumar, Univerity of Regina - 24/07/20
-// vijay36361@gmail.com
+//////////////////////////////////////////////////////////
+// This class has been automatically generated on
+// Tue Jul  4 10:23:34 2017 by ROOT version 5.34/13
+// from TTree T/Hall A Analyzer Output DST
+// found on file: shms_replay_488.root
+//////////////////////////////////////////////////////////
 
 #ifndef calibration_h
 #define calibration_h
@@ -17,6 +21,10 @@
 
 const Int_t        fhgc_pmts = 4;
 const Double_t     fhgc_zpos = 156.27;
+
+// Header file for the classes stored in the TTree if any.
+
+// Fixed size dimensions of array or collections stored in the TTree if any.
 
 class calibration : public TSelector {
  public :
@@ -40,11 +48,14 @@ class calibration : public TSelector {
   TH1F           *fBeta_Cut;
   TH1F           *fBeta_Full;
   TH1F           *fTiming_Cut;
+  // TH2F            *fTiming_Cut;
   TH1F           *fTiming_Full;
+  // TH2F           *fTiming_Full;
   TH1F            *fTim1;
   TH1F            *fTim2;
   TH1F            *fTim3;
-  TH1F            *fTim4;  
+  TH1F            *fTim4;
+  
 
   // Declaration of histograms used in fitting/analysis
   TH1F *scaled_clone;
@@ -80,10 +91,11 @@ class calibration : public TSelector {
   Double_t x;
 
   // Readers to access the data
-  // These leaves MUST all be present in your replay file for this scrip to run!
   TTreeReaderValue<Int_t>    Ndata_P_tr_beta            = {fReader, "Ndata.P.tr.beta"};
   TTreeReaderArray<Double_t> P_tr_beta                  = {fReader, "P.tr.beta"};
   TTreeReaderArray<Double_t> P_hgcer_goodAdcTdcDiffTime = {fReader, "P.hgcer.goodAdcTdcDiffTime"};
+  // TTreeReaderArray<Double_t> P_hgcer_goodAdcTdcDiffTime = {fReader, "Ndata.P.hgcer.goodAdcTdcDiffTime"};
+
   TTreeReaderArray<Double_t> P_hgcer_goodAdcPulseInt    = {fReader, "P.hgcer.goodAdcPulseInt"};
   TTreeReaderArray<Double_t> P_hgcer_goodAdcPulseAmp    = {fReader, "P.hgcer.goodAdcPulseAmp"};
   TTreeReaderArray<Double_t> P_hgcer_numTracksFired     = {fReader, "P.hgcer.numTracksFired"};
@@ -123,50 +135,67 @@ class calibration : public TSelector {
 #ifdef calibration_cxx
 void calibration::Init(TTree *tree)
 {
-  fReader.SetTree(tree);  
+  // The Init() function is called when the selector needs to initialize
+  // a new tree or chain. Typically here the branch addresses and branch
+  // pointers of the tree will be set.
+  // It is normally not necessary to make changes to the generated
+  // code, but the routine can be extended by the user if needed.
+  // Init() will be called many times when running on PROOF
+  // (once per file to be processed).
+
+  // Set branch addresses and branch pointers
+
+  fReader.SetTree(tree);
+   
 }
 
 Bool_t calibration::Notify()
 {
+  // The Notify() function is called when a new file is opened. This
+  // can be either for a new TTree in a TChain or when when a new TTree
+  // is started when using PROOF. It is normally not necessary to make changes
+  // to the generated code, but the routine can be extended by the
+  // user if needed. The return value is currently not used.
+
   return kTRUE;
 }
+
 
 //Poisson distribution is used to remove background from larger values of NPE
 Double_t poisson(Double_t *x, Double_t *par)
 {
-  Double_t PoissFit1 = (par[1]*pow(par[0],x[0])*exp(-par[0]))/(tgamma(x[0]+1));                 
-  return PoissFit1;
-}
+  Double_t result1 = (par[1]*pow(par[0],x[0])*exp(-par[0]))/(tgamma(x[0]+1));                 
+  return result1;
+  }
 
 //Gaussian distribution is used to find the mean of the SPE and determine spacing between subsequent NPE
 Double_t gauss(Double_t *x, Double_t *par)
 {
-  Double_t GaussFit1 = par[0]*exp((-0.5)*(pow((x[0] - par[1]),2)/pow((par[2]),2)));
-  Double_t GaussFit2 = par[3]*exp((-0.5)*(pow((x[0] - par[4]),2)/pow((par[5]),2)));
-  // I don't really get why these 3 are defined, they aren't used at all in this function - SK 24/07/20
-  // Double_t GaussFit3 = par[6]*exp((-0.5)*(pow((x[0] - par[7]),2)/pow((par[8]),2)));
-  // Double_t GaussFit4 = par[9]*exp((-0.5)*(pow((x[0] - par[10]),2)/pow((par[11]),2)));
-  // Double_t GaussFit5 = par[12]*exp((-0.5)*(pow((x[0] - par[13]),2)/pow((par[14]),2)));
-  return GaussFit1 + GaussFit2;
+  Double_t result1 = par[0]*exp((-0.5)*(pow((x[0] - par[1]),2)/pow((par[2]),2)));
+  Double_t result2 = par[3]*exp((-0.5)*(pow((x[0] - par[4]),2)/pow((par[5]),2)));
+  // Double_t result3 = par[6]*exp((-0.5)*(pow((x[0] - par[7]),2)/pow((par[8]),2)));
+  // Double_t result4 = par[9]*exp((-0.5)*(pow((x[0] - par[10]),2)/pow((par[11]),2)));
+  //Double_t result5 = par[12]*exp((-0.5)*(pow((x[0] - par[13]),2)/pow((par[14]),2)));
+  return result1 + result2;
 }
  
 // Function used for quality contron of the calibration
 Double_t fun_4gauss_2poisson(Double_t *x, Double_t *par)
 {
-  Double_t GaussFit1 = par[0]*exp((-0.5)*(pow((x[0] - par[1]),2)/pow((par[2]),2)));
-  Double_t GaussFit2 = par[3]*exp((-0.5)*(pow((x[0] - par[4]),2)/pow((par[5]),2)));
-  Double_t GaussFit3 = par[6]*exp((-0.5)*(pow((x[0] - par[7]),2)/pow((par[8]),2)));
-  Double_t GaussFit4 = par[9]*exp((-0.5)*(pow((x[0] - par[10]),2)/pow((par[11]),2)));
-  Double_t PoissFit1 = (par[13]*pow(par[12],x[0])*exp(-par[12]))/(tgamma(x[0]+1)); 
-  Double_t PoissFit2 = (par[15]*pow(par[14],x[0])*exp(-par[14]))/(tgamma(x[0]+1)); 
-  return GaussFit1 + GaussFit2 + GaussFit3 + GaussFit4 + PoissFit1 + PoissFit2;
+  Double_t result1 = par[0]*exp((-0.5)*(pow((x[0] - par[1]),2)/pow((par[2]),2)));
+  Double_t result2 = par[3]*exp((-0.5)*(pow((x[0] - par[4]),2)/pow((par[5]),2)));
+  Double_t result3 = par[6]*exp((-0.5)*(pow((x[0] - par[7]),2)/pow((par[8]),2)));
+  Double_t result4 = par[9]*exp((-0.5)*(pow((x[0] - par[10]),2)/pow((par[11]),2)));
+  Double_t result5 = (par[13]*pow(par[12],x[0])*exp(-par[12]))/(tgamma(x[0]+1)); 
+  Double_t result6 = (par[15]*pow(par[14],x[0])*exp(-par[14]))/(tgamma(x[0]+1)); 
+  return result1 + result2 + result3 +result4 + result5 + result6;
 }
 
 //A simple linear equation is used to determine how linear the means of the NPE are
 Double_t linear(Double_t *x, Double_t *par)
 {
-  Double_t LinFit1 = par[0]*x[0] + par[1];
-  return LinFit1;
+  Double_t result1 = par[0]*x[0] + par[1];
+  return result1;
 }
 
 #endif // #ifdef calibration_cxx

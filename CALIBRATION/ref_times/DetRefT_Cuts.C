@@ -126,7 +126,6 @@ Bool_t DetRefT_Cuts::Process(Long64_t entry)
   for (Int_t i = 0; i < 4; i++){ // Loop over planes
     for (Int_t j = 0; j < 2; j++){ // Loop over ends
       for (Int_t k = 0; k < 2; k++){ // Loop over digitiser
-	
 	if (i == 0 && j == 0){
 	  h1HHodADCTDCDiffTime[i][j]->Fill(H_hod_1x_NegAdcTdcDiffTime[0]);
 	  h1PHodADCTDCDiffTime[i][j]->Fill(P_hod_1x_NegAdcTdcDiffTime[0]);
@@ -204,7 +203,7 @@ Bool_t DetRefT_Cuts::Process(Long64_t entry)
 
 	else if (i == 3 && j == 0){
 	  h1HHodADCTDCDiffTime[i][j]->Fill(H_hod_2y_NegAdcTdcDiffTime[0]);
-	  h1PHodADCTDCDiffTime[i][j]->Fill(P_hod_2y_NegAdcTdcDiffTime[0]);
+	  h1PHodADCTDCDiffTime[i][j]->Fill(P_hod_2y_NegAdcTdcDiffTime[2]);
 	  if (k == 0){
 	    h1HHodRefTime[i][j][k]->Fill(H_hod_2y_NegAdcRefTime[0]);
 	    h1PHodRefTime[i][j][k]->Fill(P_hod_2y_NegAdcRefTime[0]);
@@ -216,7 +215,7 @@ Bool_t DetRefT_Cuts::Process(Long64_t entry)
 	}
 	else if (i == 3 && j == 1){
 	  h1HHodADCTDCDiffTime[i][j]->Fill(H_hod_2y_PosAdcTdcDiffTime[0]);
-	  h1PHodADCTDCDiffTime[i][j]->Fill(P_hod_2y_PosAdcTdcDiffTime[0]);
+	  h1PHodADCTDCDiffTime[i][j]->Fill(P_hod_2y_PosAdcTdcDiffTime[2]);
 	  if (k == 0){
 	    h1HHodRefTime[i][j][k]->Fill(H_hod_2y_PosAdcRefTime[0]);
 	    h1PHodRefTime[i][j][k]->Fill(P_hod_2y_PosAdcRefTime[0]);
@@ -310,7 +309,7 @@ void DetRefT_Cuts::Terminate()
       HMS_Hodo_Offset[i] = 200 + (HMSWeightSum1[i]/HMSWeightSum2[i]);
     }
     else{
-      HMS_Hodo_Offset[i] = 0;
+      HMS_Hodo_Offset[i] = 200;
     }
   }
 
@@ -327,7 +326,7 @@ void DetRefT_Cuts::Terminate()
       SHMS_Hodo_Offset[i] = 200 + (SHMSWeightSum1[i]/SHMSWeightSum2[i]);
     }
     else{
-      SHMS_Hodo_Offset[i] = 0;
+      SHMS_Hodo_Offset[i] = 200;
     }
   }
 

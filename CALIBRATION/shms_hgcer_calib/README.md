@@ -37,14 +37,3 @@ Enter NA to skip this OR enter the options you want, see the final section for t
 #############################################
 
 Vijay - Add some info here on the criteria for good/bad fit and what people should look for.
-
-###############
-### OPTIONS ###
-###############
-
-Options for the calibration script are (case/spelling important):
-* **readall** - read all data from ROOT tree (very slow)
-* **showall** - display all calibration details (lots of windows)
-* **tracksfired** - alternate calibration method using the tracksfired leaf
-* **cut** - use particle ID
-* **pions** - use particle ID selecting pions

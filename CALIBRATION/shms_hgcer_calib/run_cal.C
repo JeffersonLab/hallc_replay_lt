@@ -103,40 +103,19 @@ void run_cal(string RunPrefix = "", Int_t NumEvents = 0, Int_t nRuns = 0, Int_t 
   }
   
   TProof *proof = TProof::Open("workers=4");
+  TString option;
   if (nRuns==1){
-    TString option = Form("%i,%i", RunNumber1, RunNumber1);
+    option = Form("%i,%i", RunNumber1, RunNumber1);
   }
   else if (nRuns == 2){
-    TString option = Form("%i,%i", RunNumber1, RunNumber2);
+    option = Form("%i,%i", RunNumber1, RunNumber2);
   }
   else if (nRuns == 3){
-    TString option = Form("%i,%i", RunNumber1, RunNumber3);
+    option = Form("%i,%i", RunNumber1, RunNumber3);
   }
   proof->SetProgressDialog(0);  
   ch.SetProof();
   //Start calibration process
-  ch.Process("calibration.C",calib_option);
-
-  // This block should all be deleted once the files are named correctly as they're created
-  ifstream temp;
-  temp.open("calibration_temp.txt", ios::in);
-  if (temp.is_open()){
-    if (nRuns == 1){
-      rename("calibration_temp1.txt", Form("Calibration_plots/phgcer_calib%d.param", RunNumber1));
-      rename("calibration_temp2txt", Form("Calibration_plots/phgcer_calib_err%d.param", RunNumber1));
-      rename("Calibration_plots.pdf", Form("Calibration_plots/Calibration_plots%d.pdf", RunNumber1));
-    }
-    if (nRuns == 2){
-      rename("calibration_temp1.txt", Form("Calibration_plots/phgcer_calib%d-%d.param", RunNumber1, RunNumber2));
-      rename("calibration_temp2.txt", Form("Calibration_plots/phgcer_calib_err%d-%d.param", RunNumber1, RunNumber2));
-      rename("Calibration_plots.pdf", Form("Calibration_plots/Calibration_plots%d-%d.pdf", RunNumber1, RunNumber2));
-    }
-    if (nRuns == 3){
-      rename("calibration_temp1.txt", Form("Calibration_plots/phgcer_calib%d-%d.param", RunNumber1, RunNumber3));
-      rename("calibration_temp2.txt", Form("Calibration_plots/phgcer_calib_err%d-%d.param", RunNumber1, RunNumber3));
-      rename("Calibration_plots.pdf", Form("Calibration_plots/Calibration_plots%d-%d.pdf", RunNumber1, RunNumber3));
-    }
-  }
-  else cout << "Error opening calibration constants, may have to update constants manually!" << endl;
+  ch.Process("calibration.C",option);
 
 }

@@ -5,32 +5,31 @@
 ### Reads in a list of run numbers from a text file ###
 inputFile="$1"
 
+if [[ "${HOSTNAME}" = *"farm"* ]]; then  
+    REPLAYPATH="/group/c-kaonlt/USERS/${USER}/hallc_replay_lt"
+elif [[ "${HOSTNAME}" = *"qcd"* ]]; then
+    REPLAYPATH="/group/c-kaonlt/USERS/${USER}/hallc_replay_lt"
+elif [[ "${HOSTNAME}" = *"cdaq"* ]]; then
+    REPLAYPATH="/home/cdaq/hallc-online/hallc_replay_lt"
+elif [[ "${HOSTNAME}" = *"phys.uregina.ca"* ]]; then
+    REPLAYPATH="/home/${USER}/work/JLab/hallc_replay_lt"
+fi
+
 while IFS='' read -r line || [[ -n "$line" ]]; do
-    ##Run number#                                                         
+    #Run number#
     runNum=$line
-    sed -i "s/hcal_cuts_Autumn18.param/CALIB\/hcal_cuts_$runNum.param/" "Offline"$runNum".param"
-    sed -i "s/hcal_cuts_Winter18.param/CALIB\/hcal_cuts_$runNum.param/" "Offline"$runNum".param"
-    sed -i "s/hcal_cuts_Spring19.param/CALIB\/hcal_cuts_$runNum.param/" "Offline"$runNum".param"
-    sed -i "s/hcal_cuts_Summer19.param/CALIB\/hcal_cuts_$runNum.param/" "Offline"$runNum".param"
+    if [ -f "$REPLAYPATH/PARAM/HMS/HODO/Calibration/hhodo_cuts_$runNum.param" ]; then
+	sed -i "s/hhodo_cuts_Autumn18.param/Calibration\/hhodo_cuts_$runNum.param/" "Offline"$runNum".param"
+	sed -i "s/hhodo_cuts_Winter18.param/Calibration\/hhodo_cuts_$runNum.param/" "Offline"$runNum".param"
+	sed -i "s/hhodo_cuts_Spring19.param/Calibration\/hhodo_cuts_$runNum.param/" "Offline"$runNum".param"
+	sed -i "s/hhodo_cuts_Summer19.param/Calibration\/hhodo_cuts_$runNum.param/" "Offline"$runNum".param"
+    fi
 
-    sed -i "s/hcer_cuts_Autumn18.param/CALIB\/hcer_cuts_$runNum.param/" "Offline"$runNum".param"
-    sed -i "s/hcer_cuts_Winter18.param/CALIB\/hcer_cuts_$runNum.param/" "Offline"$runNum".param"
-    sed -i "s/hcer_cuts_Spring19.param/CALIB\/hcer_cuts_$runNum.param/" "Offline"$runNum".param"
-    sed -i "s/hcer_cuts_Summer19.param/CALIB\/hcer_cuts_$runNum.param/" "Offline"$runNum".param"
-
-    sed -i "s/pcal_cuts_Autumn18.param/CALIB\/pcal_cuts_$runNum.param/" "Offline"$runNum".param"
-    sed -i "s/pcal_cuts_Winter18.param/CALIB\/pcal_cuts_$runNum.param/" "Offline"$runNum".param"
-    sed -i "s/pcal_cuts_Spring19.param/CALIB\/pcal_cuts_$runNum.param/" "Offline"$runNum".param"
-    sed -i "s/pcal_cuts_Summer19.param/CALIB\/pcal_cuts_$runNum.param/" "Offline"$runNum".param"
-
-    sed -i "s/phgcer_cuts_Autumn18.param/CALIB\/phgcer_cuts_$runNum.param/" "Offline"$runNum".param"
-    sed -i "s/phgcer_cuts_Winter18.param/CALIB\/phgcer_cuts_$runNum.param/" "Offline"$runNum".param"
-    sed -i "s/phgcer_cuts_Spring19.param/CALIB\/phgcer_cuts_$runNum.param/" "Offline"$runNum".param"
-    sed -i "s/phgcer_cuts_Summer19.param/CALIB\/phgcer_cuts_$runNum.param/" "Offline"$runNum".param"
-
-    sed -i "s/paero_cuts_Autumn18.param/CALIB\/paero_cuts_$runNum.param/" "Offline"$runNum".param"
-    sed -i "s/paero_cuts_Winter18.param/CALIB\/paero_cuts_$runNum.param/" "Offline"$runNum".param"
-    sed -i "s/paero_cuts_Spring19.param/CALIB\/paero_cuts_$runNum.param/" "Offline"$runNum".param"
-    sed -i "s/paero_cuts_Summer19.param/CALIB\/paero_cuts_$runNum.param/" "Offline"$runNum".param"
+    if [ -f "$REPLAYPATH/PARAM/SHMS/HODO/Calibration/phodo_cuts_$runNum.param" ]; then
+	sed -i "s/phodo_cuts_Autumn18.param/Calibration\/phodo_cuts_$runNum.param/" "Offline"$runNum".param"
+	sed -i "s/phodo_cuts_Winter18.param/Calibration\/phodo_cuts_$runNum.param/" "Offline"$runNum".param"
+	sed -i "s/phodo_cuts_Spring19.param/Calibration\/phodo_cuts_$runNum.param/" "Offline"$runNum".param"
+	sed -i "s/phodo_cuts_Summer19.param/Calibration\/phodo_cuts_$runNum.param/" "Offline"$runNum".param"
+    fi
 
 done < "$inputFile"

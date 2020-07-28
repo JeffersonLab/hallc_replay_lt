@@ -26,37 +26,14 @@ void calibration::Begin(TTree * /*tree*/)
 { printf("\n\n");
 
   TString option = GetOption();
-  TString report_option = option(0,option.Length()-79);
-  Info("Begin", "Script will fail unless 'calibration.C+' is used");
-  Info("Begin", "Starting calibration process with option: %s", report_option.Data());
-  Info("Begin", "To see details of calibration, use option showall");
-  Info("Begin", "To calibrate using TrackFired leaf, use option trackfired");
-  Info("Begin", "Default is no particle cut, use option cut if desired");
-  Info("Begin", "Default particle ID is electrons, use option pions if desired");
+  Info("Begin", "Starting calibration process");
   printf("\n\n");
-
-  //Check option 
-  if (option.Contains("showall")) fFullShow = kTRUE;
-  if (option.Contains("trackfired")) fTrack = kTRUE;
-  if (option.Contains("pions") || option.Contains("pion")) fPions = kTRUE;
-  if (option.Contains("cut") || fPions || option.Contains("cuts")) fCut = kTRUE; 
 }
 
 void calibration::SlaveBegin(TTree * /*tree*/)
 {
   printf("\n\n");
   TString option = GetOption();
-   
-  //Check option
-  if (option.Contains("showall")) fFullShow = kTRUE;
-  if (option.Contains("trackfired")) fTrack = kTRUE;
-  if (option.Contains("pions") || option.Contains("pion")) fPions = kTRUE;
-  if (option.Contains("cut") || fPions || option.Contains("cuts")) fCut = kTRUE;
-  
-  Info("SlaveBegin", "'%s' showing", (fFullShow ? "full" : "minimal"));                           
-  Info("SlaveBegin", "'%s' strategy", (fTrack ? "tracking" : "quadrant"));
-  Info("SlaveBegin", "cuts %s performed", (fCut ? "are" : "are not"));
-  if (fCut) Info("SlaveBegin", "cutting for '%s'", (fPions ? "pions" : "electrons"));
 
   // Initialize the histograms. Note they are binned per ADC channel which will be changed in the calibration analysis.
   Int_t ADC_min;
@@ -176,186 +153,115 @@ Bool_t calibration::Process(Long64_t entry)
 
       //Cuts to remove entries corresponding to a PMT not registering a hit    
       if (P_hgcer_goodAdcPulseInt[ipmt] == 0.0) continue;
-	 	  
-      //For quadrant cut strategy with particle ID cuts. In this case electrons are selected
-      if (!fTrack && fCut && !fPions){
-	//Retrieve particle ID information
-	Double_t p = *P_gtr_p;
+      
+      // Should be in by default for this script
+      // //For quadrant cut strategy with particle ID cuts. In this case electrons are selected
+      // if (!fTrack && fCut && !fPions){
+      // 	//Retrieve particle ID information
+      // 	Double_t p = *P_gtr_p;
 
-	//Fill histogram visualizaing the electron selection
-	fCut_everything->Fill(*P_cal_fly_earray/p, *P_cal_pr_eplane/p);                  
-	fCut_enorm->Fill(*P_cal_etotnorm);
+      // 	//Fill histogram visualizaing the electron selection
+      // 	fCut_everything->Fill(*P_cal_fly_earray/p, *P_cal_pr_eplane/p);                  
+      // 	fCut_enorm->Fill(*P_cal_etotnorm);
 
-	//Cut on Shower vs preshower is a tilted ellipse, this requires an angle of rotation (in radians), x/y center, semimajor and semiminor axis
-	Float_t eangle = 3.0*3.14159/4.0;                             
-	Float_t ex_center = 0.65;                                 
-	Float_t ey_center = 0.35;                                
-	Float_t esemimajor_axis = 0.30;
-	Float_t esemiminor_axis = 0.08;
-	if (pow((*P_cal_fly_earray/p - ex_center)*cos(eangle) + (*P_cal_pr_eplane/p - ey_center)*sin(eangle),2)/pow(esemimajor_axis,2) + 
-	    pow((*P_cal_fly_earray/p - ex_center)*sin(eangle) - (*P_cal_pr_eplane/p - ey_center)*cos(eangle),2)/pow(esemiminor_axis,2) < 1
-	    /* P_cal_etotnorm > 0.4*/){
-	  //Fill histogram visualizing the electron selection
-	  fCut_electron->Fill(*P_cal_fly_earray/p, *P_cal_pr_eplane/p);
+      // 	//Cut on Shower vs preshower is a tilted ellipse, this requires an angle of rotation (in radians), x/y center, semimajor and semiminor axis
+      // 	Float_t eangle = 3.0*3.14159/4.0;                             
+      // 	Float_t ex_center = 0.65;                                 
+      // 	Float_t ey_center = 0.35;                                
+      // 	Float_t esemimajor_axis = 0.30;
+      // 	Float_t esemiminor_axis = 0.08;
+      // 	if (pow((*P_cal_fly_earray/p - ex_center)*cos(eangle) + (*P_cal_pr_eplane/p - ey_center)*sin(eangle),2)/pow(esemimajor_axis,2) + 
+      // 	    pow((*P_cal_fly_earray/p - ex_center)*sin(eangle) - (*P_cal_pr_eplane/p - ey_center)*cos(eangle),2)/pow(esemiminor_axis,2) < 1
+      // 	    /* P_cal_etotnorm > 0.4*/){
+      // 	  //Fill histogram visualizing the electron selection
+      // 	  fCut_electron->Fill(*P_cal_fly_earray/p, *P_cal_pr_eplane/p);
 
-	  //Fill histogram of the full PulseInt spectra for each PMT
-	  fPulseInt[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
-	  fPulseInt_poiss[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
+      // 	  //Fill histogram of the full PulseInt spectra for each PMT
+      // 	  fPulseInt[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
+      // 	  fPulseInt_poiss[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
 
-	  //Fill histograms of what each PMT registers from each quadrant, this requires tracking the particle from the focal plane. Each quadrant is defined from the parameter files
-	  Float_t y_pos = P_tr_y[0] + P_tr_ph[0]*fhgc_zpos;                              
-	  Float_t x_pos = P_tr_x[0] + P_tr_th[0]*fhgc_zpos;
+      // 	  //Fill histograms of what each PMT registers from each quadrant, this requires tracking the particle from the focal plane. Each quadrant is defined from the parameter files
+      // 	  Float_t y_pos = P_tr_y[0] + P_tr_ph[0]*fhgc_zpos;                              
+      // 	  Float_t x_pos = P_tr_x[0] + P_tr_th[0]*fhgc_zpos;
 		  
-	  //Condition for quadrant 1 mirror
-	  if (y_pos >= 4.6 && x_pos >= 9.4) fPulseInt_quad[0][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
+      // 	  //Condition for quadrant 1 mirror
+      // 	  if (y_pos >= 4.6 && x_pos >= 9.4) fPulseInt_quad[0][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
 
-	  //Condition for quadrant 2 mirror
-	  if (y_pos < 4.6 && x_pos >= 9.4) fPulseInt_quad[1][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
+      // 	  //Condition for quadrant 2 mirror
+      // 	  if (y_pos < 4.6 && x_pos >= 9.4) fPulseInt_quad[1][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
 
-	  //Condition for quadrant 3 mirror
-	  if (y_pos >= 4.6 && x_pos < 9.4) fPulseInt_quad[2][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
+      // 	  //Condition for quadrant 3 mirror
+      // 	  if (y_pos >= 4.6 && x_pos < 9.4) fPulseInt_quad[2][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
 
-	  //Condition for quadrant 4 mirror
-	  if (y_pos < 4.6 && x_pos < 9.4) fPulseInt_quad[3][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
-	}
-      }//Marks end of electron selection condition
+      // 	  //Condition for quadrant 4 mirror
+      // 	  if (y_pos < 4.6 && x_pos < 9.4) fPulseInt_quad[3][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
+      // 	}
+      // }//Marks end of electron selection condition
+      
+      // Should be split out as an option when running
+      // //For quadrant cut strategy with particle ID cuts. In this case pions are selected
+      // if (!fTrack && fCut && fPions){
+      // 	//Retrieve particle ID information
+      // 	//Fill histogram visualizaing the pion selection
+      // 	Double_t p = *P_gtr_p;
+      // 	fCut_everything->Fill(*P_cal_fly_earray/p, *P_cal_pr_eplane/p);
+      // 	fCut_enorm->Fill(*P_cal_etotnorm);
 
-      //For quadrant cut strategy with particle ID cuts. In this case pions are selected
-      if (!fTrack && fCut && fPions){
-	//Retrieve particle ID information
-	//Fill histogram visualizaing the pion selection
-	Double_t p = *P_gtr_p;
-	fCut_everything->Fill(*P_cal_fly_earray/p, *P_cal_pr_eplane/p);
-	fCut_enorm->Fill(*P_cal_etotnorm);
+      // 	//Cut on Shower vs preshower is a tilted ellipse, this requires an angle of rotation (in radians), x/y center, semimajor and semiminor axis
+      // 	Float_t piangle = 0.0;
+      // 	Float_t pix_center = 0.3;
+      // 	Float_t piy_center = 0.03;
+      // 	Float_t pisemimajor_axis = 0.3;
+      // 	Float_t pisemiminor_axis = 0.02;
+      // 	if (pow((*P_cal_fly_earray/p - pix_center)*cos(piangle) + (*P_cal_pr_eplane/p - piy_center)*sin(piangle),2)/pow(pisemimajor_axis,2) + 
+      // 	    pow((*P_cal_fly_earray/p - pix_center)*sin(piangle) - (*P_cal_pr_eplane/p - piy_center)*cos(piangle),2)/pow(pisemiminor_axis,2) < 1){
+      // 	  //Fill histogram visualizaing the pion selection
+      // 	  fCut_pion->Fill(*P_cal_fly_earray/p, *P_cal_pr_eplane/p);
 
-	//Cut on Shower vs preshower is a tilted ellipse, this requires an angle of rotation (in radians), x/y center, semimajor and semiminor axis
-	Float_t piangle = 0.0;
-	Float_t pix_center = 0.3;
-	Float_t piy_center = 0.03;
-	Float_t pisemimajor_axis = 0.3;
-	Float_t pisemiminor_axis = 0.02;
-	if (pow((*P_cal_fly_earray/p - pix_center)*cos(piangle) + (*P_cal_pr_eplane/p - piy_center)*sin(piangle),2)/pow(pisemimajor_axis,2) + 
-	    pow((*P_cal_fly_earray/p - pix_center)*sin(piangle) - (*P_cal_pr_eplane/p - piy_center)*cos(piangle),2)/pow(pisemiminor_axis,2) < 1){
-	  //Fill histogram visualizaing the pion selection
-	  fCut_pion->Fill(*P_cal_fly_earray/p, *P_cal_pr_eplane/p);
+      // 	  //Fill histogram of the full PulseInt spectra for each PMT
+      // 	  fPulseInt[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
+      // 	  fPulseInt_poiss[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
 
-	  //Fill histogram of the full PulseInt spectra for each PMT
-	  fPulseInt[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
-	  fPulseInt_poiss[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
-
-	  //Fill histograms of what each PMT registers from each quadrant, this requires tracking the particle from the focal plane. Each quadrant is defined from the parameter files
-	  Float_t y_pos = P_tr_y[0] + P_tr_ph[0]*fhgc_zpos;                        
-	  Float_t x_pos = P_tr_x[0] + P_tr_th[0]*fhgc_zpos;
+      // 	  //Fill histograms of what each PMT registers from each quadrant, this requires tracking the particle from the focal plane. Each quadrant is defined from the parameter files
+      // 	  Float_t y_pos = P_tr_y[0] + P_tr_ph[0]*fhgc_zpos;                        
+      // 	  Float_t x_pos = P_tr_x[0] + P_tr_th[0]*fhgc_zpos;
 		
-	  //Condition for quadrant 1 mirror                                                                        
-	  if (y_pos >= 4.6 && x_pos >= 9.4) fPulseInt_quad[0][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
+      // 	  //Condition for quadrant 1 mirror                                                                        
+      // 	  if (y_pos >= 4.6 && x_pos >= 9.4) fPulseInt_quad[0][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
 
-	  //Condition for quadrant 2 mirror
-	  if (y_pos < 4.6 && x_pos >= 9.4) fPulseInt_quad[1][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
+      // 	  //Condition for quadrant 2 mirror
+      // 	  if (y_pos < 4.6 && x_pos >= 9.4) fPulseInt_quad[1][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
 
-	  //Condition for quadrant 3 mirror
-	  if (y_pos >= 4.6 && x_pos < 9.4) fPulseInt_quad[2][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
+      // 	  //Condition for quadrant 3 mirror
+      // 	  if (y_pos >= 4.6 && x_pos < 9.4) fPulseInt_quad[2][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
 
-	  //Condition for quadrant 4 mirror
-	  if (y_pos < 4.6 && x_pos < 9.4) fPulseInt_quad[3][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
-	}
-      }   
-      //Marks end of pion selection condition
+      // 	  //Condition for quadrant 4 mirror
+      // 	  if (y_pos < 4.6 && x_pos < 9.4) fPulseInt_quad[3][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
+      // 	}
+      // }   
+      // //Marks end of pion selection condition
 		      
       //For quadrant cut strategy with no particle ID cut
-      if (!fTrack && !fCut){
-	//Fill histogram of the full PulseInt spectra for each PMT
-	fPulseInt[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
-	fPulseInt_poiss[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
+      //Fill histogram of the full PulseInt spectra for each PMT
+      fPulseInt[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
+      fPulseInt_poiss[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
 
-	//Retrieve information for particle tracking from focal plane
-	//Fill histograms of what each PMT registers from each quadrant, this requires tracking the particle from the focal plane. Each quadrant is defined from the parameter files
-	Float_t y_pos = P_tr_y[0] + P_tr_ph[0]*fhgc_zpos;
-	Float_t x_pos = P_tr_x[0] + P_tr_th[0]*fhgc_zpos;
+      //Retrieve information for particle tracking from focal plane
+      //Fill histograms of what each PMT registers from each quadrant, this requires tracking the particle from the focal plane. Each quadrant is defined from the parameter files
+      Float_t y_pos = P_tr_y[0] + P_tr_ph[0]*fhgc_zpos;
+      Float_t x_pos = P_tr_x[0] + P_tr_th[0]*fhgc_zpos;
 		  
-	//Condition for quadrant 1 mirror
-	if (y_pos >= 4.6 && x_pos >= 9.4) fPulseInt_quad[0][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
+      //Condition for quadrant 1 mirror
+      if (y_pos >= 4.6 && x_pos >= 9.4) fPulseInt_quad[0][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
 
-	//Condition for quadrant 2 mirror
-	if (y_pos < 4.6 && x_pos >= 9.4) fPulseInt_quad[1][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
+      //Condition for quadrant 2 mirror
+      if (y_pos < 4.6 && x_pos >= 9.4) fPulseInt_quad[1][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
 
-	//Condition for quadrant 3 mirror
-	if (y_pos >= 4.6 && x_pos < 9.4) fPulseInt_quad[2][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
+      //Condition for quadrant 3 mirror
+      if (y_pos >= 4.6 && x_pos < 9.4) fPulseInt_quad[2][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
 
-	//Condition for quadrant 4 mirror
-	if (y_pos < 4.6 && x_pos < 9.4) fPulseInt_quad[3][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
-      }//Marks end of no particle ID strategy 
-	  	  
-      //For TracksFired cut strategy with no particle ID cut
-      if (fTrack && !fCut){
-	//Fill histogram of the full PulseInt spectra for each PMT
-	fPulseInt[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
-	fPulseInt_poiss[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
-
-
-	//Fill histograms with TracksFired cut, note that quadrant cuts are included
-	for (Int_t iregion = 0; iregion < 4; iregion++){
-	  if (P_hgcer_numTracksFired[iregion] == (iregion + 1)) fPulseInt_quad[iregion][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
-	}
-      }//Marks end of tracksfired strategy with no particle ID
-
-      //For TracksFired cut strategy selecting electrons
-      if (fTrack && fCut && !fPions){
-	//Retrieve particle ID information
-	//Fill histogram visualizaing the electron selection
-	Double_t p = *P_gtr_p;
-	fCut_everything->Fill(*P_cal_fly_earray/p, *P_cal_pr_eplane/p);
-
-	//Cut on Shower vs preshower is a tilted ellipse, this requires an angle of rotation (in radians), x/y center, semimajor and semiminor axis
-	Float_t eangle = 3.0*3.14159/4;
-	Float_t ex_center = 0.375;
-	Float_t ey_center = 0.360;
-	Float_t esemimajor_axis = 0.38;
-	Float_t esemiminor_axis = 0.05;
-	if (pow((*P_cal_fly_earray/p - ex_center)*cos(eangle) + (*P_cal_pr_eplane/p - ey_center)*sin(eangle),2)/pow(esemimajor_axis,2) + 
-	    pow((*P_cal_fly_earray/p - ex_center)*sin(eangle) - (*P_cal_pr_eplane/p - ey_center)*cos(eangle),2)/pow(esemiminor_axis,2) < 1){
-	  //Fill histogram visualizing the electron selection
-	  fCut_electron->Fill(*P_cal_fly_earray/p, *P_cal_pr_eplane/p);
-
-	  //Fill histogram of the full PulseInt spectra for each PMT
-	  fPulseInt[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
-	  fPulseInt_poiss[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
-
-	  //Fill histograms with TracksFired cut, note that quadrant cuts are included so any off quadrant histograms will be empty
-	  for (Int_t iregion = 0; iregion < 4; iregion++){
-	    if (P_hgcer_numTracksFired[iregion] != 0.0) fPulseInt_quad[iregion][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
-	  }
-	}
-      }//Marks end of tracksfired with electrons
-
-      //For TracksFired cut strategy selecting pions
-      if (fTrack && fCut && fPions){
-	//Retrieve particle ID information
-	//Fill histogram visualizaing the electron selection
-	Double_t p = *P_gtr_p;
-	fCut_everything->Fill(*P_cal_fly_earray/p, *P_cal_pr_eplane/p);
-
-	//Cut on Shower vs preshower is a tilted ellipse, this requires an angle of rotation (in radians), x/y center, semimajor and semiminor axis
-	Float_t piangle = 0.0;
-	Float_t pix_center = 0.26;
-	Float_t piy_center = 0.03;
-	Float_t pisemimajor_axis = 0.1;
-	Float_t pisemiminor_axis = 0.02;
-	if (pow((*P_cal_fly_earray/p - pix_center)*cos(piangle) + (*P_cal_pr_eplane/p - piy_center)*sin(piangle),2)/pow(pisemimajor_axis,2) + 
-	    pow((*P_cal_fly_earray/p - pix_center)*sin(piangle) - (*P_cal_pr_eplane/p - piy_center)*cos(piangle),2)/pow(pisemiminor_axis,2) < 1){
-	  //Fill histogram visualizing the electron selection
-	  fCut_pion->Fill(*P_cal_fly_earray/p, *P_cal_pr_eplane/p);
-
-	  //Fill histogram of the full PulseInt spectra for each PMT
-	  fPulseInt[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
-	  fPulseInt_poiss[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
-
-	  //Fill histograms with TracksFired cut, note that quadrant cuts are included
-	  for (Int_t iregion = 0; iregion < 4; iregion++){
-	    if (P_hgcer_numTracksFired[iregion] != 0.0) fPulseInt_quad[iregion][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
-	  }
-	}
-      }//Marks end of tracksfired with electrons
+      //Condition for quadrant 4 mirror
+      if (y_pos < 4.6 && x_pos < 9.4) fPulseInt_quad[3][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
     }//Marks end of loop over PMTs
   }//Marks end of loop over tracks
   
@@ -368,17 +274,24 @@ void calibration::SlaveTerminate()
 
 void calibration::Terminate()
 {  
-  printf("\n");
-  Info("Terminate", "'%s' showing", (fFullShow ? "full" : "minimal"));
-  Info("Terminate", "'%s' strategy", (fTrack ? "tracking" : "quadrant"));
-  Info("Terminate", "cuts %s performed", (fCut ? "are" : "are not"));
-  if (fCut) Info("Terminate", "cutting for '%s'", (fPions ? "pions" : "electrons"));
+  TString option = GetOption();
+  TString RunNumStartStr = option(0,4);
+  TString RunNumEndStr = option(5,10);
+  Int_t RunNumStart = (RunNumStartStr.Atoi());
+  Int_t RunNumEnd = (RunNumEndStr.Atoi());
+
   printf("\n");
   Info("Terminate", "Histograms formed, now starting calibration.\n'Peak Buffer full' is a good warning!\n");
   printf("\n");
 
   // Default name of the output pdf
-  TString foutname = "Calibration_plots";
+  TString foutname;
+  if ( RunNumStart == RunNumEnd){
+    foutname = Form("Calibration_plots/Calibration_plots_%i", RunNumStart);
+  }
+  else {
+    foutname = Form("Calibration_plots/Calibration_plots_%i-%i", RunNumStart, RunNumEnd);
+  }
 
   //Print all plots in a single pdf 
   TString outputpdf = foutname + ".pdf";
@@ -406,42 +319,42 @@ void calibration::Terminate()
     }
   }
   //Canvases to display cut information
-  if (fFullShow){
-    //Canvas to show beta cut information
-    TCanvas *Beta;
-    Beta = new TCanvas("Beta", "Beta information for events");
-    Beta->Divide(2,1);
-    Beta->cd(1);
-    fBeta_Full->Draw(); 
-    Beta->cd(2);
-    fBeta_Cut->Draw(); 
+ 
+  //Canvas to show beta cut information
+  TCanvas *Beta;
+  Beta = new TCanvas("Beta", "Beta information for events");
+  Beta->Divide(2,1);
+  Beta->cd(1);
+  fBeta_Full->Draw(); 
+  Beta->cd(2);
+  fBeta_Cut->Draw(); 
 
-    Beta->Print(outputpdf + '(');
+  Beta->Print(outputpdf + '(');
      
-    //Canvas to show full timing  information
-    TCanvas *Timing;
-    Timing = new TCanvas("Timing", "Timing information for events");
-    // Timing->Setlogy();
-    gPad->SetLogy();
-    fTiming_Full->Draw(); 
+  //Canvas to show full timing  information
+  TCanvas *Timing;
+  Timing = new TCanvas("Timing", "Timing information for events");
+  // Timing->Setlogy();
+  gPad->SetLogy();
+  fTiming_Full->Draw(); 
 
-    Timing->Print(outputpdf);
+  Timing->Print(outputpdf);
 
-    //Canvas to show timing cuts info for each PMT
-    TCanvas *Timing1;
-    Timing1 = new TCanvas("Timing1","time cuts for each pmts.");      
-    Timing1->Divide(2,2);
-    Timing1->cd(1);
-    fTim1->Draw();     
-    Timing1->cd(2);
-    fTim2->Draw();    
-    Timing1->cd(3);
-    fTim3->Draw();      
-    Timing1->cd(4);
-    fTim4->Draw();   
-    Timing1->Print(outputpdf);
-  } 
-
+  //Canvas to show timing cuts info for each PMT
+  TCanvas *Timing1;
+  Timing1 = new TCanvas("Timing1","time cuts for each pmts.");      
+  Timing1->Divide(2,2);
+  Timing1->cd(1);
+  fTim1->Draw();     
+  Timing1->cd(2);
+  fTim2->Draw();    
+  Timing1->cd(3);
+  fTim3->Draw();      
+  Timing1->cd(4);
+  fTim4->Draw();   
+  Timing1->Print(outputpdf);
+  
+  // Should be back in
   //Show the particle cuts performed in the histogram forming
   /* if (fCut)
      {
@@ -521,18 +434,18 @@ void calibration::Terminate()
       TSpectrum *s = new TSpectrum(2);  
 
       //Create Canvas to see the search result for the SPE  
-      if (fFullShow) quad_cuts[ipmt] = new TCanvas(Form("quad_cuts_%d",ipmt), Form("First Photoelectron peaks PMT%d",ipmt+1));
-      if (fFullShow) quad_cuts[ipmt]->Divide(3,1);  
+      quad_cuts[ipmt] = new TCanvas(Form("quad_cuts_%d",ipmt), Form("First Photoelectron peaks PMT%d",ipmt+1));
+      quad_cuts[ipmt]->Divide(3,1);  
 	  
       Int_t ipad = 1; //Variable to draw over pads correctly
 	 
       for (Int_t iquad=0; iquad<4; iquad++){ 
 	if (iquad == ipmt) continue; //ignore a PMT looking at its own quadrant
-	if (fFullShow) quad_cuts[ipmt]->cd(ipad);
+	quad_cuts[ipmt]->cd(ipad);
 
 	if (PulseInt_quad[iquad][ipmt]->GetEntries() > 0){		 
 	  //Perform search for the SPE and save the peak into the array xpeaks   //0.001
-	  fFullShow ? s->Search(PulseInt_quad[iquad][ipmt], 2.0, "nobackground",0.05) : s->Search(PulseInt_quad[iquad][ipmt], 2.0, "nobackground&&nodraw",0.05);
+	  s->Search(PulseInt_quad[iquad][ipmt], 2.0, "nobackground",0.05);
                     
 	  TList *functions = PulseInt_quad[iquad][ipmt]->GetListOfFunctions(); 
 	  TPolyMarker *pm = (TPolyMarker*)functions->FindObject("TPolyMarker");
@@ -566,7 +479,7 @@ void calibration::Terminate()
 	  Gauss2->SetParLimits(3, 0.0,PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[1])));
 	  Gauss2->SetParLimits(4, xpeaks[1]-0.5, xpeaks[1]+0.5);
 	  Gauss2->SetParLimits(5, 0.5, 4.0);
-	  fFullShow ? PulseInt_quad[iquad][ipmt]->Fit("Gauss2","RQN") : PulseInt_quad[iquad][ipmt]->Fit("Gauss2","RQN");		
+	  PulseInt_quad[iquad][ipmt]->Fit("Gauss2","RQN");
 	
 	  //Again Use the peak to fit the SPE with a Gaussian to determine the mean
 	  Gauss2->SetParameter(0,Gauss2->GetParameter(0));
@@ -575,7 +488,7 @@ void calibration::Terminate()
 	  Gauss2->SetParameter(3,Gauss2->GetParameter(3));
 	  Gauss2->SetParameter(4,Gauss2->GetParameter(4));	
 	  Gauss2->SetParameter(5,Gauss2->GetParameter(5));
-	  fFullShow ? PulseInt_quad[iquad][ipmt]->Fit("Gauss2","RQ"): PulseInt_quad[iquad][ipmt]->Fit("Gauss2","RQ");
+	  PulseInt_quad[iquad][ipmt]->Fit("Gauss2","RQ");
 		 
 	  // Draw individual functions from the Gauss2 function
 	  TF1 *g1 = new TF1("g1","gaus",0,35);
@@ -667,7 +580,7 @@ void calibration::Terminate()
 	}
       }
 	  
-      if(fFullShow) quad_cuts[ipmt]->Print(outputpdf);        
+      quad_cuts[ipmt]->Print(outputpdf);        
       //Obtain the conversion from ADC to NPE by taking the error weighted average of the SPE means
       Double_t xscale = 0.0;
       Double_t xscaleErr = 0.0;
@@ -689,10 +602,10 @@ void calibration::Terminate()
       //Perform check if the statistics were too low to get a good estimate of the SPE mean
       if (xscale < 1.0){
 	//Repeat the exact same procedure for the SPE of each quadrant, except now its for the full PMT spectra
-	if(fFullShow) low_stats_ipmt = new TCanvas(Form("low_stats_%d",ipmt),Form("Low stats analysis for PMT%d",ipmt+1));
-	if(fFullShow) low_stats_ipmt->cd(1);
+	low_stats_ipmt = new TCanvas(Form("low_stats_%d",ipmt),Form("Low stats analysis for PMT%d",ipmt+1));
+	low_stats_ipmt->cd(1);
 	PulseInt[ipmt]->GetXaxis()->SetRangeUser(0,20);
-	fFullShow ? s->Search(PulseInt[ipmt], 3.5, "nobackground", 0.001) : s->Search(PulseInt[ipmt], 2.0, "nobackground&&nodraw", 0.001);
+	s->Search(PulseInt[ipmt], 3.5, "nobackground", 0.001);
 	TList *functions = PulseInt[ipmt]->GetListOfFunctions();
 	TPolyMarker *pm = (TPolyMarker*)functions->FindObject("TPolyMarker");
 	Double_t *xpeaks = pm->GetX();
@@ -701,7 +614,7 @@ void calibration::Terminate()
 	Gauss1->SetParameter(2, 3);
 	Gauss1->SetParLimits(0, 0., 3000.);
 	PulseInt[ipmt]->GetXaxis()->SetRangeUser(0,200);
-	fFullShow ? PulseInt[ipmt]->Fit("Gauss1","RQ") : PulseInt[ipmt]->Fit("Gauss1","RQ");
+	PulseInt[ipmt]->Fit("Gauss1","RQ");
 	xscale = Gauss1->GetParameter(1);
 	xscaleErr = Gauss1->GetParError(1);
       }	  
@@ -725,14 +638,14 @@ void calibration::Terminate()
       fscaled[ipmt]->Scale(1.0/fscaled[ipmt]->Integral(), "width");                         
 
       //Tcanvas for draw the  scaled histogram 
-      if (fFullShow) background_ipmt = new TCanvas(Form("backgrounf_pmt%d",ipmt), Form("Full NPE spectra for PMT%d ",ipmt+1));	  
-      if (fFullShow) background_ipmt->cd();	    
+      background_ipmt = new TCanvas(Form("backgrounf_pmt%d",ipmt), Form("Full NPE spectra for PMT%d ",ipmt+1));	  
+      background_ipmt->cd();	    
    
       //Poisson distribution 
       Poisson->SetRange(7,35);
       Poisson->SetParameter(0,9.0);
       Poisson->SetParameter(1, 0.40);
-      fFullShow ? fscaled[ipmt]->Fit("Poisson","RQBN") : fscaled[ipmt]->Fit("Poisson","RQBN");
+      fscaled[ipmt]->Fit("Poisson","RQBN");
 
       // Gauss4Poiss2 included 4gauss + 2poisson for the quality control check 
       Gauss4Poiss2->SetRange(0,35.0);
@@ -760,8 +673,7 @@ void calibration::Terminate()
 
       // Clone the histogram before fit it	 
       scaled_clone = (TH1F*)fscaled[ipmt]->Clone("scaled_clone");	 
-
-      fFullShow ? fscaled[ipmt]->Fit("Gauss4Poiss2","RQN") : fscaled[ipmt]->Fit("Gauss4Poiss2","RQN");
+      fscaled[ipmt]->Fit("Gauss4Poiss2","RQN");
 
       // Again fit the normalised histogram taking parameters from the first fit   
       Gauss4Poiss2->SetParameter(0, Gauss4Poiss2->GetParameter(0));
@@ -782,7 +694,7 @@ void calibration::Terminate()
       Gauss4Poiss2->SetParameter(15,Gauss4Poiss2->GetParameter(15));
       Gauss4Poiss2->SetLineColor(5);
 
-      fFullShow ? fscaled[ipmt]->Fit("Gauss4Poiss2","RQ+") : fscaled[ipmt]->Fit("Gauss4Poiss2","RQ+");
+      fscaled[ipmt]->Fit("Gauss4Poiss2","RQ+");
 	 
       // Statistics box for display  parameters from the Gauss4Poiss2 fit
       // p0 = Offset Gauss1,  p1 = Mean Gauss1, p2 = stdDev Gauss1, p3 = Offset Gauss2,  p4 = Mean Gauss2, p5 = stdDev Gauss2, p6 = Offset Gauss3,  p7 = Mean Gauss3, p8 = stdDev Gauss3,
@@ -806,7 +718,6 @@ void calibration::Terminate()
       p13 = Gauss4Poiss2->GetParameter(13);  p13_err = Gauss4Poiss2->GetParError(13);
       p14 = Gauss4Poiss2->GetParameter(14);  p14_err = Gauss4Poiss2->GetParError(14);
       p15 = Gauss4Poiss2->GetParameter(15);  p15_err = Gauss4Poiss2->GetParError(15);
-	 
 
       TPaveText *t1 = new TPaveText(0.70, 0.35, 0.9, 0.9, "NDC");
       {
@@ -875,13 +786,13 @@ void calibration::Terminate()
 	g8->SetLineColor(802);
 	g8->Draw("same"); 
       }
-      if(fFullShow) background_ipmt->Print(outputpdf);
+      background_ipmt->Print(outputpdf);
 
       //Tcanvas for draw the zoomed clone histogram 
-      if (fFullShow) Full_zoom_fit_ipmt = new TCanvas(Form("Full_zoom_fit_pmt%d",ipmt), Form("Zoom in NPE spectra for PMT%d with all fits",ipmt+1));
-      if (fFullShow) scaled_clone->GetXaxis()->SetRangeUser(0,5); 
-      if (fFullShow) Full_zoom_fit_ipmt->cd();
-      if (fFullShow) scaled_clone->Draw();
+      Full_zoom_fit_ipmt = new TCanvas(Form("Full_zoom_fit_pmt%d",ipmt), Form("Zoom in NPE spectra for PMT%d with all fits",ipmt+1));
+      scaled_clone->GetXaxis()->SetRangeUser(0,5); 
+      Full_zoom_fit_ipmt->cd();
+      scaled_clone->Draw();
 
       TF1 *Gauss4Poiss2_clone = new TF1("Gauss4Poiss2_clone",fun_4gauss_2poisson, 0.0, 35.0, 16.0);
       {
@@ -954,10 +865,10 @@ void calibration::Terminate()
 	g14->SetLineColor(802);
 	g14->Draw("same");
       } 
-      if(fFullShow) Full_zoom_fit_ipmt->Print(outputpdf);
+      Full_zoom_fit_ipmt->Print(outputpdf);
 	
       //TCanvas for the linear spacing of photo-electrons
-      if (fFullShow) final_spectra_ipmt = new TCanvas(Form("final_Spectra_%d",ipmt), Form("NPE spectra for PMT%d",ipmt+1));
+      final_spectra_ipmt = new TCanvas(Form("final_Spectra_%d",ipmt), Form("NPE spectra for PMT%d",ipmt+1));
       y_npe[0] = Gauss4Poiss2->GetParameter(1), y_npe[1] = Gauss4Poiss2->GetParameter(4), y_npe[2] = Gauss4Poiss2->GetParameter(7);
       y_err[0] = xscaleErr + p1_err, y_err[1] = xscaleErr + p4_err, y_err[2] = xscaleErr + p7_err;
       x_npe[0] = 1, x_npe[1] = 2, x_npe[2] = 3;
@@ -977,7 +888,7 @@ void calibration::Terminate()
       Linear->SetParameter(1.0, 0.0);
       Linear->SetLineColor(1);
 
-      if (fFullShow) gr_npe->Draw("A*"); 
+      gr_npe->Draw("A*"); 
 
       //Fit with another linear function when intercept is zero
       TF1 *g15 = new TF1("g15","[0]*x", 0.0,5.0);
@@ -987,8 +898,8 @@ void calibration::Terminate()
 	g15->SetLineColor(2);
       }
 
-      fFullShow ? gr_npe->Fit("Linear","RQ") : gr_npe->Fit("Linear","RQ");
-      fFullShow ? gr_npe->Fit("g15","RQ+") : gr_npe->Fit("g15","RQ+");
+      gr_npe->Fit("Linear","RQ");
+      gr_npe->Fit("g15","RQ+");
 
       //Get parameters from both fitting 
       Double_t sl1, sl1_err, in1, in1_err, Chi1, NDF1, sl2, sl2_err, Chi2, NDF2 ;
@@ -1024,33 +935,33 @@ void calibration::Terminate()
 	t2->Draw();
       }
       if(ipmt ==0){
-	if(fFullShow) final_spectra_ipmt->Print(outputpdf);
+	final_spectra_ipmt->Print(outputpdf);
       }
       if(ipmt ==1){
-	if(fFullShow) final_spectra_ipmt->Print(outputpdf);
+	final_spectra_ipmt->Print(outputpdf);
       }
       if(ipmt ==2){
-	if(fFullShow) final_spectra_ipmt->Print(outputpdf);
+	final_spectra_ipmt->Print(outputpdf);
       } 
       if(ipmt ==3){
-	if(fFullShow) final_spectra_ipmt->Print(outputpdf + ')');
+	final_spectra_ipmt->Print(outputpdf + ')');
       } 
 
       calibration_mk1[ipmt] = xscale;
       calibration_mk1Err[ipmt] = xscaleErr;
       pmt_calib[ipmt] = abs(1.0 - Gauss4Poiss2->GetParameter(1));
 
-      if (fCut){
-	TCanvas *cut_enorm = new TCanvas("cut_enorm", "Visualization of etotnorm");
-	fCut_enorm->Draw();
+      // if (fCut){
+      // 	TCanvas *cut_enorm = new TCanvas("cut_enorm", "Visualization of etotnorm");
+      // 	fCut_enorm->Draw();
 
-	TCanvas *cut_visualization = new TCanvas("cut_visualization", "Visualization of the particle ID cuts performed");
-	cut_visualization->Divide(2,1);
-	cut_visualization->cd(1);
-	fCut_everything->Draw("Colz");
-	cut_visualization->cd(2);
-	fPions ? fCut_pion->Draw("Colz") : fCut_electron->Draw("Colz");
-      }
+      // 	TCanvas *cut_visualization = new TCanvas("cut_visualization", "Visualization of the particle ID cuts performed");
+      // 	cut_visualization->Divide(2,1);
+      // 	cut_visualization->cd(1);
+      // 	fCut_everything->Draw("Colz");
+      // 	cut_visualization->cd(2);
+      // 	fPions ? fCut_pion->Draw("Colz") : fCut_electron->Draw("Colz");
+      // }
 	  
       //Initial calibration constant has been obtained. Now I multiply it by the slope of the spacing of the NPE (should be approx. 1) for a second estimate
       Double_t xscale_mk2 = xscale * p1;  
@@ -1061,129 +972,7 @@ void calibration::Terminate()
       pmt_calib_mk2[ipmt] = abs(1.0 - Gauss4Poiss2->GetParameter(1));
 				   
     } // This brace marks the end of the quadrant cut strategy
-               
-    //Begin the TrackFired cut calibration
-    if (fTrack){
-      //TSpectrum class is used to find the SPE peak using the search method
-      TSpectrum *s = new TSpectrum(2); 
-
-      //Create Canvas to show the search result for the SPE
-      if (fFullShow) quad_cuts_ipmt = new TCanvas(Form("quad_cuts_%d",ipmt), Form("First Photoelectron peaks PMT%d",ipmt+1));
-      if (fFullShow) quad_cuts_ipmt->Divide(2,2);
-      if (fFullShow) quad_cuts_ipmt->cd(1);
-
-      for (Int_t iquad = 0; iquad < 4; iquad++)
-	{
-	  //Perform search for the SPE and save the peak into the array xpeaks
-	  if (fFullShow) quad_cuts_ipmt->cd(iquad+1);
-
-	  PulseInt_quad[ipmt][ipmt]->GetXaxis()->SetRangeUser(0,50);
-	  fFullShow ? s->Search(PulseInt_quad[iquad][ipmt], 1.0, "nobackground", 0.001) : s->Search(PulseInt_quad[iquad][ipmt], 1.5, "nobackground&&nodraw", 0.001);
-	  TList *functions = PulseInt_quad[iquad][ipmt]->GetListOfFunctions();
-	  TPolyMarker *pm = (TPolyMarker*)functions->FindObject("TPolyMarker");
-	  Double_t *xpeaks = pm->GetX();
-	  PulseInt_quad[iquad][ipmt]->GetXaxis()->SetRangeUser(-1,200);
-
-	  //Use the peak to fit the SPE with a Gaussian to determine the mean
-	  Gauss1->SetRange(xpeaks[0]-3, xpeaks[0]+3);
-	  Gauss1->SetParameter(1, xpeaks[0]);
-	  Gauss1->SetParameter(2, 10.);
-	  Gauss1->SetParLimits(0, 0., 2000.);
-	  Gauss1->SetParLimits(1, xpeaks[0]-3, xpeaks[0]+3);
-	  Gauss1->SetParLimits(2, 0.5, 10.);
-	  fFullShow ? PulseInt_quad[iquad][ipmt]->Fit("Gauss1","RQ") : PulseInt_quad[iquad][ipmt]->Fit("Gauss1","RQN");
-	  //Store the mean of the SPE in the mean array provided it is not zero, passes a loose statistical cut, and is above a minimum channel number
-	  if (xpeaks[0] != 0.0 && PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])) > 10 && ipmt != iquad){	
-	    mean[iquad] = Gauss1->GetParameter(1);
-	    mean_err[iquad] = Gauss1->GetParError(1);
-	  }
-	} 
-	  
-      Double_t xscale = 0.0;
-      Double_t xscaleErr = 0.0;
-      Double_t WeightAvgSum1 = 0.0;
-      Double_t WeightAvgSum2 = 0.0;
-      for (Int_t i=0; i<3; i++){
-	// Need to define Boolean for this loop, earlier it's based on X2 range of fit, do similar here. Case not used for now SK 27/8/19
-	// Take weighted avg 26/8/19 SK
-	if (GoodFit[i] == kFALSE) continue;
-	WeightAvgSum1 += mean[i]/(mean_err[i]*mean_err[i]);               
-	WeightAvgSum2 += 1/(mean_err[i]*mean_err[i]);
-      }
-      xscale = WeightAvgSum1/WeightAvgSum2;
-      xscaleErr = 1/TMath::Sqrt(WeightAvgSum2);
-	  
-      calibration_mk1[ipmt] = xscale;
-      calibration_mk1Err[ipmt] = xscaleErr;
-
-      //Scale full ADC spectra according to the mean of the SPE. This requires filling a new histogram with the same number of bins but scaled min/max
-      Int_t nbins;
-      nbins = PulseInt_quad[ipmt][ipmt]->GetXaxis()->GetNbins();
-
-      fscaled[ipmt] = new TH1F(Form("fscaled_PMT%d", ipmt+1), Form("Scaled ADC spectra for PMT%d; NPE; Normalized Counts",ipmt+1), 210, -1, 20);
-
-      //Fill this histogram bin by bin
-      for (Int_t ibin=0; ibin<nbins; ibin++){
-	Double_t y = PulseInt_quad[ipmt][ipmt]->GetBinContent(ibin);
-	Double_t x = PulseInt_quad[ipmt][ipmt]->GetXaxis()->GetBinCenter(ibin);
-	Double_t x_scaled = x/calibration_mk1[ipmt];
-	Int_t bin_scaled = fscaled[ipmt]->GetXaxis()->FindBin(x_scaled); 
-	fscaled[ipmt]->SetBinContent(bin_scaled,y);
-      }
-
-      //Normalize the histogram for ease of fitting
-      fscaled[ipmt]->Scale(1.0/fscaled[ipmt]->Integral(), "width");
-	  
-      if (fFullShow) final_spectra_ipmt = new TCanvas(Form("final_Spectra_%d",ipmt), Form("Calibrated spectra for PMT%d; NPE; Normalized Counts",ipmt+1));
-      if (fFullShow) final_spectra_ipmt->cd(1);
-
-      //Find the location of the SPE and subtract from 1.0 to determine accuracy of calibration
-      Gauss1->SetRange(0.50, 1.50);
-      Gauss1->SetParameter(0, 0.05);
-      Gauss1->SetParameter(1, 1.0);
-      Gauss1->SetParameter(2, 0.3);
-      Gauss1->SetParLimits(0, 0.0, 1.0);
-      Gauss1->SetParLimits(1, 0.5, 1.5);
-      Gauss1->SetParLimits(2, 0.1, 0.5);
-      fFullShow ? fscaled[ipmt]->Fit("Gauss1","RQ") : fscaled[ipmt]->Fit("Gauss1","RQN");
-			   
-      calibration_mk2[ipmt] = calibration_mk1[ipmt]*Gauss1->GetParameter(1);
-      calibration_mk2[ipmt] = xscale * Gauss1->GetParameter(1);
-
-      calibration_mk2Err[ipmt] = Sqrt(Power(xscaleErr*Gauss1->GetParameter(1),2) +  Power(xscale*Gauss1->GetParError(1),2)); 
-      pmt_calib[ipmt] = abs(1.0 - Gauss1->GetParameter(1));
-
-      //Scale full ADC spectra according to the mean of the SPE. This requires filling a new histogram with the same number of bins but scaled min/max
-      fscaled_mk2[ipmt] = new TH1F(Form("fscaled_mk2_PMT%d", ipmt+1), Form("Scaled ADC spectra for PMT%d; NPE; Normalized Counts",ipmt+1), 210, -1, 20);
-	  
-      //Fill this histogram bin by bin
-      for (Int_t ibin=0; ibin<nbins; ibin++){
-	Double_t y = PulseInt_quad[ipmt][ipmt]->GetBinContent(ibin);
-	Double_t x = PulseInt_quad[ipmt][ipmt]->GetXaxis()->GetBinCenter(ibin);
-	Double_t x_scaled = x/calibration_mk2[ipmt];
-	Int_t bin_scaled = fscaled_mk2[ipmt]->GetXaxis()->FindBin(x_scaled); 
-	fscaled_mk2[ipmt]->SetBinContent(bin_scaled,y);
-      }
-
-      //Normalize the histogram for ease of fitting
-      fscaled_mk2[ipmt]->Scale(1.0/fscaled_mk2[ipmt]->Integral(), "width");
-	  
-      if (fFullShow) final_spectra_mk2_ipmt = new TCanvas(Form("final_Spectra_mk2_%d",ipmt), Form("Calibrated spectra for PMT%d; NPE; Normalized Counts",ipmt+1));
-      if (fFullShow) final_spectra_mk2_ipmt->cd(1);
-	 
-
-      //Find the location of the SPE and subtract from 1.0 to determine accuracy of calibration
-      Gauss1->SetRange(0.50, 1.50);
-      Gauss1->SetParameter(0, 0.05);
-      Gauss1->SetParameter(1, 1.0);
-      Gauss1->SetParameter(2, 0.3);
-      Gauss1->SetParLimits(0, 0.0, 0.1);
-      Gauss1->SetParLimits(1, 0.5, 1.5);
-      Gauss1->SetParLimits(2, 0.1, 0.5);
-      fFullShow ? fscaled_mk2[ipmt]->Fit("Gauss1","RQ") : fscaled_mk2[ipmt]->Fit("Gauss1","RQN");
-      pmt_calib_mk2[ipmt] = abs(1.0 - Gauss1->GetParameter(1));
-    } //This brace marks the end of TracksFired strategy   
-  }   
+  } 
 
   cout << "Calibration constants are \nPMT#:   First Guess" << setw(25) << "Second Guess\n" << endl;
   for (Int_t i=0; i<4; i++){
@@ -1191,11 +980,16 @@ void calibration::Terminate()
   }
   printf("\n");
 
-  if (fCut) cout << (Pois_Chi[0] < Pois_Chi[1] ? "First Guess":"Second Guess") << " better characterizes the full Poisson character" << endl;
+  //if (fCut) cout << (Pois_Chi[0] < Pois_Chi[1] ? "First Guess":"Second Guess") << " better characterizes the full Poisson character" << endl;
 
   //Start the process of writing the calibration information to file
   ofstream calibration_out;
-  calibration_out.open("calibration_temp.txt", ios::out);
+  if(RunNumStart == RunNumEnd){
+    calibration_out.open(Form("Calibration_plots/phgcer_calib_%i.param", RunNumStart), ios::out);
+  }
+  else{
+    calibration_out.open(Form("Calibration_plots/phgcer_calib_%i-%i.param", RunNumStart, RunNumEnd), ios::out);
+  }
   if (!calibration_out.is_open()) cout << "Problem saving calibration constants, may have to update constants manually!" << endl;
 
   else{
@@ -1213,7 +1007,12 @@ void calibration::Terminate()
   }
   // Second time to save the parameters
   ofstream calibration_out2;
-  calibration_out2.open("calibration_temp2.txt", ios::out);
+  if(RunNumStart == RunNumEnd){
+    calibration_out2.open(Form("Calibration_plots/phgcer_calib_err_%i.param", RunNumStart), ios::out);
+  }
+  else{
+    calibration_out2.open(Form("Calibration_plots/phgcer_calib_err_%i-%i.param", RunNumStart, RunNumEnd), ios::out);
+  }
   if (!calibration_out2.is_open()) cout << "Problem saving calibration constants, may have to update constants manually!" << endl;
   else{
     calibration_out2 <<("phgcer_adc_to_npe are: ")<<endl; 

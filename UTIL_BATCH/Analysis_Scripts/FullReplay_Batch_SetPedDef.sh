@@ -1,12 +1,9 @@
 #!/bin/bash
 
-### Stephen Kay --- University of Regina --- 12/11/19 ###
-### Template for a batch running script from Richard, modify with your username and with the script you want to run on the final eval line
-
 echo "Starting Replay script"
 echo "I take as arguments the Run Number and max number of events!"
 RUNNUMBER=$1
-MAXEVENTS=$2
+MAXEVENTS=-1
 ### Check you've provided the an argument
 if [[ $1 -eq "" ]]; then
     echo "I need a Run Number!"
@@ -18,22 +15,23 @@ if [[ ${USER} = "cdaq" ]]; then
     echo "Please be sure you want to do this."
     echo "Comment this section out and run again if you're sure."
     exit 2
-fi  
+fi          
+
 # Set path depending upon hostname. Change or add more as needed  
 if [[ "${HOSTNAME}" = *"farm"* ]]; then  
     REPLAYPATH="/group/c-kaonlt/USERS/${USER}/hallc_replay_lt"
     if [[ "${HOSTNAME}" != *"ifarm"* ]]; then
 	source /site/12gev_phys/softenv.sh 2.3
     fi
-    cd "/group/c-kaonlt/hcana/"
-    source "/group/c-kaonlt/hcana/setup.sh"
+    cd "/group/c-kaonlt/hcana_MKJ_Test/"
+    source "/group/c-kaonlt/hcana_MKJ_Test/setup.sh"
     cd "$REPLAYPATH"
     source "$REPLAYPATH/setup.sh"
 elif [[ "${HOSTNAME}" = *"qcd"* ]]; then
     REPLAYPATH="/group/c-kaonlt/USERS/${USER}/hallc_replay_lt"
     source /site/12gev_phys/softenv.sh 2.3
-    cd "/group/c-kaonlt/hcana/"
-    source "/group/c-kaonlt/hcana/setup.sh" 
+    cd "/group/c-kaonlt/hcana_MKJ_Test/"
+    source "/group/c-kaonlt/hcana_MKJ_Test/setup.sh" 
     cd "$REPLAYPATH"
     source "$REPLAYPATH/setup.sh" 
 elif [[ "${HOSTNAME}" = *"cdaq"* ]]; then
@@ -44,5 +42,5 @@ fi
 cd $REPLAYPATH
 
 echo -e "\n\nStarting Replay Script\n\n"
-eval "$REPLAYPATH/hcana -l -q \"SCRIPTS/COIN/PRODUCTION/replay_production_coin_hElec_pProt.C($RUNNUMBER,$MAXEVENTS)\""
-exit 1
+eval "$REPLAYPATH/hcana -l -q \"SCRIPTS/COIN/PRODUCTION/FullReplay_Offline_SetPedDef_Pt2.C ($RUNNUMBER,$MAXEVENTS)\""
+exit 0

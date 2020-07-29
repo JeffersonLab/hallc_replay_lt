@@ -3,6 +3,12 @@
 ##### A batch submission script based on an earlier version by Richard
 
 echo "Running as ${USER}"
+### Check if an argument was provided, if not assume -1, if yes, this is max events
+if [[ $1 -eq "" ]]; then
+    MAXEVENTS=-1
+else
+    MAXEVENTS=$1
+fi
 
 ##Output history file##                                                                                                                                                                                           
 historyfile=hist.$( date "+%Y-%m-%d_%H-%M-%S" ).log
@@ -12,7 +18,7 @@ batch="${USER}_Job.txt"
 
 ##Input run numbers##                                                                      
 ##Point this to the location of your input run list                                            
-inputFile="/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_BATCH/batch_scripts/inputRuns"
+inputFile="/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_BATCH/InputRunLists/inputRuns"
 
 ## Tape stub, you can point directly to a taped file and the farm job will do the jgetting for you, don't call it in your script!                                                      
 MSSstub='/mss/hallc/spring17/raw/coin_all_%05d.dat'
@@ -47,7 +53,7 @@ while true; do
                 ##Creation of batch script for submission##                                                                                                                                                       
                 echo "PROJECT: c-kaonlt" >> ${batch} # Or whatever your project is!
                 echo "TRACK: analysis" >> ${batch} ## Use this track for production running
-                #echo "TRACK: debug" >> ${batch} ### Use this track for testing, higher priority
+		#echo "TRACK: debug" >> ${batch} ### Use this track for testing, higher priority
                 echo "JOBNAME: KaonLT_${runNum}" >> ${batch} ## Change to be more specific if you want
 		# Request double the tape file size in space, for trunctuated replays edit down as needed
 		# Note, unless this is set typically replays will produce broken root files
@@ -57,10 +63,11 @@ while true; do
                 elif [[ $TapeFileSize -ge 45 ]]; then
                     echo "MEMORY: 4000 MB" >> ${batch}
                 fi
-                echo "OS: centos7" >> ${batch}
-                echo "CPU: 1" >> ${batch} ### hcana is single core, setting CPU higher will lower priority and gain you nothing!
+                #echo "OS: centos7" >> ${batch}
+		echo "OS: general" >> ${batch} # As of 16/1/20 centos 7.2 (which centos7 defaults to) cores being phased out. General will run on first available node (which should speed it up)
+		echo "CPU: 1" >> ${batch} ### hcana is single core, setting CPU higher will lower priority and gain you nothing!
 		echo "INPUT_FILES: ${tape_file}" >> ${batch}
-                echo "COMMAND:/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_BATCH/Analysis_Scripts/SCRIPT.sh${runNum}" >> ${batch} ### Insert your script at end!                                            
+                echo "COMMAND:/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_BATCH/Analysis_Scripts/Batch_Template.sh ${runNum} ${MAXEVENTS}"  >> ${batch} ### Insert your script at end!
                 echo "MAIL: ${USER}@jlab.org" >> ${batch}
                 echo "Submitting batch"
                 eval "jsub ${batch} 2>/dev/null"

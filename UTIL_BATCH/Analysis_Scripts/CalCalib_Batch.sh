@@ -39,7 +39,7 @@ fi
 if [[ "${HOSTNAME}" = *"farm"* ]]; then  
     REPLAYPATH="/group/c-kaonlt/USERS/${USER}/hallc_replay_lt"
     if [[ "${HOSTNAME}" != *"ifarm"* ]]; then
-	source /site/12gev_phys/softenv.sh 2.1
+	source /site/12gev_phys/softenv.sh 2.3
     fi
     cd "/group/c-kaonlt/hcana/"
     source "/group/c-kaonlt/hcana/setup.sh"
@@ -47,7 +47,7 @@ if [[ "${HOSTNAME}" = *"farm"* ]]; then
     source "$REPLAYPATH/setup.sh"
 elif [[ "${HOSTNAME}" = *"qcd"* ]]; then
     REPLAYPATH="/group/c-kaonlt/USERS/${USER}/hallc_replay_lt"
-    source /site/12gev_phys/softenv.sh 2.1
+    source /site/12gev_phys/softenv.sh 2.3
     cd "/group/c-kaonlt/hcana/"
     source "/group/c-kaonlt/hcana/setup.sh" 
     cd "$REPLAYPATH"
@@ -81,12 +81,13 @@ touch "Tmp_"$RUNNUMBER"_"$OPT".txt"
 eval "$REPLAYPATH/hcana -l -q  \"SCRIPTS/COIN/CALIBRATION/"$OPT"Cal_Calib_Coin.C($RUNNUMBER, 1)\"" | tee "Tmp_"$RUNNUMBER"_"$OPT".txt"
 if [ $OPT == "HMS" ]; then
     if [ "$RUNNUMBER" -le 8375 ]; then 
+	# Find and obtain the calibration used in the replay, assuming it follows one of two patterns
 	CALIBFILE=$(grep -o "PARAM/HMS/CAL/hcal_.*" "Tmp_"$RUNNUMBER"_"$OPT".txt")
-	#CALIBFILE=$(grep -o "PARAM/HMS/CAL/CALIB/hcal_.*" "Tmp_"$RUNNUMBER"_"$OPT".txt")
+	CALIBFILE=$(grep -o "PARAM/HMS/CAL/CALIB/hcal_.*" "Tmp_"$RUNNUMBER"_"$OPT".txt")
     fi
     if [ "$RUNNUMBER" -ge 8376 ]; then
-	CALIBFILE=$(grep -o "PARAM/HMS/CAL/new_hcal*" "Tmp_"$RUNNUMBER"_"$OPT".txt")
-	#CALIBFILE=$(grep -o "PARAM/HMS/CAL/CALIB/hcal_.*" "Tmp_"$RUNNUMBER"_"$OPT".txt")
+	CALIBFILE=$(grep -o "PARAM/HMS/CAL/new_hcal.*" "Tmp_"$RUNNUMBER"_"$OPT".txt")
+	CALIBFILE=$(grep -o "PARAM/HMS/CAL/CALIB/hcal_.*" "Tmp_"$RUNNUMBER"_"$OPT".txt")
     fi
 fi
 if [ $OPT == "SHMS" ]; then

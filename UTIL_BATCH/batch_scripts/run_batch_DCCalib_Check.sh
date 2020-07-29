@@ -5,16 +5,30 @@
 
 echo "Running as ${USER}"
 
+SPEC=$1
+
+### Check you have provided the first argument correctly                                                                                                                                                         
+if [[ ! $1 =~ ^("HMS"|"SHMS")$ ]]; then
+    echo "Please specify spectrometer, HMS or SHMS"
+    exit 2
+fi
+### Check if a second argument was provided, if not assume -1, if yes, this is max events                                                                                                                         
+if [[ $2 -eq "" ]]; then
+    MAXEVENTS=-1
+else
+    MAXEVENTS=$2
+fi
+
 ##Output history file##                                                                                                                                                                                           
 historyfile=hist.$( date "+%Y-%m-%d_%H-%M-%S" ).log
 
 ##Output batch script##                                                                                                                                                                                           
 batch="${USER}_Job.txt"
 
-##Input run numbers##                                                                                                                                                                                             
-inputFile="/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_BATCH/InputRunLists/Lumi_ALL" 
+##Input run numbers##
+inputFile="/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_BATCH/InputRunLists/Coin_Lumi_1_Part"
 
-## Tape stub                                                                                                                                                                                                      
+## Tape stub
 MSSstub='/mss/hallc/spring17/raw/coin_all_%05d.dat'
 
 auger="augerID.tmp"
@@ -41,17 +55,16 @@ while true; do
                 cp /dev/null ${batch}
                 ##Creation of batch script for submission##                                                                                                                                                       
                 echo "PROJECT: c-kaonlt" >> ${batch}
-                echo "TRACK: analysis" >> ${batch}
-                #echo "TRACK: debug" >> ${batch} ### Use for testing                                                                                                                                              
-                echo "JOBNAME: KaonLT_${runNum}" >> ${batch}
-                echo "DISK_SPACE: 25 GB" >>${batch}                                                                                                                                                              
+		echo "TRACK: analysis" >> ${batch}
+		#echo "TRACK: debug" >> ${batch}
+                echo "JOBNAME: KaonLT_DCCalib_${SPEC}_${runNum}" >> ${batch}
+		echo "DISK_SPACE: 20 GB" >>${batch} 
                 echo "MEMORY: 2500 MB" >> ${batch}
                 echo "OS: centos7" >> ${batch}
-                echo "CPU: 1" >> ${batch} ### hcana single core, setting CPU higher will lower priority!                                                                                                          
+                echo "CPU: 1" >> ${batch} ### hcana single core, setting CPU higher will lower priority
 		echo "INPUT_FILES: ${tape_file}" >> ${batch}
-		#echo "TIME: 1" >> ${batch} 
-		echo "COMMAND:/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_BATCH/Analysis_Scripts/FullReplay_Batch.sh ${runNum}" >> ${batch}                                                        
-		echo "MAIL: ${USER}@jlab.org" >> ${batch}
+		echo "COMMAND:/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_BATCH/Analysis_Scripts/DCCalib_CheckReplay_Batch.sh ${runNum} ${SPEC} ${MAXEVENTS}" >> ${batch} 
+                echo "MAIL: ${USER}@jlab.org" >> ${batch}
                 echo "Submitting batch"
                 eval "jsub ${batch} 2>/dev/null"
                 echo " "
@@ -65,7 +78,6 @@ while true; do
 		do
 		    if [ $(grep -c $j ${tmp}) -gt 0 ]; then
 			ID=$(echo $(grep $j ${tmp}) | head -c 8)
-			#ID=$(echo $(grep $j ${tmp}) | head -c 8) 
 			augerID[$i]=$ID
 			echo "${augerID[@]}" >> $auger
 		    fi	

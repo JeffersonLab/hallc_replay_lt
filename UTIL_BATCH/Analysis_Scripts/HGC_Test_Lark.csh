@@ -12,7 +12,7 @@ if ( $1 ==  "" ) then
     exit 2
     else
 
-    #Initialize hcana
+    #Initialise hcana
     cd "/home/apps/hcana"
     source "/home/apps/hcana/setup.csh"
     cd "/home/${USER}/work/JLab/hallc_replay_lt"

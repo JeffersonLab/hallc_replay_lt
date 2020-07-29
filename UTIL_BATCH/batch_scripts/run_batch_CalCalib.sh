@@ -19,7 +19,7 @@ historyfile=hist.$( date "+%Y-%m-%d_%H-%M-%S" ).log
 batch="${USER}_Job.txt"
 ##Input run numbers##                                                                      
 ##Point this to the location of your input run list                                            
-inputFile="/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_BATCH/InputRunLists/Calib_Runs_All"
+inputFile="/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_BATCH/InputRunLists/Calib_Runs_Reruns"
 #inputFile="/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_BATCH/InputRunLists/inputRuns"
 ## Tape stub, you can point directly to a taped file and the farm job will do the jgetting for you, don't call it in your script!                   
 MSSstub='/mss/hallc/spring17/raw/coin_all_%05d.dat'
@@ -63,7 +63,7 @@ while true; do
                 elif [[ $TapeFileSize -ge 45 ]]; then
                     echo "MEMORY: 4000 MB" >> ${batch}
                 fi
-                echo "OS: centos7" >> ${batch}
+                echo "OS: general" >> ${batch}
                 echo "CPU: 1" >> ${batch} ### hcana is single core, setting CPU higher will lower priority and gain you nothing!
 		echo "INPUT_FILES: ${tape_file}" >> ${batch}
                 echo "COMMAND:/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/UTIL_BATCH/Analysis_Scripts/CalCalib_Batch.sh ${runNum} ${SPEC} ${MAXEVENTS}" >> ${batch}

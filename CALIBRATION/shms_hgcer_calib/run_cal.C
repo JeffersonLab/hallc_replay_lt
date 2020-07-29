@@ -33,7 +33,7 @@ void run_cal(string RunPrefix = "", Int_t NumEvents = 0, Int_t nRuns = 0, Int_t 
   if(nRuns == 0) {
     cout << "Enter the number of runs to chain (1 to 3): ";
     cin >> nRuns;
-    if (nRuns != 1 || nRuns !=2 || nRuns != 3){
+    if (nRuns != 1 && nRuns !=2 && nRuns != 3){
       cerr << "...Invalid entry\n";
       cerr << "Enter either 1, 2 or 3\n";
       return;

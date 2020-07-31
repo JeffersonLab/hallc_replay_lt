@@ -1,13 +1,21 @@
-# Vijay Kumar, Univerity of Regina - 24/07/20
-# vijay36361@gmail.com
+Vijay Kumar, Univerity of Regina - 24/07/20
+vijay36361@gmail.com
 
 ####################################
 ### Using the Calibration Script ###
 ####################################
 
-This file assumes your replayed files are in a sym link (or folder) called ROOTfiles in your base hallc_replay directory. Please change or add your path to the block around Line60 of the run_cal.C macro in this folder.
+The script has some default paths set for the KaonLT group on the farm, as well as machines at the University of Regina.
+
+Please change or add your path to the block around Line60 of the run_cal.C macro in this folder.
+
+This path should point to the directory where your replayed files (to be calibrated) are stored.
 
 To run the calibration, use the run_cal.C macro with root.
+
+root run_cal.C
+
+Executing the script in this way will yield several prompts to the user to provide the arguments, it is recommended you provide the arguments when running the script as detailed below.
 
 It is highly recommend you execute the script without displaying any graphics (run in batch mode).
 
@@ -29,11 +37,30 @@ From the directory this README is located in, execute
 
 root -l -b -q 'run_cal.C("Coin_Replay", -1, 3, 5555, 5556, 5557)'
 
-When running the script, it will complain if a rootfile cannot be found. If everything looks OK, you will be prompted to provide any options you want.
-Enter NA to skip this OR enter the options you want, see the final section for the options that are available.
+When running the script, it will complain if a rootfile cannot be found. 
 
-#############################################
-### How many runs should I chain together? ##
-#############################################
+The path it tried to find the rootfile in will be printed to screen, check this looks correct and adjust the pathing if it doesn't.
 
-Vijay - Add some info here on the criteria for good/bad fit and what people should look for.
+###################
+### Output Info ###
+###################
+
+By default, the output from the code is place in a folder called Calibration_plots.
+
+Files are named by runnumber(s), there are a set of plots saved as a pdf as well as two param files with values.
+
+By default, the "second guess" parameters are assumed to be the "best". The file phgcer_calib_#RUNNUMBER.param file is the file that should be fed back to hcana.
+
+This file has both the first and second guesses saved in it, but the first guess is commented out. 
+
+##############################################
+### How many runs should I chain together? ###
+##############################################
+
+If any calibraiton paramaters are returned as NaN this is a sign that the calibration has failed. This is likely due to a lack of statistics.
+
+If no quadrants for a PMT return a "good" fit (see the instructions pdf for more info) then the fitting will fail for that PMT.
+
+If this is the case, try executing the calibration again with an extra run.
+
+Typically, the calibration needs at least two runs chained together to yield decent results.

@@ -43,7 +43,7 @@ CALIBRATION/hms_cal_calib/Output/
 CALIBRATION/hms_cal_calib/Input/
 CALIBRATION/shms_cal_calib/Output/
 CALIBRATION/shms_cal_calib/Input/
-CALIBRATION/shms_hgcer/Calibration_plots
+CALIBRATION/shms_hgcer/Calibration_plots/
 CALIBRATION/ref_times/HMS/
 CALIBRATION/ref_times/SHMS/
 PARAM/HMS/BCM/CALIB/

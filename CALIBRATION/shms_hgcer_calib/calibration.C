@@ -986,22 +986,29 @@ void calibration::Terminate()
   ofstream calibration_out;
   if(RunNumStart == RunNumEnd){
     calibration_out.open(Form("Calibration_plots/phgcer_calib_%i.param", RunNumStart), ios::out);
+    calibration_out << Form("; Calibration parameters from calibrating run %i", RunNumStart) << endl; 
   }
   else{
     calibration_out.open(Form("Calibration_plots/phgcer_calib_%i-%i.param", RunNumStart, RunNumEnd), ios::out);
+    calibration_out << Form("; Calibration parameters from calibrating runs %i-%i", RunNumStart, RunNumEnd) << endl;
   }
   if (!calibration_out.is_open()) cout << "Problem saving calibration constants, may have to update constants manually!" << endl;
 
   else{
-    calibration_out <<("; phgcer_adc_to_npe are: ")<<endl; 
+    calibration_out << ("; First guess parameters (commented by default)") << endl;
+    calibration_out << ("; phgcer_adc_to_npe = ");
     for (Int_t ipmt = 0; ipmt < 4; ipmt++){
       //calibration << Form("phgcer_adc_to_npe: PMT%i = ", 1+ipmt);
-      calibration_out << Form("1.0/%3.3f, ",calibration_mk1[ipmt]);
+      if (ipmt != 3) calibration_out << Form("1.0/%3.3f, ",calibration_mk1[ipmt]);
+      else if (ipmt == 3) calibration_out << Form("1.0/%3.3f",calibration_mk1[ipmt]);
     }
     calibration_out << ("")<<endl;
+    calibration_out << ("; Second guess parameters") << endl;
+    calibration_out << ("phgcer_adc_to_npe=");
     for (Int_t ipmt = 0; ipmt < 4; ipmt++){
       // calibration << Form("From quality control, phgcer_adc_to_npe");
-      calibration_out << Form("1./%3.3f, ",calibration_mk2[ipmt]);
+      if (ipmt != 3) calibration_out << Form("1./%3.3f, ",calibration_mk2[ipmt]);
+      else if (ipmt ==3) calibration_out << Form("1.0/%3.3f",calibration_mk2[ipmt]);
     }
     calibration_out.close();
   }

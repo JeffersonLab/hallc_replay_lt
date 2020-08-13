@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ### Stephen Kay --- University of Regina --- 23/07/20 ###
-### Reads in a list of run numbers from a text file and processes the detector ref time script for them ###
+### Reads in a list of run numbers from a text file and processes the detector time window script for them ###
 inputFile="$1"
 DEFAULTPREFIX="Full_coin_replay_Offline"
 DEFAULTROOTDIR="ROOTfilesMKJTest"
@@ -37,14 +37,9 @@ cd "$REPLAYPATH/CALIBRATION/ref_times"
 while IFS='' read -r line || [[ -n "$line" ]]; do
     runNum=$line
     if [ -f "$REPLAYPATH/ROOTfilesMKJTest/Full_coin_replay_Offline_${runNum}_-1.root" ]; then
-	eval "${REPLAYPATH}/CALIBRATION/ref_times/RefTCuts.sh ${PREFIX} ${runNum} -1"
+	eval "${REPLAYPATH}/CALIBRATION/ref_times/DetTCuts.sh ${PREFIX} ${runNum} -1"
     elif [ ! -f "$REPLAYPATH/ROOTfilesMKJTest/Full_coin_replay_Offline_${runNum}_-1.root" ]; then
 	echo "$REPLAYPATH/ROOTfilesMKJTest/Full_coin_replay_Offline_${runNum}_-1.root not found, skipping"
-	if [ ! -f "$REPLAYPATH/CALIBRATION/ref_times/Skipped_Runs_${inputFile}" ]; then
-	    echo "runNum" > "$REPLAYPATH/CALIBRATION/ref_times/Skipped_Runs"
-	elif [ -f "$REPLAYPATH/CALIBRATION/ref_times/Skipped_Runs_${inputFile}" ]; then
-	    echo "runNum" >> "$REPLAYPATH/CALIBRATION/ref_times/Skipped_Runs"
-	fi
     fi
     sleep 1
 done < "$inputFile"

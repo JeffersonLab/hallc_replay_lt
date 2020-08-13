@@ -1,12 +1,15 @@
 #!/bin/bash
 
-ROOTPREFIX=$1
+DEFAULTPREFIX="Full_coin_replay_Offline"
+DEFAULTROOTDIR="ROOTfilesMKJTest"
+ROOTPREFIX=${1:-$DEFAULTPREFIX}
 RUNNUMBER=$2
 MAXEVENTS=$3
 
 if [[ -z "$1" ]]; then
     echo "I need a replay file prefix!"
     echo "Please provide a replay file prefix as input"
+    echo "Default prefix is assumed as ${ROOTPREFIX}"
     exit 1
 fi
 
@@ -41,8 +44,11 @@ if [ ! -d "$REPLAYPATH/CALIBRATION/ref_times/Rootfiles" ]; then
     mkdir "$REPLAYPATH/CALIBRATION/ref_times/Rootfiles"
 fi
 
-root -l -b -q "run_DetTCuts.C(\"$ROOTPREFIX\", $RUNNUMBER, $MAXEVENTS)"
-sleep 5
+root -b << EOF
+.x run_DetTCuts.C("$ROOTPREFIX", $RUNNUMBER, $MAXEVENTS)
+.q 
+EOF
+sleep 1
 mv "TimeWindowHistos_Coin_Run$RUNNUMBER.root" "Rootfiles/TimeWindowHistos_Coin_Run$RUNNUMBER.root"
 mv "TimeWindowPlots_Coin_Run$RUNNUMBER.pdf" "Plots/TimeWindowPlots_Coin_Run$RUNNUMBER.pdf"
 mv "SHMSHGC_xyPlots_Coin_Run$RUNNUMBER.pdf" "Plots/SHMSHGC_xyPlots_Coin_Run$RUNNUMBER.pdf"

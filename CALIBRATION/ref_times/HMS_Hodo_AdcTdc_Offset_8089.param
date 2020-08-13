@@ -1,0 +1,2 @@
+; HMS Hodoscope AdcTdc Offset times
+hhodo_adc_tdc_offset = 176., 176., 177., 177.

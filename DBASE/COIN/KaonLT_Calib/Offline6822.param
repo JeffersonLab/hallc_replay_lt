@@ -29,11 +29,11 @@ cminch=2.54
 #include "PARAM/HMS/CAL/hcal_geom.param"
 
 ; HMS default cut parameter files
-#include "PARAM/HMS/CER/hcer_cuts_Winter18.param"
+#include "PARAM/HMS/CER/CALIB/hcer_cuts_6822.param"
 #include "PARAM/HMS/DC/hdc_cuts_Winter18.param"
-#include "PARAM/HMS/HODO/hhodo_cuts_Winter18.param"
+#include "PARAM/HMS/HODO/Calibration/hhodo_cuts_6822.param"
 #include "PARAM/HMS/AERO/haero_cuts.param"
-#include "PARAM/HMS/CAL/hcal_cuts_Winter18.param"
+#include "PARAM/HMS/CAL/CALIB/hcal_cuts_6822.param"
 
 ; HMS default calibration parameter files
 #include "PARAM/HMS/CER/hcer_calib_Winter18.param"
@@ -64,10 +64,10 @@ cminch=2.54
 ; SHMS default cut parameter files
 #include "PARAM/SHMS/NGCER/pngcer_cuts.param"
 #include "PARAM/SHMS/DC/pdc_cuts_Winter18.param"
-#include "PARAM/SHMS/HODO/phodo_cuts_Winter18.param"
-#include "PARAM/SHMS/HGCER/phgcer_cuts_Winter18.param"
-#include "PARAM/SHMS/AERO/paero_cuts_Winter18.param"
-#include "PARAM/SHMS/CAL/pcal_cuts_Winter18.param"
+#include "PARAM/SHMS/HODO/Calibration/phodo_cuts_6822.param"
+#include "PARAM/SHMS/HGCER/CALIB/phgcer_cuts_6822.param"
+#include "PARAM/SHMS/AERO/CALIB/paero_cuts_6822.param"
+#include "PARAM/SHMS/CAL/CALIB/pcal_cuts_6822.param"
 
 ; SHMS default calibration parameter files
 #include "PARAM/SHMS/NGCER/pngcer_calib.param"

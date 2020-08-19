@@ -31,7 +31,7 @@ cminch=2.54
 ; HMS default cut parameter files
 #include "PARAM/HMS/CER/CALIB/hcer_cuts_5119.param"
 #include "PARAM/HMS/DC/hdc_cuts_Autumn18.param"
-#include "PARAM/HMS/HODO/Calibration/hhodo_cuts_5143.param"
+#include "PARAM/HMS/HODO/Calibration/hhodo_cuts_5119.param"
 #include "PARAM/HMS/AERO/haero_cuts_Autumn18.param"
 #include "PARAM/HMS/CAL/CALIB/hcal_cuts_5119.param"
 
@@ -64,7 +64,7 @@ cminch=2.54
 ; SHMS default cut parameter files
 #include "PARAM/SHMS/NGCER/pngcer_cuts_Autumn18.param"
 #include "PARAM/SHMS/DC/pdc_cuts_Autumn18.param"
-#include "PARAM/SHMS/HODO/Calibration/phodo_cuts_5143.param"
+#include "PARAM/SHMS/HODO/Calibration/phodo_cuts_5119.param"
 #include "PARAM/SHMS/HGCER/CALIB/phgcer_cuts_5119.param"
 #include "PARAM/SHMS/AERO/CALIB/paero_cuts_5119.param"
 #include "PARAM/SHMS/CAL/CALIB/pcal_cuts_5119.param"

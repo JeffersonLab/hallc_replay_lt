@@ -4,7 +4,7 @@
 ### Reads in a list of run numbers from a text file and processes the detector time window script for them ###
 inputFile="$1"
 DEFAULTPREFIX="Full_coin_replay_Offline"
-DEFAULTROOTDIR="ROOTfilesMKJTest"
+DEFAULTROOTDIR="ROOTfiles"
 PREFIX=${2:-$DEFAULTPREFIX}
 ROOTDIR=${3:-$DEFAULTROOTDIR}
 ## Assume a default if not set
@@ -36,10 +36,10 @@ cd "$REPLAYPATH/CALIBRATION/ref_times"
 
 while IFS='' read -r line || [[ -n "$line" ]]; do
     runNum=$line
-    if [ -f "$REPLAYPATH/ROOTfilesMKJTest/Full_coin_replay_Offline_${runNum}_-1.root" ]; then
+    if [ -f "$REPLAYPATH/ROOTfiles/Full_coin_replay_Offline_${runNum}_-1.root" ]; then
 	eval "${REPLAYPATH}/CALIBRATION/ref_times/DetTCuts.sh ${PREFIX} ${runNum} -1"
-    elif [ ! -f "$REPLAYPATH/ROOTfilesMKJTest/Full_coin_replay_Offline_${runNum}_-1.root" ]; then
-	echo "$REPLAYPATH/ROOTfilesMKJTest/Full_coin_replay_Offline_${runNum}_-1.root not found, skipping"
+    elif [ ! -f "$REPLAYPATH/ROOTfiles/Full_coin_replay_Offline_${runNum}_-1.root" ]; then
+	echo "$REPLAYPATH/ROOTfiles/Full_coin_replay_Offline_${runNum}_-1.root not found, skipping"
     fi
     sleep 1
 done < "$inputFile"

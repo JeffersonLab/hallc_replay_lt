@@ -42,12 +42,12 @@ void run_DetTCuts(string RunPrefix = "", Int_t RunNumber = 0, Int_t MaxEvent = 0
   cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
   if(Hostname.Contains("farm")){
-    Rootpath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt/ROOTfilesMKJTest/";
+    Rootpath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt/ROOTfiles/";
     Outpath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt/OUTPUT/";
     Histopath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt/HISTOGRAMS/";
   }
   else if(Hostname.Contains("qcd")){
-    Rootpath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt/ROOTfilesMKJTest/";
+    Rootpath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt/ROOTfiles/";
     Outpath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt/OUTPUT/";
     Histopath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt/HISTOGRAMS/";
   }

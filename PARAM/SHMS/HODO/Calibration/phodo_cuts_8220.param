@@ -46,7 +46,6 @@ phodo_slop = 2.,  2.,  4.,  4.
 ;phodo_tdc_offset = 1860, 2000, 2060, 2000
 phodo_tdc_offset = 2000, 2000, 2000, 2000
 
-phodo_adc_tdc_offset = 220., 226., 220., 240.
 ;   to move the ADC pulse time after reference time subtraction to a reasonable time (ns).
 phodo_adc_tdc_offset = 220., 226., 220., 240.
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-### Stephen Kay --- University of Regina --- 15/11/19 ###
+### Stephen Kay --- University of Regina --- 02/09/20 ###
 ### Switches out SHMS HGC calibs in param file with new ones ###
 ### Reads in a list of param files to switch in ###
 inputFile="$1"
@@ -14,8 +14,7 @@ elif [[ "${HOSTNAME}" = *"cdaq"* ]]; then
 elif [[ "${HOSTNAME}" = *"phys.uregina.ca"* ]]; then
     REPLAYPATH="/home/${USER}/work/JLab/hallc_replay_lt"
 fi
-
-cd "${REPlAYPATH}/DBASE/COIN/KaonLT_Calib"
+cd "${REPLAYPATH}/DBASE/COIN/KaonLT_Calib/"
 # Read from list of param files
 while IFS='' read -r line || [[ -n "$line" ]]; do
     CalibFile=$line
@@ -32,10 +31,10 @@ while IFS='' read -r line || [[ -n "$line" ]]; do
     	    ParamRunNum=$line
     	    #echo "$ParamRunNum"
     	    # Set OfflineXXXX.param file to use new SHMS HGC calibration
-    	    # sed -i "s/phgcer_calib_Autumn18.param/Calibration\/${CalibFile}/" "Offline"$runNum".param" 
-    	    # sed -i "s/phgcer_calib_Winter18.param/Calibration\/${CalibFile}/" "Offline"$runNum".param" 
-    	    # sed -i "s/phgcer_calib_Spring19.param/Calibration\/${CalibFile}/" "Offline"$runNum".param" 
-    	    # sed -i "s/phgcer_calib_Summer19.param/Calibration\/${CalibFile}/" "Offline"$runNum".param" 
+    	    # sed -i "s/phgcer_calib_Autumn18.param/CALIB\/${CalibFile}/" "Offline"$runNum".param" 
+    	    # sed -i "s/phgcer_calib_Winter18.param/CALIB\/${CalibFile}/" "Offline"$runNum".param" 
+    	    # sed -i "s/phgcer_calib_Spring19.param/CALIB\/${CalibFile}/" "Offline"$runNum".param" 
+    	    # sed -i "s/phgcer_calib_Summer19.param/CALIB\/${CalibFile}/" "Offline"$runNum".param" 
     	done < "$RunSetFile" 
     else echo "!!! ERROR !!! - $RunSetFile not found! - !!! ERROR !!!"
     fi

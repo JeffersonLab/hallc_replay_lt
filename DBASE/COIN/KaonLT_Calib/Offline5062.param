@@ -76,6 +76,6 @@ cminch=2.54
 #include "PARAM/SHMS/HODO/phodo_calib_Autumn18.param"
 #include "PARAM/SHMS/HODO/phodo_TWcalib_Autumn18.param"
 #include "PARAM/SHMS/HODO/phodo_Vpcalib_Autumn18.param"
-#include "PARAM/SHMS/HGCER/phgcer_calib_Autumn18.param"
+#include "PARAM/SHMS/HGCER/CALIB/phgcer_calib_5090-5093.param"
 #include "PARAM/SHMS/AERO/paero_calib_Autumn18.param"
 #include "PARAM/SHMS/CAL/pcal_calib_Autumn18.param"

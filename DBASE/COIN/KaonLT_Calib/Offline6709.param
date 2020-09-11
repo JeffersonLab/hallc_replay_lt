@@ -76,6 +76,6 @@ cminch=2.54
 #include "PARAM/SHMS/HODO/phodo_calib_Winter18.param"
 #include "PARAM/SHMS/HODO/phodo_TWcalib_Winter18.param"
 #include "PARAM/SHMS/HODO/phodo_Vpcalib_Winter18.param"
-#include "PARAM/SHMS/HGCER/phgcer_calib_Winter18.param"
+#include "PARAM/SHMS/HGCER/CALIB/phgcer_calib_6690-6692.param"
 #include "PARAM/SHMS/AERO/paero_calib_Winter18.param"
 #include "PARAM/SHMS/CAL/pcal_calib_Winter18.param"

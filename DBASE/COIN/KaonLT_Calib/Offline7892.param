@@ -76,6 +76,6 @@ cminch=2.54
 #include "PARAM/SHMS/HODO/phodo_calib_Spring19.param"
 #include "PARAM/SHMS/HODO/phodo_TWcalib_Spring19.param"
 #include "PARAM/SHMS/HODO/phodo_Vpcalib_Spring19.param"
-#include "PARAM/SHMS/HGCER/phgcer_calib_Spring19.param"
+#include "PARAM/SHMS/HGCER/CALIB/phgcer_calib_7891-7894.param"
 #include "PARAM/SHMS/AERO/paero_calib_Spring19.param"
 #include "PARAM/SHMS/CAL/pcal_calib_Spring19.param"

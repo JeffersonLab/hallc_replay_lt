@@ -47,6 +47,7 @@ CALIBRATION/shms_hgcer/Calibration_plots/
 CALIBRATION/ref_times/HMS/
 CALIBRATION/ref_times/SHMS/
 PARAM/HMS/BCM/CALIB/
+PARAM/HMS/BCM/CALIB/*
 DBASE/COIN/KaonLT_Calib_MKJTest/PedDefault_0_Files/
 UTIL_BATCH/
 UTIL_KAONLT/

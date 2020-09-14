@@ -32,10 +32,10 @@ ALL_events_NO_EDTM          T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime 
 
 Decode_master ALL_events_NO_EDTM
 
-Block: CoarseTracking
+#Block: CoarseTracking
 
-HMS_TRACK_FOUND      H.dc.ntrack > 0 && ALL_HMS_events_NOEDTM
-SHMS_TRACK_FOUND     P.dc.ntrack > 0 && ALL_SHMS_events_NOEDTM
-COIN_TRACK_FOUND     P.dc.ntrack > 0 && H.dc.ntrack > 0 && ALL_COIN_events_NO_EDTM
+#HMS_TRACK_FOUND      H.dc.ntrack > 0 && ALL_HMS_events_NOEDTM
+#SHMS_TRACK_FOUND     P.dc.ntrack > 0 && ALL_SHMS_events_NOEDTM
+#COIN_TRACK_FOUND     P.dc.ntrack > 0 && H.dc.ntrack > 0 && ALL_COIN_events_NO_EDTM
 
-CoarseTracking_master COIN_TRACK_FOUND
+#CoarseTracking_master ALL_events

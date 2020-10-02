@@ -1,30 +1,27 @@
 //Main Calibration Code
 #include "DC_calib.h"
 #include "DC_calib.C"
+#include <TString.h>
 #include <iostream>
 #include <ctime>
 using namespace std;
 
-int main_calib()
+int main_calib(TString SpecFlag, string inputname, Int_t RunNum)
 {
-
+  //cout << "Provide a spectrometer flag (HMS/SHMS), a rootfille and a run number!" << endl;
+  //cout << "e.g. root -l main_calib.C(\"HMS\", \"../../ROOTFiles/Test.root\", 9001)" << endl;
   //prevent root from displaying graphs while executing
   gROOT->SetBatch(1);
 
-
   //measure execution time
   clock_t cl;
-  cl = clock();
-                                                                                                  
+  cl = clock();                                                    
                                                                                                         //pid_elec,  pid_kFALSE (no PID cuts) 
                                                                                                         // |
                                                                                                         // v
   //  DC_calib obj("HMS", "../../../ROOTfiles/hms_replay_production_all_1856_hodtrefcut1000_-1.root", 1856,-1, "pid_elec", "card");
-  //DC_calib obj("SHMS", "../../../ROOTfiles/shms_replay_production_all_2774_-1.root", 2774, -1, "pid_elec"); 
-  //  DC_calib obj("SHMS", "~/abishek/hallc_replay/ROOTfiles/shms_replay_production_all_1791_-1.root", 1791, 10000000, "pid_elec", "card");
-    DC_calib obj("SHMS", "../../../ROOTfiles/shms_coin_replay_production_all_6601_100000.root", 6601, 100000, "pid_elec", "card");                                                                                                        
-  // DC_calib obj("HMS", "../../../ROOTfiles/hms_coin_replay_production_1866_1000000.root", 1866, 1000, "pid_kFALSE");
-  
+    
+  DC_calib obj(SpecFlag, inputname, RunNum, -1, "pid_elec", "card");                                                                                           
   obj.setup_Directory();
   obj.SetPlaneNames();
   obj.GetDCLeafs();

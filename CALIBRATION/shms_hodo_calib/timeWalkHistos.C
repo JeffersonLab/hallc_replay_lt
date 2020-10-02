@@ -198,7 +198,7 @@ void generatePlots(UInt_t iplane, UInt_t iside, UInt_t ipaddle) {
   
 } // generatePlots()
 
-void timeWalkHistos(TString inputname, Int_t runNum) {
+void timeWalkHistos(TString inputname, Int_t runNum, string SPEC_flg) {  //SPEC_flg--> "shms" or "coin"
 
   // Global ROOT settings
   gStyle->SetOptFit();
@@ -215,8 +215,8 @@ void timeWalkHistos(TString inputname, Int_t runNum) {
     
   replayFile = new TFile(inputname, "READ");
   // replayFile = new TFile(Form("ROOTfiles/shms_coin_replay_production_%d_-1.root", runNum), "READ");
-   
-  outFile    = new TFile("timeWalkHistos.root", "RECREATE");
+  TString outFileName = Form("timeWalkHistos_%d.root", runNum ); // SK 13/5/19 - new .root output for each run tested                                                                                             
+  outFile    = new TFile(outFileName, "RECREATE");
   // Obtain the tree
   rawDataTree = dynamic_cast <TTree*> (replayFile->Get("T"));
 
@@ -227,12 +227,12 @@ void timeWalkHistos(TString inputname, Int_t runNum) {
   Double_t phod_2ynhits;
 
   // Acquire the trigger apparatus data
-  rawDataTree->SetBranchAddress("T.shms.pFADC_TREF_ROC2_adcPulseTimeRaw", &refAdcPulseTimeRaw);
-  rawDataTree->SetBranchAddress("T.shms.pFADC_TREF_ROC2_adcPulseAmp",     &refAdcPulseAmp);
-  rawDataTree->SetBranchAddress("T.shms.pFADC_TREF_ROC2_adcMultiplicity", &refAdcMultiplicity);
-  rawDataTree->SetBranchAddress("T.shms.pT1_tdcTimeRaw", &refT1TdcTimeRaw);
-  rawDataTree->SetBranchAddress("T.shms.pT2_tdcTimeRaw", &refT2TdcTimeRaw);
-  rawDataTree->SetBranchAddress("T.shms.pT3_tdcTimeRaw", &refT3TdcTimeRaw);
+  rawDataTree->SetBranchAddress(Form("T.%s.pFADC_TREF_ROC2_adcPulseTimeRaw", SPEC_flg.c_str()), &refAdcPulseTimeRaw);
+  rawDataTree->SetBranchAddress(Form("T.%s.pFADC_TREF_ROC2_adcPulseAmp", SPEC_flg.c_str()),     &refAdcPulseAmp);
+  rawDataTree->SetBranchAddress(Form("T.%s.pFADC_TREF_ROC2_adcMultiplicity", SPEC_flg.c_str()), &refAdcMultiplicity);
+  rawDataTree->SetBranchAddress(Form("T.%s.pT1_tdcTimeRaw", SPEC_flg.c_str()), &refT1TdcTimeRaw);
+  rawDataTree->SetBranchAddress(Form("T.%s.pT2_tdcTimeRaw", SPEC_flg.c_str()), &refT2TdcTimeRaw);
+  rawDataTree->SetBranchAddress(Form("T.%s.pT3_tdcTimeRaw", SPEC_flg.c_str()), &refT3TdcTimeRaw);
   // rawDataTree->SetBranchAddress("P.cal.etot", &calEtot);
   // rawDataTree->SetBranchAddress("P.ngcer.npeSum", &cerNpeSum);
 
@@ -466,7 +466,7 @@ void timeWalkHistos(TString inputname, Int_t runNum) {
   printf ("The Analysis Event Rate Was %.3f kHz \n", (ievent + 1) / (((float) t) / CLOCKS_PER_SEC*1000.));
 
   outFile->Write();
-  //outFile->Close();
+  outFile->Close();
 
   //return 0;
 

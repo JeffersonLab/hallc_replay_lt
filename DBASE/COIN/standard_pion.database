@@ -1,0 +1,19 @@
+### Run Period 1 - Autumn 2018 KaonLT Kinematics
+0-5334
+g_ctp_parm_filename       = "DBASE/COIN/OnlineAutumn18.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard_pion.kinematics"
+
+### Run Period 2 - Winter 2018 KaonLT Kinematics
+5335-7045
+g_ctp_parm_filename       = "DBASE/COIN/OnlineWinter18.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard_pion.kinematics"
+
+### Run Period 3 - Spring 19 KaonLT Kinematics
+7046-8357
+g_ctp_parm_filename       = "DBASE/COIN/OnlineSpring19.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard_pion.kinematics"
+
+### Run Period 4 - Summer 19 PionLT Kinematics
+8358-99999
+g_ctp_parm_filename       = "DBASE/COIN/OnlineSummer19.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"

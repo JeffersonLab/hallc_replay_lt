@@ -7,6 +7,7 @@
 #include "TVectorD.h"
 #include "TMatrixD.h"
 #include "TDecompLU.h"
+#include "TDecompSVD.h"
 #include "TMath.h"
 #include <iostream>
 #include <fstream>
@@ -34,7 +35,7 @@ using namespace std;
 class THcShowerCalib {
 
  public:
-  THcShowerCalib(string, int, int);
+  THcShowerCalib(string, int, int, int);
   THcShowerCalib();
   ~THcShowerCalib();
 
@@ -57,6 +58,7 @@ class THcShowerCalib {
  private:
 
   string fPrefix;
+  Int_t fRunNumber;
 
   Double_t fDeltaMin, fDeltaMax;   // Delta range, %.
   Double_t fBetaMin, fBetaMax;     // Beta range
@@ -103,7 +105,7 @@ class THcShowerCalib {
 
   Double_t        H_tr_tg_dp;
 
-  Double_t        H_cer_npe[2];
+  Double_t        H_cer_npeSum;
   Double_t        H_tr_beta;
 
   Double_t        H_cal_nclust;
@@ -129,7 +131,7 @@ class THcShowerCalib {
 
   TBranch* b_H_tr_tg_dp;
  
-  TBranch* b_H_cer_npe;
+  TBranch* b_H_cer_npeSum;
   TBranch* b_H_tr_beta;
 
   TBranch* b_H_cal_nclust;
@@ -155,8 +157,9 @@ THcShowerCalib::THcShowerCalib() {};
 
 //------------------------------------------------------------------------------
 
-THcShowerCalib::THcShowerCalib(string Prefix, int nstart, int nstop) {
+THcShowerCalib::THcShowerCalib(string Prefix, int RunNumber, int nstart, int nstop) {
   fPrefix = Prefix;
+  fRunNumber = RunNumber;
   fNstart = nstart;
   //  fNstop = nstop;       //defined in Init
   fNstopRequested = nstop;
@@ -211,7 +214,7 @@ void THcShowerCalib::ReadThresholds() {
     falpha0[iblk] = 0.;
   };
 
-  ifstream fin( "input.dat" );
+  ifstream fin( Form("Input/input_%d.dat", fRunNumber) );
 
   string line;
   istringstream iss;
@@ -308,8 +311,9 @@ void THcShowerCalib::Init() {
 
   gROOT->Reset();
 
-  char* fname = Form("../../ROOTfiles/%s.root",fPrefix.c_str());
-  cout << "THcShowerCalib::Init: Root file name = " << fname << endl;
+  char* fname = Form("ROOTfiles/%s_%d_%d.root",fPrefix.c_str(), fRunNumber, fNstopRequested);
+  //   char* fname = Form("kaonRoot/%s.root",fPrefix.c_str());
+ cout << "THcShowerCalib::Init: Root file name = " << fname << endl;
 
   TFile *f = new TFile(fname);
   f->GetObject("T",fTree);
@@ -320,7 +324,7 @@ void THcShowerCalib::Init() {
   fNstopRequested<0 ? fNstop = fNentries :
                       fNstop = TMath::Min(unsigned(fNstopRequested), fNentries);
   cout << "                      fNstop   = " << fNstop << endl;
-
+  //fNstop=50000;
   // Set branch addresses.
 
   fTree->SetBranchAddress("H.cal.1pr.goodNegAdcPulseInt", H_cal_1pr_aneg_p,
@@ -343,17 +347,17 @@ void THcShowerCalib::Init() {
   fTree->SetBranchAddress("H.cal.4ta.goodPosAdcPulseInt", H_cal_4ta_apos_p,
 			  &b_H_cal_4ta_apos_p);
 
-  fTree->SetBranchAddress("H.tr.n", &H_tr_n,&b_H_tr_n);
-  fTree->SetBranchAddress("H.tr.x",&H_tr_x,&b_H_tr_x);
-  fTree->SetBranchAddress("H.tr.y",&H_tr_y,&b_H_tr_y);
-  fTree->SetBranchAddress("H.tr.th",&H_tr_xp,&b_H_tr_xp);
-  fTree->SetBranchAddress("H.tr.ph",&H_tr_yp,&b_H_tr_yp);
-  fTree->SetBranchAddress("H.tr.p",&H_tr_p,&b_H_tr_p);
+  fTree->SetBranchAddress("H.dc.ntrack", &H_tr_n,&b_H_tr_n);
+  fTree->SetBranchAddress("H.gtr.x",&H_tr_x,&b_H_tr_x);
+  fTree->SetBranchAddress("H.gtr.y",&H_tr_y,&b_H_tr_y);
+  fTree->SetBranchAddress("H.gtr.th",&H_tr_xp,&b_H_tr_xp);
+  fTree->SetBranchAddress("H.gtr.ph",&H_tr_yp,&b_H_tr_yp);
+  fTree->SetBranchAddress("H.gtr.p",&H_tr_p,&b_H_tr_p);
 
-  fTree->SetBranchAddress("H.tr.tg_dp", &H_tr_tg_dp,&b_H_tr_tg_dp);
+  fTree->SetBranchAddress("H.gtr.dp", &H_tr_tg_dp,&b_H_tr_tg_dp);
  
-  fTree->SetBranchAddress("H.cer.npe", H_cer_npe,&b_H_cer_npe);
-  fTree->SetBranchAddress("H.tr.beta", &H_tr_beta,&b_H_tr_beta);
+  fTree->SetBranchAddress("H.cer.npeSum", &H_cer_npeSum,&b_H_cer_npeSum);
+  fTree->SetBranchAddress("H.hod.beta", &H_tr_beta,&b_H_tr_beta);
 
   fTree->SetBranchAddress("H.cal.nclust", &H_cal_nclust,&b_H_cal_nclust);
 
@@ -431,7 +435,7 @@ void THcShowerCalib::CalcThresholds() {
   TF1 *fit = hEunc->GetFunction("gaus");
   Double_t gmean  = fit->GetParameter(1);
   Double_t gsigma = fit->GetParameter(2);
-  fLoThr = gmean - 3.*gsigma;
+  fLoThr = gmean - 2.*gsigma;
   fHiThr = gmean + 3.*gsigma;
   cout << "CalcThreshods: fLoThr=" << fLoThr << "  fHiThr=" << fHiThr 
        << "  nev=" << nev << endl;
@@ -476,8 +480,7 @@ bool THcShowerCalib::ReadShRawTrack(THcShTrack &trk, UInt_t ientry) {
 		    H_tr_y + H_tr_yp*D_CALO_FP < YMAX ;
   if (!good_trk) return 0;
 
-  bool good_cer = H_cer_npe[0] > fCerMin ||
-                  H_cer_npe[1] > fCerMin ;
+  bool good_cer = H_cer_npeSum > fCerMin ;
   if(!good_cer) return 0;
 
   bool good_beta = H_tr_beta > fBetaMin &&
@@ -516,7 +519,16 @@ bool THcShowerCalib::ReadShRawTrack(THcShTrack &trk, UInt_t ientry) {
 
       UInt_t nb = j+1 + k*THcShTrack::fNrows;
 
-      if (adc_pos>0. || adc_neg>0.) {
+      if (k==0 && adc_pos>0. && adc_neg>0.) {
+	trk.AddHit(adc_pos, adc_neg, 0., 0., nb);
+      }
+      if (k==1 && adc_pos>0. && adc_neg>0.) {
+	trk.AddHit(adc_pos, adc_neg, 0., 0., nb);
+      }
+      if (k==2 && adc_pos>0. && adc_neg==0.) {
+	trk.AddHit(adc_pos, adc_neg, 0., 0., nb);
+      }
+      if (k==3 && adc_pos>0. && adc_neg==0.) {
 	trk.AddHit(adc_pos, adc_neg, 0., 0., nb);
       }
 
@@ -563,7 +575,7 @@ void THcShowerCalib::ComposeVMs() {
 	for (UInt_t i=0; i<trk.GetNhits(); i++) {
 
 	  THcShHit* hit = trk.GetHit(i);
-	  // hit->Print(cout);
+	  //hit->Print(cout);
 	  
 	  UInt_t nb = hit->GetBlkNumber();
 
@@ -638,13 +650,11 @@ void THcShowerCalib::ComposeVMs() {
   for (UInt_t i=0; i<THcShTrack::fNpmts; i++)
     q0out << fq0[i] << " " << i << endl;
   q0out.close();
-
   ofstream qeout;
   qeout.open("qe.deb",ios::out);
   for (UInt_t i=0; i<THcShTrack::fNpmts; i++)
     qeout << fqe[i] << " " << i << endl;
   qeout.close();
-
   ofstream Qout;
   Qout.open("Q.deb",ios::out);
   for (UInt_t i=0; i<THcShTrack::fNpmts; i++)
@@ -765,7 +775,8 @@ void THcShowerCalib::SolveAlphas() {
 
   // Declare LU decomposition method for the correlation matrix Q.
 
-  TDecompLU lu(Q);
+    TDecompLU lu(Q);
+  //  TDecompSVD lu(Q);
   Double_t d1,d2;
   lu.Det(d1,d2);
   cout << "cond:" << lu.Condition() << endl;
@@ -861,8 +872,8 @@ void THcShowerCalib::SaveAlphas() {
   //
 
   ofstream output;
-  char* fname = Form("pcal.param.%s_%d_%d", fPrefix.c_str(),
-		     fNstart, fNstopRequested);
+  char* fname = Form("hcal.param.%s_%d_%d", fPrefix.c_str(),
+		     fRunNumber, fNstopRequested);
   cout << "SaveAlphas: fname=" << fname << endl;
 
   output.open(fname,ios::out);
@@ -899,5 +910,4 @@ void THcShowerCalib::SaveAlphas() {
 
   output.close();
 }
-
 #endif

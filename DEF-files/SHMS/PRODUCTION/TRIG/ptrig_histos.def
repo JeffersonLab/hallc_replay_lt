@@ -69,7 +69,7 @@ TH1F ptrig_pFADC_TREF_ROC2_ptime_mult 'SHMS pFADC_TREF_ROC2 ADC Multiplicity; AD
 #--------------------------------------------
 
 TH1F ptrig_phgc_sum_pped     'SHMS Heavy Gas Sum FADC Pulse Pedestal; Pulse Pedestal; Number of Entries / 0.5 mV' T.shms.pHGCER_adcPed       400 0 200  T.shms.pHGCER_adcPed>0.0
-TH1F ptrig_pngc_sum_pped     'SHMS Noble Gas Sum FADC Pulse Pedestal; Pulse Pedestal; Number of Entries / 0.5 mV' T.shms.pNGCER_adcPed       400 0 200  T.shms.pNGCER_adcPed>0.0
+#TH1F ptrig_pngc_sum_pped     'SHMS Noble Gas Sum FADC Pulse Pedestal; Pulse Pedestal; Number of Entries / 0.5 mV' T.shms.pNGCER_adcPed       400 0 200  T.shms.pNGCER_adcPed>0.0
 TH1F ptrig_prshwr_sum_pped   'SHMS Preshwr Sum FADC pulse Pedestal; Pulse Pedestal; Number of Entries / 0.5 mV'    T.shms.pPSHWR_adcPed      400 0 200  T.shms.pPSHWR_adcPed>0.0
 TH1F ptrig_phgc_sum_MOD_pped 'SHMS Heavy Gas Sum FADC Pulse Pedestal; Pulse Pedestal; Number of Entries / 0.5 mV' T.shms.pHGCER_MOD_adcPed   400 0 200  T.shms.pHGCER_MOD_adcPed>0.0
 TH1F ptrig_pngc_sum_MOD_pped 'SHMS Heavy Gas Sum FADC Pulse Pedestal; Pulse Pedestal; Number of Entries / 0.5 mV' T.shms.pNGCER_MOD_adcPed   400 0 200  T.shms.pNGCER_MOD_adcPed>0.0

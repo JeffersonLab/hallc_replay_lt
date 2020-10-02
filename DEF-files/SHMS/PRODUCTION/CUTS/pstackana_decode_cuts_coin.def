@@ -1,0 +1,20 @@
+Block: Decode
+
+pcut_TRIG1         T.coin.pTRIG1_tdcTimeRaw > 0
+pcut_TRIG2         T.coin.pTRIG2_tdcTimeRaw > 0
+pcut_TRIG3         T.coin.pTRIG3_tdcTimeRaw > 0
+pcut_TRIG4         T.coin.pTRIG3_tdcTimeRaw > 0
+pcut_TRIG5         T.coin.pTRIG5_tdcTimeRaw > 0
+pcut_TRIG6         T.coin.pTRIG6_tdcTimeRaw > 0
+SHMS_Pretrig  pcut_TRIG1 || pcut_TRIG2 || pcut_TRIG3
+
+shms_trigs        SHMS_event
+pcut_edtm_accepted     T.coin.pEDTM_tdcTimeRaw != 0.0
+pcut_physics_accepted  T.coin.pEDTM_tdcTimeRaw == 0.0
+
+pcut_good_S1_time         T.coin.p1T_tdcTime > 241 && T.coin.p1T_tdcTime < 243
+pcut_good_S2X_time        T.coin.p2X_tdcTime > 180 && T.coin.p2X_tdcTime < 220
+pcut_good_S1_S2X_time     pcut_good_S1_time && pcut_good_S2X_time
+
+ALL_SHMS_NO_EDTM          ALL_SHMS_events && pcut_physics_accepted
+

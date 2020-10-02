@@ -27,7 +27,7 @@ void replay_coin_scalers (Int_t RunNumber = 0, Int_t MaxEvent = 0,Int_t FirstEve
 
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
-  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard.database");
+  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_KaonLTCalib.database");
   gHcParms->Load(gHcParms->GetString("g_ctp_database_filename"), RunNumber);
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
@@ -140,11 +140,11 @@ void replay_coin_scalers (Int_t RunNumber = 0, Int_t MaxEvent = 0,Int_t FirstEve
   // Define cuts file
   analyzer->SetCutFile("DEF-files/COIN/SCALERS/coinscaler_cuts.def");  // optional
   // File to record accounting information for cuts
-  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/COIN/SCALERS/summary_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional
+  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/SCALERS/summary_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template
   analyzer->PrintReport("TEMPLATES/COIN/SCALERS/coinscalers.template",
-  			Form("REPORT_OUTPUT/COIN/SCALERS/replay_coin_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
+  			Form("REPORT_OUTPUT/SCALERS/replay_coin_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
 
 }

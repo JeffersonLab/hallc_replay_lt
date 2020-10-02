@@ -1,0 +1,10 @@
+; Calibration constants for file HMS_Cal_Calib.root, 9 events processed
+
+hcal_pos_gain_cor=  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,
+                    -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,
+                    -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,
+                    -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,
+hcal_neg_gain_cor=  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,
+                    -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,  -nan,
+                    0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,
+                    0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,  0.00,

@@ -33,19 +33,18 @@ class calibration : public TSelector {
   TH1F          **fPulseInt;
   TH1F          **fPulseInt_poiss;
   TH1F         ***fPulseInt_quad;
-  TH2F           *fCut_everything;
-  TH1F           *fCut_enorm;
-  TH2F           *fCut_electron;
-  TH2F           *fCut_pion;
   TH1F           *fBeta_Cut;
   TH1F           *fBeta_Full;
-  TH1F           *fTiming_Cut;
   TH1F           *fTiming_Full;
   TH1F            *fTim1;
   TH1F            *fTim2;
   TH1F            *fTim3;
-  TH1F            *fTim4;  
-
+  TH1F            *fTim4;
+  TH1F            *fTim1_full;  
+  TH1F            *fTim2_full;  
+  TH1F            *fTim3_full;  
+  TH1F            *fTim4_full;  
+  
   // Declaration of histograms used in fitting/analysis
   TH1F *scaled_clone;
   TH1F *fscaled[4];
@@ -99,7 +98,7 @@ class calibration : public TSelector {
   TTreeReaderArray<Double_t> P_hgcer_xAtCer             = {fReader, "P.hgcer.xAtCer"};
   TTreeReaderArray<Double_t> P_hgcer_yAtCer             = {fReader, "P.hgcer.yAtCer"};
   
- calibration(TTree * /*tree*/ =0) : fChain(0) {fPulseInt = 0, fPulseInt_poiss = 0, fPulseInt_quad = 0, fCut_everything = 0, fCut_enorm=0, fCut_electron = 0, fCut_pion = 0, fBeta_Cut = 0, fBeta_Full = 0, fTiming_Cut = 0, fTiming_Full = 0,fTim1 =0,fTim2 =0,fTim3 = 0,fTim4 = 0,fFullRead = kFALSE, fFullShow = kFALSE, fTrack = kFALSE, fCut = kFALSE, fPions = kFALSE;}
+ calibration(TTree * /*tree*/ =0) : fChain(0) {fPulseInt = 0, fPulseInt_poiss = 0, fPulseInt_quad = 0, fBeta_Cut = 0, fBeta_Full = 0, fTiming_Full = 0,fTim1 =0, fTim1_full = 0,fTim2 =0, fTim2_full = 0, fTim3 = 0, fTim3_full = 0, fTim4 = 0, fTim4_full = 0, fFullRead = kFALSE, fFullShow = kFALSE, fTrack = kFALSE, fCut = kFALSE, fPions = kFALSE;}
   virtual ~calibration() { }
   virtual Int_t   Version() const { return 2; }
   virtual void    Begin(TTree *tree);
@@ -143,10 +142,6 @@ Double_t gauss(Double_t *x, Double_t *par)
 {
   Double_t GaussFit1 = par[0]*exp((-0.5)*(pow((x[0] - par[1]),2)/pow((par[2]),2)));
   Double_t GaussFit2 = par[3]*exp((-0.5)*(pow((x[0] - par[4]),2)/pow((par[5]),2)));
-  // I don't really get why these 3 are defined, they aren't used at all in this function - SK 24/07/20
-  // Double_t GaussFit3 = par[6]*exp((-0.5)*(pow((x[0] - par[7]),2)/pow((par[8]),2)));
-  // Double_t GaussFit4 = par[9]*exp((-0.5)*(pow((x[0] - par[10]),2)/pow((par[11]),2)));
-  // Double_t GaussFit5 = par[12]*exp((-0.5)*(pow((x[0] - par[13]),2)/pow((par[14]),2)));
   return GaussFit1 + GaussFit2;
 }
  

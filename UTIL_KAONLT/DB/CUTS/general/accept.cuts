@@ -3,3 +3,6 @@ delta = {"H_gtr_dp" : ((H_gtr_dp > accept.H_del_low) & (H_gtr_dp < accept.H_del_
 # xpfp,ypfp
 h_pfp = {"H_gtr_th" : ((H_gtr_xp > accept.H_xpfp_low) & (H_gtr_xp < accept.H_xpfp_high))}, {"H_gtr_ph" : ((H_gtr_yp > accept.H_ypfp_low) & (H_gtr_yp < accept.H_ypfp_high))}
 p_pfp = {"P_gtr_th" : ((P_gtr_xp > accept.P_xpfp_low) & (P_gtr_xp < accept.P_xpfp_high))}, {"P_gtr_ph" : ((P_gtr_yp > accept.P_ypfp_low) & (P_gtr_yp < accept.P_ypfp_high))}
+# start time
+h_starttime = {"H_hod_goodstarttime" : (H_hod_goodstarttime == accept.H_starttime)}
+p_starttime = {"P_hod_goodstarttime" : (P_hod_goodstarttime == accept.P_starttime)}

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-06-16 17:46:01 trottar"
+# Time-stamp: "2020-11-02 23:25:30 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -37,8 +37,9 @@ elif ("trottar" in HOST[1]):
 print("Running as %s on %s, hallc_replay_lt path assumed as %s" % (USER[1], HOST[1], REPLAYPATH))
 
 filename = "%s/UTIL_KAONLT/scripts/luminosity/OUTPUTS/lumi_data.csv" % REPLAYPATH
-rootName = "%s/UTIL_KAONLT/ROOTfiles/lumi_coin_offline_%s_%s.root" % (REPLAYPATH,runNum,MaxEvent)
-report = "/u/group/c-kaonlt/USERS/%s/kaonlt/REPORT_OUTPUT/lumi_coin_offline_%s_%s.report" % (USER[1],runNum,MaxEvent)
+rootName = "%s/UTIL_KAONLT/ROOTfiles/coin_replay_Full_Lumi_%s_%s.root" % (REPLAYPATH,runNum,MaxEvent)
+# report = "/u/group/c-kaonlt/USERS/%s/kaonlt/REPORT_OUTPUT/coin_replay_Full_Lumi_%s_%s.report" % (USER[1],runNum,MaxEvent)
+report = "%s/UTIL_KAONLT/REPORT_OUTPUT/replay_coin_Lumi_%s_%s.report" % (REPLAYPATH,runNum,MaxEvent)
 
 thres_curr = 2.5
 
@@ -95,6 +96,12 @@ H_BCM2_scalerCharge = s_tree.array("H.BCM2.scalerCharge")
 H_BCM4B_scalerCharge = s_tree.array("H.BCM4B.scalerCharge")
 H_BCM1_scalerCharge = s_tree.array("H.BCM1.scalerCharge")
 H_BCM4C_scalerCharge = s_tree.array("H.BCM4C.scalerCharge")
+
+H_BCM4A_scalerCurrent = s_tree.array("H.BCM4A.scalerCurrent")
+H_BCM2_scalerCurrent = s_tree.array("H.BCM2.scalerCurrent")
+H_BCM4B_scalerCurrent = s_tree.array("H.BCM4B.scalerCurrent")
+H_BCM1_scalerCurrent = s_tree.array("H.BCM1.scalerCurrent")
+H_BCM4C_scalerCurrent = s_tree.array("H.BCM4C.scalerCurrent")
 
 H_1Mhz_scalerTime = s_tree.array("H.1MHz.scalerTime")
 
@@ -156,6 +163,9 @@ def scaler(runNum, PS1, PS3, thres_curr):
     bcm_value = [H_BCM1_scalerCharge, H_BCM2_scalerCharge,
                  H_BCM4A_scalerCharge, H_BCM4B_scalerCharge, H_BCM4C_scalerCharge]
 
+    current = [H_BCM1_scalerCurrent, H_BCM2_scalerCurrent,
+                 H_BCM4A_scalerCurrent, H_BCM4B_scalerCurrent, H_BCM4C_scalerCurrent]
+
     trig_value = [H_hTRIG1_scaler, H_hTRIG2_scaler, H_hTRIG3_scaler,
                   H_hTRIG4_scaler, H_hTRIG5_scaler, H_hTRIG6_scaler]
 
@@ -186,7 +196,6 @@ def scaler(runNum, PS1, PS3, thres_curr):
     previous_time = [0]*NBCM
     current_I = 0
     current_time = 0
-    Current = 0
 
     # To determine computer livetime
     name = [0]*NTRIG
@@ -225,61 +234,58 @@ def scaler(runNum, PS1, PS3, thres_curr):
         current_I = 0
         for i, evt in enumerate(H_1Mhz_scalerTime):
             if (evt != previous_time[ibcm]):
-                current_I = (
-                    bcm_value[ibcm][i] - previous_charge[ibcm])/(evt - previous_time[ibcm])
-            if (current_I > thres_curr):
-                charge_sum[ibcm] += (bcm_value[ibcm][i] -
-                                     previous_charge[ibcm])
+                current_I = (bcm_value[ibcm][i] -
+                             previous_charge[ibcm])/(evt - previous_time[ibcm])
+                # current_I = current[ibcm][i]
+                # print("\n\ncurrent_I",current_I,"\n\n")
+            if ((current_I-thres_curr < current_I < current_I+thres_curr )):
+                charge_sum[ibcm] += (bcm_value[ibcm][i] - previous_charge[ibcm])
                 time_sum[ibcm] += (evt - previous_time[ibcm])
-            if (ibcm == 3 and (current_I > thres_curr)):
-                EDTM_current = (EDTM_value - previous_EDTM)
+            if (ibcm == 2 and (current_I-thres_curr < current_I < current_I+thres_curr )):
+                print("\n\ncurrent_I",current_I,"\n\n")
+                EDTM_current = (EDTM_value[i] - previous_EDTM)
                 EDTM_sum += EDTM_current
-                acctrig_sum += ((acctrig_value - EDTM_current) -
-                                previous_acctrig)
+                acctrig_sum += ((acctrig_value[i] - EDTM_current) - previous_acctrig)
                 for itrig in range(0, NTRIG):
-                    trig_sum[itrig] += (trig_value[itrig] -
-                                        previous_trig[itrig])
+                    trig_sum[itrig] += (trig_value[itrig][i] - previous_trig[itrig])
                 for iPRE in range(0, NPRE):
-                    PRE_sum[iPRE] += (PRE_value[iPRE] - previous_PRE[iPRE])
-                    SHMS_PRE_sum[iPRE] += (SHMS_PRE_value[iPRE] -
-                                           SHMS_previous_PRE[iPRE])
+                    PRE_sum[iPRE] += (PRE_value[iPRE][i] - previous_PRE[iPRE])
+                    SHMS_PRE_sum[iPRE] += (SHMS_PRE_value[iPRE][i] - SHMS_previous_PRE[iPRE])
                 for iRATE in range(0, NRATE):
-                    rate_sum[iRATE] += (rate_value[iRATE] -
-                                        previous_rate[iRATE])
+                    rate_sum[iRATE] += (rate_value[iRATE][i] - previous_rate[iRATE])
                 for iRATE in range(0, SHMSNRATE):
-                    SHMS_rate_sum[iRATE] += (SHMS_rate_value[iRATE] -
-                                             SHMS_previous_rate[iRATE])
-                previous_acctrig = (acctrig_value - EDTM_current)
-                previous_EDTM = EDTM_value
+                    SHMS_rate_sum[iRATE] += (SHMS_rate_value[iRATE][i] - SHMS_previous_rate[iRATE])
+                previous_acctrig = (acctrig_value[i] - EDTM_current)
+                previous_EDTM = EDTM_value[i]
                 for itrig in range(0, NTRIG):
-                    previous_trig[itrig] = trig_value[itrig]
+                    previous_trig[itrig] = trig_value[itrig][i]
                 for iPRE in range(0, NPRE):
-                    previous_PRE[iPRE] = PRE_value[iPRE]
-                    SHMS_previous_PRE[iPRE] = SHMS_PRE_value[iPRE]
+                    previous_PRE[iPRE] = PRE_value[iPRE][i]
+                    SHMS_previous_PRE[iPRE] = SHMS_PRE_value[iPRE][i]
                 for iRATE in range(0, NRATE):
-                    previous_rate[iRATE] = rate_value[iRATE]
+                    previous_rate[iRATE] = rate_value[iRATE][i]
                 for iRATE in range(0, SHMSNRATE):
-                    SHMS_previous_rate[iRATE] = SHMS_rate_value[iRATE]
-        time_total += (evt - previous_time[ibcm])
-        previous_time[ibcm] = evt
-        previous_charge[ibcm] = bcm_value[ibcm][i]
+                    SHMS_previous_rate[iRATE] = SHMS_rate_value[iRATE][i]
+                time_total += (evt - previous_time[ibcm])
+                previous_time[ibcm] = evt
+                previous_charge[ibcm] = bcm_value[ibcm][i]
 
     if PS1 == 0 :
         scalers = {
             "run number" : runNum,
             "ps1" : PS1,
             "ps3" : PS3,
-            "time": time_sum[3],
-            "charge": charge_sum[3],
-            "TRIG1_scaler": sum(trig_sum[0]),
-            "TRIG3_scaler": sum(trig_sum[2]),
-            "CPULT_scaler": 1-sum(acctrig_sum)/(sum(trig_sum[2])/PS3),
-            "CPULT_scaler_uncern": (sum(acctrig_sum)/((sum(trig_sum[2])/PS3)))*np.sqrt((1/(sum(trig_sum[2])/PS3))+(1/sum(acctrig_sum))),
-            "HMS_eLT": 1 - ((6/5)*(sum(PRE_sum[1])-sum(PRE_sum[2]))/(sum(PRE_sum[1]))),
-            "HMS_eLT_uncern": (sum(PRE_sum[1])-sum(PRE_sum[2]))/(sum(PRE_sum[1]))*np.sqrt((np.sqrt(sum(PRE_sum[1])) + np.sqrt(sum(PRE_sum[2])))/(sum(PRE_sum[1]) - sum(PRE_sum[2])) + (np.sqrt(sum(PRE_sum[1]))/sum(PRE_sum[1]))),
+            "time": time_sum[1],
+            "charge": charge_sum[1],
+            "TRIG1_scaler": trig_sum[0],
+            "TRIG3_scaler": trig_sum[2],
+            "CPULT_scaler": 1-acctrig_sum/(trig_sum[2]/PS3),
+            "CPULT_scaler_uncern": (acctrig_sum/((trig_sum[2]/PS3)))*np.sqrt((1/(trig_sum[2]/PS3))+(1/acctrig_sum)),
+            "HMS_eLT": 1 - ((6/5)*(PRE_sum[1]-PRE_sum[2])/(PRE_sum[1])),
+            "HMS_eLT_uncern": (PRE_sum[1]-PRE_sum[2])/(PRE_sum[1])*np.sqrt((np.sqrt(PRE_sum[1]) + np.sqrt(PRE_sum[2]))/(PRE_sum[1] - PRE_sum[2]) + (np.sqrt(PRE_sum[1])/PRE_sum[1])),
             "SHMS_eLT": 0,
             "SHMS_eLT_uncern": 0,
-            "sent_edtm": sum(EDTM_sum)
+            "sent_edtm": EDTM_sum
 
         }
     elif PS3==0 :
@@ -287,17 +293,17 @@ def scaler(runNum, PS1, PS3, thres_curr):
             "run number" : runNum,
             "ps1" : PS1,
             "ps3" : PS3,
-            "time": time_sum[3],
-            "charge": charge_sum[3],
-            "TRIG1_scaler": sum(trig_sum[0]),
-            "TRIG3_scaler": sum(trig_sum[2]),
-            "CPULT_scaler": 1-sum(acctrig_sum)/((sum(trig_sum[0])/PS1)),
-            "CPULT_scaler_uncern": (sum(acctrig_sum)/((sum(trig_sum[0])/PS1))*np.sqrt((1/(sum(trig_sum[0])/PS1)))+(1/sum(acctrig_sum))),
+            "time": time_sum[1],
+            "charge": charge_sum[1],
+            "TRIG1_scaler": trig_sum[0],
+            "TRIG3_scaler": trig_sum[2],
+            "CPULT_scaler": 1-acctrig_sum/((trig_sum[0]/PS1)),
+            "CPULT_scaler_uncern": (acctrig_sum/((trig_sum[0]/PS1))*np.sqrt((1/(trig_sum[0]/PS1)))+(1/acctrig_sum)),
             "HMS_eLT": 0,
             "HMS_eLT_uncern": 0,
-            "SHMS_eLT": 1 - ((6/5)*(sum(SHMS_PRE_sum[1])-sum(SHMS_PRE_sum[2]))/(sum(SHMS_PRE_sum[1]))),
-            "SHMS_eLT_uncern": (sum(SHMS_PRE_sum[1])-sum(SHMS_PRE_sum[2]))/(sum(SHMS_PRE_sum[1]))*np.sqrt((np.sqrt(sum(SHMS_PRE_sum[1])) + np.sqrt(sum(SHMS_PRE_sum[2])))/(sum(SHMS_PRE_sum[1]) - sum(SHMS_PRE_sum[2])) + (np.sqrt(sum(SHMS_PRE_sum[1]))/sum(SHMS_PRE_sum[1]))),
-            "sent_edtm": sum(EDTM_sum)
+            "SHMS_eLT": 1 - ((6/5)*(SHMS_PRE_sum[1]-SHMS_PRE_sum[2])/(SHMS_PRE_sum[1])),
+            "SHMS_eLT_uncern": (SHMS_PRE_sum[1]-SHMS_PRE_sum[2])/(SHMS_PRE_sum[1])*np.sqrt((np.sqrt(SHMS_PRE_sum[1]) + np.sqrt(SHMS_PRE_sum[2]))/(SHMS_PRE_sum[1] - SHMS_PRE_sum[2]) + (np.sqrt(SHMS_PRE_sum[1])/SHMS_PRE_sum[1])),
+            "sent_edtm": EDTM_sum
 
         }
 
@@ -306,17 +312,17 @@ def scaler(runNum, PS1, PS3, thres_curr):
             "run number" : runNum,
             "ps1" : PS1,
             "ps3" : PS3,
-            "time": time_sum[3],
-            "charge": charge_sum[3],
-            "TRIG1_scaler": sum(trig_sum[0]),
-            "TRIG3_scaler": sum(trig_sum[2]),
-            "CPULT_scaler": 1-sum(acctrig_sum)/((sum(trig_sum[0])/PS1) + (sum(trig_sum[2])/PS3)),
-            "CPULT_scaler_uncern": (sum(acctrig_sum)/((sum(trig_sum[0])/PS1) + (sum(trig_sum[2])/PS3)))*np.sqrt((1/(sum(trig_sum[0])/PS1))+(1/(sum(trig_sum[2])/PS3))+(1/sum(acctrig_sum))),
-            "HMS_eLT": 1 - ((6/5)*(sum(PRE_sum[1])-sum(PRE_sum[2]))/(sum(PRE_sum[1]))),
-            "HMS_eLT_uncern": (sum(PRE_sum[1])-sum(PRE_sum[2]))/(sum(PRE_sum[1]))*np.sqrt((np.sqrt(sum(PRE_sum[1])) + np.sqrt(sum(PRE_sum[2])))/(sum(PRE_sum[1]) - sum(PRE_sum[2])) + (np.sqrt(sum(PRE_sum[1]))/sum(PRE_sum[1]))),
-            "SHMS_eLT": 1 - ((6/5)*(sum(SHMS_PRE_sum[1])-sum(SHMS_PRE_sum[2]))/(sum(SHMS_PRE_sum[1]))),
-            "SHMS_eLT_uncern": (sum(SHMS_PRE_sum[1])-sum(SHMS_PRE_sum[2]))/(sum(SHMS_PRE_sum[1]))*np.sqrt((np.sqrt(sum(SHMS_PRE_sum[1])) + np.sqrt(sum(SHMS_PRE_sum[2])))/(sum(SHMS_PRE_sum[1]) - sum(SHMS_PRE_sum[2])) + (np.sqrt(sum(SHMS_PRE_sum[1]))/sum(SHMS_PRE_sum[1]))),
-            "sent_edtm": sum(EDTM_sum)
+            "time": time_sum[1],
+            "charge": charge_sum[1],
+            "TRIG1_scaler": trig_sum[0],
+            "TRIG3_scaler": trig_sum[2],
+            "CPULT_scaler": 1-acctrig_sum/((trig_sum[0]/PS1) + (trig_sum[2]/PS3)),
+            "CPULT_scaler_uncern": (acctrig_sum/((trig_sum[0]/PS1) + (trig_sum[2]/PS3)))*np.sqrt((1/(trig_sum[0]/PS1))+(1/(trig_sum[2]/PS3))+(1/acctrig_sum)),
+            "HMS_eLT": 1 - ((6/5)*(PRE_sum[1]-PRE_sum[2])/(PRE_sum[1])),
+            "HMS_eLT_uncern": (PRE_sum[1]-PRE_sum[2])/(PRE_sum[1])*np.sqrt((np.sqrt(PRE_sum[1]) + np.sqrt(PRE_sum[2]))/(PRE_sum[1] - PRE_sum[2]) + (np.sqrt(PRE_sum[1])/PRE_sum[1])),
+            "SHMS_eLT": 1 - ((6/5)*(SHMS_PRE_sum[1]-SHMS_PRE_sum[2])/(SHMS_PRE_sum[1])),
+            "SHMS_eLT_uncern": (SHMS_PRE_sum[1]-SHMS_PRE_sum[2])/(SHMS_PRE_sum[1])*np.sqrt((np.sqrt(SHMS_PRE_sum[1]) + np.sqrt(SHMS_PRE_sum[2]))/(SHMS_PRE_sum[1] - SHMS_PRE_sum[2]) + (np.sqrt(SHMS_PRE_sum[1])/SHMS_PRE_sum[1])),
+            "sent_edtm": EDTM_sum
             
         }
 
@@ -331,7 +337,7 @@ def scaler(runNum, PS1, PS3, thres_curr):
     print("\n\n")
 
     print("L1ACC counts: %.0f, \n%s Prescaled Pretrigger Counts: %.0f \n%s Prescaled Pretrigger Counts: %.0f \nComputer Livetime: %f +/- %f" %
-          (sum(acctrig_sum), trig_name[0], scalers["TRIG1_scaler"], trig_name[2], scalers["TRIG3_scaler"], scalers["CPULT_scaler"], scalers["CPULT_scaler_uncern"]))
+          (acctrig_sum, trig_name[0], scalers["TRIG1_scaler"], trig_name[2], scalers["TRIG3_scaler"], scalers["CPULT_scaler"], scalers["CPULT_scaler_uncern"]))
 
     print("HMS Electronic livetime: %f +/- %f" %
           (scalers["HMS_eLT"], scalers["HMS_eLT_uncern"]))
@@ -361,6 +367,7 @@ H_tr_chi2 = tree.array("H.tr.chi2")
 H_tr_ndof = tree.array("H.tr.ndof")
 H_hod_goodscinhit = tree.array("H.hod.goodscinhit")
 H_hod_betanotrack = tree.array("H.hod.betanotrack")
+H_hod_goodstarttime = tree.array("H.hod.goodstarttime")
 H_dc_ntrack = tree.array("H.dc.ntrack")
 
 H_dc_1x1_nhit = tree.array("H.dc.1x1.nhit")
@@ -376,6 +383,7 @@ H_dc_2v1_nhit = tree.array("H.dc.2v1.nhit")
 H_dc_2x2_nhit = tree.array("H.dc.2x2.nhit")
 H_dc_2v2_nhit = tree.array("H.dc.2v2.nhit")
 
+W = tree.array("H.kin.primary.W")
 P_cal_etotnorm = tree.array("P.cal.etotnorm")
 P_hgcer_npeSum = tree.array("P.hgcer.npeSum")
 P_aero_npeSum = tree.array("P.aero.npeSum")
@@ -387,6 +395,7 @@ P_tr_chi2 = tree.array("P.tr.chi2")
 P_tr_ndof = tree.array("P.tr.ndof")
 P_hod_goodscinhit = tree.array("P.hod.goodscinhit")
 P_hod_betanotrack = tree.array("P.hod.betanotrack")
+P_hod_goodstarttime = tree.array("P.hod.goodstarttime")
 P_dc_ntrack = tree.array("P.dc.ntrack")
 
 P_dc_1x1_nhit = tree.array("P.dc.1x1.nhit")
@@ -402,7 +411,8 @@ P_dc_2v1_nhit = tree.array("P.dc.2v1.nhit")
 P_dc_2x2_nhit = tree.array("P.dc.2x2.nhit")
 P_dc_2v2_nhit = tree.array("P.dc.2v2.nhit")
 
-H_bcm_bcm4b_AvgCurrent = tree.array("H.bcm.bcm4b.AvgCurrent")
+# H_bcm_bcm4b_AvgCurrent = tree.array("H.bcm.bcm4b.AvgCurrent")
+H_bcm_bcm4b_AvgCurrent = np.full(len(W),np.average(H_BCM4C_scalerCharge))
 
 T_coin_pTRIG1_ROC1_tdcTime = tree.array("T.coin.pTRIG1_ROC1_tdcTime")
 T_coin_pTRIG3_ROC1_tdcTime = tree.array("T.coin.pTRIG3_ROC1_tdcTime")
@@ -489,7 +499,7 @@ def analysis(PS1, PS3, thres_curr):
              if bcm > thres_curr             
              if x != 0.0]
     TRIG3 = [x
-             for x,bcm in zip(T_coin_pTRIG3_ROC2_tdcTime,bcm_after)
+             for x,bcm in zip(T_coin_pTRIG3_ROC1_tdcTime,bcm_after)
              if bcm > thres_curr
              if x !=0.0]
     TRIG5 = [x
@@ -564,7 +574,7 @@ def analysis(PS1, PS3, thres_curr):
                 if (evt == 2)]
 
     TRIG3_cut = [ x
-                  for (x, evt, bcm ) in zip(T_coin_pTRIG3_ROC2_tdcTime, EvtType, bcm_after)
+                  for (x, evt, bcm ) in zip(T_coin_pTRIG3_ROC1_tdcTime, EvtType, bcm_after)
                   if bcm > thres_curr
                   if evt == 2]
 
@@ -627,14 +637,20 @@ def analysis(PS1, PS3, thres_curr):
     
     # h_ecut_lumi_eff
     h_ecut_lumi_eff = c.add_cut(H_cal_etotnorm,"h_ecut_lumi_eff")
+
+    # goodscinhit cut
+    h_ecuts_goodscinhit = c.add_cut(H_hod_goodscinhit,"h_ecut_lumi_eff")
+    p_ecuts_goodscinhit = c.add_cut(P_hod_goodscinhit,"h_ecut_lumi_eff")
                                                         
-    if PS1 == 0:
+    if PS1 == -1 or PS1 == 0:
         track_info = {
             
-            "HMS_evts" : len(h_ecut_lumi_eff),
-            "HMS_evts_uncern" : math.sqrt(len(h_ecut_lumi_eff)),
-            "SHMS_evts" : 0,
-            "SHMS_evts_uncern" : 0,
+            "HMS_evts_scalar" : len(h_ecut_lumi_eff),
+            "HMS_evts_scalar_uncern" : math.sqrt(len(h_ecut_lumi_eff)),
+            "SHMS_evts_scalar" : 0,
+            "SHMS_evts_scalar_uncern" : 0,
+            "h_int_goodscin_evts" : scipy.integrate.simps(h_ecuts_goodscinhit),
+            "p_int_goodscin_evts" : scipy.integrate.simps(p_ecuts_goodscinhit),
             "TRIG1_cut" : len(TRIG1_cut),
             "TRIG3_cut" : len(TRIG3_cut),
             "HMS_track" : len(h_track_lumi_after)/len(h_track_lumi_before),
@@ -651,16 +667,19 @@ def analysis(PS1, PS3, thres_curr):
             "Ktrack_uncern" : 0,
             "ptrack" : 0,
             "ptrack_uncern" : 0,
-            "accp_edtm" : (scipy.integrate.simps(SHMS_EDTM) + scipy.integrate.simps(HMS_EDTM)),
+            "accp_edtm" : (scipy.integrate.simps(HMS_EDTM)),
             
         }
-    elif PS3 == 0:
+    elif PS3 == -1 or PS3 == 0:
         track_info = {
             
-            "HMS_evts" : 0,
-            "HMS_evts_uncern" : 0,
-            "SHMS_evts" : len(p_ecut_lumi_eff),
-            "SHMS_evts_uncern" : math.sqrt(len(p_ecut_lumi_eff)),
+            "HMS_evts_scalar" : 0,
+            "HMS_evts_scalar_uncern" : 0,
+            "SHMS_evts_scalar" : len(p_ecut_lumi_eff),
+            "SHMS_evts_scalar_uncern" : math.sqrt(len(p_ecut_lumi_eff)),
+            "intW_evts" : scipy.integrate.simps(h_ecut_W),
+            "h_int_goodscin_evts" : scipy.integrate.simps(h_ecuts_goodscinhit),
+            "p_int_goodscin_evts" : scipy.integrate.simps(p_ecuts_goodscinhit),
             "TRIG1_cut" : len(TRIG1_cut),
             "TRIG3_cut" : len(TRIG3_cut),
             "HMS_track" : 0,
@@ -677,16 +696,18 @@ def analysis(PS1, PS3, thres_curr):
             "Ktrack_uncern" : (len(p_ktrack_lumi_after)/len(p_ktrack_lumi_before))*math.sqrt((1/len(p_ktrack_lumi_after)) + (1/len(p_ktrack_lumi_before))),
             "ptrack" : len(p_ptrack_lumi_after)/len(p_ptrack_lumi_before),
             "ptrack_uncern" : (len(p_ptrack_lumi_after)/len(p_ptrack_lumi_before))*math.sqrt((1/len(p_ptrack_lumi_after)) + (1/len(p_ptrack_lumi_before))),
-            "accp_edtm" : (scipy.integrate.simps(SHMS_EDTM) + scipy.integrate.simps(HMS_EDTM)),
+            "accp_edtm" : (scipy.integrate.simps(SHMS_EDTM)),
 
         }
     else:
         track_info = {
             
-            "HMS_evts" : len(h_ecut_lumi_eff),
-            "HMS_evts_uncern" : math.sqrt(len(h_ecut_lumi_eff)),
-            "SHMS_evts" : len(p_ecut_lumi_eff),
-            "SHMS_evts_uncern" : math.sqrt(len(p_ecut_lumi_eff)),
+            "HMS_evts_scalar" : len(h_ecut_lumi_eff),
+            "HMS_evts_scalar_uncern" : math.sqrt(len(h_ecut_lumi_eff)),
+            "SHMS_evts_scalar" : len(p_ecut_lumi_eff),
+            "SHMS_evts_scalar_uncern" : math.sqrt(len(p_ecut_lumi_eff)),
+            "h_int_goodscin_evts" : scipy.integrate.simps(h_ecuts_goodscinhit),
+            "p_int_goodscin_evts" : scipy.integrate.simps(p_ecuts_goodscinhit),
             "TRIG1_cut" : len(TRIG1_cut),
             "TRIG3_cut" : len(TRIG3_cut),
             "HMS_track" : len(h_track_lumi_after)/len(h_track_lumi_before),

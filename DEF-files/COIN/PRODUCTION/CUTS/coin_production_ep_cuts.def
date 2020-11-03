@@ -3,51 +3,51 @@
 
 Block: RawDecode
 
-Pedestal_event       g.evtyp == 99
-SHMS_event           g.evtyp == 1
-HMS_event            g.evtyp == 2
-BOTH_SINGLES_event   g.evtyp == 3
-COIN_ONLY_event      g.evtyp == 4
-SHMS_COIN_event      g.evtyp == 5
-HMS_COIN_event       g.evtyp == 6 
-COIN_ALL_event       g.evtyp == 7
-ALL_events           SHMS_event || HMS_event || BOTH_SINGLES_event || COIN_ONLY_event || COIN_ALL_event
+Pedestal_event         g.evtyp == 99
+SHMS_event             g.evtyp == 1
+HMS_event              g.evtyp == 2
+BOTH_SINGLES_event     g.evtyp == 3
+COIN_ONLY_event        g.evtyp == 4
+SHMS_COIN_event        g.evtyp == 5
+HMS_COIN_event         g.evtyp == 6 
+COIN_ALL_event         g.evtyp == 7
+ALL_COIN_events        g.evtyp >= 4 && g.evtyp <= 7 
+ALL_events             g.evtyp >= 1 && g.evtyp <= 7 
 
-RawDecode_master  ALL_events
+ALL_HMS_events       HMS_event || COIN_ONLY_event || HMS_COIN_event  || COIN_ALL_event
+ALL_SHMS_events     SHMS_event || COIN_ONLY_event || SHMS_COIN_event || COIN_ALL_event
+
+RawDecode_master ALL_events
 
 Block: Decode
 
-goodctime         ALL_events        #LOOSE CUT AROUND COINTIME PEAK (3 beam buckets)
-tightctime        ALL_events        #TIGHT CUT AROUND COINTIME PEAK (1 beam buckets)
-ranctime          ALL_events        #CUT AWAY FROM COINTIME PEAK (4 beam buckets)
+pTRIG1_ROC2     T.coin.pTRIG1_ROC2_tdcTimeRaw > 0
+pTRIG2_ROC2     T.coin.pTRIG2_ROC2_tdcTimeRaw > 0
+pTRIG3_ROC2     T.coin.pTRIG3_ROC2_tdcTimeRaw > 0
+pTRIG4_ROC2     T.coin.pTRIG4_ROC2_tdcTimeRaw > 0
+pTRIG5_ROC2     T.coin.pTRIG5_ROC2_tdcTimeRaw > 0
+pTRIG6_ROC2	T.coin.pTRIG6_ROC2_tdcTimeRaw > 0
 
-ALL_COIN_NO_EDTM  T.coin.hEDTM_tdcTime==0.0&&T.coin.pEDTM_tdcTime==0.0&&ALL_events
+ALL_HMS_events_NOEDTM       T.coin.hEDTM_tdcTime == 0.0 && ALL_HMS_events
+ALL_SHMS_events_NOEDTM      T.coin.pEDTM_tdcTime == 0.0 && ALL_SHMS_events
+ALL_COIN_events_NO_EDTM     T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime == 0.0 && ALL_COIN_events
+ALL_events_NO_EDTM          T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime == 0.0 && ALL_events
 
+Decode_master ALL_events_NO_EDTM
 
-Decode_master     ALL_COIN_NO_EDTM
+#Block: CoarseTracking
 
-Block: CoarseTracking
-CoarseTracking_master ALL_COIN_NO_EDTM
+#HMS_TRACK_FOUND      H.dc.ntrack > 0 && ALL_HMS_events_NOEDTM
+#SHMS_TRACK_FOUND     P.dc.ntrack > 0 && ALL_SHMS_events_NOEDTM
+#COIN_TRACK_FOUND     P.dc.ntrack > 0 && H.dc.ntrack > 0 && ALL_COIN_events_NO_EDTM
 
-Block: CoarseReconstruct
-CoarseReconstruct_master ALL_COIN_NO_EDTM
+#CoarseTracking_master COIN_TRACK_FOUND
 
-Block: Tracking
-Tracking_master  ALL_COIN_NO_EDTM
+#Block: Physics       
+#DELTA_SHMS           P.gtr.dp>-15.5&&P.gtr.dp<25.
+#DELTA_HMS            H.gtr.dp>-10&&H.gtr.dp<10.
+#HMS_ELEC             H.cal.etotnorm>.35&&H.cer.npeSum>1.2
+#GOOD_EVENT           COIN_TRACK_FOUND&&DELTA_SHMS&&DELTA_HMS&&HMS_ELEC
 
-Block: Reconstruct
-Reconstruct_master ALL_COIN_NO_EDTM
+#Physics_master COIN_TRACK_FOUND
 
-hcleantrack        H.gtr.index > -1
-pcleantrack        P.gtr.index > -1
-ccleantrack        hcleantrack && pcleantrack
-
-coincut            ccleantrack && goodctime
-tight_coin         ccleantrack && tightctime
-ran_coincut        ccleantrack && ranctime
-
-e_cut_cal          P.cal.etottracknorm > 0.6 && P.cal.etottracknorm < 2.0
-e_cut_cer          P.hgcer.npeSum > 5.0
-select_e_cut       e_cut_cal && e_cut_cer
-betacut_proton     H.gtr.beta > 0.6 && H.gtr.beta < 0.8
-coincut_ep         ccleantrack && select_e_cut && betacut_proton

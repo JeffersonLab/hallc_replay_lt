@@ -99,18 +99,6 @@ import time, math, sys, subprocess
 import gc
 gc.collect()
 
-# # Add this to all files for more dynamic pathing
-# USER = subprocess.getstatusoutput("whoami") # Grab user info for file finding
-# HOST = subprocess.getstatusoutput("hostname")
-
-# if ("farm" in HOST[1]):
-#     REPLAYPATH = "/group/c-kaonlt/USERS/%s/hallc_replay_lt" % USER[1]
-# elif ("lark" in HOST[1]):
-#     REPLAYPATH = "/home/%s/work/JLab/hallc_replay_lt" % USER[1]
-# elif ("trottar" in HOST[1]):
-#     REPLAYPATH = "/home/trottar/Analysis/hallc_replay_lt"
-
-
 '''
 When calling kaonlt package, you may define a dictionary in the script. This dictionary will contain
 the cuts of interest (defined in a CUTS directory).  These cuts are read in through the read_dict()
@@ -220,7 +208,8 @@ class pyPlot(pyDict):
 
     def cut_RF(self,runNum,MaxEvent):
         TimingCutFile = self.REPLAYPATH+'/UTIL_KAONLT/DB/PARAM/Timing_Parameters.csv'
-        rootName = "/lustre19/expphy/volatile/hallc/c-kaonlt/sjdkay/ROOTfiles/Proton_Analysis/Pass3/Proton_coin_replay_production_%s_%s.root" % (self.REPLAYPATH, runNum, MaxEvent)
+        # rootName = "/lustre19/expphy/volatile/hallc/c-kaonlt/sjdkay/ROOTfiles/Proton_Analysis/Pass3/Proton_coin_replay_production_%s_%s.root" % (self.REPLAYPATH, runNum, MaxEvent)
+        rootName = "%s/UTIL_KAONLT/ROOTfiles/coin_replay_Full_Lumi_%s_%s.root" % (self.REPLAYPATH,runNum,MaxEvent)
         e_tree = up.open(rootName)["T"]
         TimingCutf = open(TimingCutFile)
         PromptPeak = [0, 0, 0]
@@ -296,17 +285,18 @@ class pyPlot(pyDict):
                     elif "current" in cutplus:
                         plusfout = self.REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/current.cuts"
                     else:
-                        print("ERROR 2: Cut %s not found" % cutplus)
+                        print("!!!!ERROR!!!!: Added cut %s not defined in /UTIL_KAONLT/DB/CUTS/general/" % cutplus) # ERROR 2
+                        print("Cut must be pid, track, accept, coin_time or current")
                         continue
                     cutplus = cutplus.split(".")
                     if len(cutplus) == 2:
                         cutplus = str(cutplus[1])
-                        print("cutplus ", cutplus)
+                        # print("cutplus ", cutplus)
                     elif len(cutplus) > 2:
                         cutplus = str(cutplus[2])
-                        print("cutplus ", cutplus)
+                        # print("cutplus ", cutplus)
                     else:
-                        print("ERROR 5: %s cut not found in %s" % (cutplus,plusfout))
+                        # print("ERROR 5: %s cut not found in %s" % (cutplus,plusfout))
                         continue
 
                     # Open general cuts file of interest to be added to dictionary
@@ -317,7 +307,7 @@ class pyPlot(pyDict):
                         else:
                             lplus  = lplus.split("=",1)
                             cuts = lplus[1]
-                            print(cutplus, " ++ ", lplus[0])
+                            # print(cutplus, " ++ ", lplus[0])
                             # Check if cut is in file
                             if cutplus in lplus[0]:
                                 # Check if run type is already defined in dictionary
@@ -329,7 +319,7 @@ class pyPlot(pyDict):
                                         db_cut = self.search_DB(cuts,runNum)
                                         print(typName, " already found!!!!")
                                         cutDict[typName] += ","+db_cut
-                                        print(lplus[0],"++>",cutDict[typName])
+                                        # print(lplus[0],"++>",cutDict[typName])
                                 else:
                                     # If run type not defined, then add key to dictionary
                                     print("cuts",cuts)
@@ -337,9 +327,9 @@ class pyPlot(pyDict):
                                     db_cut = self.search_DB(cuts,runNum)
                                     cutName = {typName : db_cut}
                                     cutDict.update(cutName)
-                                    print(lplus[0],"++>",cutDict[typName])
+                                    # print(lplus[0],"++>",cutDict[typName])
                             else:
-                                print("ERROR 6: %s cut does not match %s" % (cutplus,lplus[0]))
+                                # print("ERROR 6: %s cut does not match %s" % (cutplus,lplus[0]))
                                 continue
 
                     ###################
@@ -363,7 +353,8 @@ class pyPlot(pyDict):
                         elif "none" in cutminus:
                             minusfout = "none"
                         else:
-                            print("ERROR 3: Cut %s not found" % cutminus)
+                            print("!!!!ERROR!!!!: Subtracted cut %s not defined in /UTIL_KAONLT/DB/CUTS/general/" % cutplus) # ERROR 3
+                            print("Cut must be pid, track, accept, coin_time or current")
                             continue
                         # Break down the cut to be removed to find specific leaf to be subtracted from
                         # dictionary
@@ -374,7 +365,7 @@ class pyPlot(pyDict):
                         elif minuscut == ['none']:
                             cutminus = "none"
                         else:
-                            print("ERROR 4: Invalid syntax for removing cut %s " % (minuscut))
+                            print("!!!!ERROR!!!!: Invalid syntax for removing cut %s " % (minuscut)) # Error 4
                             continue
 
                         # Open general cuts file of interest to be removed from dictionary.
@@ -388,7 +379,7 @@ class pyPlot(pyDict):
                                 cuts = lminus[1]
                                 # Split cuts to check for the one to be removed.
                                 arr_cuts = cuts.split(",")
-                                print(leafminus,": ",cutminus, " -- ", lminus[0])
+                                # print(leafminus,": ",cutminus, " -- ", lminus[0])
                                 # Check if cut is in file
                                 if cutminus in lminus[0]:
                                     for remove in arr_cuts:
@@ -399,9 +390,9 @@ class pyPlot(pyDict):
                                             print("Removing... ",remove)
                                             # Replace unwanted cut with blank string
                                             cutDict[typName] = cutDict[typName].replace(remove,"")
-                                            print(lminus[0],"-->",cutDict[typName])
+                                            # print(lminus[0],"-->",cutDict[typName])
                                 else:
-                                    print("ERROR 7: %s cut does not match %s" % (cutminus,lminus[0]))
+                                    # print("ERROR 7: %s cut does not match %s" % (cutminus,lminus[0]))
                                     continue
                         fplus.close()
                         fminus.close()
@@ -432,11 +423,11 @@ class pyPlot(pyDict):
                             print("ERROR 9: %s not found in %s" % (tmp,fout))
                         for i,evt in enumerate(data['Run_Start']):
                             if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
-                                print("xxxx",tmp,str(data[tmp][i]))
+                                # print("xxxx",tmp,str(data[tmp][i]))
                                 cut  = cut.replace("accept."+tmp,str(data[tmp][i]))
                                 pass
                             else:
-                                print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                                # print("!!!!ERROR!!!!: Run %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i])) # Error 10
                                 continue
                     else:
                         continue
@@ -457,7 +448,7 @@ class pyPlot(pyDict):
                                 cut  = cut.replace("track."+tmp,str(data[tmp][i]))
                                 pass
                             else:
-                                print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                                # print("!!!!ERROR!!!!: Run %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i])) # Error 10
                                 continue
                     else:
                         continue
@@ -478,7 +469,7 @@ class pyPlot(pyDict):
                                 cut  = cut.replace("CT."+tmp,str(data[tmp][i]))
                                 pass
                             else:
-                                print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                                # print("!!!!ERROR!!!!: Run %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i])) # Error 10
                                 continue
                     else:
                         continue
@@ -499,7 +490,7 @@ class pyPlot(pyDict):
                                 cut  = cut.replace("pid."+tmp,str(data[tmp][i]))
                                 pass
                             else:
-                                print("ERROR 10: %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i]))
+                                # print("!!!!ERROR!!!!: Run %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i])) # Error 10
                                 continue
                     else:
                         continue
@@ -511,9 +502,9 @@ class pyPlot(pyDict):
                 tmp = tmp[1].split(")")[0]
                 cut  = cut.replace("current."+tmp,"2.5")
                 db_cuts.append(cut.rstrip())
-                print("!!!!",cut)
+                # print("!!!!",cut)
             else:
-                print("ERROR 11: %s not defined" % cut)
+                # print("ERROR 11: %s not defined" % cut)
                 continue
             
         # Rejoins list of cuts to a string separated by commas

@@ -32,11 +32,11 @@ ALL_events_NO_EDTM          T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime 
 
 Decode_master ALL_events_NO_EDTM
 
-Block: CoarseTracking
+#Block: CoarseTracking
 
-HMS_TRACK_FOUND      H.dc.ntrack > 0 && ALL_HMS_events_NOEDTM
-SHMS_TRACK_FOUND     P.dc.ntrack > 0 && ALL_SHMS_events_NOEDTM
-COIN_TRACK_FOUND     P.dc.ntrack > 0 && H.dc.ntrack > 0 && ALL_COIN_events_NO_EDTM
+#HMS_TRACK_FOUND      H.dc.ntrack > 0 && ALL_HMS_events_NOEDTM
+#SHMS_TRACK_FOUND     P.dc.ntrack > 0 && ALL_SHMS_events_NOEDTM
+#COIN_TRACK_FOUND     P.dc.ntrack > 0 && H.dc.ntrack > 0 && ALL_COIN_events_NO_EDTM
 
 CoarseTracking_maste ALL_events_NO_EDTM
 
@@ -47,3 +47,4 @@ DELTA_HMS            H.gtr.dp>-8.5&&H.gtr.dp<8.
 HMS_ELEC              H.cal.etotnorm>.35&&H.cer.npeSum>1.2
 GOOD_EVENT           COIN_TRACK_FOUND&&AEROGEL_PION&&DELTA_SHMS&&DELTA_HMS&&HMS_ELEC
 Physics_master ALL_events_NO_EDTM
+#CoarseTracking_master ALL_events

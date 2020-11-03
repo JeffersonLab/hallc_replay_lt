@@ -28,7 +28,7 @@ void FullReplay_Offline_SetPedDef (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./cache");
 
   //const char* RunFileNamePattern = "raw/coin_all_%05d.dat";
-  const char* ROOTFileNamePattern = "ROOTfilesMKJTest/Full_coin_replay_Offline_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfiles/Full_coin_replay_Offline_%d_%d.root";
 
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
@@ -180,9 +180,15 @@ void FullReplay_Offline_SetPedDef (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Suppress missing reference time warnings for these event types
   coin->SetEvtType(1);
   coin->AddEvtType(2);
-  TRG->AddDetector(coin); 
+  TRG->AddDetector(coin);
+ 
+  THcHelicityScaler *helscaler = new THcHelicityScaler("HS", "Hall C helicity scalers"); 
+  helscaler->SetROC(8);
+  helscaler->SetUseFirstEvent(kTRUE);
+  gHaEvtHandlers->Add(helscaler);
   THcHelicity* helicity = new THcHelicity("helicity","Helicity Detector");
   TRG->AddDetector(helicity); 
+  helicity->SetHelicityScaler(helscaler);
   
   //Add coin physics module THcCoinTime::THcCoinTime (const char *name, const char* description, const char* hadArmName, 
   // const char* elecArmName, const char* coinname) :

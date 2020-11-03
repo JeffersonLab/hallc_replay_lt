@@ -28,11 +28,11 @@ void FullReplay_Offline_SetPedDef_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) 
   pathList.push_back("./cache");
 
   //const char* RunFileNamePattern = "raw/coin_all_%05d.dat";
-  const char* ROOTFileNamePattern = "ROOTfilesMKJTest/Full_coin_replay_Offline_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfiles/Full_coin_replay_Offline_%d_%d.root";
 
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
-  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_KaonLTCalib_MKJTest.database");
+  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_KaonLTCalib.database");
   gHcParms->Load(gHcParms->GetString("g_ctp_database_filename"), RunNumber);
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
@@ -181,9 +181,15 @@ void FullReplay_Offline_SetPedDef_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) 
   coin->SetEvtType(1);
   coin->AddEvtType(2);
   TRG->AddDetector(coin); 
+ 
+  THcHelicityScaler *helscaler = new THcHelicityScaler("HS", "Hall C helicity scalers"); 
+  helscaler->SetROC(8);
+  helscaler->SetUseFirstEvent(kTRUE);
+  gHaEvtHandlers->Add(helscaler);
   THcHelicity* helicity = new THcHelicity("helicity","Helicity Detector");
   TRG->AddDetector(helicity); 
-  
+  helicity->SetHelicityScaler(helscaler);  
+
   //Add coin physics module THcCoinTime::THcCoinTime (const char *name, const char* description, const char* hadArmName, 
   // const char* elecArmName, const char* coinname) :
   THcCoinTime* coinTime = new THcCoinTime("CTime", "Coincidende Time Determination", "P", "H", "T.coin");

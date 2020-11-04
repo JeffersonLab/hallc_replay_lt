@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-11-03 18:19:18 trottar"
+# Time-stamp: "2020-11-04 16:23:51 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -93,7 +93,6 @@ s_branch = klt.pyBranch(s_tree)
 
 # s_evts = len(s_tree)
 s_evts = s_tree.array("H.BCM4A.scaler")
-print(s_evts)
 
 H_BCM4A_scalerCharge = s_tree.array("H.BCM4A.scalerCharge")
 H_BCM2_scalerCharge = s_tree.array("H.BCM2.scalerCharge")
@@ -196,9 +195,8 @@ def scaler(runNum, PS1, PS3, thres_curr):
     name = [0]*NBCM
     charge_sum = [0]*NBCM
     time_sum = [0]*NBCM
-    time_total = 0
     previous_charge = [0]*NBCM
-    # previous_time = 0
+    previous_time = 0
     previous_time = [0]*NBCM
     current_I = 0
     current_time = 0
@@ -237,16 +235,27 @@ def scaler(runNum, PS1, PS3, thres_curr):
     previous_EDTM = 0
 
     for ibcm in range(0, 5):
-        current_I = 0
+        previous_acctrig = (acctrig_value[0] - EDTM_current)
+        previous_EDTM = EDTM_value[0]
+        for itrig in range(0, NTRIG):
+            previous_trig[itrig] = trig_value[itrig][0]
+        for iPRE in range(0, NPRE):
+            previous_PRE[iPRE] = PRE_value[iPRE][0]
+            SHMS_previous_PRE[iPRE] = SHMS_PRE_value[iPRE][0]
+        for iRATE in range(0, NRATE):
+            previous_rate[iRATE] = rate_value[iRATE][0]
+        for iRATE in range(0, SHMSNRATE):
+            SHMS_previous_rate[iRATE] = SHMS_rate_value[iRATE][0]
+        previous_time[ibcm] = time_value[0]
+        previous_charge[ibcm] = bcm_value[ibcm][0]
         for i, evt in enumerate(s_evts):
             if (time_value[i] != previous_time[ibcm]):
                 current_I = (bcm_value[ibcm][i] -
                              previous_charge[ibcm])/(time_value[i] - previous_time[ibcm])
-            if (( current_I-thres_curr < current_I < current_I+thres_curr )):
+            if (( current[ibcm][i]-thres_curr < current[ibcm][i] < current[ibcm][i]+thres_curr )):
                 charge_sum[ibcm] += (bcm_value[ibcm][i] - previous_charge[ibcm])
                 time_sum[ibcm] += (time_value[i] - previous_time[ibcm])
-            if (ibcm == 2 and ( current_I-thres_curr < current_I < current_I+thres_curr )):
-                print("\n\ncurrent_I",current_I-thres_curr,"<",current_I,"<",current_I+thres_curr,"\n\n")
+            if (ibcm == 2 and ( current[ibcm][i]-thres_curr < current[ibcm][i] < current[ibcm][i]+thres_curr )):
                 EDTM_current = (EDTM_value[i] - previous_EDTM)
                 EDTM_sum += EDTM_current
                 acctrig_sum += ((acctrig_value[i] - EDTM_current) - previous_acctrig)
@@ -259,20 +268,19 @@ def scaler(runNum, PS1, PS3, thres_curr):
                     rate_sum[iRATE] += (rate_value[iRATE][i] - previous_rate[iRATE])
                 for iRATE in range(0, SHMSNRATE):
                     SHMS_rate_sum[iRATE] += (SHMS_rate_value[iRATE][i] - SHMS_previous_rate[iRATE])
-                previous_acctrig = (acctrig_value[i] - EDTM_current)
-                previous_EDTM = EDTM_value[i]
-                for itrig in range(0, NTRIG):
-                    previous_trig[itrig] = trig_value[itrig][i]
-                for iPRE in range(0, NPRE):
-                    previous_PRE[iPRE] = PRE_value[iPRE][i]
-                    SHMS_previous_PRE[iPRE] = SHMS_PRE_value[iPRE][i]
-                for iRATE in range(0, NRATE):
-                    previous_rate[iRATE] = rate_value[iRATE][i]
-                for iRATE in range(0, SHMSNRATE):
-                    SHMS_previous_rate[iRATE] = SHMS_rate_value[iRATE][i]
-                time_total += (time_value[i] - previous_time[ibcm])
-                previous_time[ibcm] = time_value[i]
-                previous_charge[ibcm] = bcm_value[ibcm][i]
+            previous_acctrig = (acctrig_value[i] - EDTM_current)
+            previous_EDTM = EDTM_value[i]
+            for itrig in range(0, NTRIG):
+                previous_trig[itrig] = trig_value[itrig][i]
+            for iPRE in range(0, NPRE):
+                previous_PRE[iPRE] = PRE_value[iPRE][i]
+                SHMS_previous_PRE[iPRE] = SHMS_PRE_value[iPRE][i]
+            for iRATE in range(0, NRATE):
+                previous_rate[iRATE] = rate_value[iRATE][i]
+            for iRATE in range(0, SHMSNRATE):
+                SHMS_previous_rate[iRATE] = SHMS_rate_value[iRATE][i]
+            previous_time[ibcm] = time_value[i]
+            previous_charge[ibcm] = bcm_value[ibcm][i]
 
     if PS1 == 0 :
         scalers = {

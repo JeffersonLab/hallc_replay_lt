@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-11-02 23:25:30 trottar"
+# Time-stamp: "2020-11-03 18:19:18 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -91,6 +91,10 @@ SCALER TREE, TSH
 s_tree = up.open(rootName)["TSH"]
 s_branch = klt.pyBranch(s_tree)
 
+# s_evts = len(s_tree)
+s_evts = s_tree.array("H.BCM4A.scaler")
+print(s_evts)
+
 H_BCM4A_scalerCharge = s_tree.array("H.BCM4A.scalerCharge")
 H_BCM2_scalerCharge = s_tree.array("H.BCM2.scalerCharge")
 H_BCM4B_scalerCharge = s_tree.array("H.BCM4B.scalerCharge")
@@ -163,6 +167,8 @@ def scaler(runNum, PS1, PS3, thres_curr):
     bcm_value = [H_BCM1_scalerCharge, H_BCM2_scalerCharge,
                  H_BCM4A_scalerCharge, H_BCM4B_scalerCharge, H_BCM4C_scalerCharge]
 
+    time_value = H_1Mhz_scalerTime
+
     current = [H_BCM1_scalerCurrent, H_BCM2_scalerCurrent,
                  H_BCM4A_scalerCurrent, H_BCM4B_scalerCurrent, H_BCM4C_scalerCurrent]
 
@@ -232,17 +238,15 @@ def scaler(runNum, PS1, PS3, thres_curr):
 
     for ibcm in range(0, 5):
         current_I = 0
-        for i, evt in enumerate(H_1Mhz_scalerTime):
-            if (evt != previous_time[ibcm]):
+        for i, evt in enumerate(s_evts):
+            if (time_value[i] != previous_time[ibcm]):
                 current_I = (bcm_value[ibcm][i] -
-                             previous_charge[ibcm])/(evt - previous_time[ibcm])
-                # current_I = current[ibcm][i]
-                # print("\n\ncurrent_I",current_I,"\n\n")
-            if ((current_I-thres_curr < current_I < current_I+thres_curr )):
+                             previous_charge[ibcm])/(time_value[i] - previous_time[ibcm])
+            if (( current_I-thres_curr < current_I < current_I+thres_curr )):
                 charge_sum[ibcm] += (bcm_value[ibcm][i] - previous_charge[ibcm])
-                time_sum[ibcm] += (evt - previous_time[ibcm])
-            if (ibcm == 2 and (current_I-thres_curr < current_I < current_I+thres_curr )):
-                print("\n\ncurrent_I",current_I,"\n\n")
+                time_sum[ibcm] += (time_value[i] - previous_time[ibcm])
+            if (ibcm == 2 and ( current_I-thres_curr < current_I < current_I+thres_curr )):
+                print("\n\ncurrent_I",current_I-thres_curr,"<",current_I,"<",current_I+thres_curr,"\n\n")
                 EDTM_current = (EDTM_value[i] - previous_EDTM)
                 EDTM_sum += EDTM_current
                 acctrig_sum += ((acctrig_value[i] - EDTM_current) - previous_acctrig)
@@ -266,8 +270,8 @@ def scaler(runNum, PS1, PS3, thres_curr):
                     previous_rate[iRATE] = rate_value[iRATE][i]
                 for iRATE in range(0, SHMSNRATE):
                     SHMS_previous_rate[iRATE] = SHMS_rate_value[iRATE][i]
-                time_total += (evt - previous_time[ibcm])
-                previous_time[ibcm] = evt
+                time_total += (time_value[i] - previous_time[ibcm])
+                previous_time[ibcm] = time_value[i]
                 previous_charge[ibcm] = bcm_value[ibcm][i]
 
     if PS1 == 0 :

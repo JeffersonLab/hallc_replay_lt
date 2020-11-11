@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-11-04 16:23:51 trottar"
+# Time-stamp: "2020-11-10 21:13:11 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -15,6 +15,7 @@ import numpy as np
 import pandas as pd
 import scipy
 import scipy.integrate as integrate
+import matplotlib.pyplot as plt
 import sys, math, os, subprocess
 
 sys.path.insert(0, '../../../bin/python/')
@@ -233,7 +234,10 @@ def scaler(runNum, PS1, PS3, thres_curr):
     EDTM_sum = 0
     EDTM_current = 0
     previous_EDTM = 0
-
+    for itrig in range(0, NTRIG):
+        print("trig_value[%s] = " %(itrig),trig_value[itrig][:5])
+        print(len(trig_value[itrig]))
+        
     for ibcm in range(0, 5):
         previous_acctrig = (acctrig_value[0] - EDTM_current)
         previous_EDTM = EDTM_value[0]
@@ -261,6 +265,7 @@ def scaler(runNum, PS1, PS3, thres_curr):
                 acctrig_sum += ((acctrig_value[i] - EDTM_current) - previous_acctrig)
                 for itrig in range(0, NTRIG):
                     trig_sum[itrig] += (trig_value[itrig][i] - previous_trig[itrig])
+                    print("trig_value[%s] = " %(itrig),trig_value[itrig][i])
                 for iPRE in range(0, NPRE):
                     PRE_sum[iPRE] += (PRE_value[iPRE][i] - previous_PRE[iPRE])
                     SHMS_PRE_sum[iPRE] += (SHMS_PRE_value[iPRE][i] - SHMS_previous_PRE[iPRE])
@@ -494,8 +499,60 @@ cutDict = make_cutDict("h_track_lumi_after",cutDict)
 cutDict = make_cutDict("h_etrack_lumi_after",cutDict)
 cutDict = make_cutDict("h_etrack_lumi_after",cutDict)
 cutDict = make_cutDict("h_ecut_lumi_eff",cutDict)
+cutDict = make_cutDict("h_cal",cutDict)
+cutDict = make_cutDict("h_cer",cutDict)
+cutDict = make_cutDict("p_cal",cutDict)
+cutDict = make_cutDict("p_hgcer",cutDict)
+cutDict = make_cutDict("p_aero",cutDict)
 c = klt.pyPlot(REPLAYPATH,cutDict )
 
+def pid_cuts():
+
+    f = plt.figure(figsize=(11.69,8.27))
+    plt.hist(H_cal_etotnorm,
+             bins=c.setbin(H_cal_etotnorm,200),label='no cut',histtype='step', alpha=0.5, stacked=True, fill=True)
+    plt.hist(c.add_cut(H_cal_etotnorm,"h_cal"),
+             bins=c.setbin(c.add_cut(H_cal_etotnorm,"h_ecut_lumi_eff"),200),label='no cut',histtype='step', alpha=0.5, stacked=True, fill=True)
+    plt.yscale('log')
+    plt.xlabel('H_cal_etotnorm')
+    plt.ylabel('Count')
+
+    f = plt.figure(figsize=(11.69,8.27))
+    plt.hist(H_cer_npeSum,
+             bins=c.setbin(H_cer_npeSum,200),label='no cut',histtype='step', alpha=0.5, stacked=True, fill=True)
+    plt.hist(c.add_cut(H_cer_npeSum,"h_cer"),
+             bins=c.setbin(c.add_cut(H_cer_npeSum,"h_ecut_lumi_eff"),200),label='no cut',histtype='step', alpha=0.5, stacked=True, fill=True)
+    plt.yscale('log')
+    plt.xlabel('H_cer_npeSum')
+    plt.ylabel('Count')
+
+    f = plt.figure(figsize=(11.69,8.27))
+    plt.hist(P_cal_etotnorm,
+             bins=c.setbin(P_cal_etotnorm,200),label='no cut',histtype='step', alpha=0.5, stacked=True, fill=True)
+    plt.hist(c.add_cut(P_cal_etotnorm,"p_cal"),
+             bins=c.setbin(c.add_cut(P_cal_etotnorm,"h_ecut_lumi_eff"),200),label='no cut',histtype='step', alpha=0.5, stacked=True, fill=True)
+    plt.yscale('log')
+    plt.xlabel('P_cal_etotnorm')
+    plt.ylabel('Count')
+
+    f = plt.figure(figsize=(11.69,8.27))
+    plt.hist(P_hgcer_npeSum,
+             bins=c.setbin(P_hgcer_npeSum,200),label='no cut',histtype='step', alpha=0.5, stacked=True, fill=True)
+    plt.hist(c.add_cut(P_hgcer_npeSum,"p_hgcer"),
+             bins=c.setbin(c.add_cut(P_hgcer_npeSum,"h_ecut_lumi_eff"),200),label='no cut',histtype='step', alpha=0.5, stacked=True, fill=True)
+    plt.yscale('log')
+    plt.xlabel('P_hgcer_npeSum')
+    plt.ylabel('Count')
+
+    f = plt.figure(figsize=(11.69,8.27))
+    plt.hist(P_aero_npeSum,
+             bins=c.setbin(P_aero_npeSum,200),label='no cut',histtype='step', alpha=0.5, stacked=True, fill=True)
+    plt.hist(c.add_cut(P_aero_npeSum,"p_aero"),
+             bins=c.setbin(c.add_cut(P_aero_npeSum,"h_ecut_lumi_eff"),200),label='no cut',histtype='step', alpha=0.5, stacked=True, fill=True)
+    plt.yscale('log')
+    plt.xlabel('P_aero_npeSum')
+    plt.ylabel('Count')    
+    
 def analysis(PS1, PS3, thres_curr):
     
     bcm_before = H_bcm_bcm4b_AvgCurrent
@@ -795,6 +852,9 @@ def analysis(PS1, PS3, thres_curr):
 
 def main():
 
+    pid_cuts()
+    plt.show()
+    
     # combine dictionaries
     scalers = scaler(runNum, PS1, PS3, thres_curr)
     track_info = analysis(PS1, PS3, thres_curr)

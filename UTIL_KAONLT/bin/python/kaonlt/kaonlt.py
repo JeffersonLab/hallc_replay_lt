@@ -177,9 +177,10 @@ apply cuts. Set the dictionary to None if no cuts are required.
 '''
 class pyPlot(pyDict):
     
-    def __init__(self, REPLAYPATH,cutDict=None):
+    def __init__(self, REPLAYPATH,cutDict=None,DEBUG=False):
         self.REPLAYPATH = REPLAYPATH
         self.cutDict = cutDict
+        self.DEBUG = DEBUG
 
     # A method for defining a bin. This may be called in any matplotlib package plots.
     # This will calculate a suitable bin width and use that to equally distribute the bin size
@@ -254,8 +255,9 @@ class pyPlot(pyDict):
                 # Grab run type cuts required, note at this stage the cuts to be removed are bunched
                 # together still
                 typCuts = line[1].split("+")
-                print("Type ", typName)
-                print("Cuts ", typCuts)
+                if (self.DEBUG):
+                    print("Type ", typName)
+                    print("Cuts ", typCuts)
                 
                 # Loop over run type cuts
                 for i,evt in enumerate(typCuts):
@@ -267,7 +269,8 @@ class pyPlot(pyDict):
                     # iteration over run type cuts
                     cutplus = minusCuts[0].rstrip()
                     cutplus = cutplus.lstrip()
-                    print("+ ",cutplus)
+                    if (self.DEBUG):
+                        print("+ ",cutplus)
 
                     ##############
                     # Added cuts #
@@ -314,15 +317,18 @@ class pyPlot(pyDict):
                                 if typName in cutDict.keys():
                                     if cuts not in cutDict.items():
                                         # If run type already defined, then append dictionary key
-                                        print("cuts",cuts)
+                                        if (self.DEBUG):
+                                            print("cuts",cuts)
                                         # Grabs parameters from DB (see below)
                                         db_cut = self.search_DB(cuts,runNum)
-                                        print(typName, " already found!!!!")
+                                        if (self.DEBUG):
+                                            print(typName, " already found!!!!")
                                         cutDict[typName] += ","+db_cut
                                         # print(lplus[0],"++>",cutDict[typName])
                                 else:
                                     # If run type not defined, then add key to dictionary
-                                    print("cuts",cuts)
+                                    if (self.DEBUG):
+                                        print("cuts",cuts)
                                     # Grabs parameters from DB (see below)
                                     db_cut = self.search_DB(cuts,runNum)
                                     cutName = {typName : db_cut}
@@ -338,7 +344,8 @@ class pyPlot(pyDict):
 
                     # Loop over cuts that need to be subtracted
                     for cutminus in minus:
-                        print("- ",cutminus)
+                        if (self.DEBUG):
+                            print("- ",cutminus)
                         # Matches run type cuts with the general cuts (e.g pid, track, etc.)
                         if "pid" in cutminus:
                             minusfout = self.REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/pid.cuts"
@@ -387,7 +394,8 @@ class pyPlot(pyDict):
                                         if leafminus in remove:
                                             # Grabs parameters from DB (see below)
                                             remove = self.search_DB(remove,runNum)
-                                            print("Removing... ",remove)
+                                            if (self.DEBUG):
+                                                print("Removing... ",remove)
                                             # Replace unwanted cut with blank string
                                             cutDict[typName] = cutDict[typName].replace(remove,"")
                                             # print(lminus[0],"-->",cutDict[typName])
@@ -396,9 +404,11 @@ class pyPlot(pyDict):
                                     continue
                         fplus.close()
                         fminus.close()
-                print("\n\n")
+                if (self.DEBUG):   
+                    print("\n\n")
         f.close()
-        print(cutDict.keys())
+        if (self.DEBUG):
+            print(cutDict.keys())
         return cutDict
 
     # Grabs the cut parameters from the database. In essence this method simply replaces one string
@@ -533,7 +543,8 @@ class pyPlot(pyDict):
             applycut += 'self.cut("%s")]' % cuts[len(cuts)-1]
             tmp = eval(applycut)
         else:
-            print('No cuts applied to %s' % leaf)
+            if (self.DEBUG):
+                print('No cuts applied to %s' % leaf)
             tmp = leaf
         
         return tmp

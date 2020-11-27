@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-10-28 14:05:32 trottar"
+# Time-stamp: "2020-11-27 12:43:55 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -52,22 +52,22 @@ def calc_yield():
     rate_SHMS = [lumi_data["SHMS_evts_scalar"][i]/lumi_data["time"][i]
                 for i,evts in enumerate(lumi_data["run number"])]
     rate_SHMS = pd.Series(rate_SHMS).fillna(0).tolist()
-    cpuLT_HMS = [1-lumi_data["TRIG3_cut"][i]/((lumi_data["TRIG3_scaler"][i]-lumi_data["sent_edtm"][i]))
+    cpuLT_HMS = [1-abs(lumi_data["TRIG3_cut"][i]/(((lumi_data["TRIG3_scaler"][i]/lumi_data["ps3"][i])-lumi_data["sent_edtm"][i])))
                  for i,evt in enumerate(lumi_data["run number"])]
     cpuLT_HMS  = pd.Series(cpuLT_HMS).fillna(0).tolist()
-    cpuLT_HMS_uncern = [np.sqrt(cpuLT_HMS[i])/cpuLT_HMS[i]
-                 for i,evt in enumerate(lumi_data["run number"])]
+    cpuLT_HMS_uncern = [np.sqrt(abs(cpuLT_HMS[i]))/cpuLT_HMS[i]
+                        for i,evt in enumerate(lumi_data["run number"])]
     cpuLT_HMS_uncern = pd.Series(cpuLT_HMS_uncern).fillna(0).tolist()
-    cpuLT_SHMS = [1-lumi_data["TRIG1_cut"][i]/((lumi_data["TRIG1_scaler"][i]-lumi_data["sent_edtm"][i]))
+    cpuLT_SHMS = [1-abs(lumi_data["TRIG1_cut"][i]/(((lumi_data["TRIG1_scaler"][i]/lumi_data["ps1"][i])-lumi_data["sent_edtm"][i])))
                   for i,evt in enumerate(lumi_data["run number"])]
     cpuLT_SHMS = pd.Series(cpuLT_SHMS).fillna(0).tolist()
-    cpuLT_SHMS_uncern = [np.sqrt(cpuLT_SHMS[i])/cpuLT_SHMS[i]
+    cpuLT_SHMS_uncern = [np.sqrt(abs(cpuLT_SHMS[i]))/cpuLT_SHMS[i]
                          for i,evt in enumerate(lumi_data["run number"])]
     cpuLT_SHMS_uncern = pd.Series(cpuLT_SHMS_uncern).fillna(0).tolist()
-    uncern_HMS_evts_scalar = [np.sqrt(lumi_data["HMS_evts_scalar"][i])/lumi_data["HMS_evts_scalar"][i]
+    uncern_HMS_evts_scalar = [np.sqrt(lumi_data["TRIG3_scaler"][i])/lumi_data["TRIG3_scaler"][i]
                        for i,evt in enumerate(lumi_data["run number"])]
     uncern_HMS_evts_scalar  = pd.Series(uncern_HMS_evts_scalar).fillna(0).tolist()
-    uncern_SHMS_evts_scalar = [np.sqrt(lumi_data["SHMS_evts_scalar"][i])/lumi_data["SHMS_evts_scalar"][i]
+    uncern_SHMS_evts_scalar = [np.sqrt(lumi_data["TRIG1_scaler"][i])/lumi_data["TRIG1_scaler"][i]
                         for i,evt in enumerate(lumi_data["run number"])]
     uncern_SHMS_evts_scalar = pd.Series(uncern_SHMS_evts_scalar).fillna(0).tolist()
     uncern_HMS_evts_notrack = [np.sqrt(lumi_data["h_int_goodscin_evts"][i])/lumi_data["h_int_goodscin_evts"][i]
@@ -82,24 +82,39 @@ def calc_yield():
     uncern_SHMS_evts_track = [np.sqrt(lumi_data["p_int_goodscin_evts"][i])/lumi_data["p_int_goodscin_evts"][i]
                         for i,evt in enumerate(lumi_data["run number"])]
     uncern_SHMS_evts_track = pd.Series(uncern_SHMS_evts_track).fillna(0).tolist()
-    yield_HMS_notrack = [(lumi_data["h_int_goodscin_evts"][i]*lumi_data["ps3"][i])/(lumi_data["charge"][i]*cpuLT_HMS[i])
+    yield_HMS_notrack = [(lumi_data["h_int_goodscin_evts"][i])/(lumi_data["charge"][i]*cpuLT_HMS[i])
     for i,evt in enumerate(lumi_data["run number"])]
-    yield_HMS_track = [(lumi_data["h_int_goodscin_evts"][i]*lumi_data["ps3"][i])/(lumi_data["charge"][i]*cpuLT_HMS[i]*lumi_data["HMS_track"][i])
+    yield_HMS_track = [(lumi_data["h_int_goodscin_evts"][i])/(lumi_data["charge"][i]*cpuLT_HMS[i]*(1-lumi_data["etrack"][i]))
     for i,evt in enumerate(lumi_data["run number"])]
     yield_HMS_scalar = [(lumi_data["TRIG3_scaler"][i])/(lumi_data["charge"][i])
                  for i,evt in enumerate(lumi_data["run number"])]
     yield_HMS_scalar = pd.Series(yield_HMS_scalar).fillna(0).tolist()
     yield_HMS_notrack = pd.Series(yield_HMS_notrack).fillna(0).tolist()
     yield_HMS_track = pd.Series(yield_HMS_track).fillna(0).tolist()
-    yield_SHMS_notrack = [(lumi_data["p_int_goodscin_evts"][i]*lumi_data["ps1"][i])/(lumi_data["charge"][i]*cpuLT_SHMS[i])
+    yield_SHMS_notrack = [(lumi_data["p_int_goodscin_evts"][i])/(lumi_data["charge"][i]*cpuLT_SHMS[i])
     for i,evt in enumerate(lumi_data["run number"])]
-    yield_SHMS_track = [(lumi_data["h_int_goodscin_evts"][i]*lumi_data["ps1"][i])/(lumi_data["charge"][i]*cpuLT_SHMS[i]*lumi_data["SHMS_track"][i])
+    yield_SHMS_track = [(lumi_data["h_int_goodscin_evts"][i])/(lumi_data["charge"][i]*cpuLT_SHMS[i]*(1-lumi_data["ptrack"][i]))
     for i,evt in enumerate(lumi_data["run number"])]
     yield_SHMS_scalar = [(lumi_data["TRIG1_scaler"][i])/(lumi_data["charge"][i])
                   for i,evt in enumerate(lumi_data["run number"])]
     yield_SHMS_scalar = pd.Series(yield_SHMS_scalar).fillna(0).tolist()
     yield_SHMS_notrack = pd.Series(yield_SHMS_notrack).fillna(0).tolist()
     yield_SHMS_track = pd.Series(yield_SHMS_track).fillna(0).tolist()
+    
+    count_HMS = [(lumi_data["h_int_goodscin_evts"][i])
+                  for i,evt in enumerate(lumi_data["run number"])]
+    count_HMS = pd.Series(count_HMS).fillna(0).tolist()    
+    count_SHMS = [(lumi_data["p_int_goodscin_evts"][i])
+                  for i,evt in enumerate(lumi_data["run number"])]
+    count_SHMS = pd.Series(count_SHMS).fillna(0).tolist()
+
+    etrack_HMS = [(1-lumi_data["etrack"][i])
+                  for i,evt in enumerate(lumi_data["run number"])]
+    etrack_HMS = pd.Series(etrack_HMS).fillna(0).tolist()            
+    ptrack_SHMS = [(1-lumi_data["ptrack"][i])
+                  for i,evt in enumerate(lumi_data["run number"])]
+    ptrack_SHMS = pd.Series(ptrack_SHMS).fillna(0).tolist()
+
 
     for i,curr in enumerate(current):
         if curr == min(current):
@@ -149,11 +164,11 @@ def calc_yield():
     yieldRel_SHMS_track = [yield_SHMS_track[i]/min_yield_SHMS_track for i,evt in enumerate(lumi_data["run number"])]
     # yieldRel_SHMS_track = pd.Series(yieldRel_SHMS_track).fillna(0).tolist()
 
-    return [current,rate_HMS,rate_SHMS,cpuLT_HMS,cpuLT_SHMS,uncern_HMS_evts_scalar,uncern_SHMS_evts_scalar,yield_HMS_scalar,yield_SHMS_scalar,yieldRel_HMS_scalar,yieldRel_SHMS_scalar,uncern_HMS_evts_notrack,uncern_SHMS_evts_notrack,yield_HMS_notrack,yield_SHMS_notrack,yieldRel_HMS_notrack,yieldRel_SHMS_notrack,uncern_HMS_evts_track,uncern_SHMS_evts_track,yield_HMS_track,yield_SHMS_track,yieldRel_HMS_track,yieldRel_SHMS_track]
+    return [current,rate_HMS,rate_SHMS,cpuLT_HMS,cpuLT_SHMS,uncern_HMS_evts_scalar,uncern_SHMS_evts_scalar,yield_HMS_scalar,yield_SHMS_scalar,yieldRel_HMS_scalar,yieldRel_SHMS_scalar,uncern_HMS_evts_notrack,uncern_SHMS_evts_notrack,yield_HMS_notrack,yield_SHMS_notrack,yieldRel_HMS_notrack,yieldRel_SHMS_notrack,uncern_HMS_evts_track,uncern_SHMS_evts_track,yield_HMS_track,yield_SHMS_track,yieldRel_HMS_track,yieldRel_SHMS_track,count_HMS,count_SHMS,etrack_HMS,ptrack_SHMS]
 
 def plot_yield():
 
-    [current,rate_HMS,rate_SHMS,cpuLT_HMS,cpuLT_SHMS,uncern_HMS_evts_scalar,uncern_SHMS_evts_scalar,yield_HMS_scalar,yield_SHMS_scalar,yieldRel_HMS_scalar,yieldRel_SHMS_scalar,uncern_HMS_evts_notrack,uncern_SHMS_evts_notrack,yield_HMS_notrack,yield_SHMS_notrack,yieldRel_HMS_notrack,yieldRel_SHMS_notrack,uncern_HMS_evts_track,uncern_SHMS_evts_track,yield_HMS_track,yield_SHMS_track,yieldRel_HMS_track,yieldRel_SHMS_track] = calc_yield()
+    [current,rate_HMS,rate_SHMS,cpuLT_HMS,cpuLT_SHMS,uncern_HMS_evts_scalar,uncern_SHMS_evts_scalar,yield_HMS_scalar,yield_SHMS_scalar,yieldRel_HMS_scalar,yieldRel_SHMS_scalar,uncern_HMS_evts_notrack,uncern_SHMS_evts_notrack,yield_HMS_notrack,yield_SHMS_notrack,yieldRel_HMS_notrack,yieldRel_SHMS_notrack,uncern_HMS_evts_track,uncern_SHMS_evts_track,yield_HMS_track,yield_SHMS_track,yieldRel_HMS_track,yieldRel_SHMS_track,count_HMS,count_SHMS,etrack_HMS,ptrack_SHMS] = calc_yield()
 
     for i, val in enumerate(lumi_data["run number"]):
         print("Run numbers:",lumi_data["run number"][i],"Current Values:",current[i])
@@ -273,10 +288,131 @@ def plot_yield():
         plt.xlabel('Current [uA]', fontsize =16)
     else :
         plt.title('SHMS Carbon %s-%s' % (lumi_data["run number"][0],lumi_data["run number"][numRuns-1]), fontsize =16)
-        plt.xlabel('Current [uA]', fontsize =16)
+        plt.xlabel('Current [uA]', fontsize =16)        
+
+    plt.tight_layout()        
+
+    # cpuPlot = plt.figure(figsize=(12,8))
+
+    # #HMS plot cpu
+    # plt.subplot(2,1,1)    
+    # plt.grid(zorder=1)
+    # plt.xlim(0,60)
+    # #plt.ylim(0.98,1.02)
+    # plt.plot([0,60], [1,1], 'r-',zorder=2)
+    # plt.scatter(current,cpuLT_HMS,color='blue',zorder=4)
+    # plt.ylabel('CPU LT', fontsize=16)
+    # if target == 'LD2' :
+    #     plt.title('HMS LD2 %s-%s' % (lumi_data["run number"][0],lumi_data["run number"][numRuns-1]), fontsize =16)
+    #     plt.xlabel('Current [uA]', fontsize =16)
+    # elif target == 'LH2' :
+    #     plt.title('HMS LH2 %s-%s' % (lumi_data["run number"][0],lumi_data["run number"][numRuns-1]), fontsize =16)
+    #     plt.xlabel('Current [uA]', fontsize =16)
+    # else :
+    #     plt.title('HMS Carbon %s-%s' % (lumi_data["run number"][0],lumi_data["run number"][numRuns-1]), fontsize =16)
+    #     plt.xlabel('Current [uA]', fontsize =16)
+
+    # #SHMS plot cpu
+    # plt.subplot(2,1,2)    
+    # plt.grid(zorder=1)
+    # plt.xlim(0,60)
+    # #plt.ylim(0.98,1.02)
+    # plt.plot([0,60], [1,1], 'r-',zorder=2)
+    # plt.scatter(current,cpuLT_SHMS,color='blue',zorder=4)
+    # plt.ylabel('CPU LT', fontsize=16)
+    # if target == 'LD2' :
+    #     plt.title('SHMS LD2 %s-%s' % (lumi_data["run number"][0],lumi_data["run number"][numRuns-1]), fontsize =16)
+    #     plt.xlabel('Current [uA]', fontsize =16)
+    # elif target == 'LH2' :
+    #     plt.title('SHMS LH2 %s-%s' % (lumi_data["run number"][0],lumi_data["run number"][numRuns-1]), fontsize =16)
+    #     plt.xlabel('Current [uA]', fontsize =16)
+    # else :
+    #     plt.title('SHMS Carbon %s-%s' % (lumi_data["run number"][0],lumi_data["run number"][numRuns-1]), fontsize =16)
+    #     plt.xlabel('Current [uA]', fontsize =16)        
+
+    # plt.tight_layout()
         
+    # countPlot = plt.figure(figsize=(12,8))
+
+    # #HMS plot count
+    # plt.subplot(2,1,1)    
+    # plt.grid(zorder=1)
+    # plt.xlim(0,60)
+    # #plt.ylim(0.98,1.02)
+    # plt.plot([0,60], [1,1], 'r-',zorder=2)
+    # plt.scatter(current,count_HMS,color='blue',zorder=4)
+    # plt.ylabel('Count', fontsize=16)
+    # if target == 'LD2' :
+    #     plt.title('HMS LD2 %s-%s' % (lumi_data["run number"][0],lumi_data["run number"][numRuns-1]), fontsize =16)
+    #     plt.xlabel('Current [uA]', fontsize =16)
+    # elif target == 'LH2' :
+    #     plt.title('HMS LH2 %s-%s' % (lumi_data["run number"][0],lumi_data["run number"][numRuns-1]), fontsize =16)
+    #     plt.xlabel('Current [uA]', fontsize =16)
+    # else :
+    #     plt.title('HMS Carbon %s-%s' % (lumi_data["run number"][0],lumi_data["run number"][numRuns-1]), fontsize =16)
+    #     plt.xlabel('Current [uA]', fontsize =16)
+
+    # #SHMS plot count
+    # plt.subplot(2,1,2)    
+    # plt.grid(zorder=1)
+    # plt.xlim(0,60)
+    # #plt.ylim(0.98,1.02)
+    # plt.plot([0,60], [1,1], 'r-',zorder=2)
+    # plt.scatter(current,count_SHMS,color='blue',zorder=4)
+    # plt.ylabel('Count', fontsize=16)
+    # if target == 'LD2' :
+    #     plt.title('SHMS LD2 %s-%s' % (lumi_data["run number"][0],lumi_data["run number"][numRuns-1]), fontsize =16)
+    #     plt.xlabel('Current [uA]', fontsize =16)
+    # elif target == 'LH2' :
+    #     plt.title('SHMS LH2 %s-%s' % (lumi_data["run number"][0],lumi_data["run number"][numRuns-1]), fontsize =16)
+    #     plt.xlabel('Current [uA]', fontsize =16)
+    # else :
+    #     plt.title('SHMS Carbon %s-%s' % (lumi_data["run number"][0],lumi_data["run number"][numRuns-1]), fontsize =16)
+    #     plt.xlabel('Current [uA]', fontsize =16)        
+
         
+    # plt.tight_layout()
+
+    # trackPlot = plt.figure(figsize=(12,8))
+
+    # #HMS plot etrack
+    # plt.subplot(2,1,1)    
+    # plt.grid(zorder=1)
+    # plt.xlim(0,60)
+    # #plt.ylim(0.98,1.02)
+    # plt.plot([0,60], [1,1], 'r-',zorder=2)
+    # plt.scatter(current,etrack_HMS,color='blue',zorder=4)
+    # plt.ylabel('etrack', fontsize=16)
+    # if target == 'LD2' :
+    #     plt.title('HMS LD2 %s-%s' % (lumi_data["run number"][0],lumi_data["run number"][numRuns-1]), fontsize =16)
+    #     plt.xlabel('Current [uA]', fontsize =16)
+    # elif target == 'LH2' :
+    #     plt.title('HMS LH2 %s-%s' % (lumi_data["run number"][0],lumi_data["run number"][numRuns-1]), fontsize =16)
+    #     plt.xlabel('Current [uA]', fontsize =16)
+    # else :
+    #     plt.title('HMS Carbon %s-%s' % (lumi_data["run number"][0],lumi_data["run number"][numRuns-1]), fontsize =16)
+    #     plt.xlabel('Current [uA]', fontsize =16)
+
+    # #SHMS plot ptrack
+    # plt.subplot(2,1,2)    
+    # plt.grid(zorder=1)
+    # plt.xlim(0,60)
+    # #plt.ylim(0.98,1.02)
+    # plt.plot([0,60], [1,1], 'r-',zorder=2)
+    # plt.scatter(current,ptrack_SHMS,color='blue',zorder=4)
+    # plt.ylabel('ptrack', fontsize=16)
+    # if target == 'LD2' :
+    #     plt.title('SHMS LD2 %s-%s' % (lumi_data["run number"][0],lumi_data["run number"][numRuns-1]), fontsize =16)
+    #     plt.xlabel('Current [uA]', fontsize =16)
+    # elif target == 'LH2' :
+    #     plt.title('SHMS LH2 %s-%s' % (lumi_data["run number"][0],lumi_data["run number"][numRuns-1]), fontsize =16)
+    #     plt.xlabel('Current [uA]', fontsize =16)
+    # else :
+    #     plt.title('SHMS Carbon %s-%s' % (lumi_data["run number"][0],lumi_data["run number"][numRuns-1]), fontsize =16)
+    #     plt.xlabel('Current [uA]', fontsize =16)
+
     plt.tight_layout()
+        
     plt.show()
 
     yield_data = {

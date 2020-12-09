@@ -1,7 +1,7 @@
 #! /usr/bin/python
 # Description:
 # ================================================================
-# Time-stamp: "2020-11-25 15:26:52 trottar"
+# Time-stamp: "2020-12-09 12:06:34 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -299,7 +299,7 @@ def scaler(runNum, PS1, PS3, thres_curr):
             "charge": charge_sum[1],
             "TRIG1_scaler": trig_sum[0],
             "TRIG3_scaler": trig_sum[2],
-            "CPULT_scaler": 1-acctrig_sum/(trig_sum[2]/PS3),
+            "CPULT_scaler": acctrig_sum/(trig_sum[2]/PS3),
             "CPULT_scaler_uncern": (acctrig_sum/((trig_sum[2]/PS3)))*np.sqrt((1/(trig_sum[2]/PS3))+(1/acctrig_sum)),
             "HMS_eLT": 1 - ((6/5)*(PRE_sum[1]-PRE_sum[2])/(PRE_sum[1])),
             "HMS_eLT_uncern": (PRE_sum[1]-PRE_sum[2])/(PRE_sum[1])*np.sqrt((np.sqrt(PRE_sum[1]) + np.sqrt(PRE_sum[2]))/(PRE_sum[1] - PRE_sum[2]) + (np.sqrt(PRE_sum[1])/PRE_sum[1])),
@@ -317,7 +317,7 @@ def scaler(runNum, PS1, PS3, thres_curr):
             "charge": charge_sum[1],
             "TRIG1_scaler": trig_sum[0],
             "TRIG3_scaler": trig_sum[2],
-            "CPULT_scaler": 1-acctrig_sum/((trig_sum[0]/PS1)),
+            "CPULT_scaler": acctrig_sum/((trig_sum[0]/PS1)),
             "CPULT_scaler_uncern": (acctrig_sum/((trig_sum[0]/PS1))*np.sqrt((1/(trig_sum[0]/PS1)))+(1/acctrig_sum)),
             "HMS_eLT": 0,
             "HMS_eLT_uncern": 0,
@@ -336,7 +336,7 @@ def scaler(runNum, PS1, PS3, thres_curr):
             "charge": charge_sum[1],
             "TRIG1_scaler": trig_sum[0],
             "TRIG3_scaler": trig_sum[2],
-            "CPULT_scaler": 1-acctrig_sum/((trig_sum[0]/PS1) + (trig_sum[2]/PS3)),
+            "CPULT_scaler": acctrig_sum/((trig_sum[0]/PS1) + (trig_sum[2]/PS3)),
             "CPULT_scaler_uncern": (acctrig_sum/((trig_sum[0]/PS1) + (trig_sum[2]/PS3)))*np.sqrt((1/(trig_sum[0]/PS1))+(1/(trig_sum[2]/PS3))+(1/acctrig_sum)),
             "HMS_eLT": 1 - ((6/5)*(PRE_sum[1]-PRE_sum[2])/(PRE_sum[1])),
             "HMS_eLT_uncern": (PRE_sum[1]-PRE_sum[2])/(PRE_sum[1])*np.sqrt((np.sqrt(PRE_sum[1]) + np.sqrt(PRE_sum[2]))/(PRE_sum[1] - PRE_sum[2]) + (np.sqrt(PRE_sum[1])/PRE_sum[1])),
@@ -733,7 +733,7 @@ def analysis(PS1, PS3, thres_curr):
             "Ktrack_uncern" : 0,
             "ptrack" : 0,
             "ptrack_uncern" : 0,
-            "accp_edtm" : (scipy.integrate.simps(EDTM)),
+            "accp_edtm" : (len(EDTM)),
             
         }
     elif PS3 == -1 or PS3 == 0:
@@ -762,7 +762,7 @@ def analysis(PS1, PS3, thres_curr):
             "Ktrack_uncern" : (len(p_ktrack_lumi_after)/len(p_ktrack_lumi_before))*math.sqrt((1/len(p_ktrack_lumi_after)) + (1/len(p_ktrack_lumi_before))),
             "ptrack" : len(p_ptrack_lumi_after)/len(p_ptrack_lumi_before),
             "ptrack_uncern" : (len(p_ptrack_lumi_after)/len(p_ptrack_lumi_before))*math.sqrt((1/len(p_ptrack_lumi_after)) + (1/len(p_ptrack_lumi_before))),
-            "accp_edtm" : (scipy.integrate.simps(EDTM)),
+            "accp_edtm" : (len(EDTM)),
 
         }
     else:
@@ -790,14 +790,14 @@ def analysis(PS1, PS3, thres_curr):
             "Ktrack_uncern" : (len(p_ktrack_lumi_after)/len(p_ktrack_lumi_before))*math.sqrt((1/len(p_ktrack_lumi_after)) + (1/len(p_ktrack_lumi_before))),
             "ptrack" : len(p_ptrack_lumi_after)/len(p_ptrack_lumi_before),
             "ptrack_uncern" : (len(p_ptrack_lumi_after)/len(p_ptrack_lumi_before))*math.sqrt((1/len(p_ptrack_lumi_after)) + (1/len(p_ptrack_lumi_before))),
-            "accp_edtm" : (scipy.integrate.simps(EDTM)),
+            "accp_edtm" : (len(EDTM)),
             
         }
 
     print("Terminate","Selection rules have been applied, plotting results")
     print("Using prescale factors: PS1 %.0f, PS3 %.0f\n" % (PS1,PS3))
     print("Total number of events: %.0f\n" % (len(EventType)))
-    print("Number of EDTM  Events: %.0f\n" % (scipy.integrate.simps(EDTM)))
+    print("Number of EDTM  Events: %.0f\n" % (len(EDTM)))
     print("Number of TRIG1 Events: %.0f\n" % (PS1*scipy.integrate.simps(TRIG1_cut)))
     print("Number of TRIG3 Events: %.0f\n" % (PS3*scipy.integrate.simps(TRIG3_cut)))
     print("Number of TRIG5 Events: %.0f\n\n" % scipy.integrate.simps(TRIG5))

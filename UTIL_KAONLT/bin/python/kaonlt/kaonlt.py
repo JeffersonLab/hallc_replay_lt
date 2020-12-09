@@ -287,6 +287,8 @@ class pyPlot(pyDict):
                         plusfout = self.REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/coin_time.cuts"
                     elif "current" in cutplus:
                         plusfout = self.REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/current.cuts"
+                    elif "misc" in cutplus:
+                        plusfout = self.REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/misc.cuts"
                     else:
                         print("!!!!ERROR!!!!: Added cut %s not defined in /UTIL_KAONLT/DB/CUTS/general/" % cutplus) # ERROR 2
                         print("Cut must be pid, track, accept, coin_time or current")
@@ -357,6 +359,8 @@ class pyPlot(pyDict):
                             minusfout = self.REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/coin_time.cuts"
                         elif "current" in cutminus:
                             minusfout = self.REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/current.cuts"
+                        elif "misc" in cutminus:
+                            minusfout = self.REPLAYPATH+"/UTIL_KAONLT/DB/CUTS/general/misc.cuts"
                         elif "none" in cutminus:
                             minusfout = "none"
                         else:
@@ -505,6 +509,27 @@ class pyPlot(pyDict):
                     else:
                         continue
                 db_cuts.append(cut.rstrip())
+            elif "misc" in cut:
+                tmp = cut.split("misc")
+                for val in tmp:
+                    if "." in val:
+                        tmp = val.split(")")[0]
+                        tmp = tmp.split(".")[1]
+                        fout = self.REPLAYPATH+"/UTIL_KAONLT/DB/PARAM/Misc_Parameters.csv"
+                        try:
+                            data = dict(pd.read_csv(fout))
+                        except IOError:
+                            print("ERROR 9: %s not found in %s" % (tmp,fout))
+                        for i,evt in enumerate(data['Run_Start']):
+                            if data['Run_Start'][i] <= np.int64(runNum) <= data['Run_End'][i]:
+                                cut  = cut.replace("misc."+tmp,str(data[tmp][i]))
+                                pass
+                            else:
+                                # print("!!!!ERROR!!!!: Run %s not found in range %s-%s" % (np.int64(runNum),data['Run_Start'][i],data['Run_End'][i])) # Error 10
+                                continue
+                    else:
+                        continue
+                db_cuts.append(cut.rstrip())                
             # Find which cut is being called. This elif statement is a little different since it only
             # grabs a threshold current value. This is hardcoded for now, eventually need to change.
             elif "current" in cut:

@@ -3,7 +3,7 @@
 #
 # Description:
 # ================================================================
-# Time-stamp: "2020-12-09 12:25:17 trottar"
+# Time-stamp: "2020-12-10 13:49:11 trottar"
 # ================================================================
 #
 # Author:  Richard L. Trotta III <trotta@cua.edu>
@@ -90,7 +90,7 @@ def calc_yield():
     for i,evt in enumerate(lumi_data["run number"])]
     yield_HMS_track = [(lumi_data["h_int_goodscin_evts"][i])/(lumi_data["charge"][i]*cpuLT_HMS[i]*(1-lumi_data["etrack"][i]))
     for i,evt in enumerate(lumi_data["run number"])]
-    yield_HMS_scalar = [(lumi_data["TRIG3_scaler"][i])/(lumi_data["charge"][i])
+    yield_HMS_scalar = [(lumi_data["TRIG3_scaler"][i]-lumi_data["sent_edtm"][i])/(lumi_data["charge"][i])
                  for i,evt in enumerate(lumi_data["run number"])]
     yield_HMS_scalar = pd.Series(yield_HMS_scalar).fillna(0).tolist()
     yield_HMS_notrack = pd.Series(yield_HMS_notrack).fillna(0).tolist()
@@ -99,7 +99,7 @@ def calc_yield():
     for i,evt in enumerate(lumi_data["run number"])]
     yield_SHMS_track = [(lumi_data["h_int_goodscin_evts"][i])/(lumi_data["charge"][i]*cpuLT_SHMS[i]*(lumi_data["ptrack"][i]))
     for i,evt in enumerate(lumi_data["run number"])]
-    yield_SHMS_scalar = [(lumi_data["TRIG1_scaler"][i])/(lumi_data["charge"][i])
+    yield_SHMS_scalar = [(lumi_data["TRIG1_scaler"][i]-lumi_data["sent_edtm"][i])/(lumi_data["charge"][i])
                   for i,evt in enumerate(lumi_data["run number"])]
     yield_SHMS_scalar = pd.Series(yield_SHMS_scalar).fillna(0).tolist()
     yield_SHMS_notrack = pd.Series(yield_SHMS_notrack).fillna(0).tolist()
@@ -121,51 +121,51 @@ def calc_yield():
 
 
     for i,curr in enumerate(current):
-        if curr == min(current):
+        if curr == max(current):
             if lumi_data["ps3"][i] !=0:
-                min_yield_HMS_scalar = yield_HMS_scalar[i]
+                max_yield_HMS_scalar = yield_HMS_scalar[i]
             else:
-                min_yield_HMS_scalar = 1
+                max_yield_HMS_scalar = 1
             if lumi_data["ps1"][i] !=0:
-                min_yield_SHMS_scalar = yield_SHMS_scalar[i]
+                max_yield_SHMS_scalar = yield_SHMS_scalar[i]
             else:
-                min_yield_SHMS_scalar = 1
+                max_yield_SHMS_scalar = 1
                 
     for i,curr in enumerate(current):
-        if curr == min(current):
+        if curr == max(current):
             if lumi_data["ps3"][i] !=0:
-                min_yield_HMS_notrack = yield_HMS_notrack[i]
+                max_yield_HMS_notrack = yield_HMS_notrack[i]
             else:
-                min_yield_HMS_notrack = 1
+                max_yield_HMS_notrack = 1
             if lumi_data["ps1"][i] !=0:
-                min_yield_SHMS_notrack = yield_SHMS_notrack[i]
+                max_yield_SHMS_notrack = yield_SHMS_notrack[i]
             else:
-                min_yield_SHMS_notrack = 1
+                max_yield_SHMS_notrack = 1
 
     for i,curr in enumerate(current):
-        if curr == min(current):
+        if curr == max(current):
             if lumi_data["ps3"][i] !=0:
-                min_yield_HMS_track = yield_HMS_track[i]
+                max_yield_HMS_track = yield_HMS_track[i]
             else:
-                min_yield_HMS_track = 1
+                max_yield_HMS_track = 1
             if lumi_data["ps1"][i] !=0:
-                min_yield_SHMS_track = yield_SHMS_track[i]
+                max_yield_SHMS_track = yield_SHMS_track[i]
             else:
-                min_yield_SHMS_track = 1
+                max_yield_SHMS_track = 1
 
-    yieldRel_HMS_scalar = [yield_HMS_scalar[i]/min_yield_HMS_scalar for i,evt in enumerate(lumi_data["run number"])]
+    yieldRel_HMS_scalar = [yield_HMS_scalar[i]/max_yield_HMS_scalar for i,evt in enumerate(lumi_data["run number"])]
     # yieldRel_HMS_scalar = pd.Series(yieldRel_HMS_scalar).fillna(0).tolist()
-    yieldRel_SHMS_scalar = [yield_SHMS_scalar[i]/min_yield_SHMS_scalar for i,evt in enumerate(lumi_data["run number"])]
+    yieldRel_SHMS_scalar = [yield_SHMS_scalar[i]/max_yield_SHMS_scalar for i,evt in enumerate(lumi_data["run number"])]
     # yieldRel_SHMS_scalar = pd.Series(yieldRel_SHMS_scalar).fillna(0).tolist()
 
-    yieldRel_HMS_notrack = [yield_HMS_notrack[i]/min_yield_HMS_notrack for i,evt in enumerate(lumi_data["run number"])]
+    yieldRel_HMS_notrack = [yield_HMS_notrack[i]/max_yield_HMS_notrack for i,evt in enumerate(lumi_data["run number"])]
     # yieldRel_HMS_notrack = pd.Series(yieldRel_HMS_notrack).fillna(0).tolist()
-    yieldRel_SHMS_notrack = [yield_SHMS_notrack[i]/min_yield_SHMS_notrack for i,evt in enumerate(lumi_data["run number"])]
+    yieldRel_SHMS_notrack = [yield_SHMS_notrack[i]/max_yield_SHMS_notrack for i,evt in enumerate(lumi_data["run number"])]
     # yieldRel_SHMS_notrack = pd.Series(yieldRel_SHMS_notrack).fillna(0).tolist()
 
-    yieldRel_HMS_track = [yield_HMS_track[i]/min_yield_HMS_track for i,evt in enumerate(lumi_data["run number"])]
+    yieldRel_HMS_track = [yield_HMS_track[i]/max_yield_HMS_track for i,evt in enumerate(lumi_data["run number"])]
     # yieldRel_HMS_track = pd.Series(yieldRel_HMS_track).fillna(0).tolist()
-    yieldRel_SHMS_track = [yield_SHMS_track[i]/min_yield_SHMS_track for i,evt in enumerate(lumi_data["run number"])]
+    yieldRel_SHMS_track = [yield_SHMS_track[i]/max_yield_SHMS_track for i,evt in enumerate(lumi_data["run number"])]
     # yieldRel_SHMS_track = pd.Series(yieldRel_SHMS_track).fillna(0).tolist()
 
     return [current,rate_HMS,rate_SHMS,cpuLT_HMS,cpuLT_SHMS,uncern_HMS_evts_scalar,uncern_SHMS_evts_scalar,yield_HMS_scalar,yield_SHMS_scalar,yieldRel_HMS_scalar,yieldRel_SHMS_scalar,uncern_HMS_evts_notrack,uncern_SHMS_evts_notrack,yield_HMS_notrack,yield_SHMS_notrack,yieldRel_HMS_notrack,yieldRel_SHMS_notrack,uncern_HMS_evts_track,uncern_SHMS_evts_track,yield_HMS_track,yield_SHMS_track,yieldRel_HMS_track,yieldRel_SHMS_track,count_HMS,count_SHMS,etrack_HMS,ptrack_SHMS]

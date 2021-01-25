@@ -2321,7 +2321,7 @@ hpartmass = 0.000511
 helicity_freq = 120.0007547169
 
 # 4.5 GeV Q2 = 0.425 
-8808 - 8809
+8808 - 8810
 gpbeam = 4.559
 gtargmass_amu = 1.00794
 hpcentral = 1.662

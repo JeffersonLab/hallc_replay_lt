@@ -1038,7 +1038,7 @@ g_ctp_parm_filename       = "DBASE/COIN/KaonLT_Calib/Offline8785.param"
 g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
 
 ### Calib from run 8800 - Summer 19 RP ###
-8880-99999
+8800-99999
 g_ctp_parm_filename       = "DBASE/COIN/KaonLT_Calib/Offline8800.param"
 g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
 

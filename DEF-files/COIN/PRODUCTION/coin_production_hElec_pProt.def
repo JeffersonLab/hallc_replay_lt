@@ -1,3 +1,4 @@
+block g.*
 block T.coin.*
 block CTime*
 block CTime.eKCoinTime_ROC1

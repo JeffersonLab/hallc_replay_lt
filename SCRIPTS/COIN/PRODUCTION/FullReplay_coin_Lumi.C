@@ -28,7 +28,7 @@ void FullReplay_coin_Lumi (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./cache");
 
   //const char* RunFileNamePattern = "raw/coin_all_%05d.dat";
-  const char* ROOTFileNamePattern = "ROOTfiles/coin_replay_Full_Lumi_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfiles/Analysis/Lumi/coin_replay_Full_Lumi_%d_%d.root";
 
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
@@ -253,11 +253,11 @@ void FullReplay_coin_Lumi (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Define cuts file
   analyzer->SetCutFile("DEF-files/COIN/PRODUCTION/CUTS/luminosity_coin_production_cuts.def");  // optional
   // File to record accounting information for cuts
-  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/COIN/PRODUCTION/summary_Lumi_%d_%d.report", RunNumber, MaxEvent));  // optional
+  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Analysis/Lumi/summary_Lumi_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template
   analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/coin_Lumi.template",
-			 Form("REPORT_OUTPUT/COIN/PRODUCTION/replay_coin_Lumi_%d_%d.report", RunNumber, MaxEvent));  // optional
+			 Form("REPORT_OUTPUT/Analysis/Lumi/replay_coin_Lumi_%d_%d.report", RunNumber, MaxEvent));  // optional
 
 }

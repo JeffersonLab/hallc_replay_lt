@@ -1,5 +1,7 @@
 void FullReplay_Offline (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
+  // SK 04/03/21 - Outdated/not used? Delete in a few months if not touched again
+
   // Get RunNumber and MaxEvent if not provided.
   if(RunNumber == 0) {
     cout << "Enter a Run Number (-1 to exit): ";
@@ -28,7 +30,7 @@ void FullReplay_Offline (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./cache");
 
   //const char* RunFileNamePattern = "raw/coin_all_%05d.dat";
-  const char* ROOTFileNamePattern = "ROOTfilesMKJTest/Full_coin_replay_Offline_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfiles/Analysis/General/Full_coin_replay_Offline_%d_%d.root";
 
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);

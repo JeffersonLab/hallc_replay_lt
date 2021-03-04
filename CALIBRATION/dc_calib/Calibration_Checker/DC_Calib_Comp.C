@@ -44,12 +44,12 @@ void DC_Calib_Comp(string Det = "", TString Run_List="")
 
   // Set some paths
   if(Hostname.Contains("farm")){
-    Outpath = "/volatile/hallc/c-kaonlt/${USER}/OUTPUT/DC_Calib";
-    Histopath = "/volatile/hallc/c-kaonlt/${USER}/HISTOGRAMS/DC_Calib";
+    Outpath = "/volatile/hallc/c-pionlt/${USER}/OUTPUT/DC_Calib";
+    Histopath = "/volatile/hallc/c-pionlt/${USER}/HISTOGRAMS/DC_Calib";
   }
   else if(Hostname.Contains("qcd")){
-    Outpath = "/volatile/hallc/c-kaonlt/${USER}/OUTPUT/DC_Calib";
-    Histopath = "/volatile/hallc/c-kaonlt/${USER}/HISTOGRAMS/DC_Calib";
+    Outpath = "/volatile/hallc/c-pionlt/${USER}/OUTPUT/DC_Calib";
+    Histopath = "/volatile/hallc/c-pionlt/${USER}/HISTOGRAMS/DC_Calib";
     Rootpath= "/cache/hallc/kaonlt/sjdkay/ROOTfiles/DC_Calib/Pass1_RateTest";
   }
   else if (Hostname.Contains("phys.uregina.ca")){

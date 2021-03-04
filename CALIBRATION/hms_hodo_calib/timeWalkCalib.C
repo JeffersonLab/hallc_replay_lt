@@ -141,7 +141,7 @@ Double_t calcMinOrMax(Double_t *array, UInt_t iplane, TString minOrmax) {
 //=: Level 2
 //=:=:=:=:=:=:
 
-// Perform the timw-walk fits
+// Perform the time-walk fits
 void doTwFits(UInt_t iplane, UInt_t iside, UInt_t ipaddle) {
   // Draw fits on canvas
   twFitCan[iplane][iside]->cd(ipaddle+1);

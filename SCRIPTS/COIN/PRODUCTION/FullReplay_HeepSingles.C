@@ -28,7 +28,7 @@ void FullReplay_HeepSingles (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./cache");
 
   //const char* RunFileNamePattern = "raw/coin_all_%05d.dat";
-  const char* ROOTFileNamePattern = "ROOTfiles/coin_replay_Full_Heep_Singles_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfiles/Analysis/HeeP/coin_replay_Full_Heep_Singles_%d_%d.root";
 
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
@@ -252,7 +252,7 @@ void FullReplay_HeepSingles (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Define cuts file
   analyzer->SetCutFile("DEF-files/COIN/PRODUCTION/CUTS/HeepSingles_Production_Cuts.def");  // optional
   // File to record accounting information for cuts
-  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/COIN/PRODUCTION/summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
+  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Analysis/HeeP/summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template

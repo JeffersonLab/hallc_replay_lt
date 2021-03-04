@@ -28,7 +28,7 @@ void FullReplay_Offline_SetPedDef (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./cache");
 
   //const char* RunFileNamePattern = "raw/coin_all_%05d.dat";
-  const char* ROOTFileNamePattern = "ROOTfiles/Full_coin_replay_Offline_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfiles/Calib/General/Full_coin_replay_Offline_%d_%d.root";
 
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);

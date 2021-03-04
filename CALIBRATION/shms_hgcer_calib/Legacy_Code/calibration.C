@@ -506,7 +506,7 @@ void calibration::Terminate()
 
   //gStyle->SetOptStat(1000000001);
   // Path to save the print pdf file 
-  TString foutname = "/u/group/c-kaonlt/USERS/vijay/hallc_replay_lt/CALIBRATION/shms_hgcer_calib/Calibration_plots/Calibration_plots";
+  TString foutname = "/u/group/c-pionlt/USERS/vijay/hallc_replay_lt/CALIBRATION/shms_hgcer_calib/Calibration_plots/Calibration_plots";
 
   //Print all plots in a single pdf 
   TString outputpdf = foutname + ".pdf";

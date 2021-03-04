@@ -23,7 +23,7 @@ void replay_production_hms_coin_all(Int_t RunNumber=0, Int_t MaxEvent=0) {
   pathList.push_back("./raw/../raw.copiedtotape");
   pathList.push_back("./cache");
 
-  const char* ROOTFileNamePattern = "ROOTfiles/hms_coin_replay_production_all_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfiles/Analysis/General/hms_coin_replay_production_all_%d_%d.root";
 
   // Load Global parameters
   // Add variables to global list.
@@ -159,11 +159,11 @@ void replay_production_hms_coin_all(Int_t RunNumber=0, Int_t MaxEvent=0) {
   // Define cuts file
   analyzer->SetCutFile("DEF-files/HMS/PRODUCTION/CUTS/hstackana_production_cuts.def");    // optional
   // File to record cuts accounting information for cuts
-  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/HMS/PRODUCTION/summary_coin_all_production_%d_%d.report", RunNumber, MaxEvent));    // optional
+  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Analysis/General/summary_coin_all_production_%d_%d.report", RunNumber, MaxEvent));    // optional
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template.
   analyzer->PrintReport("TEMPLATES/HMS/PRODUCTION/hstackana_production.template",
-			Form("REPORT_OUTPUT/HMS/PRODUCTION/replay_hms_coin_all_production_%d_%d.report", RunNumber, MaxEvent));
+			Form("REPORT_OUTPUT/Analysis/General/replay_hms_coin_all_production_%d_%d.report", RunNumber, MaxEvent));
 
 }

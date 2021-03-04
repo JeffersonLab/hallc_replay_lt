@@ -23,7 +23,7 @@ void HMSDC_Calib_Check(Int_t RunNumber=0, Int_t MaxEvent=0) {
   pathList.push_back("./raw/../raw.copiedtotape");
   pathList.push_back("./cache");
 
-  const char* ROOTFileNamePattern = "ROOTfilesDCCalib/HMS_DC_Calib_Check_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfiles/Calib/DC/HMS_DC_Calib_Check_%d_%d.root";
 
    // Load Global parameters
   // Add variables to global list.

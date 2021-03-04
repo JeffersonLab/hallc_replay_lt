@@ -36,9 +36,9 @@ cd "$REPLAYPATH/CALIBRATION/ref_times"
 
 while IFS='' read -r line || [[ -n "$line" ]]; do
     runNum=$line
-    if [ -f "$REPLAYPATH/ROOTfiles/Full_coin_replay_Offline_${runNum}_-1.root" ]; then
+    if [ -f "$REPLAYPATH/ROOTfiles/Calib/Timing/Full_coin_replay_Offline_${runNum}_-1.root" ]; then
 	eval "${REPLAYPATH}/CALIBRATION/ref_times/RefTCuts.sh ${PREFIX} ${runNum} -1"
-    elif [ ! -f "$REPLAYPATH/ROOTfiles/Full_coin_replay_Offline_${runNum}_-1.root" ]; then
+    elif [ ! -f "$REPLAYPATH/ROOTfiles/Calib/Timing/Full_coin_replay_Offline_${runNum}_-1.root" ]; then
 	echo "$REPLAYPATH/ROOTfiles/Full_coin_replay_Offline_${runNum}_-1.root not found, skipping"
 	if [ ! -f "$REPLAYPATH/CALIBRATION/ref_times/Skipped_Runs_${inputFile}" ]; then
 	    echo "runNum" > "$REPLAYPATH/CALIBRATION/ref_times/Skipped_Runs"

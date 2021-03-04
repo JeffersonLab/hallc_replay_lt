@@ -311,7 +311,7 @@ void THcShowerCalib::Init() {
 
   gROOT->Reset();
 
-  char* fname = Form("ROOTfiles/%s_%d_%d.root",fPrefix.c_str(), fRunNumber, fNstopRequested);
+  char* fname = Form("ROOTfiles/Calib/Cal/%s_%d_%d.root",fPrefix.c_str(), fRunNumber, fNstopRequested);
   //   char* fname = Form("kaonRoot/%s.root",fPrefix.c_str());
  cout << "THcShowerCalib::Init: Root file name = " << fname << endl;
 

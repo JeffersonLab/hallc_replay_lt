@@ -1,3 +1,6 @@
+04/03/21 - SK, note, need to actually make some slimmed down timing replays for use here. They're now pointed to ROOTfiles/Calib/Timing e.t.c. to check stuff, but no replays actually write anything here YET
+Should make some new replay scripts that DO and only include the relevant stuff for these scripts to keep file sizes down.
+
 Run the .sh script if you want to clean things up automatically as they finish, you can also run the script with root directly via 
 
 root -l (-b) run_DetTCuts.C

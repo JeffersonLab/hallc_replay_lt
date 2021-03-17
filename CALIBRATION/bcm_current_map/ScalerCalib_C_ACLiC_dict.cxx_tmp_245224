@@ -1,0 +1,157 @@
+// Do NOT change. Changes will be lost next time file is generated
+
+#define R__DICTIONARY_FILENAME dIudIgroupdIcmIpionltdIUSERSdIsjdkaydIhallc_replay_ltdICALIBRATIONdIbcm_current_mapdIScalerCalib_C_ACLiC_dict
+
+/*******************************************************************/
+#include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
+#define G__DICTIONARY
+#include "RConfig.h"
+#include "TClass.h"
+#include "TDictAttributeMap.h"
+#include "TInterpreter.h"
+#include "TROOT.h"
+#include "TBuffer.h"
+#include "TMemberInspector.h"
+#include "TInterpreter.h"
+#include "TVirtualMutex.h"
+#include "TError.h"
+
+#ifndef G__ROOT
+#define G__ROOT
+#endif
+
+#include "RtypesImp.h"
+#include "TIsAProxy.h"
+#include "TFileMergeInfo.h"
+#include <algorithm>
+#include "TCollectionProxyInfo.h"
+/*******************************************************************/
+
+#include "TDataMember.h"
+
+// Since CINT ignores the std namespace, we need to do so in this file.
+namespace std {} using namespace std;
+
+// Header files passed as explicit arguments
+#include "/u/group/c-pionlt/USERS/sjdkay/hallc_replay_lt/CALIBRATION/bcm_current_map/./ScalerCalib.C"
+
+// Header files passed via #pragma extra_include
+
+   namespace ROOT {
+      inline ::ROOT::TGenericClassInfo *GenerateInitInstance();
+      static TClass *ROOT_Dictionary();
+
+      // Function generating the singleton type initializer
+      inline ::ROOT::TGenericClassInfo *GenerateInitInstance()
+      {
+         static ::ROOT::TGenericClassInfo 
+            instance("ROOT", 0 /*version*/, "Rtypes.h", 102,
+                     ::ROOT::Internal::DefineBehavior((void*)0,(void*)0),
+                     &ROOT_Dictionary, 0);
+         return &instance;
+      }
+      // Insure that the inline function is _not_ optimized away by the compiler
+      ::ROOT::TGenericClassInfo *(*_R__UNIQUE_DICT_(InitFunctionKeeper))() = &GenerateInitInstance;  
+      // Static variable to force the class initialization
+      static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstance(); R__UseDummy(_R__UNIQUE_DICT_(Init));
+
+      // Dictionary for non-ClassDef classes
+      static TClass *ROOT_Dictionary() {
+         return GenerateInitInstance()->GetClass();
+      }
+
+   }
+
+namespace ROOT {
+   static void delete_ScalerCalib(void *p);
+   static void deleteArray_ScalerCalib(void *p);
+   static void destruct_ScalerCalib(void *p);
+
+   // Function generating the singleton type initializer
+   static TGenericClassInfo *GenerateInitInstanceLocal(const ::ScalerCalib*)
+   {
+      ::ScalerCalib *ptr = 0;
+      static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::ScalerCalib >(0);
+      static ::ROOT::TGenericClassInfo 
+         instance("ScalerCalib", ::ScalerCalib::Class_Version(), "ScalerCalib.h", 17,
+                  typeid(::ScalerCalib), ::ROOT::Internal::DefineBehavior(ptr, ptr),
+                  &::ScalerCalib::Dictionary, isa_proxy, 4,
+                  sizeof(::ScalerCalib) );
+      instance.SetDelete(&delete_ScalerCalib);
+      instance.SetDeleteArray(&deleteArray_ScalerCalib);
+      instance.SetDestructor(&destruct_ScalerCalib);
+      return &instance;
+   }
+   TGenericClassInfo *GenerateInitInstance(const ::ScalerCalib*)
+   {
+      return GenerateInitInstanceLocal((::ScalerCalib*)0);
+   }
+   // Static variable to force the class initialization
+   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const ::ScalerCalib*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
+} // end of namespace ROOT
+
+//______________________________________________________________________________
+atomic_TClass_ptr ScalerCalib::fgIsA(0);  // static to hold class pointer
+
+//______________________________________________________________________________
+const char *ScalerCalib::Class_Name()
+{
+   return "ScalerCalib";
+}
+
+//______________________________________________________________________________
+const char *ScalerCalib::ImplFileName()
+{
+   return ::ROOT::GenerateInitInstanceLocal((const ::ScalerCalib*)0x0)->GetImplFileName();
+}
+
+//______________________________________________________________________________
+int ScalerCalib::ImplFileLine()
+{
+   return ::ROOT::GenerateInitInstanceLocal((const ::ScalerCalib*)0x0)->GetImplFileLine();
+}
+
+//______________________________________________________________________________
+TClass *ScalerCalib::Dictionary()
+{
+   fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::ScalerCalib*)0x0)->GetClass();
+   return fgIsA;
+}
+
+//______________________________________________________________________________
+TClass *ScalerCalib::Class()
+{
+   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::ScalerCalib*)0x0)->GetClass(); }
+   return fgIsA;
+}
+
+//______________________________________________________________________________
+void ScalerCalib::Streamer(TBuffer &R__b)
+{
+   // Stream an object of class ScalerCalib.
+
+   if (R__b.IsReading()) {
+      R__b.ReadClassBuffer(ScalerCalib::Class(),this);
+   } else {
+      R__b.WriteClassBuffer(ScalerCalib::Class(),this);
+   }
+}
+
+namespace ROOT {
+   // Wrapper around operator delete
+   static void delete_ScalerCalib(void *p) {
+      delete ((::ScalerCalib*)p);
+   }
+   static void deleteArray_ScalerCalib(void *p) {
+      delete [] ((::ScalerCalib*)p);
+   }
+   static void destruct_ScalerCalib(void *p) {
+      typedef ::ScalerCalib current_t;
+      ((current_t*)p)->~current_t();
+   }
+} // end of namespace ROOT for class ::ScalerCalib
+

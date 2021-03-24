@@ -1,0 +1,17 @@
+; DJM For Fall '18, which had two bcm calib runs, 4755, 6320.
+; Use BCM1 for best charge (nominal 0.5% uncertainty). 
+; For BCM1,2, I averaged calib runs 4755 and 6320. 
+; For other BCMs, I used run 6320 if available, otherwise 4755.
+gNumBCMs=6
+gBCM_Names  = "BCM1   BCM2   Unser   BCM4A   BCM4B   BCM4C"
+gBCM_Gain   = 5712,   5531,   5020,   9445,   2126,   6343
+gBCM_Offset = 253500, 251000, 325000, -259,    226,    852
+; The following two lines are to correct for ~1% saturation 
+; in BCM1,2 between 50 and 70 muA. 
+gBCM_SatOffset=   50.,   50.,  1000., 1000., 1000.,   1000. 
+gBCM_SatQuadratic=  0.00175,  0.002,  0.0,  0.0,  0.0,  0.0 
+; index = 0 to gNumBCMs-1
+; For the current threshold, I switched from BCM4A to BCM1 .     
+gBCM_Current_threshold_index = 0
+;gBCM_Current_threshold_index = 3
+gBCM_Current_threshold = 5.0

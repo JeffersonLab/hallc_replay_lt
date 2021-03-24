@@ -44,8 +44,9 @@ void FullReplay_Offline_SetPedDef (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHcDetectorMap = new THcDetectorMap();
   gHcDetectorMap->Load("MAPS/COIN/DETEC/coin.map");
 
-     // Dec data
-   gHaApps->Add(new Podd::DecData("D","Decoder raw data"));
+  // Dec data
+  gHaApps->Add(new Podd::DecData("D","Decoder raw data"));
+
   //=:=:=:=
   // SHMS 
   //=:=:=:=
@@ -102,6 +103,13 @@ void FullReplay_Offline_SetPedDef (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pscaler->SetDelayedType(129);
   pscaler->SetUseFirstEvent(kTRUE);
   gHaEvtHandlers->Add(pscaler);
+
+  //Add SHMS event handler for helicity scalers
+  THcHelicityScaler *phelscaler = new THcHelicityScaler("P", "Hall C helicity scaler");
+  //phelscaler->SetDebugFile("PHelScaler.txt");
+  phelscaler->SetROC(8);
+  phelscaler->SetUseFirstEvent(kTRUE);
+  gHaEvtHandlers->Add(phelscaler);
 
   //=:=:=
   // HMS 
@@ -181,15 +189,7 @@ void FullReplay_Offline_SetPedDef (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   coin->SetEvtType(1);
   coin->AddEvtType(2);
   TRG->AddDetector(coin);
- 
-  // THcHelicityScaler *helscaler = new THcHelicityScaler("HS", "Hall C helicity scalers"); 
-  // helscaler->SetROC(8);
-  // helscaler->SetUseFirstEvent(kTRUE);
-  // gHaEvtHandlers->Add(helscaler);
-  // THcHelicity* helicity = new THcHelicity("helicity","Helicity Detector");
-  // TRG->AddDetector(helicity); 
-  // helicity->SetHelicityScaler(helscaler);
-  
+   
   //Add coin physics module THcCoinTime::THcCoinTime (const char *name, const char* description, const char* hadArmName, 
   // const char* elecArmName, const char* coinname) :
   THcCoinTime* coinTime = new THcCoinTime("CTime", "Coincidende Time Determination", "P", "H", "T.coin");

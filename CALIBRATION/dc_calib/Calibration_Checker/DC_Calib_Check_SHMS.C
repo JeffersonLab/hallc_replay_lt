@@ -147,7 +147,7 @@ void DC_Calib_Check_SHMS::Terminate()
     ResidualExclPl[i] = dynamic_cast<TH1F*> (GetOutputList()->FindObject(Name));
   }             
   
-  TFile *Histogram_file = new TFile(Form("HISTOGRAMS/SHMS_DCCalib_Check_Run%i_Pt%i.root", Run, Part),"RECREATE");
+  TFile *Histogram_file = new TFile(Form("/group/c-pionlt/USERS/${USER}/hallc_replay_lt/HISTOGRAMS/Calib/DC/SHMS_DCCalib_Check_Run%i_Pt%i.root", Run, Part),"RECREATE");
 
   h1_1u1_DriftDistance->Write();
   h1_1u2_DriftDistance->Write();

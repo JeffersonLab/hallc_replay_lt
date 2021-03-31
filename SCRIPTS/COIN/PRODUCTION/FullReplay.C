@@ -29,6 +29,8 @@ void FullReplay (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   //const char* RunFileNamePattern = "raw/coin_all_%05d.dat";
   const char* ROOTFileNamePattern = "ROOTfiles/Analysis/General/coin_replay_Full_%d_%d.root";
+  //const char* ROOTFileNamePattern = "ROOTfiles/Analysis/General/coin_replay_Full_TestDefv1_%d_%d.root";
+  //const char* ROOTFileNamePattern = "ROOTfiles/Analysis/General/coin_replay_Full_TestDefv2_%d_%d.root";
 
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
@@ -213,7 +215,7 @@ void FullReplay (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Set up the analyzer - we use the standard one,
   // but this could be an experiment-specific one as well.
   // The Analyzer controls the reading of the data, executes
-  // tests/cuts, loops over Acpparatus's and PhysicsModules,
+  // tests/cuts, loops over Apparatus's and PhysicsModules,
   // and executes the output routines.
   THcAnalyzer* analyzer = new THcAnalyzer;
 
@@ -249,7 +251,8 @@ void FullReplay (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file+
-  analyzer->SetOdefFile("DEF-files/COIN/PRODUCTION/coin_production_hElec_pProt.def");
+  //analyzer->SetOdefFile("DEF-files/COIN/PRODUCTION/Full_Replay_Pass2_Coin.def"); // Original version with EVERYTHING
+  analyzer->SetOdefFile("DEF-files/COIN/PRODUCTION/Full_Replay_Pass2_Coin_v2.def"); // New version, slimmed down
   // Define cuts file
   analyzer->SetCutFile("DEF-files/COIN/PRODUCTION/CUTS/coin_production_cuts.def");  // optional
   // File to record accounting information for cuts

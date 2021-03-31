@@ -31,7 +31,10 @@ void HMSDC_Calib_Coin_Pt1 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   const char* ROOTFileNamePattern = "ROOTfiles/Calib/DC/HMS_DC_Calib_Pt1_%d_%d.root";
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
-  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_DCCalib_Offline.database");
+  // Original version, used online calib files as base
+  //gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_DCCalib_Offline.database");
+  // New version, uses latest calibrations
+  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_DCCalib_Offline_v2.database");
   gHcParms->Load(gHcParms->GetString("g_ctp_database_filename"), RunNumber);
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);

@@ -48,8 +48,8 @@ block P.hgcer.npeSum
 block P.hgcer.xAtCer
 block P.hgcer.yAtCer
 block P.hod.starttime
-block H.kin.primary.*
-block P.kin.primary.*
+block H.kin.*
+block P.kin.*
 block T.coin.pTRIG*
 block T.coin.pTRIG5_ROC2_tdcTime
 block T.coin.pEDTM_tdcTime

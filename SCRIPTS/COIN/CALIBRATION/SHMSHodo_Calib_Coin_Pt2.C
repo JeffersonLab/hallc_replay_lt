@@ -233,9 +233,9 @@ void SHMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file+
-  analyzer->SetOdefFile("DEF-files/COIN/CALIBRATION/SHMS_Calib.def");
+  analyzer->SetOdefFile("DEF-files/CALIBRATION/SHMS_Calib.def");
   // Define cuts file
-  analyzer->SetCutFile("DEF-files/COIN/CALIBRATION/SHMS_Calib_cuts.def");  // optional
+  analyzer->SetCutFile("DEF-files/CALIBRATION/SHMS_Calib_cuts.def");  // optional
   // Start the actual analysis.
   analyzer->Process(run);
 }

@@ -251,10 +251,10 @@ void FullReplay (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file+
-  //analyzer->SetOdefFile("DEF-files/COIN/PRODUCTION/Full_Replay_Pass2_Coin.def"); // Original version with EVERYTHING
-  analyzer->SetOdefFile("DEF-files/COIN/PRODUCTION/Full_Replay_Pass2_Coin_v2.def"); // New version, slimmed down
+  //analyzer->SetOdefFile("DEF-files/PRODUCTION/Full_Replay_Pass2_Coin.def"); // Original version with EVERYTHING
+  analyzer->SetOdefFile("DEF-files/PRODUCTION/Full_Replay_Pass2_Coin_v2.def"); // New version, slimmed down
   // Define cuts file
-  analyzer->SetCutFile("DEF-files/COIN/PRODUCTION/CUTS/coin_production_cuts.def");  // optional
+  analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/coin_production_cuts.def");  // optional
   // File to record accounting information for cuts
   analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Analysis/General/summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.

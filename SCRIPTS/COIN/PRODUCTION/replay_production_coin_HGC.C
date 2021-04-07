@@ -253,9 +253,9 @@ void replay_production_coin_HGC (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
     // Define DEF-file+
-  analyzer->SetOdefFile("DEF-files/COIN/PRODUCTION/coin_production_hElec_pProt.def");
+  analyzer->SetOdefFile("DEF-files/PRODUCTION/coin_production_hElec_pProt.def");
   // Define cuts file
-  analyzer->SetCutFile("DEF-files/COIN/PRODUCTION/CUTS/coin_production_cuts.def");  // optional
+  analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/coin_production_cuts.def");  // optional
   // File to record accounting information for cuts
   analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Calib/HGC/summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.
@@ -265,9 +265,9 @@ void replay_production_coin_HGC (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   Form("REPORT_OUTPUT/Calib/HGC/replay_coin_production_%d_%d.report", RunNumber, MaxEvent));  // optional
 
   // Define DEF-file+
-  //analyzer->SetOdefFile("DEF-files/COIN/PRODUCTION/coin_production_KLT.def");
+  //analyzer->SetOdefFile("DEF-files/PRODUCTION/coin_production_KLT.def");
   // Define cuts file
-  //analyzer->SetCutFile("DEF-files/COIN/PRODUCTION/coin_production_cuts_KLT.def");  // optional
+  //analyzer->SetCutFile("DEF-files/PRODUCTION/coin_production_cuts_KLT.def");  // optional
   // Need up to date report/output summary files!
   // File to record accounting information for cuts
   //analyzer->SetSummaryFile(Form("REPORT_OUTPUT/COIN/PRODUCTION/summary_production_%d_%d.report", RunNumber, MaxEvent)); // optional

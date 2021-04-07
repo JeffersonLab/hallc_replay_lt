@@ -136,9 +136,9 @@ void replay_coin_scalers (Int_t RunNumber = 0, Int_t MaxEvent = 0,Int_t FirstEve
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file
-  analyzer->SetOdefFile("DEF-files/COIN/EPICS/epics_short.def");
+  analyzer->SetOdefFile("DEF-files/EPICS/epics_short.def");
   // Define cuts file
-  analyzer->SetCutFile("DEF-files/COIN/SCALERS/coinscaler_cuts.def");  // optional
+  analyzer->SetCutFile("DEF-files/SCALERS/coinscaler_cuts.def");  // optional
   // File to record accounting information for cuts
   analyzer->SetSummaryFile(Form("REPORT_OUTPUT/COIN/SCALERS/summary_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.

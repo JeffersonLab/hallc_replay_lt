@@ -248,9 +248,9 @@ void FullReplay_HeepSingles (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file+
-  analyzer->SetOdefFile("DEF-files/COIN/PRODUCTION/HeepSingles_Production.def");
+  analyzer->SetOdefFile("DEF-files/PRODUCTION/HeepSingles_Production.def");
   // Define cuts file
-  analyzer->SetCutFile("DEF-files/COIN/PRODUCTION/CUTS/HeepSingles_Production_Cuts.def");  // optional
+  analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/HeepSingles_Production_Cuts.def");  // optional
   // File to record accounting information for cuts
   analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Analysis/HeeP/summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.

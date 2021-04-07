@@ -159,6 +159,7 @@ block P.aero.xAtAero
 block P.aero.yAtAero
 block P.aero.tot*
 block P.aero.npe*
+#block P.aero.RefTime
 
 # SHMS DC
 block P.dc.Ch1.*

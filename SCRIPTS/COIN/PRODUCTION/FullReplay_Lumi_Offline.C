@@ -240,7 +240,7 @@ void FullReplay_Lumi_Offline (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file+
-  analyzer->SetOdefFile("DEF-files/COIN/PRODUCTION/coin_production_hElec_pProt.def");
+  analyzer->SetOdefFile("DEF-files/PRODUCTION/coin_production_hElec_pProt.def");
   // Define cuts file
   analyzer->SetCutFile("UTIL_PION/DEF-files/luminosity_coin_production_cuts.def");  // optional
   // File to record accounting information for cuts

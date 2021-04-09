@@ -25,8 +25,8 @@ pTRIG4_ROC2     T.coin.pTRIG4_ROC2_tdcTimeRaw > 0
 pTRIG5_ROC2     T.coin.pTRIG5_ROC2_tdcTimeRaw > 0
 pTRIG6_ROC2	T.coin.pTRIG6_ROC2_tdcTimeRaw > 0
 
-ALL_HMS_events_NOEDTM       T.coin.hEDTM_tdcTime == 0.0 && ALL_HMS_events
-ALL_SHMS_events_NOEDTM      T.coin.pEDTM_tdcTime == 0.0 && ALL_SHMS_events
+ALL_HMS_events_NO_EDTM       T.coin.hEDTM_tdcTime == 0.0 && ALL_HMS_events
+ALL_SHMS_events_NO_EDTM      T.coin.pEDTM_tdcTime == 0.0 && ALL_SHMS_events
 ALL_COIN_events_NO_EDTM     T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime == 0.0 && ALL_COIN_events
 ALL_events_NO_EDTM          T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime == 0.0 && ALL_events
 

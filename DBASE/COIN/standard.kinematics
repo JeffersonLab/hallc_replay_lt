@@ -2247,6 +2247,8 @@ ptheta_lab = 13.140
 ppartmass = 0.139570
 hpartmass = 0.000511
 helicity_freq = 120.0007547169
+HMS_RF_Offset = 2
+SHMS_RF_Offset = 1
 
 # 4.5 GeV Q2 = 0.425 
 8797 - 8798

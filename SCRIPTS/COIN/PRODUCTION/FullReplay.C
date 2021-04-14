@@ -204,6 +204,10 @@ void FullReplay (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // const char* elecArmName, const char* coinname) :
   THcCoinTime* coinTime = new THcCoinTime("CTime", "Coincidende Time Determination", "P", "H", "T.coin");
   gHaPhysics->Add(coinTime);
+  //Add RF physics module THcRFTime::THcRFTime (const char *name, const char* description, const char* hadArmName, 
+  // const char* elecArmName, const char* RFname) :
+  THcRFTime* RFTime = new THcRFTime("RFTime", "RF Time Determination", "P", "H", "T.coin");
+  gHaPhysics->Add(RFTime);
 
   // Add event handler for prestart event 125.
   THcConfigEvtHandler* ev125 = new THcConfigEvtHandler("HC", "Config Event type 125");
@@ -245,7 +249,7 @@ void FullReplay (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   analyzer->SetEvent(event);
   // Set EPICS event type
-  analyzer->SetEpicsEvtType(180);
+  analyzer->SetEpicsEvtType(181);
   // Define crate map
   analyzer->SetCrateMapFileName("MAPS/db_cratemap.dat");
   // Define output ROOT file

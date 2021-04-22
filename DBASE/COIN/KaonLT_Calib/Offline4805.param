@@ -37,13 +37,13 @@ cminch=2.54
 
 ; HMS default calibration parameter files
 #include "PARAM/HMS/CER/hcer_calib_Autumn18.param"
-#include "PARAM/HMS/DC/CALIB/hdc_calib_4825.param"
-#include "PARAM/HMS/DC/CALIB/hdc_tzero_per_wire_4825.param"
+#include "PARAM/HMS/DC/CALIB/hdc_calib_4797.param"
+#include "PARAM/HMS/DC/CALIB/hdc_tzero_per_wire_4797.param"
 #include "PARAM/HMS/HODO/hhodo_calib_Autumn18.param"
 #include "PARAM/HMS/HODO/hhodo_TWcalib_Autumn18.param"
 #include "PARAM/HMS/HODO/hhodo_Vpcalib_Autumn18.param"
 #include "PARAM/HMS/AERO/haero_calib.param"
-#include "PARAM/HMS/CAL/CALIB/hcal_4818.param"
+#include "PARAM/HMS/CAL/CALIB/hcal_4797.param"
 
 ; General SHMS parameter files
 ; Note: shmsflags.param includes spectrometer offsets and options.
@@ -71,8 +71,8 @@ cminch=2.54
 
 ; SHMS default calibration parameter files
 #include "PARAM/SHMS/NGCER/pngcer_calib.param"
-#include "PARAM/SHMS/DC/CALIB/pdc_calib_4818.param"
-#include "PARAM/SHMS/DC/CALIB/pdc_tzero_per_wire_4818.param"
+#include "PARAM/SHMS/DC/CALIB/pdc_calib_4797.param"
+#include "PARAM/SHMS/DC/CALIB/pdc_tzero_per_wire_4797.param"
 #include "PARAM/SHMS/HODO/phodo_calib_Autumn18.param"
 #include "PARAM/SHMS/HODO/phodo_TWcalib_Autumn18.param"
 #include "PARAM/SHMS/HODO/phodo_Vpcalib_Autumn18.param"

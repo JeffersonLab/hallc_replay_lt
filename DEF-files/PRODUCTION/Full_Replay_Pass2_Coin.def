@@ -1,0 +1,58 @@
+#General stuff
+block g.*
+block T.coin.*
+block CTime.*
+block T.helicity.*
+
+# HMS branches
+block H.cer.*
+block H.dc.*
+block H.tr.*
+block H.hod.*
+block H.cal.*
+block H.gtr.*
+block H.kin.*
+block H.rb.*
+block H.react.*
+
+# SHMS branches
+block P.dc.*
+block P.tr.*
+block P.hod.*
+block P.hgcer.*
+block P.aero.*
+block P.cal.*
+block P.gtr.*
+block P.kin.*
+block P.rb.*
+block P.react.*
+
+# Epics data
+begin epics
+IBC3H00CRCUR4
+hac_bcm_average
+ibcm1
+ibcm2
+iunser
+itov3out
+itov4out
+IPM3H07A.XPOS
+IPM3H07A.YPOS
+IPM3H07B.XPOS
+IPM3H07B.YPOS
+IPM3H07C.XPOS
+IPM3H07C.YPOS
+IPM3H07A.XRAW
+IPM3H07A.YRAW
+IPM3H07B.XRAW
+IPM3H07B.YRAW
+IPM3H07C.XRAW
+IPM3H07C.YRAW
+IPM3H07A.XSOF
+IPM3H07A.YSOF
+IPM3H07B.XSOF
+IPM3H07B.YSOF
+IPM3H07C.XSOF
+IPM3H07C.YSOF
+HALLC:p
+end epics

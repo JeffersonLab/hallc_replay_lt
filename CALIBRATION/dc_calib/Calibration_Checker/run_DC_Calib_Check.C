@@ -6,6 +6,8 @@
 #include <TSystem.h>
 #include <TLegend.h>
 
+// Stephen Kay - University of Regina - 30/03/21 - This script needs to be adjusted to be a little more resilient, need to check paths exists and so on
+
 void run_DC_Calib_Check(Int_t RunNumber = 0, Int_t MaxEvent = 0, string Detector = "")
 {
   TString Hostname = gSystem->HostName();
@@ -33,16 +35,16 @@ void run_DC_Calib_Check(Int_t RunNumber = 0, Int_t MaxEvent = 0, string Detector
   }
   // Need to convert string to char* for use in form command, do via .c_str()
   if(Hostname.Contains("farm")){
-    rootFileNameString1 = Form("/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/ROOTfilesDCCalib/%s_DC_Calib_Pt1_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
-    rootFileNameString2 = Form("/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/ROOTfilesDCCalib/%s_DC_Calib_Pt2_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
-    Outpath = "/volatile/hallc/c-kaonlt/${USER}/OUTPUT/DC_Calib";
-    Histopath = "/volatile/hallc/c-kaonlt/${USER}/HISTOGRAMS/DC_Calib";
+    rootFileNameString1 = Form("/group/c-pionlt/USERS/${USER}/hallc_replay_lt/ROOTfiles/Calib/DC/%s_DC_Calib_Pt1_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
+    rootFileNameString2 = Form("/group/c-pionlt/USERS/${USER}/hallc_replay_lt/ROOTfiles/Calib/DC/%s_DC_Calib_Pt2_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
+    Outpath = "/group/c-pionlt/USERS/${USER}/hallc_replay_lt/OUTPUT/Calib/DC";
+    Histopath = "/group/c-pionlt/USERS/${USER}/hallc_replay_lt/HISTOGRAMS/Calib/DC";
   }
   else if(Hostname.Contains("qcd")){
-    rootFileNameString1 = Form("/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/ROOTfilesDCCalib/%s_DC_Calib_Pt1_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
-    rootFileNameString2 = Form("/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/ROOTfilesDCCalib/%s_DC_Calib_Pt2_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
-    Outpath = "/volatile/hallc/c-kaonlt/${USER}/OUTPUT/DC_Calib";
-    Histopath = "/volatile/hallc/c-kaonlt/${USER}/HISTOGRAMS/DC_Calib";
+    rootFileNameString1 = Form("/group/c-pionlt/USERS/${USER}/hallc_replay_lt/ROOTfiles/Calib/DC/%s_DC_Calib_Pt1_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
+    rootFileNameString2 = Form("/group/c-pionlt/USERS/${USER}/hallc_replay_lt/ROOTfiles/Calib/DC/%s_DC_Calib_Pt2_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
+    Outpath = "/group/c-pionlt/USERS/${USER}/hallc_replay_lt/OUTPUT/Calib/DC";
+    Histopath = "/group/c-pionlt/USERS/${USER}/hallc_replay_lt/HISTOGRAMS/Calib/DC";
   }
   else if (Hostname.Contains("phys.uregina.ca")){
     rootFileNameString1 = Form("/dsk3/${USER}/JLab/ROOTfiles/DC_Calib/%s_DC_Calib_Pt1_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);

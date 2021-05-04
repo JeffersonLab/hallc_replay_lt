@@ -1,0 +1,45 @@
+block g.*
+block T.coin.*
+
+block P.dc.1u1.time
+block P.dc.1u2.time
+block P.dc.1v1.time
+block P.dc.1v2.time
+block P.dc.1x1.time
+block P.dc.1x2.time
+block P.dc.2u1.time
+block P.dc.2u2.time
+block P.dc.2v1.time
+block P.dc.2v2.time
+block P.dc.2x1.time
+block P.dc.2x2.time
+block P.dc.1u1.wirenum
+block P.dc.1u2.wirenum
+block P.dc.1v1.wirenum
+block P.dc.1v2.wirenum
+block P.dc.1x1.wirenum
+block P.dc.1x2.wirenum
+block P.dc.2u1.wirenum
+block P.dc.2u2.wirenum
+block P.dc.2v1.wirenum
+block P.dc.2v2.wirenum
+block P.dc.2x1.wirenum
+block P.dc.2x2.wirenum
+block P.dc.1u1.dist
+block P.dc.1u2.dist
+block P.dc.1v1.dist
+block P.dc.1v2.dist
+block P.dc.1x1.dist
+block P.dc.1x2.dist
+block P.dc.2u1.dist
+block P.dc.2u2.dist
+block P.dc.2v1.dist
+block P.dc.2v2.dist
+block P.dc.2x1.dist
+block P.dc.2x2.dist
+block P.dc.residual
+block P.dc.residualExclPlane
+
+block P.cal.etot
+block P.hgcer.npeSum
+

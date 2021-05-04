@@ -147,13 +147,11 @@ void run_cal(string RunPrefix = "", Int_t NumEvents = 0, Int_t nRuns = 0, Int_t 
   // This is where the script will look for the rootfiles to analyse
   if(Hostname.Contains("farm"))
     { 
-      //Rootpath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt/ROOTfiles/";
-      Rootpath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt/ROOTfilesHGC/";
+      Rootpath = "/group/c-pionlt/USERS/"+User+"/hallc_replay_lt/ROOTfiles/Calib/HGC/";
     }
   else if(Hostname.Contains("qcd"))
     {
-      //Rootpath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt/ROOTfiles/";
-      Rootpath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt/ROOTfilesHGC/";
+      Rootpath = "/group/c-pionlt/USERS/"+User+"/hallc_replay_lt/ROOTfiles/Calib/HGC/";
     }
   
   rootFileNameString1 = Rootpath + Form("%s_%i_%i.root", RunPrefix.c_str(), RunNumber1, NumEvents);

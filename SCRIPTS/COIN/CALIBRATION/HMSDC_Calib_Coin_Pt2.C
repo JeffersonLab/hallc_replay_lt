@@ -28,7 +28,7 @@ void HMSDC_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./raw/../raw.copiedtotape");
   pathList.push_back("./cache");
 
-  const char* ROOTFileNamePattern = "ROOTfilesDCCalib/HMS_DC_Calib_Pt2_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfiles/Calib/DC/HMS_DC_Calib_Pt2_%d_%d.root";
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
   gHcParms->AddString("g_ctp_database_filename", Form("DBASE/COIN/HMS_DCCalib/standard_%d.database", RunNumber));
@@ -233,9 +233,9 @@ void HMSDC_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file+
-  analyzer->SetOdefFile("DEF-files/COIN/CALIBRATION/HMSDC_Calib.def");
+  analyzer->SetOdefFile("DEF-files/CALIBRATION/HMSDC_Calib.def");
   // Define cuts file
-  analyzer->SetCutFile("DEF-files/COIN/CALIBRATION/HMSDC_Calib_cuts.def");  // optional
+  analyzer->SetCutFile("DEF-files/CALIBRATION/HMSDC_Calib_cuts.def");  // optional
   // Start the actual analysis.
   analyzer->Process(run);
 }

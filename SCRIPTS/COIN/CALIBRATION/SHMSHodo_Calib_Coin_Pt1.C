@@ -28,7 +28,7 @@ void SHMSHodo_Calib_Coin_Pt1 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./raw/../raw.copiedtotape");
   pathList.push_back("./cache");
 
-  const char* ROOTFileNamePattern = "ROOTfilesHodoCalib/SHMS_Hodo_Calib_Pt1_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfiles/Calib/Hodo/SHMS_Hodo_Calib_Pt1_%d_%d.root";
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
   gHcParms->AddString("g_ctp_database_filename","DBASE/COIN/standard_Offline.database");
@@ -233,9 +233,9 @@ void SHMSHodo_Calib_Coin_Pt1 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file+
-  analyzer->SetOdefFile("DEF-files/COIN/CALIBRATION/SHMS_Calib.def");
+  analyzer->SetOdefFile("DEF-files/CALIBRATION/SHMS_Calib.def");
   // Define cuts file
-  analyzer->SetCutFile("DEF-files/COIN/CALIBRATION/SHMS_Calib_cuts.def");  // optional
+  analyzer->SetCutFile("DEF-files/CALIBRATION/SHMS_Calib_cuts.def");  // optional
   // Start the actual analysis.
   analyzer->Process(run);
 }

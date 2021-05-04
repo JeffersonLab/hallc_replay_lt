@@ -28,7 +28,7 @@ void HMSCal_Calib_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./raw/../raw.copiedtotape");
   pathList.push_back("./cache");
 
-  const char* ROOTFileNamePattern = "ROOTfilesCalCalib/HMS_Cal_Calib_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfiles/Calib/Cal/HMS_Cal_Calib_%d_%d.root";
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
   gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_KaonLTCalib.database");
@@ -233,9 +233,9 @@ void HMSCal_Calib_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file+
-  analyzer->SetOdefFile("DEF-files/COIN/CALIBRATION/HMS_Calib.def");
+  analyzer->SetOdefFile("DEF-files/CALIBRATION/HMS_Calib.def");
   // Define cuts file
-  analyzer->SetCutFile("DEF-files/COIN/CALIBRATION/HMS_Calib_cuts.def");  // optional
+  analyzer->SetCutFile("DEF-files/CALIBRATION/HMS_Calib_cuts.def");  // optional
   // Start the actual analysis.
   analyzer->Process(run);
 }

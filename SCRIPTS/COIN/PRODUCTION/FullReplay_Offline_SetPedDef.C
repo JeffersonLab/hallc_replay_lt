@@ -28,7 +28,7 @@ void FullReplay_Offline_SetPedDef (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./cache");
 
   //const char* RunFileNamePattern = "raw/coin_all_%05d.dat";
-  const char* ROOTFileNamePattern = "ROOTfiles/Full_coin_replay_Offline_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfiles/Calib/General/Full_coin_replay_Offline_%d_%d.root";
 
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
@@ -44,8 +44,9 @@ void FullReplay_Offline_SetPedDef (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHcDetectorMap = new THcDetectorMap();
   gHcDetectorMap->Load("MAPS/COIN/DETEC/coin.map");
 
-     // Dec data
-   gHaApps->Add(new Podd::DecData("D","Decoder raw data"));
+  // Dec data
+  gHaApps->Add(new Podd::DecData("D","Decoder raw data"));
+
   //=:=:=:=
   // SHMS 
   //=:=:=:=
@@ -102,6 +103,13 @@ void FullReplay_Offline_SetPedDef (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pscaler->SetDelayedType(129);
   pscaler->SetUseFirstEvent(kTRUE);
   gHaEvtHandlers->Add(pscaler);
+
+  //Add SHMS event handler for helicity scalers
+  THcHelicityScaler *phelscaler = new THcHelicityScaler("P", "Hall C helicity scaler");
+  //phelscaler->SetDebugFile("PHelScaler.txt");
+  phelscaler->SetROC(8);
+  phelscaler->SetUseFirstEvent(kTRUE);
+  gHaEvtHandlers->Add(phelscaler);
 
   //=:=:=
   // HMS 
@@ -181,15 +189,7 @@ void FullReplay_Offline_SetPedDef (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   coin->SetEvtType(1);
   coin->AddEvtType(2);
   TRG->AddDetector(coin);
- 
-  THcHelicityScaler *helscaler = new THcHelicityScaler("HS", "Hall C helicity scalers"); 
-  helscaler->SetROC(8);
-  helscaler->SetUseFirstEvent(kTRUE);
-  gHaEvtHandlers->Add(helscaler);
-  THcHelicity* helicity = new THcHelicity("helicity","Helicity Detector");
-  TRG->AddDetector(helicity); 
-  helicity->SetHelicityScaler(helscaler);
-  
+   
   //Add coin physics module THcCoinTime::THcCoinTime (const char *name, const char* description, const char* hadArmName, 
   // const char* elecArmName, const char* coinname) :
   THcCoinTime* coinTime = new THcCoinTime("CTime", "Coincidende Time Determination", "P", "H", "T.coin");
@@ -241,9 +241,9 @@ void FullReplay_Offline_SetPedDef (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file+
-  analyzer->SetOdefFile("DEF-files/COIN/PRODUCTION/coin_production_hElec_pProt_SetPedDef.def");
+  analyzer->SetOdefFile("DEF-files/PRODUCTION/coin_production_hElec_pProt_SetPedDef.def");
   // Define cuts file
-  analyzer->SetCutFile("DEF-files/COIN/PRODUCTION/CUTS/coin_production_cuts.def");  // optional
+  analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/coin_production_cuts.def");  // optional
   // File to record accounting information for cuts
   //analyzer->SetSummaryFile(Form("REPORT_OUTPUT/COIN/PRODUCTION/summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.

@@ -41,6 +41,10 @@ void replay_production_all_hms(Int_t RunNumber=0, Int_t MaxEvent=0) {
   gHcDetectorMap = new THcDetectorMap();
   gHcDetectorMap->Load("MAPS/HMS/DETEC/STACK/hms_stack.map");
 
+  // Add the dec data class for debugging
+  Podd::DecData *decData = new Podd::DecData("D", "Decoder Raw Data");
+  gHaApps->Add(decData);
+
   // Add trigger apparatus
   THaApparatus* TRG = new THcTrigApp("T", "TRG");
   gHaApps->Add(TRG);
@@ -100,6 +104,16 @@ void replay_production_all_hms(Int_t RunNumber=0, Int_t MaxEvent=0) {
   hscaler->SetDelayedType(129);
   hscaler->SetUseFirstEvent(kTRUE);
   gHaEvtHandlers->Add(hscaler);
+
+  /*
+  // Add event handler for helicity scalers
+  THcHelicityScaler *hhelscaler = new THcHelicityScaler("H", "Hall C helicity scaler");
+  //hhelscaler->SetDebugFile("HHelScaler.txt");
+  hhelscaler->SetROC(5);
+  hhelscaler->SetUseFirstEvent(kTRUE);
+  gHaEvtHandlers->Add(hhelscaler);
+  */
+
   // Add event handler for DAQ configuration event
   THcConfigEvtHandler *hconfig = new THcConfigEvtHandler("hconfig", "Hall C configuration event handler");
   gHaEvtHandlers->Add(hconfig);

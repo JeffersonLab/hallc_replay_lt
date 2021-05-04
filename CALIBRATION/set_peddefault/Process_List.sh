@@ -5,11 +5,11 @@
 inputFile="$1"
 # Set path depending upon hostname. Change or add more as needed  
 if [[ "${HOSTNAME}" = *"farm"* ]]; then  
-    REPLAYPATH="/group/c-kaonlt/USERS/${USER}/hallc_replay_lt"
+    REPLAYPATH="/group/c-pionlt/USERS/${USER}/hallc_replay_lt"
     cd "$REPLAYPATH"
     source "$REPLAYPATH/setup.sh"
 elif [[ "${HOSTNAME}" = *"qcd"* ]]; then
-    REPLAYPATH="/group/c-kaonlt/USERS/${USER}/hallc_replay_lt"
+    REPLAYPATH="/group/c-pionlt/USERS/${USER}/hallc_replay_lt"
     cd "$REPLAYPATH"
     source "$REPLAYPATH/setup.sh" 
 elif [[ "${HOSTNAME}" = *"cdaq"* ]]; then
@@ -22,10 +22,10 @@ cd "$REPLAYPATH/CALIBRATION/set_peddefault"
 
 while IFS='' read -r line || [[ -n "$line" ]]; do
     runNum=$line
-    if [ -f "$REPLAYPATH/ROOTfilesMKJTest/Full_coin_replay_Offline_${runNum}_-1.root" ]; then
+    if [ -f "$REPLAYPATH/ROOTfiles/Calib/General/Full_coin_replay_Offline_${runNum}_-1.root" ]; then
 	eval "${REPLAYPATH}/CALIBRATION/set_peddefault/SetPedDef.sh ${runNum}"
-    elif [ -f ! "$REPLAYPATH/ROOTfilesMKJTest/Full_coin_replay_Offline_${runNum}_-1.root" ]; then
-	echo "$REPLAYPATH/ROOTfilesMKJTest/Full_coin_replay_Offline_${runNum}_-1.root not found, skipping"
+    elif [ -f ! "$REPLAYPATH/ROOTfiles/Calib/General/Full_coin_replay_Offline_${runNum}_-1.root" ]; then
+	echo "$REPLAYPATH/ROOTfiles/Calib/General/Full_coin_replay_Offline_${runNum}_-1.root not found, skipping"
 	if [ -f ! "$REPLAYPATH/CALIBRATION/set_peddefault/Skipped_Runs_${inputFile}" ]; then
 	    echo "runNum" > "$REPLAYPATH/CALIBRATION/set_peddefault/Skipped_Runs"
 	elif [ -f "$REPLAYPATH/CALIBRATION/set_peddefault/Skipped_Runs_${inputFile}" ]; then

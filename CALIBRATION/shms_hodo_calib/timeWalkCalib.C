@@ -466,7 +466,7 @@ void timeWalkCalib(int run) {
   //histoFile->Close();
  
   // NH 25/03/2021 - Create Root File for output plots
-  TString histOutFileName = Form("TimeWalkCalib_%d.root", run);
+  TString histOutFileName = Form("timeWalkCalib_%d.root", run);
   histOutFile = new TFile(histOutFileName, "RECREATE");
   //make sure current file is output file
   gFile = histOutFile;

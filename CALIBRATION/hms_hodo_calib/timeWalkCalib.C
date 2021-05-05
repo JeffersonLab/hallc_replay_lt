@@ -449,7 +449,7 @@ using namespace std;
   } // Plane loop
   
   // NH 25/03/2021 - Create ROOT File for output plots
-  TString histOutFileName = Form("TimeWalkCalib_%d.root", run);
+  TString histOutFileName = Form("timeWalkCalib_%d.root", run);
   histOutFile = new TFile(histOutFileName, "RECREATE");
   //write to ROOT File
   writePlots();

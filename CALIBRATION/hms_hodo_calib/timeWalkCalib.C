@@ -25,7 +25,8 @@
 #include <TF1.h>
 
 // Declare ROOT files
-TFile *histoFile, *outFile;
+TFile *histoFile;
+TFile *histOutFile;
 
 // Declare Output  Parameter File
 ofstream outParam;
@@ -257,6 +258,28 @@ void drawParams(UInt_t iplane) {
   return;
 } // drawParams
 
+//Add method for writing summary plots to file
+void writePlots()
+{
+  TDirectory *PSUM = histOutFile->mkdir("Param_Summary");
+  TDirectory *FSUM = histOutFile->mkdir("Fit_Summary");
+
+  for (UInt_t ipar = 0; ipar < nTwFitPars; ipar++)
+  {
+    //parameter summary plots
+    PSUM->WriteObject(twFitParCan[ipar], Form("twFitParCan%d", ipar));
+  }
+
+  for (UInt_t iplane = 0; iplane < nPlanes; iplane++)
+  {
+    for(UInt_t iside; iside < nSides; iside++)
+    {
+      //TW Fit Summary canvases
+      FSUM->WriteObject(twFitCan[iplane][iside], "twFitCan_"+planeNames[iplane]+"_"+sideNames[iside]);
+    }
+  }
+  return;
+}
 
 //Add a method to Get Fit Parameters
 void WriteFitParam(int runNUM)
@@ -364,7 +387,7 @@ void timeWalkCalib(int run) {
 using namespace std;
 
 //prevent root from displaying graphs while executing
-//gROOT->SetBatch(1);
+ gROOT->SetBatch(1);
 
   // ROOT settings
   gStyle->SetTitleFontSize(fontSize);
@@ -423,7 +446,16 @@ using namespace std;
     } // Side loop
     // Draw the time-walk parameter graphs
     drawParams(iplane);
-  } // Plane loop 
+  } // Plane loop
+  
+  // NH 25/03/2021 - Create ROOT File for output plots
+  TString histOutFileName = Form("TimeWalkCalib_%d.root", run);
+  histOutFile = new TFile(histOutFileName, "RECREATE");
+  //write to ROOT File
+  writePlots();
+
+  histOutFile->Close();
+ 
   //Write to a param file
   WriteFitParam(run);
 }

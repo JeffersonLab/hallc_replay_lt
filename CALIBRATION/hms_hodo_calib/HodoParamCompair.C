@@ -6,7 +6,7 @@
 	It takes in a file with run numbers, and then spits out some graphs of parameter vrs run #
 	requires you to have run the timeWalkCalib.C script first!!!
 
-	This only works for SHMS, a similar script works for HMS 
+	This only works for HMS, a similar script works for SHMS 
 */
 
 #include <TSystem.h>
@@ -36,7 +36,7 @@
 // Declare constants
 static const UInt_t nPlanes    = 4;
 static const UInt_t nSides     = 2;
-static const UInt_t nBarsMax   = 21;
+static const UInt_t nBarsMax   = 16;
 static const UInt_t nTwFitPars = 2;
 static const TString sideNames[nSides] = {"Positive", "Negative"};
 
@@ -163,14 +163,13 @@ void HodoParamCompair ( TString runNums_name, UInt_t numRuns) //input path to ru
 	{
 		
 		//get file
-		fileName = Form("Calibration_Plots/phodo_TWcalib_Err_%.0f.param", runs[irun]); // may need to change this path though
+		fileName = Form("Calibration_Plots/hhodo_TWcalib_Err_%.0f.param", runs[irun]);
 		runFile.open(fileName);
 		
 		//output error if can't find file
 		if ( !runFile )
 		{
-			cout << "could not find file: \"" << fileName << "\"!!!" << endl;  
-			//if this file is not found its either that you did not run that run number or didn't fix the hms to also output this file!
+			cout << "could not find file: \"" << fileName << "\"!!!" << endl;
 			cout << "Stoping!!" << endl;
 			return;
 		}

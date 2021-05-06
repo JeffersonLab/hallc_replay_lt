@@ -5,7 +5,7 @@ t_coin_tdcoffset = 300.
 t_coin_adc_tdc_offset = 200.
 
 t_coin_tdcchanperns = 0.09766
-eHadCoinTime_Offset = 0.
+;eHadCoinTime_Offset = 0.
 t_coin_trig_tdcrefcut=-4000.
 t_coin_trig_adcrefcut=-5500.
 

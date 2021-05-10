@@ -42,14 +42,14 @@ void run_RefT_Cuts(string RunPrefix = "", Int_t RunNumber = 0, Int_t MaxEvent = 
   cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
   if(Hostname.Contains("farm")){
-    Rootpath = "/group/c-pionlt/USERS/"+User+"/hallc_replay_lt/ROOTfiles/Calib/Timing/";
-    Outpath = "/group/c-pionlt/USERS/"+User+"/hallc_replay_lt/OUTPUT/Calib/Timing/";
-    Histopath = "/group/c-pionlt/USERS/"+User+"/hallc_replay_lt/HISTOGRAMS/Calib/Timing/";
+    Rootpath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt/ROOTfiles/Calib/Timing/";
+    Outpath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt/OUTPUT/Calib/Timing/";
+    Histopath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt/HISTOGRAMS/Calib/Timing/";
   }
   else if(Hostname.Contains("qcd")){
-    Rootpath = "/group/c-pionlt/USERS/"+User+"/hallc_replay_lt/ROOTfiles/Calib/Timing/";
-    Outpath = "/group/c-pionlt/USERS/"+User+"/hallc_replay_lt/OUTPUT/Calib/Timing/";
-    Histopath = "/group/c-pionlt/USERS/"+User+"/hallc_replay_lt/HISTOGRAMS/Calib/Timing/";
+    Rootpath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt/ROOTfiles/Calib/Timing/";
+    Outpath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt/OUTPUT/Calib/Timing/";
+    Histopath = "/group/c-kaonlt/USERS/"+User+"/hallc_replay_lt/HISTOGRAMS/Calib/Timing/";
   }
   // Need to change this, probably expliticly require a ROOTfile name as an argument in future (Or just the file prefix)
   else if (Hostname.Contains("phys.uregina.ca")){

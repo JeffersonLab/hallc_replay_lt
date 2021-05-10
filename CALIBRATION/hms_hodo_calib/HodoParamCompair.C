@@ -208,7 +208,7 @@ void HodoParamCompair ( TString runNums_name, UInt_t numRuns) //input path to ru
 	tp->GetYaxis()->SetTitle("TW Fit Parameter Value");
 	tp->SetMarkerStyle(35);
    	tp->Draw("AP");
-	Temp->Write( "TW_example" );
+	tp->Write( "TW_example" );
 	
 	
 	//make canvases and graphs

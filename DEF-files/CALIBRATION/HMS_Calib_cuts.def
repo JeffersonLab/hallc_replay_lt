@@ -30,4 +30,4 @@ ALL_SHMS_events_NO_EDTM      T.coin.pEDTM_tdcTime == 0.0 && ALL_SHMS_events
 ALL_COIN_events_NO_EDTM     T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime == 0.0 && ALL_COIN_events
 ALL_events_NO_EDTM          T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime == 0.0 && ALL_events
 
-Decode_master ALL_HMS_events_NO_EDTM
+Decode_master ALL_HMS_events_NOEDTM

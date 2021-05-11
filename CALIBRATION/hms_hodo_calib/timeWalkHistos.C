@@ -441,5 +441,5 @@ void timeWalkHistos(TString inputname,Int_t runNum, string SPEC_flg) {    //SPEC
   printf ("The Analysis Event Rate Was %.3f kHz \n", (ievent + 1) / (((float) t) / CLOCKS_PER_SEC*1000.));
   outFile->Write();
   outFile->Close();
-  //return 0;
+  return 0;
 } // time_walk_calib()

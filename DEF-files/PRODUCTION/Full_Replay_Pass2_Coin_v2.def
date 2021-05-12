@@ -5,6 +5,7 @@ block T.coin.*
 block CTime.*
 block RFTime.*
 block T.helicity.*
+block H.bcm.*
 
 # HMS branches
 

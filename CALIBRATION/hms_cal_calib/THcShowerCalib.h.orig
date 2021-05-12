@@ -79,9 +79,7 @@ class THcShowerCalib {
   Int_t  fNstopRequested;
 
   // Declaration of leaves types
-
   // Calorimeter ADC signals.
-
   Double_t        H_cal_1pr_aneg_p[THcShTrack::fNrows];
   Double_t        H_cal_1pr_apos_p[THcShTrack::fNrows];
 
@@ -95,7 +93,6 @@ class THcShowerCalib {
   Double_t        H_cal_4ta_apos_p[THcShTrack::fNrows];
 
   // Track parameters.
-
   double          H_tr_n;
   Double_t        H_tr_p;
   Double_t        H_tr_x;   //X FP
@@ -137,7 +134,6 @@ class THcShowerCalib {
   TBranch* b_H_cal_nclust;
 
   // Quantities for calculations of the calibration constants.
-
   Double_t fe0;
   Double_t fqe[THcShTrack::fNpmts];
   Double_t fq0[THcShTrack::fNpmts];

@@ -233,7 +233,7 @@ void HMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file+
-  analyzer->SetOdefFile("DEF-files/CALIBRATION/HMS_Calib.def");
+  analyzer->SetOdefFile("DEF-files/CALIBRATION/HMSHodo_Calib.def");
   // Define cuts file
   analyzer->SetCutFile("DEF-files/CALIBRATION/HMS_Calib_cuts.def");  // optional
   // Start the actual analysis.

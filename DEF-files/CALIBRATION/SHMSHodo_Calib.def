@@ -1,8 +1,0 @@
-block T.coin.p*
-
-block P.dc.ntrack
-block P.hod.*
-block P.hgcer.npeSum
-block P.aero.npeSum
-block P.cal.e*
-block P.gtr.*

@@ -230,7 +230,7 @@ void timeWalkHistos(TString inputname,Int_t runNum, string SPEC_flg) {    //SPEC
     for(UInt_t iside = 0; iside < nSides; iside++) {
       // Generate directory structure and histograms
       for(UInt_t ipaddle = 0; ipaddle < nbars[iplane]; ipaddle++)
-	generatePlots(iplane, iside, ipaddle);	
+		generatePlots(iplane, iside, ipaddle);	
       for(UInt_t isignal = 0; isignal < nSignals; isignal++) {
 
 	// Acquire the hodoscope ADC data objects
@@ -403,7 +403,7 @@ void timeWalkHistos(TString inputname,Int_t runNum, string SPEC_flg) {    //SPEC
 			tdcTime        = tdcTimeRaw - refT2TdcTimeRaw*tdcChanToTime;
 			adcTdcTimeDiff = tdcTime - adcPulseTime;
 			// Define cuts
-			adcAndTdcHitCut   = (adcPaddleNum != tdcPaddleNum);
+			adcAndTdcHitCut   = (adcPaddleNum != tdcPaddleNum); 
 			adcTdcTimeDiffCut = (adcTdcTimeDiff < adcTdcTimeDiffCutLow || adcTdcTimeDiff > adcTdcTimeDiffCutHigh);
 			// Implement cuts
 			if (adcAndTdcHitCut || adcTdcTimeDiffCut) continue;

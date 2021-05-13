@@ -7,6 +7,13 @@
 	requires you to have run the timeWalkCalib.C script first!!!
 
 	This only works for HMS, a similar script works for SHMS 
+	
+	The program asks for 3 arguments.
+	
+	The path to a file containing a list of all your run numbers, (ie. ../../UTIL_BATCH/InputRunLists/ALL_Runs)
+	The path to the directory of your root files, (ie. ../../ROOTfilesHodoCalib/)
+		Note: this assumes the root files are named as: "SHMS_Hodo_Calib_Pt1_%d_-1.root" and "SHMS_Hodo_Calib_Pt3_%d_-1.root", with %d being the run number
+	The Number of runs you are looking at.
 */
 
 #include <TSystem.h>
@@ -100,7 +107,8 @@ void RemoveBad ( TGraphErrors *g1, Double_t *Param, Double_t *ParamErr, UInt_t n
 
 }
 
-void HodoParamCompair ( TString runNums_name, UInt_t numRuns) //input path to run # file, and the number of runs to look at.
+//input path to run # file, Path to your root file directory, and the number of runs to look at.
+void HodoParamCompair ( TString runNums_name, TString PathToRootFiles, UInt_t numRuns) 
 {
 	//open file with run numbers
 	ifstream runFile;
@@ -258,6 +266,8 @@ void HodoParamCompair ( TString runNums_name, UInt_t numRuns) //input path to ru
 			CompCan[iside][iplane]->Write( Form("TW_c2_Comp_"+sideNames[iside]+"_side_plane%i", iplane+1) );
 		}
 	}
+	
+	
 	
 	
 	File->Close();

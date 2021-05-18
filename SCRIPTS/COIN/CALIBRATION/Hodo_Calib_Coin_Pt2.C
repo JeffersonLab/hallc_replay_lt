@@ -1,4 +1,4 @@
-void SHMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
+void Hodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   // Get RunNumber and MaxEvent if not provided.
   if(RunNumber == 0) {

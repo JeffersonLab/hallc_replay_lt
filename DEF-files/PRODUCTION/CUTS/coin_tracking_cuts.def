@@ -1,0 +1,384 @@
+#################################
+###### Author - Ali Usman #######
+##### University of Regina ######
+###### Created - May, 2021 ######
+#################################
+
+Block: RawDecode
+
+Pedestal_event         g.evtyp == 99
+SHMS_event             g.evtyp == 1
+HMS_event              g.evtyp == 2
+BOTH_SINGLES_event     g.evtyp == 3
+COIN_ONLY_event        g.evtyp == 4
+SHMS_COIN_event        g.evtyp == 5
+HMS_COIN_event         g.evtyp == 6 
+COIN_ALL_event         g.evtyp == 7
+ALL_COIN_events        g.evtyp >= 4 && g.evtyp <= 7 
+ALL_events             g.evtyp >= 1 && g.evtyp <= 7 
+
+ALL_HMS_events       HMS_event || COIN_ONLY_event || HMS_COIN_event  || COIN_ALL_event 
+ALL_SHMS_events     SHMS_event || COIN_ONLY_event || SHMS_COIN_event || COIN_ALL_event 
+
+RawDecode_master ALL_events
+
+Block: Decode
+
+pTRIG1_ROC2     T.coin.pTRIG1_ROC2_tdcTimeRaw > 0
+pTRIG2_ROC2     T.coin.pTRIG2_ROC2_tdcTimeRaw > 0
+pTRIG3_ROC2     T.coin.pTRIG3_ROC2_tdcTimeRaw > 0
+pTRIG4_ROC2     T.coin.pTRIG4_ROC2_tdcTimeRaw > 0
+pTRIG5_ROC2     T.coin.pTRIG5_ROC2_tdcTimeRaw > 0
+pTRIG6_ROC2	T.coin.pTRIG6_ROC2_tdcTimeRaw > 0
+
+edtm_accepted           T.coin.pEDTM_tdcTimeRaw > 0
+
+ALL_HMS_events_NOEDTM       T.coin.hEDTM_tdcTime == 0.0 && ALL_HMS_events
+ALL_SHMS_events_NOEDTM      T.coin.pEDTM_tdcTime == 0.0 && ALL_SHMS_events
+ALL_COIN_events_NO_EDTM     T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime == 0.0 && ALL_COIN_events
+ALL_events_NO_EDTM          T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime == 0.0 && ALL_events
+
+Decode_master ALL_events
+
+Block: Tracking
+
+##################
+###    SHMS    ###
+##################
+
+# Accceptance cuts for SHMS gloden track defined here (Not used in SHMS Tracking)
+
+pcut_xpfp		  P.gtr.th > -0.06 && P.gtr.th < 0.06
+pcut_ypfp		  P.gtr.ph > -0.04 && P.gtr.ph < 0.04
+pcut_delta		  P.gtr.dp > -10 && P.gtr.dp < 20
+pcut_acceptance		  pcut_xpfp && pcut_ypfp &&pcut_delta
+
+# PID cuts for different particles in all the SHMS detectors [HGC, AERO, CAL(untracked)]
+
+pcut_cer_hg_elec          P.hgcer.npeSum > 1.5
+pcut_cer_hg_pi            P.hgcer.npeSum > 1.5
+pcut_cer_hg_p             P.hgcer.npeSum <= 1.5
+pcut_cer_ag_elec          P.aero.npeSum > 1.5
+pcut_cer_ag_pi            P.aero.npeSum > 1.5
+pcut_cer_ag_p             P.aero.npeSum <= 1.5
+pcut_cal_elec             P.cal.etotnorm > 0.6 && P.cal.etotnorm < 1.6
+pcut_cal_pi               P.cal.etotnorm <= 0.6 && P.cal.etotnorm > 0.05
+pcut_cal_p                P.cal.etotnorm <= 0.6 && P.cal.etotnorm > 0.05
+pcut_elec_all             pcut_cer_hg_elec && pcut_cer_ag_elec && pcut_cal_elec
+pcut_pi_all               pcut_cer_hg_pi && pcut_cer_ag_pi && pcut_cal_pi 
+pcut_p_all                pcut_cer_hg_p && pcut_cer_ag_p && pcut_cal_p 
+
+# Scin cuts defined here for SHMS
+
+shmsScinGood        P.hod.goodscinhit == 1
+shmsGoodBetanotrk   P.hod.betanotrack > 0.5 && P.hod.betanotrack < 1.4
+shmshodstarttime    P.hod.goodstarttime == 1
+
+# Tracking Efficiency calculation (Should = denominator, Did = Numerator)
+
+shmsScinShould      shmsScinGood && shmsGoodBetanotrk && shmshodstarttime
+shmsScinShoulde     shmsScinShould && pcut_elec_all
+shmsScinShouldpi    shmsScinShould && pcut_pi_all
+shmsScinShouldp     shmsScinShould && pcut_p_all
+shmsScinShouldh     shmsScinShould && P.cal.etotnorm <= 0.6 && P.cal.etotnorm > 0.5
+shmsScinDid         shmsScinShould && P.dc.ntrack > 0
+shmsScinDide        shmsScinShoulde && P.dc.ntrack > 0
+shmsScinDidpi       shmsScinShouldpi && P.dc.ntrack > 0
+shmsScinDidp        shmsScinShouldp && P.dc.ntrack > 0
+shmsScinDidh        shmsScinShouldh && P.dc.ntrack > 0
+
+# HMS tracked variables for SHMS coin Tracking Efficiency
+
+HMScoinScinGood           H.hod.goodscinhit == 1
+HMScoinGoodBetatrk        H.gtr.beta > 0.8 && H.gtr.beta < 1.3
+HMScoinhodstarttime       H.hod.goodstarttime == 1
+HMScoindcindipole	  H.dc.InsideDipoleExit == 1
+HMScoindelta              H.gtr.dp > -8 && H.gtr.dp < 8
+
+# HMS variable combinations for SHMS coin Efficency (NOT used in HMS Tracking Efficiency)
+
+HMScoinScinShould         HMScoinScinGood && HMScoinGoodBetatrk && HMScoinhodstarttime && HMScoindcindipole && HMScoindelta
+HMScoinScinShoulde        HMScoinScinShould && H.cal.etotnorm > 0.6 && H.cal.etotnorm < 2.0 && H.cer.npeSum > 0.5
+HMScoinScinShouldh        HMScoinScinShould && H.cal.etotnorm < 0.6 && H.cal.etotnorm > 0.05 && H.cer.npeSum < 0.5
+
+# HMS found tracks (Used in denominator of SHMS coin Tracking Efficency)
+
+HMScoinScinDid            HMScoinScinShould && H.dc.ntrack > 0
+HMScoinScinDide           HMScoinScinShoulde && H.dc.ntrack > 0
+HMScoinScinDidh           HMScoinScinShouldh && H.dc.ntrack > 0
+
+# Raw (untracked) coin time calculation and cuts (Actual Raw (untracked) coin time is not available in hcana)
+
+COINTimeRaw		  CTime.CoinTime_RAW_ROC2_NoTrack > -20 && CTime.CoinTime_RAW_ROC2_NoTrack < 30 
+COINTimeRawCut		  COINTimeRaw && HMScoinScinGood && shmsScinGood
+
+# SHMS coin Tracking efficency calculation (Should = Denominator, Did = Numerator)
+
+PcoinShould		  shmsScinShould && HMScoinScinDid && COINTimeRawCut
+PcoinShoulde	 	  shmsScinShoulde && HMScoinScinDide && COINTimeRawCut
+PcoinShouldpi		  shmsScinShouldpi && HMScoinScinDide && COINTimeRawCut
+PcoinShouldp		  shmsScinShouldp && HMScoinScinDide && COINTimeRawCut
+PcoinDid		  PcoinShould && P.dc.ntrack > 0
+PcoinDide		  PcoinShoulde && P.dc.ntrack > 0
+PcoinDidpi		  PcoinShouldpi && P.dc.ntrack > 0
+PcoinDidp		  PcoinShouldp && P.dc.ntrack > 0
+
+##################
+####    HMS    ###
+##################
+
+# HMS Acceptance cuts (Not used in HMS Tracking Efficiency)
+
+hcut_xpfp                 H.gtr.th > -0.08 && H.gtr.th < 0.08
+hcut_ypfp                 H.gtr.ph > -0.045 && H.gtr.ph < 0.045
+hcut_delta                H.gtr.dp > -8 && H.gtr.dp < 8
+hcut_acceptance           hcut_xpfp && hcut_ypfp && hcut_delta
+
+
+# HMS PID cuts for different particles in HGC and CAL
+
+hcut_cer_elec             H.cer.npeSum > 0.5
+hcut_cer_pi               H.cer.npeSum < 0.5
+hcut_cal_elec		  H.cal.etotnorm > 0.6 && H.cal.etotnorm < 2.0
+hcut_cal_pi		  H.cal.etotnorm < 0.6 && H.cal.etotnorm > 0.05
+
+# HMS Scin cuts (untracked) for HMS Tracking Efficiency
+
+HMSScinGood           H.hod.goodscinhit == 1
+HMSGoodBetanotrk      H.hod.betanotrack > 0.8 && H.hod.betanotrack < 1.3
+HMShodstarttime       H.hod.goodstarttime == 1
+
+# HMS Tracking Efficiency Calculation (Should = Denominator, Did = Numerator)
+
+HMSScinShould         HMSScinGood && HMSGoodBetanotrk && HMShodstarttime
+HMSScinShoulde        HMSScinShould && hcut_cer_elec && hcut_cal_elec
+HMSScinShouldpi       HMSScinGood && hcut_cer_pi && hcut_cal_pi
+HMSScinDid            HMSScinShould && H.dc.ntrack > 0
+HMSScinDide           HMSScinShoulde && H.dc.ntrack > 0
+HMSScinDidpi          HMSScinShouldpi && H.dc.ntrack > 0
+
+# SHMS tracked variables for HMS coin Tracking Efficiency
+
+SHMScoinScinGood           P.hod.goodscinhit == 1
+SHMScoinGoodBetatrk        P.gtr.beta > 0.6 && P.gtr.beta < 1.5
+SHMScoinhodstarttime       P.hod.goodstarttime == 1
+SHMScoindcindipole         P.dc.InsideDipoleExit == 1
+SHMScoindelta              P.gtr.dp > -10 && P.gtr.dp < 20
+
+# SHMS variable combinations for HMS coin Efficency (NOT used in SHMS Tracking Efficiency)
+
+SHMScoinScinShould         SHMScoinScinGood && SHMScoinGoodBetatrk && SHMScoinhodstarttime && SHMScoindcindipole && SHMScoindelta
+SHMScoinScinShouldh        SHMScoinScinShould && P.cal.etotnorm < 0.6 && P.cal.etotnorm > 0.05 && P.hgcer.npeSum > 1.5
+
+# SHMS found tracks (Used in denominator of HMS coin Tracking Efficency)
+
+SHMScoinScinDid            SHMScoinScinShould && H.dc.ntrack > 0
+SHMScoinScinDidh           SHMScoinScinShouldh && H.dc.ntrack > 0
+
+# HMS coin Tracking efficency calculation (Should = Denominator, Did = Numerator)
+
+HcoinShould               HMSScinShould && SHMScoinScinDid && COINTimeRawCut
+HcoinShoulde              HMSScinShoulde && SHMScoinScinDidh && COINTimeRawCut
+HcoinShouldpi             HMSScinShouldpi && SHMScoinScinDidh && COINTimeRawCut
+HcoinDid                  HcoinShould && H.dc.ntrack > 0
+HcoinDide                 HcoinShoulde && H.dc.ntrack > 0
+HcoinDidpi                HcoinShouldpi && H.dc.ntrack > 0
+
+##########################
+########   DEBUG   #######
+##########################
+
+##################
+###    SHMS    ###
+##################
+
+pcut_goodHDC1x1     P.dc.1x1.nhit > 0 && P.dc.1x1.nhit < 3
+pcut_goodHDC1u2     P.dc.1u2.nhit > 0 && P.dc.1u2.nhit < 3
+pcut_goodHDC1u1     P.dc.1u1.nhit > 0 && P.dc.1u1.nhit < 3
+pcut_goodHDC1v1     P.dc.1v1.nhit > 0 && P.dc.1v1.nhit < 3
+pcut_goodHDC1v2     P.dc.1v2.nhit > 0 && P.dc.1v2.nhit < 3
+pcut_goodHDC1x2     P.dc.1x2.nhit > 0 && P.dc.1x2.nhit < 3
+
+pcut_goodHDC2x1     P.dc.2x1.nhit > 0 && P.dc.2x1.nhit < 3
+pcut_goodHDC2u2     P.dc.2u2.nhit > 0 && P.dc.2u2.nhit < 3
+pcut_goodHDC2u1     P.dc.2u1.nhit > 0 && P.dc.2u1.nhit < 3
+pcut_goodHDC2v1     P.dc.2v1.nhit > 0 && P.dc.2v1.nhit < 3
+pcut_goodHDC2v2     P.dc.2v2.nhit > 0 && P.dc.2v2.nhit < 3
+pcut_goodHDC2x2     P.dc.2x2.nhit > 0 && P.dc.2x2.nhit < 3
+
+pcut_goodHDC1     pcut_goodHDC1x1  && pcut_goodHDC1u2 && pcut_goodHDC1u1 && pcut_goodHDC1v1 && pcut_goodHDC1v2 && pcut_goodHDC1x2
+pcut_goodHDC2     pcut_goodHDC2x1  && pcut_goodHDC2u2 && pcut_goodHDC2u1 && pcut_goodHDC2v1 && pcut_goodHDC2v2 && pcut_goodHDC2x2
+pcut_bothGood     pcut_goodHDC1 && pcut_goodHDC2
+
+pcut_realhdc1x1     pcut_goodHDC1x1 && ((P.dc.Ch1.spacepoints + P.dc.Ch2.spacepoints) > 0)
+pcut_realhdc1u2     pcut_goodHDC1u2 && ((P.dc.Ch1.spacepoints + P.dc.Ch2.spacepoints) > 0)
+pcut_realhdc1u1     pcut_goodHDC1u1 && ((P.dc.Ch1.spacepoints + P.dc.Ch2.spacepoints) > 0)
+pcut_realhdc1v1     pcut_goodHDC1v1 && ((P.dc.Ch1.spacepoints + P.dc.Ch2.spacepoints) > 0)
+pcut_realhdc1v2     pcut_goodHDC1v2 && ((P.dc.Ch1.spacepoints + P.dc.Ch2.spacepoints) > 0)
+pcut_realhdc1x2     pcut_goodHDC1x2 && ((P.dc.Ch1.spacepoints + P.dc.Ch2.spacepoints) > 0)
+
+pcut_realhdc2x1     pcut_goodHDC2x1 && ((P.dc.Ch1.spacepoints + P.dc.Ch2.spacepoints) > 0)
+pcut_realhdc2u2     pcut_goodHDC2u2 && ((P.dc.Ch1.spacepoints + P.dc.Ch2.spacepoints) > 0)
+pcut_realhdc2u1     pcut_goodHDC2u1 && ((P.dc.Ch1.spacepoints + P.dc.Ch2.spacepoints) > 0)
+pcut_realhdc2v1     pcut_goodHDC2v1 && ((P.dc.Ch1.spacepoints + P.dc.Ch2.spacepoints) > 0)
+pcut_realhdc2v2     pcut_goodHDC2v2 && ((P.dc.Ch1.spacepoints + P.dc.Ch2.spacepoints) > 0)
+pcut_realhdc2x2     pcut_goodHDC2x2 && ((P.dc.Ch1.spacepoints + P.dc.Ch2.spacepoints) > 0)
+
+pcut_Found1Track     P.dc.ntrack == 1
+pcut_Found2Track     P.dc.ntrack == 2
+pcut_Found3Track     P.dc.ntrack == 3
+pcut_Found4Track     P.dc.ntrack == 4
+
+pcut_anys1x     P.hod.1x.nhits > 0
+pcut_anys1y     P.hod.1y.nhits > 0
+pcut_anys2x     P.hod.2x.nhits > 0
+pcut_anys2y     P.hod.2y.nhits > 0
+
+pcut_goods1x      P.hod.1x.nhits > 0 && P.hod.1x.nhits < 3
+pcut_goods1y      P.hod.1y.nhits > 0 && P.hod.1y.nhits < 3
+pcut_goods1       pcut_goods1x && pcut_goods1y
+pcut_goods2x      P.hod.2x.nhits > 0 && P.hod.2x.nhits < 3
+pcut_goods2y      P.hod.2y.nhits > 0 && P.hod.2y.nhits < 3
+pcut_goods2       pcut_goods2x && pcut_goods2y
+pcut_goods1s2     pcut_goods1 && pcut_goods2
+
+SHMS_hgcer_track_matched_region_1 P.hgcer.numTracksMatched[0]>0
+SHMS_hgcer_track_fired_region_1 P.hgcer.numTracksFired[0]>0
+SHMS_hgcer_track_matched_region_2 P.hgcer.numTracksMatched[1]>0
+SHMS_hgcer_track_fired_region_2 P.hgcer.numTracksFired[1]>0
+SHMS_hgcer_track_matched_region_3 P.hgcer.numTracksMatched[2]>0
+SHMS_hgcer_track_fired_region_3 P.hgcer.numTracksFired[2]>0
+SHMS_hgcer_track_matched_region_4 P.hgcer.numTracksMatched[3]>0
+SHMS_hgcer_track_fired_region_4 P.hgcer.numTracksFired[3]>0
+SHMS_hgcer_track_matched_tot P.hgcer.totNumTracksMatched>0
+SHMS_hgcer_track_fired_tot P.hgcer.totNumTracksFired>0
+
+SHMS_aero_track_matched_region_1 P.aero.numTracksMatched[0]>0
+SHMS_aero_track_fired_region_1 P.aero.numTracksFired[0]>0
+SHMS_aero_track_matched_region_2 P.aero.numTracksMatched[1]>0
+SHMS_aero_track_fired_region_2 P.aero.numTracksFired[1]>0
+SHMS_aero_track_matched_region_3 P.aero.numTracksMatched[2]>0
+SHMS_aero_track_fired_region_3 P.aero.numTracksFired[2]>0
+SHMS_aero_track_matched_region_4 P.aero.numTracksMatched[3]>0
+SHMS_aero_track_fired_region_4 P.aero.numTracksFired[3]>0
+SHMS_aero_track_matched_region_5 P.aero.numTracksMatched[4]>0
+SHMS_aero_track_fired_region_5 P.aero.numTracksFired[4]>0
+SHMS_aero_track_matched_region_6 P.aero.numTracksMatched[5]>0
+SHMS_aero_track_fired_region_6 P.aero.numTracksFired[5]>0
+SHMS_aero_track_matched_region_7 P.aero.numTracksMatched[6]>0
+SHMS_aero_track_fired_region_7 P.aero.numTracksFired[6]>0
+SHMS_aero_track_matched_tot P.aero.totNumTracksMatched>0
+SHMS_aero_track_fired_tot P.aero.totNumTracksFired>0
+
+##################
+####    HMS    ###
+##################
+
+hcut_goodHDC1x1            H.dc.1x1.nhit > 0 && H.dc.1x1.nhit < 3
+hcut_goodHDC1v2            H.dc.1v2.nhit > 0 && H.dc.1v2.nhit < 3
+hcut_goodHDC1u1            H.dc.1u1.nhit > 0 && H.dc.1u1.nhit < 3
+hcut_goodHDC1v1            H.dc.1v1.nhit > 0 && H.dc.1v1.nhit < 3
+hcut_goodHDC1u2            H.dc.1u2.nhit > 0 && H.dc.1u2.nhit < 3
+hcut_goodHDC1x2            H.dc.1x2.nhit > 0 && H.dc.1x2.nhit < 3
+
+hcut_goodHDC2x1            H.dc.2x1.nhit > 0 && H.dc.2x1.nhit < 3
+hcut_goodHDC2v2            H.dc.2v2.nhit > 0 && H.dc.2v2.nhit < 3
+hcut_goodHDC2u1            H.dc.2u1.nhit > 0 && H.dc.2u1.nhit < 3
+hcut_goodHDC2v1            H.dc.2v1.nhit > 0 && H.dc.2v1.nhit < 3
+hcut_goodHDC2u2            H.dc.2u2.nhit > 0 && H.dc.2u2.nhit < 3
+hcut_goodHDC2x2            H.dc.2x2.nhit > 0 && H.dc.2x2.nhit < 3
+
+hcut_goodHDC1              hcut_goodHDC1x1  && hcut_goodHDC1v2 && hcut_goodHDC1u1 && hcut_goodHDC1v1 && hcut_goodHDC1u2 && hcut_goodHDC1x2
+hcut_goodHDC2              hcut_goodHDC2x1  && hcut_goodHDC2v2 && hcut_goodHDC2u1 && hcut_goodHDC2v1 && hcut_goodHDC2u2 && hcut_goodHDC2x2
+hcut_bothGood              hcut_goodHDC1 && hcut_goodHDC2
+
+hcut_realhdc1x1            hcut_goodHDC1x1 && ((H.dc.Ch1.spacepoints+H.dc.Ch2.spacepoints)>0)
+hcut_realhdc1v2            hcut_goodHDC1v2 && ((H.dc.Ch1.spacepoints+H.dc.Ch2.spacepoints)>0)
+hcut_realhdc1u1            hcut_goodHDC1u1 && ((H.dc.Ch1.spacepoints+H.dc.Ch2.spacepoints)>0)
+hcut_realhdc1v1            hcut_goodHDC1v1 && ((H.dc.Ch1.spacepoints+H.dc.Ch2.spacepoints)>0)
+hcut_realhdc1u2            hcut_goodHDC1u2 && ((H.dc.Ch1.spacepoints+H.dc.Ch2.spacepoints)>0)
+hcut_realhdc1x2            hcut_goodHDC1x2 && ((H.dc.Ch1.spacepoints+H.dc.Ch2.spacepoints)>0)
+hcut_realhdc2x1            hcut_goodHDC2x1 && ((H.dc.Ch1.spacepoints+H.dc.Ch2.spacepoints)>0)
+hcut_realhdc2v2            hcut_goodHDC2v2 && ((H.dc.Ch1.spacepoints+H.dc.Ch2.spacepoints)>0)
+hcut_realhdc2u1            hcut_goodHDC2u1 && ((H.dc.Ch1.spacepoints+H.dc.Ch2.spacepoints)>0)
+hcut_realhdc2v1            hcut_goodHDC2v1 && ((H.dc.Ch1.spacepoints+H.dc.Ch2.spacepoints)>0)
+hcut_realhdc2u2            hcut_goodHDC2u2 && ((H.dc.Ch1.spacepoints+H.dc.Ch2.spacepoints)>0)
+hcut_realhdc2x2            hcut_goodHDC2x2 && ((H.dc.Ch1.spacepoints+H.dc.Ch2.spacepoints)>0)
+
+hcut_FoundTrack            H.dc.ntrack > 0
+hcut_Found1Track           H.dc.ntrack == 1
+hcut_Found2Track           H.dc.ntrack == 2
+hcut_Found3Track           H.dc.ntrack == 3
+hcut_Found4Track           H.dc.ntrack == 4
+
+hcut_anys1x                H.hod.1x.nhits > 0
+hcut_anys1y                H.hod.1y.nhits > 0
+hcut_anys2x                H.hod.2x.nhits > 0
+hcut_anys2y                H.hod.2y.nhits > 0
+
+hcut_goods1x               H.hod.1x.nhits > 0 && H.hod.1x.nhits < 3
+hcut_goods1y               H.hod.1y.nhits > 0 && H.hod.1y.nhits < 3
+hcut_goods1                hcut_goods1x && hcut_goods1y
+hcut_goods2x               H.hod.2x.nhits > 0 && H.hod.2x.nhits < 3
+hcut_goods2y               H.hod.2y.nhits > 0 && H.hod.2y.nhits < 3
+hcut_goods2                hcut_goods2x && hcut_goods2y
+hcut_goods1s2              hcut_goods1 && hcut_goods2
+
+HMS_hcer_track_matched_region_1 H.cer.numTracksMatched[0]>0
+HMS_hcer_track_fired_region_1 H.cer.numTracksFired[0]>0
+HMS_hcer_track_matched_region_2 H.cer.numTracksMatched[1]>0
+HMS_hcer_track_fired_region_2 H.cer.numTracksFired[1]>0
+HMS_hcer_track_matched_tot H.cer.totNumTracksMatched>0
+HMS_hcer_track_fired_tot H.cer.totNumTracksFired>0
+
+##################
+###  SHMS HGC  ###
+##################
+
+SHMSGEN		shmsScinGood && shmshodstarttime && SHMScoindcindipole && pcut_acceptance
+SHMSCT	  	CTime.ePiCoinTime_ROC1 > -1 && CTime.ePiCoinTime_ROC1 < 1
+SHMSCalpi	P.cal.etottracknorm < 0.7              
+SHMSMMpicut     P.kin.secondary.MMpi > 0.901 && P.kin.secondary.MMpi < 1.054
+SHMSAEROpi      P.aero.npeSum  > 1.5
+
+shmsRF		RFTime.SHMS_RFtimeDist > 1.469 && RFTime.SHMS_RFtimeDist < 2.603
+
+#Using wide cut for Aerogel position
+
+SHMSAEROpospi	P.aero.yAtAero > -35 && P.aero.yAtAero < 35
+
+SHMSHGCShouldpi		SHMSGEN && SHMSCT && SHMSCalpi && SHMSMMpicut && SHMSAEROpi && SHMSAEROpospi && shmsRF
+SHMSHGCDidpi		SHMSHGCShouldpi && P.hgcer.npeSum > 1.5
+
+###################
+###  SHMS Aero  ###
+###################
+
+SHMSHGCpi      P.hgcer.npeSum  > 1.5
+
+SHMSAeroShouldpi         SHMSGEN && SHMSCT && SHMSCalpi && SHMSMMpicut && SHMSHGCpi && SHMSAEROpospi && shmsRF
+SHMSAeroDidpi            SHMSAeroShouldpi && P.aero.npeSum > 1.5
+
+##################
+###   HMS HGC  ###
+##################
+
+HMSGEN		   HMSScinGood && HMShodstarttime && HMScoindcindipole && hcut_acceptance
+HMSCalelec         H.cal.etottracknorm > 0.05
+
+HMSHGCShouldelec         HMSGEN && SHMSCT && HMSCalelec 
+HMSHGCDidelec            HMSHGCShouldelec && H.cer.npeSum > 1.5
+
+##################
+##### EDTM  ######
+##################
+
+SHMSTRIG1_ROC2		T.coin.pTRIG1_ROC2_tdcTime > -10000.0 && T.coin.pTRIG1_ROC2_tdcTime < 10000.0
+SHMSTRIG2_ROC2          T.coin.pTRIG2_ROC2_tdcTime > -10000.0 && T.coin.pTRIG2_ROC2_tdcTime < 10000.0
+HMSTRIG3_ROC2		T.coin.hTRIG3_ROC2_tdcTime > -10000.0 && T.coin.hTRIG3_ROC2_tdcTime < 10000.0
+
+Tracking_master ALL_events
+
+
+
+

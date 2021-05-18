@@ -929,8 +929,8 @@ void THcShowerCalib::FillHEcal() {
   // of momentum deviation versus normalized energy deposition.
   //
 
-  ofstream output;
-  output.open("calibrated.deb",ios::out);
+  //ofstream output;
+  //output.open("calibrated.deb",ios::out);
 
   ofstream evFile;
   evFile.open("eventNumberCalib.txt",ios::out);

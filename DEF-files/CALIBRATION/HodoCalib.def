@@ -1,0 +1,118 @@
+#General stuff
+
+block g.*
+block T.coin.*
+block CTime.*
+block RFTime.*
+
+# HMS branches
+
+# HMS Cer
+block H.cer.npe*
+block H.cer.good*
+block H.cer.RefTime
+
+# HMS DC
+block H.dc.x_fp
+block H.dc.xp_fp
+block H.dc.y_fp
+block H.dc.yp_fp
+block H.dc.n*
+block H.dc.InsideDipoleExit
+block H.dc.gtr*
+
+# HMS Hodo
+block H.hod.*
+
+# HMS Cal
+block H.cal.ep*
+block H.cal.etot*
+block H.cal.nhits
+block H.cal.ntracks
+
+# HMS track info
+block H.tr.*
+block H.gtr.*
+
+# HMS kin/rastered beam/react variables
+block H.kin.*
+block H.rb.*
+block H.react.*
+
+# SHMS branches
+
+# SHMS HGC
+block P.hgcer.tot*
+block P.hgcer.npe*
+block P.hgcer.good*
+block P.hgcer.num*
+block P.hgcer.RefTime
+
+# SHMS Aero
+block P.aero.tot*
+block P.aero.npe*
+#block P.aero.RefTime
+
+# SHMS DC
+block P.dc.x_fp
+block P.dc.xp_fp
+block P.dc.y_fp
+block P.dc.yp_fp
+block P.dc.n*
+block P.dc.InsideDipoleExit
+block P.dc.gtr*
+
+# SHMS Calorimeter
+block P.cal.ep*
+block P.cal.etot*
+block P.cal.etrack*
+block P.cal.fly.nclust
+block P.cal.fly.ntracks
+block P.cal.nclust
+block P.cal.ntracks
+block P.cal.pr.eplane*
+block P.cal.pr.tot*
+block P.cal.fly.tot*
+
+# SHMS Hodoscope
+block P.hod.*
+
+# SHMS tracking
+block P.tr.*
+block P.gtr.*
+
+# SHMS Kinematics/rastered beam/reaction info
+block P.kin.*
+block P.rb.*
+block P.react.*
+
+# Epics data
+begin epics
+IBC3H00CRCUR4
+hac_bcm_average
+ibcm1
+ibcm2
+iunser
+itov3out
+itov4out
+IPM3H07A.XPOS
+IPM3H07A.YPOS
+IPM3H07B.XPOS
+IPM3H07B.YPOS
+IPM3H07C.XPOS
+IPM3H07C.YPOS
+IPM3H07A.XRAW
+IPM3H07A.YRAW
+IPM3H07B.XRAW
+IPM3H07B.YRAW
+IPM3H07C.XRAW
+IPM3H07C.YRAW
+IPM3H07A.XSOF
+IPM3H07A.YSOF
+IPM3H07B.XSOF
+IPM3H07B.YSOF
+IPM3H07C.XSOF
+IPM3H07C.YSOF
+HALLC:p
+pgunFreqDiv:C
+end epics

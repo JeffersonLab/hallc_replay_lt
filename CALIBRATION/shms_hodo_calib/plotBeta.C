@@ -30,22 +30,44 @@
 #include <TObjArray.h>
 #include <TF1.h>
 
-void plotBeta ( TString rootFile1, TString rootFile2, int runNumber ) // first root file is assumed to be the before, second is the after.
-{
+//Files and containers and histograms
+TFile *Outfile;
+TFile *input1, *input2;
+TTree *tree1, *tree2;
+TH1 *beta1, *beta2;
 
-	TFile *input1, *input2;
+//variables for cutting trees and plotting
+Double_t calEtot, hgcerNpeSum, aeroNpeSum, gtrBeta;
+
+//cuts
+const Double_t calEtotLow = 0.5; //unit GeV
+const Double_t hgcerNpeSumLow = 1.5; //unit NPE
+const Double_t aeroNpeSumLow = 1.5; //unit NPE
+
+const Int_t INILENGTH = 64;
+
+
+//function makes the beta plots and saves them to output file
+void makePlots ( TString rootFile1, TString rootFile2 ) // first root file is assumed to be the before, second is the after.
+{
 
 	input1 = new TFile(Form(rootFile1, "READ");
 	input2 = new TFile(Form(rootFile2, "READ");
-
-	TH1 *beta1, *beta2;
-	beta1 = (TH1 *)input1->Get("phodo_beta;1");
-	beta2 = (TH1 *)input2->Get("phodo_beta;1");
-
+	
+	tree1 = dynamic_cast <TTree*> (input1->Get("T")); //get T tree from root files
+	tree2 = dynamic_cast <TTree*> (input2->Get("T"));
+	
+	tree1->SetBranchAddress("P.cal.etot", &calEtot);
+	tree1->SetBranchAddress("P.hgcer.npeSum", &hgcerNpeSum);
+	tree1->SetBranchAddress("P.aero.npeSum", &aeroNpeSum);
+	tree1->SetBranchAddress("P.gtr.beta", &gtrBeta);
+	
+	
 	TCanvas *c1 = new TCanvas("c1","c1",10, 10, 1000, 800);
 	c1->SetGrid();
    	//gStyle->SetOptTitle(kFALSE);
    	gStyle->SetOptStat("nemr");
+	
 		
 
 	beta1->SetLineColor(kBlue);
@@ -80,13 +102,71 @@ void plotBeta ( TString rootFile1, TString rootFile2, int runNumber ) // first r
 	s2->SetTextColor(kRed);
 	
 	gPad->Update();
-	
-	//THStack *hs = new THStack("hs", ""); //failed attempt
-	//hs->Add(beta1);
-	//hs->Add(beta2);
-	//hs->Draw();
 
-	//gPad->BuildLegend();
+	
 }
+
+void plotBeta (  TString runNumbers ) 
+{
+	ifstream runNumFile;
+	runNumFile.open(runNumbers)
+	if (!runNumFile)
+	{
+		cout << "Runfile that was specified does not exist !!!!!!  \n\n Shuting down!!! \n\n";
+		return; 
+	}
+	
+	Int_t *runList;
+	Int_t Length = 1, Iteration = 1;
+	runList = new Int_t [INILENGTH];
+	
+	//fill runlist
+	while (!runNumFile.eof())
+	{
+		// for if there are greater than INILENGTH runs that need to be read in.
+		if (Length >= Iteration*INILENGTH)
+		{
+			Iteration++;
+			// copy current list into one that has INILENGTH more spots
+			Int_t *temp = new Int_t [Iteration*INILENGTH];
+			for (Int_t i = 0; i < Length; i++)
+			{
+				temp[i] = runList[i];
+			}
+			//return memory
+			delete[] runList;
+			//copy pionter into new list location
+			runList = temp;
+		}
+		runNumFile >> runList[Length - 1];
+		
+		Length++;
+	}
+	runNumFile.close();
+	
+	TString rootFileName1, rootFileName2;
+	//open output File
+	Outfile = new TFile ("./Calibration_Plots/BetaComp.root","RECREATE");
+	for(Int_t i = 0; i < Length; i++)
+	{
+		rootFileName1 = form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt1_%d_-1.root", runList[i]);
+		rootFileName2 = form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt3_%d_-1.root", runList[i]);
+		
+		// generate and save plots of delta, with cuts.
+		makePlots(rootFileName1, rootFileName2);
+	}
+	
+	Outfile.close();
+	return;
+}
+
+
+
+
+
+
+
+
+
 
 

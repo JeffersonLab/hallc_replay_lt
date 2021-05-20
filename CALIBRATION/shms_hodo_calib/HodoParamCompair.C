@@ -273,7 +273,7 @@ void HodoParamCompair ( TString runNums_name, UInt_t numRuns) //input path to ru
 			//for planes only run as much as is neccessary (13 in first two, 14 in 3rd one and 21 times in quartz
 			for (UInt_t ibar = 0;((ibar < 13) || (ibar < 14 && iplane == 2)) || (ibar < nBarsMax && iplane == 3) ; ibar++)
 			{
-				CompHistos->WriteObject(CompGra[iside][iplane][ibar], Form("TW_c2_Comp_"+sideNames[iside]+"_side_plane_%i_Bar%i", iplane+1, ibar+1));
+				CompHistos->WriteObject(CompGra[iside][iplane][ibar], Form("TW_c2_Comp_"+sideNames[iside]+"_side_plane_%i_Bar%i", iplane+1, ibar+1))
 			}
 		}
 	}

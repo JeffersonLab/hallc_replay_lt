@@ -191,13 +191,14 @@ void HodoParamCompair ( TString runNums_name, UInt_t numRuns) //input path to ru
 	gROOT->SetBatch(kTRUE); //don't display plots
 	
 	//make file to store output
-	TFile *File = new TFile("./Calibration_Plots/Hodo_Param_Comp.root", "RECREATE");
-	if ( !File->IsOpen() )
+	TFile *Outfile = new TFile("./Calibration_Plots/Hodo_Param_Comp.root", "RECREATE");
+	if ( !Outfile->IsOpen() )
 	{
 		cout << "Output File Failed To Create!!!\nShuting down!!!\n";
 		return;
 	}
 	
+	/*
 	TCanvas *Temp = new TCanvas(Form("c_s%i_p%i", 0, 1), Form("TW_c2_Comp_"+sideNames[0]+"_side_plane_%i", 1), 1600, 1600); // name, title, width, height
 	Temp->SetGrid();
 	TGraphErrors *tp = new TGraphErrors (numRuns, runs, Param[0][1][1], nullptr, ParamErr[0][1][1]);
@@ -210,7 +211,7 @@ void HodoParamCompair ( TString runNums_name, UInt_t numRuns) //input path to ru
 	tp->SetMarkerStyle(35);
    	tp->Draw("AP");
 	Temp->Write( "TW_example" );
-	
+	*/
 	
 	//make canvases and graphs
 	TCanvas *CompCan[nSides][nPlanes];
@@ -260,8 +261,24 @@ void HodoParamCompair ( TString runNums_name, UInt_t numRuns) //input path to ru
 		}
 	}
 	
+	//move to directory that will contain individual histograms
+	TDirectory* CompHistos = dynamic_cast <TDirectory*> (outFile->Get("CompHistos"));
+	if (!CompHistos) {Outfile->mkdir("CompHistos");}
+	CompHistos->cd();
+	// loop again in order to save histogrames into another directory
+	for (UInt_t iside = 0; iside < nSides; iside++)
+	{
+		for (UInt_t iplane = 0; iplane < nPlanes; iplane++)
+		{
+			//for planes only run as much as is neccessary (13 in first two, 14 in 3rd one and 21 times in quartz
+			for (UInt_t ibar = 0;((ibar < 13) || (ibar < 14 && iplane == 2)) || (ibar < nBarsMax && iplane == 3) ; ibar++)
+			{
+				CompHistos->WriteObject(CompGra[iside][iplane][ibar], Form("TW_c2_Comp_"+sideNames[iside]+"_side_plane_%i_Bar%i", iplane+1, ibar+1));
+			}
+		}
+	}
 	
-	File->Close();
+	Outfile->Close();
 	return;
 }
 

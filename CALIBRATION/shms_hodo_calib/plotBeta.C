@@ -80,7 +80,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th1_aeroCut = new TH1F();
 	
 	Int_t nEntries = tree1->GetEntries();
-	for(Int_t iEntry = 0; iEntry < nEntries; iEntries++)
+	for(Int_t iEntry = 0; iEntry < nEntries; iEntry++)
 	{
 		tree1->GetEntry(iEntry);
 		
@@ -151,7 +151,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th1_aeroCut = new TH1F();
 	
 	nEntries = tree2->GetEntries();
-	for(Int_t iEntry = 0; iEntry < nEntries; iEntries++)
+	for(Int_t iEntry = 0; iEntry < nEntries; iEntry++)
 	{
 		tree2->GetEntry(iEntry);
 		
@@ -250,7 +250,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 void plotBeta (  TString runNumbers ) 
 {
 	ifstream runNumFile;
-	runNumFile.open(runNumbers)
+	runNumFile.open(runNumbers);
 	if (!runNumFile)
 	{
 		cout << "Runfile that was specified does not exist !!!!!!  \n\n Shuting down!!! \n\n";

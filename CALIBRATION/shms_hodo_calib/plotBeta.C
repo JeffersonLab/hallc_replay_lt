@@ -58,8 +58,8 @@ const Int_t INILENGTH = 64;
 void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first root file is assumed to be the before, second is the after.
 {
 
-	input1 = new TFile(Form(rootFile1, "READ");
-	input2 = new TFile(Form(rootFile2, "READ");
+	input1 = new TFile(rootFile1, "READ");
+	input2 = new TFile(rootFile2, "READ");
 	
 	tree1 = dynamic_cast <TTree*> (input1->Get("T")); //get T tree from root files
 	tree2 = dynamic_cast <TTree*> (input2->Get("T"));
@@ -80,7 +80,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th1_aeroCut = new TH1F();
 	
 	Int_t nEntries = tree1->GetEntries();
-	for(Int_t iEntry = 0; iEntry < nEntries; iEntrie++)
+	for(Int_t iEntry = 0; iEntry < nEntries; iEntries++)
 	{
 		tree1->GetEntry(iEntry);
 		
@@ -90,7 +90,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 		
 		//cuts
 		calCut = (calEtot >= calEtotLow);
-		hgcerCut = (hgcerNpeSum >= hcgerNpeSumLow);
+		hgcerCut = (hgcerNpeSum >= hgcerNpeSumLow);
 		aeroCut = (aeroNpeSum >= aeroNpeSumLow);
 	
 		if(calCut)   { th1_calCut->Fill(calEtot); }
@@ -99,7 +99,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 		
 		if(calCut && hgcerCut && aeroCut) 
 		{
-			beta1->Fill(gtrBeta)
+			beta1->Fill(gtrBeta);
 		}
 	}
 	
@@ -150,8 +150,8 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th1_aero = new TH1F();
 	th1_aeroCut = new TH1F();
 	
-	Int_t nEntries = tree2->GetEntries();
-	for(Int_t iEntry = 0; iEntry < nEntries; iEntrie++)
+	nEntries = tree2->GetEntries();
+	for(Int_t iEntry = 0; iEntry < nEntries; iEntries++)
 	{
 		tree2->GetEntry(iEntry);
 		
@@ -161,7 +161,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 		
 		//cuts
 		calCut = (calEtot >= calEtotLow);
-		hgcerCut = (hgcerNpeSum >= hcgerNpeSumLow);
+		hgcerCut = (hgcerNpeSum >= hgcerNpeSumLow);
 		aeroCut = (aeroNpeSum >= aeroNpeSumLow);
 	
 		if(calCut)   { th1_calCut->Fill(calEtot); }
@@ -170,7 +170,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 		
 		if(calCut && hgcerCut && aeroCut) 
 		{
-			beta2->Fill(gtrBeta)
+			beta2->Fill(gtrBeta);
 		}
 	}
 	
@@ -243,7 +243,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	s2->SetTextColor(kRed);
 	
 	gPad->Update();
-	betaDir->WriteObject(c1, form("Beta_Comp_%d", runNum));
+	betaDir->WriteObject(c1, Form("Beta_Comp_%d", runNum));
 	
 }
 
@@ -294,17 +294,17 @@ void plotBeta (  TString runNumbers )
 	//Loop over all run numbers
 	for(Int_t i = 0; i < Length; i++)
 	{
-		rootFileName1 = form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt1_%d_-1.root", runList[i]);
-		rootFileName2 = form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt3_%d_-1.root", runList[i]);
+		rootFileName1 = Form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt1_%d_-1.root", runList[i]);
+		rootFileName2 = Form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt3_%d_-1.root", runList[i]);
 		
 		// make a directory for plots of cut variables by run number
-		cutSubDir = cutsDir->mkdir(form("Cuts_Run_%d", runList[i]));
+		cutSubDir = cutsDir->mkdir(Form("Cuts_Run_%d", runList[i]));
 		
 		// generate and save plots of delta, with cuts.
 		makePlots(rootFileName1, rootFileName2, runList[i]);
 	}
 	
-	Outfile.close();
+	Outfile->Close();
 	return;
 }
 

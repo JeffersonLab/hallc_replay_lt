@@ -61,6 +61,12 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	input1 = new TFile(rootFile1, "READ");
 	input2 = new TFile(rootFile2, "READ");
 	
+	if(!input1 || !input2)
+	{
+		cout << "File not open properly!\nTried to open:\n     " << rootFile1 << "\nand: " << rootFile2;
+		return;
+	}
+	
 	tree1 = dynamic_cast <TTree*> (input1->Get("T")); //get T tree from root files
 	tree2 = dynamic_cast <TTree*> (input2->Get("T"));
 	
@@ -245,6 +251,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	gPad->Update();
 	betaDir->WriteObject(c1, Form("Beta_Comp_%d", runNum));
 	
+	return;
 }
 
 void plotBeta (  TString runNumbers ) 

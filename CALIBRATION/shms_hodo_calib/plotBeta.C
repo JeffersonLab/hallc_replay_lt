@@ -102,7 +102,111 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 			beta1->Fill(gtrBeta)
 		}
 	}
-
+	
+	//name and set stats, and write to directory all cut summary plots for 1st replay
+	th1_cal->SetName("calEtot_Pt1");
+	th1_cal->SetStats();
+	cutSubDir->WriteObject(th1_cal, "calEtot_Pt1");
+	
+	th1_calCut->SetName("calEtotCut_Pt1");
+	th1_calCut->SetStats();
+	cutSubDir->WriteObject(th1_calCut, "calEtotCut_Pt1");
+	
+	th1_hgcer->SetName("hgcerNpeSum_Pt1");
+	th1_hgcer->SetStats();
+	cutSubDir->WriteObject(th1_hgcer, "hgcerNpeSum_Pt1");
+	
+	th1_hgcerCut->SetName("hgcerNpeSumCut_Pt1");
+	th1_hgcerCut->SetStats();
+	cutSubDir->WriteObject(th1_hgcerCut, "hgcerNpeSumCut_Pt1");
+	
+	th1_aero->SetName("aeroNpeSum_Pt1");
+	th1_aero->SetStats();
+	cutSubDir->WriteObject(th1_aero, "aeroNpeSum_Pt1");
+	
+	th1_aeroCut->SetName("aeroNpeSumCut_Pt1");
+	th1_aeroCut->SetStats();
+	cutSubDir->WriteObject(th1_aeroCut, "aeroNpeSumCut_Pt1");
+	
+	//to avoid memory leak delete histograms since we make new ones for part 2
+	delete(th1_cal); 
+	delete(th1_calCut); 
+	delete(th1_hgcer);
+	delete(th1_hgcerCut); 
+	delete(th1_aero);
+	delete(th1_aeroCut);
+	
+	//start again for the second tree
+	tree2->SetBranchAddress("P.cal.etot", &calEtot);
+	tree2->SetBranchAddress("P.hgcer.npeSum", &hgcerNpeSum);
+	tree2->SetBranchAddress("P.aero.npeSum", &aeroNpeSum);
+	tree2->SetBranchAddress("P.gtr.beta", &gtrBeta);
+	
+	// make empty histograms
+	th1_cal = new TH1F();
+	th1_calCut = new TH1F();
+	th1_hgcer = new TH1F();
+	th1_hgcerCut = new TH1F();
+	th1_aero = new TH1F();
+	th1_aeroCut = new TH1F();
+	
+	Int_t nEntries = tree2->GetEntries();
+	for(Int_t iEntry = 0; iEntry < nEntries; iEntrie++)
+	{
+		tree2->GetEntry(iEntry);
+		
+		th1_cal->Fill(calEtot);
+		th1_hgcer->Fill(hgcerNpeSum);
+		th1_aero->Fill(aeroNpeSum);
+		
+		//cuts
+		calCut = (calEtot >= calEtotLow);
+		hgcerCut = (hgcerNpeSum >= hcgerNpeSumLow);
+		aeroCut = (aeroNpeSum >= aeroNpeSumLow);
+	
+		if(calCut)   { th1_calCut->Fill(calEtot); }
+		if(hgcerCut) { th1_hgcerCut->Fill(hgcerNpeSum); }
+		if(aeroCut)  { th1_aeroCut->Fill(aeroNpeSum); }
+		
+		if(calCut && hgcerCut && aeroCut) 
+		{
+			beta2->Fill(gtrBeta)
+		}
+	}
+	
+	//name and set stats, and write to directory all cut summary plots for 2nd replay
+	th1_cal->SetName("calEtot_Pt3");
+	th1_cal->SetStats();
+	cutSubDir->WriteObject(th1_cal, "calEtot_Pt3");
+	
+	th1_calCut->SetName("calEtotCut_Pt3");
+	th1_calCut->SetStats();
+	cutSubDir->WriteObject(th1_calCut, "calEtotCut_Pt3");
+	
+	th1_hgcer->SetName("hgcerNpeSum_Pt3");
+	th1_hgcer->SetStats();
+	cutSubDir->WriteObject(th1_hgcer, "hgcerNpeSum_Pt3");
+	
+	th1_hgcerCut->SetName("hgcerNpeSumCut_Pt3");
+	th1_hgcerCut->SetStats();
+	cutSubDir->WriteObject(th1_hgcerCut, "hgcerNpeSumCut_Pt3");
+	
+	th1_aero->SetName("aeroNpeSum_Pt3");
+	th1_aero->SetStats();
+	cutSubDir->WriteObject(th1_aero, "aeroNpeSum_Pt3");
+	
+	th1_aeroCut->SetName("aeroNpeSumCut_Pt3");
+	th1_aeroCut->SetStats();
+	cutSubDir->WriteObject(th1_aeroCut, "aeroNpeSumCut_Pt3");
+	
+	//to avoid memory leak delete histograms since we make new ones for part 3
+	delete(th1_cal); 
+	delete(th1_calCut); 
+	delete(th1_hgcer);
+	delete(th1_hgcerCut); 
+	delete(th1_aero);
+	delete(th1_aeroCut);
+	
 	//make canvas for beta comparison plot
 	TCanvas *c1 = new TCanvas("c1","c1",10, 10, 1000, 800);
 	c1->SetGrid();
@@ -111,7 +215,6 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 
 	beta1->SetLineColor(kBlue);
 	beta1->SetName("Beta_preCalib");
-	beta1->SetBinContent(beta1->FindBin(0), 0);
 	beta1->SetStats(); //gets stat box
 	
 	//this makes the stat box
@@ -127,7 +230,6 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	
 	beta2->SetLineColor(kRed);
 	beta2->SetName("Beta_postCalib");
-	beta2->SetBinContent(beta2->FindBin(0), 0);
 	beta2->SetStats();
 
 	beta2->Draw("sames");
@@ -141,7 +243,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	s2->SetTextColor(kRed);
 	
 	gPad->Update();
-
+	betaDir->WriteObject(c1, form("Beta_Comp_%d", runNum));
 	
 }
 

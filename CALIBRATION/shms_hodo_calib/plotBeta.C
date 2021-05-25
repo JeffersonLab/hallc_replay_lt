@@ -34,7 +34,12 @@
 TFile *Outfile;
 TFile *input1, *input2;
 TTree *tree1, *tree2;
-TH1 *beta1, *beta2;
+TDirectory *betaDir, *cutsDir, *cutSubDir; 
+
+//histograms
+TH1F *beta1, *beta2;
+TH1F *th1_cal, *th1_calCut, *th1_hgcer, *th1_hgcerCut, *th1_aero, *th1_aeroCut;
+
 
 //variables for cutting trees and plotting
 Double_t calEtot, hgcerNpeSum, aeroNpeSum, gtrBeta;
@@ -44,11 +49,13 @@ const Double_t calEtotLow = 0.5; //unit GeV
 const Double_t hgcerNpeSumLow = 1.5; //unit NPE
 const Double_t aeroNpeSumLow = 1.5; //unit NPE
 
+Bool_t calCut, hgcerCut, aeroCut;
+
 const Int_t INILENGTH = 64;
 
 
 //function makes the beta plots and saves them to output file
-void makePlots ( TString rootFile1, TString rootFile2 ) // first root file is assumed to be the before, second is the after.
+void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first root file is assumed to be the before, second is the after.
 {
 
 	input1 = new TFile(Form(rootFile1, "READ");
@@ -62,13 +69,45 @@ void makePlots ( TString rootFile1, TString rootFile2 ) // first root file is as
 	tree1->SetBranchAddress("P.aero.npeSum", &aeroNpeSum);
 	tree1->SetBranchAddress("P.gtr.beta", &gtrBeta);
 	
+	// make empty histograms
+	beta1 = new TH1F();
+	beta2 = new TH1F();
+	th1_cal = new TH1F();
+	th1_calCut = new TH1F();
+	th1_hgcer = new TH1F();
+	th1_hgcerCut = new TH1F();
+	th1_aero = new TH1F();
+	th1_aeroCut = new TH1F();
 	
+	Int_t nEntries = tree1->GetEntries();
+	for(Int_t iEntry = 0; iEntry < nEntries; iEntrie++)
+	{
+		tree1->GetEntry(iEntry);
+		
+		th1_cal->Fill(calEtot);
+		th1_hgcer->Fill(hgcerNpeSum);
+		th1_aero->Fill(aeroNpeSum);
+		
+		//cuts
+		calCut = (calEtot >= calEtotLow);
+		hgcerCut = (hgcerNpeSum >= hcgerNpeSumLow);
+		aeroCut = (aeroNpeSum >= aeroNpeSumLow);
+	
+		if(calCut)   { th1_calCut->Fill(calEtot); }
+		if(hgcerCut) { th1_hgcerCut->Fill(hgcerNpeSum); }
+		if(aeroCut)  { th1_aeroCut->Fill(aeroNpeSum); }
+		
+		if(calCut && hgcerCut && aeroCut) 
+		{
+			beta1->Fill(gtrBeta)
+		}
+	}
+
+	//make canvas for beta comparison plot
 	TCanvas *c1 = new TCanvas("c1","c1",10, 10, 1000, 800);
 	c1->SetGrid();
    	//gStyle->SetOptTitle(kFALSE);
    	gStyle->SetOptStat("nemr");
-	
-		
 
 	beta1->SetLineColor(kBlue);
 	beta1->SetName("Beta_preCalib");
@@ -147,13 +186,20 @@ void plotBeta (  TString runNumbers )
 	TString rootFileName1, rootFileName2;
 	//open output File
 	Outfile = new TFile ("./Calibration_Plots/BetaComp.root","RECREATE");
+	// make dirrectories for putting output
+	betaDir = Outfile->mkdir("BetaDists");
+	cutsDir = Outfile->mkdir("CutsSummary");
+	//Loop over all run numbers
 	for(Int_t i = 0; i < Length; i++)
 	{
 		rootFileName1 = form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt1_%d_-1.root", runList[i]);
 		rootFileName2 = form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt3_%d_-1.root", runList[i]);
 		
+		// make a directory for plots of cut variables by run number
+		cutSubDir = cutsDir->mkdir(form("Cuts_Run_%d", runList[i]));
+		
 		// generate and save plots of delta, with cuts.
-		makePlots(rootFileName1, rootFileName2);
+		makePlots(rootFileName1, rootFileName2, runList[i]);
 	}
 	
 	Outfile.close();

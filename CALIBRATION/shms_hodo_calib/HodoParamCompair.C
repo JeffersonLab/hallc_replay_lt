@@ -268,7 +268,6 @@ void HodoParamCompair ( TString runNums_name, UInt_t numRuns) //input path to ru
 	  CompHistos = Outfile->mkdir("CompHistos");
 	  //CompHistos = dynamic_cast <TDirectory*> (Outfile->Get("CompHistos;1"));
 	}
-	//CompHistos->cd();
 	// loop again in order to save histogrames into another directory
 	for (UInt_t iside = 0; iside < nSides; iside++)
 	{

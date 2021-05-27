@@ -1,4 +1,4 @@
-void FullReplay_HeepCoin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
+void FullReplay_HeepCoin_Pass2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   // Get RunNumber and MaxEvent if not provided.
   if(RunNumber == 0) {
@@ -257,16 +257,15 @@ void FullReplay_HeepCoin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file+
-  analyzer->SetOdefFile("DEF-files/PRODUCTION/Full_Replay_Pass2_Coin_v2.def"); // New version, slimmed down
+  analyzer->SetOdefFile("DEF-files/PRODUCTION/Full_Replay_Heep_Coin_Pass2.def"); // New version, slimmed down
   // Define cuts file
-  //analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/coin_production_cuts.def");  // optional
-  analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/coin_tracking_cuts.def");  // optional
+  analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/HeepCoin_Cuts_Pass2.def");  // optional
   // File to record accounting information for cuts
-  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Analysis/General/summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
+  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Analysis/HeeP/summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template
-  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/COIN_PROD.template",
-  Form("REPORT_OUTPUT/Analysis/General/replay_coin_production_%d_%d.report", RunNumber, MaxEvent));  // optional
+  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/HeepCoin_Pass2.template",
+  Form("REPORT_OUTPUT/Analysis/HeeP/replay_coin_production_%d_%d.report", RunNumber, MaxEvent));  // optional
 
 }

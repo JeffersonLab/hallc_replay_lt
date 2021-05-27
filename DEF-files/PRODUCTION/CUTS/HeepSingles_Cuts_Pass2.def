@@ -3,6 +3,13 @@
 ##### University of Regina ######
 ###### Created - May, 2021 ######
 #################################
+#################################
+########## NOTE - SJDK ##########
+### Copy of coin_tracking.def ###
+########### for now #############
+## Cuts should all be electron ##
+##### based for both spects #####
+#################################
 
 Block: RawDecode
 
@@ -87,41 +94,7 @@ shmsScinDidpi       shmsScinShouldpi && P.dc.ntrack > 0
 shmsScinDidp        shmsScinShouldp && P.dc.ntrack > 0
 shmsScinDidh        shmsScinShouldh && P.dc.ntrack > 0
 
-# HMS tracked variables for SHMS coin Tracking Efficiency
-
-HMScoinScinGood           H.hod.goodscinhit == 1
-HMScoinGoodBetatrk        H.gtr.beta > 0.8 && H.gtr.beta < 1.3
-HMScoinhodstarttime       H.hod.goodstarttime == 1
-HMScoindcindipole	  H.dc.InsideDipoleExit == 1
-HMScoindelta              H.gtr.dp > -8 && H.gtr.dp < 8
-
-# HMS variable combinations for SHMS coin Efficency (NOT used in HMS Tracking Efficiency)
-
-HMScoinScinShould         HMScoinScinGood && HMScoinGoodBetatrk && HMScoinhodstarttime && HMScoindcindipole && HMScoindelta
-HMScoinScinShoulde        HMScoinScinShould && H.cal.etotnorm > 0.6 && H.cal.etotnorm < 2.0 && H.cer.npeSum > 0.5
-HMScoinScinShouldh        HMScoinScinShould && H.cal.etotnorm < 0.6 && H.cal.etotnorm > 0.05 && H.cer.npeSum < 0.5
-
-# HMS found tracks (Used in denominator of SHMS coin Tracking Efficency)
-
-HMScoinScinDid            HMScoinScinShould && H.dc.ntrack > 0
-HMScoinScinDide           HMScoinScinShoulde && H.dc.ntrack > 0
-HMScoinScinDidh           HMScoinScinShouldh && H.dc.ntrack > 0
-
-# Raw (untracked) coin time calculation and cuts (Actual Raw (untracked) coin time is not available in hcana)
-
-COINTimeRaw		  CTime.CoinTime_RAW_ROC2_NoTrack > -20 && CTime.CoinTime_RAW_ROC2_NoTrack < 30 
-COINTimeRawCut		  COINTimeRaw && HMScoinScinGood && shmsScinGood
-
-# SHMS coin Tracking efficency calculation (Should = Denominator, Did = Numerator)
-
-PcoinShould		  shmsScinShould && HMScoinScinDid && COINTimeRawCut
-PcoinShoulde	 	  shmsScinShoulde && HMScoinScinDide && COINTimeRawCut
-PcoinShouldpi		  shmsScinShouldpi && HMScoinScinDide && COINTimeRawCut
-PcoinShouldp		  shmsScinShouldp && HMScoinScinDide && COINTimeRawCut
-PcoinDid		  PcoinShould && P.dc.ntrack > 0
-PcoinDide		  PcoinShoulde && P.dc.ntrack > 0
-PcoinDidpi		  PcoinShouldpi && P.dc.ntrack > 0
-PcoinDidp		  PcoinShouldp && P.dc.ntrack > 0
+SHMSdcindipole      P.dc.InsideDipoleExit == 1
 
 ##################
 ####    HMS    ###
@@ -133,7 +106,6 @@ hcut_xpfp                 H.gtr.th > -0.08 && H.gtr.th < 0.08
 hcut_ypfp                 H.gtr.ph > -0.045 && H.gtr.ph < 0.045
 hcut_delta                H.gtr.dp > -8 && H.gtr.dp < 8
 hcut_acceptance           hcut_xpfp && hcut_ypfp && hcut_delta
-
 
 # HMS PID cuts for different particles in HGC and CAL
 
@@ -157,32 +129,7 @@ HMSScinDid            HMSScinShould && H.dc.ntrack > 0
 HMSScinDide           HMSScinShoulde && H.dc.ntrack > 0
 HMSScinDidpi          HMSScinShouldpi && H.dc.ntrack > 0
 
-# SHMS tracked variables for HMS coin Tracking Efficiency
-
-SHMScoinScinGood           P.hod.goodscinhit == 1
-SHMScoinGoodBetatrk        P.gtr.beta > 0.6 && P.gtr.beta < 1.5
-SHMScoinhodstarttime       P.hod.goodstarttime == 1
-SHMScoindcindipole         P.dc.InsideDipoleExit == 1
-SHMScoindelta              P.gtr.dp > -10 && P.gtr.dp < 20
-
-# SHMS variable combinations for HMS coin Efficency (NOT used in SHMS Tracking Efficiency)
-
-SHMScoinScinShould         SHMScoinScinGood && SHMScoinGoodBetatrk && SHMScoinhodstarttime && SHMScoindcindipole && SHMScoindelta
-SHMScoinScinShouldh        SHMScoinScinShould && P.cal.etotnorm < 0.6 && P.cal.etotnorm > 0.05 && P.hgcer.npeSum > 1.5
-
-# SHMS found tracks (Used in denominator of HMS coin Tracking Efficency)
-
-SHMScoinScinDid            SHMScoinScinShould && H.dc.ntrack > 0
-SHMScoinScinDidh           SHMScoinScinShouldh && H.dc.ntrack > 0
-
-# HMS coin Tracking efficency calculation (Should = Denominator, Did = Numerator)
-
-HcoinShould               HMSScinShould && SHMScoinScinDid && COINTimeRawCut
-HcoinShoulde              HMSScinShoulde && SHMScoinScinDidh && COINTimeRawCut
-HcoinShouldpi             HMSScinShouldpi && SHMScoinScinDidh && COINTimeRawCut
-HcoinDid                  HcoinShould && H.dc.ntrack > 0
-HcoinDide                 HcoinShoulde && H.dc.ntrack > 0
-HcoinDidpi                HcoinShouldpi && H.dc.ntrack > 0
+HMSdcindipole      H.dc.InsideDipoleExit == 1
 
 ##########################
 ########   DEBUG   #######
@@ -335,35 +282,40 @@ HMS_hcer_track_fired_tot H.cer.totNumTracksFired>0
 ###  SHMS HGC  ###
 ##################
 
-SHMSGEN		shmsScinGood && shmshodstarttime && SHMScoindcindipole && pcut_acceptance
-SHMSCT	  	CTime.ePiCoinTime_ROC1 > -1 && CTime.ePiCoinTime_ROC1 < 1
-SHMSCalpi	P.cal.etottracknorm < 0.7              
-SHMSMMpicut     P.kin.secondary.MMpi > 0.901 && P.kin.secondary.MMpi < 1.054
+SHMSGEN		shmsScinGood && shmshodstarttime && SHMSdcindipole && pcut_acceptance
+SHMSCalelec	P.cal.etottracknorm > 0.7
+SHMSCalpi	P.cal.etottracknorm < 0.7
+SHMSAEROelec    P.aero.npeSum  > 1.5 
 SHMSAEROpi      P.aero.npeSum  > 1.5
-
-shmsRF		RFTime.SHMS_RFtimeDist > 1.469 && RFTime.SHMS_RFtimeDist < 2.603
 
 #Using wide cut for Aerogel position
 
 SHMSAEROpospi	P.aero.yAtAero > -35 && P.aero.yAtAero < 35
+SHMSAEROposelec	P.aero.yAtAero > -35 && P.aero.yAtAero < 35
 
-SHMSHGCShouldpi		SHMSGEN && SHMSCT && SHMSCalpi && SHMSMMpicut && SHMSAEROpi && SHMSAEROpospi && shmsRF
+SHMSHGCShouldpi		SHMSGEN && SHMSCalpi && SHMSAEROpi && SHMSAEROpospi
 SHMSHGCDidpi		SHMSHGCShouldpi && P.hgcer.npeSum > 1.5
+
+SHMSHGCShouldelec	SHMSGEN && SHMSCalelec && SHMSAEROelec && SHMSAEROposelec
+SHMSHGCDidelec		SHMSHGCShouldelec && P.hgcer.npeSum > 1.5
 
 ###################
 ###  SHMS Aero  ###
 ###################
 
+SHMSHGCelec      P.hgcer.npeSum  > 1.5
 SHMSHGCpi      P.hgcer.npeSum  > 1.5
 
-SHMSAeroShouldpi         SHMSGEN && SHMSCT && SHMSCalpi && SHMSMMpicut && SHMSHGCpi && SHMSAEROpospi && shmsRF
+SHMSAeroShouldelec         SHMSGEN && SHMSCalelec && SHMSHGCelec && SHMSAEROposelec
+SHMSAeroDidelec            SHMSAeroShouldelec && P.aero.npeSum > 1.5
+SHMSAeroShouldpi         SHMSGEN && SHMSCalpi && SHMSHGCpi && SHMSAEROpospi
 SHMSAeroDidpi            SHMSAeroShouldpi && P.aero.npeSum > 1.5
 
-##################
-###   HMS HGC  ###
-##################
+########################
+###   HMS Cherenkov  ###
+########################
 
-HMSGEN		   HMSScinGood && HMShodstarttime && HMScoindcindipole && hcut_acceptance
+HMSGEN		   HMSScinGood && HMShodstarttime && HMSdcindipole && hcut_acceptance
 HMSCalelec         H.cal.etottracknorm > 0.6
 
 HMSHGCShouldelec         HMSGEN && SHMSCT && HMSCalelec 

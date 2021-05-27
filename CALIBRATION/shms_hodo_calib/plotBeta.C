@@ -85,8 +85,10 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th1_aero = new TH1F();
 	th1_aeroCut = new TH1F();
 	
+	
 	Int_t nEntries = tree1->GetEntries();
-	for(Int_t iEntry = 0; iEntry < nEntries; iEntry++)
+	cout << "****************************\n" << nEntries << " Entries to be processed in part 1\n";
+	for(Int_t iEntry = 0; iEntry < 100000; iEntry++)
 	{
 		tree1->GetEntry(iEntry);
 		
@@ -107,6 +109,8 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 		{
 			beta1->Fill(gtrBeta);
 		}
+
+		if(iEntry % 10000 == 0) {cout << iEntry << endl;}
 	}
 	
 	//name and set stats, and write to directory all cut summary plots for 1st replay
@@ -157,7 +161,8 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th1_aeroCut = new TH1F();
 	
 	nEntries = tree2->GetEntries();
-	for(Int_t iEntry = 0; iEntry < nEntries; iEntry++)
+	cout << "****************************\n" << nEntries << " Entries to be processed in part 3\n";  
+	for(Int_t iEntry = 0; iEntry < 100000; iEntry++)
 	{
 		tree2->GetEntry(iEntry);
 		
@@ -178,6 +183,8 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 		{
 			beta2->Fill(gtrBeta);
 		}
+		
+		if ( iEntry % 100000 == 0 ) {cout << iEntry << endl;}
 	}
 	
 	//name and set stats, and write to directory all cut summary plots for 2nd replay
@@ -212,6 +219,11 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	delete(th1_hgcerCut); 
 	delete(th1_aero);
 	delete(th1_aeroCut);
+
+	delete(tree1);
+	delete(tree2);
+
+	cout << "Finished making plots for run: " << runNum << endl;
 	
 	//make canvas for beta comparison plot
 	TCanvas *c1 = new TCanvas("c1","c1",10, 10, 1000, 800);
@@ -256,6 +268,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 
 void plotBeta (  TString runNumbers ) 
 {
+  cout << "\n\n";
 	ifstream runNumFile;
 	runNumFile.open(runNumbers);
 	if (!runNumFile)
@@ -292,6 +305,12 @@ void plotBeta (  TString runNumbers )
 	}
 	runNumFile.close();
 	
+	cout << "Processing The following runs:\n";
+	for(Int_t i = 0; i < Length; i++)
+	{
+	  cout << runList[i];
+	}
+
 	TString rootFileName1, rootFileName2;
 	//open output File
 	Outfile = new TFile ("./Calibration_Plots/BetaComp.root","RECREATE");
@@ -301,13 +320,16 @@ void plotBeta (  TString runNumbers )
 	//Loop over all run numbers
 	for(Int_t i = 0; i < Length; i++)
 	{
-		rootFileName1 = Form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt1_%d_-1.root", runList[i]);
-		rootFileName2 = Form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt3_%d_-1.root", runList[i]);
+	        rootFileName1 = Form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt1_%d_-1.root", runList[i]);
+	        rootFileName2 = Form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt3_%d_-1.root", runList[i]);
+	        //rootFileName1 = Form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt1_%d_100000.root", runList[i]);
+		//rootFileName1 = Form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt3_%d_100000.root", runList[i]);
 		
 		// make a directory for plots of cut variables by run number
 		cutSubDir = cutsDir->mkdir(Form("Cuts_Run_%d", runList[i]));
 		
 		// generate and save plots of delta, with cuts.
+		cout << "processing Run " << runList[i];
 		makePlots(rootFileName1, rootFileName2, runList[i]);
 	}
 	

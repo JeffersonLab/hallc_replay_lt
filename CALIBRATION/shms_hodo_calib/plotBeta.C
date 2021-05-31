@@ -76,14 +76,14 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	tree1->SetBranchAddress("P.gtr.beta", &gtrBeta);
 	
 	// make empty histograms
-	beta1 = new TH1F();
-	beta2 = new TH1F();
-	th1_cal = new TH1F();
-	th1_calCut = new TH1F();
-	th1_hgcer = new TH1F();
-	th1_hgcerCut = new TH1F();
-	th1_aero = new TH1F();
-	th1_aeroCut = new TH1F();
+	beta1 = new TH1F("Beta_Pt1", "Beta_Pt1", 110, 0.0, 110.0);
+	beta2 = new TH1F("Beta_Pt2", "Beta_Pt2", 110, 0.0, 110.0);
+	th1_cal = new TH1F("calEtot_Pt1", "calEtot_Pt1", 20, 0.0, 20.0);
+	th1_calCut = new TH1F("calEtotCut_Pt1", "calEtotCut_Pt1", 20, 0.0, 20.0);
+	th1_hgcer = new TH1F("hgcerNpeSum_Pt1", "hgcerNpeSum_Pt1", 20, 0.0, 20.0);
+	th1_hgcerCut = new TH1F("hgcerNpeSumCut_Pt1", "hgcerNpeSumCut_Pt1", 20, 0.0, 20.0);
+	th1_aero = new TH1F("aeroNpeSum_Pt1", "aeroNpeSum_Pt1", 20, 0.0, 20.0);
+	th1_aeroCut = new TH1F("aeroNpeSumCut_Pt1", "aeroNpeSumCut_Pt1", 20, 0.0, 20.0);
 	
 	
 	Int_t nEntries = tree1->GetEntries();
@@ -110,31 +110,25 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 			beta1->Fill(gtrBeta);
 		}
 
-		if(iEntry % 10000 == 0) {cout << iEntry << endl;}
+		if(iEntry % 100000 == 0) {cout << iEntry << endl;}
 	}
 	
 	//name and set stats, and write to directory all cut summary plots for 1st replay
-	th1_cal->SetName("calEtot_Pt1");
 	th1_cal->SetStats();
 	cutSubDir->WriteObject(th1_cal, "calEtot_Pt1");
 	
-	th1_calCut->SetName("calEtotCut_Pt1");
 	th1_calCut->SetStats();
 	cutSubDir->WriteObject(th1_calCut, "calEtotCut_Pt1");
 	
-	th1_hgcer->SetName("hgcerNpeSum_Pt1");
 	th1_hgcer->SetStats();
 	cutSubDir->WriteObject(th1_hgcer, "hgcerNpeSum_Pt1");
 	
-	th1_hgcerCut->SetName("hgcerNpeSumCut_Pt1");
 	th1_hgcerCut->SetStats();
 	cutSubDir->WriteObject(th1_hgcerCut, "hgcerNpeSumCut_Pt1");
 	
-	th1_aero->SetName("aeroNpeSum_Pt1");
 	th1_aero->SetStats();
 	cutSubDir->WriteObject(th1_aero, "aeroNpeSum_Pt1");
 	
-	th1_aeroCut->SetName("aeroNpeSumCut_Pt1");
 	th1_aeroCut->SetStats();
 	cutSubDir->WriteObject(th1_aeroCut, "aeroNpeSumCut_Pt1");
 	
@@ -153,12 +147,12 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	tree2->SetBranchAddress("P.gtr.beta", &gtrBeta);
 	
 	// make empty histograms
-	th1_cal = new TH1F();
-	th1_calCut = new TH1F();
-	th1_hgcer = new TH1F();
-	th1_hgcerCut = new TH1F();
-	th1_aero = new TH1F();
-	th1_aeroCut = new TH1F();
+	th1_cal = new TH1F("calEtot_Pt3", "calEtot_Pt3", 20, 0.0, 20.0);
+	th1_calCut = new TH1F("calEtotCut_ Pt3", "calEtotCut_ Pt3", 20, 0.0, 20.0);
+	th1_hgcer = new TH1F("hgcerNpeSum_ Pt3", "hgcerNpeSum_ Pt3", 20, 0.0, 20.0);
+	th1_hgcerCut = new TH1F("hgcerNpeSumCut_ Pt3", "hgcerNpeSumCut_ Pt3", 20, 0.0, 20.0);
+	th1_aero = new TH1F("aeroNpeSum_ Pt3", "aeroNpeSum_ Pt3", 20, 0.0, 20.0);
+	th1_aeroCut = new TH1F("aeroNpeSumCut_ Pt3", "aeroNpeSumCut_ Pt3", 20, 0.0, 20.0);
 	
 	nEntries = tree2->GetEntries();
 	cout << "****************************\n" << nEntries << " Entries to be processed in part 3\n";  
@@ -187,28 +181,22 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 		if ( iEntry % 100000 == 0 ) {cout << iEntry << endl;}
 	}
 	
-	//name and set stats, and write to directory all cut summary plots for 2nd replay
-	th1_cal->SetName("calEtot_Pt3");
+	//set stats, and write to directory all cut summary plots for 2nd replay
 	th1_cal->SetStats();
 	cutSubDir->WriteObject(th1_cal, "calEtot_Pt3");
 	
-	th1_calCut->SetName("calEtotCut_Pt3");
 	th1_calCut->SetStats();
 	cutSubDir->WriteObject(th1_calCut, "calEtotCut_Pt3");
 	
-	th1_hgcer->SetName("hgcerNpeSum_Pt3");
 	th1_hgcer->SetStats();
 	cutSubDir->WriteObject(th1_hgcer, "hgcerNpeSum_Pt3");
 	
-	th1_hgcerCut->SetName("hgcerNpeSumCut_Pt3");
 	th1_hgcerCut->SetStats();
 	cutSubDir->WriteObject(th1_hgcerCut, "hgcerNpeSumCut_Pt3");
 	
-	th1_aero->SetName("aeroNpeSum_Pt3");
 	th1_aero->SetStats();
 	cutSubDir->WriteObject(th1_aero, "aeroNpeSum_Pt3");
 	
-	th1_aeroCut->SetName("aeroNpeSumCut_Pt3");
 	th1_aeroCut->SetStats();
 	cutSubDir->WriteObject(th1_aeroCut, "aeroNpeSumCut_Pt3");
 	
@@ -268,7 +256,8 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 
 void plotBeta (  TString runNumbers ) 
 {
-  cout << "\n\n";
+	gROOT->SetBatch(1);
+  	cout << "\n\n";
 	ifstream runNumFile;
 	runNumFile.open(runNumbers);
 	if (!runNumFile)
@@ -278,7 +267,7 @@ void plotBeta (  TString runNumbers )
 	}
 	
 	Int_t *runList;
-	Int_t Length = 1, Iteration = 1;
+	Int_t Length = 0, Iteration = 1;
 	runList = new Int_t [INILENGTH];
 	
 	//fill runlist
@@ -299,7 +288,7 @@ void plotBeta (  TString runNumbers )
 			//copy pionter into new list location
 			runList = temp;
 		}
-		runNumFile >> runList[Length - 1];
+		runNumFile >> runList[Length];
 		
 		Length++;
 	}
@@ -308,7 +297,7 @@ void plotBeta (  TString runNumbers )
 	cout << "Processing The following runs:\n";
 	for(Int_t i = 0; i < Length; i++)
 	{
-	  cout << runList[i];
+	  cout << runList[i] << "\n";
 	}
 
 	TString rootFileName1, rootFileName2;
@@ -323,13 +312,13 @@ void plotBeta (  TString runNumbers )
 	        rootFileName1 = Form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt1_%d_-1.root", runList[i]);
 	        rootFileName2 = Form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt3_%d_-1.root", runList[i]);
 	        //rootFileName1 = Form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt1_%d_100000.root", runList[i]);
-		//rootFileName1 = Form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt3_%d_100000.root", runList[i]);
+			//rootFileName1 = Form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt3_%d_100000.root", runList[i]);
 		
 		// make a directory for plots of cut variables by run number
 		cutSubDir = cutsDir->mkdir(Form("Cuts_Run_%d", runList[i]));
 		
 		// generate and save plots of delta, with cuts.
-		cout << "processing Run " << runList[i];
+		cout << "\n\nprocessing Run " << runList[i] << "\n";
 		makePlots(rootFileName1, rootFileName2, runList[i]);
 	}
 	

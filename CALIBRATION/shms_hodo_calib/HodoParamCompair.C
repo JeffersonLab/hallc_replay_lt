@@ -40,6 +40,8 @@ static const UInt_t nBarsMax   = 21;
 static const UInt_t nTwFitPars = 2;
 static const TString sideNames[nSides] = {"Positive", "Negative"};
 
+const Int_t INILENGTH = 64;
+
 //makes a divided canvas
 TCanvas *makeCan(UInt_t numColumns, UInt_t numRows, UInt_t winWidth, UInt_t winHeight, TCanvas *can, TString name, TString title) {
   can = new TCanvas(name, title, winWidth, winHeight);  
@@ -48,13 +50,28 @@ TCanvas *makeCan(UInt_t numColumns, UInt_t numRows, UInt_t winWidth, UInt_t winH
 }
 
 //gets run #s from file
-bool getRuns ( Double_t *runs, ifstream& runFile, UInt_t numRuns)
-{
-	for(UInt_t i = 0; i < numRuns; i++)
+bool getRuns ( Double_t *runs, ifstream& runFile, Int_t& Length)
+{	
+	while (!runFile.eof())
 	{
-		if ( runFile.eof())
-			return false;
-		runFile >> runs[i];
+		// for if there are greater than INILENGTH runs that need to be read in.
+		if (Length >= Iteration*INILENGTH)
+		{
+			Iteration++;
+			// copy current list into one that has INILENGTH more spots
+			Int_t *temp = new Int_t [Iteration*INILENGTH];
+			for (Int_t i = 0; i < Length; i++)
+			{
+				temp[i] = runList[i];
+			}
+			//return memory
+			delete[] runList;
+			//copy pionter into new list location
+			runList = temp;
+		}
+		runNumFile >> runList[Length];
+		
+		Length++;
 	}
 	return true;
 }
@@ -100,7 +117,7 @@ void RemoveBad ( TGraphErrors *g1, Double_t *Param, Double_t *ParamErr, UInt_t n
 
 }
 
-void HodoParamCompair ( TString runNums_name, UInt_t numRuns) //input path to run # file, and the number of runs to look at.
+void HodoParamCompair ( TString runNums_name ) //input path to run # file
 {
 	//open file with run numbers
 	ifstream runFile;
@@ -113,7 +130,8 @@ void HodoParamCompair ( TString runNums_name, UInt_t numRuns) //input path to ru
 	}
 	
 	//Make array for the run numbers
-	Double_t *runs = new Double_t[numRuns];
+	Double_t *runs = new Double_t[INILENGTH];
+	Int_t numRuns = 0;
 	
 	//fill the array with run numbers
 	if ( !getRuns(runs, runFile, numRuns) )
@@ -171,7 +189,7 @@ void HodoParamCompair ( TString runNums_name, UInt_t numRuns) //input path to ru
 		{
 			cout << "could not find file: \"" << fileName << "\"!!!" << endl;  
 			//if this file is not found its either that you did not run that run number or didn't fix the hms to also output this file!
-			cout << "Stoping!!" << endl;
+			cout << "Stopping!!" << endl;
 			return;
 		}
 		

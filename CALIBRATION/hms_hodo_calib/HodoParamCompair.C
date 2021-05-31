@@ -52,6 +52,7 @@ TCanvas *makeCan(UInt_t numColumns, UInt_t numRows, UInt_t winWidth, UInt_t winH
 //gets run #s from file
 bool getRuns ( Double_t *runs, ifstream& runFile, Int_t& Length)
 {	
+    Int_t Iteration = 1;
 	while (!runFile.eof())
 	{
 		// for if there are greater than INILENGTH runs that need to be read in.
@@ -65,12 +66,11 @@ bool getRuns ( Double_t *runs, ifstream& runFile, Int_t& Length)
 				temp[i] = runList[i];
 			}
 			//return memory
-			delete[] runList;
+			delete[] runs;
 			//copy pionter into new list location
-			runList = temp;
+			runs = temp;
 		}
-		runNumFile >> runList[Length];
-		
+		runFile >> runs[Length];
 		Length++;
 	}
 	return true;
@@ -294,7 +294,7 @@ void HodoParamCompair ( TString runNums_name ) //input path to run # file
 			//for planes only run as much as is neccessary (13 in first two, 14 in 3rd one and 21 times in quartz
 			for (UInt_t ibar = 0;((ibar < 13) || (ibar < 14 && iplane == 2)) || (ibar < nBarsMax && iplane == 3) ; ibar++)
 			{
-				CompHistos->WriteObject(CompGra[iside][iplane][ibar], Form("TW_c2_Comp_"+sideNames[iside]+"_side_plane_%i_Bar%i", iplane+1, ibar+1))
+				CompHistos->WriteObject(CompGra[iside][iplane][ibar], Form("TW_c2_Comp_"+sideNames[iside]+"_side_plane_%i_Bar%i", iplane+1, ibar+1));
 			}
 		}
 	}

@@ -181,7 +181,7 @@ void HodoParamCompair ( TString runNums_name ) //input path to run # file
 	{
 		
 		//get file
-		fileName = Form("Calibration_Plots/phodo_TWcalib_Err_%.0f.param", runs[irun]); // may need to change this path though
+		fileName = Form("Calibration_Plots/hhodo_TWcalib_Err_%.0f.param", runs[irun]); // may need to change this path though
 		runFile.open(fileName);
 		
 		//output error if can't find file

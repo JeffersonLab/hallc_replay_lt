@@ -6,14 +6,7 @@
 	It takes in a file with run numbers, and then spits out some graphs of parameter vrs run #
 	requires you to have run the timeWalkCalib.C script first!!!
 
-	This only works for HMS, a similar script works for SHMS 
-	
-	The program asks for 3 arguments.
-	
-	The path to a file containing a list of all your run numbers, (ie. ../../UTIL_BATCH/InputRunLists/ALL_Runs)
-	The path to the directory of your root files, (ie. ../../ROOTfilesHodoCalib/)
-		Note: this assumes the root files are named as: "SHMS_Hodo_Calib_Pt1_%d_-1.root" and "SHMS_Hodo_Calib_Pt3_%d_-1.root", with %d being the run number
-	The Number of runs you are looking at.
+	This only works for SHMS, a similar script works for HMS 
 */
 
 #include <TSystem.h>
@@ -41,11 +34,13 @@
 #include <TF1.h>
 
 // Declare constants
-static const UInt_t nPlanes    = 4;
-static const UInt_t nSides     = 2;
-static const UInt_t nBarsMax   = 16;
+static const UInt_t nPlanes     = 4;
+static const UInt_t nSides      = 2;
+static const UInt_t nMaxBars    = 16;
 static const UInt_t nTwFitPars = 2;
 static const TString sideNames[nSides] = {"Positive", "Negative"};
+
+const Int_t INILENGTH = 64;
 
 //makes a divided canvas
 TCanvas *makeCan(UInt_t numColumns, UInt_t numRows, UInt_t winWidth, UInt_t winHeight, TCanvas *can, TString name, TString title) {
@@ -55,13 +50,28 @@ TCanvas *makeCan(UInt_t numColumns, UInt_t numRows, UInt_t winWidth, UInt_t winH
 }
 
 //gets run #s from file
-bool getRuns ( Double_t *runs, ifstream& runFile, UInt_t numRuns)
-{
-	for(UInt_t i = 0; i < numRuns; i++)
+bool getRuns ( Double_t *runs, ifstream& runFile, Int_t& Length)
+{	
+	while (!runFile.eof())
 	{
-		if ( runFile.eof())
-			return false;
-		runFile >> runs[i];
+		// for if there are greater than INILENGTH runs that need to be read in.
+		if (Length >= Iteration*INILENGTH)
+		{
+			Iteration++;
+			// copy current list into one that has INILENGTH more spots
+			Int_t *temp = new Int_t [Iteration*INILENGTH];
+			for (Int_t i = 0; i < Length; i++)
+			{
+				temp[i] = runList[i];
+			}
+			//return memory
+			delete[] runList;
+			//copy pionter into new list location
+			runList = temp;
+		}
+		runNumFile >> runList[Length];
+		
+		Length++;
 	}
 	return true;
 }
@@ -107,8 +117,7 @@ void RemoveBad ( TGraphErrors *g1, Double_t *Param, Double_t *ParamErr, UInt_t n
 
 }
 
-//input path to run # file, Path to your root file directory, and the number of runs to look at.
-void HodoParamCompair ( TString runNums_name, TString PathToRootFiles, UInt_t numRuns) 
+void HodoParamCompair ( TString runNums_name ) //input path to run # file
 {
 	//open file with run numbers
 	ifstream runFile;
@@ -116,12 +125,13 @@ void HodoParamCompair ( TString runNums_name, TString PathToRootFiles, UInt_t nu
 	
 	if (!runFile)
 	{
-		cout << "File not Found!!!!\n";
+        cout << "File not Found!!!!\n";
 		return;
 	}
 	
 	//Make array for the run numbers
-	Double_t *runs = new Double_t[numRuns];
+	Double_t *runs = new Double_t[INILENGTH];
+	Int_t numRuns = 0;
 	
 	//fill the array with run numbers
 	if ( !getRuns(runs, runFile, numRuns) )
@@ -171,14 +181,15 @@ void HodoParamCompair ( TString runNums_name, TString PathToRootFiles, UInt_t nu
 	{
 		
 		//get file
-		fileName = Form("Calibration_Plots/hhodo_TWcalib_Err_%.0f.param", runs[irun]);
+		fileName = Form("Calibration_Plots/phodo_TWcalib_Err_%.0f.param", runs[irun]); // may need to change this path though
 		runFile.open(fileName);
 		
 		//output error if can't find file
 		if ( !runFile )
 		{
-			cout << "could not find file: \"" << fileName << "\"!!!" << endl;
-			cout << "Stoping!!" << endl;
+			cout << "could not find file: \"" << fileName << "\"!!!" << endl;  
+			//if this file is not found its either that you did not run that run number or didn't fix the hms to also output this file!
+			cout << "Stopping!!" << endl;
 			return;
 		}
 		
@@ -198,13 +209,14 @@ void HodoParamCompair ( TString runNums_name, TString PathToRootFiles, UInt_t nu
 	gROOT->SetBatch(kTRUE); //don't display plots
 	
 	//make file to store output
-	TFile *File = new TFile("./Calibration_Plots/Hodo_Param_Comp.root", "RECREATE");
-	if ( !File->IsOpen() )
+	TFile *Outfile = new TFile("./Calibration_Plots/Hodo_Param_Comp.root", "RECREATE");
+	if ( !Outfile->IsOpen() )
 	{
 		cout << "Output File Failed To Create!!!\nShuting down!!!\n";
 		return;
 	}
 	
+	/*
 	TCanvas *Temp = new TCanvas(Form("c_s%i_p%i", 0, 1), Form("TW_c2_Comp_"+sideNames[0]+"_side_plane_%i", 1), 1600, 1600); // name, title, width, height
 	Temp->SetGrid();
 	TGraphErrors *tp = new TGraphErrors (numRuns, runs, Param[0][1][1], nullptr, ParamErr[0][1][1]);
@@ -216,8 +228,8 @@ void HodoParamCompair ( TString runNums_name, TString PathToRootFiles, UInt_t nu
 	tp->GetYaxis()->SetTitle("TW Fit Parameter Value");
 	tp->SetMarkerStyle(35);
    	tp->Draw("AP");
-	tp->Write( "TW_example" );
-	
+	Temp->Write( "TW_example" );
+	*/
 	
 	//make canvases and graphs
 	TCanvas *CompCan[nSides][nPlanes];
@@ -267,10 +279,27 @@ void HodoParamCompair ( TString runNums_name, TString PathToRootFiles, UInt_t nu
 		}
 	}
 	
+	//move to directory that will contain individual histograms
+	TDirectory* CompHistos = dynamic_cast <TDirectory*> (Outfile->Get("CompHistos;1"));
+	if (!CompHistos) 
+	{
+	  CompHistos = Outfile->mkdir("CompHistos");
+	  //CompHistos = dynamic_cast <TDirectory*> (Outfile->Get("CompHistos;1"));
+	}
+	// loop again in order to save histogrames into another directory
+	for (UInt_t iside = 0; iside < nSides; iside++)
+	{
+		for (UInt_t iplane = 0; iplane < nPlanes; iplane++)
+		{
+			//for planes only run as much as is neccessary (13 in first two, 14 in 3rd one and 21 times in quartz
+			for (UInt_t ibar = 0;((ibar < 13) || (ibar < 14 && iplane == 2)) || (ibar < nBarsMax && iplane == 3) ; ibar++)
+			{
+				CompHistos->WriteObject(CompGra[iside][iplane][ibar], Form("TW_c2_Comp_"+sideNames[iside]+"_side_plane_%i_Bar%i", iplane+1, ibar+1))
+			}
+		}
+	}
 	
-	
-	
-	File->Close();
+	Outfile->Close();
 	return;
 }
 

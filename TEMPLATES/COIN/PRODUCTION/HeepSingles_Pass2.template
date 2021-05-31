@@ -78,7 +78,7 @@ Ps6_factor = {gHC_ti_ps_factors[5]}
 
 Total SHMS EL-REAL Triggers		   : {P.pTRIG2.scaler}
 Total SHMS EL-REAL Triggers (current cut)  : {P.pTRIG2.scalerCut}
-Pre-Scaled SHMS EL-REAL Triggers 	   : {(P.pTRIG2.scaler/gHC_ti_ps_factors[0]):%.0f}
+Pre-Scaled SHMS EL-REAL Triggers 	   : {(P.pTRIG2.scaler/gHC_ti_ps_factors[1]):%.0f}
 SHMS EL-REAL Trigger Rate  		   : {P.pTRIG2.scalerCut/P.1MHz.scalerTimeCut/1000.:%.3f} kHz
 Accepted SHMS Triggers       		   : {pTRIG2_ROC2.npassed}
 

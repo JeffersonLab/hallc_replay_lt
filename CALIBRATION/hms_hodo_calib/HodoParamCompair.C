@@ -36,7 +36,7 @@
 // Declare constants
 static const UInt_t nPlanes     = 4;
 static const UInt_t nSides      = 2;
-static const UInt_t nMaxBars    = 16;
+static const UInt_t nBarsMax    = 16;
 static const UInt_t nTwFitPars = 2;
 static const TString sideNames[nSides] = {"Positive", "Negative"};
 
@@ -50,7 +50,7 @@ TCanvas *makeCan(UInt_t numColumns, UInt_t numRows, UInt_t winWidth, UInt_t winH
 }
 
 //gets run #s from file
-bool getRuns ( Double_t *runs, ifstream& runFile, Int_t& Length)
+bool getRuns ( Int_t *runs, ifstream& runFile, Int_t& Length)
 {	
     Int_t Iteration = 1;
 	while (!runFile.eof())
@@ -130,7 +130,7 @@ void HodoParamCompair ( TString runNums_name ) //input path to run # file
 	}
 	
 	//Make array for the run numbers
-	Double_t *runs = new Double_t[INILENGTH];
+	Int_t *runs = new Int_t[INILENGTH];
 	Int_t numRuns = 0;
 	
 	//fill the array with run numbers

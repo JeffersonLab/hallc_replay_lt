@@ -177,6 +177,13 @@ void FullReplay (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   hscaler->SetUseFirstEvent(kTRUE);
   gHaEvtHandlers->Add(hscaler);
 
+  // Add event handler for helicity scalers
+  THcHelicityScaler *hhelscaler = new THcHelicityScaler("H", "Hall C helicity scaler");
+  //hhelscaler->SetDebugFile("HHelScaler.txt");
+  hhelscaler->SetROC(5);
+  hhelscaler->SetUseFirstEvent(kTRUE);
+  gHaEvtHandlers->Add(hhelscaler);
+
   //=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
   // Kinematics Modules
   //=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
@@ -268,5 +275,10 @@ void FullReplay (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Create report file from template
   analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/COIN_PROD.template",
   Form("REPORT_OUTPUT/Analysis/General/replay_coin_production_%d_%d.report", RunNumber, MaxEvent));  // optional
+  // Helicity scalers output
+  analyzer->PrintReport("TEMPLATES/HMS/SCALERS/hhelscalers.template",
+  			Form("REPORT_OUTPUT/Scalers/replay_hms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
+  analyzer->PrintReport("TEMPLATES/SHMS/SCALERS/phelscalers.template",
+  			Form("REPORT_OUTPUT/Scalers/replay_shms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
 
 }

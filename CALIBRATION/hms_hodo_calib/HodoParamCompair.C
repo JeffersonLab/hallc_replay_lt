@@ -61,7 +61,7 @@ bool getRuns ( Double_t *runs, ifstream& runFile, Int_t& Length)
 			Iteration++;
 			// copy current list into one that has INILENGTH more spots
 			Double_t *temp = new Double_t [Iteration*INILENGTH];
-			for (Double_t i = 0; i < Length; i++)
+			for (Int_t i = 0; i < Length; i++)
 			{
 				temp[i] = runs[i];
 			}

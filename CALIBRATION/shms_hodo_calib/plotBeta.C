@@ -211,9 +211,6 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	delete(tree1);
 	delete(tree2);
 	
-	input1->Close();
-	input2->Close();
-	
 	//make canvas for beta comparison plot
 	TCanvas *c1 = new TCanvas("c1","c1",10, 10, 1000, 800);
 	c1->SetGrid();
@@ -253,6 +250,9 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	betaDir->WriteObject(c1, Form("Beta_Comp_%d", runNum));
 	
 	cout << "Finished making plots for run: " << runNum << endl;
+	
+	input1->Close();
+	input2->Close();
 	
 	return;
 }

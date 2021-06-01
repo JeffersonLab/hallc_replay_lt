@@ -126,9 +126,9 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	delete(th1_cerCut); 
 	
 	//start again for the second tree
-	tree2->SetBranchAddress("P.cal.etot", &calEtot);
-	tree2->SetBranchAddress("P.cer.npeSum", &cerNpeSum);
-	tree2->SetBranchAddress("P.gtr.beta", &gtrBeta);
+	tree2->SetBranchAddress("H.cal.etot", &calEtot);
+	tree2->SetBranchAddress("H.cer.npeSum", &cerNpeSum);
+	tree2->SetBranchAddress("H.gtr.beta", &gtrBeta);
 	
 	// make empty histograms
 	th1_cal = new TH1F("calEtot_Pt3", "calEtot_Pt3", 20, 0.0, 20.0);
@@ -181,6 +181,11 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 
 	delete(tree1);
 	delete(tree2);
+	
+	input1.Close();
+	delete(input1);
+	input2.Close();
+	delete(input2);
 
 	cout << "Finished making plots for run: " << runNum << endl;
 	

@@ -182,9 +182,9 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	delete(tree1);
 	delete(tree2);
 	
-	input1.Close();
+	input1->Close();
 	delete(input1);
-	input2.Close();
+	input2->Close();
 	delete(input2);
 
 	cout << "Finished making plots for run: " << runNum << endl;

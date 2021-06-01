@@ -74,8 +74,8 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	tree1->SetBranchAddress("H.gtr.beta", &gtrBeta);
 	
 	// make empty histograms
-	beta1 = new TH1F("Beta_Pt1", "Beta_Pt1", 1.2, 0.0, 120);
-	beta2 = new TH1F("Beta_Pt2", "Beta_Pt2", 1.2, 0.0, 120);
+	beta1 = new TH1F("Beta_Pt1", "Beta_Pt1", 120, 0.0, 1.2);
+	beta2 = new TH1F("Beta_Pt2", "Beta_Pt2", 120, 0.0, 1.2);
 	th1_cal = new TH1F("calEtot_Pt1", "calEtot_Pt1", 20, 0.0, 20.0);
 	th1_calCut = new TH1F("calEtotCut_Pt1", "calEtotCut_Pt1", 20, 0.0, 20.0);
 	th1_cer = new TH1F("cerNpeSum_Pt1", "cerNpeSum_Pt1", 20, 0.0, 20.0);

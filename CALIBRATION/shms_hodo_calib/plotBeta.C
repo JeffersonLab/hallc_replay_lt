@@ -76,14 +76,14 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	tree1->SetBranchAddress("P.gtr.beta", &gtrBeta);
 	
 	// make empty histograms
-	beta1 = new TH1F("Beta_Pt1", "Beta_Pt1", 110, 0.0, 110.0);
-	beta2 = new TH1F("Beta_Pt2", "Beta_Pt2", 110, 0.0, 110.0);
-	th1_cal = new TH1F("calEtot_Pt1", "calEtot_Pt1", 20, 0.0, 20.0);
-	th1_calCut = new TH1F("calEtotCut_Pt1", "calEtotCut_Pt1", 20, 0.0, 20.0);
-	th1_hgcer = new TH1F("hgcerNpeSum_Pt1", "hgcerNpeSum_Pt1", 20, 0.0, 20.0);
-	th1_hgcerCut = new TH1F("hgcerNpeSumCut_Pt1", "hgcerNpeSumCut_Pt1", 20, 0.0, 20.0);
-	th1_aero = new TH1F("aeroNpeSum_Pt1", "aeroNpeSum_Pt1", 20, 0.0, 20.0);
-	th1_aeroCut = new TH1F("aeroNpeSumCut_Pt1", "aeroNpeSumCut_Pt1", 20, 0.0, 20.0);
+	beta1 = new TH1F("Beta_Pt1", "Beta_Pt1", 1.2, 0.0, 120);
+	beta2 = new TH1F("Beta_Pt2", "Beta_Pt2", 1.2, 0.0, 120);
+	th1_cal = new TH1F("calEtot_Pt1", "calEtot_Pt1", 10.0, 0.0, 100);
+	th1_calCut = new TH1F("calEtotCut_Pt1", "calEtotCut_Pt1", 10.0, 0.0, 100);
+	th1_hgcer = new TH1F("hgcerNpeSum_Pt1", "hgcerNpeSum_Pt1", 30, 0.0, 120);
+	th1_hgcerCut = new TH1F("hgcerNpeSumCut_Pt1", "hgcerNpeSumCut_Pt1", 30, 0.0, 120.0);
+	th1_aero = new TH1F("aeroNpeSum_Pt1", "aeroNpeSum_Pt1", 30, 0.0, 120);
+	th1_aeroCut = new TH1F("aeroNpeSumCut_Pt1", "aeroNpeSumCut_Pt1", 30, 0.0, 120);
 	
 	
 	Int_t nEntries = tree1->GetEntries();
@@ -147,12 +147,12 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	tree2->SetBranchAddress("P.gtr.beta", &gtrBeta);
 	
 	// make empty histograms
-	th1_cal = new TH1F("calEtot_Pt3", "calEtot_Pt3", 20, 0.0, 20.0);
-	th1_calCut = new TH1F("calEtotCut_ Pt3", "calEtotCut_ Pt3", 20, 0.0, 20.0);
-	th1_hgcer = new TH1F("hgcerNpeSum_ Pt3", "hgcerNpeSum_ Pt3", 20, 0.0, 20.0);
-	th1_hgcerCut = new TH1F("hgcerNpeSumCut_ Pt3", "hgcerNpeSumCut_ Pt3", 20, 0.0, 20.0);
-	th1_aero = new TH1F("aeroNpeSum_ Pt3", "aeroNpeSum_ Pt3", 20, 0.0, 20.0);
-	th1_aeroCut = new TH1F("aeroNpeSumCut_ Pt3", "aeroNpeSumCut_ Pt3", 20, 0.0, 20.0);
+	th1_cal = new TH1F("calEtot_Pt3", "calEtot_Pt3", 10.0, 0.0, 100);
+	th1_calCut = new TH1F("calEtotCut_ Pt3", "calEtotCut_ Pt3", 10.0, 0.0, 100);
+	th1_hgcer = new TH1F("hgcerNpeSum_ Pt3", "hgcerNpeSum_ Pt3", 30, 0.0, 120);
+	th1_hgcerCut = new TH1F("hgcerNpeSumCut_ Pt3", "hgcerNpeSumCut_ Pt3", 30, 0.0, 120);
+	th1_aero = new TH1F("aeroNpeSum_ Pt3", "aeroNpeSum_ Pt3", 30, 0.0, 120);
+	th1_aeroCut = new TH1F("aeroNpeSumCut_ Pt3", "aeroNpeSumCut_ Pt3", 30, 0.0, 120);
 	
 	nEntries = tree2->GetEntries();
 	cout << "****************************\n" << nEntries << " Entries to be processed in part 3\n";  

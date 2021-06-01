@@ -211,8 +211,8 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	delete(tree1);
 	delete(tree2);
 	
-	input1.Close();
-	input2.Close();
+	input1->Close();
+	input2->Close();
 	
 	//make canvas for beta comparison plot
 	TCanvas *c1 = new TCanvas("c1","c1",10, 10, 1000, 800);

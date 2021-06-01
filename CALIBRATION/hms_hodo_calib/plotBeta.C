@@ -184,8 +184,6 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	
 	input1->Close();
 	input2->Close();
-
-	cout << "Finished making plots for run: " << runNum << endl;
 	
 	//make canvas for beta comparison plot
 	TCanvas *c1 = new TCanvas("c1","c1",10, 10, 1000, 800);
@@ -224,6 +222,8 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	
 	gPad->Update();
 	betaDir->WriteObject(c1, Form("Beta_Comp_%d", runNum));
+	
+	cout << "Finished making plots for run: " << runNum << endl;
 	
 	return;
 }

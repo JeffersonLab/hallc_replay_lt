@@ -277,6 +277,7 @@ void writePlots()
 {
 	TDirectory *PSUM = histOutFile->mkdir("Param_Summary");
 	TDirectory *FSUM = histOutFile->mkdir("Fit_Summary");
+	TDirectory *FSUBSUM = FSUM->mkdir("Histos");
 	
 	for (UInt_t ipar = 0; ipar < nTwFitPars; ipar++) {
 		//Parameter Summary Canvases
@@ -289,6 +290,11 @@ void writePlots()
     	{
     		//TW Fit summary Canvases
     		FSUM->WriteObject(twFitCan[iplane][iside], "twFitCan_"+planeNames[iplane]+"_"+sideNames[iside]);
+    		//TW Fit Individual Canvases
+    		for (int ibar = 0; ibar < nBars; ibar++)
+            {
+                FSUBSUM->WriteObject(twFitCan[iplane][iside]->cd(ibar+1)->GetPadPointer(), "twFitCan_"+planeNames[iplane]+"_"+Form("Bar%d", ibar)+"_"+sideNames[iside]);
+            }
     	}
     }
     return;

@@ -45,7 +45,7 @@ TH1F *th1_cal, *th1_calCut, *th1_cer, *th1_cerCut;
 Double_t calEtot, cerNpeSum, gtrBeta;
 
 //cuts
-const Double_t calEtotLow = 0.5; //unit GeV
+const Double_t calEtotLow = 0.7; //unit Normalized energy
 const Double_t cerNpeSumLow = 1.5; //unit NPE
 
 Bool_t calCut, cerCut;
@@ -69,22 +69,22 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	tree1 = dynamic_cast <TTree*> (input1->Get("T")); //get T tree from root files
 	tree2 = dynamic_cast <TTree*> (input2->Get("T"));
 	
-	tree1->SetBranchAddress("H.cal.etot", &calEtot);
+	tree1->SetBranchAddress("H.cal.etottracknorm", &calEtot);
 	tree1->SetBranchAddress("H.cer.npeSum", &cerNpeSum);
 	tree1->SetBranchAddress("H.gtr.beta", &gtrBeta);
 	
 	// make empty histograms
 	beta1 = new TH1F("Beta_Pt1", "Beta_Pt1", 120, 0.0, 1.2);
 	beta2 = new TH1F("Beta_Pt2", "Beta_Pt2", 120, 0.0, 1.2);
-	th1_cal = new TH1F("calEtot_Pt1", "calEtot_Pt1", 20, 0.0, 20.0);
-	th1_calCut = new TH1F("calEtotCut_Pt1", "calEtotCut_Pt1", 20, 0.0, 20.0);
-	th1_cer = new TH1F("cerNpeSum_Pt1", "cerNpeSum_Pt1", 20, 0.0, 20.0);
-	th1_cerCut = new TH1F("cerNpeSumCut_Pt1", "cerNpeSumCut_Pt1", 20, 0.0, 20.0);
+	th1_cal = new TH1F("H.cal.etottracknorm_Pt1", "H.cal.etottracknorm_Pt1", 150, 0.0, 1.5);
+	th1_calCut = new TH1F("H.cal.etottracknormCut_Pt1", "H.cal.etottracknormCut_Pt1", 150, 0.0, 1.5);
+	th1_cer = new TH1F("cerNpeSum_Pt1", "cerNpeSum_Pt1", 200, 0.0, 20.0);
+	th1_cerCut = new TH1F("cerNpeSumCut_Pt1", "cerNpeSumCut_Pt1", 200, 0.0, 20.0);
 	
 	
 	Int_t nEntries = tree1->GetEntries();
 	cout << "****************************\n" << nEntries << " Entries to be processed in part 1\n";
-	for(Int_t iEntry = 0; iEntry < 100000; iEntry++)
+	for(Int_t iEntry = 0; iEntry < nEntries; iEntry++)
 	{
 		tree1->GetEntry(iEntry);
 		
@@ -126,19 +126,19 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	delete(th1_cerCut); 
 	
 	//start again for the second tree
-	tree2->SetBranchAddress("H.cal.etot", &calEtot);
+	tree2->SetBranchAddress("H.cal.etottracknorm", &calEtot);
 	tree2->SetBranchAddress("H.cer.npeSum", &cerNpeSum);
 	tree2->SetBranchAddress("H.gtr.beta", &gtrBeta);
 	
 	// make empty histograms
-	th1_cal = new TH1F("calEtot_Pt3", "calEtot_Pt3", 20, 0.0, 20.0);
-	th1_calCut = new TH1F("calEtotCut_ Pt3", "calEtotCut_ Pt3", 20, 0.0, 20.0);
-	th1_cer = new TH1F("cerNpeSum_ Pt3", "cerNpeSum_ Pt3", 20, 0.0, 20.0);
-	th1_cerCut = new TH1F("cerNpeSumCut_ Pt3", "cerNpeSumCut_ Pt3", 20, 0.0, 20.0);
+	th1_cal = new TH1F("H.cal.etottracknorm_Pt3", "H.cal.etottracknorm_Pt3", 150, 0.0, 1.5);
+	th1_calCut = new TH1F("H.cal.etottracknormCut_ Pt3", "H.cal.etottracknormCut_ Pt3", 150, 0.0, 1.5);
+	th1_cer = new TH1F("cerNpeSum_ Pt3", "cerNpeSum_ Pt3", 200, 0.0, 20.0);
+	th1_cerCut = new TH1F("cerNpeSumCut_ Pt3", "cerNpeSumCut_ Pt3", 200, 0.0, 20.0);
 	
 	nEntries = tree2->GetEntries();
 	cout << "****************************\n" << nEntries << " Entries to be processed in part 3\n";  
-	for(Int_t iEntry = 0; iEntry < 100000; iEntry++)
+	for(Int_t iEntry = 0; iEntry < nEntries; iEntry++)
 	{
 		tree2->GetEntry(iEntry);
 		

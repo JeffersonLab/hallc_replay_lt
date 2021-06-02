@@ -45,7 +45,7 @@ TH1F *th1_cal, *th1_calCut, *th1_hgcer, *th1_hgcerCut, *th1_aero, *th1_aeroCut;
 Double_t calEtot, hgcerNpeSum, aeroNpeSum, gtrBeta;
 
 //cuts
-const Double_t calEtotLow = 0.5; //unit GeV
+const Double_t calEtotLow = 0.1; //normaized energy
 const Double_t hgcerNpeSumLow = 1.5; //unit NPE
 const Double_t aeroNpeSumLow = 1.5; //unit NPE
 
@@ -70,7 +70,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	tree1 = dynamic_cast <TTree*> (input1->Get("T")); //get T tree from root files
 	tree2 = dynamic_cast <TTree*> (input2->Get("T"));
 	
-	tree1->SetBranchAddress("P.cal.etot", &calEtot);
+	tree1->SetBranchAddress("P.cal.etottracknorm", &calEtot);
 	tree1->SetBranchAddress("P.hgcer.npeSum", &hgcerNpeSum);
 	tree1->SetBranchAddress("P.aero.npeSum", &aeroNpeSum);
 	tree1->SetBranchAddress("P.gtr.beta", &gtrBeta);
@@ -78,8 +78,8 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	// make empty histograms
 	beta1 = new TH1F("Beta_Pt1", "Beta_Pt1", 120, 0.0, 1.2);
 	beta2 = new TH1F("Beta_Pt2", "Beta_Pt2", 120, 0.0, 1.2);
-	th1_cal = new TH1F("calEtot_Pt1", "calEtot_Pt1", 100, 0.0, 10.0);
-	th1_calCut = new TH1F("calEtotCut_Pt1", "calEtotCut_Pt1", 100, 0.0, 10.0);
+	th1_cal = new TH1F("P.cal.etottracknorm_Pt1", "P.cal.etottracknorm_Pt1", 100, 0.0, 1.5);
+	th1_calCut = new TH1F("P.cal.etottracknormCut_Pt1", "P.cal.etottracknormCut_Pt1", 100, 0.0, 1.5);
 	th1_hgcer = new TH1F("hgcerNpeSum_Pt1", "hgcerNpeSum_Pt1", 120, 0.0, 30.0);
 	th1_hgcerCut = new TH1F("hgcerNpeSumCut_Pt1", "hgcerNpeSumCut_Pt1", 120, 0.0, 30.0);
 	th1_aero = new TH1F("aeroNpeSum_Pt1", "aeroNpeSum_Pt1", 120, 0.0, 30.0);
@@ -88,7 +88,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	
 	Int_t nEntries = tree1->GetEntries();
 	cout << "****************************\n" << nEntries << " Entries to be processed in part 1\n";
-	for(Int_t iEntry = 0; iEntry < 100000; iEntry++)
+	for(Int_t iEntry = 0; iEntry < nEntries; iEntry++)
 	{
 		tree1->GetEntry(iEntry);
 		
@@ -141,14 +141,14 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	delete(th1_aeroCut);
 	
 	//start again for the second tree
-	tree2->SetBranchAddress("P.cal.etot", &calEtot);
+	tree2->SetBranchAddress("P.cal.etottracknorm", &calEtot);
 	tree2->SetBranchAddress("P.hgcer.npeSum", &hgcerNpeSum);
 	tree2->SetBranchAddress("P.aero.npeSum", &aeroNpeSum);
 	tree2->SetBranchAddress("P.gtr.beta", &gtrBeta);
 	
 	// make empty histograms
-	th1_cal = new TH1F("calEtot_Pt3", "calEtot_Pt3", 100, 0.0, 10.0);
-	th1_calCut = new TH1F("calEtotCut_ Pt3", "calEtotCut_ Pt3", 100, 0.0, 10.0);
+	th1_cal = new TH1F("P.cal.etottracknorm_Pt3", "P.cal.etottracknorm_Pt3", 100, 0.0, 1.5);
+	th1_calCut = new TH1F("P.cal.etottracknormCut_ Pt3", "P.cal.etottracknormCut_ Pt3", 100, 0.0, 1.5);
 	th1_hgcer = new TH1F("hgcerNpeSum_ Pt3", "hgcerNpeSum_ Pt3", 120, 0.0, 30.0);
 	th1_hgcerCut = new TH1F("hgcerNpeSumCut_ Pt3", "hgcerNpeSumCut_ Pt3", 120, 0.0, 30.0);
 	th1_aero = new TH1F("aeroNpeSum_ Pt3", "aeroNpeSum_ Pt3", 120, 0.0, 30.0);
@@ -156,7 +156,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	
 	nEntries = tree2->GetEntries();
 	cout << "****************************\n" << nEntries << " Entries to be processed in part 3\n";  
-	for(Int_t iEntry = 0; iEntry < 100000; iEntry++)
+	for(Int_t iEntry = 0; iEntry < nEntries; iEntry++)
 	{
 		tree2->GetEntry(iEntry);
 		

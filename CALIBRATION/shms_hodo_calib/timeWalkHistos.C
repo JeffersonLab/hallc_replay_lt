@@ -66,7 +66,7 @@ static const Double_t refAdcPulseTimeCutLow  = 210.0;  // Units of ns
 static const Double_t refAdcPulseTimeCutHigh = 225.0;  // Units of ns
 static const Double_t adcTdcTimeDiffCutLow   = -100.0; // Units of ns
 static const Double_t adcTdcTimeDiffCutHigh  = 100.0;  // Units of ns
-static const Double_t calEtotCutVal          = 2.0;  // Units of GeV
+static const Double_t calEtotnormCutVal      = 0.1;    // Units of Normalized energy
 static const Double_t cerNpeSumCutVal        = 1.5;    // Units of NPE
 // static const Double_t adcTdcTimeDiffCutLow   = -6000.0;  // Units of ns
 // static const Double_t adcTdcTimeDiffCutHigh  = 1000.0;  // Units of ns
@@ -122,12 +122,12 @@ Int_t numAdcHits, numTdcHits;
 
 Double_t adcErrorFlag, adcPulseTimeRaw, adcPulseTime, adcPulseAmp;
 Double_t tdcTimeRaw, tdcTime, adcTdcTimeDiff;
-Double_t calEtot, cerNpeSum;
+Double_t calEtotnorm, cerNpeSum;
 
 Bool_t adcRefMultiplicityCut, adcRefPulseAmpCut, adcRefPulseTimeCut;
 Bool_t edtmCut, adcErrorFlagCut, adcAndTdcHitCut;
 Bool_t adcPulseAmpCut, adcTdcTimeDiffCut;
-Bool_t calEtotCut, cerNpeSumCut;
+Bool_t calEtotnormCut, cerNpeSumCut;
 
 void generatePlots(UInt_t iplane, UInt_t iside, UInt_t ipaddle) {
 
@@ -233,8 +233,8 @@ void timeWalkHistos(TString inputname, Int_t runNum, string SPEC_flg) {  //SPEC_
   rawDataTree->SetBranchAddress(Form("T.%s.pT1_tdcTimeRaw", SPEC_flg.c_str()), &refT1TdcTimeRaw);
   rawDataTree->SetBranchAddress(Form("T.%s.pT2_tdcTimeRaw", SPEC_flg.c_str()), &refT2TdcTimeRaw);
   rawDataTree->SetBranchAddress(Form("T.%s.pT3_tdcTimeRaw", SPEC_flg.c_str()), &refT3TdcTimeRaw);
-  // rawDataTree->SetBranchAddress("P.cal.etot", &calEtot);
-  // rawDataTree->SetBranchAddress("P.ngcer.npeSum", &cerNpeSum);
+  rawDataTree->SetBranchAddress("P.cal.etotnorm", &calEtotnorm);
+  rawDataTree->SetBranchAddress("P.aero.npeSum", &cerNpeSum);
 
   rawDataTree->SetBranchAddress("P.hod.1x.nhits", &phod_1xnhits);
   rawDataTree->SetBranchAddress("P.hod.1y.nhits", &phod_1ynhits);
@@ -318,9 +318,9 @@ void timeWalkHistos(TString inputname, Int_t runNum, string SPEC_flg) {  //SPEC_
     good_hits = phod_1xnhits==1&&phod_1ynhits==1&&phod_2xnhits==1&&phod_2ynhits==1;
 
     // Fiducial PID cuts
-    //   calEtotCut   = (calEtot   < calEtotCutVal);
-    //cerNpeSumCut = (cerNpeSum < cerNpeSumCutVal);
-    // if (calEtotCut || cerNpeSumCut) continue;
+    calEtotnormCut   = (calEtotnorm < calEtotnormCutVal);
+    cerNpeSumCut = (cerNpeSum < cerNpeSumCutVal);
+    if (calEtotnormCut || cerNpeSumCut) continue;
     if (!good_hits) continue;
     // Fill trigger apparatus histos
     h1_refAdcPulseTimeRaw->Fill(refAdcPulseTimeRaw*adcChanToTime);

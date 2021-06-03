@@ -260,9 +260,9 @@ void fitHodoCalib(TString filename,Int_t runNUM,Bool_t cosmic_flag=kFALSE)
 	       if (side==0) //require ONLY one side, since a time diff between two pmts at each end is taken
 		{
 
-		  h1Hist_TWAvg[npl][ipmt] = new TH1F(Form("Avg. Time: Paddle %s%d", pl_names[npl].c_str(), ipmt+1), Form("Paddle %s%d: Time-Walk Corrected Average Time", pl_names[npl].c_str(), ipmt+1), 100, 15, 50);
+		  h1Hist_TWAvg[npl][ipmt] = new TH1F(Form("Avg. Time: Paddle %s%d", pl_names[npl].c_str(), ipmt+1), Form("Paddle %s%d: Time-Walk Corrected Average Time", pl_names[npl].c_str(), ipmt+1), 250, 15, 100); // was 100, 15, 50
 		  
-		  h1Hist_TWAvg_CUT[npl][ipmt] = new TH1F(Form("Avg. Time CUT: Paddle %s%d", pl_names[npl].c_str(), ipmt+1), Form("Paddle %s%d: Time-Walk Corrected Average (CUT)",pl_names[npl].c_str(), ipmt+1), 100, 15, 50);
+		  h1Hist_TWAvg_CUT[npl][ipmt] = new TH1F(Form("Avg. Time CUT: Paddle %s%d", pl_names[npl].c_str(), ipmt+1), Form("Paddle %s%d: Time-Walk Corrected Average (CUT)",pl_names[npl].c_str(), ipmt+1), 250, 15, 100); // was 100, 15, 50
 	      
 		  h2Hist_TWDiff_v_TrkPos[npl][ipmt] = new TH2F(Form("DistDiff: Paddle %s%d", pl_names[npl].c_str(), ipmt+1), Form("Paddle %s%d: Time-Walk Corr. Hit Dist vs. Hod Track Position", pl_names[npl].c_str(), ipmt+1), 160, -80, 80, 50, -100, 100);
 		  h2Hist_TW_Corr_v_TrkPos[npl][ipmt] = new TH2F(Form("TimeDiff: Paddle %s%d", pl_names[npl].c_str(), ipmt+1), Form("Paddle %s%d: Time-Walk Corr. TimeDiff. vs. Hod Track Position", pl_names[npl].c_str(), ipmt+1), 160, -40, 40, 120, -6, 6);

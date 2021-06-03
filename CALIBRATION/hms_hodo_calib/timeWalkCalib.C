@@ -271,14 +271,13 @@ void writePlots()
     PSUM->WriteObject(twFitParCan[ipar], Form("twFitParCan%d", ipar));
   }
 
-  TCanvas *
   for (UInt_t iplane = 0; iplane < nPlanes; iplane++)
   {
     for(UInt_t iside; iside < nSides; iside++)
     {
       //TW Fit Summary canvases
       FSUM->WriteObject(twFitCan[iplane][iside], "twFitCan_"+planeNames[iplane]+"_"+sideNames[iside]);
-      for (int ibar = 0; ibar < nBars; ibar++)
+      for (int ibar = 0; ibar < nBarsMax; ibar++)
       {
         FSUBSUM->WriteObject(twFitCan[iplane][iside]->cd(ibar+1)->GetPadPointer(), "twFitCan_"+planeNames[iplane]+"_"+Form("Bar%d", ibar)+"_"+sideNames[iside]);
       }

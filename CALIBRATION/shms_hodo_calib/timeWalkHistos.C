@@ -58,12 +58,12 @@ static const Double_t adcDynamicRange = 1000.0;                   // Units of mV
 static const Double_t nAdcChan        = 4096.0;                   // Units of ADC channels
 static const Double_t adcChanTomV     = adcDynamicRange/nAdcChan; // Units of mV/ADC Chan
 
-static const Double_t hodoPulseAmpCutLow     = 10.0;   // Units of mV
+static const Double_t hodoPulseAmpCutLow     = 15.0;   // Units of mV
 static const Double_t hodoPulseAmpCutHigh    = 1000.0; // Units of mV
-static const Double_t refAdcPulseAmpCutLow   = 20.0;   // Units of mV
-static const Double_t refAdcPulseAmpCutHigh  = 100.0;   // Units of mV
-static const Double_t refAdcPulseTimeCutLow  = 175.0;  // Units of ns
-static const Double_t refAdcPulseTimeCutHigh = 190.0;  // Units of ns
+static const Double_t refAdcPulseAmpCutLow   = 45.0;   // Units of mV
+static const Double_t refAdcPulseAmpCutHigh  = 65.0;   // Units of mV
+static const Double_t refAdcPulseTimeCutLow  = 330.0;  // Units of ns
+static const Double_t refAdcPulseTimeCutHigh = 370.0;  // Units of ns
 static const Double_t adcTdcTimeDiffCutLow   = -100.0; // Units of ns
 static const Double_t adcTdcTimeDiffCutHigh  = 100.0;  // Units of ns
 static const Double_t calEtotnormCutVal      = 0.1;    // Units of Normalized energy

@@ -263,7 +263,19 @@ void plotBeta (  TString runNumbers )
 			runList = temp;
 		}
 		runNumFile >> runList[Length];
-		
+		//for some reason the run list has not ended properly (Prob. caused by an extra line at the end of the runlist file)
+		//   So end early
+		if(runList[Length] == 0)
+		{
+		    cout << "ending file read in early as zero found in runlist file.\nMight be caused by an extra line at the end of the runlist file\n";
+		    // if we managed to read in anything then just use that.
+		    if (Length > 0)
+		    {
+		        return true;
+		    }else{
+		        return false;
+		    }
+		}
 		Length++;
 	}
 	runNumFile.close();

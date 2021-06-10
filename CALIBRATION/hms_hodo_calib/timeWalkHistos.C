@@ -299,7 +299,7 @@ void timeWalkHistos(TString inputname,Int_t runNum, string SPEC_flg) {    //SPEC
     cerNpeSumCut = (cerNpeSum < cerNpeSumCutVal);
     //calEtotCut =1;
     //cerNpeSumCut =1;
-    //if (calEtotNormCut || cerNpeSumCut) continue; 
+    if (calEtotNormCut || cerNpeSumCut) continue; 
     // Fill trigger apparatus histos
     h1_refAdcPulseTimeRaw->Fill(refAdcPulseTimeRaw*adcChanToTime);
     h1_refAdcPulseAmp->Fill(refAdcPulseAmp);
@@ -359,7 +359,7 @@ void timeWalkHistos(TString inputname,Int_t runNum, string SPEC_flg) {    //SPEC
 	  } // TDC signal
 
 	  // Define cuts
-	  adcRefMultiplicityCut = (refAdcMultiplicity == 1.0);
+	  adcRefMultiplicityCut = (refAdcMultiplicity < 1.0);
 	  adcRefPulseAmpCut     = (refAdcPulseAmp < refAdcPulseAmpCutLow || refAdcPulseAmp > refAdcPulseAmpCutHigh);
 	  adcRefPulseTimeCut    = (refAdcPulseTimeRaw*adcChanToTime < refAdcPulseTimeCutLow || refAdcPulseTimeRaw*adcChanToTime > refAdcPulseTimeCutHigh);
 	  // Implement cuts

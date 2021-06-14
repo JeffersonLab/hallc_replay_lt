@@ -85,10 +85,10 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th1_aero = new TH1F("aeroNpeSum_Pt1", "aeroNpeSum_Pt1", 120, 0.0, 30.0);
 	th1_aeroCut = new TH1F("aeroNpeSumCut_Pt1", "aeroNpeSumCut_Pt1", 120, 0.0, 30.0);
 	
-	
+	Int_t nEntries;
 	if (NumEvents == -1)
 	{
-	    Int_t nEntries = tree1->GetEntries();
+	    nEntries = tree1->GetEntries();
 	}else{
 	    nEntries = NumEvents;
 	}
@@ -161,7 +161,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	
 	if (NumEvents == -1)
 	{
-	    Int_t nEntries = tree2->GetEntries();
+	    nEntries = tree2->GetEntries();
 	}else{
 	    nEntries = NumEvents;
 	}

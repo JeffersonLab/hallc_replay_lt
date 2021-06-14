@@ -83,9 +83,10 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th1_cer = new TH1F("cerNpeSum_Pt1", "cerNpeSum_Pt1", 200, 0.0, 20.0);
 	th1_cerCut = new TH1F("cerNpeSumCut_Pt1", "cerNpeSumCut_Pt1", 200, 0.0, 20.0);
 	
+	Int_t nEntries;
 	if (NumEvents == -1)
 	{
-	    Int_t nEntries = tree1->GetEntries();
+	    nEntries = tree1->GetEntries();
 	}else{
 	    nEntries = NumEvents;
 	}

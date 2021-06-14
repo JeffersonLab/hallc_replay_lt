@@ -61,6 +61,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 
 	input1 = new TFile(rootFile1, "READ");
 	input2 = new TFile(rootFile2, "READ");
+	cout << "\n";
 	
 	if(!input1 || !input2)
 	{
@@ -246,6 +247,7 @@ void plotBeta (  TString runNumbers, Int_t NumEventsInput )
   	cout << "\n\n";
 	ifstream runNumFile;
 	runNumFile.open(runNumbers);
+	cout << "Running File: '"<<runNumbers<<"' for " << NumEventsInput << " Events\n";
 	if (!runNumFile)
 	{
 		cout << "Runfile that was specified does not exist !!!!!!  \n\n Shuting down!!! \n\n";

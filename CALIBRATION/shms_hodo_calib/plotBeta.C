@@ -52,6 +52,7 @@ const Double_t aeroNpeSumLow = 1.5; //unit NPE
 Bool_t calCut, hgcerCut, aeroCut;
 
 const Int_t INILENGTH = 64;
+Int_t NumEvents = -1;
 
 
 //function makes the beta plots and saves them to output file

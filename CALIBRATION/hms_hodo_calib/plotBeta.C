@@ -52,6 +52,8 @@ Bool_t calCut, cerCut;
 
 const Int_t INILENGTH = 64;
 
+Int_t NumEvents = -1;
+
 
 //function makes the beta plots and saves them to output file
 void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first root file is assumed to be the before, second is the after.
@@ -81,8 +83,12 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th1_cer = new TH1F("cerNpeSum_Pt1", "cerNpeSum_Pt1", 200, 0.0, 20.0);
 	th1_cerCut = new TH1F("cerNpeSumCut_Pt1", "cerNpeSumCut_Pt1", 200, 0.0, 20.0);
 	
-	
-	Int_t nEntries = tree1->GetEntries();
+	if (NumEvents == -1)
+	{
+	    Int_t nEntries = tree1->GetEntries();
+	}else{
+	    nEntries = NumEvents;
+	}
 	cout << "****************************\n" << nEntries << " Entries to be processed in part 1\n";
 	for(Int_t iEntry = 0; iEntry < nEntries; iEntry++)
 	{
@@ -136,7 +142,12 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th1_cer = new TH1F("cerNpeSum_ Pt3", "cerNpeSum_ Pt3", 200, 0.0, 20.0);
 	th1_cerCut = new TH1F("cerNpeSumCut_ Pt3", "cerNpeSumCut_ Pt3", 200, 0.0, 20.0);
 	
-	nEntries = tree2->GetEntries();
+	if (NumEvents == -1)
+	{
+	    Int_t nEntries = tree2->GetEntries();
+	}else{
+	    nEntries = NumEvents;
+	}
 	cout << "****************************\n" << nEntries << " Entries to be processed in part 3\n";  
 	for(Int_t iEntry = 0; iEntry < nEntries; iEntry++)
 	{
@@ -228,7 +239,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	return;
 }
 
-void plotBeta (  TString runNumbers ) 
+void plotBeta (  TString runNumbers, Int_t NumEventsInput ) 
 {
 	gROOT->SetBatch(1);
   	cout << "\n\n";
@@ -239,6 +250,7 @@ void plotBeta (  TString runNumbers )
 		cout << "Runfile that was specified does not exist !!!!!!  \n\n Shuting down!!! \n\n";
 		return; 
 	}
+	NumEvents = NumEventsInput;
 	
 	Int_t *runList;
 	Int_t Length = 0, Iteration = 1;

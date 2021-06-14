@@ -86,7 +86,12 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th1_aeroCut = new TH1F("aeroNpeSumCut_Pt1", "aeroNpeSumCut_Pt1", 120, 0.0, 30.0);
 	
 	
-	Int_t nEntries = tree1->GetEntries();
+	if (NumEvents == -1)
+	{
+	    Int_t nEntries = tree1->GetEntries();
+	}else{
+	    nEntries = NumEvents;
+	}
 	cout << "****************************\n" << nEntries << " Entries to be processed in part 1\n";
 	for(Int_t iEntry = 0; iEntry < nEntries; iEntry++)
 	{
@@ -154,7 +159,12 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th1_aero = new TH1F("aeroNpeSum_ Pt3", "aeroNpeSum_ Pt3", 120, 0.0, 30.0);
 	th1_aeroCut = new TH1F("aeroNpeSumCut_ Pt3", "aeroNpeSumCut_ Pt3", 120, 0.0, 30.0);
 	
-	nEntries = tree2->GetEntries();
+	if (NumEvents == -1)
+	{
+	    Int_t nEntries = tree2->GetEntries();
+	}else{
+	    nEntries = NumEvents;
+	}
 	cout << "****************************\n" << nEntries << " Entries to be processed in part 3\n";  
 	for(Int_t iEntry = 0; iEntry < nEntries; iEntry++)
 	{
@@ -257,7 +267,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	return;
 }
 
-void plotBeta (  TString runNumbers ) 
+void plotBeta (  TString runNumbers, Int_t NumEventsInput ) 
 {
 	gROOT->SetBatch(1);
   	cout << "\n\n";
@@ -272,6 +282,7 @@ void plotBeta (  TString runNumbers )
 	Int_t *runList;
 	Int_t Length = 0, Iteration = 1;
 	runList = new Int_t [INILENGTH];
+	NumEvents = NumEventsInput;
 	
 	//fill runlist
 	while (!runNumFile.eof())

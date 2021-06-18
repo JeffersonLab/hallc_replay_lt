@@ -1,4 +1,4 @@
-17/06/21 - NH, made a replay script for running these, very trimmed down, called SCRIPTS/CALIBRATION/RefTime_Calib.C
+17/06/21 - NH, made a replay script for running these, very trimmed down, called SCRIPTS/COIN/CALIBRATION/RefTime_Calib.C
 04/03/21 - SK, note, need to actually make some slimmed down timing replays for use here. They're now pointed to ROOTfiles/Calib/Timing e.t.c. to check stuff, but no replays actually write anything here YET
 Should make some new replay scripts that DO and only include the relevant stuff for these scripts to keep file sizes down.
 

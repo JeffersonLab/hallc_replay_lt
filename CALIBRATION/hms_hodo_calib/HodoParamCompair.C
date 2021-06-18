@@ -86,6 +86,7 @@ bool getRuns ( Double_t *runs, ifstream& runFile, Int_t& Length)
 		}
 		Length++;
 	}
+	Length--; // having issue where the length is to long by one for some reason.
 	return true;
 }
 

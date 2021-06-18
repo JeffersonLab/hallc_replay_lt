@@ -1,0 +1,124 @@
+## Very Stripped down def file ONLY For Checking ref times
+
+#General stuff
+
+block T.coin.pFADC_TREF_ROC2_adcPulseAmpRaw
+
+# HMS branches
+
+# HMS Cer
+block H.cer.good*
+block H.cer.RefTime
+
+# HMS DC
+block H.dc.1u1.*
+block H.dc.1u2.*
+block H.dc.1x1.*
+block H.dc.1x2.*
+block H.dc.1v1.*
+block H.dc.1v2.*
+block H.dc.2u1.*
+block H.dc.2u2.*
+block H.dc.2x1.*
+block H.dc.2x2.*
+block H.dc.2v1.*
+block H.dc.2v2.*
+
+# HMS Hodo
+block H.hod.1x.*
+block H.hod.1y.*
+block H.hod.2x.*
+block H.hod.2y.*
+
+
+# HMS Cal
+block H.cal.etotnorm
+block H.cal.1pr.*
+block H.cal.2ta.*
+block H.cal.3ta.*
+block H.cal.4ta.*
+
+# HMS track info
+block H.gtr.dp
+
+# HMS kin/rastered beam/react variables
+block H.kin.*
+block H.rb.*
+block H.react.*
+
+# SHMS branches
+
+# SHMS HGC
+block P.hgcer.good*
+block P.hgcer.xAtCer
+block P.hgcer.yAtCer
+block P.hgcer.RefTime
+
+# SHMS Aero
+block P.aero.good*
+
+# SHMS DC
+block P.dc.1u1.*
+block P.dc.1u2.*
+block P.dc.1x1.*
+block P.dc.1x2.*
+block P.dc.1v1.*
+block P.dc.1v2.*
+block P.dc.2u1.*
+block P.dc.2u2.*
+block P.dc.2x1.*
+block P.dc.2x2.*
+block P.dc.2v1.*
+block P.dc.2v2.*
+
+# SHMS Calorimeter
+block P.cal.etotnorm
+block P.cal.pr.*
+block P.cal.fly.*
+
+
+# SHMS Hodoscope
+block P.hod.1x.*
+block P.hod.1y.*
+block P.hod.2x.*
+block P.hod.2y.*
+
+# SHMS tracking
+block P.tr.*
+block P.gtr.dp
+
+# SHMS Kinematics/rastered beam/reaction info
+block P.kin.*
+block P.rb.*
+block P.react.*
+
+# Epics data
+begin epics
+IBC3H00CRCUR4
+hac_bcm_average
+ibcm1
+ibcm2
+iunser
+itov3out
+itov4out
+IPM3H07A.XPOS
+IPM3H07A.YPOS
+IPM3H07B.XPOS
+IPM3H07B.YPOS
+IPM3H07C.XPOS
+IPM3H07C.YPOS
+IPM3H07A.XRAW
+IPM3H07A.YRAW
+IPM3H07B.XRAW
+IPM3H07B.YRAW
+IPM3H07C.XRAW
+IPM3H07C.YRAW
+IPM3H07A.XSOF
+IPM3H07A.YSOF
+IPM3H07B.XSOF
+IPM3H07B.YSOF
+IPM3H07C.XSOF
+IPM3H07C.YSOF
+HALLC:p
+pgunFreqDiv:C
+end epics

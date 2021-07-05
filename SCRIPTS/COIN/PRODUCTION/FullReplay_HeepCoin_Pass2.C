@@ -1,4 +1,4 @@
-void FullReplay (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
+void FullReplay_HeepCoin_Pass2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   // Get RunNumber and MaxEvent if not provided.
   if(RunNumber == 0) {
@@ -28,7 +28,7 @@ void FullReplay (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./cache");
 
   //const char* RunFileNamePattern = "raw/coin_all_%05d.dat";
-  const char* ROOTFileNamePattern = "ROOTfiles/Analysis/General/coin_replay_Full_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfiles/Analysis/HeeP/coin_replay_Full_%d_%d.root";
 
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
@@ -177,13 +177,6 @@ void FullReplay (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   hscaler->SetUseFirstEvent(kTRUE);
   gHaEvtHandlers->Add(hscaler);
 
-  // Add event handler for helicity scalers
-  THcHelicityScaler *hhelscaler = new THcHelicityScaler("H", "Hall C helicity scaler");
-  //hhelscaler->SetDebugFile("HHelScaler.txt");
-  hhelscaler->SetROC(5);
-  hhelscaler->SetUseFirstEvent(kTRUE);
-  gHaEvtHandlers->Add(hhelscaler);
-
   //=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
   // Kinematics Modules
   //=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
@@ -264,21 +257,15 @@ void FullReplay (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file+
-  analyzer->SetOdefFile("DEF-files/PRODUCTION/Full_Replay_Pass2_Coin_v2.def"); // New version, slimmed down
+  analyzer->SetOdefFile("DEF-files/PRODUCTION/Full_Replay_Heep_Coin_Pass2.def"); // New version, slimmed down
   // Define cuts file
-  //analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/coin_production_cuts.def");  // optional
-  analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/coin_tracking_cuts.def");  // optional
+  analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/HeepCoin_Cuts_Pass2.def");  // optional
   // File to record accounting information for cuts
-  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Analysis/General/summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
+  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Analysis/HeeP/summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template
-  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/COIN_PROD.template",
-  Form("REPORT_OUTPUT/Analysis/General/replay_coin_production_%d_%d.report", RunNumber, MaxEvent));  // optional
-  // Helicity scalers output
-  analyzer->PrintReport("TEMPLATES/HMS/SCALERS/hhelscalers.template",
-  			Form("REPORT_OUTPUT/Scalers/replay_hms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
-  analyzer->PrintReport("TEMPLATES/SHMS/SCALERS/phelscalers.template",
-  			Form("REPORT_OUTPUT/Scalers/replay_shms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
+  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/HeepCoin_Pass2.template",
+  Form("REPORT_OUTPUT/Analysis/HeeP/replay_coin_production_%d_%d.report", RunNumber, MaxEvent));  // optional
 
 }

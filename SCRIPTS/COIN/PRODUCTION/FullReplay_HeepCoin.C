@@ -28,7 +28,7 @@ void FullReplay_HeepCoin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./cache");
 
   //const char* RunFileNamePattern = "raw/coin_all_%05d.dat";
-  const char* ROOTFileNamePattern = "ROOTfiles/Analysis/HeeP/coin_replay_Full_Heep_Coin_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfiles/Analysis/HeeP/coin_replay_Full_%d_%d.root";
 
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
@@ -45,6 +45,10 @@ void FullReplay_HeepCoin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Load the Hall C detector map
   gHcDetectorMap = new THcDetectorMap();
   gHcDetectorMap->Load("MAPS/COIN/DETEC/coin.map");
+
+  // Load the BCM current params
+  const char* CurrentFileNamePattern = "PARAM/HMS/BCM/CALIB/bcmcurrent_%d.param";
+  gHcParms->Load(Form(CurrentFileNamePattern, RunNumber));
 
   // Dec data
   gHaApps->Add(new Podd::DecData("D","Decoder raw data"));
@@ -77,8 +81,8 @@ void FullReplay_HeepCoin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   THcShower* pcal = new THcShower("cal", "Calorimeter");
   SHMS->AddDetector(pcal);
 
-  // THcBCMCurrent* hbc = new THcBCMCurrent("H.bcm", "BCM current check");
-  // gHaPhysics->Add(hbc);
+  THcBCMCurrent* hbc = new THcBCMCurrent("H.bcm", "BCM current check");
+  gHaPhysics->Add(hbc);
 
   // Add rastered beam apparatus
   THaApparatus* pbeam = new THcRasteredBeam("P.rb", "Rastered Beamline");
@@ -202,6 +206,10 @@ void FullReplay_HeepCoin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // const char* elecArmName, const char* coinname) :
   THcCoinTime* coinTime = new THcCoinTime("CTime", "Coincidende Time Determination", "P", "H", "T.coin");
   gHaPhysics->Add(coinTime);
+  //Add RF physics module THcRFTime::THcRFTime (const char *name, const char* description, const char* hadArmName, 
+  // const char* elecArmName, const char* RFname) :
+  THcRFTime* RFTime = new THcRFTime("RFTime", "RF Time Determination", "P", "H", "T.coin");
+  gHaPhysics->Add(RFTime);
 
   // Add event handler for prestart event 125.
   THcConfigEvtHandler* ev125 = new THcConfigEvtHandler("HC", "Config Event type 125");
@@ -243,21 +251,22 @@ void FullReplay_HeepCoin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   analyzer->SetEvent(event);
   // Set EPICS event type
-  analyzer->SetEpicsEvtType(180);
+  analyzer->SetEpicsEvtType(181);
   // Define crate map
   analyzer->SetCrateMapFileName("MAPS/db_cratemap.dat");
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file+
-  analyzer->SetOdefFile("DEF-files/PRODUCTION/Full_Replay_HeeP_Coin.def"); // New version, slimmed down
+  analyzer->SetOdefFile("DEF-files/PRODUCTION/Full_Replay_Pass2_Coin_v2.def"); // New version, slimmed down
   // Define cuts file
-  analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/coin_production_cuts.def");  // optional
+  //analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/coin_production_cuts.def");  // optional
+  analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/coin_tracking_cuts.def");  // optional
   // File to record accounting information for cuts
-  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Analysis/HeeP/summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
+  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Analysis/General/summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template
-  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/coin_production_new.template",
-  Form("REPORT_OUTPUT/Analysis/HeeP/replay_coin_production_%d_%d.report", RunNumber, MaxEvent));  // optional
+  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/COIN_PROD.template",
+  Form("REPORT_OUTPUT/Analysis/General/replay_coin_production_%d_%d.report", RunNumber, MaxEvent));  // optional
 
 }

@@ -3,6 +3,11 @@
 ##### University of Regina ######
 ###### Created - May, 2021 ######
 #################################
+#################################
+########## NOTE - SJDK ##########
+### Copy of coin_tracking.def ###
+########### for now #############
+#################################
 
 Block: RawDecode
 
@@ -336,37 +341,35 @@ HMS_hcer_track_fired_tot H.cer.totNumTracksFired>0
 ##################
 
 SHMSGEN		shmsScinGood && shmshodstarttime && SHMScoindcindipole && pcut_acceptance
-SHMSCT	  	CTime.ePiCoinTime_ROC1 > -1 && CTime.ePiCoinTime_ROC1 < 1
-SHMSCalpi	P.cal.etottracknorm < 0.7              
-SHMSMMpicut     P.kin.secondary.MMpi > 0.901 && P.kin.secondary.MMpi < 1.054
-SHMSAEROpi      P.aero.npeSum  > 1.5
-
-shmsRF		RFTime.SHMS_RFtimeDist > 1.469 && RFTime.SHMS_RFtimeDist < 2.603
+# Need to set for Heep coin! Where are protons? Need to set offset for these runs too!
+#SHMSCT	  	CTime.epCoinTime_ROC1 > -2 && CTime.epCoinTime_ROC1 < 2
+SHMSCalp	P.cal.etottracknorm < 0.7              
+SHMSAEROp       P.aero.npeSum  < 1.5
 
 #Using wide cut for Aerogel position
 
-SHMSAEROpospi	P.aero.yAtAero > -35 && P.aero.yAtAero < 35
+SHMSAEROposp	P.aero.yAtAero > -35 && P.aero.yAtAero < 35
 
-SHMSHGCShouldpi		SHMSGEN && SHMSCT && SHMSCalpi && SHMSMMpicut && SHMSAEROpi && SHMSAEROpospi && shmsRF
-SHMSHGCDidpi		SHMSHGCShouldpi && P.hgcer.npeSum > 1.5
+SHMSHGCShouldp		SHMSGEN && SHMSCalp && SHMSAEROp && SHMSAEROposp && shmsRF
+SHMSHGCDidp		SHMSHGCShouldp && P.hgcer.npeSum < 1.5
 
 ###################
 ###  SHMS Aero  ###
 ###################
 
-SHMSHGCpi      P.hgcer.npeSum  > 1.5
+SHMSHGCp      P.hgcer.npeSum  < 1.5
 
-SHMSAeroShouldpi         SHMSGEN && SHMSCT && SHMSCalpi && SHMSMMpicut && SHMSHGCpi && SHMSAEROpospi && shmsRF
-SHMSAeroDidpi            SHMSAeroShouldpi && P.aero.npeSum > 1.5
+SHMSAeroShouldp         SHMSGEN && SHMSCalp && SHMSHGCp && SHMSAEROposp && shmsRF
+SHMSAeroDidp            SHMSAeroShouldp && P.aero.npeSum < 1.5
 
-##################
-###   HMS HGC  ###
-##################
+########################
+###   HMS Cherenkov  ###
+########################
 
 HMSGEN		   HMSScinGood && HMShodstarttime && HMScoindcindipole && hcut_acceptance
 HMSCalelec         H.cal.etottracknorm > 0.6
 
-HMSHGCShouldelec         HMSGEN && SHMSCT && HMSCalelec 
+HMSHGCShouldelec         HMSGEN && HMSCalelec 
 HMSHGCDidelec            HMSHGCShouldelec && H.cer.npeSum > 1.5
 
 ##################

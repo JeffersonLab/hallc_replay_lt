@@ -10,16 +10,52 @@
 *.pdf
 .nfs*
 *.root
+*.root*
+*_-1_0_-1
+*_0_-1
+Tmp*
 
 # Directories
+RAID
 REPORT_OUTPUT
 HISTOGRAMS
 MON_OUTPUT
-ROOTfiles
+ROOTfiles*
+OUTPUT
 .root_history
-raw
+raw*
 raw.copiedtotape
 cache
+#PARAM/HMS/HODO/Calibration
+#PARAM/SHMS/HODO/Calibration
+DBASE/COIN/HMS_HodoCalib
+DBASE/COIN/SHMS_HodoCalib
+DBASE/COIN/HMS_DCCalib
+DBASE/COIN/SHMS_DCCalib
+#PARAM/HMS/DC/CALIB
+#PARAM/SHMS/DC/CALIB
+OUTPUT
+CALIBRATION/dc_calib/scripts/HMS_*
+CALIBRATION/dc_calib/scripts/SHMS_*
+PARAM/SHMS/DC/CALIB/Farm_Ouput/
+PARAM/HMS/DC/CALIB/Farm_Ouput/
+CALIBRATION/hms_cal_calib/Output/
+CALIBRATION/hms_cal_calib/Input/
+CALIBRATION/shms_cal_calib/Output/
+CALIBRATION/shms_cal_calib/Input/
+CALIBRATION/shms_hgcer/Calibration_plots/
+CALIBRATION/ref_times/HMS/
+CALIBRATION/ref_times/SHMS/
+PARAM/HMS/BCM/CALIB/
+PARAM/HMS/BCM/CALIB/*
+DBASE/COIN/KaonLT_Calib_MKJTest/PedDefault_0_Files/
+UTIL_BATCH/
+UTIL_KAONLT/
+UTIL_PION/
+UTIL_PROTON/
+PARAM/HMS/BCM/CALIB/
 
 # Symbolic links
 hcana
+scratch
+ROOTfilesPion

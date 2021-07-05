@@ -23,11 +23,11 @@ void replay_coin_scalers (Int_t RunNumber = 0, Int_t MaxEvent = 0,Int_t FirstEve
   pathList.push_back("./raw/../raw.copiedtotape");
   pathList.push_back("./cache");
 
-  const char* ROOTFileNamePattern = "ROOTfiles/coin_replay_scalers_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfiles/Scalers/coin_replay_scalers_%d_%d.root";
 
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
-  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard.database");
+  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_KaonLTCalib.database");
   gHcParms->Load(gHcParms->GetString("g_ctp_database_filename"), RunNumber);
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
@@ -51,13 +51,28 @@ void replay_coin_scalers (Int_t RunNumber = 0, Int_t MaxEvent = 0,Int_t FirstEve
   TRG->AddDetector(coin); 
  
   THcHallCSpectrometer* SHMS = new THcHallCSpectrometer("P", "SHMS");
+  // Add drift chambers to SHMS apparatus
+  THcDC* pdc = new THcDC("dc", "Drift Chambers");
+  SHMS->AddDetector(pdc);
+  // Add hodoscope to SHMS apparatus
+  THcHodoscope* phod = new THcHodoscope("hod", "Hodoscope");
+  SHMS->AddDetector(phod);
+
   SHMS->SetEvtType(1);
   SHMS->AddEvtType(4);
   SHMS->AddEvtType(5);
   SHMS->AddEvtType(6);
   SHMS->AddEvtType(7);
   gHaApps->Add(SHMS);
+
   THcHallCSpectrometer* HMS = new THcHallCSpectrometer("H", "HMS");
+  // Add drift chambers to HMS apparatus
+  THcDC* hdc = new THcDC("dc", "Drift Chambers");
+  HMS->AddDetector(hdc);
+  // Add hodoscope to HMS apparatus
+  THcHodoscope* hhod = new THcHodoscope("hod", "Hodoscope");
+  HMS->AddDetector(hhod);
+
   HMS->SetEvtType(2);
   HMS->AddEvtType(4);
   HMS->AddEvtType(5);
@@ -92,6 +107,25 @@ void replay_coin_scalers (Int_t RunNumber = 0, Int_t MaxEvent = 0,Int_t FirstEve
   hscaler->SetDelayedType(129);
   hscaler->SetUseFirstEvent(kTRUE);
   gHaEvtHandlers->Add(hscaler);
+
+  /*
+  //Add SHMS event handler for helicity scalers
+  THcHelicityScaler *phelscaler = new THcHelicityScaler("P", "Hall C helicity scaler");
+  //phelscaler->SetDebugFile("PHelScaler.txt");
+  phelscaler->SetROC(8);
+  phelscaler->SetUseFirstEvent(kTRUE);
+  gHaEvtHandlers->Add(phelscaler);
+  */
+
+  /*
+  // Add HMS event handler for helicity scalers
+  THcHelicityScaler *hhelscaler = new THcHelicityScaler("H", "Hall C helicity scaler");
+  //hhelscaler->SetDebugFile("HHelScaler.txt");
+  hhelscaler->SetROC(5);
+  hhelscaler->SetUseFirstEvent(kTRUE);
+  gHaEvtHandlers->Add(hhelscaler);
+  */
+
   // Add event handler for DAQ configuration event
   THcConfigEvtHandler *pconfig = new THcConfigEvtHandler("pconfig", "Hall C configuration event handler");
   gHaEvtHandlers->Add(pconfig);
@@ -136,15 +170,15 @@ void replay_coin_scalers (Int_t RunNumber = 0, Int_t MaxEvent = 0,Int_t FirstEve
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file
-  analyzer->SetOdefFile("DEF-files/COIN/EPICS/epics_short.def");
+  analyzer->SetOdefFile("DEF-files/EPICS/epics_short.def");
   // Define cuts file
-  analyzer->SetCutFile("DEF-files/COIN/SCALERS/coinscaler_cuts.def");  // optional
+  analyzer->SetCutFile("DEF-files/SCALERS/coinscaler_cuts.def");  // optional
   // File to record accounting information for cuts
-  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/COIN/SCALERS/summary_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional
+  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Scalers/summary_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template
   analyzer->PrintReport("TEMPLATES/COIN/SCALERS/coinscalers.template",
-  			Form("REPORT_OUTPUT/COIN/SCALERS/replay_coin_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
+  			Form("REPORT_OUTPUT/Scalers/replay_coin_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
 
 }

@@ -24,8 +24,6 @@
 #include <TMultiGraph.h>
 #include <TF1.h>
 
-
-
 // Declare ROOT files
 TFile *histoFile, *outFile;
 
@@ -143,7 +141,7 @@ Double_t calcMinOrMax(Double_t *array, UInt_t iplane, TString minOrmax) {
 //=: Level 2
 //=:=:=:=:=:=:
 
-// Perform the timw-walk fits
+// Perform the time-walk fits
 void doTwFits(UInt_t iplane, UInt_t iside, UInt_t ipaddle) {
   // Draw fits on canvas
   twFitCan[iplane][iside]->cd(ipaddle+1);
@@ -266,7 +264,7 @@ void WriteFitParam(int runNUM)
 
   TString outPar_Name = Form("../../PARAM/HMS/HODO/hhodo_TWcalib_%d.param", runNUM);
   outParam.open(outPar_Name);
-  outParam << ";HMS Hodoscopes Output Parameter File" << endl;
+  outParam << Form(";HMS Hodoscopes Output Parameter File: Run %d", runNUM) << endl;
   outParam << " " << endl;
   //  outParam << "htofusinginvadc=0 " << " ;set to zero to NOT read old style hodo calib parameters" << endl;
   outParam << "hTDC_threshold=" << tdcThresh << ". ;units of mV " << endl;
@@ -378,7 +376,8 @@ using namespace std;
   gStyle->SetOptStat(0);
 
   // Read the ROOT file containing the time-walk histos
-  histoFile = new TFile("timeWalkHistos.root", "READ");
+  TString histoFileName = Form("timeWalkHistos_%d.root", run); // SK 13/5/19 - new .root output for each run tested
+  histoFile = new TFile(histoFileName, "READ");
   // Obtain the top level directory
   dataDir = dynamic_cast <TDirectory*> (histoFile->FindObjectAny("hodoUncalib"));
   // Create the parameter canvases
@@ -427,11 +426,4 @@ using namespace std;
   } // Plane loop 
   //Write to a param file
   WriteFitParam(run);
-
 }
-
-
-
-
-
-

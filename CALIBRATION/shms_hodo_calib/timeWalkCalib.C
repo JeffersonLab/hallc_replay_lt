@@ -273,10 +273,9 @@ void WriteFitParam(int runNUM)
 
   TString outPar_Name = Form("../../PARAM/SHMS/HODO/phodo_TWcalib_%d.param", runNUM);
   outParam.open(outPar_Name);
-  outParam << ";SHMS Hodoscopes Time Walk Output Parameter File" << endl;
+  outParam << Form(";SHMS Hodoscopes Time Walk Output Parameter File: Run %d", runNUM) << endl;
   outParam << " " << endl;
   outParam << "pTDC_threshold=" << tdcThresh  << " ;units of mV" <<endl;
-  //outPARAM << "ptofusinginvadc=0" << endl;  //set to zero to NOT use old hodo parameters
   outParam << " " << endl;
 
   //Fill 3D Par array
@@ -371,7 +370,6 @@ void WriteFitParam(int runNUM)
 
 void timeWalkCalib(int run) {
 
-
   //prevent root from displaying graphs while executing
   //gROOT->SetBatch(1);
  
@@ -385,7 +383,9 @@ void timeWalkCalib(int run) {
   gStyle->SetOptStat(0);
 
   // Read the ROOT file containing the time-walk histos
-  histoFile = new TFile("timeWalkHistos.root", "READ");
+  TString histoFileName = Form("timeWalkHistos_%d.root", run); // SK 13/5/19 - new .root output for each run tested
+  histoFile = new TFile(histoFileName, "READ");
+
   // Obtain the top level directory
   dataDir = dynamic_cast <TDirectory*> (histoFile->FindObjectAny("hodoUncalib"));
   // Create the parameter canvases
@@ -433,12 +433,9 @@ void timeWalkCalib(int run) {
     drawParams(iplane);
   } // Plane loop 
  
- 
   //Write to a param file
   WriteFitParam(run);
   
- 
-
 } // timeWalkCalib()
 
 

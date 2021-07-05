@@ -1,0 +1,67 @@
+block CTime.*
+block H.gtr.*
+block P.gtr.*
+block H.tr.*
+block P.tr.*
+block P.hod.goodscinhit
+block P.hod.betanotrack
+block P.dc.ntrack
+block P.dc.1x1.nhit
+block P.dc.1u1.nhit
+block P.dc.1v1.nhit
+block P.dc.1x2.nhit
+block P.dc.1u2.nhit
+block P.dc.1v2.nhit
+block P.dc.2x1.nhit
+block P.dc.2u1.nhit
+block P.dc.2v1.nhit
+block P.dc.2x2.nhit
+block P.dc.2u2.nhit
+block P.dc.2v2.nhit
+block P.dc.x*
+block P.dc.y*
+block H.hod.goodscinhit
+block H.hod.betanotrack
+block H.dc.ntrack
+block H.dc.1x1.nhit
+block H.dc.1u1.nhit
+block H.dc.1v1.nhit
+block H.dc.1x2.nhit
+block H.dc.1u2.nhit
+block H.dc.1v2.nhit
+block H.dc.2x1.nhit
+block H.dc.2u1.nhit
+block H.dc.2v1.nhit
+block H.dc.2x2.nhit
+block H.dc.2u2.nhit
+block H.dc.2v2.nhit
+block H.dc.x*
+block H.dc.y*
+block H.cal.etotnorm
+block H.cal.etottracknorm
+block H.cer.npeSum
+block P.cal.etotnorm
+block P.cal.etottracknorm
+block P.aero.npeSum
+block P.aero.xAtAero
+block P.aero.yAtAero
+block P.hgcer.npeSum
+block P.hgcer.xAtCer
+block P.hgcer.yAtCer
+block P.hod.starttime
+block H.kin.*
+block P.kin.*
+block T.coin.pTRIG*
+block T.coin.pTRIG5_ROC2_tdcTime
+block T.coin.pEDTM_tdcTime
+block T.helicity.hel
+block T.coin.pRF*
+block T.coin.hRF*
+
+begin epics
+ibcm1
+ibcm2
+iunser
+itov3out
+itov4out
+end epics

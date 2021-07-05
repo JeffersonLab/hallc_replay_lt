@@ -5,7 +5,7 @@
 using namespace std;
 
 //_____________________________________________________________
-DC_calib::DC_calib(string a, TString b, const int c, Long64_t d, TString e, string f)
+DC_calib::DC_calib(TString a, string b, Int_t c, Long64_t d, TString e, string f)
 
   :spec(a),          //set spectrometer to 'HMS', or 'SHMS'  ex. DC_Calib(HMS, pdc_replay.C, 488, 50000)
    ifile_name(b),    //initialization list
@@ -15,19 +15,19 @@ DC_calib::DC_calib(string a, TString b, const int c, Long64_t d, TString e, stri
    mode(f)
 {
   //Initialize pointers
-  dir_log    = NULL;
-  tree       = NULL;
-  in_file    = NULL;
-  out_file   = NULL;
-  main_dir   = NULL;
-  plane_dt   = NULL;
-  plane_dt_corr = NULL;
-  cell_dt    = NULL;
-  cell_dt_corr    = NULL;
-  fitted_cell_dt = NULL;
-  dt_vs_wire = NULL;
-  dt_vs_wire_corr = NULL;
-  offset        = NULL;
+  dir_log                = NULL;
+  tree                   = NULL;
+  in_file                = NULL;
+  out_file               = NULL;
+  main_dir               = NULL;
+  plane_dt               = NULL;
+  plane_dt_corr          = NULL;
+  cell_dt                = NULL;
+  cell_dt_corr           = NULL;
+  fitted_cell_dt         = NULL;
+  dt_vs_wire             = NULL;
+  dt_vs_wire_corr        = NULL;
+  offset                 = NULL;
 
   entries                = NULL;
   t_zero                 = NULL;
@@ -44,8 +44,7 @@ DC_calib::DC_calib(string a, TString b, const int c, Long64_t d, TString e, stri
 
   if(mode=="card")
     {
-  
-
+ 
   //--Card Variables
       entries_card           = NULL;
       t_zero_card            = NULL;
@@ -67,7 +66,6 @@ DC_calib::DC_calib(string a, TString b, const int c, Long64_t d, TString e, stri
   
 }
 
-
 //____________________________________________________________
 DC_calib::~DC_calib()
 {
@@ -77,8 +75,6 @@ DC_calib::~DC_calib()
   delete out_file; out_file = NULL;             
   delete graph;    graph    = NULL;
   delete gr1_canv; gr1_canv = NULL;
-
-  
   
   //Delete 1D Arrays pointers to free up 'heap' space
     
@@ -86,7 +82,6 @@ DC_calib::~DC_calib()
     delete [] dt_vs_wire_corr; dt_vs_wire_corr = NULL;
     delete [] plane_dt; plane_dt     = NULL;
     delete [] plane_dt_corr; plane_dt_corr = NULL;
-
 
     //free 2d dynamic array cell_dt[][]
     for(int ip = 0; ip<NPLANES; ip++) 
@@ -104,8 +99,6 @@ DC_calib::~DC_calib()
 	delete [] twenty_perc_maxContent[ip]; 
 	delete [] ref_time[ip];
 	delete [] offset[ip];
-     
-	
 	  
 	if (mode=="card")
 	  {
@@ -126,7 +119,6 @@ DC_calib::~DC_calib()
 	    delete [] wireFitRangeHigh[ip];
 	    delete [] wireFitRangeLow[ip];
 	  }
-	  
       }  
     
     delete [] entries;                     entries                = NULL;
@@ -134,7 +126,7 @@ DC_calib::~DC_calib()
     delete [] t_zero_err;                  t_zero_err             = NULL;
     delete [] t_zero_final;                t_zero_final           = NULL;
     delete [] cell_dt;                     cell_dt                = NULL;
-    delete [] cell_dt_corr;                cell_dt_corr                = NULL;
+    delete [] cell_dt_corr;                cell_dt_corr           = NULL;
     delete [] fitted_cell_dt;              fitted_cell_dt         = NULL;
     delete [] bin_max;                     bin_max                = NULL;
     delete [] bin_maxContent;              bin_maxContent         = NULL;
@@ -143,7 +135,6 @@ DC_calib::~DC_calib()
     delete [] ref_time;                    ref_time               = NULL;
     delete [] offset;                      offset                 = NULL;
     
-   
     if (mode=="card")
       {
 	//Card Variables 
@@ -165,46 +156,33 @@ DC_calib::~DC_calib()
       }
 }
 
-
 //____________________________________________________________
 void DC_calib::setup_Directory()
 {
 
-  
   if (spec == "HMS")
     {
-     
       dir_log = Form("mkdir -p ./%s_DC_%sLog_%d/", spec.c_str(), mode.c_str(), run_NUM);
-
       //Check if directory exists
       if (system(dir_log) != 0) 
 	{
 	  cout << "Creating Directory to store HMS Calibration Results . . ." << endl; 
 	  system(dir_log);  //create directory to log calibration results
 	}
-
-
     }
 
   else if (spec == "SHMS")
-    {
-      
+    { 
       dir_log = Form("mkdir -p ./%s_DC_%sLog_%d/", spec.c_str(), mode.c_str(), run_NUM);
-
-      //Check if directory exists
+ //Check if directory exists
       if (system(dir_log) != 0) 
 	{
 	  cout << "Creating Directory to store SHMS Calibration Results . . ." << endl; 
 	  system(dir_log);  //create directory to log calibration results
 	}
-      
-      
     }
 
 }
-
-
-
 
 //___________________________________________________________
 void DC_calib::SetPlaneNames()
@@ -240,24 +218,22 @@ void DC_calib::SetPlaneNames()
       if (mode=="card")
 	{
 	  //cout << "Setting Plane Cards . . ." << endl;
-      //---Per Card ONLY----
-      plane_cards[0] = 7;
-      plane_cards[1] = 7;
-      plane_cards[2] = 5;
-      plane_cards[3] = 5;
-      plane_cards[4] = 7;
-      plane_cards[5] = 7;
-      plane_cards[6] = 7;
-      plane_cards[7] = 7;
-      plane_cards[8] = 5;
-      plane_cards[9] = 5;
-      plane_cards[10] = 7;
-      plane_cards[11] = 7;
+	  //---Per Card ONLY----
+	  plane_cards[0] = 7;
+	  plane_cards[1] = 7;
+	  plane_cards[2] = 5;
+	  plane_cards[3] = 5;
+	  plane_cards[4] = 7;
+	  plane_cards[5] = 7;
+	  plane_cards[6] = 7;
+	  plane_cards[7] = 7;
+	  plane_cards[8] = 5;
+	  plane_cards[9] = 5;
+	  plane_cards[10] = 7;
+	  plane_cards[11] = 7;
 	}
-
     }
       
-  
   else if(spec=="HMS")
     {
       
@@ -285,19 +261,19 @@ void DC_calib::SetPlaneNames()
 
       if (mode=="card")
 	{
-      //---Per-Card ONLY---
-      plane_cards[0] = 6;
-      plane_cards[1] = 6;
-      plane_cards[2] = 7;
-      plane_cards[3] = 7;
-      plane_cards[4] = 6;
-      plane_cards[5] = 6;
-      plane_cards[6] = 6;
-      plane_cards[7] = 6;
-      plane_cards[8] = 7;
-      plane_cards[9] = 7;
-      plane_cards[10] = 6;
-      plane_cards[11] = 6;
+	  //---Per-Card ONLY---
+	  plane_cards[0] = 6;
+	  plane_cards[1] = 6;
+	  plane_cards[2] = 7;
+	  plane_cards[3] = 7;
+	  plane_cards[4] = 6;
+	  plane_cards[5] = 6;
+	  plane_cards[6] = 6;
+	  plane_cards[7] = 6;
+	  plane_cards[8] = 7;
+	  plane_cards[9] = 7;
+	  plane_cards[10] = 6;
+	  plane_cards[11] = 6;
 	}
     }
   
@@ -307,12 +283,10 @@ void DC_calib::SetPlaneNames()
 void DC_calib::SetTdcOffset()
 {
   //cout << "Setting TDC offsets for the HMS " << endl;
-  
   for (int ip = 0; ip < NPLANES; ip ++)
     {
       for (wire = 1; wire <= nwires[ip]; wire++)
 	{
-	  
 	  if (ip== 0 && wire > 80)          {offset[ip][wire-1] = tdc_offset;}
 	  else if (ip== 6 && wire > 80)     {offset[ip][wire-1] = tdc_offset;}
 	  else if (ip == 0 && wire <= 80)   {offset[ip][wire-1] = 0.0;}
@@ -321,22 +295,14 @@ void DC_calib::SetTdcOffset()
 	  else if (ip == 4 && (wire <=48 || wire >= 65)) {offset[ip][wire-1] = 0.0;}
 	  else if (ip == 10 && (wire <= 48 || wire >= 65)) {offset[ip][wire-1] = 0.0;}
 	  else if (ip!=4 || ip!=0 || ip!=6 || ip!=10) {offset[ip][wire-1] = 0.0;}
-
-
 	}
-      
     }
-  
-  
-
 }
 
 //____________________________________________________________________________________
 
 void DC_calib::GetDCLeafs()
 {
-  
- 
   //open input root file
   in_file = new TFile(ifile_name, "READ" );
   
@@ -349,7 +315,6 @@ void DC_calib::GetDCLeafs()
     {
       cout << "Number of entries entered: " << num_evts << " exeeds MAX number of entries: " << nentries << endl;
       cout << "Setting the number of entries to:  " << nentries  <<  endl;
-      
       num_evts = nentries;
     }
   else if (num_evts==-1)
@@ -358,11 +323,9 @@ void DC_calib::GetDCLeafs()
       num_evts = nentries;
     }
 
-
   //Loop over each plane
   for (int ip = 0; ip < NPLANES; ip++)
     {
-      
       base_name = SPECTROMETER+"."+DETECTOR+"."+plane_names[ip];
       ndatatime = "Ndata."+base_name+".time";
       drifttime = base_name+".time";
@@ -372,20 +335,17 @@ void DC_calib::GetDCLeafs()
       tree->SetBranchAddress(wirenum, wire_num[ip]);   
       tree->SetBranchAddress(drifttime, drift_time[ip]);   
       tree->SetBranchAddress(ndatatime, &ndata_time[ip]);   
-						     
     }
-  
-  
+
   if (spec=="SHMS")
     {
       cal_etot_leaf = "P.cal.etot";
-      cer_npe_leaf = "P.ngcer.npeSum";  
+      cer_npe_leaf = "P.hgcer.npeSum"; // hgc for KaonLT, really, this should check for either or  
     
       //Check Branch Status 
       status_cal = tree->GetBranchStatus(cal_etot_leaf);  //returns a boolean
       status_cer = tree->GetBranchStatus(cer_npe_leaf);  //return a boolean
-      
-      
+
       if ((!status_cal || !status_cer )&& (pid=="pid_elec"))
 	{
 	  cout << "*************ATTENTION!**************" << endl;
@@ -418,8 +378,7 @@ void DC_calib::GetDCLeafs()
     {
       cal_etot_leaf = "H.cal.etot";
       cer_npe_leaf = "H.cer.npeSum";  
-     
-
+      
       //Check Branch Status with Boolean
       status_cal = tree->GetBranchStatus(cal_etot_leaf);
       status_cer = tree->GetBranchStatus(cer_npe_leaf); 
@@ -448,11 +407,7 @@ void DC_calib::GetDCLeafs()
 	  tree->SetBranchAddress(cal_etot_leaf, &cal_etot);
 	  tree->SetBranchAddress(cer_npe_leaf, &cer_npe);   
 	}
- 
-      
     }
-
-
 }
 
 
@@ -460,7 +415,6 @@ void DC_calib::GetDCLeafs()
 void DC_calib::AllocateDynamicArrays()
 {
  
-
   dir_log = new char();
   
   //Allocate 1D dynamic arrays
@@ -483,7 +437,6 @@ void DC_calib::AllocateDynamicArrays()
   twenty_perc_maxContent  = new Double_t*[NPLANES]; /*Array to store 20% of maximum bin content (peak)*/						     
   ref_time                = new Double_t*[NPLANES]; /*Array to store ref_time(time corresp. to 20% of peak) times for each sense wire*/             
   offset                  = new Double_t*[NPLANES];
-
 
   if (mode=="card")
     {
@@ -522,40 +475,34 @@ void DC_calib::AllocateDynamicArrays()
       ref_time[ip]                = new Double_t[nwires[ip]];                    
       offset[ip]                  = new Double_t[nwires[ip]];
 
-    
       if (mode=="card")
 	{
-      
-      //Card Variables
-      entries_card[ip]            = new Int_t[plane_cards[ip]];
-      t_zero_card[ip]             = new Double_t[plane_cards[ip]];
-      t_zero_card_err[ip]         = new Double_t[plane_cards[ip]];
-      card_hist[ip]               = new TH1F[plane_cards[ip]];
-      fitted_card_hist[ip]        = new TH1F[plane_cards[ip]];
-      corr_card_hist[ip]          = new TH1F[plane_cards[ip]];
-      wire_min[ip]                = new Int_t[plane_cards[ip]];
-      wire_max[ip]                = new Int_t[plane_cards[ip]];
-      wireBinContentMax[ip]       = new Double_t [plane_cards[ip]];
-      wireBinContentLow[ip]       = new Double_t [plane_cards[ip]];
-      wireBinContentHigh[ip]      = new Double_t [plane_cards[ip]];
-      wireBinLow[ip]              = new Double_t [plane_cards[ip]];
-      wireBinHigh[ip]             = new Double_t [plane_cards[ip]];
-      wireFitRangeLow[ip]         = new Double_t [plane_cards[ip]];
-      wireFitRangeHigh[ip]        = new Double_t [plane_cards[ip]];
-
+	  
+	  //Card Variables
+	  entries_card[ip]            = new Int_t[plane_cards[ip]];
+	  t_zero_card[ip]             = new Double_t[plane_cards[ip]];
+	  t_zero_card_err[ip]         = new Double_t[plane_cards[ip]];
+	  card_hist[ip]               = new TH1F[plane_cards[ip]];
+	  fitted_card_hist[ip]        = new TH1F[plane_cards[ip]];
+	  corr_card_hist[ip]          = new TH1F[plane_cards[ip]];
+	  wire_min[ip]                = new Int_t[plane_cards[ip]];
+	  wire_max[ip]                = new Int_t[plane_cards[ip]];
+	  wireBinContentMax[ip]       = new Double_t [plane_cards[ip]];
+	  wireBinContentLow[ip]       = new Double_t [plane_cards[ip]];
+	  wireBinContentHigh[ip]      = new Double_t [plane_cards[ip]];
+	  wireBinLow[ip]              = new Double_t [plane_cards[ip]];
+	  wireBinHigh[ip]             = new Double_t [plane_cards[ip]];
+	  wireFitRangeLow[ip]         = new Double_t [plane_cards[ip]];
+	  wireFitRangeHigh[ip]        = new Double_t [plane_cards[ip]];
 	}
     }
-  
-  
 }
 
 //_______________________________________________________________
 void DC_calib::CreateHistoNames()
 {
- 
   for(int ip=0; ip<NPLANES; ip++)
     {
-      
       //Set-Up plane drift time histo labels
       plane_dt_name  = plane_names[ip]+"_time"; 
       plane_dt_title = spec + " DC, Plane "+plane_names[ip]+" Drift Time";
@@ -566,7 +513,6 @@ void DC_calib::CreateHistoNames()
       plane_dt[ip].SetXTitle("Drift Time (ns)");
       plane_dt[ip].SetYTitle("Number of Entries / 1 ns");
 
-      
       plane_dt_name_corr  = plane_names[ip]+"corrected_time"; 
       plane_dt_title_corr = spec + " DC, Plane "+plane_names[ip]+" Corrected Drift Time";
       
@@ -575,8 +521,6 @@ void DC_calib::CreateHistoNames()
       plane_dt_corr[ip].SetBins(NBINS, MINBIN, MAXBIN);
       plane_dt_corr[ip].SetXTitle("Drift Time (ns)");
       plane_dt_corr[ip].SetYTitle("Number of Entries / 1 ns");
-      
-
       
       //Set-Up Drift Time vs. Wire Number Histos labels
       dt_vs_wire_name  = "dt_vs_wire_plane_"+plane_names[ip]; 
@@ -649,31 +593,22 @@ void DC_calib::CreateHistoNames()
 	      fitted_card_hist[ip][card].SetXTitle("Drift Time (ns)");
 	      fitted_card_hist[ip][card].SetYTitle("Number of Entries / 1 ns");
 	      
-	      
 	      corr_card_hist_name = Form("Corr_Card_%d", card+1); 
 	      corr_card_hist_title = spec + " DC Plane " +plane_names[ip] + Form(": Corrected Card_%d", card+1);
-	      
 	      
 	      corr_card_hist[ip][card].SetName(corr_card_hist_name);
 	      corr_card_hist[ip][card].SetTitle(corr_card_hist_title);
 	      corr_card_hist[ip][card].SetBins(NBINS, MINBIN, MAXBIN);
 	      corr_card_hist[ip][card].SetXTitle("Drift Time (ns)");
 	      corr_card_hist[ip][card].SetYTitle("Number of Entries / 1 ns");
-	      
-	      
 	    } //end loop over cards
-
-	  
 	} //end card mode
-
     } //End Loop over Planes
-  
 } //End CreateHistoNames() method
 
 //________________________________________________________________________
 void DC_calib::GetCard()
 {
-
   //ONLY required in :: CARD MODE
       
   if (spec=="HMS")
@@ -779,8 +714,7 @@ void DC_calib::GetCard()
       wire_min[11][3]=49;       wire_max[11][3]=64;
       wire_min[11][4]=65;       wire_max[11][4]=80;
       wire_min[11][5]=81;       wire_max[11][5]=96;
-
-
+    
     } //end hms card defnitions
 
   else if (spec=="SHMS")
@@ -889,14 +823,11 @@ void DC_calib::GetCard()
 
       
     }  //end shms card definitions
-
-  
 } //End method getCard
 
 //________________________________________________________________
 void DC_calib::EventLoop(string option="")
 {
-
   if (mode=="card")
     {
       //cout << "Executing GetCard() Method . . ." << endl;
@@ -909,7 +840,6 @@ void DC_calib::EventLoop(string option="")
   //Loop over all entries
   for(Long64_t i=0; i<num_evts; i++)
     {
-
       tree->GetEntry(i);  
       
       //------READ USER 'pid' input to determine particle type to calibrate----------
@@ -943,22 +873,18 @@ void DC_calib::EventLoop(string option="")
      //Initialize chamber hit counter
       cnts_ch1=0;
       cnts_ch2=0;
-       
-
+      
       for(int ip=0; ip<NPLANES; ip++)
 	{
-	  
 	  //Count how many planes were hit by the event
 	  if(ip<=5 && ndata_time[ip]==1) 
 	    { 
 	      cnts_ch1++; 
 	    }
-
 	  if(ip>5 && ndata_time[ip]==1) 
 	    {
 	      cnts_ch2++; 
 	    }
-	  
 	}
 
       //Count the number of events that had at least 5/6 hits / chamber
@@ -966,14 +892,11 @@ void DC_calib::EventLoop(string option="")
 	{
 	  ngood_evts++;
 	}
-      
       good_event=kFALSE;
       
-
       //***good event definition***: cal_energy > 100 MeV, cer_npeSum > 1.0
       good_event = cal_elec && cer_elec; //&& cnts_ch1>4 && cnts_ch2>4;
       
-   
 	  // cout << "passed cut: " << i << endl;
 	  for(Int_t ip=0; ip<NPLANES; ip++)
 	    {
@@ -981,25 +904,15 @@ void DC_calib::EventLoop(string option="")
 
    	  if (good_event&&ndata_time[ip]==1)
         	{
-		
-	      
 	      //-----------------------------------------------------------------------------------------	  
-	      
-		  
 		  //Loop over number of hits for each trigger in each DC plane 
 		  for(Int_t j = 0; j < ndata_time[ip]; j++)    
 		    {
-		      
 		      //get wire hit for ith event in 'ip' plane
 		      wire = int(wire_num[ip][j]);
-
 		      //cout << "About to enter Wire Mode in EventLoop. . ." << endl;
-		       
-		       
-
 		      if (mode=="wire")
 			{
-
 		      //-----------WIRE MODE ONLY----------------------------
 		      
 		      if (option=="FillUncorrectedTimes")
@@ -1010,8 +923,6 @@ void DC_calib::EventLoop(string option="")
 			  cell_dt[ip][wire-1].Fill(drift_time[ip][j] - offset[ip][wire-1]);
 			  fitted_cell_dt[ip][wire-1].Fill(drift_time[ip][j] - offset[ip][wire-1]);
 			}
-
-		      
 		      else if (option=="ApplyT0Correction")
 			{
 			  //Fill corrected plane drift times 
@@ -1020,24 +931,17 @@ void DC_calib::EventLoop(string option="")
 			  dt_vs_wire_corr[ip].Fill(wire_num[ip][j], drift_time[ip][j] - offset[ip][wire-1] - t_zero[ip][wire-1]);
 			  t_zero_final[ip][wire-1] = offset[ip][wire-1] + t_zero[ip][wire-1];
 			}
-
 		      //-------------END WIRE MODE ONLY------------------------
-
 			}
 		       
 		      //cout << "About To Enter Card Mode in EventLoop() " << endl;
 
 		      if (mode=="card")
 		      	{
-
-			  
-		      //cout << "Entered in Card Mode " << endl;
-			      //------------CARD MODE ONLY-----------------------------
-			      
+			  //cout << "Entered in Card Mode " << endl;
+			  //------------CARD MODE ONLY-----------------------------
 			  if (option=="FillUncorrectedTimes")
 			    {
-			     
-			      
 			      //Fill uncorrected plane drift times 
 			      plane_dt[ip].Fill(drift_time[ip][j] - offset[ip][wire-1]); 
 			      dt_vs_wire[ip].Fill(wire_num[ip][j], drift_time[ip][j] - offset[ip][wire-1]);
@@ -1045,67 +949,43 @@ void DC_calib::EventLoop(string option="")
 			      //Loop over plane cards
 			      for (card = 0; card < plane_cards[ip]; card++ )
 				{
-			    
-				  //Conditions
+			  	  //Conditions
 				  if (wire >= wire_min[ip][card] && wire <= wire_max[ip][card])
 				    {
 				      //Fill Uncorrected Cards dRIFT tIME
 				      card_hist[ip][card].Fill(drift_time[ip][j]);
 				      fitted_card_hist[ip][card].Fill(drift_time[ip][j]);
-				  
 				    } //End loop over wires
-				  
 				} //End loop over cards
-			      
 			    } //end option argument
 		    
-
 			  else if (option=="ApplyT0Correction")
 			    {
-			 
 			      for (card = 0; card < plane_cards[ip]; card++ )
 				{
-				  
 				  //Fill Corrected plane drift times (using the CARD method)
 				  
 				  if (wire >= wire_min[ip][card] && wire <= wire_max[ip][card])
 				    {
-			  
 				      //Fill Corrected Plane Drift Times
 				      plane_dt_corr[ip].Fill(drift_time[ip][j] - t_zero_card[ip][card]);
-				      
 				      
 				      //Fill Corrected Card Drift Times
 				      dt_vs_wire_corr[ip].Fill(wire_num[ip][j], drift_time[ip][j] - t_zero_card[ip][card]);  
 				      corr_card_hist[ip][card].Fill(drift_time[ip][j]-t_zero_card[ip][card]);
    				      //t_zero_final[ip][wire-1] = t_zero_card[ip][card];
-				  
-				      
 				    } 
-				  
 				} //loop over cards
-			      
 			    } //end option argument
-			  
 			  //------------END CARD MODE ONLY------------------------
-			      
-			  
-			  } //End CARD MODE
-	       
+			} //End CARD MODE
 		    } //end loop over hits
-
-	     	 
+		  
 //-----------------------------------------------------------------------------------------
-	      
 		} //good event cut   
-       
 	    } //end plane loop
-    
     } //end loop over events
-
 } // end event loop method
-
-
 
 //_________________________________________________________________________
 /*
@@ -1177,13 +1057,9 @@ void DC_calib::CalcT0Historical()
 //_________________________________________________________________________
 void DC_calib::GetTwentyPercent_Peak()
 {
-  
   //Loop over DC PLANES
   for (int ip = 0; ip<NPLANES; ip++)
     {
-
-      
-     
       //Loop over DC wires
       for (wire = 0; wire < nwires[ip]; wire++)
 	{
@@ -1201,12 +1077,10 @@ void DC_calib::GetTwentyPercent_Peak()
 	      
 	      content.push_back(content_bin);                                      //add bin content to array
 	      bin_num.push_back(bin);                                              //add bin number to array
-	      
 	      // check if 2 bin contents have been stored and examine if these contents exceed or not 20% of peak
 	      if (content.size() == 5) {
 		//initialize counter to count how many bin contents >= 20%
 		counts = 0;
-		
 		// Loop over 2 bin contents stored in array content
 		for (Int_t j=0; j<5; j++)
 		  {
@@ -1215,40 +1089,26 @@ void DC_calib::GetTwentyPercent_Peak()
 			counts = counts+1;
 			if(counts >= 4) { goto stop;}
 		      }
-		    
 		    content.clear();
 		    bin_num.clear();
-		    
 		  }
-		
 	      }
-	      
 	    }
 	stop:
 	  ref_time[ip][wire] = cell_dt[ip][wire].GetXaxis()->GetBinCenter(bin_num[0]); //Get time corresponding ~20% Max BIN CONTENT  
-	  
-	  
 	} // end wire loop
-      
     } //end planes loop
- 
 } //End GetTwentyPercent_Peak() method
-
 
 //____________________________________________________________________________________
 void DC_calib::FitWireDriftTime()
 {
-  
   Double_t sum_NUM= 0.0;
   Double_t sum_DEN=0.0;
-
-
-
 
   //Loop over planes
   for (Int_t ip = 0; ip < NPLANES; ip++)
     {
-    
       //Loop over DC sense wires
       for (wire = 0; wire < nwires[ip]; wire++)
 	{
@@ -1298,20 +1158,13 @@ void DC_calib::FitWireDriftTime()
 		  //cout << "wire: " << wire + 1 << " :: " << "tzero: " << t_zero[ip][wire] << endl;
 		}
 	      else if (t_zero_err[ip][wire] >= t0_err_thrs) { 
-
 		t_zero[ip][wire] = 0.0;
-
 	      }
-	      
 	    }
-
-	 
-	 
 	  else if (abs(-y_int/m)>=5.0*std_dev ||  m <= 0.2  || entries[ip][wire] <= max_wire_entry || t_zero_err[ip][wire] >= t0_err_thrs )
 		{
 		      t_zero[ip][wire] = 0.0;
 		}	  
-
 	} //END LOOP OVER WIRES
 
       weighted_avg[ip] = sum_NUM /sum_DEN; 
@@ -1325,28 +1178,19 @@ void DC_calib::FitWireDriftTime()
 	      t_zero[ip][wire] = weighted_avg[ip];
 	      t_zero_final[ip][wire] = offset[ip][wire] + weighted_avg[ip];
 	   }
-	      
 	}
-      
-      
     }//END LOOP OVER PLANES  
-
-  
 } //End FitWireDriftTime() method
 
 //_______________________________________________________________________
 void DC_calib::GetTwentyPercent_Card()
 {
-
   binValLow = binValHigh = binSearchLow = 0, binSearchHigh = 0;
   binDiffThreshHigh = 100; binDiffThreshLow = 100;
-
   for (int ip = 0; ip<NPLANES; ip++)
     {
-	
       for (card = 0; card < plane_cards[ip]; card++)
 	{
-	
 	   binSearchHigh =  fitted_card_hist[ip][card].GetMaximumBin();           //returns bin value of maximum content
 	   wireBinContentMax[ip][card] = fitted_card_hist[ip][card].GetMaximum(); // return maximum histo bin content
 	   entries_card[ip][card] = fitted_card_hist[ip][card].GetEntries();      // return entries of card histograms
@@ -1369,16 +1213,13 @@ void DC_calib::GetTwentyPercent_Card()
 	  	   
 	   while(binValLow == 0)
 	     {
-
 	       binDiffThreshLow = binDiffThreshLow  + 100;
 	       	       
 	       fitted_card_hist[ip][card].GetBinWithContent(wireBinContentLow[ip][card],  binValLow,  binSearchLow, binSearchHigh, binDiffThreshLow); 	  	     
-		     
 	     }
 	    	 
 	   while(binValHigh == 0)
 	     {
-
 	       binDiffThreshHigh = binDiffThreshHigh + 100;
 
 	       fitted_card_hist[ip][card].GetBinWithContent(wireBinContentHigh[ip][card],  binValHigh,  binSearchLow, binSearchHigh, binDiffThreshHigh);
@@ -1388,25 +1229,21 @@ void DC_calib::GetTwentyPercent_Card()
 	  wireBinHigh[ip][card] = binValHigh;
 	  wireFitRangeLow[ip][card]  = fitted_card_hist[ip][card].GetBinCenter(wireBinLow[ip][card]);
 	  wireFitRangeHigh[ip][card] = fitted_card_hist[ip][card].GetBinCenter(wireBinHigh[ip][card]);
-
 	} //end plane cards loop
-
     } //end planes loop
-  
 } //end  GetTwentyPercent_Card() method
 
 //___________________________________________________________________
 Double_t DC_calib::GetCardT0_alternative(Int_t ip, Int_t card)
 {
-
   //NOTE**: This method must be called within FitCardDriftTime() method
   // if the fit t0 error/card entries exceed a threshold
   
   //  cout << "Inside GetCardT0 Method . . ." << endl;
   
-    cout << "Calling GetCardT0_alternative ( " << ip << " , " << card << " ) " << endl;
- 
+  cout << "Calling GetCardT0_alternative ( " << ip << " , " << card << " ) " << endl;
   
+
   binSearchHigh = fitted_card_hist[ip][card].GetMaximumBin();
   maxContent_frac = fitted_card_hist[ip][card].GetBinContent(binSearchHigh) * 0.20;
 
@@ -1429,7 +1266,6 @@ Double_t DC_calib::GetCardT0_alternative(Int_t ip, Int_t card)
       if (content.size() == 10)
 	{
 	  counts = 0;
-
 	  //  cout << "About to loop over 5 bins " << endl;
 	  for (Int_t j=0; j<10; j++)
 	    {
@@ -1441,10 +1277,8 @@ Double_t DC_calib::GetCardT0_alternative(Int_t ip, Int_t card)
 		  counts = counts + 1;
 		  if(counts >=8) {goto stop;}
 		} //end 'if' statement
-	      
 	      content.clear();
 	      bin_num.clear();
-
 	    } //end loop over 5 bin sample
 
 	} //end 'if' stmnt checking content size
@@ -1456,8 +1290,6 @@ Double_t DC_calib::GetCardT0_alternative(Int_t ip, Int_t card)
   card_T0 = fitted_card_hist[ip][card].GetXaxis()->GetBinCenter(bin_num[0]);
   //cout << "card_T0 = " << card_T0 << endl;
   return card_T0;
-
-
 }
 
 //___________________________________________________________________
@@ -1467,13 +1299,10 @@ void DC_calib::FitCardDriftTime()
 
   for (Int_t ip = 0; ip < NPLANES; ip++)
     {
-
       cout << "Plane : " << ip << endl;
-    
      //Loop over DC cards
       for (card = 0; card < plane_cards[ip]; card++)
 	{
-     
 	  cout << "card: " << card << endl;
 	  tZero_fit = new TF1("tZero_fit", "[0]*x + [1]", wireFitRangeLow[ip][card], wireFitRangeHigh[ip][card]);
        
@@ -1502,7 +1331,6 @@ void DC_calib::FitCardDriftTime()
 	  //Require sufficient events and NOT CRAZY! tzero values, otherwis, set t0 to ZERO
 	  if ((abs(-y_int/m) < std_dev*5.0 && m > 0.0 )  || entries_card[ip][card]>2000)
 	    {
-	 
 	      t_zero_card[ip][card] = - y_int/m ;
 	      t_zero_card_err[ip][card] = sqrt(y_int_err*y_int_err/(m*m) + y_int*y_int*m_err*m_err/(m*m*m*m) );
     
@@ -1513,9 +1341,7 @@ void DC_calib::FitCardDriftTime()
 		  t_zero_card_err[ip][card] = 0.0;
 		  //cout << "About to execute GetCardT0_alternative() " << endl;
 		  cout << "plane: " << ip << " :: card: " << card << "t_zero_card: " << GetCardT0_alternative(ip, card) << endl;
-		  
 		}
-
 	    }
 
 	  //ensure to assign card tzero values to zero, if card entries are not sufficient                                                                                                                            
@@ -1525,42 +1351,30 @@ void DC_calib::FitCardDriftTime()
 	      t_zero_card_err[ip][card] = 0.0;                                                                                                                           
 	      //cout << "About to execute GetCardT0_alternative() " << endl;                                                                                             
 	      cout << "plane: " << ip << " :: card: " << card << "t_zero_card: " << GetCardT0_alternative(ip, card) << endl;                       
-	    }                                                                                                                                                                                                         
-	  
+	    }                                                                                                                                                                                                     
 
-	      for(wire=1; wire<=nwires[ip]; wire++)
+	  for(wire=1; wire<=nwires[ip]; wire++)
+	    {
+	      if (wire >= wire_min[ip][card] && wire <=wire_max[ip][card]) //entries_card[ip][card]>max_wire_entry)
 		{
-   
-		  if (wire >= wire_min[ip][card] && wire <=wire_max[ip][card]) //entries_card[ip][card]>max_wire_entry)
-		    {
-		   
-		      t_zero[ip][wire-1] = t_zero_card[ip][card];
-		      t_zero_err[ip][wire-1] = t_zero_card_err[ip][card];
-		      t_zero_final[ip][wire-1] = t_zero_card[ip][card];                                                                                                                                                                      
-                                                                                                                                                                                                        
-		    } //end 'if' statement for wire group selection
-		
-		
-		  //ensure to assign wire tzero values to zero, if card entries are not sufficient
+		  t_zero[ip][wire-1] = t_zero_card[ip][card];
+		  t_zero_err[ip][wire-1] = t_zero_card_err[ip][card];
+		  t_zero_final[ip][wire-1] = t_zero_card[ip][card];                                                                                                                                                                } //end 'if' statement for wire group selection
+	       //ensure to assign wire tzero values to zero, if card entries are not sufficient
 		  //else if (wire >= wire_min[ip][card] && wire <=wire_max[ip][card] && t_zero_card_err[ip][card] > t0_err_thrs)//entries_card[ip][card] <= max_wire_entry)
 		  //{
 		  //  t_zero[ip][wire-1] = 0;
 		  //  t_zero_final[ip][wire-1] = 0;                                                                                   
 														                                                                                      
 		  //}
-		    
-		} //end wire loop
-
+	    } //end wire loop
 	}  //end loop over cards
-    
     } // end loop over planes
-
 } //end FitCardDriftTime() method
 
 //________________________________________________________________
 void DC_calib::Calculate_tZero()
 {
-  
   //CalcT0Historical();
 
   if (mode=="wire")
@@ -1574,11 +1388,8 @@ void DC_calib::Calculate_tZero()
    
       GetTwentyPercent_Card();
       FitCardDriftTime();
-     
     }
-
 }
-
 
 //__________________________________________________________________________
 void DC_calib::WriteTZeroParam()
@@ -1606,15 +1417,10 @@ void DC_calib::WriteTZeroParam()
        else if (wire==nwires[ip]-1) 
 	 {
 	   out_txtFILE << setprecision(6) << t_zero_final[ip][wire] << fixed << endl;
-     
-	   }
-       
+	 }
      } //END LOOP OVER WIRES
-
   } //END LOOP OVER PLANES
-  
   out_txtFILE.close();
-  
 } //end WriteTZeroParam() Method
 
 //_________________________________________________________________________________
@@ -1635,8 +1441,6 @@ void DC_calib::WriteLookUpTable()
 //Loop over each plane of hms/shms Drift Chambers (DC1 & DC2)
 
   for (int ip=0; ip<NPLANES; ip++){
-   
-    
     //Get bin corresponding to t0 = 0 ns
     bin_t0[ip] = plane_dt_corr[ip].GetXaxis()->FindBin(t_offset_firstbin);
    
@@ -1645,8 +1449,7 @@ void DC_calib::WriteLookUpTable()
    
     //Find total BIN Content over entire integration range
     binContent_TOTAL[ip] = 0.; //set counter to zero
-
-
+    
     for (int bin = bin_t0[ip]; bin <= bin_final[ip]; bin ++ ) {
      
       bin_Content[ip] = plane_dt_corr[ip].GetBinContent(bin);
@@ -1670,8 +1473,6 @@ void DC_calib::WriteLookUpTable()
      
       bin_Content[ip] = plane_dt_corr[ip].GetBinContent(bin);
       binSUM[ip] = binSUM[ip] + bin_Content[ip];
-     
-     
       lookup_value[ip] = binSUM[ip] / binContent_TOTAL[ip];
       bin_count = bin_count + 1;
      
@@ -1685,27 +1486,18 @@ void DC_calib::WriteLookUpTable()
       else {
 	out_txtFILE  << setprecision(5) << lookup_value[ip] <<  fixed << endl;	  
       }
-     
     } //END LOOP OVER plane drift time BINS
-
   } //END LOOP OVER PLANES                     
-
   out_txtFILE.close();
-
 } //end WriteLookUpTable() method
-
-
 
 //________________________________________________________________
 void DC_calib::WriteToFile(Int_t debug = 0)
 {
-
-  
   //create output ROOT file to write UnCALIB./CALIB. histos
   ofile_name = "./"+spec+"_DC_"+mode.c_str()+"Log_"+std::to_string(run_NUM) +"/"+spec+"_DC_driftimes.root";
   out_file   = new TFile(ofile_name, "RECREATE"); 
 
-  
   //***NOTE***  debug = 0 (OFF), 1 (ON)
   //-------------------------------------------------------------------
   if (debug == 1) 
@@ -1719,10 +1511,8 @@ void DC_calib::WriteToFile(Int_t debug = 0)
 	  //write histos to root file
 	  plane_dt[ip].Write();
 	}
-
-     
-
-   //------write corrected plane drift time histos to a directory on FILE--------
+      
+      //------write corrected plane drift time histos to a directory on FILE--------
       main_dir = out_file->mkdir("corr_plane_times");   
       main_dir->cd();
       
@@ -1732,130 +1522,113 @@ void DC_calib::WriteToFile(Int_t debug = 0)
 	  plane_dt_corr[ip].Write();
 	}      
       
-      
-  //----------------------------------------------------------------------
+      //----------------------------------------------------------------------
 
       if (mode=="wire")
 	{
-  //--------write uncorrected cell drift times histos to FILE-------- 
-   
-  main_dir = out_file->mkdir("uncorr_wire_times");
+	  //--------write uncorrected cell drift times histos to FILE-------- 
+	  main_dir = out_file->mkdir("uncorr_wire_times");
   
-    for (int ip=0; ip<NPLANES; ip++)
-      {
+	  for (int ip=0; ip<NPLANES; ip++)
+	    {
+	      // create planes sub-directories to store wire drift times
+	      (main_dir->mkdir("plane "+plane_names[ip], ""))->cd();
 	
-	// create planes sub-directories to store wire drift times
-	(main_dir->mkdir("plane "+plane_names[ip], ""))->cd();
-	
-	dt_vs_wire[ip].Write(); //write 2d drifttimet_vs_wire to FILE
-	
-	for (wire = 0; wire < nwires[ip]; wire++)
-	  {
-	    
-	    cell_dt[ip][wire].Write();   //Write wire driftimes to FILE
-	    
-	  }
-      
-     } //END LOOP OVER PLANES
+	      dt_vs_wire[ip].Write(); //write 2d drifttimet_vs_wire to FILE
+	      
+	      for (wire = 0; wire < nwires[ip]; wire++)
+		{
+		  cell_dt[ip][wire].Write();   //Write wire driftimes to FILE
+	   	}
+	    } //END LOOP OVER PLANES
 
-  //--------write corrected cell drift times histos to FILE-------- 
+	  //--------write corrected cell drift times histos to FILE-------- 
     
-  main_dir = out_file->mkdir("corr_wire_times");
+	  main_dir = out_file->mkdir("corr_wire_times");
   
-    for (int ip=0; ip<NPLANES; ip++)
-      {
-	
-	// create planes sub-directories to store wire drift times
-	(main_dir->mkdir("plane "+plane_names[ip], ""))->cd();
-	
-	dt_vs_wire_corr[ip].Write(); //write 2d drifttimet_vs_wire to FILE
-	
-	for (wire = 0; wire < nwires[ip]; wire++)
-	  {
-	    
-	    cell_dt_corr[ip][wire].Write();   //Write wire driftimes to FILE
-	    
-	  }
-      
-      } //END LOOP OVER PLANES
+	  for (int ip=0; ip<NPLANES; ip++)
+	    {
+	      // create planes sub-directories to store wire drift times
+	      (main_dir->mkdir("plane "+plane_names[ip], ""))->cd();
+	      
+	      dt_vs_wire_corr[ip].Write(); //write 2d drifttimet_vs_wire to FILE
+	      
+	      for (wire = 0; wire < nwires[ip]; wire++)
+		{
+		  cell_dt_corr[ip][wire].Write();   //Write wire driftimes to FILE
+		}
+	    } //END LOOP OVER PLANES
 
+	  //------------------------------------------------------------------------
 
- //------------------------------------------------------------------------
-
-   //-------Write Fitted Wire Drift Time histos to FILE----------------------------
+	  //-------Write Fitted Wire Drift Time histos to FILE----------------------------
   
 
-  main_dir = out_file->mkdir("fitted_wire_drift_times");
+	  main_dir = out_file->mkdir("fitted_wire_drift_times");
+	  
+	  for (int ip=0; ip<NPLANES; ip++)
+	    {
+	      // create planes sub-directories to store fitted wire drift times
+	      (main_dir->mkdir("plane "+plane_names[ip], ""))->cd();
+	      
+	      for (wire = 0; wire < nwires[ip]; wire++)
+		{
+		  fitted_cell_dt[ip][wire].Write();   //Write wire driftimes to FILE
+		}
+	    } //END LOOP OVER PLANES
   
-    for (int ip=0; ip<NPLANES; ip++)
-      {
-	
-	// create planes sub-directories to store fitted wire drift times
-	(main_dir->mkdir("plane "+plane_names[ip], ""))->cd();
-		
-	for (wire = 0; wire < nwires[ip]; wire++)
-	  {
-	    fitted_cell_dt[ip][wire].Write();   //Write wire driftimes to FILE
-	    
-	  }
-      
-      } //END LOOP OVER PLANES
-  
-    //-----Write 'tzero' values to a TEXT FILE--------------------
+	  //-----Write 'tzero' values to a TEXT FILE--------------------
     
-    //open a text FILE to write
-    for (int ip = 0; ip < NPLANES; ip++) 
-      {
-
-	otxtfile_name = Form("./%s_DC_%sLog_%d/t_zero_values_%s.dat", spec.c_str(), mode.c_str(), run_NUM, planes[ip].c_str());
-	out_txtFILE.open(otxtfile_name);
-	out_txtFILE << "#Plane_" + plane_names[ip] << endl;
-	out_txtFILE << "#Wire " << setw(12) << "tzero " << setw(12) << "t_zero_err " << setw(12) << "entries" << endl;
-	
-	for (wire = 0; wire < nwires[ip]; wire++) 
-	  {
-	    out_txtFILE << wire+1 << "    " << t_zero[ip][wire] << "     " << t_zero_err[ip][wire] << "             " << entries[ip][wire] << endl;
-	  }
-	
-	out_txtFILE.close();
-      
-      }
+	  //open a text FILE to write
+	  for (int ip = 0; ip < NPLANES; ip++) 
+	    {
+	      
+	      otxtfile_name = Form("./%s_DC_%sLog_%d/t_zero_values_%s.dat", spec.c_str(), mode.c_str(), run_NUM, planes[ip].c_str());
+	      out_txtFILE.open(otxtfile_name);
+	      out_txtFILE << "#Plane_" + plane_names[ip] << endl;
+	      out_txtFILE << "#Wire " << setw(12) << "tzero " << setw(12) << "t_zero_err " << setw(12) << "entries" << endl;
+	      
+	      for (wire = 0; wire < nwires[ip]; wire++) 
+		{
+		  out_txtFILE << wire+1 << "    " << t_zero[ip][wire] << "     " << t_zero_err[ip][wire] << "             " << entries[ip][wire] << endl;
+		}
+	      out_txtFILE.close();
+	    }
      
-//------------------------------------------------------------------------
+	  //------------------------------------------------------------------------
     
-    main_dir = out_file->mkdir("t0_vs_wire");
-    main_dir->cd();
-    
-    for (int ip=0; ip<NPLANES; ip++)
-      {
-	
-	//fit_tzero[ip] = new TF1(Form("fit%d", ip), "pol0", 1, nwires[ip]);
-	gr1_canv = new TCanvas("gr1", "", 2000, 500);
-	gr1_canv->SetGrid();
-	//write TGraph: tzero v. wire number to root file
-	itxtfile_name =  "./"+spec+"_DC_"+mode.c_str()+"Log_"+ std::to_string(run_NUM) +"/"+"t_zero_values_"+plane_names[ip]+".dat";
-	graph = new TGraphErrors(itxtfile_name, "%lg %lg %lg");
-	graph->SetName("graph");
-	
-	graph_title = "DC "+plane_names[ip]+": t0 vs. Wire";
-	graph->SetTitle(graph_title);
-	
-	graph->SetMarkerStyle(20);
-	graph->SetMarkerColor(1);
-	
-	graph->GetXaxis()->SetLimits(0., nwires[ip]);
-	graph->GetXaxis()->SetTitle("Wire Number");
-	graph->GetXaxis()->CenterTitle();
-	graph->GetYaxis()->SetTitle("t-Zero (ns)");
-	graph->GetYaxis()->CenterTitle();
-	graph->GetYaxis()->SetRangeUser(-50.0, 50.0);
-	
-	graph->Draw("AP");
-	gr1_canv->Update();
-	gr1_canv->Write(graph_title);   //write to a root file
+	  main_dir = out_file->mkdir("t0_vs_wire");
+	  main_dir->cd();
+	  
+	  for (int ip=0; ip<NPLANES; ip++)
+	    {
+	      //fit_tzero[ip] = new TF1(Form("fit%d", ip), "pol0", 1, nwires[ip]);
+	      gr1_canv = new TCanvas("gr1", "", 2000, 500);
+	      gr1_canv->SetGrid();
+	      //write TGraph: tzero v. wire number to root file
+	      itxtfile_name =  "./"+spec+"_DC_"+mode.c_str()+"Log_"+ std::to_string(run_NUM) +"/"+"t_zero_values_"+plane_names[ip]+".dat";
+	      graph = new TGraphErrors(itxtfile_name, "%lg %lg %lg");
+	      graph->SetName("graph");
+	      
+	      graph_title = "DC "+plane_names[ip]+": t0 vs. Wire";
+	      graph->SetTitle(graph_title);
+	      
+	      graph->SetMarkerStyle(20);
+	      graph->SetMarkerColor(1);
+	      
+	      graph->GetXaxis()->SetLimits(0., nwires[ip]);
+	      graph->GetXaxis()->SetTitle("Wire Number");
+	      graph->GetXaxis()->CenterTitle();
+	      graph->GetYaxis()->SetTitle("t-Zero (ns)");
+	      graph->GetYaxis()->CenterTitle();
+	      graph->GetYaxis()->SetRangeUser(-50.0, 50.0);
+	      
+	      graph->Draw("AP");
+	      gr1_canv->Update();
+	      gr1_canv->Write(graph_title);   //write to a root file
   
-	  }
-
+	    }
+	  
  
 	} //end "wire mode" 
 
@@ -1867,30 +1640,23 @@ void DC_calib::WriteToFile(Int_t debug = 0)
 	  
 	  for (int ip=0; ip<NPLANES; ip++)
 	    {
+	      // create planes sub-directories to store card drift times
+	      (main_dir->mkdir("plane "+plane_names[ip], ""))->cd();
+	
+	      dt_vs_wire[ip].Write(); //write 2d drifttimet_vs_wire to FILE
 	      
-	// create planes sub-directories to store card drift times
-	(main_dir->mkdir("plane "+plane_names[ip], ""))->cd();
-	
-	dt_vs_wire[ip].Write(); //write 2d drifttimet_vs_wire to FILE
-	
-	for (card = 0; card < plane_cards[ip]; card++)
-	  {
-	    
-	    card_hist[ip][card].Write();   //Write wire driftimes to FILE
-	    
-	  } //end card loop
-
+	      for (card = 0; card < plane_cards[ip]; card++)
+		{
+		  card_hist[ip][card].Write();   //Write wire driftimes to FILE
+		} //end card loop
 	    }//end plane loop
 
-	  
-
-    //--------write corrected CARD drift times histos to FILE--------
+	  //--------write corrected CARD drift times histos to FILE--------
    
 	  main_dir = out_file->mkdir("corr_card_times");
 	  
 	  for (int ip=0; ip<NPLANES; ip++)
 	    {
-	      
 	      // create planes sub-directories to store card drift times
 	      (main_dir->mkdir("plane "+plane_names[ip], ""))->cd();
 	      
@@ -1898,31 +1664,23 @@ void DC_calib::WriteToFile(Int_t debug = 0)
 	      
 	      for (card = 0; card < plane_cards[ip]; card++)
 		{
-		  
 		  corr_card_hist[ip][card].Write();   //Write wire driftimes to FILE
-		  
 		} //end card loop
-	      
 	    } //end plane loop
 	  
-	  
 	  //-------Write Fitted Card Drift Time histos to FILE----------------------------
-  
-
+	  
 	  main_dir = out_file->mkdir("fitted_card_drift_times");
 	  
 	  for (int ip=0; ip<NPLANES; ip++)
 	    {
-	      
 	      // create planes sub-directories to store fitted wire drift times
 	      (main_dir->mkdir("plane "+plane_names[ip], ""))->cd();
 	      
 	      for (card = 0; card < plane_cards[ip]; card++)
 		{
 		  fitted_card_hist[ip][card].Write();   //Write card driftimes to FILE
-		  
 		}
-	      
 	    } //end plane loop
 	  
 	  //-----Write 'tzero-per-card' values to a TEXT FILE--------------------
@@ -1940,16 +1698,9 @@ void DC_calib::WriteToFile(Int_t debug = 0)
 		{
 		  out_txtFILE << card << "    " << t_zero_card[ip][card] << "     " << t_zero_card_err[ip][card] << "             " << entries_card[ip][card] << endl;
 		} //end card loop
-	      
 	      out_txtFILE.close();
-	      
 	    } //end plane loop
-	  
-
 	} //end "card mode"
-      
     } //END DEBUG   
-  
-
 } //end WriteToFile() method
   

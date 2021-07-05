@@ -1,0 +1,8 @@
+0-6580
+g_ctp_parm_filename       = "DBASE/COIN/DCCalib_RP1.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+# KaonLT kinematics
+6581-99999
+g_ctp_parm_filename       = "DBASE/COIN/DCCalib_RP2.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"

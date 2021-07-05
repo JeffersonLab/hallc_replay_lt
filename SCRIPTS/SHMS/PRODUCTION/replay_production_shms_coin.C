@@ -1,4 +1,4 @@
-void replay_production_shms_coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
+void replay_production_shms_coin (Int_t RunNumber = 0, Int_t MaxEvent = 0, Int_t FirstEvent = 1) {
 
   // Get RunNumber and MaxEvent if not provided.
   if(RunNumber == 0) {
@@ -49,8 +49,8 @@ void replay_production_shms_coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   SHMS->AddEvtType(7);
   gHaApps->Add(SHMS);
   // Add Noble Gas Cherenkov to SHMS apparatus
-  THcCherenkov* ngcer = new THcCherenkov("ngcer", "Noble Gas Cherenkov");
-  SHMS->AddDetector(ngcer);
+  //THcCherenkov* ngcer = new THcCherenkov("ngcer", "Noble Gas Cherenkov");
+  //SHMS->AddDetector(ngcer);
   // Add drift chambers to SHMS apparatus
   THcDC* dc = new THcDC("dc", "Drift Chambers");
   SHMS->AddDetector(dc);
@@ -112,6 +112,16 @@ void replay_production_shms_coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pscaler->SetDelayedType(129);
   pscaler->SetUseFirstEvent(kTRUE);
   gHaEvtHandlers->Add(pscaler);
+
+  /*
+  //Add event handler for helicity scalers
+  THcHelicityScaler *phelscaler = new THcHelicityScaler("P", "Hall C helicity scaler");
+  //phelscaler->SetDebugFile("PHelScaler.txt");
+  phelscaler->SetROC(8);
+  phelscaler->SetUseFirstEvent(kTRUE);
+  gHaEvtHandlers->Add(phelscaler);
+  */
+
   // Add event handler for DAQ configuration event
   THcConfigEvtHandler *pconfig = new THcConfigEvtHandler("pconfig", "Hall C configuration event handler");
   gHaEvtHandlers->Add(pconfig);
@@ -136,7 +146,7 @@ void replay_production_shms_coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   run->SetRunParamClass("THcRunParameters");
   
   // Eventually need to learn to skip over, or properly analyze the pedestal events
-  run->SetEventRange(1, MaxEvent); // Physics Event number, does not include scaler or control events.
+  run->SetEventRange(FirstEvent, MaxEvent); // Physics Event number, does not include scaler or control events.
   run->SetNscan(1);
   run->SetDataRequired(0x7);
   run->Print();

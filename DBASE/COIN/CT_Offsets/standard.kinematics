@@ -1,0 +1,6716 @@
+# COIN
+# Need to set htheta_lab to a NEGATIVE value
+# Need to set ptheta_lab to a POSITIVE value
+# 1H   gtargmass_amu = 1.00794
+# 12C  gtargmass_amu = 12.0107
+# 27Al gtargmass_amu = 26.98  (Dummy target should be analyzed as 1H, since it is the background underneath)
+# ppartmass = 0.493677 for K+ physics production runs
+# ppartmass = 0.139570 for Pi+ physics production runs
+
+# Optics running
+
+4735-4736
+gpbeam = 10.600
+gtargmass_amu = 12.0107
+htheta_lab = -13.01
+ptheta_lab = 9.505
+hpcentral = 6.6
+ppcentral = 8.035
+ppartmass = 0.0005109
+hpartmass = 0.0005109 
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.030
+
+4737-4779
+gpbeam = 10.600
+gtargmass_amu = 12.0107
+htheta_lab = -13.01
+ptheta_lab = 9.505
+hpcentral = 6.6+6.6*0.0145
+ppcentral = 8.035
+ppartmass = 0.0005109
+hpartmass = 0.0005109 
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.030
+
+# Heep single
+
+4780-4784
+gpbeam = 10.588
+gtargmass_amu = 12.0107
+htheta_lab = -22.60
+ptheta_lab = 20.00
+hpcentral = 5.322
+ppcentral = 6.30
+ppartmass = 0.0005109
+hpartmass = 0.0005109 
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.030
+
+4785
+gpbeam = 10.588
+gtargmass_amu = 1.00794
+htheta_lab = -22.60
+ptheta_lab = 20.00
+hpcentral = 5.322
+ppcentral = 6.30
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.030
+
+#Golden Sieve Run 4686
+
+4786
+gpbeam = 10.588
+gtargmass_amu = 1.00794
+htheta_lab = -22.60
+ptheta_lab = 20.00
+hpcentral = 5.322
+ppcentral = 6.30
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.030
+
+#Beam pos check
+
+4787
+gpbeam = 10.588
+gtargmass_amu = 12.0107
+htheta_lab = -13.01
+ptheta_lab = 9.505
+hpcentral = 5.322
+ppcentral = 6.30
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.030
+
+#Heep single
+
+4788 - 4790
+gpbeam = 10.588
+gtargmass_amu = 1.00794
+htheta_lab = -24.17
+ptheta_lab = 18.00
+hpcentral = 5.322
+ppcentral = 6.842
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.030
+
+4791 - 4792
+gpbeam = 10.588
+gtargmass_amu = 1.00794
+htheta_lab = -24.17
+ptheta_lab = 16.25
+hpcentral = 5.322
+ppcentral = 6.842
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.030
+
+4793 - 4794
+gpbeam = 10.588
+gtargmass_amu = 1.00794
+htheta_lab = -24.17
+ptheta_lab = 19.85
+hpcentral = 5.322
+ppcentral = 6.842
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.030
+
+4795 - 4799
+gpbeam = 10.588
+gtargmass_amu = 1.00794
+htheta_lab = -24.17
+ptheta_lab = 13.80
+hpcentral = 5.322
+ppcentral = 6.842
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+
+4800 - 4801
+gpbeam = 10.588
+gtargmass_amu = 1.00794
+htheta_lab = -24.17
+ptheta_lab = 13.80
+hpcentral = 5.322
+ppcentral = 6.842
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.030
+
+4802 - 4804
+gpbeam = 10.588
+gtargmass_amu = 12.0107
+htheta_lab = -24.17
+ptheta_lab = 13.80
+hpcentral = 5.322
+ppcentral = 6.842
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.030
+
+4805 - 4813
+gpbeam = 10.588
+gtargmass_amu = 1.00794
+htheta_lab = -18.80
+ptheta_lab = 13.70
+hpcentral = 6.590
+ppcentral = 8.035
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.030
+
+4814 - 4817
+gpbeam = 10.588
+gtargmass_amu = 1.00794
+htheta_lab = -17.20
+ptheta_lab = 11.70
+hpcentral = 6.590
+ppcentral = 8.035
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.030
+
+4818 - 4820
+gpbeam = 10.588
+gtargmass_amu = 12.0107
+htheta_lab = -13.005
+ptheta_lab = 11.70
+hpcentral = 6.590
+ppcentral = 8.035
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.030
+
+4821 - 4825
+gpbeam = 10.588
+gtargmass_amu = 1.00794
+htheta_lab = -19.755
+ptheta_lab = 15.650
+hpcentral = 6.590
+ppcentral = 8.035
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.030
+
+4826
+gpbeam = 10.588
+gtargmass_amu = 12.0107
+htheta_lab = -13.00
+ptheta_lab = 15.650
+hpcentral = 6.590
+ppcentral = 8.035
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.030
+
+4827 - 4864
+gpbeam = 10.588
+gtargmass_amu = 1.00794
+htheta_lab = -18.845
+ptheta_lab = 26.147
+hpcentral = 6.590
+ppcentral = 4.840
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.030
+
+4865 - 4870
+gpbeam = 10.588
+gtargmass_amu = 1.00794
+htheta_lab = -11.91
+ptheta_lab = 15.18
+hpcentral = 6.590
+ppcentral = 3.486
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.030
+
+4871-4880
+gpbeam = 10.588
+gtargmass_amu = 1.00794
+htheta_lab = -11.91
+ptheta_lab = 18.18
+hpcentral = 6.590
+ppcentral = 3.486
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.119
+
+4881 - 4890
+gpbeam = 10.588
+gtargmass_amu = 1.00794
+htheta_lab = -11.91
+ptheta_lab = 21.180
+hpcentral = 6.590
+ppcentral = 3.486
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.113
+
+4891
+gpbeam = 10.588
+gtargmass_amu = 1.00794
+htheta_lab = -11.159
+ptheta_lab = 7.738
+hpcentral = 5.292
+ppcentral = 4.983
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.000
+
+4892 - 4912
+gpbeam = 10.588
+gtargmass_amu = 1.00794
+htheta_lab = -11.159
+ptheta_lab = 13.742
+hpcentral = 5.292
+ppcentral = 4.983
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.000
+
+4913 - 4924
+gpbeam = 10.588
+gtargmass_amu = 1.00794
+htheta_lab = -11.159
+ptheta_lab = 10.735
+hpcentral = 5.292
+ppcentral = 4.983
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.145
+
+4925 - 4939
+gpbeam = 10.588
+gtargmass_amu = 1.00794
+htheta_lab = -11.159
+ptheta_lab = 7.735
+hpcentral = 5.292
+ppcentral = 4.983
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.119
+
+4940 - 4944
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -11.159
+ptheta_lab = 7.735
+hpcentral = 5.292
+ppcentral = 4.983
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.119
+
+4945 - 4947
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -11.159
+ptheta_lab = 10.730
+hpcentral = 5.292
+ppcentral = 4.983
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.145
+
+4948 - 4959
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -11.159
+ptheta_lab = 7.73
+hpcentral = 5.292
+ppcentral = 4.983
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.119
+
+4960 - 4979
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -17.08
+ptheta_lab = 9.81
+hpcentral = 4.712
+ppcentral = 5.389
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.125
+
+4980 - 4998
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -17.08
+ptheta_lab = 12.81
+hpcentral = 4.712
+ppcentral = 5.389
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.050
+
+4999 - 5012
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -17.08
+ptheta_lab = 15.81
+hpcentral = 4.712
+ppcentral = 5.389
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -0.097
+
+5013 - 5037
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -14.93
+ptheta_lab = 12.46
+hpcentral = 4.204
+ppcentral = 6.053
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -0.040
+
+5038 - 5039
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -14.93
+ptheta_lab = 12.46
+hpcentral = 4.204
+ppcentral = 6.053
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.750
+
+5040 - 5046
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -14.93
+ptheta_lab = 9.42
+hpcentral = 4.204
+ppcentral = 6.053
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.750
+
+5047 - 5077
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -14.93
+ptheta_lab = 9.42
+hpcentral = 4.204
+ppcentral = 6.053
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.250
+
+5078 - 5123
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -14.93
+ptheta_lab = 6.495
+hpcentral = 4.204
+ppcentral = 6.053
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.290
+
+5124 - 5145
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -23.005
+ptheta_lab = 6.490
+hpcentral = 3.266
+ppcentral = 6.842
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.290
+
+5149 - 5153
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -12.53
+ptheta_lab = 6.495
+hpcentral = 3.266
+ppcentral = 6.842
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.290
+
+5154 - 5158
+gpbeam = 10.585
+gtargmass_amu = 12.0107
+htheta_lab = -12.53
+ptheta_lab = 6.495
+hpcentral = 3.266
+ppcentral = 6.842
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.290
+
+5159 - 5166
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -12.53
+ptheta_lab = 6.495
+hpcentral = 3.266
+ppcentral = 6.842
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.290
+
+5167 - 5173
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -14.93
+ptheta_lab = 6.495
+hpcentral = 4.204
+ppcentral = 6.053
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.290
+
+5174 - 5181
+gpbeam = 10.585
+gtargmass_amu = 12.0107
+htheta_lab = -14.93
+ptheta_lab = 6.495
+hpcentral = 4.204
+ppcentral = 6.053
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.290
+
+5182 - 5220
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -23.00
+ptheta_lab = 6.495
+hpcentral = 3.266
+ppcentral = 6.842
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.290
+
+5221 - 5233
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -23.00
+ptheta_lab = 9.552
+hpcentral = 3.266
+ppcentral = 6.842
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.290
+
+5234 - 5235
+gpbeam = 10.585
+gtargmass_amu = 12.0107
+htheta_lab = -23.00
+ptheta_lab = 9.552
+hpcentral = 3.266
+ppcentral = 6.842
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.290
+
+5236 - 5243
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -23.00
+ptheta_lab = 12.565
+hpcentral = 3.266
+ppcentral = 6.842
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.290
+
+5244 - 5248
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -23.00
+ptheta_lab = 12.565
+hpcentral = 3.266
+ppcentral = 6.842
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.680
+
+5249 - 5250
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -23.00
+ptheta_lab = 12.565
+hpcentral = 3.266
+ppcentral = 6.842
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.680
+
+5251 - 5261
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -23.00
+ptheta_lab = 9.555
+hpcentral = 3.266
+ppcentral = 6.842
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.680
+
+5262 - 5263
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -23.00
+ptheta_lab = 12.555
+hpcentral = 3.266
+ppcentral = 6.842
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.680
+
+5264
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -23.00
+ptheta_lab = 6.509
+hpcentral = 3.266
+ppcentral = 6.842
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.680
+
+5265 - 5270
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -23.00
+ptheta_lab = 9.560
+hpcentral = 3.266
+ppcentral = 6.842
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.680
+
+5271 - 5274
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -23.00
+ptheta_lab = 12.565
+hpcentral = 3.266
+ppcentral = 6.842
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.680
+
+5275 - 5294
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -23.00
+ptheta_lab = 6.500
+hpcentral = 3.266
+ppcentral = 6.842
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.680
+
+5295 - 5299
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -12.505
+ptheta_lab = 6.500
+hpcentral = 3.266
+ppcentral = 6.842
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.680
+
+5300 - 5303
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -14.91
+ptheta_lab = 6.500
+hpcentral = 4.204
+ppcentral = 6.053
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.680
+
+5304 - 5310
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -14.91
+ptheta_lab = 9.425
+hpcentral = 4.204
+ppcentral = 6.053
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.720
+
+5311 - 5312
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -14.91
+ptheta_lab = 12.42
+hpcentral = 4.204
+ppcentral = 6.053
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.720
+
+5313 - 5334
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -14.91
+ptheta_lab = 6.525
+hpcentral = 4.204
+ppcentral = 6.053
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.720
+
+5335
+gpbeam = 10.585
+gtargmass_amu = 1.00794
+htheta_lab = -13.50
+ptheta_lab = 13.50
+hpcentral = 6.269
+ppcentral = 6.269
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.720
+
+5336 - 6589
+gpbeam = 10.5965
+gtargmass_amu = 1.00794
+htheta_lab = -13.50
+ptheta_lab = 13.50
+hpcentral = 6.269
+ppcentral = 6.269
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.720
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -0.348
+
+6590
+gpbeam = 3.835
+gtargmass_amu = 1.00794
+htheta_lab = -21.12
+ptheta_lab = 21.12
+hpcentral = 3.007
+ppcentral = 3.007
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -0.348
+
+6591 - 6594
+gpbeam = 3.835
+gtargmass_amu = 12.0107
+htheta_lab = -21.12
+ptheta_lab = 21.12
+hpcentral = 3.007
+ppcentral = 3.007
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -0.348
+
+6595 - 6597
+gpbeam = 3.835
+gtargmass_amu = 1.00794
+htheta_lab = -21.12
+ptheta_lab = 21.12
+hpcentral = 3.007
+ppcentral = 3.007
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -0.348
+
+6598 - 6601
+gpbeam = 3.835
+gtargmass_amu = 1.00794
+htheta_lab = -23.989
+ptheta_lab = 23.980
+hpcentral = 2.834
+ppcentral = 2.834
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -0.348
+
+6602 - 6604
+gpbeam = 3.835
+gtargmass_amu = 1.00794
+htheta_lab = -25.985
+ptheta_lab = 25.970
+hpcentral = 2.713
+ppcentral = 2.713
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -0.348
+
+6605 - 6609
+gpbeam = 3.835
+gtargmass_amu = 1.00794
+htheta_lab = -28.185
+ptheta_lab = 28.180
+hpcentral = 2.583
+ppcentral = 2.583
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -0.348
+
+6610 - 6615
+gpbeam = 3.835
+gtargmass_amu = 1.00794
+htheta_lab = -29.985
+ptheta_lab = 30.000
+hpcentral = 2.478
+ppcentral = 2.478
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -0.348
+
+6616 - 6620
+gpbeam = 3.835
+gtargmass_amu = 12.0107
+htheta_lab = -38.600
+ptheta_lab = 9.50
+hpcentral = 2.026
+ppcentral = 3.007
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -0.348
+
+6621 - 6622
+gpbeam = 3.835
+gtargmass_amu = 1.00794
+ptheta_lab = 21.14
+htheta_lab = -38.60
+hpcentral = 2.026
+ppcentral = 3.007
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -0.348
+
+6623 - 6625
+gpbeam = 3.835
+gtargmass_amu = 1.00794
+ptheta_lab = 24.00
+htheta_lab = -38.60
+hpcentral = 2.026
+ppcentral = 2.834
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -0.348
+
+6626 - 6627
+gpbeam = 3.835
+gtargmass_amu = 1.00794
+ptheta_lab = 26.00
+htheta_lab = -38.60
+hpcentral = 2.026
+ppcentral = 2.713
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -0.348
+
+6628 - 6630
+gpbeam = 3.835
+gtargmass_amu = 1.00794
+ptheta_lab = 28.19
+htheta_lab = -38.60
+hpcentral = 2.026
+ppcentral = 2.583
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -0.348
+
+6631 - 6633
+gpbeam = 3.835
+gtargmass_amu = 1.00794
+ptheta_lab = 30.00
+htheta_lab = -38.60
+hpcentral = 2.026
+ppcentral = 2.478
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -0.348
+
+6634 - 6635
+gpbeam = 3.835
+gtargmass_amu = 1.00794
+ptheta_lab = 29.305
+htheta_lab = -38.60
+hpcentral = 2.026
+ppcentral = 2.583
+ppartmass = 0.93827231
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -0.348
+
+6636 - 6637
+gpbeam = 3.835
+gtargmass_amu = 1.00794
+ptheta_lab = 29.305
+htheta_lab = -38.60
+hpcentral = 2.026
+ppcentral = 2.583
+ppartmass = 0.93827231
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -0.348
+
+6638 - 6708
+gpbeam = 3.835
+gtargmass_amu = 1.00794
+ptheta_lab = 6.79
+htheta_lab = -21.14
+hpcentral = 0.968 
+ppcentral = 2.583
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -0.348
+
+6709 - 6730
+gpbeam = 3.835
+gtargmass_amu = 1.00794
+ptheta_lab = 9.79
+htheta_lab = -21.14
+hpcentral = 0.968 
+ppcentral = 2.583
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -0.320
+
+#OPTICS
+
+6731
+gpbeam = 3.835
+gtargmass_amu = 1.00794
+ptheta_lab = 9.79
+htheta_lab = -13.00
+hpcentral = 0.968 
+ppcentral = 2.583
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -0.348
+
+6732 - 6789
+gpbeam = 3.835
+gtargmass_amu = 1.00794
+ptheta_lab = 9.79
+htheta_lab = -21.14
+hpcentral = 0.968
+ppcentral = 2.583
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -0.348
+
+6790 - 6867
+gpbeam = 3.835
+gtargmass_amu = 1.00794
+ptheta_lab = 6.795
+htheta_lab = -21.135
+hpcentral = 0.968
+ppcentral = 2.583
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.628
+
+6868
+gpbeam = 4.933
+gtargmass_amu = 12.0107
+ptheta_lab = 9.496
+htheta_lab = -13.00
+hpcentral = 3.000
+ppcentral = 3.500
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.628
+
+#(Heep singles setting 1)
+6869 - 6872 
+gpbeam = 4.933
+gtargmass_amu = 1.00794
+ptheta_lab = 8.26
+htheta_lab = -12.71
+hpcentral = 4.371
+ppcentral = 4.642
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.628
+
+#(Heep singles setting 2)
+6873 - 6875
+gpbeam = 4.933
+gtargmass_amu = 1.00794
+ptheta_lab = 11.86
+htheta_lab = -15.00
+hpcentral = 4.184
+ppcentral = 4.436
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.628
+
+#(Heep singles setting 3)
+6876 - 6877 
+gpbeam = 4.933
+gtargmass_amu = 1.00794
+ptheta_lab = 15.00
+htheta_lab = -18.00
+hpcentral = 3.923
+ppcentral = 4.184
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.628
+
+#(Heep singles setting 4)
+6878 - 6880 
+gpbeam = 4.933
+gtargmass_amu = 1.00794
+ptheta_lab = 34.2
+htheta_lab = -34.2
+hpcentral = 2.583
+ppcentral = 2.583
+ppartmass = 0.0005109
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.628
+
+#(Heep coin setting)
+6881 - 6882 
+gpbeam = 4.933
+gtargmass_amu = 1.00794
+ptheta_lab = 33.5
+htheta_lab = -27.15
+hpcentral = 3.124
+ppcentral = 2.583
+ppartmass = 0.93827231
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.628
+
+#(Al(eep) coin setting)
+6883 
+gpbeam = 4.933
+gtargmass_amu = 1.00794 
+ptheta_lab = 33.5
+htheta_lab = -27.15
+hpcentral = 3.124
+ppcentral = 2.583
+ppartmass = 0.93827231
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.628
+
+#(P(eeK)lambda) centre
+6884 - 6920 
+gpbeam = 4.933
+gtargmass_amu = 1.00794
+ptheta_lab = 8.86
+htheta_lab = -12.71
+hpcentral = 2.066
+ppcentral = 2.583
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.320
+
+#(P(eeK)lambda) left
+6921 - 6947 
+gpbeam = 4.933
+gtargmass_amu = 1.00794
+ptheta_lab = 11.86
+htheta_lab = -12.71
+hpcentral = 2.066
+ppcentral = 2.583
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.320
+
+#(P(eeK)lambda) center
+6948 - 6971 
+gpbeam = 4.933
+gtargmass_amu = 1.00794
+ptheta_lab = 8.86
+htheta_lab = -12.71
+hpcentral = 2.066
+ppcentral = 2.583
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.320
+
+#(P(eeK)lambda) center
+6972 - 6978 
+gpbeam = 4.933
+gtargmass_amu = 1.00794
+ptheta_lab = 11.855
+htheta_lab = -12.71
+hpcentral = 2.066
+ppcentral = 2.583
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.320
+
+#(P(eeK)lambda) center
+6979 - 7102 
+gpbeam = 4.933
+gtargmass_amu = 1.00794
+ptheta_lab = 6.01
+htheta_lab = -12.71
+hpcentral = 2.066
+ppcentral = 2.583
+ppartmass = 0.493677
+hpartmass = 0.0005109
+helicity_freq = 29.5596
+Bunch_Spacing_Override = 2.004
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.340
+
+#### KaonLT Spring 19 6.2 GeV Calibration Runs
+
+# Cosmic
+7832 - 7839
+gpbeam = 6.19009
+gtargmass_amu = 1.00794
+hpcentral = 3.939
+ppcentral = 3.939
+htheta_lab = -9.5
+ptheta_lab = 13.0
+ppartmass = 0.493677
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.232
+
+# sieve
+7840
+gpbeam = 6.19009
+gtargmass_amu = 1.00794
+hpcentral = 3.939
+ppcentral = 3.939
+htheta_lab = -11.005
+ptheta_lab = 13.005
+ppartmass = 0.493677
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.232
+
+# lumi
+7841
+gpbeam = 6.19009
+gtargmass_amu = 12.0107
+hpcentral = 3.939
+ppcentral = 3.939
+htheta_lab = -11.005
+ptheta_lab = 13.005
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.232
+
+7842-7845
+gpbeam = 6.19009
+gtargmass_amu = 1.00794
+hpcentral = 3.939
+ppcentral = 3.939
+htheta_lab = -11.005
+ptheta_lab = 13.005
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.232
+
+7846-7847
+gpbeam = 6.19009
+gtargmass_amu = 12.0107
+hpcentral = 3.939
+ppcentral = 3.939
+htheta_lab = -11.005
+ptheta_lab = 13.005
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.232
+
+# HEEP Singles #1
+7848 - 7849
+gpbeam = 6.19009
+gtargmass_amu = 1.00794
+hpcentral = 3.939
+ppcentral = 3.939
+htheta_lab = -24.00
+ptheta_lab = 24.00
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.232
+
+# HEEP Singles #2
+7850 - 7854
+gpbeam = 6.19009
+gtargmass_amu = 1.00794
+hpcentral = 3.709
+ppcentral = 3.709
+htheta_lab = -26.005
+ptheta_lab = 26.005
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.232
+
+# HEEP Singles #3
+7855 - 7858
+gpbeam = 6.19009
+gtargmass_amu = 1.00794
+hpcentral = 3.491
+ppcentral = 3.491
+htheta_lab = -28.000
+ptheta_lab = 28.000
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.232
+
+# HEEP Singles #4
+7859 - 7861
+gpbeam = 6.19009
+gtargmass_amu = 1.00794
+hpcentral = 3.284
+ppcentral = 3.284
+htheta_lab = -30.000
+ptheta_lab = 29.995
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.232
+
+# lumi
+7862 - 7863
+gpbeam = 6.19009
+gtargmass_amu = 1.00794
+hpcentral = 3.939
+ppcentral = 3.939
+htheta_lab = -11.00
+ptheta_lab = 13.00
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.232
+
+7864-7865
+gpbeam = 6.19009
+gtargmass_amu = 12.0107
+hpcentral = 3.939
+ppcentral = 3.939
+htheta_lab = -11.00
+ptheta_lab = 13.00
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.232
+
+# Heep-coin
+7866 - 7868
+gpbeam = 6.19009
+gtargmass_amu = 1.00794
+hpcentral = 3.571
+ppcentral = 3.486
+htheta_lab = -27.25
+ptheta_lab = 28.53
+ppartmass = 0.938272
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.232
+
+# KaonLT Physics - low epsilon data
+7869 - 7880
+gpbeam = 6.19009
+gtargmass_amu = 1.00794
+hpcentral = 2.185
+ppcentral = 3.486
+htheta_lab = -27.25
+ptheta_lab = 13.28
+ppartmass =  0.493677
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.232
+
+# KaonLT Physics - SHMS Left 16.28 deg
+7881 - 7882
+gpbeam = 6.19009
+gtargmass_amu = 1.00794
+hpcentral = 2.185
+ppcentral = 3.486
+htheta_lab = -27.25
+ptheta_lab = 16.28
+ppartmass =  0.493677
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.235
+
+# KaonLT Physics - SHMS Left 16.28 deg
+7883 - 7888
+gpbeam = 6.19009
+gtargmass_amu = 1.00794
+hpcentral = 2.185
+ppcentral = 3.486
+htheta_lab = -27.25
+ptheta_lab = 16.28
+ppartmass =  0.493677
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.235
+
+# KaonLT Physics - Q=2.115 SHMS left 8.48 deg 
+7889 - 7908
+gpbeam = 6.19009
+gtargmass_amu = 1.00794
+hpcentral = 0.888
+ppcentral = 4.983
+htheta_lab = -36.15
+ptheta_lab = 8.48
+ppartmass =  0.493677
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.230
+
+# KaonLT Physics - Q=2.115 SHMS centre 6.20 deg 
+7909 - 7938
+gpbeam = 6.19009
+gtargmass_amu = 1.00794
+hpcentral = 0.888
+ppcentral = 4.983
+htheta_lab = -36.15
+ptheta_lab = 6.20
+ppartmass =  0.493677
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.197
+
+# KaonLT 8.2 GeV optics runs
+
+# Cosmics
+7939 - 7946
+gpbeam = 6.19009
+gtargmass_amu = 1.00794
+hpcentral = 5.745
+ppcentral = 5.745
+htheta_lab = -12.97
+ptheta_lab = 9.51
+ppartmass =  0.493677
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.197
+
+# Sieve
+7947
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 5.745
+ppcentral = 5.745
+htheta_lab = -12.97
+ptheta_lab = 9.51
+ppartmass =  0.493677
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.197
+
+# Lumi scan - Carbon
+7948 - 7953
+gpbeam = 8.210
+gtargmass_amu = 12.0107
+hpcentral = 5.745
+ppcentral = 5.745
+htheta_lab = -12.97
+ptheta_lab = 9.51
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.197
+
+# Lumi scan - LH2
+7954 - 7961
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 5.745
+ppcentral = 5.745
+htheta_lab = -12.97
+ptheta_lab = 9.51
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.197
+
+# Elastic Singles # 1
+7962 - 7963
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 5.745
+ppcentral = 5.745
+htheta_lab = -17.98
+ptheta_lab = 18.01
+ppartmass =  0.000511
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.197
+
+# Elastic Singles # 2
+7964 - 7965
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 5.3720
+ppcentral = 5.3720
+htheta_lab = -20.005
+ptheta_lab = 19.995
+ppartmass =  0.000511
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.197
+
+# Elastic Singles # 3
+7966 - 7967
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 5.013
+ppcentral = 5.013
+htheta_lab = -22.005
+ptheta_lab = 21.995
+ppartmass =  0.000511
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.197
+
+# Elastic Singles # 4
+7968 - 7969
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 4.672
+ppcentral = 4.672
+htheta_lab = -23.995
+ptheta_lab = 23.995
+ppartmass =  0.000511
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.197
+
+# Elastic Singles # 5
+7970 - 7972
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 4.352
+ppcentral = 4.352
+htheta_lab = -26.000
+ptheta_lab = 26.000
+ppartmass =  0.000511
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.197
+
+# Heep coin data 
+
+7973 - 7977
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 4.672
+ppcentral = 4.371
+htheta_lab = -24.00
+ptheta_lab = 25.775
+ppartmass =  0.938272
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.197
+
+# Kaon L-T Physics
+
+7978 - 7993
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 2.328
+ppcentral = 5.389
+htheta_lab = -27.77
+ptheta_lab = 10.005
+ppartmass =  0.493677
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 2.050
+
+7994 - 8002
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 2.328
+ppcentral = 5.389
+htheta_lab = -27.77
+ptheta_lab = 10.005
+ppartmass =  0.493677
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 4.000
+
+# Kaon L-T Physics
+
+8003 - 8037
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 2.328
+ppcentral = 5.389
+htheta_lab = -27.77
+ptheta_lab = 13.010
+ppartmass =  0.493677
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.061
+
+8038 - 8048
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 1.8210
+ppcentral = 6.0530
+htheta_lab = -25.895
+ptheta_lab = 6.910
+ppartmass =  0.493677
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.020
+
+8049 - 8110
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 1.8210
+ppcentral = 6.0530
+htheta_lab = -25.895
+ptheta_lab = 6.910
+ppartmass =  0.493677
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.950
+
+8111 - 8179
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 1.8210
+ppcentral = 6.0530
+htheta_lab = -25.895
+ptheta_lab = 9.909
+ppartmass =  0.493677
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.950
+
+8180 - 8185
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 1.8210
+ppcentral = 6.0530
+htheta_lab = -25.895
+ptheta_lab = 9.909
+ppartmass =  0.493677
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.050
+
+8186 - 8246
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 0.962
+ppcentral = 6.755
+htheta_lab = -49.308
+ptheta_lab = 8.498
+ppartmass =  0.493677
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.050
+
+8251 - 8303
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 0.962
+ppcentral = 6.755
+htheta_lab = -49.308
+ptheta_lab = 6.205
+ppartmass =  0.493677
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.020
+
+8304 - 8313
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 0.962
+ppcentral = 6.755
+htheta_lab = -49.308
+ptheta_lab = 6.205
+ppartmass =  0.493677
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0.030
+
+8314 - 8367
+gpbeam = 8.210
+gtargmass_amu = 1.00794
+hpcentral = 0.962
+ppcentral = 6.755
+htheta_lab = -49.308
+ptheta_lab = 6.205
+ppartmass =  0.493677
+hpartmass = 0.000511
+helicity_freq = 29.5596
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+################ Pion Electrproduction Runs #################
+################ Summer 2019 ################################
+
+# Beam checkout/calibration runs / Carbon Hole
+8368 - 8372
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 1.500
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 9.499
+ppartmass =  0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# Carbon 1.5%, PID legs checkout
+8373 - 8374
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 1.500
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 9.499
+ppartmass =  0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# Carbon Sieve
+8375 - 8376
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 1.500
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 9.499
+ppartmass =  0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# Carbon 1.5, pid legs
+8377 - 8386
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 0.448
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 9.499
+ppartmass =  0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# Carbon 1.5, sieve runs
+8387 - 8391
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 0.448
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 9.499
+ppartmass =  0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# Optics 1, sieve runs
+8392 - 8395
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 0.800
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 9.499
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# Optics 1, sieve runs
+8396 - 8402
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 1.000
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 9.499
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# Optics 1, shms pointing scan
+8403 - 8404
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 1.000
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 7.598
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# Optics 1, shms pointing scan 2
+8405 - 8406
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 1.000
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 10.990
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# Optics 1, shms pointing scan 3
+8407 - 8408
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 1.000
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 12.990
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# Optics 1, shms pointing scan 4
+8409 - 8409
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 1.000
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 14.990
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# Optics 1, shms pointing scan 5
+8410 - 8411
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 1.000
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 16.990
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# Optics 1, shms pointing scan 6
+8412 - 8413
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 1.000
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 19.985
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# Optics 1, shms pointing scan 7
+8414 - 8416
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 1.000
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 24.984
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# Optics 1, shms pointing scan 8
+8417 - 8419
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 1.000
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 29.967
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# Optics 1, shms pointing scan 9
+8420 - 8421
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 1.000
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 34.995
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+ 
+# Optics 1, shms pointing scan 10
+8422-8425
+gpbeam = 2.783
+gtargmass_amu = 12.0107
+hpcentral = 1.000
+ppcentral = 1.500
+htheta_lab = -11.50
+ptheta_lab = 38.795
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+#optics 1, hms pointing scan 10
+8426-8440
+gpbeam = 2.775
+gtargmass_amu = 12.0107
+hpcentral = 1.500
+ppcentral = 2.77
+htheta_lab = -13.50
+ptheta_lab = 6.00
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+8441-8443
+gpbeam = 2.775
+gtargmass_amu = 12.0107
+hpcentral = 1.500
+ppcentral = 2.77
+htheta_lab = -15.50
+ptheta_lab = 6.00
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+8444-8445
+gpbeam = 2.775
+gtargmass_amu = 12.0107
+hpcentral = 1.500
+ppcentral = 2.77
+htheta_lab = -17.50
+ptheta_lab = 6.00
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+8446-8446
+gpbeam = 2.775
+gtargmass_amu = 12.0107
+hpcentral = 1.500
+ppcentral = 2.77
+htheta_lab = -20.00
+ptheta_lab = 6.00
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+8447-8447
+gpbeam = 2.775
+gtargmass_amu = 12.0107
+hpcentral = 1.500
+ppcentral = 2.77
+htheta_lab = -25.00
+ptheta_lab = 6.00
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+8448-8450
+gpbeam = 2.775
+gtargmass_amu = 12.0107
+hpcentral = 1.500
+ppcentral = 2.77
+htheta_lab = -30.00
+ptheta_lab = 6.00
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+8451-8453
+gpbeam = 2.775
+gtargmass_amu = 12.0107
+hpcentral = 1.500
+ppcentral = 2.630
+htheta_lab = -35.05
+ptheta_lab = 6.00
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+8454-8454
+gpbeam = 2.775
+gtargmass_amu = 12.0107
+hpcentral = 1.500
+ppcentral = 2.500
+htheta_lab = -35.05
+ptheta_lab = 6.00
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+8455-8455
+gpbeam = 2.775
+gtargmass_amu = 12.0107
+hpcentral = 1.500
+ppcentral = 2.370
+htheta_lab = -35.05
+ptheta_lab = 6.00
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+#Lumi Scans
+
+8456-8473
+gpbeam = 2.758
+gtargmass_amu = 12.0107
+hpcentral = 1.500
+ppcentral = 1.500
+htheta_lab = -11.505
+ptheta_lab = 9.500
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+8474-8480
+gpbeam = 2.758
+gtargmass_amu = 1.00794
+hpcentral = 1.500
+ppcentral = 1.500
+htheta_lab = -11.505
+ptheta_lab = 9.50
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+8481
+gpbeam = 2.758
+gtargmass_amu = 1.00794
+hpcentral = 1.500
+ppcentral = 1.500
+htheta_lab = -11.505
+ptheta_lab = 9.50
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+#Heep
+
+8482-8483
+gpbeam = 2.749
+gtargmass_amu = 1.00794
+hpcentral = 2.6170
+ppcentral = 2.6040
+htheta_lab = -11.505
+ptheta_lab = 11.090
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+8484-8486
+gpbeam = 2.749
+gtargmass_amu = 1.00794
+hpcentral = 2.573
+ppcentral = 2.573
+htheta_lab = -13.005
+ptheta_lab = 13.005
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+8487-8489
+gpbeam = 2.749
+gtargmass_amu = 1.00794
+hpcentral = 2.501
+ppcentral = 2.501
+htheta_lab = 15.23
+ptheta_lab = 15.22
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+8490-8491
+gpbeam = 2.749
+gtargmass_amu = 1.00794
+hpcentral = 2.30
+ppcentral = 2.30
+htheta_lab = 21.20
+ptheta_lab = 21.20
+ppartmass = 0.000511
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+#Q2 = 0.375 centre
+8492-8508
+gpbeam = 2.749
+gtargmass_amu = 1.00794
+hpcentral = 0.448
+ppcentral = 2.30
+htheta_lab = -31.97
+ptheta_lab = 5.70
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+#Q2 = 0.425 centre
+8509-8516
+gpbeam = 2.749
+gtargmass_amu = 1.00794
+hpcentral = 0.421
+ppcentral = 2.326
+htheta_lab = -35.19
+ptheta_lab = 5.70
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+#Q2 = 0.425 left 1
+8517-8528
+gpbeam = 2.749
+gtargmass_amu = 1.00794
+hpcentral = 0.421
+ppcentral = 2.326
+htheta_lab = -35.175
+ptheta_lab = 7.75
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+#Q2 = 0.425 left 2
+8529-8536
+gpbeam = 2.749
+gtargmass_amu = 1.00794
+hpcentral = 0.421
+ppcentral = 2.326
+htheta_lab = -35.175
+ptheta_lab = 9.740
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+#Q2 = 0.375 left 2
+8537-8542
+gpbeam = 2.749
+gtargmass_amu = 1.00794
+hpcentral = 0.448
+ppcentral = 2.300
+htheta_lab = -31.965
+ptheta_lab = 9.705
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+#Q2 = 0.375 left 1
+8543-8547
+gpbeam = 2.749
+gtargmass_amu = 1.00794
+hpcentral = 0.448
+ppcentral = 2.300
+htheta_lab = -31.965
+ptheta_lab = 7.695
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# HeeP Coin
+8548 - 8551
+gpbeam = 2.749
+gtargmass_amu = 1.00794
+hpcentral = 1.729
+ppcentral = 1.729
+htheta_lab = -37.10
+ptheta_lab = 37.105
+ppartmass = 0.93827231
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# elastic singles junk
+8552 - 8556
+gpbeam = 2.749
+gtargmass_amu = 1.00794
+hpcentral = 2.3000
+ppcentral = 2.3000
+htheta_lab = -21.195
+ptheta_lab = 21.195
+ppartmass = 0.93827231
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# elastic singles
+8557 - 8559
+gpbeam = 2.749
+gtargmass_amu = 1.00794
+hpcentral = 1.964
+ppcentral = 1.964
+htheta_lab = -30.395
+ptheta_lab = 30.405
+ppartmass = 0.93827231
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# elastic singles
+8560 - 8565
+gpbeam = 2.749
+gtargmass_amu = 1.00794
+hpcentral = 1.8480
+ppcentral = 1.8480
+htheta_lab = -33.640
+ptheta_lab = 33.645
+ppartmass = 0.93827231
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+
+# Heep singles
+8566 - 8568
+gpbeam = 2.749
+gtargmass_amu = 1.00794
+hpcentral = 2.3000
+ppcentral = 2.3000
+htheta_lab = - 21.200
+ptheta_lab = 21.200
+ppartmass = 0.93827231
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 3.6 GeV Heep
+8569 - 8572
+gpbeam = 3.660
+gtargmass_amu = 1.00794
+hpcentral = 2.114
+ppcentral = 2.300
+htheta_lab = - 35.65
+ptheta_lab = 32.395
+ppartmass = 0.93827231
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 3.6 GeV Q2 = 1.45
+8573 - 8582
+gpbeam = 3.660
+gtargmass_amu = 1.00794
+hpcentral = 1.182
+ppcentral = 2.412
+htheta_lab = - 33.64
+ptheta_lab = 11.755
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 3.6 GeV Q2 = 1.45
+8583 - 8584
+gpbeam = 3.660
+gtargmass_amu = 1.00794
+hpcentral = 1.182
+ppcentral = 2.412
+htheta_lab = - 33.64
+ptheta_lab = 13.755
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 3.6 GeV Q2 = 0.375
+8585 - 8611
+gpbeam = 3.660
+gtargmass_amu = 1.00794
+hpcentral = 1.35
+ppcentral = 2.3
+htheta_lab = - 15.83
+ptheta_lab = 5.75
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 3.6 GeV Q2 = 0.375
+8612 - 8619
+gpbeam = 3.660
+gtargmass_amu = 1.00794
+hpcentral = 1.35
+ppcentral = 2.3
+htheta_lab = -15.83
+ptheta_lab = 6.87   
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 3.6 GeV Q2 = 0.375
+8620 - 8620
+gpbeam = 3.660
+gtargmass_amu = 1.00794
+hpcentral = 1.35
+ppcentral = 2.3
+htheta_lab = -15.83
+ptheta_lab = 8.87   
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 3.6 GeV Q2 = 0.375
+8621 - 8627
+gpbeam = 3.660
+gtargmass_amu = 1.00794
+hpcentral = 1.35
+ppcentral = 2.3
+htheta_lab = -15.83
+ptheta_lab = 8.87   
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 3.6 GeV Q2 = 0.375
+8628 - 8637
+gpbeam = 3.660
+gtargmass_amu = 1.00794
+hpcentral = 1.35
+ppcentral = 2.3
+htheta_lab = -15.83
+ptheta_lab = 10.87   
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 3.6 GeV Q2 = 0.375
+8638 - 8654
+gpbeam = 3.660
+gtargmass_amu = 1.00794
+hpcentral = 1.35
+ppcentral = 2.3
+htheta_lab = -15.83
+ptheta_lab = 12.87   
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 3.6 GeV Q2 = 1.45
+8655 - 8670
+gpbeam = 3.660
+gtargmass_amu = 1.00794
+hpcentral = 1.182
+ppcentral = 2.412
+htheta_lab = -33.640
+ptheta_lab = 13.760   
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 3.6 GeV Q2 = 1.45
+8671 - 8680
+gpbeam = 3.660
+gtargmass_amu = 1.00794
+hpcentral = 1.182
+ppcentral = 2.412
+htheta_lab = -33.640
+ptheta_lab = 15.76   
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 3.6 GeV Q2=1.45 th=15.76
+8681 - 8689
+gpbeam = 3.650
+gtargmass_amu = 1.00794
+hpcentral = 1.3230
+ppcentral = 2.3260
+htheta_lab = -17.025
+ptheta_lab = 9.200   
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 3.6 GeV Q2 = 1.45
+8690 - 8696
+gpbeam = 3.660
+gtargmass_amu = 1.00794
+hpcentral = 1.3230
+ppcentral = 2.3260
+htheta_lab = -17.025
+ptheta_lab = 11.20   
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 3.6 GeV Q2 = 1.45
+8697 - 8700
+gpbeam = 3.660
+gtargmass_amu = 1.00794
+hpcentral = 1.3230
+ppcentral = 2.3260
+htheta_lab = -17.025
+ptheta_lab = 13.20   
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 4.5 GeV Q2 = 0.33 
+8701 - 8710
+gpbeam = 4.559
+gtargmass_amu = 1.00794
+hpcentral = 2.252
+ppcentral = 2.300
+htheta_lab = -10.965
+ptheta_lab = 7.645
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 4.5 GeV Q2 = 0.33 
+8711 - 8719
+gpbeam = 4.559
+gtargmass_amu = 1.00794
+hpcentral = 2.252
+ppcentral = 2.300
+htheta_lab = -10.965
+ptheta_lab = 10.325
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 4.5 GeV Q2 = 0.33 
+8720 - 8725
+gpbeam = 4.559
+gtargmass_amu = 1.00794
+hpcentral = 2.252
+ppcentral = 2.300
+htheta_lab = -10.965
+ptheta_lab = 12.34
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 4.5 GeV Q2 = 0.375
+8726 - 8731
+gpbeam = 4.559
+gtargmass_amu = 1.00794
+hpcentral = 2.252
+ppcentral = 2.300
+htheta_lab = -10.965
+ptheta_lab = 14.325
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 4.5 GeV Q2 = 0.425
+8732 - 8743
+gpbeam = 4.559
+gtargmass_amu = 1.00794
+hpcentral = 2.226
+ppcentral = 2.326
+htheta_lab = -11.745
+ptheta_lab = 6.870
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 4.5 GeV Q2 = 0.425
+8744 - 8757
+gpbeam = 4.559
+gtargmass_amu = 1.00794
+hpcentral = 2.226
+ppcentral = 2.326
+htheta_lab = -11.745
+ptheta_lab = 8.075
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 4.5 GeV Q2 = 0.425
+8758 - 8762
+gpbeam = 4.559
+gtargmass_amu = 1.00794
+hpcentral = 2.226
+ppcentral = 2.326
+htheta_lab = -11.745
+ptheta_lab = 10.075
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 4.5 GeV Q2 = 0.425
+8763 - 8767
+gpbeam = 4.559
+gtargmass_amu = 1.00794
+hpcentral = 2.226
+ppcentral = 2.326
+htheta_lab = -11.745
+ptheta_lab = 12.075
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 4.5 GeV Q2 = 0.425
+8768 - 8774
+gpbeam = 4.559
+gtargmass_amu = 1.00794
+hpcentral = 2.226
+ppcentral = 2.326
+htheta_lab = -11.745
+ptheta_lab = 14.08
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 4.5 GeV Heep COIN
+8775 - 8779
+gpbeam = 4.559
+gtargmass_amu = 1.00794
+hpcentral = 2.553*.997
+ppcentral = 2.792
+htheta_lab = -33.05
+ptheta_lab = 29.90
+ppartmass = 0.93827
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 4.5 GeV Q2 = 0.425 
+8780 - 8784
+gpbeam = 4.559
+gtargmass_amu = 1.00794
+hpcentral = 1.662
+ppcentral = 2.792
+htheta_lab = -30.65
+ptheta_lab = 15.14
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+ 
+# 4.5 GeV Q2 = 0.425 
+8785 - 8789
+gpbeam = 4.559
+gtargmass_amu = 1.00794
+hpcentral = 1.662
+ppcentral = 2.792
+htheta_lab = -30.65
+ptheta_lab = 17.13
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 4.5 GeV Q2 = 0.425 
+8790 - 8796
+gpbeam = 4.559
+gtargmass_amu = 1.00794
+hpcentral = 1.662
+ppcentral = 2.792
+htheta_lab = -30.65
+ptheta_lab = 13.140
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 4.5 GeV Q2 = 0.425 
+8797 - 8798
+gpbeam = 4.559
+gtargmass_amu = 1.00794
+hpcentral = 1.662
+ppcentral = 2.792
+htheta_lab = -30.65
+ptheta_lab = 15.14
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 4.5 GeV Q2 = 0.425 
+8799 - 8801
+gpbeam = 4.559
+gtargmass_amu = 1.00794
+hpcentral = 1.662
+ppcentral = 2.792
+htheta_lab = -30.65
+ptheta_lab = 17.135
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 4.5 GeV Q2 = 0.425 
+8802 - 8804
+gpbeam = 4.559
+gtargmass_amu = 1.00794
+hpcentral = 1.662
+ppcentral = 2.792
+htheta_lab = -30.65
+ptheta_lab = 13.14
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 4.5 GeV Q2 = 0.425 
+8805 - 8805
+gpbeam = 4.559
+gtargmass_amu = 1.00794
+hpcentral = 1.662
+ppcentral = 2.792
+htheta_lab = -30.65
+ptheta_lab = 15.14
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 4.5 GeV Q2 = 0.425 
+8806 - 8806
+gpbeam = 4.559
+gtargmass_amu = 1.00794
+hpcentral = 1.662
+ppcentral = 2.792
+htheta_lab = -30.65
+ptheta_lab = 17.13
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 4.5 GeV Q2 = 0.425 
+8807-8807
+gpbeam = 4.559
+gtargmass_amu = 1.00794
+hpcentral = 1.662
+ppcentral = 2.792
+htheta_lab = -30.65
+ptheta_lab = 13.14
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 4.5 GeV Q2 = 0.425 
+8808 - 8810
+gpbeam = 4.559
+gtargmass_amu = 1.00794
+hpcentral = 1.662
+ppcentral = 2.792
+htheta_lab = -30.65
+ptheta_lab = 15.14
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 4.5 GeV Q2 = 0.425 
+8811 - 8812
+gpbeam = 4.559
+gtargmass_amu = 1.00794
+hpcentral = 1.662
+ppcentral = 2.792
+htheta_lab = -30.65
+ptheta_lab = 17.13
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+# 4.5 GeV Q2 = 0.425 
+8813 - 8976
+gpbeam = 4.559
+gtargmass_amu = 1.00794
+hpcentral = 1.662
+ppcentral = 2.792
+htheta_lab = -30.65
+ptheta_lab = 13.14
+ppartmass = 0.139570
+hpartmass = 0.000511
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+#VCS Runs for HGC test
+8977 - 9999
+gpbeam = 4.55
+gtargmass_amu = 1.00794
+htheta_lab = -37.33
+ptheta_lab = 7.69
+hpcentral = 0.893
+ppcentral = 4.034
+ppartmass = 0.000511
+hpartmass = 0.938272
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+
+4865
+eHadCoinTime_Offset = 47.307
+
+4866
+eHadCoinTime_Offset = 47.357
+
+4867
+eHadCoinTime_Offset = 47.327
+
+4868
+eHadCoinTime_Offset = 47.282
+
+4871
+eHadCoinTime_Offset = 44.704
+
+4873
+eHadCoinTime_Offset = 44.714
+
+4874
+eHadCoinTime_Offset = 44.730
+
+4875
+eHadCoinTime_Offset = 44.398
+
+4876
+eHadCoinTime_Offset = 44.423
+
+4877
+eHadCoinTime_Offset = 44.338
+
+4878
+eHadCoinTime_Offset = 44.408
+
+4879
+eHadCoinTime_Offset = 44.380
+
+4882
+eHadCoinTime_Offset = 44.394
+
+4884
+eHadCoinTime_Offset = 44.429
+
+4885
+eHadCoinTime_Offset = 44.473
+
+4887
+eHadCoinTime_Offset = 44.321
+
+4888
+eHadCoinTime_Offset = 44.373
+
+4889
+eHadCoinTime_Offset = 44.441
+
+4890
+eHadCoinTime_Offset = 44.467
+
+4892
+eHadCoinTime_Offset = 44.396
+
+4893
+eHadCoinTime_Offset = 44.412
+
+4894
+eHadCoinTime_Offset = 44.497
+
+4895
+eHadCoinTime_Offset = 44.570
+
+4896
+eHadCoinTime_Offset = 44.555
+
+4897
+eHadCoinTime_Offset = 44.570
+
+4898
+eHadCoinTime_Offset = 44.512
+
+4899
+eHadCoinTime_Offset = 44.506
+
+4900
+eHadCoinTime_Offset = 44.528
+
+4901
+eHadCoinTime_Offset = 44.657
+
+4904
+eHadCoinTime_Offset = 44.448
+
+4905
+eHadCoinTime_Offset = 44.538
+
+4906
+eHadCoinTime_Offset = 44.548
+
+4907
+eHadCoinTime_Offset = 44.543
+
+4908
+eHadCoinTime_Offset = 44.512
+
+4909
+eHadCoinTime_Offset = 44.522
+
+4914
+eHadCoinTime_Offset = 44.530
+
+4916
+eHadCoinTime_Offset = 44.522
+
+4917
+eHadCoinTime_Offset = 44.532
+
+4918
+eHadCoinTime_Offset = 44.542
+
+4919
+eHadCoinTime_Offset = 44.560
+
+4920
+eHadCoinTime_Offset = 44.525
+
+4921
+eHadCoinTime_Offset = 44.532
+
+4922
+eHadCoinTime_Offset = 44.483
+
+4923
+eHadCoinTime_Offset = 44.518
+
+4924
+eHadCoinTime_Offset = 44.452
+
+4925
+eHadCoinTime_Offset = 44.342
+
+4926
+eHadCoinTime_Offset = 44.381
+
+4927
+eHadCoinTime_Offset = 44.388
+
+4928
+eHadCoinTime_Offset = 44.406
+
+4929
+eHadCoinTime_Offset = 44.365
+
+4930
+eHadCoinTime_Offset = 44.394
+
+4931
+eHadCoinTime_Offset = 44.313
+
+4932
+eHadCoinTime_Offset = 44.376
+
+4933
+eHadCoinTime_Offset = 44.419
+
+4934
+eHadCoinTime_Offset = 44.253
+
+4935
+eHadCoinTime_Offset = 44.321
+
+4936
+eHadCoinTime_Offset = 44.346
+
+4937
+eHadCoinTime_Offset = 44.367
+
+4938
+eHadCoinTime_Offset = 44.383
+
+4939
+eHadCoinTime_Offset = 44.390
+
+4943
+eHadCoinTime_Offset = 44.367
+
+4944
+eHadCoinTime_Offset = 44.382
+
+4945
+eHadCoinTime_Offset = 44.458
+
+4946
+eHadCoinTime_Offset = 44.451
+
+4947
+eHadCoinTime_Offset = 44.424
+
+4948
+eHadCoinTime_Offset = 44.331
+
+4949
+eHadCoinTime_Offset = 44.271
+
+4950
+eHadCoinTime_Offset = 44.315
+
+4951
+eHadCoinTime_Offset = 44.342
+
+4952
+eHadCoinTime_Offset = 44.297
+
+4953
+eHadCoinTime_Offset = 44.302
+
+4954
+eHadCoinTime_Offset = 44.299
+
+4955
+eHadCoinTime_Offset = 44.253
+
+4956
+eHadCoinTime_Offset = 44.281
+
+4957
+eHadCoinTime_Offset = 44.255
+
+4958
+eHadCoinTime_Offset = 44.285
+
+4959
+eHadCoinTime_Offset = 44.263
+
+4965
+eHadCoinTime_Offset = 44.319
+
+4966
+eHadCoinTime_Offset = 44.351
+
+4967
+eHadCoinTime_Offset = 44.294
+
+4968
+eHadCoinTime_Offset = 44.324
+
+4969
+eHadCoinTime_Offset = 44.344
+
+4970
+eHadCoinTime_Offset = 44.235
+
+4971
+eHadCoinTime_Offset = 44.265
+
+4972
+eHadCoinTime_Offset = 44.290
+
+4973
+eHadCoinTime_Offset = 44.197
+
+4974
+eHadCoinTime_Offset = 44.221
+
+4975
+eHadCoinTime_Offset = 44.256
+
+4982
+eHadCoinTime_Offset = 44.360
+
+4983
+eHadCoinTime_Offset = 44.258
+
+4984
+eHadCoinTime_Offset = 44.315
+
+4985
+eHadCoinTime_Offset = 44.308
+
+4986
+eHadCoinTime_Offset = 44.344
+
+4987
+eHadCoinTime_Offset = 44.329
+
+4990
+eHadCoinTime_Offset = 44.271
+
+4991
+eHadCoinTime_Offset = 44.336
+
+4995
+eHadCoinTime_Offset = 44.293
+
+4996
+eHadCoinTime_Offset = 44.249
+
+4997
+eHadCoinTime_Offset = 44.262
+
+4998
+eHadCoinTime_Offset = 44.245
+
+4999
+eHadCoinTime_Offset = 44.256
+
+5000
+eHadCoinTime_Offset = 44.401
+
+5001
+eHadCoinTime_Offset = 44.108
+
+5002
+eHadCoinTime_Offset = 44.217
+
+5003
+eHadCoinTime_Offset = 44.270
+
+5004
+eHadCoinTime_Offset = 44.292
+
+5005
+eHadCoinTime_Offset = 44.201
+
+5006
+eHadCoinTime_Offset = 44.244
+
+5007
+eHadCoinTime_Offset = 44.321
+
+5008
+eHadCoinTime_Offset = 44.267
+
+5009
+eHadCoinTime_Offset = 44.275
+
+5013
+eHadCoinTime_Offset = 44.358
+
+5014
+eHadCoinTime_Offset = 44.311
+
+5015
+eHadCoinTime_Offset = 44.340
+
+5016
+eHadCoinTime_Offset = 44.322
+
+5017
+eHadCoinTime_Offset = 44.334
+
+5018
+eHadCoinTime_Offset = 44.312
+
+5019
+eHadCoinTime_Offset = 44.283
+
+5020
+eHadCoinTime_Offset = 44.273
+
+5021
+eHadCoinTime_Offset = 44.273
+
+5022
+eHadCoinTime_Offset = 44.325
+
+5023
+eHadCoinTime_Offset = 44.250
+
+5024
+eHadCoinTime_Offset = 44.294
+
+5025
+eHadCoinTime_Offset = 44.285
+
+5026
+eHadCoinTime_Offset = 44.305
+
+5027
+eHadCoinTime_Offset = 44.308
+
+5031
+eHadCoinTime_Offset = 44.261
+
+5032
+eHadCoinTime_Offset = 44.277
+
+5033
+eHadCoinTime_Offset = 44.247
+
+5038
+eHadCoinTime_Offset = 44.157
+
+5039
+eHadCoinTime_Offset = 44.215
+
+5040
+eHadCoinTime_Offset = 43.980
+
+5041
+eHadCoinTime_Offset = 44.115
+
+5042
+eHadCoinTime_Offset = 44.158
+
+5044
+eHadCoinTime_Offset = 44.141
+
+5045
+eHadCoinTime_Offset = 44.094
+
+5046
+eHadCoinTime_Offset = 44.159
+
+5047
+eHadCoinTime_Offset = 44.118
+
+5048
+eHadCoinTime_Offset = 44.233
+
+5049
+eHadCoinTime_Offset = 44.000
+
+5050
+eHadCoinTime_Offset = 44.193
+
+5051
+eHadCoinTime_Offset = 44.041
+
+5052
+eHadCoinTime_Offset = 44.126
+
+5053
+eHadCoinTime_Offset = 44.170
+
+5054
+eHadCoinTime_Offset = 44.114
+
+5055
+eHadCoinTime_Offset = 44.102
+
+5056
+eHadCoinTime_Offset = 44.153
+
+5057
+eHadCoinTime_Offset = 44.123
+
+5058
+eHadCoinTime_Offset = 44.160
+
+5059
+eHadCoinTime_Offset = 44.131
+
+5060
+eHadCoinTime_Offset = 44.148
+
+5062
+eHadCoinTime_Offset = 44.127
+
+5063
+eHadCoinTime_Offset = 44.089
+
+5064
+eHadCoinTime_Offset = 44.137
+
+5065
+eHadCoinTime_Offset = 44.117
+
+5066
+eHadCoinTime_Offset = 44.089
+
+5068
+eHadCoinTime_Offset = 44.174
+
+5069
+eHadCoinTime_Offset = 44.129
+
+5070
+eHadCoinTime_Offset = 44.217
+
+5071
+eHadCoinTime_Offset = 44.140
+
+5072
+eHadCoinTime_Offset = 44.180
+
+5073
+eHadCoinTime_Offset = 44.161
+
+5075
+eHadCoinTime_Offset = 44.178
+
+5076
+eHadCoinTime_Offset = 44.189
+
+5077
+eHadCoinTime_Offset = 44.245
+
+5078
+eHadCoinTime_Offset = 44.121
+
+5079
+eHadCoinTime_Offset = 44.183
+
+5080
+eHadCoinTime_Offset = 44.054
+
+5081
+eHadCoinTime_Offset = 44.036
+
+5082
+eHadCoinTime_Offset = 44.061
+
+5083
+eHadCoinTime_Offset = 43.924
+
+5084
+eHadCoinTime_Offset = 43.993
+
+5085
+eHadCoinTime_Offset = 44.032
+
+5086
+eHadCoinTime_Offset = 44.097
+
+5089
+eHadCoinTime_Offset = 44.062
+
+5090
+eHadCoinTime_Offset = 44.117
+
+5091
+eHadCoinTime_Offset = 44.085
+
+5092
+eHadCoinTime_Offset = 44.102
+
+5093
+eHadCoinTime_Offset = 44.105
+
+5094
+eHadCoinTime_Offset = 44.101
+
+5095
+eHadCoinTime_Offset = 44.058
+
+5096
+eHadCoinTime_Offset = 44.055
+
+5097
+eHadCoinTime_Offset = 44.081
+
+5098
+eHadCoinTime_Offset = 44.087
+
+5099
+eHadCoinTime_Offset = 44.076
+
+5100
+eHadCoinTime_Offset = 44.088
+
+5101
+eHadCoinTime_Offset = 44.080
+
+5102
+eHadCoinTime_Offset = 44.014
+
+5103
+eHadCoinTime_Offset = 44.171
+
+5104
+eHadCoinTime_Offset = 44.050
+
+5105
+eHadCoinTime_Offset = 44.118
+
+5106
+eHadCoinTime_Offset = 44.112
+
+5111
+eHadCoinTime_Offset = 44.076
+
+5113
+eHadCoinTime_Offset = 44.102
+
+5114
+eHadCoinTime_Offset = 44.115
+
+5115
+eHadCoinTime_Offset = 44.119
+
+5116
+eHadCoinTime_Offset = 44.083
+
+5117
+eHadCoinTime_Offset = 44.074
+
+5118
+eHadCoinTime_Offset = 44.080
+
+5119
+eHadCoinTime_Offset = 44.086
+
+5120
+eHadCoinTime_Offset = 44.037
+
+5122
+eHadCoinTime_Offset = 44.035
+
+5128
+eHadCoinTime_Offset = 44.073
+
+5129
+eHadCoinTime_Offset = 44.147
+
+5130
+eHadCoinTime_Offset = 44.108
+
+5131
+eHadCoinTime_Offset = 44.041
+
+5132
+eHadCoinTime_Offset = 44.114
+
+5133
+eHadCoinTime_Offset = 44.061
+
+5134
+eHadCoinTime_Offset = 44.043
+
+5135
+eHadCoinTime_Offset = 43.959
+
+5136
+eHadCoinTime_Offset = 44.041
+
+5137
+eHadCoinTime_Offset = 43.957
+
+5138
+eHadCoinTime_Offset = 44.082
+
+5139
+eHadCoinTime_Offset = 44.022
+
+5140
+eHadCoinTime_Offset = 44.022
+
+5141
+eHadCoinTime_Offset = 43.985
+
+5142
+eHadCoinTime_Offset = 43.994
+
+5143
+eHadCoinTime_Offset = 44.065
+
+5144
+eHadCoinTime_Offset = 43.900
+
+5183
+eHadCoinTime_Offset = 44.041
+
+5184
+eHadCoinTime_Offset = 44.007
+
+5185
+eHadCoinTime_Offset = 44.267
+
+5197
+eHadCoinTime_Offset = 44.021
+
+5198
+eHadCoinTime_Offset = 43.979
+
+5199
+eHadCoinTime_Offset = 44.025
+
+5200
+eHadCoinTime_Offset = 43.937
+
+5201
+eHadCoinTime_Offset = 43.954
+
+5202
+eHadCoinTime_Offset = 43.992
+
+5203
+eHadCoinTime_Offset = 43.880
+
+5204
+eHadCoinTime_Offset = 43.905
+
+5206
+eHadCoinTime_Offset = 43.956
+
+5207
+eHadCoinTime_Offset = 44.020
+
+5208
+eHadCoinTime_Offset = 43.913
+
+5209
+eHadCoinTime_Offset = 43.978
+
+5210
+eHadCoinTime_Offset = 43.375
+
+5211
+eHadCoinTime_Offset = 43.945
+
+5212
+eHadCoinTime_Offset = 43.855
+
+5213
+eHadCoinTime_Offset = 43.900
+
+5217
+eHadCoinTime_Offset = 43.926
+
+5218
+eHadCoinTime_Offset = 43.991
+
+5219
+eHadCoinTime_Offset = 43.982
+
+5220
+eHadCoinTime_Offset = 44.053
+
+5221
+eHadCoinTime_Offset = 44.151
+
+5222
+eHadCoinTime_Offset = 44.087
+
+5223
+eHadCoinTime_Offset = 44.029
+
+5224
+eHadCoinTime_Offset = 44.114
+
+5225
+eHadCoinTime_Offset = 44.078
+
+5226
+eHadCoinTime_Offset = 44.097
+
+5227
+eHadCoinTime_Offset = 44.093
+
+5228
+eHadCoinTime_Offset = 44.100
+
+5229
+eHadCoinTime_Offset = 44.147
+
+5230
+eHadCoinTime_Offset = 44.150
+
+5231
+eHadCoinTime_Offset = 44.149
+
+5232
+eHadCoinTime_Offset = 44.107
+
+5237
+eHadCoinTime_Offset = 44.046
+
+5238
+eHadCoinTime_Offset = 44.020
+
+5239
+eHadCoinTime_Offset = 44.145
+
+5240
+eHadCoinTime_Offset = 43.994
+
+5241
+eHadCoinTime_Offset = 44.220
+
+5242
+eHadCoinTime_Offset = 44.095
+
+5243
+eHadCoinTime_Offset = 44.117
+
+5244
+eHadCoinTime_Offset = 44.098
+
+5245
+eHadCoinTime_Offset = 44.081
+
+5246
+eHadCoinTime_Offset = 44.095
+
+5247
+eHadCoinTime_Offset = 44.155
+
+5248
+eHadCoinTime_Offset = 44.056
+
+5251
+eHadCoinTime_Offset = 44.067
+
+5253
+eHadCoinTime_Offset = 44.082
+
+5254
+eHadCoinTime_Offset = 44.110
+
+5255
+eHadCoinTime_Offset = 44.047
+
+5256
+eHadCoinTime_Offset = 44.078
+
+5257
+eHadCoinTime_Offset = 44.129
+
+5258
+eHadCoinTime_Offset = 44.100
+
+5259
+eHadCoinTime_Offset = 44.010
+
+5260
+eHadCoinTime_Offset = 43.955
+
+5261
+eHadCoinTime_Offset = 43.998
+
+5266
+eHadCoinTime_Offset = 44.049
+
+5267
+eHadCoinTime_Offset = 44.166
+
+5268
+eHadCoinTime_Offset = 44.179
+
+5269
+eHadCoinTime_Offset = 44.186
+
+5270
+eHadCoinTime_Offset = 44.140
+
+5271
+eHadCoinTime_Offset = 44.235
+
+5272
+eHadCoinTime_Offset = 44.157
+
+5273
+eHadCoinTime_Offset = 44.118
+
+5274
+eHadCoinTime_Offset = 43.875
+
+5276
+eHadCoinTime_Offset = 43.915
+
+5277
+eHadCoinTime_Offset = 44.033
+
+5278
+eHadCoinTime_Offset = 43.912
+
+5279
+eHadCoinTime_Offset = 43.922
+
+5280
+eHadCoinTime_Offset = 43.941
+
+5281
+eHadCoinTime_Offset = 43.728
+
+5282
+eHadCoinTime_Offset = 43.930
+
+5283
+eHadCoinTime_Offset = 43.875
+
+5284
+eHadCoinTime_Offset = 43.966
+
+5285
+eHadCoinTime_Offset = 43.849
+
+5286
+eHadCoinTime_Offset = 43.939
+
+5287
+eHadCoinTime_Offset = 43.809
+
+5288
+eHadCoinTime_Offset = 43.966
+
+5289
+eHadCoinTime_Offset = 43.787
+
+5290
+eHadCoinTime_Offset = 43.826
+
+5291
+eHadCoinTime_Offset = 44.019
+
+5293
+eHadCoinTime_Offset = 43.856
+
+5294
+eHadCoinTime_Offset = 43.992
+
+5304
+eHadCoinTime_Offset = 44.161
+
+5305
+eHadCoinTime_Offset = 44.179
+
+5306
+eHadCoinTime_Offset = 44.100
+
+5307
+eHadCoinTime_Offset = 44.109
+
+5308
+eHadCoinTime_Offset = 44.097
+
+5309
+eHadCoinTime_Offset = 44.112
+
+5310
+eHadCoinTime_Offset = 44.113
+
+5311
+eHadCoinTime_Offset = 44.165
+
+5312
+eHadCoinTime_Offset = 44.197
+
+5313
+eHadCoinTime_Offset = 44.058
+
+5314
+eHadCoinTime_Offset = 44.043
+
+5315
+eHadCoinTime_Offset = 43.982
+
+5316
+eHadCoinTime_Offset = 43.992
+
+5317
+eHadCoinTime_Offset = 44.021
+
+5318
+eHadCoinTime_Offset = 43.966
+
+5319
+eHadCoinTime_Offset = 44.011
+
+5320
+eHadCoinTime_Offset = 44.022
+
+5321
+eHadCoinTime_Offset = 44.035
+
+5322
+eHadCoinTime_Offset = 44.035
+
+5323
+eHadCoinTime_Offset = 44.052
+
+5324
+eHadCoinTime_Offset = 44.027
+
+5325
+eHadCoinTime_Offset = 43.984
+
+5326
+eHadCoinTime_Offset = 44.003
+
+5327
+eHadCoinTime_Offset = 43.919
+
+5328
+eHadCoinTime_Offset = 43.907
+
+5329
+eHadCoinTime_Offset = 43.913
+
+5330
+eHadCoinTime_Offset = 43.987
+
+5331
+eHadCoinTime_Offset = 43.970
+
+5332
+eHadCoinTime_Offset = 44.034
+
+5333
+eHadCoinTime_Offset = 44.012
+
+5334
+eHadCoinTime_Offset = 43.966
+
+6638
+eHadCoinTime_Offset = 47.981
+
+6642
+eHadCoinTime_Offset = 47.980
+
+6643
+eHadCoinTime_Offset = 47.972
+
+6644
+eHadCoinTime_Offset = 47.963
+
+6645
+eHadCoinTime_Offset = 47.962
+
+6646
+eHadCoinTime_Offset = 47.949
+
+6647
+eHadCoinTime_Offset = 47.955
+
+6649
+eHadCoinTime_Offset = 47.977
+
+6650
+eHadCoinTime_Offset = 47.972
+
+6651
+eHadCoinTime_Offset = 47.965
+
+6652
+eHadCoinTime_Offset = 47.959
+
+6653
+eHadCoinTime_Offset = 47.960
+
+6654
+eHadCoinTime_Offset = 47.985
+
+6655
+eHadCoinTime_Offset = 47.979
+
+6656
+eHadCoinTime_Offset = 47.968
+
+6657
+eHadCoinTime_Offset = 47.973
+
+6658
+eHadCoinTime_Offset = 47.958
+
+6659
+eHadCoinTime_Offset = 47.960
+
+6661
+eHadCoinTime_Offset = 47.980
+
+6662
+eHadCoinTime_Offset = 47.982
+
+6663
+eHadCoinTime_Offset = 47.970
+
+6664
+eHadCoinTime_Offset = 47.968
+
+6665
+eHadCoinTime_Offset = 47.953
+
+6666
+eHadCoinTime_Offset = 47.953
+
+6667
+eHadCoinTime_Offset = 47.970
+
+6668
+eHadCoinTime_Offset = 47.976
+
+6669
+eHadCoinTime_Offset = 47.974
+
+6671
+eHadCoinTime_Offset = 47.969
+
+6672
+eHadCoinTime_Offset = 47.959
+
+6673
+eHadCoinTime_Offset = 48.006
+
+6674
+eHadCoinTime_Offset = 48.038
+
+6675
+eHadCoinTime_Offset = 48.022
+
+6676
+eHadCoinTime_Offset = 48.013
+
+6680
+eHadCoinTime_Offset = 47.982
+
+6681
+eHadCoinTime_Offset = 47.984
+
+6682
+eHadCoinTime_Offset = 47.980
+
+6683
+eHadCoinTime_Offset = 47.982
+
+6684
+eHadCoinTime_Offset = 47.981
+
+6685
+eHadCoinTime_Offset = 47.993
+
+6687
+eHadCoinTime_Offset = 47.968
+
+6688
+eHadCoinTime_Offset = 47.969
+
+6689
+eHadCoinTime_Offset = 47.962
+
+6690
+eHadCoinTime_Offset = 47.950
+
+6691
+eHadCoinTime_Offset = 47.969
+
+6692
+eHadCoinTime_Offset = 48.010
+
+6694
+eHadCoinTime_Offset = 47.971
+
+6695
+eHadCoinTime_Offset = 47.965
+
+6696
+eHadCoinTime_Offset = 47.960
+
+6697
+eHadCoinTime_Offset = 48.001
+
+6704
+eHadCoinTime_Offset = 48.006
+
+6705
+eHadCoinTime_Offset = 47.982
+
+6706
+eHadCoinTime_Offset = 47.970
+
+6707
+eHadCoinTime_Offset = 47.964
+
+6708
+eHadCoinTime_Offset = 47.958
+
+6709
+eHadCoinTime_Offset = 47.987
+
+6710
+eHadCoinTime_Offset = 47.992
+
+6711
+eHadCoinTime_Offset = 47.990
+
+6712
+eHadCoinTime_Offset = 47.987
+
+6713
+eHadCoinTime_Offset = 47.988
+
+6714
+eHadCoinTime_Offset = 47.989
+
+6715
+eHadCoinTime_Offset = 47.993
+
+6716
+eHadCoinTime_Offset = 47.988
+
+6718
+eHadCoinTime_Offset = 47.994
+
+6719
+eHadCoinTime_Offset = 47.993
+
+6720
+eHadCoinTime_Offset = 47.999
+
+6721
+eHadCoinTime_Offset = 47.995
+
+6724
+eHadCoinTime_Offset = 48.019
+
+6725
+eHadCoinTime_Offset = 47.994
+
+6726
+eHadCoinTime_Offset = 48.002
+
+6727
+eHadCoinTime_Offset = 48.003
+
+6728
+eHadCoinTime_Offset = 47.999
+
+6729
+eHadCoinTime_Offset = 48.009
+
+6730
+eHadCoinTime_Offset = 48.004
+
+6736
+eHadCoinTime_Offset = 48.006
+
+6737
+eHadCoinTime_Offset = 48.006
+
+6738
+eHadCoinTime_Offset = 47.993
+
+6739
+eHadCoinTime_Offset = 48.002
+
+6740
+eHadCoinTime_Offset = 48.000
+
+6740
+eHadCoinTime_Offset = 48.000
+
+6741
+eHadCoinTime_Offset = 48.001
+
+6742
+eHadCoinTime_Offset = 48.007
+
+6743
+eHadCoinTime_Offset = 47.999
+
+6744
+eHadCoinTime_Offset = 48.015
+
+6745
+eHadCoinTime_Offset = 48.004
+
+6746
+eHadCoinTime_Offset = 48.017
+
+6747
+eHadCoinTime_Offset = 48.025
+
+6748
+eHadCoinTime_Offset = 48.019
+
+6749
+eHadCoinTime_Offset = 48.021
+
+6750
+eHadCoinTime_Offset = 48.020
+
+6751
+eHadCoinTime_Offset = 48.020
+
+6752
+eHadCoinTime_Offset = 48.024
+
+6753
+eHadCoinTime_Offset = 48.033
+
+6754
+eHadCoinTime_Offset = 48.015
+
+6754
+eHadCoinTime_Offset = 48.015
+
+6755
+eHadCoinTime_Offset = 48.004
+
+6756
+eHadCoinTime_Offset = 48.006
+
+6757
+eHadCoinTime_Offset = 47.999
+
+6760
+eHadCoinTime_Offset = 48.033
+
+6761
+eHadCoinTime_Offset = 48.020
+
+6762
+eHadCoinTime_Offset = 48.021
+
+6763
+eHadCoinTime_Offset = 48.026
+
+6765
+eHadCoinTime_Offset = 48.020
+
+6766
+eHadCoinTime_Offset = 48.017
+
+6767
+eHadCoinTime_Offset = 48.025
+
+6768
+eHadCoinTime_Offset = 48.023
+
+6769
+eHadCoinTime_Offset = 48.013
+
+6770
+eHadCoinTime_Offset = 48.026
+
+6771
+eHadCoinTime_Offset = 48.020
+
+6772
+eHadCoinTime_Offset = 48.015
+
+6774
+eHadCoinTime_Offset = 48.016
+
+6774
+eHadCoinTime_Offset = 48.016
+
+6775
+eHadCoinTime_Offset = 48.012
+
+6777
+eHadCoinTime_Offset = 48.030
+
+6778
+eHadCoinTime_Offset = 48.021
+
+6779
+eHadCoinTime_Offset = 48.020
+
+6780
+eHadCoinTime_Offset = 48.021
+
+6782
+eHadCoinTime_Offset = 48.018
+
+6783
+eHadCoinTime_Offset = 48.016
+
+6784
+eHadCoinTime_Offset = 48.045
+
+6785
+eHadCoinTime_Offset = 48.022
+
+6786
+eHadCoinTime_Offset = 48.024
+
+6787
+eHadCoinTime_Offset = 48.028
+
+6788
+eHadCoinTime_Offset = 48.032
+
+6789
+eHadCoinTime_Offset = 48.043
+
+6791
+eHadCoinTime_Offset = 48.011
+
+6792
+eHadCoinTime_Offset = 48.006
+
+6793
+eHadCoinTime_Offset = 48.009
+
+6795
+eHadCoinTime_Offset = 48.006
+
+6796
+eHadCoinTime_Offset = 48.008
+
+6797
+eHadCoinTime_Offset = 48.007
+
+6798
+eHadCoinTime_Offset = 48.012
+
+6799
+eHadCoinTime_Offset = 48.023
+
+6800
+eHadCoinTime_Offset = 48.014
+
+6801
+eHadCoinTime_Offset = 48.015
+
+6802
+eHadCoinTime_Offset = 48.014
+
+6803
+eHadCoinTime_Offset = 48.005
+
+6804
+eHadCoinTime_Offset = 48.008
+
+6807
+eHadCoinTime_Offset = 48.018
+
+6808
+eHadCoinTime_Offset = 48.021
+
+6809
+eHadCoinTime_Offset = 48.022
+
+6810
+eHadCoinTime_Offset = 48.020
+
+6811
+eHadCoinTime_Offset = 48.022
+
+6812
+eHadCoinTime_Offset = 48.013
+
+6813
+eHadCoinTime_Offset = 47.993
+
+6815
+eHadCoinTime_Offset = 47.999
+
+6816
+eHadCoinTime_Offset = 48.003
+
+6817
+eHadCoinTime_Offset = 47.994
+
+6818
+eHadCoinTime_Offset = 48.002
+
+6819
+eHadCoinTime_Offset = 48.000
+
+6821
+eHadCoinTime_Offset = 48.008
+
+6822
+eHadCoinTime_Offset = 48.015
+
+6823
+eHadCoinTime_Offset = 48.017
+
+6824
+eHadCoinTime_Offset = 48.016
+
+6825
+eHadCoinTime_Offset = 48.018
+
+6826
+eHadCoinTime_Offset = 48.026
+
+6827
+eHadCoinTime_Offset = 48.032
+
+6828
+eHadCoinTime_Offset = 48.035
+
+6829
+eHadCoinTime_Offset = 48.018
+
+6830
+eHadCoinTime_Offset = 48.028
+
+6831
+eHadCoinTime_Offset = 48.033
+
+6832
+eHadCoinTime_Offset = 48.042
+
+6833
+eHadCoinTime_Offset = 48.027
+
+6834
+eHadCoinTime_Offset = 48.032
+
+6835
+eHadCoinTime_Offset = 48.028
+
+6837
+eHadCoinTime_Offset = 48.028
+
+6838
+eHadCoinTime_Offset = 48.020
+
+6839
+eHadCoinTime_Offset = 48.010
+
+6840
+eHadCoinTime_Offset = 48.024
+
+6841
+eHadCoinTime_Offset = 48.021
+
+6842
+eHadCoinTime_Offset = 48.032
+
+6843
+eHadCoinTime_Offset = 48.010
+
+6844
+eHadCoinTime_Offset = 48.018
+
+6845
+eHadCoinTime_Offset = 48.021
+
+6847
+eHadCoinTime_Offset = 48.001
+
+6848
+eHadCoinTime_Offset = 48.000
+
+6849
+eHadCoinTime_Offset = 48.002
+
+6850
+eHadCoinTime_Offset = 48.026
+
+6851
+eHadCoinTime_Offset = 48.018
+
+6852
+eHadCoinTime_Offset = 48.021
+
+6853
+eHadCoinTime_Offset = 48.002
+
+6854
+eHadCoinTime_Offset = 47.999
+
+6855
+eHadCoinTime_Offset = 48.005
+
+6856
+eHadCoinTime_Offset = 47.996
+
+6857
+eHadCoinTime_Offset = 47.990
+
+6885
+eHadCoinTime_Offset = 47.995
+
+6887
+eHadCoinTime_Offset = 47.993
+
+6888
+eHadCoinTime_Offset = 47.988
+
+6889
+eHadCoinTime_Offset = 47.988
+
+6890
+eHadCoinTime_Offset = 47.985
+
+6891
+eHadCoinTime_Offset = 47.975
+
+6894
+eHadCoinTime_Offset = 47.974
+
+6895
+eHadCoinTime_Offset = 47.971
+
+6897
+eHadCoinTime_Offset = 47.977
+
+6898
+eHadCoinTime_Offset = 47.975
+
+6899
+eHadCoinTime_Offset = 47.983
+
+6900
+eHadCoinTime_Offset = 47.993
+
+6904
+eHadCoinTime_Offset = 47.987
+
+6905
+eHadCoinTime_Offset = 47.993
+
+6906
+eHadCoinTime_Offset = 47.993
+
+6907
+eHadCoinTime_Offset = 47.999
+
+6908
+eHadCoinTime_Offset = 47.997
+
+6909
+eHadCoinTime_Offset = 47.998
+
+6910
+eHadCoinTime_Offset = 47.991
+
+6911
+eHadCoinTime_Offset = 47.992
+
+6912
+eHadCoinTime_Offset = 47.999
+
+6913
+eHadCoinTime_Offset = 47.996
+
+6914
+eHadCoinTime_Offset = 48.001
+
+6915
+eHadCoinTime_Offset = 47.978
+
+6916
+eHadCoinTime_Offset = 47.982
+
+6917
+eHadCoinTime_Offset = 47.979
+
+6918
+eHadCoinTime_Offset = 47.982
+
+6919
+eHadCoinTime_Offset = 47.993
+
+6920
+eHadCoinTime_Offset = 47.996
+
+6921
+eHadCoinTime_Offset = 48.006
+
+6922
+eHadCoinTime_Offset = 48.009
+
+6924
+eHadCoinTime_Offset = 48.001
+
+6925
+eHadCoinTime_Offset = 48.027
+
+6927
+eHadCoinTime_Offset = 48.028
+
+6928
+eHadCoinTime_Offset = 48.006
+
+6929
+eHadCoinTime_Offset = 47.992
+
+6930
+eHadCoinTime_Offset = 47.986
+
+6934
+eHadCoinTime_Offset = 47.982
+
+6935
+eHadCoinTime_Offset = 47.979
+
+6936
+eHadCoinTime_Offset = 47.982
+
+6937
+eHadCoinTime_Offset = 47.983
+
+6938
+eHadCoinTime_Offset = 47.984
+
+6939
+eHadCoinTime_Offset = 47.979
+
+6941
+eHadCoinTime_Offset = 47.966
+
+6942
+eHadCoinTime_Offset = 47.968
+
+6943
+eHadCoinTime_Offset = 47.965
+
+6944
+eHadCoinTime_Offset = 47.980
+
+6945
+eHadCoinTime_Offset = 47.982
+
+6946
+eHadCoinTime_Offset = 47.983
+
+6947
+eHadCoinTime_Offset = 47.983
+
+6948
+eHadCoinTime_Offset = 47.976
+
+6949
+eHadCoinTime_Offset = 47.976
+
+6950
+eHadCoinTime_Offset = 47.976
+
+6951
+eHadCoinTime_Offset = 47.978
+
+6952
+eHadCoinTime_Offset = 47.983
+
+6953
+eHadCoinTime_Offset = 47.979
+
+6955
+eHadCoinTime_Offset = 47.996
+
+6956
+eHadCoinTime_Offset = 47.999
+
+6958
+eHadCoinTime_Offset = 48.009
+
+6959
+eHadCoinTime_Offset = 47.997
+
+6960
+eHadCoinTime_Offset = 47.992
+
+6961
+eHadCoinTime_Offset = 47.983
+
+6962
+eHadCoinTime_Offset = 47.980
+
+6963
+eHadCoinTime_Offset = 47.976
+
+6964
+eHadCoinTime_Offset = 47.984
+
+6965
+eHadCoinTime_Offset = 47.984
+
+6966
+eHadCoinTime_Offset = 47.989
+
+6967
+eHadCoinTime_Offset = 47.986
+
+6968
+eHadCoinTime_Offset = 47.985
+
+6969
+eHadCoinTime_Offset = 47.983
+
+6970
+eHadCoinTime_Offset = 47.980
+
+6971
+eHadCoinTime_Offset = 47.976
+
+6972
+eHadCoinTime_Offset = 47.998
+
+6973
+eHadCoinTime_Offset = 47.990
+
+6974
+eHadCoinTime_Offset = 47.993
+
+6975
+eHadCoinTime_Offset = 47.995
+
+6976
+eHadCoinTime_Offset = 47.996
+
+6977
+eHadCoinTime_Offset = 47.999
+
+6978
+eHadCoinTime_Offset = 47.997
+
+6980
+eHadCoinTime_Offset = 47.947
+
+6981
+eHadCoinTime_Offset = 47.953
+
+6982
+eHadCoinTime_Offset = 47.949
+
+6983
+eHadCoinTime_Offset = 47.946
+
+6984
+eHadCoinTime_Offset = 47.949
+
+6985
+eHadCoinTime_Offset = 47.953
+
+6986
+eHadCoinTime_Offset = 47.954
+
+6987
+eHadCoinTime_Offset = 47.959
+
+6988
+eHadCoinTime_Offset = 47.957
+
+6989
+eHadCoinTime_Offset = 47.960
+
+6990
+eHadCoinTime_Offset = 47.957
+
+6992
+eHadCoinTime_Offset = 47.953
+
+6993
+eHadCoinTime_Offset = 47.960
+
+6994
+eHadCoinTime_Offset = 47.960
+
+6995
+eHadCoinTime_Offset = 47.968
+
+6996
+eHadCoinTime_Offset = 47.965
+
+6997
+eHadCoinTime_Offset = 47.969
+
+6998
+eHadCoinTime_Offset = 47.969
+
+7002
+eHadCoinTime_Offset = 47.966
+
+7003
+eHadCoinTime_Offset = 47.966
+
+7004
+eHadCoinTime_Offset = 47.973
+
+7005
+eHadCoinTime_Offset = 47.968
+
+7006
+eHadCoinTime_Offset = 47.977
+
+7007
+eHadCoinTime_Offset = 47.985
+
+7009
+eHadCoinTime_Offset = 47.973
+
+7010
+eHadCoinTime_Offset = 47.982
+
+7011
+eHadCoinTime_Offset = 47.975
+
+7012
+eHadCoinTime_Offset = 47.975
+
+7013
+eHadCoinTime_Offset = 47.970
+
+7014
+eHadCoinTime_Offset = 47.969
+
+7016
+eHadCoinTime_Offset = 47.974
+
+7018
+eHadCoinTime_Offset = 47.973
+
+7019
+eHadCoinTime_Offset = 47.969
+
+7022
+eHadCoinTime_Offset = 47.962
+
+7023
+eHadCoinTime_Offset = 47.964
+
+7024
+eHadCoinTime_Offset = 47.956
+
+7025
+eHadCoinTime_Offset = 47.957
+
+7026
+eHadCoinTime_Offset = 47.955
+
+7028
+eHadCoinTime_Offset = 47.957
+
+7029
+eHadCoinTime_Offset = 47.952
+
+7030
+eHadCoinTime_Offset = 47.967
+
+7031
+eHadCoinTime_Offset = 47.968
+
+7032
+eHadCoinTime_Offset = 47.971
+
+7033
+eHadCoinTime_Offset = 47.969
+
+7034
+eHadCoinTime_Offset = 47.970
+
+7035
+eHadCoinTime_Offset = 47.970
+
+7036
+eHadCoinTime_Offset = 47.966
+
+7037
+eHadCoinTime_Offset = 47.966
+
+7038
+eHadCoinTime_Offset = 47.970
+
+7040
+eHadCoinTime_Offset = 47.971
+
+7041
+eHadCoinTime_Offset = 47.962
+
+7043
+eHadCoinTime_Offset = 47.953
+
+7044
+eHadCoinTime_Offset = 47.955
+
+7045
+eHadCoinTime_Offset = 47.952
+
+7871
+eHadCoinTime_Offset = 43.807
+
+7872
+eHadCoinTime_Offset = 43.806
+
+7873
+eHadCoinTime_Offset = 43.798
+
+7874
+eHadCoinTime_Offset = 43.801
+
+7875
+eHadCoinTime_Offset = 43.800
+
+7876
+eHadCoinTime_Offset = 43.798
+
+7877
+eHadCoinTime_Offset = 43.798
+
+7882
+eHadCoinTime_Offset = 43.796
+
+7883
+eHadCoinTime_Offset = 43.799
+
+7884
+eHadCoinTime_Offset = 43.812
+
+7885
+eHadCoinTime_Offset = 43.819
+
+7886
+eHadCoinTime_Offset = 43.811
+
+7887
+eHadCoinTime_Offset = 43.813
+
+7891
+eHadCoinTime_Offset = 43.747
+
+7892
+eHadCoinTime_Offset = 43.753
+
+7893
+eHadCoinTime_Offset = 43.759
+
+7894
+eHadCoinTime_Offset = 43.765
+
+7895
+eHadCoinTime_Offset = 43.748
+
+7896
+eHadCoinTime_Offset = 43.756
+
+7899
+eHadCoinTime_Offset = 43.755
+
+7900
+eHadCoinTime_Offset = 43.750
+
+7901
+eHadCoinTime_Offset = 43.764
+
+7902
+eHadCoinTime_Offset = 43.768
+
+7903
+eHadCoinTime_Offset = 43.762
+
+7904
+eHadCoinTime_Offset = 43.769
+
+7905
+eHadCoinTime_Offset = 43.757
+
+7906
+eHadCoinTime_Offset = 43.760
+
+7907
+eHadCoinTime_Offset = 43.749
+
+7908
+eHadCoinTime_Offset = 43.751
+
+7909
+eHadCoinTime_Offset = 43.750
+
+7910
+eHadCoinTime_Offset = 43.765
+
+7911
+eHadCoinTime_Offset = 43.718
+
+7912
+eHadCoinTime_Offset = 43.708
+
+7913
+eHadCoinTime_Offset = 43.708
+
+7914
+eHadCoinTime_Offset = 43.742
+
+7915
+eHadCoinTime_Offset = 43.754
+
+7916
+eHadCoinTime_Offset = 43.740
+
+7917
+eHadCoinTime_Offset = 43.734
+
+7918
+eHadCoinTime_Offset = 43.713
+
+7919
+eHadCoinTime_Offset = 43.737
+
+7920
+eHadCoinTime_Offset = 43.739
+
+7925
+eHadCoinTime_Offset = 43.738
+
+7926
+eHadCoinTime_Offset = 43.738
+
+7927
+eHadCoinTime_Offset = 43.719
+
+7928
+eHadCoinTime_Offset = 43.739
+
+7930
+eHadCoinTime_Offset = 43.771
+
+7931
+eHadCoinTime_Offset = 43.716
+
+7932
+eHadCoinTime_Offset = 43.729
+
+7933
+eHadCoinTime_Offset = 43.737
+
+7934
+eHadCoinTime_Offset = 43.740
+
+7935
+eHadCoinTime_Offset = 43.726
+
+7936
+eHadCoinTime_Offset = 43.727
+
+7937
+eHadCoinTime_Offset = 43.724
+
+7938
+eHadCoinTime_Offset = 43.746
+
+7978
+eHadCoinTime_Offset = 43.778
+
+7979
+eHadCoinTime_Offset = 43.775
+
+7980
+eHadCoinTime_Offset = 43.777
+
+7981
+eHadCoinTime_Offset = 43.778
+
+7982
+eHadCoinTime_Offset = 43.775
+
+7983
+eHadCoinTime_Offset = 43.773
+
+7984
+eHadCoinTime_Offset = 43.774
+
+7985
+eHadCoinTime_Offset = 43.765
+
+7986
+eHadCoinTime_Offset = 43.778
+
+7987
+eHadCoinTime_Offset = 43.781
+
+7988
+eHadCoinTime_Offset = 43.772
+
+7989
+eHadCoinTime_Offset = 43.789
+
+7994
+eHadCoinTime_Offset = 43.784
+
+7995
+eHadCoinTime_Offset = 43.781
+
+7996
+eHadCoinTime_Offset = 43.790
+
+7997
+eHadCoinTime_Offset = 43.779
+
+7998
+eHadCoinTime_Offset = 43.755
+
+7999
+eHadCoinTime_Offset = 43.778
+
+8000
+eHadCoinTime_Offset = 43.783
+
+8001
+eHadCoinTime_Offset = 43.773
+
+8002
+eHadCoinTime_Offset = 43.774
+
+8003
+eHadCoinTime_Offset = 43.780
+
+8004
+eHadCoinTime_Offset = 43.775
+
+8005
+eHadCoinTime_Offset = 43.785
+
+8006
+eHadCoinTime_Offset = 43.789
+
+8007
+eHadCoinTime_Offset = 43.791
+
+8008
+eHadCoinTime_Offset = 43.789
+
+8009
+eHadCoinTime_Offset = 43.794
+
+8010
+eHadCoinTime_Offset = 43.790
+
+8011
+eHadCoinTime_Offset = 43.793
+
+8012
+eHadCoinTime_Offset = 43.781
+
+8013
+eHadCoinTime_Offset = 43.786
+
+8014
+eHadCoinTime_Offset = 43.778
+
+8015
+eHadCoinTime_Offset = 43.780
+
+8016
+eHadCoinTime_Offset = 43.768
+
+8018
+eHadCoinTime_Offset = 43.777
+
+8020
+eHadCoinTime_Offset = 43.781
+
+8021
+eHadCoinTime_Offset = 43.774
+
+8022
+eHadCoinTime_Offset = 43.776
+
+8023
+eHadCoinTime_Offset = 43.777
+
+8024
+eHadCoinTime_Offset = 43.785
+
+8025
+eHadCoinTime_Offset = 43.748
+
+8026
+eHadCoinTime_Offset = 43.765
+
+8027
+eHadCoinTime_Offset = 43.786
+
+8028
+eHadCoinTime_Offset = 43.777
+
+8029
+eHadCoinTime_Offset = 43.783
+
+8030
+eHadCoinTime_Offset = 43.794
+
+8031
+eHadCoinTime_Offset = 43.790
+
+8032
+eHadCoinTime_Offset = 43.798
+
+8033
+eHadCoinTime_Offset = 43.775
+
+8034
+eHadCoinTime_Offset = 43.785
+
+8035
+eHadCoinTime_Offset = 43.789
+
+8036
+eHadCoinTime_Offset = 43.780
+
+8039
+eHadCoinTime_Offset = 43.729
+
+8040
+eHadCoinTime_Offset = 43.734
+
+8041
+eHadCoinTime_Offset = 43.735
+
+8042
+eHadCoinTime_Offset = 43.732
+
+8044
+eHadCoinTime_Offset = 43.730
+
+8045
+eHadCoinTime_Offset = 43.722
+
+8046
+eHadCoinTime_Offset = 43.723
+
+8047
+eHadCoinTime_Offset = 43.717
+
+8048
+eHadCoinTime_Offset = 43.732
+
+8050
+eHadCoinTime_Offset = 43.720
+
+8051
+eHadCoinTime_Offset = 43.726
+
+8052
+eHadCoinTime_Offset = 43.726
+
+8053
+eHadCoinTime_Offset = 43.725
+
+8055
+eHadCoinTime_Offset = 43.738
+
+8056
+eHadCoinTime_Offset = 43.742
+
+8057
+eHadCoinTime_Offset = 43.738
+
+8058
+eHadCoinTime_Offset = 43.738
+
+8059
+eHadCoinTime_Offset = 43.735
+
+8060
+eHadCoinTime_Offset = 43.733
+
+8061
+eHadCoinTime_Offset = 43.744
+
+8063
+eHadCoinTime_Offset = 43.738
+
+8064
+eHadCoinTime_Offset = 43.739
+
+8065
+eHadCoinTime_Offset = 43.736
+
+8067
+eHadCoinTime_Offset = 43.720
+
+8068
+eHadCoinTime_Offset = 43.730
+
+8069
+eHadCoinTime_Offset = 43.725
+
+8070
+eHadCoinTime_Offset = 43.727
+
+8071
+eHadCoinTime_Offset = 43.726
+
+8073
+eHadCoinTime_Offset = 43.725
+
+8074
+eHadCoinTime_Offset = 43.727
+
+8075
+eHadCoinTime_Offset = 43.735
+
+8076
+eHadCoinTime_Offset = 43.746
+
+8077
+eHadCoinTime_Offset = 43.734
+
+8078
+eHadCoinTime_Offset = 43.729
+
+8079
+eHadCoinTime_Offset = 43.740
+
+8080
+eHadCoinTime_Offset = 43.738
+
+8081
+eHadCoinTime_Offset = 43.731
+
+8082
+eHadCoinTime_Offset = 43.732
+
+8083
+eHadCoinTime_Offset = 43.732
+
+8084
+eHadCoinTime_Offset = 43.740
+
+8088
+eHadCoinTime_Offset = 43.737
+
+8089
+eHadCoinTime_Offset = 43.739
+
+8090
+eHadCoinTime_Offset = 43.742
+
+8091
+eHadCoinTime_Offset = 43.746
+
+8092
+eHadCoinTime_Offset = 43.742
+
+8093
+eHadCoinTime_Offset = 43.743
+
+8094
+eHadCoinTime_Offset = 43.732
+
+8095
+eHadCoinTime_Offset = 43.740
+
+8096
+eHadCoinTime_Offset = 43.722
+
+8097
+eHadCoinTime_Offset = 43.732
+
+8098
+eHadCoinTime_Offset = 43.745
+
+8099
+eHadCoinTime_Offset = 43.736
+
+8100
+eHadCoinTime_Offset = 43.735
+
+8101
+eHadCoinTime_Offset = 43.740
+
+8102
+eHadCoinTime_Offset = 43.731
+
+8103
+eHadCoinTime_Offset = 43.734
+
+8104
+eHadCoinTime_Offset = 43.737
+
+8105
+eHadCoinTime_Offset = 43.734
+
+8106
+eHadCoinTime_Offset = 43.732
+
+8107
+eHadCoinTime_Offset = 43.730
+
+8108
+eHadCoinTime_Offset = 43.746
+
+8109
+eHadCoinTime_Offset = 43.734
+
+8110
+eHadCoinTime_Offset = 43.745
+
+8111
+eHadCoinTime_Offset = 43.781
+
+8112
+eHadCoinTime_Offset = 43.772
+
+8113
+eHadCoinTime_Offset = 43.773
+
+8116
+eHadCoinTime_Offset = 43.762
+
+8117
+eHadCoinTime_Offset = 43.747
+
+8117
+eHadCoinTime_Offset = 43.747
+
+8118
+eHadCoinTime_Offset = 43.759
+
+8119
+eHadCoinTime_Offset = 43.762
+
+8120
+eHadCoinTime_Offset = 43.777
+
+8121
+eHadCoinTime_Offset = 43.759
+
+8122
+eHadCoinTime_Offset = 43.764
+
+8123
+eHadCoinTime_Offset = 43.769
+
+8123
+eHadCoinTime_Offset = 43.769
+
+8124
+eHadCoinTime_Offset = 43.757
+
+8125
+eHadCoinTime_Offset = 43.765
+
+8126
+eHadCoinTime_Offset = 43.774
+
+8127
+eHadCoinTime_Offset = 43.766
+
+8128
+eHadCoinTime_Offset = 43.764
+
+8129
+eHadCoinTime_Offset = 43.768
+
+8135
+eHadCoinTime_Offset = 43.770
+
+8136
+eHadCoinTime_Offset = 43.775
+
+8137
+eHadCoinTime_Offset = 43.741
+
+8138
+eHadCoinTime_Offset = 43.772
+
+8140
+eHadCoinTime_Offset = 43.794
+
+8141
+eHadCoinTime_Offset = 43.747
+
+8142
+eHadCoinTime_Offset = 43.776
+
+8143
+eHadCoinTime_Offset = 43.762
+
+8144
+eHadCoinTime_Offset = 43.781
+
+8145
+eHadCoinTime_Offset = 43.778
+
+8146
+eHadCoinTime_Offset = 43.790
+
+8147
+eHadCoinTime_Offset = 43.785
+
+8148
+eHadCoinTime_Offset = 43.775
+
+8149
+eHadCoinTime_Offset = 43.779
+
+8150
+eHadCoinTime_Offset = 43.779
+
+8152
+eHadCoinTime_Offset = 43.784
+
+8153
+eHadCoinTime_Offset = 43.789
+
+8154
+eHadCoinTime_Offset = 43.778
+
+8156
+eHadCoinTime_Offset = 43.774
+
+8157
+eHadCoinTime_Offset = 43.770
+
+8158
+eHadCoinTime_Offset = 43.788
+
+8159
+eHadCoinTime_Offset = 43.779
+
+8160
+eHadCoinTime_Offset = 43.762
+
+8165
+eHadCoinTime_Offset = 43.779
+
+8166
+eHadCoinTime_Offset = 43.772
+
+8167
+eHadCoinTime_Offset = 43.777
+
+8168
+eHadCoinTime_Offset = 43.773
+
+8169
+eHadCoinTime_Offset = 43.786
+
+8170
+eHadCoinTime_Offset = 43.786
+
+8171
+eHadCoinTime_Offset = 43.787
+
+8172
+eHadCoinTime_Offset = 43.775
+
+8173
+eHadCoinTime_Offset = 43.787
+
+8174
+eHadCoinTime_Offset = 43.776
+
+8175
+eHadCoinTime_Offset = 43.757
+
+8176
+eHadCoinTime_Offset = 43.767
+
+8177
+eHadCoinTime_Offset = 43.781
+
+8178
+eHadCoinTime_Offset = 43.790
+
+8179
+eHadCoinTime_Offset = 43.767
+
+8180
+eHadCoinTime_Offset = 43.752
+
+8181
+eHadCoinTime_Offset = 43.756
+
+8182
+eHadCoinTime_Offset = 43.742
+
+8183
+eHadCoinTime_Offset = 43.759
+
+8184
+eHadCoinTime_Offset = 43.778
+
+8185
+eHadCoinTime_Offset = 43.782
+
+8186
+eHadCoinTime_Offset = 43.810
+
+8187
+eHadCoinTime_Offset = 43.765
+
+8188
+eHadCoinTime_Offset = 43.779
+
+8189
+eHadCoinTime_Offset = 43.746
+
+8190
+eHadCoinTime_Offset = 43.722
+
+8191
+eHadCoinTime_Offset = 43.795
+
+8192
+eHadCoinTime_Offset = 43.718
+
+8193
+eHadCoinTime_Offset = 43.769
+
+8194
+eHadCoinTime_Offset = 43.753
+
+8195
+eHadCoinTime_Offset = 43.774
+
+8196
+eHadCoinTime_Offset = 43.742
+
+8197
+eHadCoinTime_Offset = 43.719
+
+8198
+eHadCoinTime_Offset = 43.759
+
+8199
+eHadCoinTime_Offset = 43.800
+
+8200
+eHadCoinTime_Offset = 43.734
+
+8201
+eHadCoinTime_Offset = 43.768
+
+8202
+eHadCoinTime_Offset = 43.787
+
+8203
+eHadCoinTime_Offset = 43.741
+
+8204
+eHadCoinTime_Offset = 43.743
+
+8205
+eHadCoinTime_Offset = 43.730
+
+8206
+eHadCoinTime_Offset = 43.755
+
+8207
+eHadCoinTime_Offset = 43.771
+
+8212
+eHadCoinTime_Offset = 43.760
+
+8213
+eHadCoinTime_Offset = 43.748
+
+8214
+eHadCoinTime_Offset = 43.743
+
+8215
+eHadCoinTime_Offset = 43.764
+
+8216
+eHadCoinTime_Offset = 43.743
+
+8217
+eHadCoinTime_Offset = 43.768
+
+8218
+eHadCoinTime_Offset = 43.762
+
+8219
+eHadCoinTime_Offset = 43.737
+
+8220
+eHadCoinTime_Offset = 43.761
+
+8221
+eHadCoinTime_Offset = 43.775
+
+8222
+eHadCoinTime_Offset = 43.783
+
+8223
+eHadCoinTime_Offset = 43.783
+
+8224
+eHadCoinTime_Offset = 43.776
+
+8225
+eHadCoinTime_Offset = 43.744
+
+8226
+eHadCoinTime_Offset = 43.743
+
+8227
+eHadCoinTime_Offset = 43.762
+
+8228
+eHadCoinTime_Offset = 43.775
+
+8229
+eHadCoinTime_Offset = 43.778
+
+8230
+eHadCoinTime_Offset = 43.754
+
+8231
+eHadCoinTime_Offset = 43.784
+
+8232
+eHadCoinTime_Offset = 43.767
+
+8233
+eHadCoinTime_Offset = 43.759
+
+8234
+eHadCoinTime_Offset = 43.733
+
+8235
+eHadCoinTime_Offset = 43.721
+
+8236
+eHadCoinTime_Offset = 43.748
+
+8237
+eHadCoinTime_Offset = 43.776
+
+8238
+eHadCoinTime_Offset = 43.760
+
+8239
+eHadCoinTime_Offset = 43.751
+
+8240
+eHadCoinTime_Offset = 43.710
+
+8241
+eHadCoinTime_Offset = 43.741
+
+8242
+eHadCoinTime_Offset = 43.735
+
+8243
+eHadCoinTime_Offset = 43.757
+
+8244
+eHadCoinTime_Offset = 43.767
+
+8245
+eHadCoinTime_Offset = 43.773
+
+8246
+eHadCoinTime_Offset = 43.773
+
+8252
+eHadCoinTime_Offset = 43.756
+
+8253
+eHadCoinTime_Offset = 43.758
+
+8254
+eHadCoinTime_Offset = 43.742
+
+8255
+eHadCoinTime_Offset = 43.738
+
+8256
+eHadCoinTime_Offset = 43.731
+
+8267
+eHadCoinTime_Offset = 43.750
+
+8268
+eHadCoinTime_Offset = 43.758
+
+8269
+eHadCoinTime_Offset = 43.731
+
+8270
+eHadCoinTime_Offset = 43.731
+
+8271
+eHadCoinTime_Offset = 43.768
+
+8272
+eHadCoinTime_Offset = 43.750
+
+8273
+eHadCoinTime_Offset = 43.761
+
+8274
+eHadCoinTime_Offset = 43.747
+
+8275
+eHadCoinTime_Offset = 43.779
+
+8276
+eHadCoinTime_Offset = 43.724
+
+8277
+eHadCoinTime_Offset = 43.737
+
+8278
+eHadCoinTime_Offset = 43.735
+
+8279
+eHadCoinTime_Offset = 43.753
+
+8280
+eHadCoinTime_Offset = 43.731
+
+8281
+eHadCoinTime_Offset = 43.751
+
+8282
+eHadCoinTime_Offset = 43.745
+
+8284
+eHadCoinTime_Offset = 43.743
+
+8285
+eHadCoinTime_Offset = 43.743
+
+8286
+eHadCoinTime_Offset = 43.746
+
+8287
+eHadCoinTime_Offset = 43.784
+
+8288
+eHadCoinTime_Offset = 43.746
+
+8289
+eHadCoinTime_Offset = 43.740
+
+8290
+eHadCoinTime_Offset = 43.704
+
+8291
+eHadCoinTime_Offset = 43.761
+
+8292
+eHadCoinTime_Offset = 43.729
+
+8293
+eHadCoinTime_Offset = 43.739
+
+8294
+eHadCoinTime_Offset = 43.741
+
+8295
+eHadCoinTime_Offset = 43.762
+
+8296
+eHadCoinTime_Offset = 43.705
+
+8297
+eHadCoinTime_Offset = 43.762
+
+8298
+eHadCoinTime_Offset = 43.739
+
+8304
+eHadCoinTime_Offset = 43.733
+
+8305
+eHadCoinTime_Offset = 43.759
+
+8306
+eHadCoinTime_Offset = 43.739
+
+8307
+eHadCoinTime_Offset = 43.754
+
+8308
+eHadCoinTime_Offset = 43.742
+
+8309
+eHadCoinTime_Offset = 43.771
+
+8310
+eHadCoinTime_Offset = 43.709
+
+8311
+eHadCoinTime_Offset = 43.734
+
+8312
+eHadCoinTime_Offset = 43.766
+
+8313
+eHadCoinTime_Offset = 43.774
+
+8318
+eHadCoinTime_Offset = 43.767
+
+8319
+eHadCoinTime_Offset = 43.736
+
+8320
+eHadCoinTime_Offset = 43.741
+
+8321
+eHadCoinTime_Offset = 43.733
+
+8322
+eHadCoinTime_Offset = 43.741
+
+8323
+eHadCoinTime_Offset = 43.730
+
+8324
+eHadCoinTime_Offset = 43.718
+
+8325
+eHadCoinTime_Offset = 43.725
+
+8326
+eHadCoinTime_Offset = 43.735
+
+8327
+eHadCoinTime_Offset = 43.760
+
+8328
+eHadCoinTime_Offset = 43.747
+
+8329
+eHadCoinTime_Offset = 43.703
+
+8330
+eHadCoinTime_Offset = 43.740
+
+8331
+eHadCoinTime_Offset = 43.747
+
+8332
+eHadCoinTime_Offset = 43.706
+
+8333
+eHadCoinTime_Offset = 43.731
+
+8334
+eHadCoinTime_Offset = 43.399
+
+8335
+eHadCoinTime_Offset = 43.761
+
+8336
+eHadCoinTime_Offset = 43.718
+
+8337
+eHadCoinTime_Offset = 43.747
+
+8338
+eHadCoinTime_Offset = 43.788
+
+8339
+eHadCoinTime_Offset = 43.794
+
+8340
+eHadCoinTime_Offset = 43.727
+
+8341
+eHadCoinTime_Offset = 43.765
+
+8342
+eHadCoinTime_Offset = 43.750
+
+8343
+eHadCoinTime_Offset = 43.758
+
+8344
+eHadCoinTime_Offset = 43.734
+
+8345
+eHadCoinTime_Offset = 43.753
+
+8346
+eHadCoinTime_Offset = 43.745
+
+8347
+eHadCoinTime_Offset = 43.734
+
+8348
+eHadCoinTime_Offset = 43.751
+
+8349
+eHadCoinTime_Offset = 43.730
+
+8350
+eHadCoinTime_Offset = 43.757
+
+8351
+eHadCoinTime_Offset = 43.741
+
+8352
+eHadCoinTime_Offset = 43.748
+
+8353
+eHadCoinTime_Offset = 43.707
+
+8354
+eHadCoinTime_Offset = 43.797
+
+8355
+eHadCoinTime_Offset = 44.375
+
+8356
+eHadCoinTime_Offset = 43.716
+
+8497
+eHadCoinTime_Offset = 43.962
+
+8498
+eHadCoinTime_Offset = 43.961
+
+8500
+eHadCoinTime_Offset = 43.980
+
+8503
+eHadCoinTime_Offset = 44.051
+
+8504
+eHadCoinTime_Offset = 43.991
+
+8505
+eHadCoinTime_Offset = 43.884
+
+8506
+eHadCoinTime_Offset = 43.949
+
+8509
+eHadCoinTime_Offset = 43.932
+
+8510
+eHadCoinTime_Offset = 43.899
+
+8511
+eHadCoinTime_Offset = 43.970
+
+8512
+eHadCoinTime_Offset = 43.890
+
+8513
+eHadCoinTime_Offset = 43.963
+
+8514
+eHadCoinTime_Offset = 43.952
+
+8515
+eHadCoinTime_Offset = 43.966
+
+8519
+eHadCoinTime_Offset = 44.093
+
+8522
+eHadCoinTime_Offset = 43.963
+
+8523
+eHadCoinTime_Offset = 43.982
+
+8524
+eHadCoinTime_Offset = 44.037
+
+8525
+eHadCoinTime_Offset = 43.978
+
+8526
+eHadCoinTime_Offset = 43.976
+
+8527
+eHadCoinTime_Offset = 43.989
+
+8528
+eHadCoinTime_Offset = 43.999
+
+8530
+eHadCoinTime_Offset = 44.011
+
+8531
+eHadCoinTime_Offset = 44.071
+
+8532
+eHadCoinTime_Offset = 44.029
+
+8533
+eHadCoinTime_Offset = 44.016
+
+8534
+eHadCoinTime_Offset = 43.981
+
+8535
+eHadCoinTime_Offset = 44.000
+
+8536
+eHadCoinTime_Offset = 44.007
+
+8537
+eHadCoinTime_Offset = 44.007
+
+8538
+eHadCoinTime_Offset = 44.020
+
+8539
+eHadCoinTime_Offset = 44.013
+
+8540
+eHadCoinTime_Offset = 43.980
+
+8544
+eHadCoinTime_Offset = 43.956
+
+8545
+eHadCoinTime_Offset = 43.940
+
+8546
+eHadCoinTime_Offset = 44.012
+
+8547
+eHadCoinTime_Offset = 43.995
+
+8573
+eHadCoinTime_Offset = 44.085
+
+8574
+eHadCoinTime_Offset = 44.086
+
+8575
+eHadCoinTime_Offset = 44.072
+
+8576
+eHadCoinTime_Offset = 44.092
+
+8577
+eHadCoinTime_Offset = 44.045
+
+8578
+eHadCoinTime_Offset = 43.974
+
+8579
+eHadCoinTime_Offset = 44.080
+
+8580
+eHadCoinTime_Offset = 44.083
+
+8581
+eHadCoinTime_Offset = 44.044
+
+8582
+eHadCoinTime_Offset = 43.996
+
+8583
+eHadCoinTime_Offset = 44.043
+
+8584
+eHadCoinTime_Offset = 44.048
+
+8585
+eHadCoinTime_Offset = 44.002
+
+8586
+eHadCoinTime_Offset = 44.023
+
+8587
+eHadCoinTime_Offset = 44.012
+
+8603
+eHadCoinTime_Offset = 44.070
+
+8604
+eHadCoinTime_Offset = 44.075
+
+8605
+eHadCoinTime_Offset = 44.087
+
+8606
+eHadCoinTime_Offset = 44.069
+
+8607
+eHadCoinTime_Offset = 44.089
+
+8608
+eHadCoinTime_Offset = 44.076
+
+8609
+eHadCoinTime_Offset = 44.077
+
+8610
+eHadCoinTime_Offset = 44.085
+
+8611
+eHadCoinTime_Offset = 44.078
+
+8612
+eHadCoinTime_Offset = 44.069
+
+8613
+eHadCoinTime_Offset = 44.087
+
+8614
+eHadCoinTime_Offset = 44.077
+
+8615
+eHadCoinTime_Offset = 44.108
+
+8616
+eHadCoinTime_Offset = 44.027
+
+8617
+eHadCoinTime_Offset = 44.076
+
+8618
+eHadCoinTime_Offset = 44.091
+
+8620
+eHadCoinTime_Offset = 43.979
+
+8621
+eHadCoinTime_Offset = 44.038
+
+8622
+eHadCoinTime_Offset = 44.096
+
+8623
+eHadCoinTime_Offset = 44.092
+
+8624
+eHadCoinTime_Offset = 44.107
+
+8625
+eHadCoinTime_Offset = 44.067
+
+8626
+eHadCoinTime_Offset = 44.092
+
+8627
+eHadCoinTime_Offset = 44.091
+
+8628
+eHadCoinTime_Offset = 44.132
+
+8629
+eHadCoinTime_Offset = 44.108
+
+8630
+eHadCoinTime_Offset = 44.129
+
+8631
+eHadCoinTime_Offset = 44.097
+
+8632
+eHadCoinTime_Offset = 44.115
+
+8633
+eHadCoinTime_Offset = 44.123
+
+8634
+eHadCoinTime_Offset = 44.107
+
+8635
+eHadCoinTime_Offset = 44.088
+
+8636
+eHadCoinTime_Offset = 44.109
+
+8645
+eHadCoinTime_Offset = 44.079
+
+8646
+eHadCoinTime_Offset = 44.069
+
+8647
+eHadCoinTime_Offset = 44.065
+
+8648
+eHadCoinTime_Offset = 44.083
+
+8649
+eHadCoinTime_Offset = 44.081
+
+8650
+eHadCoinTime_Offset = 44.072
+
+8651
+eHadCoinTime_Offset = 44.064
+
+8652
+eHadCoinTime_Offset = 44.035
+
+8653
+eHadCoinTime_Offset = 44.076
+
+8661
+eHadCoinTime_Offset = 44.046
+
+8662
+eHadCoinTime_Offset = 44.108
+
+8663
+eHadCoinTime_Offset = 44.043
+
+8664
+eHadCoinTime_Offset = 44.066
+
+8665
+eHadCoinTime_Offset = 44.037
+
+8666
+eHadCoinTime_Offset = 44.070
+
+8667
+eHadCoinTime_Offset = 43.975
+
+8668
+eHadCoinTime_Offset = 44.028
+
+8669
+eHadCoinTime_Offset = 44.084
+
+8670
+eHadCoinTime_Offset = 44.061
+
+8671
+eHadCoinTime_Offset = 44.060
+
+8672
+eHadCoinTime_Offset = 44.043
+
+8673
+eHadCoinTime_Offset = 44.097
+
+8674
+eHadCoinTime_Offset = 44.046
+
+8675
+eHadCoinTime_Offset = 44.017
+
+8676
+eHadCoinTime_Offset = 43.955
+
+8677
+eHadCoinTime_Offset = 44.081
+
+8678
+eHadCoinTime_Offset = 44.044
+
+8679
+eHadCoinTime_Offset = 44.027
+
+8681
+eHadCoinTime_Offset = 44.071
+
+8683
+eHadCoinTime_Offset = 44.067
+
+8684
+eHadCoinTime_Offset = 44.070
+
+8686
+eHadCoinTime_Offset = 44.077
+
+8687
+eHadCoinTime_Offset = 44.065
+
+8688
+eHadCoinTime_Offset = 44.062
+
+8689
+eHadCoinTime_Offset = 44.069
+
+8690
+eHadCoinTime_Offset = 44.098
+
+8691
+eHadCoinTime_Offset = 44.104
+
+8692
+eHadCoinTime_Offset = 44.102
+
+8693
+eHadCoinTime_Offset = 44.077
+
+8695
+eHadCoinTime_Offset = 44.091
+
+8696
+eHadCoinTime_Offset = 44.097
+
+8697
+eHadCoinTime_Offset = 44.122
+
+8698
+eHadCoinTime_Offset = 44.080
+
+8699
+eHadCoinTime_Offset = 44.117
+
+8704
+eHadCoinTime_Offset = 44.089
+
+8705
+eHadCoinTime_Offset = 44.078
+
+8706
+eHadCoinTime_Offset = 44.102
+
+8707
+eHadCoinTime_Offset = 44.078
+
+8708
+eHadCoinTime_Offset = 44.056
+
+8709
+eHadCoinTime_Offset = 44.081
+
+8711
+eHadCoinTime_Offset = 44.112
+
+8712
+eHadCoinTime_Offset = 44.096
+
+8713
+eHadCoinTime_Offset = 44.095
+
+8714
+eHadCoinTime_Offset = 44.089
+
+8715
+eHadCoinTime_Offset = 44.094
+
+8716
+eHadCoinTime_Offset = 44.096
+
+8717
+eHadCoinTime_Offset = 44.087
+
+8718
+eHadCoinTime_Offset = 44.113
+
+8721
+eHadCoinTime_Offset = 44.088
+
+8722
+eHadCoinTime_Offset = 44.104
+
+8723
+eHadCoinTime_Offset = 44.105
+
+8724
+eHadCoinTime_Offset = 44.125
+
+8725
+eHadCoinTime_Offset = 44.119
+
+8726
+eHadCoinTime_Offset = 44.124
+
+8727
+eHadCoinTime_Offset = 44.134
+
+8728
+eHadCoinTime_Offset = 44.109
+
+8729
+eHadCoinTime_Offset = 44.121
+
+8730
+eHadCoinTime_Offset = 44.112
+
+8733
+eHadCoinTime_Offset = 44.102
+
+8734
+eHadCoinTime_Offset = 44.106
+
+8735
+eHadCoinTime_Offset = 44.098
+
+8736
+eHadCoinTime_Offset = 44.094
+
+8737
+eHadCoinTime_Offset = 44.101
+
+8738
+eHadCoinTime_Offset = 44.109
+
+8739
+eHadCoinTime_Offset = 44.116
+
+8740
+eHadCoinTime_Offset = 44.101
+
+8741
+eHadCoinTime_Offset = 44.111
+
+8742
+eHadCoinTime_Offset = 44.119
+
+8743
+eHadCoinTime_Offset = 44.106
+
+8744
+eHadCoinTime_Offset = 44.103
+
+8745
+eHadCoinTime_Offset = 44.097
+
+8746
+eHadCoinTime_Offset = 44.105
+
+8747
+eHadCoinTime_Offset = 44.108
+
+8748
+eHadCoinTime_Offset = 44.111
+
+8749
+eHadCoinTime_Offset = 44.106
+
+8750
+eHadCoinTime_Offset = 44.113
+
+8751
+eHadCoinTime_Offset = 44.100
+
+8752
+eHadCoinTime_Offset = 44.106
+
+8759
+eHadCoinTime_Offset = 44.070
+
+8760
+eHadCoinTime_Offset = 44.109
+
+8761
+eHadCoinTime_Offset = 44.112
+
+8762
+eHadCoinTime_Offset = 44.107
+
+8763
+eHadCoinTime_Offset = 44.114
+
+8764
+eHadCoinTime_Offset = 44.106
+
+8765
+eHadCoinTime_Offset = 44.105
+
+8766
+eHadCoinTime_Offset = 44.119
+
+8769
+eHadCoinTime_Offset = 44.114
+
+8770
+eHadCoinTime_Offset = 44.104
+
+8771
+eHadCoinTime_Offset = 44.119
+
+8772
+eHadCoinTime_Offset = 44.140
+
+8773
+eHadCoinTime_Offset = 44.120
+
+8774
+eHadCoinTime_Offset = 44.119
+
+8781
+eHadCoinTime_Offset = 44.093
+
+8782
+eHadCoinTime_Offset = 44.081
+
+8783
+eHadCoinTime_Offset = 44.086
+
+8784
+eHadCoinTime_Offset = 44.072
+
+8785
+eHadCoinTime_Offset = 44.070
+
+8786
+eHadCoinTime_Offset = 44.081
+
+8787
+eHadCoinTime_Offset = 44.071
+
+8788
+eHadCoinTime_Offset = 44.082
+
+8792
+eHadCoinTime_Offset = 44.066
+
+8793
+eHadCoinTime_Offset = 44.080
+
+8794
+eHadCoinTime_Offset = 44.067
+
+8795
+eHadCoinTime_Offset = 44.079
+
+8796
+eHadCoinTime_Offset = 44.065
+
+8797
+eHadCoinTime_Offset = 44.077
+
+8798
+eHadCoinTime_Offset = 44.079
+
+8799
+eHadCoinTime_Offset = 44.087
+
+8800
+eHadCoinTime_Offset = 44.074
+
+8801
+eHadCoinTime_Offset = 44.078
+
+8802
+eHadCoinTime_Offset = 44.063
+
+8803
+eHadCoinTime_Offset = 44.076
+
+8804
+eHadCoinTime_Offset = 44.074
+
+8805
+eHadCoinTime_Offset = 44.097
+
+8806
+eHadCoinTime_Offset = 44.074
+
+8807
+eHadCoinTime_Offset = 44.081
+
+8808
+eHadCoinTime_Offset = 44.077
+
+8809
+eHadCoinTime_Offset = 44.074
+
+8810
+eHadCoinTime_Offset = 44.066
+
+8811
+eHadCoinTime_Offset = 44.111
+
+8812
+eHadCoinTime_Offset = 44.070
+
+8813
+eHadCoinTime_Offset = 44.057
+
+4860
+eHadCoinTime_Offset = 47.654
+
+4862
+eHadCoinTime_Offset = 47.657
+
+4863
+eHadCoinTime_Offset = 47.74
+
+4864
+eHadCoinTime_Offset = 47.855
+
+6634
+eHadCoinTime_Offset = 48.504
+
+6635
+eHadCoinTime_Offset = 48.504
+
+6636
+eHadCoinTime_Offset = 48.472
+
+6637
+eHadCoinTime_Offset = 48.515
+
+7866
+eHadCoinTime_Offset = 43.979
+
+7867
+eHadCoinTime_Offset = 43.981
+
+7868
+eHadCoinTime_Offset = 43.987
+
+7974
+eHadCoinTime_Offset = 43.903
+
+7975
+eHadCoinTime_Offset = 43.905
+
+7976
+eHadCoinTime_Offset = 43.903
+
+7977
+eHadCoinTime_Offset = 43.918
+
+8561
+eHadCoinTime_Offset = 44.606
+
+8570
+eHadCoinTime_Offset = 44.606
+
+8572
+eHadCoinTime_Offset = 44.59
+
+8776
+eHadCoinTime_Offset = 44.505
+
+8777
+eHadCoinTime_Offset = 44.509
+
+8778
+eHadCoinTime_Offset = 44.51

@@ -1,0 +1,10 @@
+PROJECT: c-kaonlt
+TRACK: analysis
+JOBNAME: KaonLT_DCCalib_SHMS_4783
+DISK_SPACE: 20 GB
+MEMORY: 2500 MB
+OS: centos7
+CPU: 1
+INPUT_FILES: /mss/hallc/spring17/raw/coin_all_04783.dat
+COMMAND:/group/c-kaonlt/USERS/sjdkay/hallc_replay_lt/UTIL_BATCH/Analysis_Scripts/DCCalib_CheckReplay_Batch.sh 4783 SHMS -1
+MAIL: sjdkay@jlab.org

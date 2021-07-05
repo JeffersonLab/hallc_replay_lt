@@ -66,7 +66,7 @@ static const Double_t refAdcPulseTimeCutLow  = 210.0;  // Units of ns
 static const Double_t refAdcPulseTimeCutHigh = 225.0;  // Units of ns
 static const Double_t adcTdcTimeDiffCutLow   = -100.0; // Units of ns
 static const Double_t adcTdcTimeDiffCutHigh  = 100.0;  // Units of ns
-static const Double_t calEtotCutVal          = 0.100;  // Units of GeV
+static const Double_t calEtotNormCutVal      = 0.7;  // Units of GeV
 static const Double_t cerNpeSumCutVal        = 1.5;    // Units of NPE
 // static const Double_t adcTdcTimeDiffCutLow   = -6000.0;  // Units of ns
 // static const Double_t adcTdcTimeDiffCutHigh  = 1000.0;  // Units of ns
@@ -122,12 +122,12 @@ Int_t numAdcHits, numTdcHits;
 
 Double_t adcErrorFlag, adcPulseTimeRaw, adcPulseTime, adcPulseAmp;
 Double_t tdcTimeRaw, tdcTime, adcTdcTimeDiff;
-Double_t calEtot, cerNpeSum;
+Double_t calEtotNorm, cerNpeSum;
 
 Bool_t adcRefMultiplicityCut, adcRefPulseAmpCut, adcRefPulseTimeCut;
 Bool_t edtmCut, adcErrorFlagCut, adcAndTdcHitCut;
 Bool_t adcPulseAmpCut, adcTdcTimeDiffCut;
-Bool_t calEtotCut, cerNpeSumCut;
+Bool_t calEtotNormCut, cerNpeSumCut;
 
 void generatePlots(UInt_t iplane, UInt_t iside, UInt_t ipaddle) {
 
@@ -193,11 +193,11 @@ void generatePlots(UInt_t iplane, UInt_t iside, UInt_t ipaddle) {
   if (!adcTdcTimeDiffWalkDir[iplane][iside]) {adcTdcTimeDiffWalkDir[iplane][iside] = sideUncalibDir[iplane][iside]->mkdir("adcTdcTimeDiffWalk"); adcTdcTimeDiffWalkDir[iplane][iside]->cd();}
   else (outFile->cd("hodoUncalib/"+planeNames[iplane]+"/"+sideNames[iside]+"/adcTdcTimeDiffWalk"));
   // Book histos
-  if (!h2_adcTdcTimeDiffWalk[iplane][iside][ipaddle]) h2_adcTdcTimeDiffWalk[iplane][iside][ipaddle] = new TH2F(Form("h2_adcTdcTimeDiffWalk_paddle_%d", ipaddle+1), "TDC-ADC Time vs. Pulse Amp Plane "+planeNames[iplane]+" Side "+sideNames[iside]+Form(" Paddle %d", ipaddle+1)+"; Pulse Amplitude (mV) / 1 mV;  TDC-ADC Time (ns) / 100 ps", 1000, 0, 1000, 150, -20, 20);
+  if (!h2_adcTdcTimeDiffWalk[iplane][iside][ipaddle]) h2_adcTdcTimeDiffWalk[iplane][iside][ipaddle] = new TH2F(Form("h2_adcTdcTimeDiffWalk_paddle_%d", ipaddle+1), "TDC-ADC Time vs. Pulse Amp Plane "+planeNames[iplane]+" Side "+sideNames[iside]+Form(" Paddle %d", ipaddle+1)+"; Pulse Amplitude (mV) / 1 mV;  TDC-ADC Time (ns) / 100 ps", 1000, 0, 1000, 150, -100, 100);
   
 } // generatePlots()
 
-void timeWalkHistos(TString inputname,Int_t runNum) {
+void timeWalkHistos(TString inputname,Int_t runNum, string SPEC_flg) {    //SPEC_flg ---> "hms"  or "coin"
 
   // Global ROOT settings
   gStyle->SetOptFit();
@@ -212,22 +212,18 @@ void timeWalkHistos(TString inputname,Int_t runNum) {
 
   // Obtain the replay data file and create new output ROOT file
   // replayFile = new TFile("ROOTfiles/hms_replay_production_all_1267_-1.root", "READ");
-   replayFile = new TFile(inputname, "READ");
-  //replayFile = new TFile("/lustre/expphy/volatile/hallc/comm2017/pooser/tw-data/hms_replay_production_all_1267_-1.root", "READ");
-
-  // replayFile = new TFile(Form("ROOTfiles/hms_replay_production_all_%d_-1.root", runNum), "READ");
-  // replayFile = new TFile(Form("ROOTfiles/hms_coin_replay_production_%d_-1.root", runNum), "READ");
-
-  outFile    = new TFile("timeWalkHistos.root", "RECREATE");
+  replayFile = new TFile(inputname, "READ");
+  TString outFileName = Form("timeWalkHistos_%d.root", runNum ); // SK 13/5/19 - new .root output for each run tested
+  outFile    = new TFile(outFileName, "RECREATE");
   // Obtain the tree
   rawDataTree = dynamic_cast <TTree*> (replayFile->Get("T"));
   // Acquire the trigger apparatus data
-  rawDataTree->SetBranchAddress("T.hms.hFADC_TREF_ROC1_adcPulseTimeRaw", &refAdcPulseTimeRaw);
-  rawDataTree->SetBranchAddress("T.hms.hFADC_TREF_ROC1_adcPulseAmp",     &refAdcPulseAmp);
-  rawDataTree->SetBranchAddress("T.hms.hFADC_TREF_ROC1_adcMultiplicity", &refAdcMultiplicity);
-  rawDataTree->SetBranchAddress("T.hms.hT1_tdcTimeRaw", &refT1TdcTimeRaw);
-  rawDataTree->SetBranchAddress("T.hms.hT2_tdcTimeRaw", &refT2TdcTimeRaw);
-  rawDataTree->SetBranchAddress("H.cal.etot", &calEtot);
+  rawDataTree->SetBranchAddress(Form("T.%s.hFADC_TREF_ROC1_adcPulseTimeRaw", SPEC_flg.c_str()), &refAdcPulseTimeRaw);
+  rawDataTree->SetBranchAddress(Form("T.%s.hFADC_TREF_ROC1_adcPulseAmp", SPEC_flg.c_str()),     &refAdcPulseAmp);
+  rawDataTree->SetBranchAddress(Form("T.%s.hFADC_TREF_ROC1_adcMultiplicity", SPEC_flg.c_str()), &refAdcMultiplicity);
+  rawDataTree->SetBranchAddress(Form("T.%s.hT1_tdcTimeRaw", SPEC_flg.c_str()), &refT1TdcTimeRaw);
+  rawDataTree->SetBranchAddress(Form("T.%s.hT2_tdcTimeRaw", SPEC_flg.c_str()), &refT2TdcTimeRaw);
+  rawDataTree->SetBranchAddress("H.cal.etotnorm", &calEtotNorm);
   rawDataTree->SetBranchAddress("H.cer.npeSum", &cerNpeSum);
   // Loop over the planes, sides, signals, leafs, and fill data arrays
   for(UInt_t iplane = 0; iplane < nPlanes; iplane++) {
@@ -299,11 +295,11 @@ void timeWalkHistos(TString inputname,Int_t runNum) {
     // Acquire the event from the data tree
     rawDataTree->GetEntry(ievent);
     // Fiducial PID cuts
-    calEtotCut   = (calEtot   < calEtotCutVal);
+    calEtotNormCut   = (calEtotNorm   < calEtotNormCutVal);
     cerNpeSumCut = (cerNpeSum < cerNpeSumCutVal);
-    //  calEtotCut =1;
+    //calEtotCut =1;
     //cerNpeSumCut =1;
-    //if (calEtotCut || cerNpeSumCut) continue;
+    if (calEtotNormCut || cerNpeSumCut) continue;
     // Fill trigger apparatus histos
     h1_refAdcPulseTimeRaw->Fill(refAdcPulseTimeRaw*adcChanToTime);
     h1_refAdcPulseAmp->Fill(refAdcPulseAmp);
@@ -443,10 +439,7 @@ void timeWalkHistos(TString inputname,Int_t runNum) {
   t = clock() - t;
   printf ("The Analysis Took %.1f seconds \n", ((float) t) / CLOCKS_PER_SEC);
   printf ("The Analysis Event Rate Was %.3f kHz \n", (ievent + 1) / (((float) t) / CLOCKS_PER_SEC*1000.));
-
   outFile->Write();
-  //outFile->Close();
-
+  outFile->Close();
   //return 0;
-
 } // time_walk_calib()

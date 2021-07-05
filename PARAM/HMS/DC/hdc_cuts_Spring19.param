@@ -1,0 +1,20 @@
+;Utilize per wire tzero offsets, 1 means true
+h_using_tzero_per_wire = 1
+
+; TEST STAND PARAMETER
+; Custom parameter which should be loaded when aiming to analyze HMS DC
+; data with no tracking 
+hsel_using_scin  = 0
+; hsel_using_prune = 0
+
+hdc_tdc_min_win = -14248, -14181, -14247, -14236, -14172, -14338, -14131, -14283, -14183, -14195, -14239, -14158 
+hdc_tdc_max_win = -11215, -11143, -11179, -11172, -11114, -11216, -11101, -11182, -11122, -11144, -11160, -11098 
+
+hdc_fix_lr = 1 ; Let hit have different L/R assignment for different space point
+hdc_fix_propcorr = 1 ; do propagation along wire each time hit appeears
+                     ; in a space point
+
+
+; Zero time correction for each plane in ns that is added to TDC time.
+hdc_plane_time_zero = 1316.0+30.,1316.0+30.,1316.0+30.,1316.0+30.,1316.0+30.,1316.0+30.,
+		      1316.0+30.,1316.0+30.,1316.0+30.,1316.0+30.,1316.0+30.,1316.0+30.

@@ -1,0 +1,48 @@
+### Run Period 1 - Autumn 2018 KaonLT Kinematics
+0-5334
+g_ctp_parm_filename       = "DBASE/COIN/DC_Calib/OfflineAutumn18_DCCalib.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+### Run Period 2 - Winter 2018 KaonLT Kinematics
+#5335-7045
+#g_ctp_parm_filename       = "DBASE/COIN/DC_Calib/OfflineWinter18_DCCalib.param"
+#g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+#### TEST ####
+
+### Run Period 2 - Winter 2018 KaonLT Kinematics
+5335-6645
+g_ctp_parm_filename       = "DBASE/COIN/DC_Calib/OfflineWinter18_DCCalib.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+6646-6648
+g_ctp_parm_filename       = "DBASE/COIN/DC_Calib/OfflineWinter18_DCCalib_6646.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+6649
+g_ctp_parm_filename       = "DBASE/COIN/DC_Calib/OfflineWinter18_DCCalib_6649.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+### Run Period 2 - Winter 2018 KaonLT Kinematics
+6650-7045
+g_ctp_parm_filename       = "DBASE/COIN/DC_Calib/OfflineWinter18_DCCalib.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+
+#### TEST #####
+
+### Run Period 3 - Spring 19 KaonLT Kinematics
+7046-8357
+g_ctp_parm_filename       = "DBASE/COIN/DC_Calib/OfflineSpring19_DCCalib.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+### Run Period 4 - Summer 19 PionLT Kinematics
+8358-8976
+g_ctp_parm_filename       = "DBASE/COIN/DC_Calib/OfflineSummer19_DCCalib.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+### VCS - Summer 19
+8977-99999
+g_ctp_parm_filename       = "DBASE/COIN/OnlineSummer19VCS.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+g_ctp_trigdet_filename    = "PARAM/TRIG/tcoin_VCS.param"

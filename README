@@ -1,0 +1,30 @@
+This branch, offline, has all of the scripts as they were at the END of the run on 20/7/19. It will 
+also receive future updates to scripts that are applicable to ALL users analysing the Kaon or Pion LT
+data.
+
+######################################################################################################
+#################################### SCRIPT INFO #####################################################
+######################################################################################################
+
+These scripts execute a hcana replay and then run a quick analysis script on that replay once it ends.
+The replay script outputs some plots to the screen, here's some brief notes on what you should expect
+to see -
+
+HeepSinglesYield.sh - Plots of the HMS and SHMS W distributions, here we expect these to be peaked at
+~0.938. If you see an extra bump in the distribution at ~1.2 this is likely just due to the delta cut
+being too open. You'll also get some other plots of phi for the q vector and of W vs x'fp.
+
+HeepCoinYield.sh - A plot of the missing mass, this should be ZERO. You should also see that the missing
+momenta (all components) and energy are ZERO.
+
+luminosity.sh - You should see some event selection histograms, what's important here are the numbers
+that are also printed to screen detailing the numbers of events. Don't worry about these too much.
+
+PionYield.sh - Here you will see some event selection histograms, some timing histograms and finally a 
+summary of the kinematics. The Q2 and W diamond should match up to your current experimental setting.
+The value of epsilon should also match up. You should also see a missing mass plot with a peak at the
+neutron mass (~0.940). This should have a nice gaussian fit to it, you'll also get a textbox with the 
+number of pion events found. Make a note of this number on the run sheet.
+
+NOTE - The scripts are set up such that they will NOT run another replay IF an existing root file exists.
+If you want to replay again, comment out the relevant line in each script.

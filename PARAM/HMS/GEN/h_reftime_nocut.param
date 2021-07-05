@@ -1,0 +1,7 @@
+; Reference time for no cuts
+; hdc_tdcrefcut=0.
+; hhodo_tdcrefcut=0.
+
+; hhodo_adcrefcut=0.
+; hcer_adcrefcut=0.
+; hcal_adcrefcut=0.

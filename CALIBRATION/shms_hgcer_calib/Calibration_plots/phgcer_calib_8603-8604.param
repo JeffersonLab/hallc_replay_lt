@@ -1,0 +1,5 @@
+; Calibration parameters from calibrating runs 8603-8604
+; First guess parameters (commented by default)
+; phgcer_adc_to_npe = 1.0/5.939, 1.0/6.695, 1.0/5.250, 1.0/6.798
+; Second guess parameters
+phgcer_adc_to_npe=1./6.008, 1./6.606, 1./5.243, 1.0/6.494

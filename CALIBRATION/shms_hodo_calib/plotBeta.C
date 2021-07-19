@@ -219,9 +219,6 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	delete(th1_hgcerCut); 
 	delete(th1_aero);
 	delete(th1_aeroCut);
-
-	delete(tree1);
-	delete(tree2);
 	
 	//make canvas for beta comparison plot
 	TCanvas *c1 = new TCanvas("c1","c1",10, 10, 1000, 800);
@@ -237,19 +234,19 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	beta1->Draw();
 	gPad->Update();
 	
-	TPaveStats *s1;
-	s1 = (TPaveStats*)c1->GetPrimitive("stats");
-	s1->SetName("s1");
-	s1->SetY1NDC(.4);
-	s1->SetY2NDC(.6);
-	s1->SetTextColor(kBlue);
-	
 	beta2->SetLineColor(kRed);
 	beta2->SetName("Beta_postCalib");
 	beta2->SetStats();
 
 	beta2->Draw("sames");
 	gPad->Update();
+	
+	TPaveStats *s1;
+	s1 = (TPaveStats*)c1->GetPrimitive("stats");
+	s1->SetName("s1");
+	s1->SetY1NDC(.4);
+	s1->SetY2NDC(.6);
+	s1->SetTextColor(kBlue);
 			
 	TPaveStats *s2;
 	s2 = (TPaveStats*)c1->GetPrimitive("stats");
@@ -262,6 +259,9 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	betaDir->WriteObject(c1, Form("Beta_Comp_%d", runNum));
 	
 	cout << "Finished making plots for run: " << runNum << endl;
+	
+	delete(tree1);
+	delete(tree2);
 	
 	input1->Close();
 	input2->Close();

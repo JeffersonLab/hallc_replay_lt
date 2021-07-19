@@ -51,13 +51,28 @@ void replay_coin_scalers (Int_t RunNumber = 0, Int_t MaxEvent = 0,Int_t FirstEve
   TRG->AddDetector(coin); 
  
   THcHallCSpectrometer* SHMS = new THcHallCSpectrometer("P", "SHMS");
+  // Add drift chambers to SHMS apparatus
+  THcDC* pdc = new THcDC("dc", "Drift Chambers");
+  SHMS->AddDetector(pdc);
+  // Add hodoscope to SHMS apparatus
+  THcHodoscope* phod = new THcHodoscope("hod", "Hodoscope");
+  SHMS->AddDetector(phod);
+
   SHMS->SetEvtType(1);
   SHMS->AddEvtType(4);
   SHMS->AddEvtType(5);
   SHMS->AddEvtType(6);
   SHMS->AddEvtType(7);
   gHaApps->Add(SHMS);
+
   THcHallCSpectrometer* HMS = new THcHallCSpectrometer("H", "HMS");
+  // Add drift chambers to HMS apparatus
+  THcDC* hdc = new THcDC("dc", "Drift Chambers");
+  HMS->AddDetector(hdc);
+  // Add hodoscope to HMS apparatus
+  THcHodoscope* hhod = new THcHodoscope("hod", "Hodoscope");
+  HMS->AddDetector(hhod);
+
   HMS->SetEvtType(2);
   HMS->AddEvtType(4);
   HMS->AddEvtType(5);

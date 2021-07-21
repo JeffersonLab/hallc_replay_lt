@@ -57,7 +57,7 @@ void run_RefT_Cuts(string RunPrefix = "", Int_t RunNumber = 0, Int_t MaxEvent = 
     Outpath = "/dsk3/"+User+"/JLab/OUTPUT/Calib/Timing/";
     Histopath = "/dsk3/"+User+"/JLab/HISTOGRAMS/Calib/Timing/";
   }
-  rootFileNameString = Rootpath + Form("%s_%i_%i.root", RunPrefix.c_str(), RunNumber, MaxEvent);
+  rootFileNameString = Rootpath + Form("%s%i_%i.root", RunPrefix.c_str(), RunNumber, MaxEvent);
   if (gSystem->AccessPathName(rootFileNameString) == kTRUE){
     cerr << "!!!!! ERROR !!!!! " << endl << rootFileNameString <<  " not found" << endl <<  "!!!!! ERRROR !!!!!" << endl;
     return;

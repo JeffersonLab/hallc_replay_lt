@@ -2,7 +2,7 @@
 
 #General stuff
 
-block T.coin.pFADC_TREF_ROC2_adcPulseAmpRaw
+block T.coin.*
 
 # HMS branches
 

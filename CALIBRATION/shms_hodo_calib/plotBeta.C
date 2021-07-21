@@ -34,7 +34,7 @@
 TFile *Outfile;
 TFile *input1, *input2;
 TTree *tree1, *tree2;
-TDirectory *betaDir, *cutsDir, *cutSubDir; 
+TDirectory *betaDir, *cutsDir; 
 
 //histograms
 TH1F *beta1, *beta2;
@@ -122,22 +122,22 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	
 	//name and set stats, and write to directory all cut summary plots for 1st replay
 	th1_cal->SetStats();
-	cutSubDir->WriteObject(th1_cal, "calEtot_Pt1");
+	cutsDir->WriteObject(th1_cal, "calEtot_Pt1");
 	
 	th1_calCut->SetStats();
-	cutSubDir->WriteObject(th1_calCut, "calEtotCut_Pt1");
+	cutsDir->WriteObject(th1_calCut, "calEtotCut_Pt1");
 	
 	th1_hgcer->SetStats();
-	cutSubDir->WriteObject(th1_hgcer, "hgcerNpeSum_Pt1");
+	cutsDir->WriteObject(th1_hgcer, "hgcerNpeSum_Pt1");
 	
 	th1_hgcerCut->SetStats();
-	cutSubDir->WriteObject(th1_hgcerCut, "hgcerNpeSumCut_Pt1");
+	cutsDir->WriteObject(th1_hgcerCut, "hgcerNpeSumCut_Pt1");
 	
 	th1_aero->SetStats();
-	cutSubDir->WriteObject(th1_aero, "aeroNpeSum_Pt1");
+	cutsDir->WriteObject(th1_aero, "aeroNpeSum_Pt1");
 	
 	th1_aeroCut->SetStats();
-	cutSubDir->WriteObject(th1_aeroCut, "aeroNpeSumCut_Pt1");
+	cutsDir->WriteObject(th1_aeroCut, "aeroNpeSumCut_Pt1");
 	
 	//to avoid memory leak delete histograms since we make new ones for part 2
 	delete(th1_cal); 
@@ -195,22 +195,22 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	
 	//set stats, and write to directory all cut summary plots for 2nd replay
 	th1_cal->SetStats();
-	cutSubDir->WriteObject(th1_cal, "calEtot_Pt3");
+	cutsDir->WriteObject(th1_cal, "calEtot_Pt3");
 	
 	th1_calCut->SetStats();
-	cutSubDir->WriteObject(th1_calCut, "calEtotCut_Pt3");
+	cutsDir->WriteObject(th1_calCut, "calEtotCut_Pt3");
 	
 	th1_hgcer->SetStats();
-	cutSubDir->WriteObject(th1_hgcer, "hgcerNpeSum_Pt3");
+	cutsDir->WriteObject(th1_hgcer, "hgcerNpeSum_Pt3");
 	
 	th1_hgcerCut->SetStats();
-	cutSubDir->WriteObject(th1_hgcerCut, "hgcerNpeSumCut_Pt3");
+	cutsDir->WriteObject(th1_hgcerCut, "hgcerNpeSumCut_Pt3");
 	
 	th1_aero->SetStats();
-	cutSubDir->WriteObject(th1_aero, "aeroNpeSum_Pt3");
+	cutsDir->WriteObject(th1_aero, "aeroNpeSum_Pt3");
 	
 	th1_aeroCut->SetStats();
-	cutSubDir->WriteObject(th1_aeroCut, "aeroNpeSumCut_Pt3");
+	cutsDir->WriteObject(th1_aeroCut, "aeroNpeSumCut_Pt3");
 	
 	//to avoid memory leak delete histograms since we make new ones for part 3
 	delete(th1_cal); 
@@ -269,87 +269,27 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	return;
 }
 
-void plotBeta (  TString runNumbers, Int_t NumEventsInput ) 
+void plotBeta (  Int_t runNumber, Int_t NumEventsInput ) 
 {
 	gROOT->SetBatch(1);
   	cout << "\n\n";
-	ifstream runNumFile;
-	runNumFile.open(runNumbers);
-	cout << "Running File: '"<<runNumbers<<"' for " << NumEventsInput << " Events\n";
-	if (!runNumFile)
-	{
-		cout << "Runfile that was specified does not exist !!!!!!  \n\n Shuting down!!! \n\n";
-		return; 
-	}
+	cout << "Running Run: '"<<runNumbers<<"' for " << NumEventsInput << " Events\n";
+	
 	
 	Int_t *runList;
 	Int_t Length = 0, Iteration = 1;
-	runList = new Int_t [INILENGTH];
 	NumEvents = NumEventsInput;
-	
-	//fill runlist
-	while (!runNumFile.eof())
-	{
-		// for if there are greater than INILENGTH runs that need to be read in.
-		if (Length >= Iteration*INILENGTH)
-		{
-			Iteration++;
-			// copy current list into one that has INILENGTH more spots
-			Int_t *temp = new Int_t [Iteration*INILENGTH];
-			for (Int_t i = 0; i < Length; i++)
-			{
-				temp[i] = runList[i];
-			}
-			//return memory
-			delete[] runList;
-			//copy pionter into new list location
-			runList = temp;
-		}
-		runNumFile >> runList[Length];
-		//for some reason the run list has not ended properly (Prob. caused by an extra line at the end of the runlist file)
-		//   So end early
-		if(runList[Length] == 0)
-		{
-		    cout << "ending file read in early as zero found in runlist file.\nMight be caused by an extra line at the end of the runlist file\n";
-		    // if we managed to read in anything then just use that.
-		    if (Length > 0)
-		    {
-		        return true;
-		    }else{
-		        return false;
-		    }
-		}
-		Length++;
-	}
-	runNumFile.close();
-	
-	cout << "Processing The following runs:\n";
-	for(Int_t i = 0; i < Length; i++)
-	{
-	  cout << runList[i] << "\n";
-	}
 
 	TString rootFileName1, rootFileName2;
 	//open output File
-	Outfile = new TFile ("./Calibration_Plots/BetaComp.root","RECREATE");
+	Outfile = new TFile (Form("./Calibration_Plots/BetaComp%d.root", runNumber),"RECREATE");
 	// make dirrectories for putting output
 	betaDir = Outfile->mkdir("BetaDists");
 	cutsDir = Outfile->mkdir("CutsSummary");
-	//Loop over all run numbers
-	for(Int_t i = 0; i < Length; i++)
-	{
-	        rootFileName1 = Form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt1_%d_-1.root", runList[i]);
-	        rootFileName2 = Form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt3_%d_-1.root", runList[i]);
-	        //rootFileName1 = Form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt1_%d_100000.root", runList[i]);
-			//rootFileName1 = Form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt3_%d_100000.root", runList[i]);
-		
-		// make a directory for plots of cut variables by run number
-		cutSubDir = cutsDir->mkdir(Form("Cuts_Run_%d", runList[i]));
-		
-		// generate and save plots of delta, with cuts.
-		cout << "\n\nprocessing Run " << runList[i] << "\n";
-		makePlots(rootFileName1, rootFileName2, runList[i]);
-	}
+	rootFileName1 = Form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt1_%d_-1.root", runNumber);
+	rootFileName2 = Form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt3_%d_-1.root", runNumber);
+	
+	makePlots(rootFileName1, rootFileName2, runNumber);
 	
 	Outfile->Close();
 	return;

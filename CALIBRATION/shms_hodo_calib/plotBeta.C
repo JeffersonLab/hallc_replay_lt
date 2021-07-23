@@ -275,19 +275,8 @@ void plotBeta (  Int_t runNumber, Int_t NumEventsInput )
 {
 	gROOT->SetBatch(1);
   	cout << "\n\n";
-<<<<<<< HEAD
-	ifstream runNumFile;
-	runNumFile.open(runNumbers);
-	cout << "Running File: '"<<runNumber<<"' for " << NumEventsInput << " Events\n";
-	if (!runNumFile)
-	{
-		cout << "Runfile that was specified does not exist !!!!!!  \n\n Shuting down!!! \n\n";
-		return; 
-	}
-=======
-	cout << "Running Run: '"<<runNumbers<<"' for " << NumEventsInput << " Events\n";
-	
->>>>>>> 8e53dd5abbfbf3a2185a35fcf92c30f11fe9a6ce
+
+	cout << "Running Run: '"<<runNumber<<"' for " << NumEventsInput << " Events\n";
 	
 	Int_t *runList;
 	Int_t Length = 0, Iteration = 1;

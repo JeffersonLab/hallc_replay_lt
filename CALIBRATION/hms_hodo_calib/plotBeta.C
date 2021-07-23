@@ -277,7 +277,7 @@ void plotBeta (  TString runNumbers, Int_t NumEventsInput )
   	cout << "\n\n";
 	ifstream runNumFile;
 	runNumFile.open(runNumbers);
-	cout << "Running File: '"<<runNumbers<<"' for " << NumEventsInput << " Events\n";
+	cout << "Running File: '"<<runNumber<<"' for " << NumEventsInput << " Events\n";
 	if (!runNumFile)
 	{
 		cout << "Runfile that was specified does not exist !!!!!!  \n\n Shuting down!!! \n\n";

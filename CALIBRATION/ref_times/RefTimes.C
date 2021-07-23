@@ -256,15 +256,16 @@ void setBranchAddresses(TTree* DataTree)
     //shms calorimeter
     for(Int_t iSide = 0; iSide < calSides; iSide++)
     {
-        DataTree->SetBranchAddress(Form("H.cal.pr.Good%sAdcTdcDiffTime", calSideNames[iSide]), &pcalprAdcMult[iSide]);
-        DataTree->SetBranchAddress(Form("H.cal.pr.Good%sAdcMult", calSideNames[iSide]), &pcalprAdcMult[iSide]);
+        DataTree->SetBranchAddress(Form("P.cal.pr.Good%sAdcTdcDiffTime", calSideNames[iSide]), &pcalprAdcMult[iSide]);
+        DataTree->SetBranchAddress(Form("P.cal.pr.Good%sAdcMult", calSideNames[iSide]), &pcalprAdcMult[iSide]);
     }
-    DataTree->SetBranchAddress(Form("H.cal.fly.GoodAdcTdcDiffTime"), &pcalprAdcMult[iSide]);
-    DataTree->SetBranchAddress(Form("H.cal.fly.GoodAdcMult"), &pcalprAdcMult[iSide]);
+    DataTree->SetBranchAddress("P.cal.fly.GoodAdcTdcDiffTime", &pcalprAdcMult[iSide]);
+    DataTree->SetBranchAddress("P.cal.fly.GoodAdcMult", &pcalprAdcMult[iSide]);
 
     return;
 }
 
+//function for declaring all of the Histograms that are to be filed in the proceding script
 void makeHistos ()
 {
     hFADC_TREF_ROC1_Hist = new TH1I(Form("T.%s.hFADC_TREF_ROC1_adcPulseTimeRaw", DaqName), Form("T.%s.hFADC_TREF_ROC1_adcPulseTimeRaw", DaqName), 10000, 1.0);
@@ -362,22 +363,42 @@ void makeHistos ()
     {
         for(Int_t iPmt = 0; iPmt < aeroNumPmts; iPmt++)
         {
-            aeroAdcTdcDiffTime_Hist[aeroSides]
-            aeroAdcMult_Hist[aeroSides]
+            aeroAdcTdcDiffTime_Hist[iSide][iPmt] = new TH1F(Form("P.aero.good%sAdcTdcDiffTime_Pmt%d", aeroSideNames[iSide], iPmt+1), Form("P.aero.good%sAdcTdcDiffTime_Pmt%d", aeroSideNames[iSide], iPmt+1), 5000, 1.0);
+            aeroAdcMult_Hist[iSide][iPmt] = new TH1I(Form("P.aero.good%sAdcMult_Pmt%d", aeroSideNames[iSide], iPmt+1), Form("P.aero.good%sAdcMult_Pmt%d", aeroSideNames[iSide], iPmt+1), 10, 1.0);
         }
     }
 
     //Calorimeters
     //hms
-    hcalAdcTdcDiffTime_Hist[hcalPlanes][calSides]
-    hcalAdcMult_Hist[hcalPlanes][calSides]
-
-    //shms
-    pcalprAdcTdcDiffTime_Hist[calSides]
-    pcalprAdcMult_Hist[calSides]
-
-    pcalflyAdcTdcDiffTime_Hist
-    pcalflyAdcMult_Hist
+    for(Int_t iPlane = 0; iPlane < hcalPlanes; iPlane++)
+    {
+        for(Int_t iSide = 0; iSide < calSides; iSide++)
+        {
+            for(Int_t iPmt = 0; iPmt < hcalNumPmts[iPlane]; iPmt++)
+            {
+                hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt] = new TH1F(Form("H.cal.%s.Good%sAdcTdcDiffTime_Pmt%d", calPlaneNames[iPlane], calSideNames[iSide], iPmt+1),Form("H.cal.%s.Good%sAdcTdcDiffTime_Pmt%d", calPlaneNames[iPlane], calSideNames[iSide], iPmt+1), 5000, 1.0);
+                hcalAdcMult_Hist[iPlane][iSide][iPmt] = new TH1I(Form("H.cal.%s.Good%sAdcMult_Pmt%d", calPlaneNames[iPlane], calSideNames[iSide], iPmt+1),Form("H.cal.%s.Good%sAdcMult_Pmt%d", calPlaneNames[iPlane], calSideNames[iSide], iPmt+1), 10, 1.0);
+            }
+        }
+    }
+    
+    //shms calorimeter
+    for(Int_t iSide = 0; iSide < calSides; iSide++)
+    {
+        for(Int_t iPmt = 0; iPmt < pcalPrNumPmts; iPmt++)
+        {
+            pcalprAdcTdcDiffTime_Hist[iSide][iPmt] = new TH1F(Form("P.cal.pr.Good%sAdcTdcDiffTime_pmt%d", calSideNames[iSide], iPmt+1), Form("P.cal.pr.Good%sAdcTdcDiffTime_pmt%d", calSideNames[iSide], iPmt+1), 5000, 1.0);
+            pcalprAdcMult_Hist[iSide][iPmt] = new TH1I(Form("P.cal.pr.Good%sAdcMult_pmt%d", calSideNames[iSide], iPmt+1), Form("P.cal.pr.Good%sAdcMult_pmt%d", calSideNames[iSide], iPmt+1), 10, 1.0);
+        }
+    }    
+    
+    for(Int_t iPmt = 0; iPmt < pcalFlyNumPmts; iPmt++)
+    {
+        pcalflyAdcTdcDiffTime_Hist[iPmt] = new TH1F((Form("P.cal.fly.GoodAdcTdcDiffTime_pmt%d", iPmt+1),Form("P.cal.fly.GoodAdcTdcDiffTime_pmt%d", iPmt+1), 5000, 1.0);
+        pcalflyAdcMult_Hist[iPmt] = new TH1F((Form("P.cal.fly.GoodAdcMult_pmt%d", iPmt+1),Form("P.cal.fly.GoodAdcMult_pmt%d", iPmt+1), 10, 1.0);
+    }
+    
+    return;
 }
 
 // input is the path from ref_times directory to rootfile and the run number that your using
@@ -393,7 +414,13 @@ void refTimes( TString rootFileName, Int_t RunNumber)
     setBranchAddresses(DataTree);
     
     //make histograms
+    makeHistos();
     
+    //fill histos and apply cuts
+    
+    //save plots
+    
+    return;
 }
 
 

@@ -171,32 +171,32 @@ Bool_t DetTCuts_Coin::Process(Long64_t entry)
     }
   }
   
-  for (Int_t npl = 0; npl < cal_planes; npl++){ // Loop over all calorimeter planes
-    for (Int_t nside = 0; nside < sides; nside++){ //Loop over each side
-      for (Int_t ipmt = 0; ipmt < 13; ipmt++){ // Loop over each PMT in a particular plane	
-	if (npl == 0 && nside == 0) {
-	  if (H_cal_1pr_goodPosAdcMult[ipmt] == 1) h1hCalAdcTdcTDiff[npl][nside][ipmt]->Fill(H_cal_1pr_goodPosAdcTdcDiffTime[ipmt]);
-	}
-	else if (npl == 1 && nside == 0){
-	  if (H_cal_2ta_goodPosAdcMult[ipmt] == 1) h1hCalAdcTdcTDiff[npl][nside][ipmt]->Fill(H_cal_2ta_goodPosAdcTdcDiffTime[ipmt]);
-	}
-	else if (npl == 2 && nside == 0){
-	  if (H_cal_3ta_goodPosAdcMult[ipmt] == 1) h1hCalAdcTdcTDiff[npl][nside][ipmt]->Fill(H_cal_3ta_goodPosAdcTdcDiffTime[ipmt]);
-	}  
-	else if (npl == 3 && nside == 0){
-	  if (H_cal_4ta_goodPosAdcMult[ipmt] == 1) h1hCalAdcTdcTDiff[npl][nside][ipmt]->Fill(H_cal_4ta_goodPosAdcTdcDiffTime[ipmt]);
-	}
-	else if (npl == 0 && nside == 1){
-	  if (H_cal_1pr_goodNegAdcMult[ipmt] == 1) h1hCalAdcTdcTDiff[npl][nside][ipmt]->Fill(H_cal_1pr_goodNegAdcTdcDiffTime[ipmt]);
-	}
-	else if (npl == 1 && nside == 1){
-	  if (H_cal_2ta_goodNegAdcMult[ipmt] == 1) h1hCalAdcTdcTDiff[npl][nside][ipmt]->Fill(H_cal_2ta_goodNegAdcTdcDiffTime[ipmt]);
-	}
+      for (Int_t npl = 0; npl < cal_planes; npl++){ // Loop over all calorimeter planes
+        for (Int_t nside = 0; nside < sides; nside++){ //Loop over each side
+          for (Int_t ipmt = 0; ipmt < 13; ipmt++){ // Loop over each PMT in a particular plane	
+	        if (npl == 0 && nside == 0) {
+	            if (H_cal_1pr_goodPosAdcMult[ipmt] == 1) h1hCalAdcTdcTDiff[npl][nside][ipmt]->Fill(H_cal_1pr_goodPosAdcTdcDiffTime[ipmt]);
+	        }
+	        else if (npl == 1 && nside == 0){
+	          if (H_cal_2ta_goodPosAdcMult[ipmt] == 1) h1hCalAdcTdcTDiff[npl][nside][ipmt]->Fill(H_cal_2ta_goodPosAdcTdcDiffTime[ipmt]);
+	        }
+	        else if (npl == 2 && nside == 0){
+	          if (H_cal_3ta_goodPosAdcMult[ipmt] == 1) h1hCalAdcTdcTDiff[npl][nside][ipmt]->Fill(H_cal_3ta_goodPosAdcTdcDiffTime[ipmt]);
+	        }  
+	        else if (npl == 3 && nside == 0){
+	          if (H_cal_4ta_goodPosAdcMult[ipmt] == 1) h1hCalAdcTdcTDiff[npl][nside][ipmt]->Fill(H_cal_4ta_goodPosAdcTdcDiffTime[ipmt]);
+	        }
+	        else if (npl == 0 && nside == 1){
+	          if (H_cal_1pr_goodNegAdcMult[ipmt] == 1) h1hCalAdcTdcTDiff[npl][nside][ipmt]->Fill(H_cal_1pr_goodNegAdcTdcDiffTime[ipmt]);
+	        }
+	        else if (npl == 1 && nside == 1){
+	          if (H_cal_2ta_goodNegAdcMult[ipmt] == 1) h1hCalAdcTdcTDiff[npl][nside][ipmt]->Fill(H_cal_2ta_goodNegAdcTdcDiffTime[ipmt]);
+	        }
+              }
+            }
       }
-    }
-  }
 
-  for (Int_t npl = 0; npl < hod_planes; npl++){ // Loop over all hodoscope planes
+      for (Int_t npl = 0; npl < hod_planes; npl++){ // Loop over all hodoscope planes
     for (Int_t nside = 0; nside < sides; nside++){ //Loop over each side
       for (Int_t ipmt = 0; ipmt < hmaxPMT[npl]; ipmt++){ // Loop over each PMT in a particular plane	
 	if (npl == 0 && nside == 0){

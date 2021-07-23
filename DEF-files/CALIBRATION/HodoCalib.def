@@ -26,7 +26,7 @@ block H.hod.*
 
 # HMS Cal
 block H.cal.ep*
-block H.cal.etot*
+block H.cal.e*
 block H.cal.nhits
 block H.cal.ntracks
 

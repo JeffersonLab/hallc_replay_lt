@@ -223,13 +223,13 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	delete(th1_aeroCut);
 	
 	//make canvas for beta comparison plot
-	TCanvas *c1 = new TCanvas("c1","c1",10, 10, 1000, 800);
+	TCanvas *c1 = new TCanvas(Form("Beta_Comparison_%d", rumNum),Form("Beta_Comparison_%d", rumNum),10, 10, 1000, 800);
 	c1->SetGrid();
    	//gStyle->SetOptTitle(kFALSE);
    	gStyle->SetOptStat("nemr");
 
 	beta1->SetLineColor(kBlue);
-	beta1->SetName("Beta_preCalib");
+	beta1->SetName(Form("Beta_preCalib_Run%d", runNum));
 	beta1->SetStats(); //gets stat box
 	
 	//this makes the stat box
@@ -237,7 +237,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	gPad->Update();
 	
 	beta2->SetLineColor(kRed);
-	beta2->SetName("Beta_postCalib");
+	beta2->SetName(Form("Beta_postCalib_Run%d", runNum));
 	beta2->SetStats();
 
 	beta2->Draw("sames");
@@ -275,8 +275,8 @@ void plotBeta (  Int_t runNumber, Int_t NumEventsInput )
 {
 	gROOT->SetBatch(1);
   	cout << "\n\n";
-	cout << "Running Run: '"<<runNumbers<<"' for " << NumEventsInput << " Events\n";
-	
+
+	cout << "Running Run: '"<<runNumber<<"' for " << NumEventsInput << " Events\n";
 	
 	Int_t *runList;
 	Int_t Length = 0, Iteration = 1;

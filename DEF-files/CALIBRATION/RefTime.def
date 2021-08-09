@@ -25,18 +25,11 @@ block H.dc.2v1.*
 block H.dc.2v2.*
 
 # HMS Hodo
-block H.hod.1x.*
-block H.hod.1y.*
-block H.hod.2x.*
-block H.hod.2y.*
+block H.hod.*
 
 
 # HMS Cal
-block H.cal.etotnorm
-block H.cal.1pr.*
-block H.cal.2ta.*
-block H.cal.3ta.*
-block H.cal.4ta.*
+block H.cal.*
 
 # HMS track info
 block H.gtr.dp
@@ -72,9 +65,7 @@ block P.dc.2v1.*
 block P.dc.2v2.*
 
 # SHMS Calorimeter
-block P.cal.etotnorm
-block P.cal.pr.*
-block P.cal.fly.*
+block P.cal.*
 
 
 # SHMS Hodoscope

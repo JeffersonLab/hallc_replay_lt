@@ -217,11 +217,11 @@ void setBranchAddresses(TTree* DataTree)
     {
         for(Int_t iSide = 0; iSide < HodSides; iSide++)
         {
-            DataTree->SetBranchAddress(Form("H.hod.%s.good%sAdcTdcDiffTime", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data()), &hHodAdcTdcDiffTime[iPlane][iSide]);
-            DataTree->SetBranchAddress(Form("H.hod.%s.good%sAdcMult", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data()), &hHodAdcMult[iPlane][iSide]);
+            DataTree->SetBranchAddress(Form("H.hod.%s.Good%sAdcTdcDiffTime", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data()), &hHodAdcTdcDiffTime[iPlane][iSide]);
+            DataTree->SetBranchAddress(Form("H.hod.%s.Good%sAdcMult", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data()), &hHodAdcMult[iPlane][iSide]);
             
-            DataTree->SetBranchAddress(Form("H.hod.%s.good%sAdcTdcDiffTime", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data()), &pHodAdcTdcDiffTime[iPlane][iSide]);
-            DataTree->SetBranchAddress(Form("H.hod.%s.good%sAdcMult", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data()), &pHodAdcMult[iPlane][iSide]);
+            DataTree->SetBranchAddress(Form("P.hod.%s.Good%sAdcTdcDiffTime", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data()), &pHodAdcTdcDiffTime[iPlane][iSide]);
+            DataTree->SetBranchAddress(Form("P.hod.%s.Good%sAdcMult", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data()), &pHodAdcMult[iPlane][iSide]);
         }
     }
     

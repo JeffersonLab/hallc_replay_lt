@@ -52,106 +52,106 @@ Bool_t IsNgcerIn = false;
 //***** Branch variables ******/
 
 //ref time variables
-Int_t hFADC_TREF_ROC1;
-Int_t hTref1, hTref2;
-Int_t hDCREF1, hDCREF2, hDCREF3, hDCREF4, hDCREF5; //hDCRef5 not avaiable for runs prior to July 2018
-Int_t hFADC_TREF_ROC1_Mult;
-Int_t hTref1_Mult, hTref2_Mult;
-Int_t hDCREF1_Mult, hDCREF2_Mult, hDCREF3_Mult, hDCREF4_Mult, hDCREF5_Mult;
+Double_t hFADC_TREF_ROC1;
+Double_t hTref1, hTref2;
+Double_t hDCREF1, hDCREF2, hDCREF3, hDCREF4, hDCREF5; //hDCRef5 not avaiable for runs prior to July 2018
+Double_t hFADC_TREF_ROC1_Mult;
+Double_t hTref1_Mult, hTref2_Mult;
+Double_t hDCREF1_Mult, hDCREF2_Mult, hDCREF3_Mult, hDCREF4_Mult, hDCREF5_Mult;
 
-Int_t pFADC_TREF_ROC2;
-Int_t pTref1, pTref2;
-Int_t pDCREF1, pDCREF2, pDCREF3, pDCREF4, pDCREF5, pDCREF6, pDCREF7, pDCREF8, pDCREF9, pDCREF10;
-Int_t pFADC_TREF_ROC2_Mult;
-Int_t pTref1_Mult, pTref2_Mult;
-Int_t pDCREF1_Mult, pDCREF2_Mult, pDCREF3_Mult, pDCREF4_Mult, pDCREF5_Mult, pDCREF6_Mult, pDCREF7_Mult, pDCREF8_Mult, pDCREF9_Mult, pDCREF10_Mult;
+Double_t pFADC_TREF_ROC2;
+Double_t pTref1, pTref2;
+Double_t pDCREF1, pDCREF2, pDCREF3, pDCREF4, pDCREF5, pDCREF6, pDCREF7, pDCREF8, pDCREF9, pDCREF10;
+Double_t pFADC_TREF_ROC2_Mult;
+Double_t pTref1_Mult, pTref2_Mult;
+Double_t pDCREF1_Mult, pDCREF2_Mult, pDCREF3_Mult, pDCREF4_Mult, pDCREF5_Mult, pDCREF6_Mult, pDCREF7_Mult, pDCREF8_Mult, pDCREF9_Mult, pDCREF10_Mult;
 
 //dc variables
-Float_t hdcrawtdc[dcPlanes],    pdcrawtdc[dcPlanes];
-Int_t   hdcnhit[dcPlanes],      pdcnhit[dcPlanes];
+Double_t hdcrawtdc[dcPlanes],    pdcrawtdc[dcPlanes];
+Double_t   hdcnhit[dcPlanes],      pdcnhit[dcPlanes];
 
 // hodoscope variables, 
-Float_t hHodAdcTdcDiffTime[HodPlanes][HodSides];
-Int_t   hHodAdcMult[HodPlanes][HodSides];
+Double_t hHodAdcTdcDiffTime[HodPlanes][HodSides];
+Double_t   hHodAdcMult[HodPlanes][HodSides];
 
-Float_t pHodAdcTdcDiffTime[HodPlanes][HodSides];
-Int_t   pHodAdcMult[HodPlanes][HodSides];
+Double_t pHodAdcTdcDiffTime[HodPlanes][HodSides];
+Double_t   pHodAdcMult[HodPlanes][HodSides];
 
 //Gas cherenkovs
 //hms
-Float_t cerAdcTdcDiffTime;
-Int_t   cerAdcMult;
+Double_t cerAdcTdcDiffTime;
+Double_t   cerAdcMult;
 
 //shms
-Float_t hgcerAdcTdcDiffTime, ngcerAdcTdcDiffTime;
-Int_t   hgcerAdcMult,        ngcerAdcMult;
+Double_t hgcerAdcTdcDiffTime, ngcerAdcTdcDiffTime;
+Double_t   hgcerAdcMult,        ngcerAdcMult;
 
 //aerogel 
-Float_t aeroAdcTdcDiffTime[aeroSides];
-Int_t   aeroAdcMult[aeroSides];
+Double_t aeroAdcTdcDiffTime[aeroSides];
+Double_t   aeroAdcMult[aeroSides];
 
 //Calorimeters
 //hms
-Float_t hcalAdcTdcDiffTime[hcalPlanes][calSides]; 
-Int_t   hcalAdcMult[hcalPlanes][calSides];
+Double_t hcalAdcTdcDiffTime[hcalPlanes][calSides]; 
+Double_t   hcalAdcMult[hcalPlanes][calSides];
 
 //shms
-Float_t pcalprAdcTdcDiffTime[calSides];
-Int_t   pcalprAdcMult[calSides];
+Double_t pcalprAdcTdcDiffTime[calSides];
+Double_t   pcalprAdcMult[calSides];
 
-Float_t pcalflyAdcTdcDiffTime;
-Int_t   pcalflyAdcMult;
+Double_t pcalflyAdcTdcDiffTime;
+Double_t   pcalflyAdcMult;
 
 /*********** Histograms *************/
-TH1I    *hFADC_TREF_ROC1_Hist;
-TH1I    *hTref1_Hist, *hTref2_Hist;
-TH1I    *hDCREF1_Hist, *hDCREF2_Hist, *hDCREF3_Hist, *hDCREF4_Hist, *hDCREF5_Hist; //hDCRef5 not avaiable for runs prior to July 2018
-TH1I    *hFADC_TREF_ROC1_Mult_Hist;
-TH1I    *hTref1_Mult_Hist, *hTref2_Mult_Hist;
-TH1I    *hDCREF1_Mult_Hist, *hDCREF2_Mult_Hist, *hDCREF3_Mult_Hist, *hDCREF4_Mult_Hist, *hDCREF5_Mult_Hist;
+TH1D    *hFADC_TREF_ROC1_Hist;
+TH1D    *hTref1_Hist, *hTref2_Hist;
+TH1D    *hDCREF1_Hist, *hDCREF2_Hist, *hDCREF3_Hist, *hDCREF4_Hist, *hDCREF5_Hist; //hDCRef5 not avaiable for runs prior to July 2018
+TH1D    *hFADC_TREF_ROC1_Mult_Hist;
+TH1D    *hTref1_Mult_Hist, *hTref2_Mult_Hist;
+TH1D    *hDCREF1_Mult_Hist, *hDCREF2_Mult_Hist, *hDCREF3_Mult_Hist, *hDCREF4_Mult_Hist, *hDCREF5_Mult_Hist;
 
-TH1I    *pFADC_TREF_ROC2_Hist;
-TH1I    *pTref1_Hist, *pTref2_Hist;
-TH1I    *pDCREF1_Hist, *pDCREF2_Hist, *pDCREF3_Hist, *pDCREF4_Hist, *pDCREF5_Hist, *pDCREF6_Hist, *pDCREF7_Hist, *pDCREF8_Hist, *pDCREF9_Hist, *pDCREF10_Hist;
-TH1I    *pFADC_TREF_ROC2_Mult_Hist;
-TH1I    *pTref1_Mult_Hist, *pTref2_Mult_Hist;
-TH1I    *pDCREF1_Mult_Hist, *pDCREF2_Mult_Hist, *pDCREF3_Mult_Hist, *pDCREF4_Mult_Hist, *pDCREF5_Mult_Hist, *pDCREF6_Mult_Hist, *pDCREF7_Mult_Hist, *pDCREF8_Mult_Hist, *pDCREF9_Mult_Hist, *pDCREF10_Mult_Hist;
+TH1D    *pFADC_TREF_ROC2_Hist;
+TH1D    *pTref1_Hist, *pTref2_Hist;
+TH1D    *pDCREF1_Hist, *pDCREF2_Hist, *pDCREF3_Hist, *pDCREF4_Hist, *pDCREF5_Hist, *pDCREF6_Hist, *pDCREF7_Hist, *pDCREF8_Hist, *pDCREF9_Hist, *pDCREF10_Hist;
+TH1D    *pFADC_TREF_ROC2_Mult_Hist;
+TH1D    *pTref1_Mult_Hist, *pTref2_Mult_Hist;
+TH1D    *pDCREF1_Mult_Hist, *pDCREF2_Mult_Hist, *pDCREF3_Mult_Hist, *pDCREF4_Mult_Hist, *pDCREF5_Mult_Hist, *pDCREF6_Mult_Hist, *pDCREF7_Mult_Hist, *pDCREF8_Mult_Hist, *pDCREF9_Mult_Hist, *pDCREF10_Mult_Hist;
 
 //dc variables
-TH1F    *hdcrawtdc_Hist[dcPlanes],    *pdcrawtdc_Hist[dcPlanes];
-TH1I    *hdcnhit_Hist[dcPlanes],      *pdcnhit_Hist[dcPlanes];
+TH1D    *hdcrawtdc_Hist[dcPlanes],    *pdcrawtdc_Hist[dcPlanes];
+TH1D    *hdcnhit_Hist[dcPlanes],      *pdcnhit_Hist[dcPlanes];
 
 // hodoscope variables
-TH1F    *hHodAdcTdcDiffTime_Hist[HodPlanes][HodSides][MaxHodBars];
-TH1I    *hHodAdcMult_Hist[HodPlanes][HodSides][MaxHodBars];
+TH1D    *hHodAdcTdcDiffTime_Hist[HodPlanes][HodSides][MaxHodBars];
+TH1D    *hHodAdcMult_Hist[HodPlanes][HodSides][MaxHodBars];
 
-TH1F    *pHodAdcTdcDiffTime_Hist[HodPlanes][HodSides][MaxHodBars];
-TH1I    *pHodAdcMult_Hist[HodPlanes][HodSides][MaxHodBars];
+TH1D    *pHodAdcTdcDiffTime_Hist[HodPlanes][HodSides][MaxHodBars];
+TH1D    *pHodAdcMult_Hist[HodPlanes][HodSides][MaxHodBars];
 
 //Gas cherenkovs
 //hms
-TH1F    *cerAdcTdcDiffTime_Hist[cerNpmts];
-TH1I    *cerAdcMult_Hist[cerNpmts];
+TH1D    *cerAdcTdcDiffTime_Hist[cerNpmts];
+TH1D    *cerAdcMult_Hist[cerNpmts];
 
 //shms
-TH1F    *hgcerAdcTdcDiffTime_Hist[cerNpmts], *ngcerAdcTdcDiffTime_Hist[cerNpmts];
-TH1I    *hgcerAdcMult_Hist[cerNpmts],        *ngcerAdcMult_Hist[cerNpmts];
+TH1D    *hgcerAdcTdcDiffTime_Hist[cerNpmts], *ngcerAdcTdcDiffTime_Hist[cerNpmts];
+TH1D    *hgcerAdcMult_Hist[cerNpmts],        *ngcerAdcMult_Hist[cerNpmts];
 
 //aerogel 
-TH1F    *aeroAdcTdcDiffTime_Hist[aeroSides][aeroNumPmts];
-TH1I    *aeroAdcMult_Hist[aeroSides][aeroNumPmts];
+TH1D    *aeroAdcTdcDiffTime_Hist[aeroSides][aeroNumPmts];
+TH1D    *aeroAdcMult_Hist[aeroSides][aeroNumPmts];
 
 //Calorimeters
 //hms
-TH1F    *hcalAdcTdcDiffTime_Hist[hcalPlanes][calSides][hcalNumPmtsMax]; //do this b/c plane one also has the max # of pmts
-TH1I    *hcalAdcMult_Hist[hcalPlanes][calSides][hcalNumPmtsMax];
+TH1D    *hcalAdcTdcDiffTime_Hist[hcalPlanes][calSides][hcalNumPmtsMax]; //do this b/c plane one also has the max # of pmts
+TH1D    *hcalAdcMult_Hist[hcalPlanes][calSides][hcalNumPmtsMax];
 
 //shms
-TH1F    *pcalprAdcTdcDiffTime_Hist[calSides][pcalPrNumPmts];
-TH1I    *pcalprAdcMult_Hist[calSides][pcalPrNumPmts];
+TH1D    *pcalprAdcTdcDiffTime_Hist[calSides][pcalPrNumPmts];
+TH1D    *pcalprAdcMult_Hist[calSides][pcalPrNumPmts];
 
-TH1F    *pcalflyAdcTdcDiffTime_Hist[pcalFlyNumPmts];
-TH1I    *pcalflyAdcMult_Hist[pcalFlyNumPmts];
+TH1D    *pcalflyAdcTdcDiffTime_Hist[pcalFlyNumPmts];
+TH1D    *pcalflyAdcMult_Hist[pcalFlyNumPmts];
 
 // sets the addresses of all the variables that are to be used and/or plotted
 void setBranchAddresses(TTree* DataTree)
@@ -269,59 +269,59 @@ void setBranchAddresses(TTree* DataTree)
 //function for declaring all of the Histograms that are to be filed in the proceding script
 void makeHistos ()
 {
-    hFADC_TREF_ROC1_Hist = new TH1I(Form("T.%s.hFADC_TREF_ROC1_adcPulseTimeRaw", DaqName.Data()), Form("T.%s.hFADC_TREF_ROC1_adcPulseTimeRaw", DaqName.Data()), 10000, 0, 10000);
-    hTref1_Hist = new TH1I(Form("T.%s.hT1_tdcTimeRaw", DaqName.Data()), Form("T.%s.hT1_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
-    hTref2_Hist = new TH1I(Form("T.%s.hT2_tdcTimeRaw", DaqName.Data()), Form("T.%s.hT2_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
-    hDCREF1_Hist = new TH1I(Form("T.%s.hDCREF1_tdcTimeRaw", DaqName.Data()), Form("T.%s.hDCREF1_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
-    hDCREF2_Hist = new TH1I(Form("T.%s.hDCREF2_tdcTimeRaw", DaqName.Data()), Form("T.%s.hDCREF2_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
-    hDCREF3_Hist = new TH1I(Form("T.%s.hDCREF3_tdcTimeRaw", DaqName.Data()), Form("T.%s.hDCREF3_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
-    hDCREF4_Hist = new TH1I(Form("T.%s.hDCREF4_tdcTimeRaw", DaqName.Data()), Form("T.%s.hDCREF4_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
-    hDCREF5_Hist = new TH1I(Form("T.%s.hDCREF5_tdcTimeRaw", DaqName.Data()), Form("T.%s.hDCREF5_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
+    hFADC_TREF_ROC1_Hist = new TH1D(Form("T.%s.hFADC_TREF_ROC1_adcPulseTimeRaw", DaqName.Data()), Form("T.%s.hFADC_TREF_ROC1_adcPulseTimeRaw", DaqName.Data()), 10000, 0, 10000);
+    hTref1_Hist = new TH1D(Form("T.%s.hT1_tdcTimeRaw", DaqName.Data()), Form("T.%s.hT1_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
+    hTref2_Hist = new TH1D(Form("T.%s.hT2_tdcTimeRaw", DaqName.Data()), Form("T.%s.hT2_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
+    hDCREF1_Hist = new TH1D(Form("T.%s.hDCREF1_tdcTimeRaw", DaqName.Data()), Form("T.%s.hDCREF1_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
+    hDCREF2_Hist = new TH1D(Form("T.%s.hDCREF2_tdcTimeRaw", DaqName.Data()), Form("T.%s.hDCREF2_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
+    hDCREF3_Hist = new TH1D(Form("T.%s.hDCREF3_tdcTimeRaw", DaqName.Data()), Form("T.%s.hDCREF3_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
+    hDCREF4_Hist = new TH1D(Form("T.%s.hDCREF4_tdcTimeRaw", DaqName.Data()), Form("T.%s.hDCREF4_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
+    hDCREF5_Hist = new TH1D(Form("T.%s.hDCREF5_tdcTimeRaw", DaqName.Data()), Form("T.%s.hDCREF5_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
     
-    hFADC_TREF_ROC1_Mult_Hist = new TH1I(Form("T.%s.hFADC_TREF_ROC1_adcMultiplicity", DaqName.Data()), Form("T.%s.hFADC_TREF_ROC1_adcMultiplicity", DaqName.Data()), 10, 0, 10000);
-    hTref1_Mult_Hist = new TH1I(Form("T.%s.hT1_tdcMultiplicity", DaqName.Data()), Form("T.%s.hT1_tdcMultiplicity", DaqName.Data()), 10, 0, 10000);
-    hTref2_Mult_Hist = new TH1I(Form("T.%s.hT2_tdcMultiplicity", DaqName.Data()), Form("T.%s.hT2_tdcMultiplicity", DaqName.Data()), 10, 0, 10000);
-    hDCREF1_Mult_Hist = new TH1I(Form("T.%s.hDCREF1_tdcMultiplicity", DaqName.Data()), Form("T.%s.hDCREF1_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
-    hDCREF2_Mult_Hist = new TH1I(Form("T.%s.hDCREF2_tdcMultiplicity", DaqName.Data()), Form("T.%s.hDCREF2_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
-    hDCREF3_Mult_Hist = new TH1I(Form("T.%s.hDCREF3_tdcMultiplicity", DaqName.Data()), Form("T.%s.hDCREF3_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
-    hDCREF4_Mult_Hist = new TH1I(Form("T.%s.hDCREF4_tdcMultiplicity", DaqName.Data()), Form("T.%s.hDCREF4_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
-    hDCREF5_Mult_Hist = new TH1I(Form("T.%s.hDCREF5_tdcMultiplicity", DaqName.Data()), Form("T.%s.hDCREF5_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
+    hFADC_TREF_ROC1_Mult_Hist = new TH1D(Form("T.%s.hFADC_TREF_ROC1_adcMultiplicity", DaqName.Data()), Form("T.%s.hFADC_TREF_ROC1_adcMultiplicity", DaqName.Data()), 10, 0, 10000);
+    hTref1_Mult_Hist = new TH1D(Form("T.%s.hT1_tdcMultiplicity", DaqName.Data()), Form("T.%s.hT1_tdcMultiplicity", DaqName.Data()), 10, 0, 10000);
+    hTref2_Mult_Hist = new TH1D(Form("T.%s.hT2_tdcMultiplicity", DaqName.Data()), Form("T.%s.hT2_tdcMultiplicity", DaqName.Data()), 10, 0, 10000);
+    hDCREF1_Mult_Hist = new TH1D(Form("T.%s.hDCREF1_tdcMultiplicity", DaqName.Data()), Form("T.%s.hDCREF1_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
+    hDCREF2_Mult_Hist = new TH1D(Form("T.%s.hDCREF2_tdcMultiplicity", DaqName.Data()), Form("T.%s.hDCREF2_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
+    hDCREF3_Mult_Hist = new TH1D(Form("T.%s.hDCREF3_tdcMultiplicity", DaqName.Data()), Form("T.%s.hDCREF3_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
+    hDCREF4_Mult_Hist = new TH1D(Form("T.%s.hDCREF4_tdcMultiplicity", DaqName.Data()), Form("T.%s.hDCREF4_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
+    hDCREF5_Mult_Hist = new TH1D(Form("T.%s.hDCREF5_tdcMultiplicity", DaqName.Data()), Form("T.%s.hDCREF5_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
 
-    pFADC_TREF_ROC2_Hist = new TH1I(Form("T.%s.pFADC_TREF_ROC2_adcPulseTimeRaw", DaqName.Data()), Form("T.%s.pFADC_TREF_ROC2_adcPulseTimeRaw", DaqName.Data()), 10000, 0, 10000);
-    pTref1_Hist = new TH1I(Form("T.%s.pT1_tdcTimeRaw", DaqName.Data()), Form("T.%s.pT1_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
-    pTref2_Hist = new TH1I(Form("T.%s.pT2_tdcTimeRaw", DaqName.Data()), Form("T.%s.pT2_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
-    pDCREF1_Hist = new TH1I(Form("T.%s.pDCREF1_tdcTimeRaw", DaqName.Data()), Form("T.%s.pDCREF1_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
-    pDCREF2_Hist = new TH1I(Form("T.%s.pDCREF2_tdcTimeRaw", DaqName.Data()), Form("T.%s.pDCREF2_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
-    pDCREF3_Hist = new TH1I(Form("T.%s.pDCREF3_tdcTimeRaw", DaqName.Data()), Form("T.%s.pDCREF3_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
-    pDCREF4_Hist = new TH1I(Form("T.%s.pDCREF4_tdcTimeRaw", DaqName.Data()), Form("T.%s.pDCREF4_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
-    pDCREF5_Hist = new TH1I(Form("T.%s.pDCREF5_tdcTimeRaw", DaqName.Data()), Form("T.%s.pDCREF5_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
-    pDCREF6_Hist = new TH1I(Form("T.%s.pDCREF6_tdcTimeRaw", DaqName.Data()), Form("T.%s.pDCREF6_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
-    pDCREF7_Hist = new TH1I(Form("T.%s.pDCREF7_tdcTimeRaw", DaqName.Data()), Form("T.%s.pDCREF7_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
-    pDCREF8_Hist = new TH1I(Form("T.%s.pDCREF8_tdcTimeRaw", DaqName.Data()), Form("T.%s.pDCREF8_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
-    pDCREF9_Hist = new TH1I(Form("T.%s.pDCREF9_tdcTimeRaw", DaqName.Data()), Form("T.%s.pDCREF9_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
-    pDCREF10_Hist = new TH1I(Form("T.%s.pDCREF10_tdcTimeRaw", DaqName.Data()), Form("T.%s.pDCREF10_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
+    pFADC_TREF_ROC2_Hist = new TH1D(Form("T.%s.pFADC_TREF_ROC2_adcPulseTimeRaw", DaqName.Data()), Form("T.%s.pFADC_TREF_ROC2_adcPulseTimeRaw", DaqName.Data()), 10000, 0, 10000);
+    pTref1_Hist = new TH1D(Form("T.%s.pT1_tdcTimeRaw", DaqName.Data()), Form("T.%s.pT1_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
+    pTref2_Hist = new TH1D(Form("T.%s.pT2_tdcTimeRaw", DaqName.Data()), Form("T.%s.pT2_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
+    pDCREF1_Hist = new TH1D(Form("T.%s.pDCREF1_tdcTimeRaw", DaqName.Data()), Form("T.%s.pDCREF1_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
+    pDCREF2_Hist = new TH1D(Form("T.%s.pDCREF2_tdcTimeRaw", DaqName.Data()), Form("T.%s.pDCREF2_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
+    pDCREF3_Hist = new TH1D(Form("T.%s.pDCREF3_tdcTimeRaw", DaqName.Data()), Form("T.%s.pDCREF3_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
+    pDCREF4_Hist = new TH1D(Form("T.%s.pDCREF4_tdcTimeRaw", DaqName.Data()), Form("T.%s.pDCREF4_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
+    pDCREF5_Hist = new TH1D(Form("T.%s.pDCREF5_tdcTimeRaw", DaqName.Data()), Form("T.%s.pDCREF5_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
+    pDCREF6_Hist = new TH1D(Form("T.%s.pDCREF6_tdcTimeRaw", DaqName.Data()), Form("T.%s.pDCREF6_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
+    pDCREF7_Hist = new TH1D(Form("T.%s.pDCREF7_tdcTimeRaw", DaqName.Data()), Form("T.%s.pDCREF7_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
+    pDCREF8_Hist = new TH1D(Form("T.%s.pDCREF8_tdcTimeRaw", DaqName.Data()), Form("T.%s.pDCREF8_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
+    pDCREF9_Hist = new TH1D(Form("T.%s.pDCREF9_tdcTimeRaw", DaqName.Data()), Form("T.%s.pDCREF9_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
+    pDCREF10_Hist = new TH1D(Form("T.%s.pDCREF10_tdcTimeRaw", DaqName.Data()), Form("T.%s.pDCREF10_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
     
-    pFADC_TREF_ROC2_Mult_Hist = new TH1I(Form("T.%s.pFADC_TREF_ROC2_adcMultiplicity", DaqName.Data()), Form("T.%s.pFADC_TREF_ROC2_adcMultiplicity", DaqName.Data()), 10, 0, 10);
-    pTref1_Mult_Hist = new TH1I(Form("T.%s.pT1_tdcMultiplicity", DaqName.Data()), Form("T.%s.pT1_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
-    pTref2_Mult_Hist = new TH1I(Form("T.%s.pT2_tdcMultiplicity", DaqName.Data()), Form("T.%s.pT2_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
-    pDCREF1_Mult_Hist = new TH1I(Form("T.%s.pDCREF1_tdcMultiplicity", DaqName.Data()), Form("T.%s.pDCREF1_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
-    pDCREF2_Mult_Hist = new TH1I(Form("T.%s.pDCREF2_tdcMultiplicity", DaqName.Data()), Form("T.%s.pDCREF2_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
-    pDCREF3_Mult_Hist = new TH1I(Form("T.%s.pDCREF3_tdcMultiplicity", DaqName.Data()), Form("T.%s.pDCREF3_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
-    pDCREF4_Mult_Hist = new TH1I(Form("T.%s.pDCREF4_tdcMultiplicity", DaqName.Data()), Form("T.%s.pDCREF4_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
-    pDCREF5_Mult_Hist = new TH1I(Form("T.%s.pDCREF5_tdcMultiplicity", DaqName.Data()), Form("T.%s.pDCREF5_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
-    pDCREF6_Mult_Hist = new TH1I(Form("T.%s.pDCREF6_tdcMultiplicity", DaqName.Data()), Form("T.%s.pDCREF6_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
-    pDCREF7_Mult_Hist = new TH1I(Form("T.%s.pDCREF7_tdcMultiplicity", DaqName.Data()), Form("T.%s.pDCREF7_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
-    pDCREF8_Mult_Hist = new TH1I(Form("T.%s.pDCREF8_tdcMultiplicity", DaqName.Data()), Form("T.%s.pDCREF8_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
-    pDCREF9_Mult_Hist = new TH1I(Form("T.%s.pDCREF9_tdcMultiplicity", DaqName.Data()), Form("T.%s.pDCREF9_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
-    pDCREF10_Mult_Hist = new TH1I(Form("T.%s.pDCREF10_tdcMultiplicity", DaqName.Data()), Form("T.%s.pDCREF10_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
+    pFADC_TREF_ROC2_Mult_Hist = new TH1D(Form("T.%s.pFADC_TREF_ROC2_adcMultiplicity", DaqName.Data()), Form("T.%s.pFADC_TREF_ROC2_adcMultiplicity", DaqName.Data()), 10, 0, 10);
+    pTref1_Mult_Hist = new TH1D(Form("T.%s.pT1_tdcMultiplicity", DaqName.Data()), Form("T.%s.pT1_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
+    pTref2_Mult_Hist = new TH1D(Form("T.%s.pT2_tdcMultiplicity", DaqName.Data()), Form("T.%s.pT2_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
+    pDCREF1_Mult_Hist = new TH1D(Form("T.%s.pDCREF1_tdcMultiplicity", DaqName.Data()), Form("T.%s.pDCREF1_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
+    pDCREF2_Mult_Hist = new TH1D(Form("T.%s.pDCREF2_tdcMultiplicity", DaqName.Data()), Form("T.%s.pDCREF2_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
+    pDCREF3_Mult_Hist = new TH1D(Form("T.%s.pDCREF3_tdcMultiplicity", DaqName.Data()), Form("T.%s.pDCREF3_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
+    pDCREF4_Mult_Hist = new TH1D(Form("T.%s.pDCREF4_tdcMultiplicity", DaqName.Data()), Form("T.%s.pDCREF4_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
+    pDCREF5_Mult_Hist = new TH1D(Form("T.%s.pDCREF5_tdcMultiplicity", DaqName.Data()), Form("T.%s.pDCREF5_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
+    pDCREF6_Mult_Hist = new TH1D(Form("T.%s.pDCREF6_tdcMultiplicity", DaqName.Data()), Form("T.%s.pDCREF6_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
+    pDCREF7_Mult_Hist = new TH1D(Form("T.%s.pDCREF7_tdcMultiplicity", DaqName.Data()), Form("T.%s.pDCREF7_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
+    pDCREF8_Mult_Hist = new TH1D(Form("T.%s.pDCREF8_tdcMultiplicity", DaqName.Data()), Form("T.%s.pDCREF8_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
+    pDCREF9_Mult_Hist = new TH1D(Form("T.%s.pDCREF9_tdcMultiplicity", DaqName.Data()), Form("T.%s.pDCREF9_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
+    pDCREF10_Mult_Hist = new TH1D(Form("T.%s.pDCREF10_tdcMultiplicity", DaqName.Data()), Form("T.%s.pDCREF10_tdcMultiplicity", DaqName.Data()), 10, 0, 10);
 
     //dc variables
     for(Int_t i = 0; i < dcPlanes; i++)
     {
-        hdcrawtdc_Hist[i] = new TH1F(Form("H.dc.%s.rawtdc", dcPlaneNames[i].Data()), Form("H.dc.%s.rawtdc", dcPlaneNames[i].Data()), 4000, 0, 4000);
-        pdcrawtdc_Hist[i] = new TH1F(Form("P.dc.%s.rawtdc", dcPlaneNames[i].Data()), Form("P.dc.%s.rawtdc", dcPlaneNames[i].Data()), 4000, 0, 4000);
-        hdcnhit_Hist[i] = new TH1I(Form("H.dc.%s.nhit", dcPlaneNames[i].Data()), Form("H.dc.%s.nhit", dcPlaneNames[i].Data()), 50, 0, 50);
-        pdcnhit_Hist[i] = new TH1I(Form("P.dc.%s.nhit", dcPlaneNames[i].Data()), Form("P.dc.%s.nhit", dcPlaneNames[i].Data()), 50, 0, 50);
+        hdcrawtdc_Hist[i] = new TH1D(Form("H.dc.%s.rawtdc", dcPlaneNames[i].Data()), Form("H.dc.%s.rawtdc", dcPlaneNames[i].Data()), 4000, 0, 4000);
+        pdcrawtdc_Hist[i] = new TH1D(Form("P.dc.%s.rawtdc", dcPlaneNames[i].Data()), Form("P.dc.%s.rawtdc", dcPlaneNames[i].Data()), 4000, 0, 4000);
+        hdcnhit_Hist[i] = new TH1D(Form("H.dc.%s.nhit", dcPlaneNames[i].Data()), Form("H.dc.%s.nhit", dcPlaneNames[i].Data()), 50, 0, 50);
+        pdcnhit_Hist[i] = new TH1D(Form("P.dc.%s.nhit", dcPlaneNames[i].Data()), Form("P.dc.%s.nhit", dcPlaneNames[i].Data()), 50, 0, 50);
     }
 
     // hodoscope variables
@@ -331,13 +331,13 @@ void makeHistos ()
         {
             for(Int_t iPmt = 0; iPmt < hHodbars[iPlane]; iPmt++)
             {
-                hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt] = new TH1F(Form("H.hod.%s.Good%sAdcTdcDiffTime_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), Form("H.hod.%s.Good%sAdcTdcDiffTime_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), 10000, 0, 10000);
-                hHodAdcMult_Hist[iPlane][iSide][iPmt] = new TH1I(Form("H.hod.%s.Good%sAdcMult_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), Form("H.hod.%s.Good%sAdcMult_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), 10, 0, 10);
+                hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt] = new TH1D(Form("H.hod.%s.Good%sAdcTdcDiffTime_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), Form("H.hod.%s.Good%sAdcTdcDiffTime_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), 10000, 0, 10000);
+                hHodAdcMult_Hist[iPlane][iSide][iPmt] = new TH1D(Form("H.hod.%s.Good%sAdcMult_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), Form("H.hod.%s.Good%sAdcMult_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), 10, 0, 10);
             }
             for(Int_t iPmt = 0; iPmt < pHodbars[iPlane]; iPmt++)
             {
-                pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt] = new TH1F(Form("P.hod.%s.Good%sAdcTdcDiffTime_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), Form("P.hod.%s.Good%sAdcTdcDiffTime_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1),10000, 0, 10000);
-                pHodAdcMult_Hist[iPlane][iSide][iPmt] = new TH1I(Form("P.hod.%s.Good%sAdcMult_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), Form("P.hod.%s.Good%sAdcMult_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), 10, 0, 10);
+                pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt] = new TH1D(Form("P.hod.%s.Good%sAdcTdcDiffTime_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), Form("P.hod.%s.Good%sAdcTdcDiffTime_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1),10000, 0, 10000);
+                pHodAdcMult_Hist[iPlane][iSide][iPmt] = new TH1D(Form("P.hod.%s.Good%sAdcMult_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), Form("P.hod.%s.Good%sAdcMult_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), 10, 0, 10);
             }
         }
     }
@@ -346,17 +346,17 @@ void makeHistos ()
     //hms
     for(Int_t iPmt = 0; iPmt < cerNpmts; iPmt++)
     {
-        cerAdcTdcDiffTime_Hist[iPmt] = new TH1F(Form("H.cer.goodAdcTdcDiffTime_Pmt%d", iPmt+1), Form("H.cer.goodAdcTdcDiffTime_Pmt%d", iPmt+1), 5000, 0, 5000);
-        cerAdcMult_Hist[iPmt] = new TH1I(Form("H.cer.goodAdcMult_Pmt%d", iPmt+1), Form("H.cer.goodAdcMult_Pmt%d", iPmt+1), 10, 0, 10);
+        cerAdcTdcDiffTime_Hist[iPmt] = new TH1D(Form("H.cer.goodAdcTdcDiffTime_Pmt%d", iPmt+1), Form("H.cer.goodAdcTdcDiffTime_Pmt%d", iPmt+1), 5000, 0, 5000);
+        cerAdcMult_Hist[iPmt] = new TH1D(Form("H.cer.goodAdcMult_Pmt%d", iPmt+1), Form("H.cer.goodAdcMult_Pmt%d", iPmt+1), 10, 0, 10);
     }
     
     //shms
     for(Int_t iPmt = 0; iPmt < cerNpmts; iPmt++)
     {
-        hgcerAdcTdcDiffTime_Hist[iPmt] = new TH1F(Form("P.hgcer.goodAdcTdcDiffTime_Pmt%d", iPmt+1), Form("H.cer.goodAdcTdcDiffTime_Pmt%d", iPmt+1), 5000, 0, 5000);
-        ngcerAdcTdcDiffTime_Hist[iPmt] = new TH1F(Form("P.ngcer.goodAdcTdcDiffTime_Pmt%d", iPmt+1), Form("H.cer.goodAdcTdcDiffTime_Pmt%d", iPmt+1), 5000, 0, 5000);
-        hgcerAdcMult_Hist[iPmt] = new TH1I(Form("P.hgcer.goodAdcMult_Pmt%d", iPmt+1), Form("H.cer.goodAdcMult_Pmt%d", iPmt+1), 10, 0, 10);
-        ngcerAdcMult_Hist[iPmt] = new TH1I(Form("P.ngcer.goodAdcMult_Pmt%d", iPmt+1), Form("H.cer.goodAdcMult_Pmt%d", iPmt+1), 10, 0, 10);
+        hgcerAdcTdcDiffTime_Hist[iPmt] = new TH1D(Form("P.hgcer.goodAdcTdcDiffTime_Pmt%d", iPmt+1), Form("H.cer.goodAdcTdcDiffTime_Pmt%d", iPmt+1), 5000, 0, 5000);
+        ngcerAdcTdcDiffTime_Hist[iPmt] = new TH1D(Form("P.ngcer.goodAdcTdcDiffTime_Pmt%d", iPmt+1), Form("H.cer.goodAdcTdcDiffTime_Pmt%d", iPmt+1), 5000, 0, 5000);
+        hgcerAdcMult_Hist[iPmt] = new TH1D(Form("P.hgcer.goodAdcMult_Pmt%d", iPmt+1), Form("H.cer.goodAdcMult_Pmt%d", iPmt+1), 10, 0, 10);
+        ngcerAdcMult_Hist[iPmt] = new TH1D(Form("P.ngcer.goodAdcMult_Pmt%d", iPmt+1), Form("H.cer.goodAdcMult_Pmt%d", iPmt+1), 10, 0, 10);
     }
     
     //aerogel 
@@ -364,8 +364,8 @@ void makeHistos ()
     {
         for(Int_t iPmt = 0; iPmt < aeroNumPmts; iPmt++)
         {
-            aeroAdcTdcDiffTime_Hist[iSide][iPmt] = new TH1F(Form("P.aero.good%sAdcTdcDiffTime_Pmt%d", aeroSideNames[iSide].Data(), iPmt+1), Form("P.aero.good%sAdcTdcDiffTime_Pmt%d", aeroSideNames[iSide].Data(), iPmt+1), 5000, 0, 5000);
-            aeroAdcMult_Hist[iSide][iPmt] = new TH1I(Form("P.aero.good%sAdcMult_Pmt%d", aeroSideNames[iSide].Data(), iPmt+1), Form("P.aero.good%sAdcMult_Pmt%d", aeroSideNames[iSide].Data(), iPmt+1), 10, 0, 10);
+            aeroAdcTdcDiffTime_Hist[iSide][iPmt] = new TH1D(Form("P.aero.good%sAdcTdcDiffTime_Pmt%d", aeroSideNames[iSide].Data(), iPmt+1), Form("P.aero.good%sAdcTdcDiffTime_Pmt%d", aeroSideNames[iSide].Data(), iPmt+1), 5000, 0, 5000);
+            aeroAdcMult_Hist[iSide][iPmt] = new TH1D(Form("P.aero.good%sAdcMult_Pmt%d", aeroSideNames[iSide].Data(), iPmt+1), Form("P.aero.good%sAdcMult_Pmt%d", aeroSideNames[iSide].Data(), iPmt+1), 10, 0, 10);
         }
     }
 
@@ -377,8 +377,8 @@ void makeHistos ()
         {
             for(Int_t iPmt = 0; iPmt < hcalNumPmts[iPlane]; iPmt++)
             {
-                hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt] = new TH1F(Form("H.cal.%s.Good%sAdcTdcDiffTime_Pmt%d", hcalPlaneNames[iPlane].Data(), calSideNames[iSide].Data(), iPmt+1),Form("H.cal.%s.Good%sAdcTdcDiffTime_Pmt%d", hcalPlaneNames[iPlane].Data(), calSideNames[iSide].Data(), iPmt+1), 5000, 0, 5000);
-                hcalAdcMult_Hist[iPlane][iSide][iPmt] = new TH1I(Form("H.cal.%s.Good%sAdcMult_Pmt%d", hcalPlaneNames[iPlane].Data(), calSideNames[iSide].Data(), iPmt+1),Form("H.cal.%s.Good%sAdcMult_Pmt%d", hcalPlaneNames[iPlane].Data(), calSideNames[iSide].Data(), iPmt+1), 10, 0, 10);
+                hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt] = new TH1D(Form("H.cal.%s.Good%sAdcTdcDiffTime_Pmt%d", hcalPlaneNames[iPlane].Data(), calSideNames[iSide].Data(), iPmt+1),Form("H.cal.%s.Good%sAdcTdcDiffTime_Pmt%d", hcalPlaneNames[iPlane].Data(), calSideNames[iSide].Data(), iPmt+1), 5000, 0, 5000);
+                hcalAdcMult_Hist[iPlane][iSide][iPmt] = new TH1D(Form("H.cal.%s.Good%sAdcMult_Pmt%d", hcalPlaneNames[iPlane].Data(), calSideNames[iSide].Data(), iPmt+1),Form("H.cal.%s.Good%sAdcMult_Pmt%d", hcalPlaneNames[iPlane].Data(), calSideNames[iSide].Data(), iPmt+1), 10, 0, 10);
             }
         }
     }
@@ -388,15 +388,15 @@ void makeHistos ()
     {
         for(Int_t iPmt = 0; iPmt < pcalPrNumPmts; iPmt++)
         {
-            pcalprAdcTdcDiffTime_Hist[iSide][iPmt] = new TH1F(Form("P.cal.pr.Good%sAdcTdcDiffTime_pmt%d", calSideNames[iSide].Data(), iPmt+1), Form("P.cal.pr.Good%sAdcTdcDiffTime_pmt%d", calSideNames[iSide].Data(), iPmt+1), 5000, 0, 5000);
-            pcalprAdcMult_Hist[iSide][iPmt] = new TH1I(Form("P.cal.pr.Good%sAdcMult_pmt%d", calSideNames[iSide].Data(), iPmt+1), Form("P.cal.pr.Good%sAdcMult_pmt%d", calSideNames[iSide].Data(), iPmt+1), 10, 0, 10);
+            pcalprAdcTdcDiffTime_Hist[iSide][iPmt] = new TH1D(Form("P.cal.pr.Good%sAdcTdcDiffTime_pmt%d", calSideNames[iSide].Data(), iPmt+1), Form("P.cal.pr.Good%sAdcTdcDiffTime_pmt%d", calSideNames[iSide].Data(), iPmt+1), 5000, 0, 5000);
+            pcalprAdcMult_Hist[iSide][iPmt] = new TH1D(Form("P.cal.pr.Good%sAdcMult_pmt%d", calSideNames[iSide].Data(), iPmt+1), Form("P.cal.pr.Good%sAdcMult_pmt%d", calSideNames[iSide].Data(), iPmt+1), 10, 0, 10);
         }
     }    
     
     for(Int_t iPmt = 0; iPmt < pcalFlyNumPmts; iPmt++)
     {
-        pcalflyAdcTdcDiffTime_Hist[iPmt] = new TH1F(Form("P.cal.fly.GoodAdcTdcDiffTime_pmt%d", iPmt+1), Form("P.cal.fly.GoodAdcTdcDiffTime_pmt%d", iPmt+1), 5000, 0, 5000);
-        pcalflyAdcMult_Hist[iPmt] = new TH1I(Form("P.cal.fly.GoodAdcMult_pmt%d", iPmt+1),Form("P.cal.fly.GoodAdcMult_pmt%d", iPmt+1), 10, 0, 10);
+        pcalflyAdcTdcDiffTime_Hist[iPmt] = new TH1D(Form("P.cal.fly.GoodAdcTdcDiffTime_pmt%d", iPmt+1), Form("P.cal.fly.GoodAdcTdcDiffTime_pmt%d", iPmt+1), 5000, 0, 5000);
+        pcalflyAdcMult_Hist[iPmt] = new TH1D(Form("P.cal.fly.GoodAdcMult_pmt%d", iPmt+1),Form("P.cal.fly.GoodAdcMult_pmt%d", iPmt+1), 10, 0, 10);
     }
     
     return;

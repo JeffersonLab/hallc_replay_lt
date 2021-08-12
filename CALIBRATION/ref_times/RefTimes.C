@@ -580,7 +580,7 @@ void RefTimes( TString rootFileName, Int_t RunNumber)
     //save plots
     
     //make output file
-    TFile* outFile = new TFile(Form("./output/REF_TimePlots_%d", RunNumber), "RECREATE");
+    TFile* outFile = new TFile(Form("./output/REF_TimePlots_%d.root", RunNumber), "RECREATE");
     
     //make directories for drawing the files in
     TDirectory *TVar = outFile->mkdir("T");

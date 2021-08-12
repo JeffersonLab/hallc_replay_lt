@@ -735,7 +735,7 @@ void RefTimes( TString rootFileName, Int_t RunNumber)
         pCal->WriteObject(pcalflyAdcMult_Hist[iPmt], pcalflyAdcMult_Hist[iPmt]->GetName());
     }
     
-    outFile.Close();
+    outFile->Close();
     cout << "Finished saving output!\n---- End ----\n"; 
     return;
 }

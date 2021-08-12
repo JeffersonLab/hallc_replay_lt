@@ -406,9 +406,12 @@ void makeHistos ()
 void fillHistos(TTree *DataTree)
 {
     Int_t MaxEvents = DataTree->GetEntries();
+    cout << "Begining to fill histograms, " << MaxEvents << " events will be processed!\n";
     for(Int_t iEntry = 0; iEntry < MaxEvents; iEntry++)
     {
         DataTree->GetEntry(iEntry);
+        
+        if( iEntry % 10000 == 0 ) cout << iEntry << "\n"; //status report
         
         hFADC_TREF_ROC1_Mult_Hist->Fill(hFADC_TREF_ROC1_Mult);
         hTref1_Mult_Hist->Fill(hTref1_Mult);
@@ -572,6 +575,8 @@ void RefTimes( TString rootFileName, Int_t RunNumber)
     //fill histos and apply cuts
     fillHistos(DataTree);
     
+    cout << "Finished filling plots, saving output!\n";
+    
     //save plots
     
     //make output file
@@ -730,6 +735,7 @@ void RefTimes( TString rootFileName, Int_t RunNumber)
         pCal->WriteObject(pcalflyAdcMult_Hist[iPmt], pcalflyAdcMult_Hist[iPmt]->GetName());
     }
     
+    cout << "Finished saving output!\n---- End ----\n"; 
     return;
 }
 

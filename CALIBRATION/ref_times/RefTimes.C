@@ -318,8 +318,8 @@ void makeHistos ()
     //dc variables
     for(Int_t i = 0; i < dcPlanes; i++)
     {
-        hdcrawtdc_Hist[i] = new TH1D(Form("H.dc.%s.rawtdc", dcPlaneNames[i].Data()), Form("H.dc.%s.rawtdc", dcPlaneNames[i].Data()), 10000, 0, 10000);
-        pdcrawtdc_Hist[i] = new TH1D(Form("P.dc.%s.rawtdc", dcPlaneNames[i].Data()), Form("P.dc.%s.rawtdc", dcPlaneNames[i].Data()), 10000, 0, 10000);
+        hdcrawtdc_Hist[i] = new TH1D(Form("H.dc.%s.rawtdc", dcPlaneNames[i].Data()), Form("H.dc.%s.rawtdc", dcPlaneNames[i].Data()), 5000, -15000, -10000);
+        pdcrawtdc_Hist[i] = new TH1D(Form("P.dc.%s.rawtdc", dcPlaneNames[i].Data()), Form("P.dc.%s.rawtdc", dcPlaneNames[i].Data()), 5000, -15000, -10000);
         hdcnhit_Hist[i] = new TH1D(Form("H.dc.%s.nhit", dcPlaneNames[i].Data()), Form("H.dc.%s.nhit", dcPlaneNames[i].Data()), 50, 0, 50);
         pdcnhit_Hist[i] = new TH1D(Form("P.dc.%s.nhit", dcPlaneNames[i].Data()), Form("P.dc.%s.nhit", dcPlaneNames[i].Data()), 50, 0, 50);
     }

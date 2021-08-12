@@ -1,0 +1,7 @@
+; SHMS Heavy Gas Cer Parameter File Containing TimeWindow Min/Max Cuts 
+ 
+ 
+ 
+
+phgcer_adcTimeWindowMin = 33.2, 31.5, 32.4, 32.6
+phgcer_adcTimeWindowMax = 41.5, 41.7, 38.3, 38.7

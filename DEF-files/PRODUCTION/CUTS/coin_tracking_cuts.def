@@ -364,7 +364,11 @@ SHMSAeroDidpi            SHMSAeroShouldpi && P.aero.npeSum > 1.5
 ##################
 
 HMSGEN		   HMSScinGood && HMShodstarttime && HMScoindcindipole && hcut_acceptance
+<<<<<<< HEAD
+HMSCalelec         H.cal.etottracknorm > 0.6
+=======
 HMSCalelec         H.cal.etottracknorm > 0.05
+>>>>>>> origin/online_pionlt
 
 HMSHGCShouldelec         HMSGEN && SHMSCT && HMSCalelec 
 HMSHGCDidelec            HMSHGCShouldelec && H.cer.npeSum > 1.5

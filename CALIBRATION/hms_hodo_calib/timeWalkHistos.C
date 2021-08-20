@@ -58,15 +58,15 @@ static const Double_t adcDynamicRange = 1000.0;                   // Units of mV
 static const Double_t nAdcChan        = 4096.0;                   // Units of ADC channels
 static const Double_t adcChanTomV     = adcDynamicRange/nAdcChan; // Units of mV/ADC Chan
 
-static const Double_t hodoPulseAmpCutLow     = 25.0;   // Units of mV
+static const Double_t hodoPulseAmpCutLow     = 20.0;   // Units of mV
 static const Double_t hodoPulseAmpCutHigh    = 1000.0; // Units of mV
-static const Double_t refAdcPulseAmpCutLow   = 50.0;   // Units of mV
-static const Double_t refAdcPulseAmpCutHigh  = 60.0;   // Units of mV
-static const Double_t refAdcPulseTimeCutLow  = 210.0;  // Units of ns
-static const Double_t refAdcPulseTimeCutHigh = 225.0;  // Units of ns
+static const Double_t refAdcPulseAmpCutLow   = 40.0;   // Units of mV
+static const Double_t refAdcPulseAmpCutHigh  = 70.0;   // Units of mV
+static const Double_t refAdcPulseTimeCutLow  = 320.0;  // Units of ns
+static const Double_t refAdcPulseTimeCutHigh = 360.0;  // Units of ns
 static const Double_t adcTdcTimeDiffCutLow   = -100.0; // Units of ns
 static const Double_t adcTdcTimeDiffCutHigh  = 100.0;  // Units of ns
-static const Double_t calEtotNormCutVal      = 0.7;  // Units of GeV
+static const Double_t calEtotNormCutVal      = 0.6;  // Units of GeV
 static const Double_t cerNpeSumCutVal        = 1.5;    // Units of NPE
 // static const Double_t adcTdcTimeDiffCutLow   = -6000.0;  // Units of ns
 // static const Double_t adcTdcTimeDiffCutHigh  = 1000.0;  // Units of ns
@@ -193,7 +193,7 @@ void generatePlots(UInt_t iplane, UInt_t iside, UInt_t ipaddle) {
   if (!adcTdcTimeDiffWalkDir[iplane][iside]) {adcTdcTimeDiffWalkDir[iplane][iside] = sideUncalibDir[iplane][iside]->mkdir("adcTdcTimeDiffWalk"); adcTdcTimeDiffWalkDir[iplane][iside]->cd();}
   else (outFile->cd("hodoUncalib/"+planeNames[iplane]+"/"+sideNames[iside]+"/adcTdcTimeDiffWalk"));
   // Book histos
-  if (!h2_adcTdcTimeDiffWalk[iplane][iside][ipaddle]) h2_adcTdcTimeDiffWalk[iplane][iside][ipaddle] = new TH2F(Form("h2_adcTdcTimeDiffWalk_paddle_%d", ipaddle+1), "TDC-ADC Time vs. Pulse Amp Plane "+planeNames[iplane]+" Side "+sideNames[iside]+Form(" Paddle %d", ipaddle+1)+"; Pulse Amplitude (mV) / 1 mV;  TDC-ADC Time (ns) / 100 ps", 1000, 0, 1000, 150, -100, 100);
+  if (!h2_adcTdcTimeDiffWalk[iplane][iside][ipaddle]) h2_adcTdcTimeDiffWalk[iplane][iside][ipaddle] = new TH2F(Form("h2_adcTdcTimeDiffWalk_paddle_%d", ipaddle+1), "TDC-ADC Time vs. Pulse Amp Plane "+planeNames[iplane]+" Side "+sideNames[iside]+Form(" Paddle %d", ipaddle+1)+"; Pulse Amplitude (mV) / 1 mV;  TDC-ADC Time (ns) / 100 ps", 1000, 0, 1000, 1500, adcTdcTimeDiffCutLow, adcTdcTimeDiffCutHigh); // changed this so range of plot coresponds with actual cut value
   
 } // generatePlots()
 
@@ -223,14 +223,14 @@ void timeWalkHistos(TString inputname,Int_t runNum, string SPEC_flg) {    //SPEC
   rawDataTree->SetBranchAddress(Form("T.%s.hFADC_TREF_ROC1_adcMultiplicity", SPEC_flg.c_str()), &refAdcMultiplicity);
   rawDataTree->SetBranchAddress(Form("T.%s.hT1_tdcTimeRaw", SPEC_flg.c_str()), &refT1TdcTimeRaw);
   rawDataTree->SetBranchAddress(Form("T.%s.hT2_tdcTimeRaw", SPEC_flg.c_str()), &refT2TdcTimeRaw);
-  rawDataTree->SetBranchAddress("H.cal.etotnorm", &calEtotNorm);
+  rawDataTree->SetBranchAddress("H.cal.etracknorm", &calEtotNorm);
   rawDataTree->SetBranchAddress("H.cer.npeSum", &cerNpeSum);
   // Loop over the planes, sides, signals, leafs, and fill data arrays
   for(UInt_t iplane = 0; iplane < nPlanes; iplane++) {
     for(UInt_t iside = 0; iside < nSides; iside++) {
       // Generate directory structure and histograms
       for(UInt_t ipaddle = 0; ipaddle < nbars[iplane]; ipaddle++)
-	generatePlots(iplane, iside, ipaddle);	
+		generatePlots(iplane, iside, ipaddle);	
       for(UInt_t isignal = 0; isignal < nSignals; isignal++) {
 
 	// Acquire the hodoscope ADC data objects
@@ -299,7 +299,7 @@ void timeWalkHistos(TString inputname,Int_t runNum, string SPEC_flg) {    //SPEC
     cerNpeSumCut = (cerNpeSum < cerNpeSumCutVal);
     //calEtotCut =1;
     //cerNpeSumCut =1;
-    if (calEtotNormCut || cerNpeSumCut) continue;
+    if (calEtotNormCut || cerNpeSumCut) continue; 
     // Fill trigger apparatus histos
     h1_refAdcPulseTimeRaw->Fill(refAdcPulseTimeRaw*adcChanToTime);
     h1_refAdcPulseAmp->Fill(refAdcPulseAmp);
@@ -359,11 +359,11 @@ void timeWalkHistos(TString inputname,Int_t runNum, string SPEC_flg) {    //SPEC
 	  } // TDC signal
 
 	  // Define cuts
-	  adcRefMultiplicityCut = (refAdcMultiplicity == 1.0);
+	  adcRefMultiplicityCut = (refAdcMultiplicity < 1.0);
 	  adcRefPulseAmpCut     = (refAdcPulseAmp < refAdcPulseAmpCutLow || refAdcPulseAmp > refAdcPulseAmpCutHigh);
 	  adcRefPulseTimeCut    = (refAdcPulseTimeRaw*adcChanToTime < refAdcPulseTimeCutLow || refAdcPulseTimeRaw*adcChanToTime > refAdcPulseTimeCutHigh);
 	  // Implement cuts
-	  // if (adcRefMultiplicityCut || adcRefPulseAmpCut || adcRefPulseTimeCut) continue;	  
+	  if (adcRefMultiplicityCut || adcRefPulseAmpCut || adcRefPulseTimeCut) continue;	  
 	  // Acquire the hodoscope ADC data objects
 	  if(signalNames[isignal] == "Adc") { 
 	    // Loop over the signals again
@@ -403,7 +403,7 @@ void timeWalkHistos(TString inputname,Int_t runNum, string SPEC_flg) {    //SPEC
 			tdcTime        = tdcTimeRaw - refT2TdcTimeRaw*tdcChanToTime;
 			adcTdcTimeDiff = tdcTime - adcPulseTime;
 			// Define cuts
-			adcAndTdcHitCut   = (adcPaddleNum != tdcPaddleNum);
+			adcAndTdcHitCut   = (adcPaddleNum != tdcPaddleNum); 
 			adcTdcTimeDiffCut = (adcTdcTimeDiff < adcTdcTimeDiffCutLow || adcTdcTimeDiff > adcTdcTimeDiffCutHigh);
 			// Implement cuts
 			if (adcAndTdcHitCut || adcTdcTimeDiffCut) continue;
@@ -441,5 +441,5 @@ void timeWalkHistos(TString inputname,Int_t runNum, string SPEC_flg) {    //SPEC
   printf ("The Analysis Event Rate Was %.3f kHz \n", (ievent + 1) / (((float) t) / CLOCKS_PER_SEC*1000.));
   outFile->Write();
   outFile->Close();
-  //return 0;
+  return 0;
 } // time_walk_calib()

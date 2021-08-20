@@ -26,6 +26,7 @@
 
 // Declare ROOT files
 TFile *histoFile; 
+TFile *histOutFile;
  
 
 // Declare Output  Parameter File
@@ -166,9 +167,12 @@ void doTwFits(UInt_t iplane, UInt_t iside, UInt_t ipaddle) {
       fitResult = h2_adcTdcTimeDiffWalk[iplane][iside][ipaddle]->Fit("twFit", "SREQ");	
       // fitResult->Print("V");
       twFitStatus = int(fitResult);
+      if (twFitStatus!= 0)
+      	cout << "ERROR: Time Walk Fit Failed!!! " << "Status = " << twFitStatus << " For Plane: " <<  planeNames[iplane] << " Side: " << sideNames[iside] << " Paddle: " << ipaddle+1 << endl;		
     }
-  else if (twFitStatus!= 0) 
-    cout << "ERROR: Time Walk Fit Failed!!! " << "Status = " << twFitStatus << " For Plane: " <<  planeNames[iplane] << " Side: " << sideNames[iside] << " Paddle: " << ipaddle+1 << endl;		
+  else    
+    cout << "ERROR: Time Walk Fit Failed!!! " << "No Entries!!! For Plane: " <<  planeNames[iplane] << " Side: " << sideNames[iside] << " Paddle: " << ipaddle+1 << endl;
+  		
   // Create text box to display fir parameters
   twFitParText[iplane][iside][ipaddle] = new TPaveText(0.4, 0.6, 0.895, 0.895, "NBNDC");
   twFitParText[iplane][iside][ipaddle]->AddText(Form("Entries = %.0f", h2_adcTdcTimeDiffWalk[iplane][iside][ipaddle]->GetEntries()));
@@ -177,15 +181,15 @@ void doTwFits(UInt_t iplane, UInt_t iside, UInt_t ipaddle) {
     twFitPar[iplane][iside][ipar][ipaddle]    = twFit[iplane][iside][ipaddle]->GetParameter(ipar);
     twFitParErr[iplane][iside][ipar][ipaddle] = twFit[iplane][iside][ipaddle]->GetParError(ipar);
     twFitParText[iplane][iside][ipaddle]->AddText(Form(twFitParNames[ipar]+" = %.2f #pm %.2f", twFitPar[iplane][iside][ipar][ipaddle], twFitParErr[iplane][iside][ipar][ipaddle]));
- } // Parameter loop
-    twFitParText[iplane][iside][ipaddle]->AddText(Form("#chi^{2}/NDF = %.2f", twFit[iplane][iside][ipaddle]->GetChisquare()/twFit[iplane][iside][ipaddle]->GetNDF()));
+  } // Parameter loop
+  twFitParText[iplane][iside][ipaddle]->AddText(Form("#chi^{2}/NDF = %.2f", twFit[iplane][iside][ipaddle]->GetChisquare()/twFit[iplane][iside][ipaddle]->GetNDF()));
    
   // Draw the fit parameter text
   twFitParText[iplane][iside][ipaddle]->SetFillColor(kWhite);
   twFitParText[iplane][iside][ipaddle]->SetTextAlign(12);
   twFitParText[iplane][iside][ipaddle]->SetFillStyle(3003);
   twFitParText[iplane][iside][ipaddle]->Draw();
-  gPad->Modified(); gPad->Update();
+  gPad->Modified(); gPad->Update(); //fit and Data are on current Pad
   return;
 } // doTwFits()
 
@@ -235,7 +239,7 @@ void drawParams(UInt_t iplane) {
       if (iside == 1) twFitParLegend[iplane][ipar]->AddEntry(twFitParGraph[iplane][iside][ipar], "Negative Side", "p");
       avgParLegend[iplane][ipar]->AddEntry(avgParFit[iplane][iside][ipar], "#bar{"+twFitParNames[ipar]+"}"+Form(" = %.2f", avgPar[iplane][iside][ipar]),"l");
       // Define the time-walk fit parameter multigraph y-axis range
-      if (iside == 0) {
+      if (iside == 0) { 
 	// Set y-axis range min
 	if (minPar[iplane][iside][ipar] < 0.0 || minPar[iplane][iside+1][ipar] < 0.0) {
 	  if (minPar[iplane][iside][ipar] < minPar[iplane][iside+1][ipar]) 
@@ -263,9 +267,38 @@ void drawParams(UInt_t iplane) {
     twFitParLegend[iplane][ipar]->Draw();
     avgParLegend[iplane][ipar]->Draw();
   } // Parameter loop
+  
+  
   return;
 } // drawParams
 
+//Add method for writing summary plots to ROOT File
+void writePlots() 
+{
+	TDirectory *PSUM = histOutFile->mkdir("Param_Summary");
+	TDirectory *FSUM = histOutFile->mkdir("Fit_Summary");
+	TDirectory *FSUBSUM = FSUM->mkdir("Histos");
+	
+	for (UInt_t ipar = 0; ipar < nTwFitPars; ipar++) {
+		//Parameter Summary Canvases
+  		PSUM->WriteObject(twFitParCan[ipar], Form("twFitParCan%d", ipar));
+    }
+    
+    for (UInt_t iplane = 0; iplane < nPlanes; iplane++)
+    {
+    	for(UInt_t iside = 0; iside < nSides; iside++)
+    	{
+    		//TW Fit summary Canvases
+    		FSUM->WriteObject(twFitCan[iplane][iside], "twFitCan_"+planeNames[iplane]+"_"+sideNames[iside]);
+    		//TW Fit Individual Canvases
+    		for (int ibar = 0; ibar < nBarsMax; ibar++)
+            {
+                FSUBSUM->WriteObject(twFitCan[iplane][iside]->cd(ibar+1)->GetPadPointer(), "twFitCan_"+planeNames[iplane]+"_"+Form("Bar%d", ibar)+"_"+sideNames[iside]);
+            }
+    	}
+    }
+    return;
+}
 
 //Add a method to Get Fit Parameters
 void WriteFitParam(int runNUM)
@@ -364,6 +397,74 @@ void WriteFitParam(int runNUM)
 
 } //end method
 
+// This is to write all the parrameters with there errors, so that they may be checked against other Runs - NH 21/05/06
+void WriteFitParamErr(int runNUM)
+{
+
+  TString outPar_Name = Form("Calibration_Plots/phodo_TWcalib_Err_%d.param", runNUM); //note could put this where ever you wanted to
+  outParam.open(outPar_Name);
+  Double_t c2err[nPlanes][nSides][nBarsMax] = {0.};
+  //Fill 3D Par array
+  for (UInt_t iplane=0; iplane < nPlanes; iplane++)
+    {
+      
+      for (UInt_t iside=0; iside < nSides; iside++) {
+	      
+
+	for(UInt_t ipaddle = 0; ipaddle < nbars[iplane]; ipaddle++) {
+	 
+	  //c1[iplane][iside][ipaddle] = twFit[iplane][iside][ipaddle]->GetParameter("c_{1}");
+	  c2[iplane][iside][ipaddle] = twFit[iplane][iside][ipaddle]->GetParameter("c_{2}");
+	  c2err[iplane][iside][ipaddle] = twFit[iplane][iside][ipaddle]->GetParError(1);
+	  chi2ndf[iplane][iside][ipaddle] =  twFit[iplane][iside][ipaddle]->GetChisquare()/twFit[iplane][iside][ipaddle]->GetNDF();
+      
+	} //end paddle loop
+
+      } //end side loop
+    
+    } //end plane loop
+
+  //Wrtie to Param FIle
+                                                                                                                                                                            
+  //Loop over all paddles
+  for (UInt_t iplane = 0; iplane < nPlanes; iplane++)
+  {  
+  	for(UInt_t ipaddle = 0; ipaddle < nBarsMax; ipaddle++) { 
+    //Write c2-Pos values
+     
+		outParam << c2[iplane][0][ipaddle] << " " << fixed; 
+                                              
+	    }//end loop paddles
+	outParam << endl;
+	//write errors
+	for(UInt_t ipaddle = 0; ipaddle < nBarsMax; ipaddle++) {
+		outParam << c2err[iplane][0][ipaddle] << " " << fixed;
+	}
+	outParam << endl;
+  } //end loop over planes
+  
+                                                                                                                                                                           
+  //Loop over all paddles
+  for (UInt_t iplane = 0; iplane < nPlanes; iplane++)
+  {  
+  	for(UInt_t ipaddle = 0; ipaddle < nBarsMax; ipaddle++) { 
+    //Write c2-Neg values
+     
+		outParam << c2[iplane][1][ipaddle] << " " << fixed; 
+                                              
+	    }//end loop paddles
+	outParam << endl;
+	//write errors
+	for(UInt_t ipaddle = 0; ipaddle < nBarsMax; ipaddle++) {
+		outParam << c2err[iplane][1][ipaddle] << " " << fixed;
+	}
+	outParam << endl;
+  } //end loop over planes
+  
+  outParam.close();
+
+} //WriteFitParamErr
+
 //=:=:=:=:=
 //=: Main
 //=:=:=:=:=
@@ -371,7 +472,7 @@ void WriteFitParam(int runNUM)
 void timeWalkCalib(int run) {
 
   //prevent root from displaying graphs while executing
-  //gROOT->SetBatch(1);
+  gROOT->SetBatch(1);
  
  // ROOT settings
   gStyle->SetTitleFontSize(fontSize);
@@ -394,6 +495,7 @@ void timeWalkCalib(int run) {
   // Loop over the planes
   for(UInt_t iplane = 0; iplane < nPlanes; iplane++) {
     //for(UInt_t iplane = 0; iplane < 1; iplane++) {
+
     // Obtain the plane directory
     planeDir[iplane] = dynamic_cast <TDirectory*> (dataDir->FindObjectAny(planeNames[iplane]));
     // Create multigraphs
@@ -409,13 +511,15 @@ void timeWalkCalib(int run) {
       if (planeNames[iplane] == "2y") twFitCan[iplane][iside] = makeCan(6, 4, 1600, 800, twFitCan[iplane][iside], planeNames[iplane]+"_"+sideNames[iside]+"_twFitCan", planeNames[iplane]+"_"+sideNames[iside]+"_twFitCan");
       // Loop over the paddles
       for(UInt_t ipaddle = 0; ipaddle < nbars[iplane]; ipaddle++) {
-	// Populate the paddle index arrays
-	paddleIndex[iplane][iside][ipaddle] = Double_t (ipaddle + 1);
-	// Obtain the time-walk histos
-	h2_adcTdcTimeDiffWalk[iplane][iside][ipaddle] = dynamic_cast <TH2F*> (twDir[iplane][iside]->FindObjectAny(Form("h2_adcTdcTimeDiffWalk_paddle_%d", ipaddle+1)));
-	// Perform the time-walk fits while ignoring the S2Y plane (for now)
-	// if (planeNames[iplane] == "2y") continue;
-	doTwFits(iplane, iside, ipaddle);
+		// Populate the paddle index arrays
+		paddleIndex[iplane][iside][ipaddle] = Double_t (ipaddle + 1);
+		// Obtain the time-walk histos
+		h2_adcTdcTimeDiffWalk[iplane][iside][ipaddle] = dynamic_cast <TH2F*> (twDir[iplane][iside]->FindObjectAny(Form("h2_adcTdcTimeDiffWalk_paddle_%d", ipaddle+1)));
+		// Perform the time-walk fits while ignoring the S2Y plane (for now)
+		// if (planeNames[iplane] == "2y") continue;
+
+		doTwFits(iplane, iside, ipaddle);
+		
       } // Paddle loop
       // Produce the time-walk fit parameter graphs
       for (UInt_t ipar = 0; ipar < nTwFitPars; ipar++) {
@@ -423,8 +527,8 @@ void timeWalkCalib(int run) {
       	twFitParGraph[iplane][iside][ipar] = new TGraph(nbars[iplane], paddleIndex[iplane][iside], twFitPar[iplane][iside][ipar]);
       	if (iside == 0) addColorToGraph(22, markerSize, kRed,  twFitParGraph[iplane][iside][ipar]);
       	if (iside == 1) addColorToGraph(23, markerSize, kBlue, twFitParGraph[iplane][iside][ipar]);
-      	// // Add graphs to multi graph
-      	// twFitParMultiGraph[iplane][ipar]->Add(twFitParGraph[iplane][iside][ipar]);
+      		// // Add graphs to multi graph
+      		// twFitParMultiGraph[iplane][ipar]->Add(twFitParGraph[iplane][iside][ipar]);
       } // Parameter loop
       // Calculate the average of the time-walk fit parameters
       calcParAvg(iplane, iside);
@@ -432,10 +536,24 @@ void timeWalkCalib(int run) {
     // Draw the time-walk parameter graphs
     drawParams(iplane);
   } // Plane loop 
+  
+  //histoFile->Close();
  
+  // NH 25/03/2021 - Create Root File for output plots
+  TString histOutFileName = Form("timeWalkCalib_%d.root", run);
+  histOutFile = new TFile(histOutFileName, "RECREATE");
+  //make sure current file is output file
+  gFile = histOutFile;
+  //write to ROOT file
+  writePlots(); 
+ 
+  histOutFile->Close();
   //Write to a param file
   WriteFitParam(run);
+  //Write parrameters with errors out to seperate file
+  WriteFitParamErr(run);
   
+  return;
 } // timeWalkCalib()
 
 

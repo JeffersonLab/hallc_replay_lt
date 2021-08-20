@@ -227,7 +227,7 @@ void HMSHodo_Calib_Coin_Pt3 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   analyzer->SetEvent(event);
   // Set EPICS event type
-  analyzer->SetEpicsEvtType(180);
+  analyzer->SetEpicsEvtType(181);
   // Define crate map
   analyzer->SetCrateMapFileName("MAPS/db_cratemap.dat");
   // Define output ROOT file

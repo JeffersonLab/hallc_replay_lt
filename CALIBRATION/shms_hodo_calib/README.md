@@ -24,7 +24,7 @@ The two codes have different parameters and it is possible to switch between the
 
      c. Start "root -l" and then .x timeWalkCalib.C+
 
-     d. This creates the parameter file "../../PARAM/SHMS/HODO/phodo_TWcalib_runnumber.param"
+     d. This creates the parameter file "../../PARAM/SHMS/HODO/phodo_TWcalib_runnumber.param", as well as timeWalkCalib_runnumber.root which is a summary of the fits, and /CalibrationPlots/phodo_TWcalib_Err_%d.param which is used for looking at trends across many runs.
 
 3.  Replay the data with ptofusinginvadc=0 and the new parameter files (the simplest is to copy phodo_TWcalib_runnumber.param to phodo_TWcalib.param).
 

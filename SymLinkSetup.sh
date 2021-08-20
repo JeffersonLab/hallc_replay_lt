@@ -7,9 +7,9 @@
 echo "Beginning setup of folders and symlinks"
 # Set path depending upon hostname. Change or add more as needed  
 if [[ "${HOSTNAME}" = *"farm"* ]]; then 
-    GROUPPATH="/group/c-pionlt"
+    GROUPPATH="/group/c-kaonlt"
     USERPATH="${GROUPPATH}/USERS/${USER}"
-    VOLATILEPATH="/volatile/hallc/c-pionlt"
+    VOLATILEPATH="/volatile/hallc/c-kaonlt"
     cd "${USERPATH}/hallc_replay_lt"
 else echo "Host not recognised, please add relevant pathing for hostname to the script and re-run"
 fi

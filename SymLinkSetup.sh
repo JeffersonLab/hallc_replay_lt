@@ -1,285 +1,280 @@
 #!/bin/bash
 
-# 24/02/21 - Stephen JD Kay - University of Regina
-# This script sets up the relevant sim links for running your replay scripts
-# It makes the relevant directories in /volatile if they do not exist
+# 10/08/21 - Stephen JD Kay - University of Regina
+# This script sets up the relevant sym links for running your replay scripts
+# It makes the relevant directories in the ROOTfiles and analysis areas if they don't exist
+# This version is specific for cdaq
 
-echo "Beginning setup of folders and symlinks"
-# Set path depending upon hostname. Change or add more as needed  
-if [[ "${HOSTNAME}" = *"farm"* ]]; then 
-    GROUPPATH="/group/c-kaonlt"
-    USERPATH="${GROUPPATH}/USERS/${USER}"
-    VOLATILEPATH="/volatile/hallc/c-kaonlt"
-    cd "${USERPATH}/hallc_replay_lt"
-else echo "Host not recognised, please add relevant pathing for hostname to the script and re-run"
-fi
+ANALYSISPATH="/home/cdaq/pionLT-2021"
+OUTPUTPATH="/net/cdaq/cdaql1data/cdaq/hallc-online-pionLT"
+CACHEPATH="/cache/hallc/c-pionlt/raw"
+RAWPATH="/net/cdaq/cdaql1data/coda/data/raw"
+RAWCOPIEDPATH="/net/cdaq/cdaql1data/coda/data/raw.copiedtotape"
+
 # Set up the hcana sym link and execute setup for this
-if [ ! -L "${USERPATH}/hallc_replay_lt/hcana" ]; then
-    ln -s "${GROUPPATH}/hcana/hcana" "${USERPATH}/hallc_replay_lt/hcana"
-elif [ -L "${USERPATH}/hallc_replay_lt/hcana" ]; then
-    if [ ! -e "${USERPATH}/hallc_replay_lt/hcana" ]; then
+if [ ! -L "${ANALYSISPATH}/hallc_replay_lt/hcana" ]; then
+    ln -s "${ANALYSISPATH}/hcana/hcana" "${ANALYSISPATH}/hallc_replay_lt/hcana"
+elif [ -L "${ANALYSISPATH}/hallc_replay_lt/hcana" ]; then
+    if [ ! -e "${ANALYSISPATH}/hallc_replay_lt/hcana" ]; then
 	echo "hcana sym link exists but is broken, replacing"
-	rm "${USERPATH}/hallc_replay_lt/hcana"
-	ln -s "${GROUPPATH}/hcana/hcana" "${USERPATH}/hallc_replay_lt/hcana"
+	rm "${ANALYSISPATH}/hallc_replay_lt/hcana"
+	ln -s "${ANALYSISPATH}/hcana/hcana" "${ANALYSISPATH}/hallc_replay_lt/hcana"
     else read -p "hcana sym link exists and isn't broken, update it anyway? <Y/N> " prompt
 	if [[ $prompt == "y" || $prompt == "Y" || $prompt == "yes" || $prompt == "Yes" ]]; then
-	    rm "${USERPATH}/hallc_replay_lt/hcana"
-	    ln -s "${GROUPPATH}/hcana/hcana" "${USERPATH}/hallc_replay_lt/hcana"
+	    rm "${ANALYSISPATH}/hallc_replay_lt/hcana"
+	    ln -s "${ANALYSISPATH}/hcana/hcana" "${ANALYSISPATH}/hallc_replay_lt/hcana"
 	fi
     fi
 fi
 # Next, need to make a load of directories, check they exist, if not, make em!
-if [ ! -d "${VOLATILEPATH}/${USER}" ]; then
-    mkdir "${VOLATILEPATH}/${USER}"
+if [ ! -d "${OUTPUTPATH}/ROOTfiles" ]; then
+    mkdir "${OUTPUTPATH}/ROOTfiles"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/ROOTfiles" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/ROOTfiles"
+if [ ! -d "${OUTPUTPATH}/OUTPUT" ]; then
+    mkdir "${OUTPUTPATH}/OUTPUT"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/OUTPUT" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/OUTPUT"
+if [ ! -d "${OUTPUTPATH}/MON_OUTPUT" ]; then
+    mkdir "${OUTPUTPATH}/MON_OUTPUT"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/REPORT_OUTPUT" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/REPORT_OUTPUT"
+if [ ! -d "${OUTPUTPATH}/REPORT_OUTPUT" ]; then
+    mkdir "${OUTPUTPATH}/REPORT_OUTPUT"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/HISTOGRAM" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/HISTOGRAMS"
+if [ ! -d "${OUTPUTPATH}/HISTOGRAMS" ]; then
+    mkdir "${OUTPUTPATH}/HISTOGRAMS"
 fi
 
 # Now, check if subdirectories exist for ROOTfiles, if not, make them
 # Analysis subdirectories
-if [ ! -d "${VOLATILEPATH}/${USER}/ROOTfiles/Analysis" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/ROOTfiles/Analysis"
+if [ ! -d "${OUTPUTPATH}/ROOTfiles/Analysis" ]; then
+    mkdir "${OUTPUTPATH}/ROOTfiles/Analysis"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/ROOTfiles/Analysis/HeeP" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/ROOTfiles/Analysis/HeeP"
+if [ ! -d "${OUTPUTPATH}/ROOTfiles/Analysis/HeeP" ]; then
+    mkdir "${OUTPUTPATH}/ROOTfiles/Analysis/HeeP"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/ROOTfiles/Analysis/Lumi" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/ROOTfiles/Analysis/Lumi"
+if [ ! -d "${OUTPUTPATH}/ROOTfiles/Analysis/Lumi" ]; then
+    mkdir "${OUTPUTPATH}/ROOTfiles/Analysis/Lumi"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/ROOTfiles/Analysis/PionLT" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/ROOTfiles/Analysis/PionLT"
+if [ ! -d "${OUTPUTPATH}/ROOTfiles/Analysis/PionLT" ]; then
+    mkdir "${OUTPUTPATH}/ROOTfiles/Analysis/PionLT"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/ROOTfiles/Analysis/PID" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/ROOTfiles/Analysis/PID"
+if [ ! -d "${OUTPUTPATH}/ROOTfiles/Analysis/PID" ]; then
+    mkdir "${OUTPUTPATH}/ROOTfiles/Analysis/PID"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/ROOTfiles/Analysis/Optics" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/ROOTfiles/Analysis/Optics"
+if [ ! -d "${OUTPUTPATH}/ROOTfiles/Analysis/Optics" ]; then
+    mkdir "${OUTPUTPATH}/ROOTfiles/Analysis/Optics"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/ROOTfiles/Analysis/General" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/ROOTfiles/Analysis/General"
+if [ ! -d "${OUTPUTPATH}/ROOTfiles/Analysis/General" ]; then
+    mkdir "${OUTPUTPATH}/ROOTfiles/Analysis/General"
 fi
 # Calib sub directories
-if [ ! -d "${VOLATILEPATH}/${USER}/ROOTfiles/Calib" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/ROOTfiles/Calib"
+if [ ! -d "${OUTPUTPATH}/ROOTfiles/Calib" ]; then
+    mkdir "${OUTPUTPATH}/ROOTfiles/Calib"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/ROOTfiles/Calib/Hodo" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/ROOTfiles/Calib/Hodo"
+if [ ! -d "${OUTPUTPATH}/ROOTfiles/Calib/Hodo" ]; then
+    mkdir "${OUTPUTPATH}/ROOTfiles/Calib/Hodo"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/ROOTfiles/Calib/DC" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/ROOTfiles/Calib/DC"
+if [ ! -d "${OUTPUTPATH}/ROOTfiles/Calib/DC" ]; then
+    mkdir "${OUTPUTPATH}/ROOTfiles/Calib/DC"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/ROOTfiles/Calib/Cal" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/ROOTfiles/Calib/Cal"
+if [ ! -d "${OUTPUTPATH}/ROOTfiles/Calib/Cal" ]; then
+    mkdir "${OUTPUTPATH}/ROOTfiles/Calib/Cal"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/ROOTfiles/Calib/HGC" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/ROOTfiles/Calib/HGC"
+if [ ! -d "${OUTPUTPATH}/ROOTfiles/Calib/HGC" ]; then
+    mkdir "${OUTPUTPATH}/ROOTfiles/Calib/HGC"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/ROOTfiles/Calib/Aero" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/ROOTfiles/Calib/Aero"
+if [ ! -d "${OUTPUTPATH}/ROOTfiles/Calib/Aero" ]; then
+    mkdir "${OUTPUTPATH}/ROOTfiles/Calib/Aero"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/ROOTfiles/Calib/NGC" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/ROOTfiles/Calib/NGC"
+if [ ! -d "${OUTPUTPATH}/ROOTfiles/Calib/NGC" ]; then
+    mkdir "${OUTPUTPATH}/ROOTfiles/Calib/NGC"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/ROOTfiles/Calib/General" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/ROOTfiles/Calib/General"
+if [ ! -d "${OUTPUTPATH}/ROOTfiles/Calib/General" ]; then
+    mkdir "${OUTPUTPATH}/ROOTfiles/Calib/General"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/ROOTfiles/Calib/Timing" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/ROOTfiles/Calib/Timing"
+if [ ! -d "${OUTPUTPATH}/ROOTfiles/Calib/Timing" ]; then
+    mkdir "${OUTPUTPATH}/ROOTfiles/Calib/Timing"
 fi
 # Scalers ROOTfiles directory
-if [ ! -d "${VOLATILEPATH}/${USER}/ROOTfiles/Scalers" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/ROOTfiles/Scalers"
+if [ ! -d "${OUTPUTPATH}/ROOTfiles/Scalers" ]; then
+    mkdir "${OUTPUTPATH}/ROOTfiles/Scalers"
 fi
 # Now, check if subdirectories exist for OUTPUT, if not, make them
 # Analysis subdirectories
-if [ ! -d "${VOLATILEPATH}/${USER}/OUTPUT/Analysis" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/OUTPUT/Analysis"
+if [ ! -d "${OUTPUTPATH}/OUTPUT/Analysis" ]; then
+    mkdir "${OUTPUTPATH}/OUTPUT/Analysis"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/OUTPUT/Analysis/HeeP" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/OUTPUT/Analysis/HeeP"
+if [ ! -d "${OUTPUTPATH}/OUTPUT/Analysis/HeeP" ]; then
+    mkdir "${OUTPUTPATH}/OUTPUT/Analysis/HeeP"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/OUTPUT/Analysis/Lumi" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/OUTPUT/Analysis/Lumi"
+if [ ! -d "${OUTPUTPATH}/OUTPUT/Analysis/Lumi" ]; then
+    mkdir "${OUTPUTPATH}/OUTPUT/Analysis/Lumi"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/OUTPUT/Analysis/PionLT" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/OUTPUT/Analysis/PionLT"
+if [ ! -d "${OUTPUTPATH}/OUTPUT/Analysis/PionLT" ]; then
+    mkdir "${OUTPUTPATH}/OUTPUT/Analysis/PionLT"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/OUTPUT/Analysis/PID" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/OUTPUT/Analysis/PID"
+if [ ! -d "${OUTPUTPATH}/OUTPUT/Analysis/PID" ]; then
+    mkdir "${OUTPUTPATH}/OUTPUT/Analysis/PID"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/OUTPUT/Analysis/Optics" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/OUTPUT/Analysis/Optics"
+if [ ! -d "${OUTPUTPATH}/OUTPUT/Analysis/Optics" ]; then
+    mkdir "${OUTPUTPATH}/OUTPUT/Analysis/Optics"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/OUTPUT/Analysis/General" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/OUTPUT/Analysis/General"
+if [ ! -d "${OUTPUTPATH}/OUTPUT/Analysis/General" ]; then
+    mkdir "${OUTPUTPATH}/OUTPUT/Analysis/General"
 fi
 # Calib sub directories
-if [ ! -d "${VOLATILEPATH}/${USER}/OUTPUT/Calib" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/OUTPUT/Calib"
+if [ ! -d "${OUTPUTPATH}/OUTPUT/Calib" ]; then
+    mkdir "${OUTPUTPATH}/OUTPUT/Calib"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/OUTPUT/Calib/Hodo" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/OUTPUT/Calib/Hodo"
+if [ ! -d "${OUTPUTPATH}/OUTPUT/Calib/Hodo" ]; then
+    mkdir "${OUTPUTPATH}/OUTPUT/Calib/Hodo"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/OUTPUT/Calib/DC" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/OUTPUT/Calib/DC"
+if [ ! -d "${OUTPUTPATH}/OUTPUT/Calib/DC" ]; then
+    mkdir "${OUTPUTPATH}/OUTPUT/Calib/DC"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/OUTPUT/Calib/Cal" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/OUTPUT/Calib/Cal"
+if [ ! -d "${OUTPUTPATH}/OUTPUT/Calib/Cal" ]; then
+    mkdir "${OUTPUTPATH}/OUTPUT/Calib/Cal"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/OUTPUT/Calib/HGC" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/OUTPUT/Calib/HGC"
+if [ ! -d "${OUTPUTPATH}/OUTPUT/Calib/HGC" ]; then
+    mkdir "${OUTPUTPATH}/OUTPUT/Calib/HGC"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/OUTPUT/Calib/Aero" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/OUTPUT/Calib/Aero"
+if [ ! -d "${OUTPUTPATH}/OUTPUT/Calib/Aero" ]; then
+    mkdir "${OUTPUTPATH}/OUTPUT/Calib/Aero"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/OUTPUT/Calib/NGC" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/OUTPUT/Calib/NGC"
+if [ ! -d "${OUTPUTPATH}/OUTPUT/Calib/NGC" ]; then
+    mkdir "${OUTPUTPATH}/OUTPUT/Calib/NGC"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/OUTPUT/Calib/General" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/OUTPUT/Calib/General"
+if [ ! -d "${OUTPUTPATH}/OUTPUT/Calib/General" ]; then
+    mkdir "${OUTPUTPATH}/OUTPUT/Calib/General"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/OUTPUT/Calib/Timing" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/OUTPUT/Calib/Timing"
+if [ ! -d "${OUTPUTPATH}/OUTPUT/Calib/Timing" ]; then
+    mkdir "${OUTPUTPATH}/OUTPUT/Calib/Timing"
 fi
 # Scalers OUTPUT directory
-if [ ! -d "${VOLATILEPATH}/${USER}/OUTPUT/Scalers" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/OUTPUT/Scalers"
+if [ ! -d "${OUTPUTPATH}/OUTPUT/Scalers" ]; then
+    mkdir "${OUTPUTPATH}/OUTPUT/Scalers"
 fi
 # Now, check if subdirectories exist for REPORT_OUTPUT, if not, make them
 # Analysis subdirectories
-if [ ! -d "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Analysis" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Analysis"
+if [ ! -d "${OUTPUTPATH}/REPORT_OUTPUT/Analysis" ]; then
+    mkdir "${OUTPUTPATH}/REPORT_OUTPUT/Analysis"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Analysis/HeeP" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Analysis/HeeP"
+if [ ! -d "${OUTPUTPATH}/REPORT_OUTPUT/Analysis/HeeP" ]; then
+    mkdir "${OUTPUTPATH}/REPORT_OUTPUT/Analysis/HeeP"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Analysis/Lumi" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Analysis/Lumi"
+if [ ! -d "${OUTPUTPATH}/REPORT_OUTPUT/Analysis/Lumi" ]; then
+    mkdir "${OUTPUTPATH}/REPORT_OUTPUT/Analysis/Lumi"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Analysis/PionLT" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Analysis/PionLT"
+if [ ! -d "${OUTPUTPATH}/REPORT_OUTPUT/Analysis/PionLT" ]; then
+    mkdir "${OUTPUTPATH}/REPORT_OUTPUT/Analysis/PionLT"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Analysis/PID" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Analysis/PID"
+if [ ! -d "${OUTPUTPATH}/REPORT_OUTPUT/Analysis/PID" ]; then
+    mkdir "${OUTPUTPATH}/REPORT_OUTPUT/Analysis/PID"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Analysis/Optics" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Analysis/Optics"
+if [ ! -d "${OUTPUTPATH}/REPORT_OUTPUT/Analysis/Optics" ]; then
+    mkdir "${OUTPUTPATH}/REPORT_OUTPUT/Analysis/Optics"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Analysis/General" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Analysis/General"
+if [ ! -d "${OUTPUTPATH}/REPORT_OUTPUT/Analysis/General" ]; then
+    mkdir "${OUTPUTPATH}/REPORT_OUTPUT/Analysis/General"
 fi
 # Calib sub directories
-if [ ! -d "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Calib" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Calib"
+if [ ! -d "${OUTPUTPATH}/REPORT_OUTPUT/Calib" ]; then
+    mkdir "${OUTPUTPATH}/REPORT_OUTPUT/Calib"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Calib/Hodo" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Calib/Hodo"
+if [ ! -d "${OUTPUTPATH}/REPORT_OUTPUT/Calib/Hodo" ]; then
+    mkdir "${OUTPUTPATH}/REPORT_OUTPUT/Calib/Hodo"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Calib/DC" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Calib/DC"
+if [ ! -d "${OUTPUTPATH}/REPORT_OUTPUT/Calib/DC" ]; then
+    mkdir "${OUTPUTPATH}/REPORT_OUTPUT/Calib/DC"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Calib/Cal" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Calib/Cal"
+if [ ! -d "${OUTPUTPATH}/REPORT_OUTPUT/Calib/Cal" ]; then
+    mkdir "${OUTPUTPATH}/REPORT_OUTPUT/Calib/Cal"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Calib/HGC" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Calib/HGC"
+if [ ! -d "${OUTPUTPATH}/REPORT_OUTPUT/Calib/HGC" ]; then
+    mkdir "${OUTPUTPATH}/REPORT_OUTPUT/Calib/HGC"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Calib/Aero" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Calib/Aero"
+if [ ! -d "${OUTPUTPATH}/REPORT_OUTPUT/Calib/Aero" ]; then
+    mkdir "${OUTPUTPATH}/REPORT_OUTPUT/Calib/Aero"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Calib/NGC" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Calib/NGC"
+if [ ! -d "${OUTPUTPATH}/REPORT_OUTPUT/Calib/NGC" ]; then
+    mkdir "${OUTPUTPATH}/REPORT_OUTPUT/Calib/NGC"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Calib/General" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Calib/General"
+if [ ! -d "${OUTPUTPATH}/REPORT_OUTPUT/Calib/General" ]; then
+    mkdir "${OUTPUTPATH}/REPORT_OUTPUT/Calib/General"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Calib/Timing" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Calib/Timing"
+if [ ! -d "${OUTPUTPATH}/REPORT_OUTPUT/Calib/Timing" ]; then
+    mkdir "${OUTPUTPATH}/REPORT_OUTPUT/Calib/Timing"
 fi
 # Scalers REPORT_OUTPUT directory
-if [ ! -d "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Scalers" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/Scalers"
+if [ ! -d "${OUTPUTPATH}/REPORT_OUTPUT/Scalers" ]; then
+    mkdir "${OUTPUTPATH}/REPORT_OUTPUT/Scalers"
 fi
 # Now, check if subdirectories exist for HISTOGRAMS, if not, make them
 # Analysis subdirectories
-if [ ! -d "${VOLATILEPATH}/${USER}/HISTOGRAMS/Analysis" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/HISTOGRAMS/Analysis"
+if [ ! -d "${OUTPUTPATH}/HISTOGRAMS/Analysis" ]; then
+    mkdir "${OUTPUTPATH}/HISTOGRAMS/Analysis"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/HISTOGRAMS/Analysis/HeeP" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/HISTOGRAMS/Analysis/HeeP"
+if [ ! -d "${OUTPUTPATH}/HISTOGRAMS/Analysis/HeeP" ]; then
+    mkdir "${OUTPUTPATH}/HISTOGRAMS/Analysis/HeeP"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/HISTOGRAMS/Analysis/Lumi" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/HISTOGRAMS/Analysis/Lumi"
+if [ ! -d "${OUTPUTPATH}/HISTOGRAMS/Analysis/Lumi" ]; then
+    mkdir "${OUTPUTPATH}/HISTOGRAMS/Analysis/Lumi"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/HISTOGRAMS/Analysis/PionLT" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/HISTOGRAMS/Analysis/PionLT"
+if [ ! -d "${OUTPUTPATH}/HISTOGRAMS/Analysis/PionLT" ]; then
+    mkdir "${OUTPUTPATH}/HISTOGRAMS/Analysis/PionLT"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/HISTOGRAMS/Analysis/PID" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/HISTOGRAMS/Analysis/PID"
+if [ ! -d "${OUTPUTPATH}/HISTOGRAMS/Analysis/PID" ]; then
+    mkdir "${OUTPUTPATH}/HISTOGRAMS/Analysis/PID"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/HISTOGRAMS/Analysis/Optics" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/HISTOGRAMS/Analysis/Optics"
+if [ ! -d "${OUTPUTPATH}/HISTOGRAMS/Analysis/Optics" ]; then
+    mkdir "${OUTPUTPATH}/HISTOGRAMS/Analysis/Optics"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/HISTOGRAMS/Analysis/General" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/HISTOGRAMS/Analysis/General"
+if [ ! -d "${OUTPUTPATH}/HISTOGRAMS/Analysis/General" ]; then
+    mkdir "${OUTPUTPATH}/HISTOGRAMS/Analysis/General"
 fi
 # Calib sub directories
-if [ ! -d "${VOLATILEPATH}/${USER}/HISTOGRAMS/Calib" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/HISTOGRAMS/Calib"
+if [ ! -d "${OUTPUTPATH}/HISTOGRAMS/Calib" ]; then
+    mkdir "${OUTPUTPATH}/HISTOGRAMS/Calib"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/HISTOGRAMS/Calib/Hodo" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/HISTOGRAMS/Calib/Hodo"
+if [ ! -d "${OUTPUTPATH}/HISTOGRAMS/Calib/Hodo" ]; then
+    mkdir "${OUTPUTPATH}/HISTOGRAMS/Calib/Hodo"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/HISTOGRAMS/Calib/DC" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/HISTOGRAMS/Calib/DC"
+if [ ! -d "${OUTPUTPATH}/HISTOGRAMS/Calib/DC" ]; then
+    mkdir "${OUTPUTPATH}/HISTOGRAMS/Calib/DC"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/HISTOGRAMS/Calib/Cal" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/HISTOGRAMS/Calib/Cal"
+if [ ! -d "${OUTPUTPATH}/HISTOGRAMS/Calib/Cal" ]; then
+    mkdir "${OUTPUTPATH}/HISTOGRAMS/Calib/Cal"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/HISTOGRAMS/Calib/HGC" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/HISTOGRAMS/Calib/HGC"
+if [ ! -d "${OUTPUTPATH}/HISTOGRAMS/Calib/HGC" ]; then
+    mkdir "${OUTPUTPATH}/HISTOGRAMS/Calib/HGC"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/HISTOGRAMS/Calib/Aero" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/HISTOGRAMS/Calib/Aero"
+if [ ! -d "${OUTPUTPATH}/HISTOGRAMS/Calib/Aero" ]; then
+    mkdir "${OUTPUTPATH}/HISTOGRAMS/Calib/Aero"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/HISTOGRAMS/Calib/NGC" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/HISTOGRAMS/Calib/NGC"
+if [ ! -d "${OUTPUTPATH}/HISTOGRAMS/Calib/NGC" ]; then
+    mkdir "${OUTPUTPATH}/HISTOGRAMS/Calib/NGC"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/HISTOGRAMS/Calib/General" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/HISTOGRAMS/Calib/General"
+if [ ! -d "${OUTPUTPATH}/HISTOGRAMS/Calib/General" ]; then
+    mkdir "${OUTPUTPATH}/HISTOGRAMS/Calib/General"
 fi
-if [ ! -d "${VOLATILEPATH}/${USER}/HISTOGRAMS/Calib/Timing" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/HISTOGRAMS/Calib/Timing"
+if [ ! -d "${OUTPUTPATH}/HISTOGRAMS/Calib/Timing" ]; then
+    mkdir "${OUTPUTPATH}/HISTOGRAMS/Calib/Timing"
 fi
 # Scalers HISTOGRAMS directory
-if [ ! -d "${VOLATILEPATH}/${USER}/HISTOGRAMS/Scalers" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/HISTOGRAMS/Scalers"
-fi
-# Make a raw data directory on volatile
-if [ ! -d "${VOLATILEPATH}/${USER}/raw" ]; then
-    mkdir "${VOLATILEPATH}/${USER}/raw"
+if [ ! -d "${OUTPUTPATH}/HISTOGRAMS/Scalers" ]; then
+    mkdir "${OUTPUTPATH}/HISTOGRAMS/Scalers"
 fi
 
 # Directories now created, make the sym links
 echo "Directories have been created in volatile if they did not already exists, sym links will now be made for - "
 echo ""
-echo "${VOLATILEPATH}/${USER}/ROOTfiles/ - ROOTfiles"
-echo "${VOLATILEPATH}/${USER}/OUTPUT/ - OUTPUT"
-echo "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/ - REPORT_OUTPUT"
-echo "${VOLATILEPATH}/${USER}/HISTOGRAMS/ - HISTOGRAMS"
-echo "/cache/hallc/spring17/raw - raw"
-echo "/cache/hallc/spring17/raw - cache"
-echo "${VOLATILEPATH}/${USER}/raw - raw_volatile"
+echo "${OUTPUTPATH}/ROOTfiles/ - ROOTfiles"
+echo "${OUTPUTPATH}/OUTPUT/ - OUTPUT"
+echo "${OUTPUTPATH}/REPORT_OUTPUT/ - REPORT_OUTPUT"
+echo "${OUTPUTPATH}/HISTOGRAMS/ - HISTOGRAMS"
+echo "${OUTPUTPATH}/MON_OUTPUT/ - MON_OUTPUT"
+echo "${CACHEPATH} - cache"
+echo "${RAWPATH} - raw"
+echo "${RAWCOPIEDPATH} - raw.copedtotape"
 echo""
 read -p "Proceed with sym link setup setup? <Y/N> " prompt2
 if [[ $prompt2 == "y" || $prompt2 == "Y" || $prompt2 == "yes" || $prompt2 == "Yes" ]]; then
@@ -288,90 +283,98 @@ else
     echo "Please update script with desired changes to sym links and re-run if desired"
     exit 1
 fi
+
 # Each loop checks if the link exists, if it doesn't, make it
 # If it DOES, check it's not broken, if broken, replace, if not, just print that it exists
-
-if [ ! -L "${USERPATH}/hallc_replay_lt/ROOTfiles" ]; then
-    ln -s "${VOLATILEPATH}/${USER}/ROOTfiles/" "${USERPATH}/hallc_replay_lt/ROOTfiles"
-elif [ -L "${USERPATH}/hallc_replay_lt/ROOTfiles" ]; then
-    if [ ! -e "${USERPATH}/hallc_replay_lt/ROOTfiles" ]; then
+if [ ! -L "${ANALYSISPATH}/hallc_replay_lt/ROOTfiles" ]; then
+    ln -s "${OUTPUTPATH}/ROOTfiles/" "${ANALYSISPATH}/hallc_replay_lt/ROOTfiles"
+elif [ -L "${ANALYSISPATH}/hallc_replay_lt/ROOTfiles" ]; then
+    if [ ! -e "${ANALYSISPATH}/hallc_replay_lt/ROOTfiles" ]; then
 	echo "ROOTfiles sym link exits but is broken, replacing"
-	rm "${USERPATH}/hallc_replay_lt/ROOTfiles"
-	ln -s "${VOLATILEPATH}/${USER}/ROOTfiles/" "${USERPATH}/hallc_replay_lt/ROOTfiles"
-    else echo "${USERPATH}/hallc_replay_lt/ROOTfiles sym link already exists and not broken"
+	rm "${ANALYSISPATH}/hallc_replay_lt/ROOTfiles"
+	ln -s "${OUTPUTPATH}/ROOTfiles/" "${ANALYSISPATH}/hallc_replay_lt/ROOTfiles"
+    else echo "${ANALYSISPATH}/hallc_replay_lt/ROOTfiles sym link already exists and not broken"
     fi
 fi
 
-if [ ! -L "${USERPATH}/hallc_replay_lt/OUTPUT" ]; then
-    ln -s "${VOLATILEPATH}/${USER}/OUTPUT/" "${USERPATH}/hallc_replay_lt/OUTPUT"
-elif [ -L "${USERPATH}/hallc_replay_lt/OUTPUT" ]; then
-    if [ ! -e "${USERPATH}/hallc_replay_lt/OUTPUT" ]; then
+if [ ! -L "${ANALYSISPATH}/hallc_replay_lt/OUTPUT" ]; then
+    ln -s "${OUTPUTPATH}/OUTPUT/" "${ANALYSISPATH}/hallc_replay_lt/OUTPUT"
+elif [ -L "${ANALYSISPATH}/hallc_replay_lt/OUTPUT" ]; then
+    if [ ! -e "${ANALYSISPATH}/hallc_replay_lt/OUTPUT" ]; then
 	echo "OUTPUT sym link exits but is broken, replacing"
-	rm "${USERPATH}/hallc_replay_lt/OUTPUT"
-	ln -s "${VOLATILEPATH}/${USER}/OUTPUT/" "${USERPATH}/hallc_replay_lt/OUTPUT"
-    else echo "${USERPATH}/hallc_replay_lt/OUTPUT sym link already exists and not broken"
+	rm "${ANALYSISPATH}/hallc_replay_lt/OUTPUT"
+	ln -s "${OUTPUTPATH}/OUTPUT/" "${ANALYSISPATH}/hallc_replay_lt/OUTPUT"
+    else echo "${ANALYSISPATH}/hallc_replay_lt/OUTPUT sym link already exists and not broken"
     fi
 fi
 
-if [ ! -L "${USERPATH}/hallc_replay_lt/REPORT_OUTPUT" ]; then
-    ln -s "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/" "${USERPATH}/hallc_replay_lt/REPORT_OUTPUT"
-elif [ -L "${USERPATH}/hallc_replay_lt/REPORT_OUTPUT" ]; then
-    if [ ! -e "${USERPATH}/hallc_replay_lt/REPORT_OUTPUT" ]; then
+if [ ! -L "${ANALYSISPATH}/hallc_replay_lt/REPORT_OUTPUT" ]; then
+    ln -s "${OUTPUTPATH}/REPORT_OUTPUT/" "${ANALYSISPATH}/hallc_replay_lt/REPORT_OUTPUT"
+elif [ -L "${ANALYSISPATH}/hallc_replay_lt/REPORT_OUTPUT" ]; then
+    if [ ! -e "${ANALYSISPATH}/hallc_replay_lt/REPORT_OUTPUT" ]; then
 	echo "REPORT_OUTPUT sym link exits but is broken, replacing"
-	rm "${USERPATH}/hallc_replay_lt/REPORT_OUTPUT"
-	ln -s "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/" "${USERPATH}/hallc_replay_lt/REPORT_OUTPUT"
-    else echo "${USERPATH}/hallc_replay_lt/REPORT_OUTPUT sym link already exists and not broken"
+	rm "${ANALYSISPATH}/hallc_replay_lt/REPORT_OUTPUT"
+	ln -s "${OUTPUTPATH}/REPORT_OUTPUT/" "${ANALYSISPATH}/hallc_replay_lt/REPORT_OUTPUT"
+    else echo "${ANALYSISPATH}/hallc_replay_lt/REPORT_OUTPUT sym link already exists and not broken"
     fi
 fi
 
-if [ ! -L "${USERPATH}/hallc_replay_lt/HISTOGRAMS" ]; then
-    ln -s "${VOLATILEPATH}/${USER}/HISTOGRAMS/" "${USERPATH}/hallc_replay_lt/HISTOGRAMS"
-elif [ -L "${USERPATH}/hallc_replay_lt/HISTOGRAMS" ]; then
-    if [ ! -e "${USERPATH}/hallc_replay_lt/HISTOGRAMS" ]; then
+if [ ! -L "${ANALYSISPATH}/hallc_replay_lt/HISTOGRAMS" ]; then
+    ln -s "${OUTPUTPATH}/HISTOGRAMS/" "${ANALYSISPATH}/hallc_replay_lt/HISTOGRAMS"
+elif [ -L "${ANALYSISPATH}/hallc_replay_lt/HISTOGRAMS" ]; then
+    if [ ! -e "${ANALYSISPATH}/hallc_replay_lt/HISTOGRAMS" ]; then
 	echo "HISTOGRAMS sym link exits but is broken, replacing"
-	rm "${USERPATH}/hallc_replay_lt/HISTOGRAMS"
-	ln -s "${VOLATILEPATH}/${USER}/HISTOGRAMS/" "${USERPATH}/hallc_replay_lt/HISTOGRAMS"
-    else echo "${USERPATH}/hallc_replay_lt/HISTOGRAMS sym link already exists and not broken"
+	rm "${ANALYSISPATH}/hallc_replay_lt/HISTOGRAMS"
+	ln -s "${OUTPUTPATH}/HISTOGRAMS/" "${ANALYSISPATH}/hallc_replay_lt/HISTOGRAMS"
+    else echo "${ANALYSISPATH}/hallc_replay_lt/HISTOGRAMS sym link already exists and not broken"
     fi
 fi
 
-if [ ! -L "${USERPATH}/hallc_replay_lt/raw_volatile" ]; then
-    ln -s "${VOLATILEPATH}/${USER}/raw" "${USERPATH}/hallc_replay_lt/raw_volatile"
-elif [ -L "${USERPATH}/hallc_replay_lt/raw_volatile" ]; then
-    if [ ! -e "${USERPATH}/hallc_replay_lt/raw_volatile" ]; then
-	echo "raw_volatile sym link exits but is broken, replacing"
-	rm "${USERPATH}/hallc_replay_lt/raw_volatile"
-	ln -s "${VOLATILEPATH}/${USER}/raw" "${USERPATH}/hallc_replay_lt/raw_volatile"
-    else echo "${USERPATH}/hallc_replay_lt/raw_volatile sym link already exists and not broken"
+if [ ! -L "${ANALYSISPATH}/hallc_replay_lt/MON_OUTPUT" ]; then
+    ln -s "${OUTPUTPATH}/MON_OUTPUT/" "${ANALYSISPATH}/hallc_replay_lt/MON_OUTPUT"
+elif [ -L "${ANALYSISPATH}/hallc_replay_lt/MON_OUTPUT" ]; then
+    if [ ! -e "${ANALYSISPATH}/hallc_replay_lt/MON_OUTPUT" ]; then
+	echo "OUTPUT sym link exits but is broken, replacing"
+	rm "${ANALYSISPATH}/hallc_replay_lt/MON_OUTPUT"
+	ln -s "${OUTPUTPATH}/MON_OUTPUT/" "${ANALYSISPATH}/hallc_replay_lt/MON_OUTPUT"
+    else echo "${ANALYSISPATH}/hallc_replay_lt/MON_OUTPUT sym link already exists and not broken"
     fi
 fi
 
-if [ ! -L "${USERPATH}/hallc_replay_lt/raw" ]; then
-    ln -s "/cache/hallc/spring17/raw" "${USERPATH}/hallc_replay_lt/raw"
-elif [ -L "${USERPATH}/hallc_replay_lt/raw" ]; then
-    if [ ! -e "${USERPATH}/hallc_replay_lt/raw" ]; then
+if [ ! -L "${ANALYSISPATH}/hallc_replay_lt/raw" ]; then
+    ln -s "${RAWPATH}" "${ANALYSISPATH}/hallc_replay_lt/raw"
+elif [ -L "${ANALYSISPATH}/hallc_replay_lt/raw" ]; then
+    if [ ! -e "${ANALYSISPATH}/hallc_replay_lt/raw" ]; then
 	echo "raw sym link exits but is broken, replacing"
-	rm "${USERPATH}/hallc_replay_lt/raw"
-	ln -s "/cache/hallc/spring17/raw" "${USERPATH}/hallc_replay_lt/raw"
-    else echo "${USERPATH}/hallc_replay_lt/raw sym link already exists and not broken"
+	rm "${ANALYSISPATH}/hallc_replay_lt/raw"
+	ln -s "${RAWPATH}" "${ANALYSISPATH}/hallc_replay_lt/raw"
+    else echo "${ANALYSISPATH}/hallc_replay_lt/raw sym link already exists and not broken"
     fi
 fi
 
-if [ ! -L "${USERPATH}/hallc_replay_lt/cache" ]; then
-    ln -s "/cache/hallc/spring17/raw" "${USERPATH}/hallc_replay_lt/cache"
-elif [ -L "${USERPATH}/hallc_replay_lt/cache" ]; then
-    if [ ! -e "${USERPATH}/hallc_replay_lt/cache" ]; then
+if [ ! -L "${ANALYSISPATH}/hallc_replay_lt/raw.copiedtotape" ]; then
+    ln -s "${RAWCOPIEDPATH}" "${ANALYSISPATH}/hallc_replay_lt/raw.copiedtotape"
+elif [ -L "${ANALYSISPATH}/hallc_replay_lt/raw.copiedtotape" ]; then
+    if [ ! -e "${ANALYSISPATH}/hallc_replay_lt/raw.copiedtotape" ]; then
+	echo "raw.copiedtotape sym link exits but is broken, replacing"
+	rm "${ANALYSISPATH}/hallc_replay_lt/raw"
+	ln -s "${RAWCOPIEDPATH}" "${ANALYSISPATH}/hallc_replay_lt/raw.copiedtotape"
+    else echo "${ANALYSISPATH}/hallc_replay_lt/raw.copiedtotape sym link already exists and not broken"
+    fi
+fi
+
+if [ ! -L "${ANALYSISPATH}/hallc_replay_lt/cache" ]; then
+    ln -s "${CACHEPATH}" "${ANALYSISPATH}/hallc_replay_lt/cache"
+elif [ -L "${ANALYSISPATH}/hallc_replay_lt/cache" ]; then
+    if [ ! -e "${ANALYSISPATH}/hallc_replay_lt/cache" ]; then
 	echo "cache sym link exits but is broken, replacing"
-	rm "${USERPATH}/hallc_replay_lt/cache"
-	ln -s "/cache/hallc/spring17/raw" "${USERPATH}/hallc_replay_lt/cache"
-    else echo "${USERPATH}/hallc_replay_lt/cache sym link already exists and not broken"
+	rm "${ANALYSISPATH}/hallc_replay_lt/cache"
+	ln -s "${CACHEPATH}" "${ANALYSISPATH}/hallc_replay_lt/cache"
+    else echo "${ANALYSISPATH}/hallc_replay_lt/cache sym link already exists and not broken"
     fi
 fi
 
 echo ""
 echo "Directories and sym links for hallc_replay_lt now setup"
-echo "Setting up hcana path too"
-# Set hcana with setup script
-exec "${GROUPPATH}/hcana/setup.csh"
 
 exit 0

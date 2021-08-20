@@ -1,6 +1,7 @@
-This branch, offline, has all of the scripts as they were at the END of the run on 20/7/19. It will 
-also receive future updates to scripts that are applicable to ALL users analysing the Kaon or Pion LT
-data.
+This branch, online_pionlt, is the active running branch for the 2021 PionLT experiment. 
+It will be kept up to date during the experiment.
+Cdaq should be fully up to date at all times.
+Regular snapshots of this branch will be taken for quick access to specific states of the repo.
 
 ######################################################################################################
 #################################### SCRIPT INFO #####################################################

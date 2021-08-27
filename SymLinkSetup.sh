@@ -5,7 +5,7 @@
 # It makes the relevant directories in the ROOTfiles and analysis areas if they don't exist
 # This version is specific for cdaq
 
-ANALYSISPATH="/home/cdaq/pionLT-2021"
+ANALYSISPATH="/home/cdaq/hallc-online"
 OUTPUTPATH="/net/cdaq/cdaql1data/cdaq/hallc-online-pionLT"
 CACHEPATH="/cache/hallc/c-pionlt/raw"
 RAWPATH="/net/cdaq/cdaql1data/coda/data/raw"

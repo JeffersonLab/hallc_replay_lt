@@ -1,0 +1,64 @@
+Run # : {gen_run_number}
+
+**************************
+* General Run Information
+**************************
+
+Beam energy : {gpbeam}
+Target mass (amu) : {gtargmass_amu} 
+
+HMS Particle Mass : {hpartmass}
+HMS P Central : {hpcentral}
+HMS Angle : {htheta_lab}
+
+1 MhZ Pulses : {H.1MHz.scaler}
+Run Length   : {H.1MHz.scalerTime:%.3f} sec
+
+***********
+* Beamline
+***********
+
+Cut on BCM{gBCM_Current_threshold_index+1} current of {gBCM_Current_threshold} uA. Beam over threshold for {H.1MHz.scalerTimeCut:%.3f}s, or {((H.1MHz.scalerTimeCut/H.1MHz.scalerTime)*100.):%.3f}% of total run time.
+HMS BCM1 Beam Cut Current: {H.BCM1.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA		  
+HMS BCM2 Beam Cut Current: {H.BCM2.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA		 
+HMS BCM4A Beam Cut Current: {H.BCM4A.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA		  
+HMS BCM4B Beam Cut Current: {H.BCM4B.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA		 
+HMS BCM4C Beam Cut Current: {H.BCM4C.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA		 
+HMS Unser Beam Cut Current: {H.Unser.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA		  
+
+HMS BCM1  Beam Cut Charge: {H.BCM1.scalerChargeCut/1000. :%.3f} mC
+HMS BCM2  Beam Cut Charge: {H.BCM2.scalerChargeCut/1000.:%.3f} mC
+HMS BCM4A Beam Cut Charge: {H.BCM4A.scalerChargeCut/1000.:%.3f} mC		  
+HMS BCM4B Beam Cut Charge: {H.BCM4B.scalerChargeCut/1000.:%.3f} mC		 
+HMS BCM4C Beam Cut Charge: {H.BCM4C.scalerChargeCut/1000.:%.3f} mC		 
+HMS Unser Beam Cut Charge: {H.Unser.scalerChargeCut/1000.:%.3f} mC
+
+********************
+* DAQ Configuration
+********************
+
+Ps1_factor = {gHC_ti_ps_factors[0]}
+Ps2_factor = {gHC_ti_ps_factors[1]}
+Ps3_factor = {gHC_ti_ps_factors[2]}
+Ps4_factor = {gHC_ti_ps_factors[3]}
+Ps5_factor = {gHC_ti_ps_factors[4]}
+Ps6_factor = {gHC_ti_ps_factors[5]}
+
+*****************************
+*HMS TRACKING EFFICIENCIES *
+*****************************
+hdid                           :   {HMSScinDid.npassed}
+hdide                          :   {HMSScinDide.npassed}
+hdidh                          :   {HMSScinDidh.npassed}
+hscinshould                    :   {HMSScinShould.npassed}
+hscinshoulde                   :   {HMSScinShoulde.npassed}
+hscinshouldh                   :   {HMSScinShouldh.npassed}
+SING FID TRACK EFFIC           :   {HMSScinDid.npassed/(HMSScinShould.npassed+0.0001):%8.4f} +- {(sqrt(HMSScinShould.npassed-HMSScinDid.npassed)/(HMSScinShould.npassed+.0001)):%8.4f}
+E SING FID TRACK EFFIC         :   {HMSScinDide.npassed/(HMSScinShoulde.npassed+0.0001):%8.4f} +- {(sqrt(HMSScinShoulde.npassed-HMSScinDide.npassed)/(HMSScinShoulde.npassed+.0001)):%8.4f}
+HADRON SING FID TRACK EFFIC    :   {HMSScinDidh.npassed/(HMSScinShouldh.npassed+0.0001):%8.4f} +- {(sqrt(HMSScinShouldh.npassed-HMSScinDidh.npassed)/(HMSScinShouldh.npassed+.0001)):%8.4f}
+
+Plane 1: {hhodo_plane_AND_eff[0]}
+Plane 2: {hhodo_plane_AND_eff[1]}
+Plane 3: {hhodo_plane_AND_eff[2]}
+Plane 4: {hhodo_plane_AND_eff[3]}
+3_of_4 EFF : {hhodo_3_of_4_eff}

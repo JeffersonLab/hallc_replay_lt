@@ -16,14 +16,14 @@ void replay_production_shms_coin (Int_t RunNumber = 0, Int_t MaxEvent = 0, Int_t
   }
 
   // Create file name patterns.
-  const char* RunFileNamePattern = "coin_all_%05d.dat";
+  const char* RunFileNamePattern = "shms_all_%05d.dat";
   vector<TString> pathList;
   pathList.push_back(".");
   pathList.push_back("./raw");
   pathList.push_back("./raw/../raw.copiedtotape");
   pathList.push_back("./cache");
 
-  const char* ROOTFileNamePattern = "ROOTfiles/shms_coin_replay_production_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfiles/Analysis/50k/shms_coin_replay_production_%d_%d.root";
   
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
@@ -49,8 +49,8 @@ void replay_production_shms_coin (Int_t RunNumber = 0, Int_t MaxEvent = 0, Int_t
   SHMS->AddEvtType(7);
   gHaApps->Add(SHMS);
   // Add Noble Gas Cherenkov to SHMS apparatus
-  //THcCherenkov* ngcer = new THcCherenkov("ngcer", "Noble Gas Cherenkov");
-  //SHMS->AddDetector(ngcer);
+  THcCherenkov* ngcer = new THcCherenkov("ngcer", "Noble Gas Cherenkov");
+  SHMS->AddDetector(ngcer);
   // Add drift chambers to SHMS apparatus
   THcDC* dc = new THcDC("dc", "Drift Chambers");
   SHMS->AddDetector(dc);
@@ -165,15 +165,15 @@ void replay_production_shms_coin (Int_t RunNumber = 0, Int_t MaxEvent = 0, Int_t
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file
-  analyzer->SetOdefFile("DEF-files/SHMS/PRODUCTION/pstackana_production.def");
+  analyzer->SetOdefFile("DEF-files/PRODUCTION/Full_Replay_50k_SHMS.def");
   // Define cuts file
-  analyzer->SetCutFile("DEF-files/SHMS/PRODUCTION/CUTS/pstackana_production_cuts.def");  // optional
+  analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/50k/Full_Replay_50k_HMS_cuts.def");  // optional
   // File to record accounting information for cuts
-  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/SHMS/PRODUCTION/summary_coin_production_%d_%d.report", RunNumber, MaxEvent));  // optional
+  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Analysis/50k/summary_coin_production_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template
-  analyzer->PrintReport("TEMPLATES/SHMS/PRODUCTION/pstackana_production.template",
-  			Form("REPORT_OUTPUT/SHMS/PRODUCTION/replay_shms_coin_production_%d_%d.report", RunNumber, MaxEvent));  // optional
+  //analyzer->PrintReport("TEMPLATES/SHMS/PRODUCTION/pstackana_production.template",
+  //			Form("MON_OUTPUT/replay_shms_coin_production_%d_%d.report", RunNumber, MaxEvent));  // optional
 
 }

@@ -16,14 +16,20 @@ void replay_production_hms_coin(Int_t RunNumber=0, Int_t MaxEvent=0, Int_t First
   }
 
   // Create file name patterns.
-  const char* RunFileNamePattern = "coin_all_%05d.dat";
+  
+  //C.Y. Aug 26, 2021: Before Fall 2021 Run, COIN_DAQ raw data was saved as coin_all_XXXX.dat
+  //Starting on Fall 2021 Run Period (Pion LT), COIN_DAQ raw data is saved as shms_all_XXXX.dat
+  
+  //const char* RunFileNamePattern = "coin_all_%05d.dat";  // Prior to Aug 2021
+  const char* RunFileNamePattern = "shms_all_%05d.dat";   // Starting and After Aug 2021
+  
   vector<TString> pathList;
   pathList.push_back(".");
   pathList.push_back("./raw");
   pathList.push_back("./raw/../raw.copiedtotape");
   pathList.push_back("./cache");
 
-  const char* ROOTFileNamePattern = "ROOTfiles/hms_coin_replay_production_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfiles/Analysis/50k/hms_coin_replay_production_%d_%d.root";
 
   // Load Global parameters
   // Add variables to global list.
@@ -163,15 +169,15 @@ void replay_production_hms_coin(Int_t RunNumber=0, Int_t MaxEvent=0, Int_t First
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define output DEF-file 
-  analyzer->SetOdefFile("DEF-files/HMS/PRODUCTION/hstackana_production.def");
+  analyzer->SetOdefFile("DEF-files/PRODUCTION/50k/Full_Replay_50k_HMS.def");
   // Define cuts file
-  analyzer->SetCutFile("DEF-files/HMS/PRODUCTION/CUTS/hstackana_production_cuts.def");    // optional
+  analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/50k/Full_Replay_50k_HMS_cuts.def");    
   // File to record cuts accounting information for cuts
-  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/HMS/PRODUCTION/summary_coin_production_%d_%d.report", RunNumber, MaxEvent));    // optional
+  //analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Analysis/50k/summary_coin_production_%d_%d.report", RunNumber, MaxEvent));    // optional
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template.
-  analyzer->PrintReport("TEMPLATES/HMS/PRODUCTION/hstackana_production.template",
-			Form("REPORT_OUTPUT/HMS/PRODUCTION/replay_hms_coin_production_%d_%d.report", RunNumber, MaxEvent));
+  //analyzer->PrintReport("TEMPLATES/HMS/PRODUCTION/hstackana_50k.template",
+  //			Form("MON_OUTPUT/replay_hms_coin_production_%d_%d.report", RunNumber, MaxEvent));
 
 }

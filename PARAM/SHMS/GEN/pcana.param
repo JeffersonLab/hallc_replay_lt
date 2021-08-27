@@ -8,7 +8,11 @@ SHMS_CentralPathLen = 18.1*100   ; 18.1 m (or 1810 cm)
 ;p_recon_coeff_filename = "DATFILES/shms-2011-26cm-monte_q2_m015_rec.dat"
 ;p_recon_coeff_filename = "DATFILES/shms_dipole_2plow.dat"
 ;p_recon_coeff_filename = "DATFILES/shms-2017-optimized.dat"
-;In use during online running of Kaon/Pion LT in 2018/19
 ;p_recon_coeff_filename = "DATFILES/shms-2017-optimized_delta_newfit3.dat"
-; New as of April 2020 from Mark Jones
-p_recon_coeff_filename = "DATFILES/shms_newfit_xptar_april2020.dat" 
+;p_recon_coeff_filename = "DATFILES/shms-2019-newopt-Jan19.dat"
+
+; New SHMS Optics by Holly from August 2020
+p_recon_coeff_filename = "DATFILES/hsv_fit_global.dat" 
+
+; fall 2019 defocused tune -> Q2 current set to 120% of nominal tune
+; p_recon_coeff_filename = "DATFILES/shms-2017-26cm-monte_quads_p18_q2_120_rec.dat"

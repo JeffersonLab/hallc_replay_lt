@@ -8,11 +8,11 @@ hntracks_max_fp = 10
 h_remove_sppt_if_one_y_plane = 0
 
 ; Minimum number of hits in each space point (one per chamber)
-hmin_hit = 4, 4
+hmin_hit = 5, 5
 
 ; Minimum number of pairs in each space point (one per chamber)
 ; Should be 3/3 for 4/6 tracking, and 4/4 for 5/6 tracking
-hmin_combos = 3, 3 
+hmin_combos = 4, 4 
 
 ; Minimum separation of distinct space points
 hspace_point_criterion = 1.0, 1.0

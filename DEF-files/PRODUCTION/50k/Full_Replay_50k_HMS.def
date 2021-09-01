@@ -1,3 +1,4 @@
+block T.coin.*
 block H.gtr.*
 block H.tr.*
 block H.hod.goodscinhit
@@ -209,24 +210,24 @@ TH2F hcal_hD_good_pped_vs_pmt_pos 'HMS hD+ Good Pulse Pedestal vs. PMT Number; P
 # HMS DC TRIG Reference Time
 #----------------------------
 
-TH1F htrig_hdc_ref1 'HMS DC Reference Time 1; TDC Time (ns); Counts / 1 ns;' T.hms.hDCREF1_tdcTime 2500 0 2500
-TH1F htrig_hdc_ref2 'HMS DC Reference Time 2; TDC Time (ns); Counts / 1 ns;' T.hms.hDCREF2_tdcTime 2500 0 2500
-TH1F htrig_hdc_ref3 'HMS DC Reference Time 3; TDC Time (ns); Counts / 1 ns;' T.hms.hDCREF3_tdcTime 2500 0 2500
-TH1F htrig_hdc_ref4 'HMS DC Reference Time 4; TDC Time (ns); Counts / 1 ns;' T.hms.hDCREF4_tdcTime 2500 0 2500
+TH1F htrig_hdc_ref1 'HMS DC Reference Time 1; TDC Time (ns); Counts / 1 ns;' T.coin.hDCREF1_tdcTime 2500 0 2500
+TH1F htrig_hdc_ref2 'HMS DC Reference Time 2; TDC Time (ns); Counts / 1 ns;' T.coin.hDCREF2_tdcTime 2500 0 2500
+TH1F htrig_hdc_ref3 'HMS DC Reference Time 3; TDC Time (ns); Counts / 1 ns;' T.coin.hDCREF3_tdcTime 2500 0 2500
+TH1F htrig_hdc_ref4 'HMS DC Reference Time 4; TDC Time (ns); Counts / 1 ns;' T.coin.hDCREF4_tdcTime 2500 0 2500
 
 #----------------------------
 # HMS TRIG Reference Times
 #----------------------------
-TH1F htrig_h1x_good_tdc 'HMS h1x Good TDC Time; Good TDC Time (ns); Counts / 1 ns' T.hms.h1X_tdcTime 800 0 800 
-TH1F htrig_h1y_good_tdc 'HMS h1y Good TDC Time; Good TDC Time (ns); Counts / 1 ns' T.hms.h1Y_tdcTime 800 0 800 
-TH1F htrig_h2x_good_tdc 'HMS h2x Good TDC Time; Good TDC Time (ns); Counts / 1 ns' T.hms.h2X_tdcTime 800 0 800 
-TH1F htrig_h2y_good_tdc 'HMS h2y Good TDC Time; Good TDC Time (ns); Counts / 1 ns' T.hms.h2Y_tdcTime 800 0 800 
+TH1F htrig_h1x_good_tdc 'HMS h1x Good TDC Time; Good TDC Time (ns); Counts / 1 ns' T.coin.h1X_tdcTime 800 0 800 
+TH1F htrig_h1y_good_tdc 'HMS h1y Good TDC Time; Good TDC Time (ns); Counts / 1 ns' T.coin.h1Y_tdcTime 800 0 800 
+TH1F htrig_h2x_good_tdc 'HMS h2x Good TDC Time; Good TDC Time (ns); Counts / 1 ns' T.coin.h2X_tdcTime 800 0 800 
+TH1F htrig_h2y_good_tdc 'HMS h2y Good TDC Time; Good TDC Time (ns); Counts / 1 ns' T.coin.h2Y_tdcTime 800 0 800 
 
-TH1F htrig_hT1_good_tdc 'HMS hT1 Good TDC Time (Slot 2, Channel 6); Good Time (ns); Counts / 1 ns'  T.hms.hT1_tdcTime 350 0 3500 
-TH1F htrig_hT2_good_tdc 'HMS hT2 Good TDC Time (Slot 20, Channel 127); Good Time (ns); Counts / 1 ns' T.hms.hT2_tdcTime 350 0 3500
-TH1F htrig_hT3_good_tdc 'HMS hT3 Good TDC Time (Slot 2, Channel 63); Good Time (ns); Counts / 1 ns' T.hms.hT3_tdcTime 350 0 3500
+TH1F htrig_hT1_good_tdc 'HMS hT1 Good TDC Time (Slot 2, Channel 6); Good Time (ns); Counts / 1 ns'  T.coin.hT1_tdcTime 350 0 3500 
+TH1F htrig_hT2_good_tdc 'HMS hT2 Good TDC Time (Slot 20, Channel 127); Good Time (ns); Counts / 1 ns' T.coin.hT2_tdcTime 350 0 3500
+TH1F htrig_hT3_good_tdc 'HMS hT3 Good TDC Time (Slot 2, Channel 63); Good Time (ns); Counts / 1 ns' T.coin.hT3_tdcTime 350 0 3500
 
-TH1F htrig_hFADC_TREF_ROC1_good_tdc 'HMS hFADC_TREF_ROC1 Good Pulse Time; Good Pulse Time (ns); Counts / 1 ns' T.hms.hFADC_TREF_ROC1_adcPulseTime 800 0 800
+TH1F htrig_hFADC_TREF_ROC1_good_tdc 'HMS hFADC_TREF_ROC1 Good Pulse Time; Good Pulse Time (ns); Counts / 1 ns' T.coin.hFADC_TREF_ROC1_adcPulseTime 800 0 800
 
 
 #--------------------
@@ -262,13 +263,13 @@ TH2F hcal_delta_etracknorm      'HMS Delta vs. Cal E/p; Normalized Track Energy 
 # HMS Trigger ADC Pulse pedestals
 #--------------------------------
 
-TH1F htrig_hpreShwr_adc_pped 'HMS Pre-Shower Pulse Pedestal;  Pulse Pedestal (mV); Counts / 0.5 mV;' T.hms.hPSHWR_adcPed 400 0 200  T.hms.hPSHWR_adcPed>0.0
-TH1F htrig_hshwr_adc_pped 'HMS Shower Pulse Pedestal;  Pulse Pedestal (mV); Counts / 0.5 mV;' T.hms.hSHWR_adcPed 400 0 200  T.hms.hSHWR_adcPed>0.0
-TH1F htrig_hcersum_adc_pped 'HMS Cherenkov Sum Pulse Pedestal;  Pulse Pedestal (mV); Counts / 0.5 mV;' T.hms.hCER_adcPed 400 0 200   T.hms.hCER_adcPed>0.0
-TH1F htrig_hASum_adc_pped 'HMS Pre-Shower A Shower Plane Pulse Pedestal;  Pulse Pedestal (mV); Counts / 0.5 mV;' T.hms.hASUM_adcPed 400 0 200  T.hms.hASUM_adcPed>0.0
-TH1F htrig_hBSum_adc_pped 'HMS Pre-Shower B Shower Plane Pulse Pedestal;  Pulse Pedestal (mV); Counts / 0.5 mV;' T.hms.hBSUM_adcPed 400 0 200  T.hms.hBSUM_adcPed>0.0
-TH1F htrig_hCSum_adc_pped 'HMS Pre-Shower C Shower Plane Pulse Pedestal;  Pulse Pedestal (mV); Counts / 0.5 mV;' T.hms.hCSUM_adcPed 400 0 200  T.hms.hCSUM_adcPed>0.0
-TH1F htrig_hDSum_adc_pped 'HMS Pre-Shower D Shower Plane Pulse Pedestal;  Pulse Pedestal (mV); Counts / 0.5 mV;' T.hms.hDSUM_adcPed 400 0 200  T.hms.hDSUM_adcPed>0.0
+TH1F htrig_hpreShwr_adc_pped 'HMS Pre-Shower Pulse Pedestal;  Pulse Pedestal (mV); Counts / 0.5 mV;' T.coin.hPSHWR_adcPed 400 0 200  T.coin.hPSHWR_adcPed>0.0
+TH1F htrig_hshwr_adc_pped 'HMS Shower Pulse Pedestal;  Pulse Pedestal (mV); Counts / 0.5 mV;' T.coin.hSHWR_adcPed 400 0 200  T.coin.hSHWR_adcPed>0.0
+TH1F htrig_hcersum_adc_pped 'HMS Cherenkov Sum Pulse Pedestal;  Pulse Pedestal (mV); Counts / 0.5 mV;' T.coin.hCER_adcPed 400 0 200   T.coin.hCER_adcPed>0.0
+TH1F htrig_hASum_adc_pped 'HMS Pre-Shower A Shower Plane Pulse Pedestal;  Pulse Pedestal (mV); Counts / 0.5 mV;' T.coin.hASUM_adcPed 400 0 200  T.coin.hASUM_adcPed>0.0
+TH1F htrig_hBSum_adc_pped 'HMS Pre-Shower B Shower Plane Pulse Pedestal;  Pulse Pedestal (mV); Counts / 0.5 mV;' T.coin.hBSUM_adcPed 400 0 200  T.coin.hBSUM_adcPed>0.0
+TH1F htrig_hCSum_adc_pped 'HMS Pre-Shower C Shower Plane Pulse Pedestal;  Pulse Pedestal (mV); Counts / 0.5 mV;' T.coin.hCSUM_adcPed 400 0 200  T.coin.hCSUM_adcPed>0.0
+TH1F htrig_hDSum_adc_pped 'HMS Pre-Shower D Shower Plane Pulse Pedestal;  Pulse Pedestal (mV); Counts / 0.5 mV;' T.coin.hDSUM_adcPed 400 0 200  T.coin.hDSUM_adcPed>0.0
 
 
 #=================================================
@@ -346,4 +347,4 @@ TH1F hdc_trk_mom 'HMS DC Track Momentum; P (GeV); Number of Entires / 50 MeV' H.
 #--------------------------------------
 # HMS DC Ref time vs Hodo Ref time
 #--------------------------------------
-TH2D hms_dcref_vs_hodoref 'HMS HODO REF (hT2) vs. HMS DC REF 1; hT2 TDC Time Raw; DCREF1 TDC Time Raw' T.hms.hT2_tdcTimeRaw T.hms.hDCREF1_tdcTimeRaw 200 2000 5000 200 15000 18000
+TH2D hms_dcref_vs_hodoref 'HMS HODO REF (hT2) vs. HMS DC REF 1; hT2 TDC Time Raw; DCREF1 TDC Time Raw' T.coin.hT2_tdcTimeRaw T.coin.hDCREF1_tdcTimeRaw 200 2000 5000 200 15000 18000

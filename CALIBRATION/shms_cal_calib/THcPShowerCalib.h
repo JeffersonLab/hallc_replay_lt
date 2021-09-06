@@ -371,7 +371,7 @@ void THcPShowerCalib::Init() {
 
   gROOT->Reset();
 
-  char* fname = Form("ROOTfiles/Calib/Cal/%s_%d_%d.root",fPrefix.c_str(), fRunNumber, fNstopRequested);
+  char* fname = Form("../../ROOTfiles/Calib/Cal/%s_%d_%d.root",fPrefix.c_str(), fRunNumber, fNstopRequested);
   cout << "THcPShowerCalib::Init: Root file name = " << fname << endl;
 
   TFile *f = new TFile(fname);

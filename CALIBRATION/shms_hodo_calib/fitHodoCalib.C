@@ -259,16 +259,16 @@ void fitHodoCalib(TString filename,Int_t runNUM,Bool_t cosmic_flag=kFALSE)
 	       if (side==0) //require ONLY one side, since a time diff between two pmts at each end is taken
 		{
 
-		  h1Hist_TWAvg[npl][ipmt] = new TH1F(Form("Avg. Time: Paddle %s%d", pl_names[npl].c_str(), ipmt+1), Form("Paddle %s%d: Time-Walk Corrected Average Time", pl_names[npl].c_str(), ipmt+1), 100, 0, 100);
+		  h1Hist_TWAvg[npl][ipmt] = new TH1F(Form("Avg. Time: Paddle %s%d", pl_names[npl].c_str(), ipmt+1), Form("Paddle %s%d: Time-Walk Corrected Average Time", pl_names[npl].c_str(), ipmt+1), 200, 0, 200);
 		  
-		  h1Hist_TWAvg_CUT[npl][ipmt] = new TH1F(Form("Avg. Time CUT: Paddle %s%d", pl_names[npl].c_str(), ipmt+1), Form("Paddle %s%d: Time-Walk Corrected Average (CUT)",pl_names[npl].c_str(), ipmt+1), 100, 0, 100);
+		  h1Hist_TWAvg_CUT[npl][ipmt] = new TH1F(Form("Avg. Time CUT: Paddle %s%d", pl_names[npl].c_str(), ipmt+1), Form("Paddle %s%d: Time-Walk Corrected Average (CUT)",pl_names[npl].c_str(), ipmt+1), 200, 0, 200);
 	      
 		  h2Hist_TWDiff_v_TrkPos[npl][ipmt] = new TH2F(Form("DistDiff: Paddle %s%d", pl_names[npl].c_str(), ipmt+1), Form("Paddle %s%d: Time-Walk Corr. Hit Dist vs. Hod Track Position", pl_names[npl].c_str(), ipmt+1), 160, -80, 80, 200, -120, 80);
 		  h2Hist_TW_Corr_v_TrkPos[npl][ipmt] = new TH2F(Form("TimeDiff: Paddle %s%d", pl_names[npl].c_str(), ipmt+1), Form("Paddle %s%d: Time-Walk Corr. TimeDiff. vs. Hod Track Position", pl_names[npl].c_str(), ipmt+1), 160, -60, 60, 200, -15, 15);
 		  
 		  h1Hist_TWDiffTrkPos[npl][ipmt] = new TH1F(Form("DistDiff - Track: Paddle %s%d", pl_names[npl].c_str(), ipmt+1), Form("Paddle %s%d: Time-Walk Corr. Hit Dist. - Hod Track Position",pl_names[npl].c_str(), ipmt+1), 200, -120, 80);
 
-		  h2Hist_TWAvg_v_TrkPos[npl][ipmt] = new TH2F(Form("TimeAvg_v_Trk: Paddle %s%d", pl_names[npl].c_str(), ipmt+1), Form("Paddle %s%d: Time-Walk Corr. TimeAvg. vs. Hod Track Position", pl_names[npl].c_str(), ipmt+1), 160, -40, 40, 120, 0, 100);
+		  h2Hist_TWAvg_v_TrkPos[npl][ipmt] = new TH2F(Form("TimeAvg_v_Trk: Paddle %s%d", pl_names[npl].c_str(), ipmt+1), Form("Paddle %s%d: Time-Walk Corr. TimeAvg. vs. Hod Track Position", pl_names[npl].c_str(), ipmt+1), 160, -40, 40, 150, 0, 150);
   
 		  //Set Axis Titles
 		  h1Hist_TWAvg[npl][ipmt]->GetXaxis()->SetTitle("Time-Walk Corr. TDC Average Paddle Time (ns)");

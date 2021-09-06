@@ -30,7 +30,7 @@ echo "Required arguments are run number, run type and target"
 echo ""
 echo "Run number must be a positive integer value"
 echo "Run type must be one of - Prod - Lumi - HeePSing -HeePCoin - Optics - Case sensitive!"
-echo "Target must be one of - LH2 - LD2 - Dummy10cm - Carbon0p5 - Optics1 - Optics2 - CarbonHole - Case sensitive!"
+echo "Target must be one of - LH2 - LD2 - Dummy10cm - Carbon0p5 - AuFoil - Optics1 - Optics2 - CarbonHole - Case sensitive!"
 echo""
 RUNNUMBER=$1
 RUNTYPE=$2
@@ -60,15 +60,15 @@ if [[ -z "$2" || ! "$RUNTYPE" =~ Prod|Lumi|HeePSing|HeePCoin|Optics ]]; then # C
 	esac
     done
 fi
-if [[ -z "$3" || ! "$TARGET" =~ LH2|LD2|Dummy10cm|Carbon0p5|Optics1|Optics2|CarbonHole ]]; then # Check the 3rd argument was provided and that it's one of the valid options
+if [[ -z "$3" || ! "$TARGET" =~ LH2|LD2|Dummy10cm|Carbon0p5|AuFoil|Optics1|Optics2|CarbonHole ]]; then # Check the 3rd argument was provided and that it's one of the valid options
     echo ""
     echo "I need a valid target"
     while true; do	
 	echo ""
-	read -p "Please select a target from - LH2 - LD2 - Dummy10cm - Carbon0p5 - Optics1 - Optics2 - CarbonHole - Case sensitive! - or press ctrl-c to exit : " TARGET
+	read -p "Please select a target from - LH2 - LD2 - Dummy10cm - Carbon0p5 - AuFoil - Optics1 - Optics2 - CarbonHole - Case sensitive! - or press ctrl-c to exit : " TARGET
 	case $TARGET in
 	    '');; # If blank, prompt again
-	    'LH2'|'LD2'|'Dummy10cm'|'Carbon0p5'|'Optics1'|'Optics2'|'CarbonHole') break;; # If a valid option, break the loop and continue
+	    'LH2'|'LD2'|'Dummy10cm'|'Carbon0p5'|'AuFoil'|'Optics1'|'Optics2'|'CarbonHole') break;; # If a valid option, break the loop and continue
 	esac
     done
 fi
@@ -80,9 +80,12 @@ elif [[ $RUNTYPE == "Lumi" ]]; then
     echo "Running luminosity analysis script - ${UTILPATH}/scripts/luminosity/replay_lumi.sh"
     eval '"${UTILPATH}/scripts/luminosity/replay_lumi.sh" ${RUNNUMBER}'
 elif [[ $RUNTYPE == "HeePSing" ]]; then
-    echo "Running HeeP Singles analysis script - "
+    echo "Running HeeP Singles analysis script - ${UTILPATH}/scripts/heep/sing_heepYield.sh"
+    eval '"${UTILPATH}/scripts/heep/sing_heepYield.sh" hms ${RUNNUMBER}'
+    eval '"${UTILPATH}/scripts/heep/sing_heepYield.sh" shms ${RUNNUMBER}'
 elif [[ $RUNTYPE == "HeePCoin" ]]; then
-    echo "Running HeeP Coin analysis script - "
+    echo "Running HeeP Coin analysis script - ${UTILPATH}/scripts/heep/coin_heepYield.sh"
+    eval '"${UTILPATH}/scripts/heep/coin_heepYield.sh" ${RUNNUMBER}'
 elif [[ $RUNTYPE == "Optics" ]]; then
     echo "Running optics analysis script - "
 fi

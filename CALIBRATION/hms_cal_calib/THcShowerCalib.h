@@ -351,7 +351,7 @@ void THcShowerCalib::Init() {
 
   gROOT->Reset();
 
-  char* fname = Form("ROOTfiles/Calib/Cal/%s_%d_%d.root",fPrefix.c_str(), fRunNumber, fNstopRequested);
+  char* fname = Form("../../ROOTfiles/Calib/Cal/%s_%d_%d.root",fPrefix.c_str(), fRunNumber, fNstopRequested);
   //   char* fname = Form("kaonRoot/%s.root",fPrefix.c_str());
  cout << "THcShowerCalib::Init: Root file name = " << fname << endl;
 
@@ -986,8 +986,8 @@ void THcShowerCalib::FillHEcal() {
       yCalVsEp->Fill(Enorm, trk.GetY());
       xCalVsEp->Fill(Enorm, trk.GetX());
 
-      output << Enorm*P/1000. << " " << P/1000. << " " << delta << " "
-      	     << trk.GetX() << " " << trk.GetY() << endl;
+      //output << Enorm*P/1000. << " " << P/1000. << " " << delta << " "
+      //     << trk.GetX() << " " << trk.GetY() << endl;
       nev++;
       evFile << Enorm << "\t" << nev <<endl;
 
@@ -996,7 +996,7 @@ void THcShowerCalib::FillHEcal() {
     if (nev > 200000) break;
   };
 
-  output.close();
+  //  output.close();
   evFile.close();
 
   cout << "FillHEcal: " << nev << " events filled" << endl;

@@ -9,7 +9,7 @@
 # COPY and PASTE the block and then edit it, the layout is important! Keep a NEW LINE between each block
 
 8978 - 99999
-gpbeam = 4.55
+gpbeam = 9.203
 gtargmass_amu = 1.00794
 htheta_lab = -37.33
 ptheta_lab = 7.69

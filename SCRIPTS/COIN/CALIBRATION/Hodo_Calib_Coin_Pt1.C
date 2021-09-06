@@ -16,7 +16,7 @@ void Hodo_Calib_Coin_Pt1 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   }
 
   // Create file name patterns.
-  const char* RunFileNamePattern = "coin_all_%05d.dat";
+  const char* RunFileNamePattern = "shms_all_%05d.dat";
   vector<TString> pathList;
   pathList.push_back(".");
   pathList.push_back("./raw");
@@ -60,6 +60,9 @@ void Hodo_Calib_Coin_Pt1 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   SHMS->AddEvtType(6);
   SHMS->AddEvtType(7);
   gHaApps->Add(SHMS);
+  // Add Noble Gas Cherenkov to SHMS apparatus
+  THcCherenkov* ngcer = new THcCherenkov("ngcer", "Noble Gas Cherenkov");
+  SHMS->AddDetector(ngcer);  
   // Add drift chambers to SHMS apparatus
   THcDC* pdc = new THcDC("dc", "Drift Chambers");
   SHMS->AddDetector(pdc);
@@ -109,11 +112,11 @@ void Hodo_Calib_Coin_Pt1 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHaEvtHandlers->Add(pscaler);
 
   //Add SHMS event handler for helicity scalers
-  THcHelicityScaler *phelscaler = new THcHelicityScaler("P", "Hall C helicity scaler");
+  //THcHelicityScaler *phelscaler = new THcHelicityScaler("P", "Hall C helicity scaler");
   //phelscaler->SetDebugFile("PHelScaler.txt");
-  phelscaler->SetROC(8);
-  phelscaler->SetUseFirstEvent(kTRUE);
-  gHaEvtHandlers->Add(phelscaler);
+  //phelscaler->SetROC(8);
+  //phelscaler->SetUseFirstEvent(kTRUE);
+  //gHaEvtHandlers->Add(phelscaler);
 
   //=:=:=
   // HMS 

@@ -24,7 +24,7 @@ void ped_tracking_trigger(TString golden_file="",TString trigger="", TString spe
   if (histname.Contains("hwr") && spect.Contains("h")) histname = Form("%strig_%s_%s",spect.Data(),histname.Data(),"adc_pped");
   if (histname.Contains("Sum")) histname = Form("%strig_%s_%s",spect.Data(),histname.Data(),"adc_pped");
 
-  //cout << histname << endl;
+  //cout << "ped_tracking_trigger: HISTNAME-------->" << histname << endl;
 
   TH1F* H1_ped; 
   TH1F* H2_ped; 

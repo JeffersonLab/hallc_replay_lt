@@ -16,7 +16,7 @@ void HMSDC_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   }
 
   // Create file name patterns.
-  const char* RunFileNamePattern = "coin_all_%05d.dat";
+  const char* RunFileNamePattern = "shms_all_%05d.dat";
   vector<TString> pathList;
   pathList.push_back(".");
   pathList.push_back("./raw");
@@ -35,10 +35,12 @@ void HMSDC_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHcParms->Load(gHcParms->GetString("g_ctp_database_filename"), RunNumber);
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
+  // Load params for COIN trigger configuration
+  gHcParms->Load("PARAM/TRIG/tcoin.param");
   // Load fadc debug parameters
   gHcParms->Load("PARAM/HMS/GEN/h_fadc_debug.param");
   gHcParms->Load("PARAM/SHMS/GEN/p_fadc_debug.param");
-
+  gHcParms->Load("CALIBRATION/dc_calib/scripts/HMS_DC_cardLog_%d/hdc_calib_%d.param", RunNumber);
   // Load the Hall C detector map
   gHcDetectorMap = new THcDetectorMap();
   gHcDetectorMap->Load("MAPS/COIN/DETEC/coin.map");

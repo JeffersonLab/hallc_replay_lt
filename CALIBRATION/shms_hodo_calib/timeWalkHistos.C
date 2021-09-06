@@ -60,14 +60,14 @@ static const Double_t adcChanTomV     = adcDynamicRange/nAdcChan; // Units of mV
 
 static const Double_t hodoPulseAmpCutLow     = 15.0;   // Units of mV
 static const Double_t hodoPulseAmpCutHigh    = 1000.0; // Units of mV
-static const Double_t refAdcPulseAmpCutLow   = 45.0;   // Units of mV
-static const Double_t refAdcPulseAmpCutHigh  = 65.0;   // Units of mV
-static const Double_t refAdcPulseTimeCutLow  = 330.0;  // Units of ns
+static const Double_t refAdcPulseAmpCutLow   = 40.0;   // Units of mV
+static const Double_t refAdcPulseAmpCutHigh  = 70.0;   // Units of mV
+static const Double_t refAdcPulseTimeCutLow  = 300.0;  // Units of ns
 static const Double_t refAdcPulseTimeCutHigh = 370.0;  // Units of ns
-static const Double_t adcTdcTimeDiffCutLow   = -100.0; // Units of ns
-static const Double_t adcTdcTimeDiffCutHigh  = 100.0;  // Units of ns
+static const Double_t adcTdcTimeDiffCutLow   = -0.0; // Units of ns
+static const Double_t adcTdcTimeDiffCutHigh  = 60.0;  // Units of ns
 static const Double_t calEtotnormCutVal      = 0.1;    // Units of Normalized energy
-static const Double_t cerNpeSumCutVal        = 1.5;    // Units of NPE in aerogel
+static const Double_t cerNpeSumCutVal        = 0.1;    // Units of NPE in aerogel
 // static const Double_t adcTdcTimeDiffCutLow   = -6000.0;  // Units of ns
 // static const Double_t adcTdcTimeDiffCutHigh  = 1000.0;  // Units of ns
 

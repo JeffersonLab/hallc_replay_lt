@@ -56,6 +56,10 @@ void DC_Calib_Comp(string Det = "", TString Run_List="")
     Outpath = "/dsk3/${USER}/JLab/OUTPUT/DC_Calib";
     Histopath = "/dsk3/${USER}/JLab/HISTOGRAMS/DC_Calib" ;
   }
+  else if(Hostname.Contains("cdaq")){
+    Outpath = "/home/cdaq/pionLT-2021/hallc_replay_lt/OUTPUT/DC_Calib";
+    Histopath = "/home/cdaq/pionLT-2021/hallc_replay_lt/HISTOGRAMS/DC_Calib";
+  }
 
   // Open our list of runs and grab the run numbers
   fstream RunListFile;

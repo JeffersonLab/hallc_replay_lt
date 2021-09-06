@@ -32,4 +32,5 @@ Block: Reconstruct
 Reconstruct_master ALL_events
 
 Block: Physics
+hcut_CleanTrack            H.gtr.index > -1 && H.gtr.dp > -8.0 && H.gtr.dp < 8.0
 Physics_master ALL_events

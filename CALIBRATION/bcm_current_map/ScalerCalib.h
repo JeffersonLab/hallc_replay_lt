@@ -1,5 +1,5 @@
-#ifndef __SCLAERCALIB_H__
-#define __SCLAERCALIB_H__
+#ifndef __SCALERCALIB_H__
+#define __SCALERCALIB_H__
 
 #include <iostream>
 #include <fstream>

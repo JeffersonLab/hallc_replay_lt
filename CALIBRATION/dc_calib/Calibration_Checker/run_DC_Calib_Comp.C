@@ -49,8 +49,13 @@ void run_DC_Calib_Comp(Int_t RunNumber = 0, Int_t MaxEvent = 0, string Detector 
     Outpath = "/dsk3/${USER}/JLab/OUTPUT/Calib/DC";
     Histopath = "/dsk3/${USER}/JLab/HISTOGRAMS/Calib/DC" ;
   }
-
-  TChain ch("T");
+  else if(Hostname.Contains("cdaq")){
+    rootFileNameString = Form("/home/cdaq/pionLT-2021/hallc_replay_lt/ROOTfiles/Calib/DC/%s_DC_Calib_Check_Coin_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
+    Outpath = "/home/cdaq/pionLT-2021/hallc_replay_lt/OUTPUT/Calib/DC";
+    Histopath = "/home/cdaq/pionLT-2021/hallc_replay_lt/HISTOGRAMS/Calib/DC";
+    }
+ 
+ TChain ch("T");
   TString option;
   TProof *proof;  
   proof = TProof::Open("workers=4");  

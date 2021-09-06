@@ -39,13 +39,13 @@ void replay_production_hms_coin(Int_t RunNumber=0, Int_t MaxEvent=0, Int_t First
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
   // Load params for HMS trigger configuration
-  gHcParms->Load("PARAM/TRIG/thms.param");
+  gHcParms->Load("PARAM/TRIG/tcoin.param");
   // Load fadc debug parameters
   gHcParms->Load("PARAM/HMS/GEN/h_fadc_debug.param");
 
   // Load the Hall C detector map
   gHcDetectorMap = new THcDetectorMap();
-  gHcDetectorMap->Load("MAPS/HMS/DETEC/STACK/hms_stack.map");
+  gHcDetectorMap->Load("MAPS/COIN/DETEC/coin.map");
   
   // Set up the equipment to be analyzed.
   THcHallCSpectrometer* HMS = new THcHallCSpectrometer("H", "HMS");
@@ -75,9 +75,12 @@ void replay_production_hms_coin(Int_t RunNumber=0, Int_t MaxEvent=0, Int_t First
   THaApparatus* TRG = new THcTrigApp("T", "TRG");
   gHaApps->Add(TRG);
   // Add trigger detector to trigger apparatus
-  THcTrigDet* hms = new THcTrigDet("hms", "HMS Trigger Information");
-  hms->SetSpectName("H");
-  TRG->AddDetector(hms);
+  THcTrigDet* coin = new THcTrigDet("coin", "Coincidence Trigger Information");
+  // Suppress missing reference time warnings for these event types
+  coin->SetEvtType(1);
+  coin->AddEvtType(2);
+  TRG->AddDetector(coin); 
+
 
   // Add rastered beam apparatus
   THaApparatus* beam = new THcRasteredBeam("H.rb", "Rastered Beamline");

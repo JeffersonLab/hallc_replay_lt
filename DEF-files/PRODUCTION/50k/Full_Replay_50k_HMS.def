@@ -8,6 +8,7 @@ block H.cal.etotnorm
 block H.cal.etottracknorm
 block H.cer.*
 block H.kin.*
+block H.rb.*
 
 begin epics
 ibcm1

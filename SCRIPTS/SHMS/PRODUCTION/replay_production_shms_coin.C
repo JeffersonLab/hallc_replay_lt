@@ -32,13 +32,14 @@ void replay_production_shms_coin (Int_t RunNumber = 0, Int_t MaxEvent = 0, Int_t
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
   // Load parameters for SHMS trigger configuration
-  gHcParms->Load("PARAM/TRIG/tshms.param");
+  gHcParms->Load("PARAM/TRIG/tcoin.param");
   // Load fadc debug parameters
   gHcParms->Load("PARAM/SHMS/GEN/p_fadc_debug.param");
+  gHcParms->Load("PARAM/HMS/GEN/h_fadc_debug.param");
 
   // Load the Hall C detector map
   gHcDetectorMap = new THcDetectorMap();
-  gHcDetectorMap->Load("MAPS/SHMS/DETEC/STACK/shms_stack.map");
+  gHcDetectorMap->Load("MAPS/COIN/DETEC/coin.map");
   
   // Set up the equipment to be analyzed.
   THcHallCSpectrometer* SHMS = new THcHallCSpectrometer("P", "SHMS");
@@ -48,22 +49,29 @@ void replay_production_shms_coin (Int_t RunNumber = 0, Int_t MaxEvent = 0, Int_t
   SHMS->AddEvtType(6);
   SHMS->AddEvtType(7);
   gHaApps->Add(SHMS);
+  
+  
   // Add Noble Gas Cherenkov to SHMS apparatus
   THcCherenkov* ngcer = new THcCherenkov("ngcer", "Noble Gas Cherenkov");
   SHMS->AddDetector(ngcer);
+  
   // Add drift chambers to SHMS apparatus
   THcDC* dc = new THcDC("dc", "Drift Chambers");
   SHMS->AddDetector(dc);
+  
   // Add hodoscope to SHMS apparatus
   THcHodoscope* hod = new THcHodoscope("hod", "Hodoscope");
   SHMS->AddDetector(hod);
+  
   // Add Heavy Gas Cherenkov to SHMS apparatus
   THcCherenkov* hgcer = new THcCherenkov("hgcer", "Heavy Gas Cherenkov");
   SHMS->AddDetector(hgcer);
+  
   // Add Aerogel Cherenkov to SHMS apparatus
   THcAerogel* aero = new THcAerogel("aero", "Aerogel");
   SHMS->AddDetector(aero);
   // Add calorimeter to SHMS apparatus
+  
   THcShower* cal = new THcShower("cal", "Calorimeter");
   SHMS->AddDetector(cal);
 
@@ -71,38 +79,48 @@ void replay_production_shms_coin (Int_t RunNumber = 0, Int_t MaxEvent = 0, Int_t
   THaApparatus* TRG = new THcTrigApp("T", "TRG");
   gHaApps->Add(TRG);
   // Add trigger detector to trigger apparatus
-  THcTrigDet* shms = new THcTrigDet("shms", "SHMS Trigger Information");
-  shms->SetSpectName("P");
-  TRG->AddDetector(shms);
+  
+  THcTrigDet* coin = new THcTrigDet("coin", "Coincidence Trigger Information");
+  coin->SetEvtType(1);
+  coin->AddEvtType(2);
+  TRG->AddDetector(coin); 
 
   // Add rastered beam apparatus
   THaApparatus* beam = new THcRasteredBeam("P.rb", "Rastered Beamline");
   gHaApps->Add(beam);
+  
   // Add physics modules
   // Calculate reaction point
   THcReactionPoint* prp = new THcReactionPoint("P.react", "SHMS reaction point", "P", "P.rb");
   gHaPhysics->Add(prp);
+  
   // Calculate extended target corrections
   THcExtTarCor* pext = new THcExtTarCor("P.extcor", "HMS extended target corrections", "P", "P.react");
   gHaPhysics->Add(pext);
+  
   // Calculate golden track quantites
   THaGoldenTrack* gtr = new THaGoldenTrack("P.gtr", "SHMS Golden Track", "P");
   gHaPhysics->Add(gtr);
+  
   // Calculate primary (scattered beam - usually electrons) kinematics
   THcPrimaryKine* kin = new THcPrimaryKine("P.kin", "SHMS Single Arm Kinematics", "P", "P.rb");
   gHaPhysics->Add(kin);
+  
   // Calculate the hodoscope efficiencies
   THcHodoEff* peff = new THcHodoEff("phodeff", "SHMS hodo efficiency", "P.hod");
   gHaPhysics->Add(peff);   
-
+  
   // Add event handler for prestart event 125.
   THcConfigEvtHandler* ev125 = new THcConfigEvtHandler("HC", "Config Event type 125");
   gHaEvtHandlers->Add(ev125);
+  
   // Add event handler for EPICS events
   THaEpicsEvtHandler* hcepics = new THaEpicsEvtHandler("epics", "HC EPICS event type 182");
   gHaEvtHandlers->Add(hcepics);
+  
   // Add event handler for scaler events
   THcScalerEvtHandler* pscaler = new THcScalerEvtHandler("P", "Hall C scaler event type 1");
+  
   pscaler->AddEvtType(1);
   pscaler->AddEvtType(4);
   pscaler->AddEvtType(5);
@@ -165,9 +183,9 @@ void replay_production_shms_coin (Int_t RunNumber = 0, Int_t MaxEvent = 0, Int_t
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file
-  analyzer->SetOdefFile("DEF-files/PRODUCTION/Full_Replay_50k_SHMS.def");
+  analyzer->SetOdefFile("DEF-files/PRODUCTION/50k/Full_Replay_50k_SHMS.def");
   // Define cuts file
-  analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/50k/Full_Replay_50k_HMS_cuts.def");  // optional
+  analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/50k/Full_Replay_50k_SHMS_cuts.def");  // optional
   // File to record accounting information for cuts
   analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Analysis/50k/summary_coin_production_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.

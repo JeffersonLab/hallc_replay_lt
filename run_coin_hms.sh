@@ -27,7 +27,10 @@ if [ -z "$runNum" ]; then
 fi
 
 # How many events to analyze.
-numEvents=50000
+numEvents=$2
+if [ -z "$numEvents" ]; then
+ numEvents=50000 
+fi
 
 # Which scripts to run.
 script="SCRIPTS/${SPEC}/PRODUCTION/replay_production_${spec}_coin.C"

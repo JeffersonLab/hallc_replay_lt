@@ -31,7 +31,7 @@ void calibration::Begin(TTree * /*tree*/)
 
 void calibration::SlaveBegin(TTree * /*tree*/)
 {
-  printf("\n\n");
+  printf("\nTest\n");
   TString option = GetOption();
   // Initialize the histograms. Note they are binned per ADC channel which will be changed in the calibration analysis.
   Int_t ADC_min;
@@ -133,10 +133,17 @@ void calibration::SlaveBegin(TTree * /*tree*/)
   fTim4_full = new TH1F("Timing_full_PMT4", "ADC TDC Diff PMT1 ; Time (ns) ;Counts", 200, -40.0, 50.0);
   GetOutputList()->Add(fTim4_full);
   //Histograms for Beta visualization
-  fBeta_Cut = new TH1F("Beta_Cut", "Beta cut used for 'good' hits;Beta;Counts", 100, -0.1, 1.5);
+  fBeta_Cut = new TH1F("Beta_Cut", "Beta cut used for 'good' hits ; Beta ; Counts", 100, -0.1, 1.5);
   GetOutputList()->Add(fBeta_Cut);  
-  fBeta_Full = new TH1F("Beta_Full", "Full beta for events;Beta;Counts", 100, -0.1, 1.5);
+  fBeta_Full = new TH1F("Beta_Full", "Full beta for events ; Beta ; Counts", 100, -0.1, 1.5);
   GetOutputList()->Add(fBeta_Full);
+  //Testing x/y pos calculations
+ fXatYat = new TH2F("hgcX_hgcY", "X vs Y hgcer.x/yAtCer ; X ; Y", 500, -50., 50., 500, -50., 50.);
+ GetOutputList()->Add(fXatYat);
+
+ fXeqYeq = new TH2F("hgcXeq_hgcYeq", "X vs Y hgcer.x/yEq ; X ; Y", 500, -50., 50., 500, -50., 50.);
+   GetOutputList()->Add(fXeqYeq);
+
   printf("\n\n");
 }
 
@@ -149,14 +156,14 @@ Bool_t calibration::Process(Long64_t entry)
   Int_t fpmts;
   fpmts = fhgc_pmts;   
   //Require only one good track reconstruction for the event
-  if (*Ndata_P_tr_beta != 1) return kTRUE;  
+  //if (*Ndata_P_tr_beta != 1) return kTRUE;  
   //Redundant, but useful if multiple tracks are eventually allowed
-  for (Int_t itrack = 0; itrack < *Ndata_P_tr_beta; itrack++)
-    {
+  //for (Int_t itrack = 0; itrack < *Ndata_P_tr_beta; itrack++)
+  //{
       //Require loose cut on particle velocity                                     
-      fBeta_Full->Fill(P_tr_beta[itrack]);
-      if (TMath::Abs(P_tr_beta[itrack] - 1.0) > 0.4) return kTRUE;
-      fBeta_Cut->Fill(P_tr_beta[itrack]);    
+      fBeta_Full->Fill(P_gtr_beta[0]);
+      if (TMath::Abs(P_gtr_beta[0] - 1.0) > 0.4) return kTRUE;
+      fBeta_Cut->Fill(P_gtr_beta[0]);    
       //Filling the histograms
       for (Int_t ipmt = 0; ipmt < fpmts; ipmt++)
 	{
@@ -195,8 +202,12 @@ Bool_t calibration::Process(Long64_t entry)
 	  fPulseInt_poiss[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
 	  //Retrieve information for particle tracking from focal plane
 	  //Fill histograms of what each PMT registers from each quadrant, this requires tracking the particle from the focal plane. Each quadrant is defined from the parameter files
-	  Float_t y_pos = P_tr_y[0] + P_tr_ph[0]*fhgc_zpos;
-	  Float_t x_pos = P_tr_x[0] + P_tr_th[0]*fhgc_zpos;	  
+	 Float_t y_pos = P_hgcer_yAtCer[0];
+	 Float_t y_eq = P_dc_y_fp[0] + P_dc_yp_fp[0]*fhgc_zpos;
+	 Float_t x_pos = P_hgcer_xAtCer[0]; 
+	 Float_t x_eq = P_dc_x_fp[0] + P_dc_xp_fp[0]*fhgc_zpos;	  
+	 fXatYat->Fill(y_pos,x_pos);
+	  fXeqYeq->Fill(y_eq,x_eq);
 	  //Condition for quadrant 1 mirror
 	  if (y_pos >= 4.6 && x_pos >= 9.4) fPulseInt_quad[0][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
 	  //Condition for quadrant 2 mirror
@@ -206,7 +217,7 @@ Bool_t calibration::Process(Long64_t entry)
 	  //Condition for quadrant 4 mirror
 	  if (y_pos < 4.6 && x_pos < 9.4) fPulseInt_quad[3][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);	
 	}//Marks end of loop over PMTs
-    }//Marks end of loop over tracks  
+      // }//Marks end of loop over tracks  
   return kTRUE;
 }
 
@@ -258,6 +269,14 @@ void calibration::Terminate()
   Beta->cd(2);
   fBeta_Cut->Draw(); 
   Beta->Print(outputpdf + '(');
+   TCanvas *XatYat;
+   XatYat = new TCanvas("XatYat", "XatYat information for events");
+    XatYat->Divide(2,1);
+    XatYat->cd(1);
+    fXeqYeq->Draw();
+    XatYat->cd(2);
+    fXatYat->Draw();
+    XatYat->Print(outputpdf);
   //Canvas to show full timing  information
   TCanvas *Timing;
   Timing = new TCanvas("Timing", "Timing information for events");

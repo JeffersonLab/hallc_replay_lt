@@ -35,6 +35,8 @@ class calibration : public TSelector {
   TH1F         ***fPulseInt_quad;
   TH1F           *fBeta_Cut;
   TH1F           *fBeta_Full;
+  TH2F           *fXatYat;
+  TH2F           *fXeqYeq;
   TH1F           *fTiming_Full;
   TH1F            *fTim1;
   TH1F            *fTim2;
@@ -80,8 +82,8 @@ class calibration : public TSelector {
 
   // Readers to access the data
   // These leaves MUST all be present in your replay file for this scrip to run!
-  TTreeReaderValue<Int_t>    Ndata_P_tr_beta            = {fReader, "Ndata.P.tr.beta"};
-  TTreeReaderArray<Double_t> P_tr_beta                  = {fReader, "P.tr.beta"};
+  //  TTreeReaderValue<Int_t>    Ndata_P_tr_beta            = {fReader, "Ndata.P.tr.beta"};
+  TTreeReaderArray<Double_t> P_gtr_beta                  = {fReader, "P.gtr.beta"};
   TTreeReaderArray<Double_t> P_hgcer_goodAdcTdcDiffTime = {fReader, "P.hgcer.goodAdcTdcDiffTime"};
   TTreeReaderArray<Double_t> P_hgcer_goodAdcPulseInt    = {fReader, "P.hgcer.goodAdcPulseInt"};
   TTreeReaderArray<Double_t> P_hgcer_goodAdcPulseAmp    = {fReader, "P.hgcer.goodAdcPulseAmp"};
@@ -91,14 +93,18 @@ class calibration : public TSelector {
   TTreeReaderValue<Double_t> P_cal_etotnorm             = {fReader, "P.cal.etotnorm"};
   TTreeReaderValue<Double_t> P_gtr_p                    = {fReader, "P.gtr.p"};
   TTreeReaderArray<Double_t> P_gtr_dp                   = {fReader, "P.gtr.dp"};
-  TTreeReaderArray<Double_t> P_tr_x                     = {fReader, "P.tr.x"};
-  TTreeReaderArray<Double_t> P_tr_ph                    = {fReader, "P.tr.ph"};
-  TTreeReaderArray<Double_t> P_tr_y                     = {fReader, "P.tr.y"};
-  TTreeReaderArray<Double_t> P_tr_th                    = {fReader, "P.tr.th"};
+  TTreeReaderArray<Double_t> P_gtr_x                     = {fReader, "P.gtr.x"};
+  TTreeReaderArray<Double_t> P_gtr_ph                    = {fReader, "P.gtr.ph"};
+  TTreeReaderArray<Double_t> P_gtr_y                     = {fReader, "P.gtr.y"};
+  TTreeReaderArray<Double_t> P_gtr_th                    = {fReader, "P.gtr.th"};
+  TTreeReaderArray<Double_t> P_dc_x_fp                     = {fReader, "P.dc.x_fp"};
+  TTreeReaderArray<Double_t> P_dc_xp_fp                     = {fReader, "P.dc.xp_fp"};
+  TTreeReaderArray<Double_t> P_dc_y_fp                     = {fReader, "P.dc.y_fp"};
+  TTreeReaderArray<Double_t> P_dc_yp_fp                     = {fReader, "P.dc.yp_fp"};
   TTreeReaderArray<Double_t> P_hgcer_xAtCer             = {fReader, "P.hgcer.xAtCer"};
   TTreeReaderArray<Double_t> P_hgcer_yAtCer             = {fReader, "P.hgcer.yAtCer"};
   
- calibration(TTree * /*tree*/ =0) : fChain(0) {fPulseInt = 0, fPulseInt_poiss = 0, fPulseInt_quad = 0, fBeta_Cut = 0, fBeta_Full = 0, fTiming_Full = 0,fTim1 =0, fTim1_full = 0,fTim2 =0, fTim2_full = 0, fTim3 = 0, fTim3_full = 0, fTim4 = 0, fTim4_full = 0, fFullRead = kFALSE, fFullShow = kFALSE, fTrack = kFALSE, fCut = kFALSE, fPions = kFALSE;}
+ calibration(TTree * /*tree*/ =0) : fChain(0) {fPulseInt = 0, fPulseInt_poiss = 0, fPulseInt_quad = 0, fBeta_Cut = 0, fBeta_Full = 0, fXatYat = 0, fXeqYeq = 0, fTiming_Full = 0,fTim1 =0, fTim1_full = 0,fTim2 =0, fTim2_full = 0, fTim3 = 0, fTim3_full = 0, fTim4 = 0, fTim4_full = 0, fFullRead = kFALSE, fFullShow = kFALSE, fTrack = kFALSE, fCut = kFALSE, fPions = kFALSE;}
   virtual ~calibration() { }
   virtual Int_t   Version() const { return 2; }
   virtual void    Begin(TTree *tree);

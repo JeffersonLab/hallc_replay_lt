@@ -67,3 +67,25 @@ If no quadrants for a PMT return a "good" fit (see the instructions pdf for more
 If this is the case, try executing the calibration again with an extra run.
 
 Typically, the calibration needs at least two runs chained together to yield decent results.
+
+
+##################################################
+### Leaves Required in Replay to Run Script ###
+##################################################
+
+	P.gtr.beta
+	P.hgcer.goodAdcTdcDiffTime
+	P.hgcer.goodAdcPulseInt
+	P.hgcer.goodAdcPulseAmp
+	P.hgcer.numTracksFired
+	P.cal.fly.earray
+	P.cal.pr.eplane
+	P.cal.etotnorm
+	P.gtr.p
+	P.gtr.dp
+	P.gtr.x
+	P.gtr.ph
+	P.gtr.y
+	P.gtr.th
+	P.hgcer.xAtCer
+	P.hgcer.yAtCer

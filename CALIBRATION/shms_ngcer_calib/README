@@ -54,7 +54,7 @@ By default, the output from the code is place in a folder called Calibration_plo
 
 Files are named by runnumber(s), there are a set of plots saved as a pdf as well as two param files with values.
 
-By default, the weighted average of the first and second guess parameters are printed as the calibration parameters. The file phgcer_calib_#RUNNUMBER.param file is the file that should be fed back to hcana.
+By default, the weighted average of the first and second guess parameters are printed as the calibration parameters. The file pngcer_calib_#RUNNUMBER.param file is the file that should be fed back to hcana.
 
 ##############################################
 ### How many runs should I chain together? ###
@@ -74,10 +74,10 @@ Typically, the calibration needs at least two runs chained together to yield dec
 ##################################################
 
 	P.gtr.beta
-	P.hgcer.goodAdcTdcDiffTime
-	P.hgcer.goodAdcPulseInt
-	P.hgcer.goodAdcPulseAmp
-	P.hgcer.numTracksFired
+	P.ngcer.goodAdcTdcDiffTime
+	P.ngcer.goodAdcPulseInt
+	P.ngcer.goodAdcPulseAmp
+	P.ngcer.numTracksFired
 	P.cal.fly.earray
 	P.cal.pr.eplane
 	P.cal.etotnorm
@@ -87,5 +87,5 @@ Typically, the calibration needs at least two runs chained together to yield dec
 	P.gtr.ph
 	P.gtr.y
 	P.gtr.th
-	P.hgcer.xAtCer
-	P.hgcer.yAtCer
+	P.ngcer.xAtCer
+	P.ngcer.yAtCer

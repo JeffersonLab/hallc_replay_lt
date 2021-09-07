@@ -15,8 +15,8 @@
 #include <TH2.h>
 #include <TNtuple.h>
 
-const Int_t        fhgc_pmts = 4;
-const Double_t     fhgc_zpos = 156.27;
+const Int_t        fngc_pmts = 4;
+const Double_t     fngc_zpos = 156.27;
 
 class calibration : public TSelector {
  public :
@@ -84,10 +84,10 @@ class calibration : public TSelector {
   // These leaves MUST all be present in your replay file for this scrip to run!
   //  TTreeReaderValue<Int_t>    Ndata_P_tr_beta            = {fReader, "Ndata.P.tr.beta"};
   TTreeReaderArray<Double_t> P_gtr_beta                  = {fReader, "P.gtr.beta"};
-  TTreeReaderArray<Double_t> P_hgcer_goodAdcTdcDiffTime = {fReader, "P.hgcer.goodAdcTdcDiffTime"};
-  TTreeReaderArray<Double_t> P_hgcer_goodAdcPulseInt    = {fReader, "P.hgcer.goodAdcPulseInt"};
-  TTreeReaderArray<Double_t> P_hgcer_goodAdcPulseAmp    = {fReader, "P.hgcer.goodAdcPulseAmp"};
-  TTreeReaderArray<Double_t> P_hgcer_numTracksFired     = {fReader, "P.hgcer.numTracksFired"};
+  TTreeReaderArray<Double_t> P_ngcer_goodAdcTdcDiffTime = {fReader, "P.ngcer.goodAdcTdcDiffTime"};
+  TTreeReaderArray<Double_t> P_ngcer_goodAdcPulseInt    = {fReader, "P.ngcer.goodAdcPulseInt"};
+  TTreeReaderArray<Double_t> P_ngcer_goodAdcPulseAmp    = {fReader, "P.ngcer.goodAdcPulseAmp"};
+  TTreeReaderArray<Double_t> P_ngcer_numTracksFired     = {fReader, "P.ngcer.numTracksFired"};
   TTreeReaderValue<Double_t> P_cal_fly_earray           = {fReader, "P.cal.fly.earray"};
   TTreeReaderValue<Double_t> P_cal_pr_eplane            = {fReader, "P.cal.pr.eplane"};
   TTreeReaderValue<Double_t> P_cal_etotnorm             = {fReader, "P.cal.etotnorm"};
@@ -101,8 +101,8 @@ class calibration : public TSelector {
   TTreeReaderArray<Double_t> P_dc_xp_fp                     = {fReader, "P.dc.xp_fp"};
   TTreeReaderArray<Double_t> P_dc_y_fp                     = {fReader, "P.dc.y_fp"};
   TTreeReaderArray<Double_t> P_dc_yp_fp                     = {fReader, "P.dc.yp_fp"};
-  TTreeReaderArray<Double_t> P_hgcer_xAtCer             = {fReader, "P.hgcer.xAtCer"};
-  TTreeReaderArray<Double_t> P_hgcer_yAtCer             = {fReader, "P.hgcer.yAtCer"};
+  TTreeReaderArray<Double_t> P_ngcer_xAtCer             = {fReader, "P.ngcer.xAtCer"};
+  TTreeReaderArray<Double_t> P_ngcer_yAtCer             = {fReader, "P.ngcer.yAtCer"};
   
  calibration(TTree * /*tree*/ =0) : fChain(0) {fPulseInt = 0, fPulseInt_poiss = 0, fPulseInt_quad = 0, fBeta_Cut = 0, fBeta_Full = 0, fXatYat = 0, fXeqYeq = 0, fTiming_Full = 0,fTim1 =0, fTim1_full = 0,fTim2 =0, fTim2_full = 0, fTim3 = 0, fTim3_full = 0, fTim4 = 0, fTim4_full = 0, fFullRead = kFALSE, fFullShow = kFALSE, fTrack = kFALSE, fCut = kFALSE, fPions = kFALSE;}
   virtual ~calibration() { }

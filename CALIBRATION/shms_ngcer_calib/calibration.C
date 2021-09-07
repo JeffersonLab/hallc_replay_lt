@@ -138,11 +138,11 @@ void calibration::SlaveBegin(TTree * /*tree*/)
   fBeta_Full = new TH1F("Beta_Full", "Full beta for events ; Beta ; Counts", 100, -0.1, 1.5);
   GetOutputList()->Add(fBeta_Full);
   //Testing x/y pos calculations
- fXatYat = new TH2F("hgcX_hgcY", "X vs Y hgcer.x/yAtCer ; X ; Y", 500, -50., 50., 500, -50., 50.);
- GetOutputList()->Add(fXatYat);
+  //fXatYat = new TH2F("ngcX_ngcY", "X vs Y ngcer.x/yAtCer ; X ; Y", 500, -50., 50., 500, -50., 50.);
+  //GetOutputList()->Add(fXatYat);
 
- fXeqYeq = new TH2F("hgcXeq_hgcYeq", "X vs Y hgcer.x/yEq ; X ; Y", 500, -50., 50., 500, -50., 50.);
-   GetOutputList()->Add(fXeqYeq);
+  //fXeqYeq = new TH2F("ngcXeq_ngcYeq", "X vs Y ngcer.x/yEq ; X ; Y", 500, -50., 50., 500, -50., 50.);
+  //  GetOutputList()->Add(fXeqYeq);
 
   printf("\n\n");
 }
@@ -154,7 +154,7 @@ Bool_t calibration::Process(Long64_t entry)
   if (entry % 100000 == 0) printf("Processing Entry number %lld\n",entry);                          
   //Define quantities to loop over
   Int_t fpmts;
-  fpmts = fhgc_pmts;   
+  fpmts = fngc_pmts;   
   //Require only one good track reconstruction for the event
   //if (*Ndata_P_tr_beta != 1) return kTRUE;  
   //Redundant, but useful if multiple tracks are eventually allowed
@@ -168,54 +168,54 @@ Bool_t calibration::Process(Long64_t entry)
       for (Int_t ipmt = 0; ipmt < fpmts; ipmt++)
 	{
 	  //Filling timing info before cut
-	  fTiming_Full->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+	  fTiming_Full->Fill(P_ngcer_goodAdcTdcDiffTime[ipmt]);
 	  //Perform a loose timing cut on each PMT
 	  if(ipmt ==0)
 	    {
-	      fTim1_full->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-	      if(P_hgcer_goodAdcTdcDiffTime[ipmt] >40 || P_hgcer_goodAdcTdcDiffTime[ipmt] < 30) continue;                      
-	      fTim1->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+	      fTim1_full->Fill(P_ngcer_goodAdcTdcDiffTime[ipmt]);
+	      if(P_ngcer_goodAdcTdcDiffTime[ipmt] >40 || P_ngcer_goodAdcTdcDiffTime[ipmt] < 30) continue;                      
+	      fTim1->Fill(P_ngcer_goodAdcTdcDiffTime[ipmt]);
 	    }
 	  if(ipmt ==1)
 	    {
-	      fTim2_full->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-	      if(P_hgcer_goodAdcTdcDiffTime[ipmt] >40 || P_hgcer_goodAdcTdcDiffTime[ipmt] < 30) continue;                          
-	      fTim2->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+	      fTim2_full->Fill(P_ngcer_goodAdcTdcDiffTime[ipmt]);
+	      if(P_ngcer_goodAdcTdcDiffTime[ipmt] >40 || P_ngcer_goodAdcTdcDiffTime[ipmt] < 30) continue;                          
+	      fTim2->Fill(P_ngcer_goodAdcTdcDiffTime[ipmt]);
 	    }
 	  if(ipmt ==2)
 	    {
-	      fTim3_full->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-	      if(P_hgcer_goodAdcTdcDiffTime[ipmt] >40 || P_hgcer_goodAdcTdcDiffTime[ipmt] < 30) continue;                           
-	      fTim3->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+	      fTim3_full->Fill(P_ngcer_goodAdcTdcDiffTime[ipmt]);
+	      if(P_ngcer_goodAdcTdcDiffTime[ipmt] >40 || P_ngcer_goodAdcTdcDiffTime[ipmt] < 30) continue;                           
+	      fTim3->Fill(P_ngcer_goodAdcTdcDiffTime[ipmt]);
 	    }
 	  if(ipmt ==3)
 	    {
-	      fTim4_full->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-	      if(P_hgcer_goodAdcTdcDiffTime[ipmt] >40 || P_hgcer_goodAdcTdcDiffTime[ipmt] < 30) continue;                                  
-	      fTim4->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+	      fTim4_full->Fill(P_ngcer_goodAdcTdcDiffTime[ipmt]);
+	      if(P_ngcer_goodAdcTdcDiffTime[ipmt] >40 || P_ngcer_goodAdcTdcDiffTime[ipmt] < 30) continue;                                  
+	      fTim4->Fill(P_ngcer_goodAdcTdcDiffTime[ipmt]);
 	    }
 	  //Cuts to remove entries corresponding to a PMT not registering a hit    
-	  if (P_hgcer_goodAdcPulseInt[ipmt] == 0.0) continue;
+	  if (P_ngcer_goodAdcPulseInt[ipmt] == 0.0) continue;
 	  //For quadrant cut strategy with no particle ID cut
 	  //Fill histogram of the full PulseInt spectra for each PMT
-	  fPulseInt[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
-	  fPulseInt_poiss[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
+	  fPulseInt[ipmt]->Fill(P_ngcer_goodAdcPulseInt[ipmt]);
+	  fPulseInt_poiss[ipmt]->Fill(P_ngcer_goodAdcPulseInt[ipmt]);
 	  //Retrieve information for particle tracking from focal plane
 	  //Fill histograms of what each PMT registers from each quadrant, this requires tracking the particle from the focal plane. Each quadrant is defined from the parameter files
-	 Float_t y_pos = P_hgcer_yAtCer[0];
-	 Float_t y_eq = P_dc_y_fp[0] + P_dc_yp_fp[0]*fhgc_zpos;
-	 Float_t x_pos = P_hgcer_xAtCer[0]; 
-	 Float_t x_eq = P_dc_x_fp[0] + P_dc_xp_fp[0]*fhgc_zpos;	  
-	 fXatYat->Fill(y_pos,x_pos);
-	  fXeqYeq->Fill(y_eq,x_eq);
+	 Float_t y_pos = P_ngcer_yAtCer[0];
+	 //Float_t y_eq = P_gtr_y[0] + P_gtr_ph[0]*fngc_zpos;
+	 Float_t x_pos = P_ngcer_xAtCer[0]; 
+	 //Float_t x_eq = P_gtr_x[0] + P_gtr_th[0]*fngc_zpos;	  
+	 //fXatYat->Fill(y_pos,x_pos);
+	 // fXeqYeq->Fill(y_eq,x_eq);
 	  //Condition for quadrant 1 mirror
-	  if (y_pos >= 4.6 && x_pos >= 9.4) fPulseInt_quad[0][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
+	  if (y_pos >= 4.6 && x_pos >= 9.4) fPulseInt_quad[0][ipmt]->Fill(P_ngcer_goodAdcPulseInt[ipmt]);
 	  //Condition for quadrant 2 mirror
-	  if (y_pos < 4.6 && x_pos >= 9.4) fPulseInt_quad[1][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);	
+	  if (y_pos < 4.6 && x_pos >= 9.4) fPulseInt_quad[1][ipmt]->Fill(P_ngcer_goodAdcPulseInt[ipmt]);	
 	  //Condition for quadrant 3 mirror
-	  if (y_pos >= 4.6 && x_pos < 9.4) fPulseInt_quad[2][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);	
+	  if (y_pos >= 4.6 && x_pos < 9.4) fPulseInt_quad[2][ipmt]->Fill(P_ngcer_goodAdcPulseInt[ipmt]);	
 	  //Condition for quadrant 4 mirror
-	  if (y_pos < 4.6 && x_pos < 9.4) fPulseInt_quad[3][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);	
+	  if (y_pos < 4.6 && x_pos < 9.4) fPulseInt_quad[3][ipmt]->Fill(P_ngcer_goodAdcPulseInt[ipmt]);	
 	}//Marks end of loop over PMTs
       // }//Marks end of loop over tracks  
   return kTRUE;
@@ -269,14 +269,14 @@ void calibration::Terminate()
   Beta->cd(2);
   fBeta_Cut->Draw(); 
   Beta->Print(outputpdf + '(');
-   TCanvas *XatYat;
-   XatYat = new TCanvas("XatYat", "XatYat information for events");
-    XatYat->Divide(2,1);
-    XatYat->cd(1);
-    fXeqYeq->Draw();
-    XatYat->cd(2);
-    fXatYat->Draw();
-    XatYat->Print(outputpdf);
+  //  TCanvas *XatYat;
+  //  XatYat = new TCanvas("XatYat", "XatYat information for events");
+  //  XatYat->Divide(2,1);
+  //  XatYat->cd(1);
+  //  fXeqYeq->Draw();
+  //  XatYat->cd(2);
+  //  fXatYat->Draw();
+  //  XatYat->Print(outputpdf);
   //Canvas to show full timing  information
   TCanvas *Timing;
   Timing = new TCanvas("Timing", "Timing information for events");
@@ -344,7 +344,7 @@ void calibration::Terminate()
   Pois_Chi[0] = 0.0, Pois_Chi[1] = 0.0;
   gStyle->SetOptStat(0); 
   //Main loop for calibration
-  for (Int_t ipmt=0; ipmt < (fhgc_pmts); ipmt++)
+  for (Int_t ipmt=0; ipmt < (fngc_pmts); ipmt++)
     {  
       //Initialize the various arrays (calibration arrays are explicitly filled)
       for (Int_t i=0; i<4; i++)
@@ -994,12 +994,12 @@ void calibration::Terminate()
   //Start the process of writing the calibration information to file
   ofstream calibration_out;
   if(RunNumStart == RunNumEnd){
-    calibration_out.open(Form("Calibration_plots/phgcer_calib_%i.param", RunNumStart), ios::out);
+    calibration_out.open(Form("Calibration_plots/pngcer_calib_%i.param", RunNumStart), ios::out);
     calibration_out << Form("; Calibration parameters from calibrating run %i", RunNumStart) << endl; 
   }
   else
     {
-      calibration_out.open(Form("Calibration_plots/phgcer_calib_%i-%i.param", RunNumStart, RunNumEnd), ios::out);
+      calibration_out.open(Form("Calibration_plots/pngcer_calib_%i-%i.param", RunNumStart, RunNumEnd), ios::out);
       calibration_out << Form("; Calibration parameters from calibrating runs %i-%i", RunNumStart, RunNumEnd) << endl;
     }
   if (!calibration_out.is_open()) cout << "Problem saving calibration constants, may have to update constants manually!" << endl;
@@ -1007,7 +1007,7 @@ void calibration::Terminate()
   else
     {
       calibration_out << ("; Weighted average of first and second guesses") << endl;
-      calibration_out << (" phgcer_adc_to_npe = ");
+      calibration_out << (" pngcer_adc_to_npe = ");
       for (Int_t ipmt = 0; ipmt < 4; ipmt++)
 	{
 	  if (ipmt != 3) calibration_out << Form("1.0/%3.3f, ",calibration_weighted_ave[ipmt]);
@@ -1020,16 +1020,16 @@ void calibration::Terminate()
   ofstream calibration_out2;
   if(RunNumStart == RunNumEnd)
     {
-      calibration_out2.open(Form("Calibration_plots/phgcer_calib_err_%i.param", RunNumStart), ios::out);
+      calibration_out2.open(Form("Calibration_plots/pngcer_calib_err_%i.param", RunNumStart), ios::out);
     }
   else
     {
-      calibration_out2.open(Form("Calibration_plots/phgcer_calib_err_%i-%i.param", RunNumStart, RunNumEnd), ios::out);
+      calibration_out2.open(Form("Calibration_plots/pngcer_calib_err_%i-%i.param", RunNumStart, RunNumEnd), ios::out);
     }
   if (!calibration_out2.is_open()) cout << "Problem saving calibration constants, may have to update constants manually!" << endl;
   else
     {
-      calibration_out2 <<("phgcer_adc_to_npe are: ")<<endl; 
+      calibration_out2 <<("pngcer_adc_to_npe are: ")<<endl; 
       for (Int_t ipmt = 0; ipmt < 4; ipmt++){
 	calibration_out2 << Form("%3i %3.3f  %3.3f",ipmt+1, calibration_mk1[ipmt],  calibration_mk1Err[ipmt] )<<endl;
       }

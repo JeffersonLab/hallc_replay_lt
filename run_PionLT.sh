@@ -29,9 +29,8 @@ echo "Starting physics analysis of PionLT data"
 echo "Required arguments are run number, run type and target"
 echo ""
 echo "Run number must be a positive integer value"
-echo "Run type must be one of - Prod - Lumi - HeePSing -HeePCoin - Optics - Case sensitive!"
+echo "Run type must be one of - Prod - Lumi - HeePSing - HeePCoin - Optics - Case sensitive!"
 echo "Target must be one of - LH2 - LD2 - Dummy10cm - Carbon0p5 - AuFoil - Optics1 - Optics2 - CarbonHole - Case sensitive!"
-echo""
 RUNNUMBER=$1
 RUNTYPE=$2
 TARGET=$3
@@ -41,7 +40,7 @@ if [[ -z "$1" || ! "$RUNNUMBER" =~ ^-?[0-9]+$ ]]; then # Check an argument was p
     echo "I need a valid run number - MUST be a positive integer"
     while true; do
 	echo ""
-	read -p "Please provide a run number (positive integer) as input or press ctrl-c to exit : " RUNNUMBER
+	read -p "Please type in a run number (positive integer) as input or press ctrl-c to exit : " RUNNUMBER
 	case $RUNNUMBER in
 	    '' | *[!0-9]*);; # If the input is NOT a positive integer (or it's just an empty string), don't break the loop
 	    *) break;;
@@ -53,7 +52,7 @@ if [[ -z "$2" || ! "$RUNTYPE" =~ Prod|Lumi|HeePSing|HeePCoin|Optics ]]; then # C
     echo "I need a valid run type"
     while true; do
 	echo ""
-	read -p "Please select a run type from - Prod - Lumi - HeePSing -HeePCoin - Optics - Case sensitive! - or press ctrl-c to exit : " RUNTYPE
+	read -p "Please type in a run type from - Prod - Lumi - HeePSing - HeePCoin - Optics - Case sensitive! - or press ctrl-c to exit : " RUNTYPE
 	case $RUNTYPE in
 	    '');; # If blank, prompt again
 	    'Prod'|'Lumi'|'HeePSing'|'HeePCoin'|'Optics') break;; # If a valid option, break the loop and continue
@@ -65,7 +64,7 @@ if [[ -z "$3" || ! "$TARGET" =~ LH2|LD2|Dummy10cm|Carbon0p5|AuFoil|Optics1|Optic
     echo "I need a valid target"
     while true; do	
 	echo ""
-	read -p "Please select a target from - LH2 - LD2 - Dummy10cm - Carbon0p5 - AuFoil - Optics1 - Optics2 - CarbonHole - Case sensitive! - or press ctrl-c to exit : " TARGET
+	read -p "Please type in a target from - LH2 - LD2 - Dummy10cm - Carbon0p5 - AuFoil - Optics1 - Optics2 - CarbonHole - Case sensitive! - or press ctrl-c to exit : " TARGET
 	case $TARGET in
 	    '');; # If blank, prompt again
 	    'LH2'|'LD2'|'Dummy10cm'|'Carbon0p5'|'AuFoil'|'Optics1'|'Optics2'|'CarbonHole') break;; # If a valid option, break the loop and continue
@@ -88,6 +87,9 @@ elif [[ $RUNTYPE == "HeePCoin" ]]; then
     eval '"${UTILPATH}/scripts/heep/coin_heepYield.sh" ${RUNNUMBER}'
 elif [[ $RUNTYPE == "Optics" ]]; then
     echo "Running optics analysis script - "
+    eval '"${UTILPATH}/scripts/optics/run_optics.sh" ${RUNNUMBER}'
 fi
-
-eval '"${UTILPATH}/scripts/runlist/fill_runList.sh" ${RUNNUMBER} ${RUNTYPE} ${TARGET}'
+if [[ $RUNTYPE != "Optics" ]]; then
+    eval '"${UTILPATH}/scripts/runlist/fill_runList.sh" ${RUNNUMBER} ${RUNTYPE} ${TARGET}'
+else echo "Full replay for HMS and SHMS completed, check output rootfiles for plots"
+fi

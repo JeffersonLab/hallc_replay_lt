@@ -8,13 +8,27 @@
 # ppartmass = 0.139570 for Pi+ physics production runs
 # COPY and PASTE the block and then edit it, the layout is important! Keep a NEW LINE between each block
 
-8978 - 99999
+8978 - 11774
 gpbeam = 9.203
 gtargmass_amu = 1.00794
 htheta_lab = -37.33
 ptheta_lab = 7.69
 hpcentral = 0.893
 ppcentral = 4.034
+ppartmass = 0.000511
+hpartmass = 0.938272
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = -1.990
+eHadCoinTime_Offset = 44.089
+
+11775 - 99999
+gpbeam = 9.203
+gtargmass_amu = 1.00794
+htheta_lab = -12.5
+ptheta_lab = 7.5
+hpcentral = 5.89
+ppcentral = 5.27
 ppartmass = 0.000511
 hpartmass = 0.938272
 helicity_freq = 120.0007547169

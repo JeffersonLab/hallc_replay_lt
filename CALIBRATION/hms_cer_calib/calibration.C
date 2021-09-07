@@ -43,7 +43,7 @@ void calibration::Begin(TTree * /*tree*/)
    TString option = GetOption();
    Info("Begin", "Starting calibration process with option: %s", option.Data());
    Info("Begin", "To see details of calibration, use option showall");
-
+   cout << "\nTest\n";
    if (option.Contains("showall")) fFullShow = kTRUE;
 }
 

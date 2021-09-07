@@ -40,7 +40,6 @@ void SHMSDC_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Load fadc debug parameters
   gHcParms->Load("PARAM/HMS/GEN/h_fadc_debug.param");
   gHcParms->Load("PARAM/SHMS/GEN/p_fadc_debug.param");
-  gHcParms->Load("CALIBRATION/dc_calib/scripts/SHMS_DC_cardLog_%d/hdc_calib_%d.param", RunNumber);
   // Load the Hall C detector map
   gHcDetectorMap = new THcDetectorMap();
   gHcDetectorMap->Load("MAPS/COIN/DETEC/coin.map");

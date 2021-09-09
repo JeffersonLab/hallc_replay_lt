@@ -5,7 +5,7 @@
 # Arguments should be run number, type of run and target type
 # Anything but the valid options should be ignored and bounced back to the user as a prompt
 
-# Set path depending upon hostname, should only run on cdaql1/cdaql2 as cdaq
+# Set path depending upon hostname, should only run on cdaql1/cdaql2/cdaql3 as cdaq
 if [[ "${HOSTNAME}" = *"cdaql"* ]]; then # Check the user is on cdaql1 or cdaql2
     if [[ "${USER}" = "cdaq" ]]; then # Check the script is being executed by cdaq
 	REPLAYPATH="/home/cdaq/hallc-online/hallc_replay_lt"
@@ -16,9 +16,9 @@ if [[ "${HOSTNAME}" = *"cdaql"* ]]; then # Check the user is on cdaql1 or cdaql2
 	exit 1
     fi
 else
-    echo " !!!!!!!!!!! ERROR !!!!!!!!!!"
-    echo " Must run on cdaql1 or cdaql2"
-    echo " !!!!!!!!!!! ERROR !!!!!!!!!!"
+    echo " !!!!!!!!!!!!!!!! ERROR !!!!!!!!!!!!!"
+    echo " Must run on cdaql1, cdaql2 or cdaql3"
+    echo " !!!!!!!!!!!!!!!! ERROR !!!!!!!!!!!!!"
     exit 1
 fi
 

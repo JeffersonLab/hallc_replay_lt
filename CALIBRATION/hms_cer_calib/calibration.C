@@ -43,7 +43,6 @@ void calibration::Begin(TTree * /*tree*/)
    TString option = GetOption();
    Info("Begin", "Starting calibration process with option: %s", option.Data());
    Info("Begin", "To see details of calibration, use option showall");
-   cout << "\nTest\n";
    if (option.Contains("showall")) fFullShow = kTRUE;
 }
 
@@ -55,6 +54,7 @@ void calibration::SlaveBegin(TTree * /*tree*/)
 
   TString option = GetOption();
   
+   cout << "\nTest\n";
   fPulseInt = new TH1F*[2];
   for (Int_t ipmt = 0; ipmt < 2; ipmt++) {
     fPulseInt[ipmt] = new TH1F(Form("PulseInt%d",ipmt+1), Form("Pulse integral PMT %d;ADC Channel (pC);Counts",ipmt+1), 1000, 0, 100);
@@ -114,13 +114,13 @@ Bool_t calibration::Process(Long64_t entry)
    fReader.SetEntry(entry);
    
    //Only one track
-   if (*Ndata_H_tr_beta != 1) return kTRUE;
+   //if (*Ndata_H_tr_beta != 1) return kTRUE;
 
-   for (Int_t itrack = 0; itrack < *Ndata_H_tr_beta; itrack++) {
+   //for (Int_t itrack = 0; itrack < *Ndata_H_tr_beta; itrack++) {
      //Beta Cut
-     fBeta_Full->Fill(H_tr_beta[itrack]);
-     if (TMath::Abs(H_tr_beta[itrack] -1.0) > 0.2) return kTRUE;
-     fBeta_Cut->Fill(H_tr_beta[itrack]);
+     fBeta_Full->Fill(H_gtr_beta);
+     if (TMath::Abs(H_gtr_beta -1.0) > 0.2) return kTRUE;
+     fBeta_Cut->Fill(H_gtr_beta);
 
      for (Int_t ipmt = 0; ipmt < 2; ipmt++) {
        //Timing Cut
@@ -149,7 +149,7 @@ Bool_t calibration::Process(Long64_t entry)
 	 }
        }//End of electron cut
      }//End of PMT loop
-   }//End of tracking loop
+     //}//End of tracking loop
    
    return kTRUE;
 }

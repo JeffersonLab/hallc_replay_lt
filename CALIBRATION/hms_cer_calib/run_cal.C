@@ -30,7 +30,7 @@ void run_cal(Int_t RunNumber = 0, Int_t NumEvents = 0, Int_t coin = 0)
   cout << "\n\n";
 
   TChain ch("T");
-  if (coin == 1) ch.Add(Form("../../ROOTfiles/Analysis/50k/shms_coin_replay_production_%d_%d.root", RunNumber, NumEvents));
+  if (coin == 1) ch.Add(Form("../../ROOTfiles/Analysis/50k/hms_coin_replay_production_%d_%d.root", RunNumber, NumEvents));
   else ch.Add(Form("../../ROOTfiles/hms_replay_production_all_%d_%d.root", RunNumber, NumEvents));
   TProof *proof = TProof::Open("");
   //proof->SetProgressDialog(0);  

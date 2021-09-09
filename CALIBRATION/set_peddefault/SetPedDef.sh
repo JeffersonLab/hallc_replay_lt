@@ -33,7 +33,7 @@ elif [[ "${HOSTNAME}" = *"phys.uregina.ca"* ]]; then
     REPLAYPATH="/home/${USER}/work/JLab/hallc_replay_lt"
 fi
 
-ROOTFILE="$REPLAYPATH/ROOTfiles/Calib/GeneralFull_coin_replay_Offline_${RUNNUMBER}_${MAXEVENTS}.root"
+ROOTFILE="$REPLAYPATH/ROOTfiles/Calib/Timing/RefTime${RUNNUMBER}_${MAXEVENTS}.root"
 
 cd "$REPLAYPATH/CALIBRATION/set_peddefault"
 if [ ! -d "$REPLAYPATH/CALIBRATION/set_peddefault/OUTPUT" ]; then

@@ -228,8 +228,8 @@ void calibration::SlaveTerminate()
 void calibration::Terminate()
 {  
   TString option = GetOption();
-  TString RunNumStartStr = option(0,4);
-  TString RunNumEndStr = option(5,20);
+  TString RunNumStartStr = option(0,5);
+  TString RunNumEndStr = option(6,20);
   Int_t RunNumStart = (RunNumStartStr.Atoi());
   Int_t RunNumEnd = (RunNumEndStr.Atoi());
   printf("\n");

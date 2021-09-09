@@ -358,7 +358,7 @@ void fitHodoCalib(TString filename,Int_t runNUM,Bool_t cosmic_flag=kFALSE)
 	      for (Int_t ipmt = 0; ipmt < maxPMT[npl]; ipmt++)
 		{	        
 		  
-		  if(TdcTimeTWCorr[npl][0][ipmt] < 100. && TdcTimeTWCorr[npl][1][ipmt] < 100. && pcal_etrkNorm>0.7)
+		  if(TdcTimeTWCorr[npl][0][ipmt] < 200. && TdcTimeTWCorr[npl][1][ipmt] < 200. && pcal_etrkNorm>0.7)
 		    {
 		      //Fill Average TW Corr TDC Time
 		      h1Hist_TWAvg[npl][ipmt]->Fill((TdcTimeTWCorr[npl][0][ipmt] + TdcTimeTWCorr[npl][1][ipmt])/2.);
@@ -425,7 +425,7 @@ void fitHodoCalib(TString filename,Int_t runNUM,Bool_t cosmic_flag=kFALSE)
 
 
 		  //Add Time Cuts to get rid of kBig - kBig values, which yielded high evt density at zero
-		  if(TdcTimeTWCorr[npl][0][ipmt] < 100. && TdcTimeTWCorr[npl][1][ipmt] < 100.)
+		  if(TdcTimeTWCorr[npl][0][ipmt] < 200. && TdcTimeTWCorr[npl][1][ipmt] < 200.)
 		    {
 		      
 		      if (side==0)  //require only one side, as a time diff between the two ends of a paddle is take

@@ -1,3 +1,4 @@
+block T.*
 block T.coin.*
 block H.gtr.*
 block H.tr.*
@@ -234,8 +235,8 @@ TH1F htrig_hFADC_TREF_ROC1_good_tdc 'HMS hFADC_TREF_ROC1 Good Pulse Time; Good P
 #--------------------
 # HMS Fast Raster
 #--------------------
-TH2F hFRApos_XvsY 'HMS FRA X vs Y; FRA X Position (cm); FRA Y Position (cm)' H.rb.raster.fr_xa H.rb.raster.fr_ya 40 -0.2 0.2 40 -0.2 0.2 H.dc.ntrack>0
-TH2F hFRBpos_XvsY 'HMS FRB X vs Y; FRB X Position (cm); FRB Y Position (cm)' H.rb.raster.fr_xb H.rb.raster.fr_yb 40 -0.2 0.2 40 -0.2 0.2 H.dc.ntrack>0
+TH2F hFRApos_XvsY 'HMS FRA X vs Y; FRA X Position (cm); FRA Y Position (cm)' H.rb.raster.fr_xa H.rb.raster.fr_ya 140 -0.2 0.2 140 -0.2 0.2 H.dc.ntrack>0
+TH2F hFRBpos_XvsY 'HMS FRB X vs Y; FRB X Position (cm); FRB Y Position (cm)' H.rb.raster.fr_xb H.rb.raster.fr_yb 140 -0.2 0.2 140 -0.2 0.2 H.dc.ntrack>0
 
 
 #--------------------

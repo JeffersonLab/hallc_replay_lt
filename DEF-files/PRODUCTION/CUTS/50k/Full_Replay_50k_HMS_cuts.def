@@ -14,7 +14,7 @@ ALL_events             g.evtyp >= 1 && g.evtyp <= 7
 ALL_HMS_events       HMS_event || COIN_ONLY_event || HMS_COIN_event  || COIN_ALL_event
 ALL_SHMS_events     SHMS_event || COIN_ONLY_event || SHMS_COIN_event || COIN_ALL_event
 
-RawDecode_master ALL_events
+#RawDecode_master ALL_events
 
 Block: Decode
 Decode_master ALL_events
@@ -33,4 +33,4 @@ Reconstruct_master ALL_events
 
 Block: Physics
 hcut_CleanTrack            H.gtr.index > -1 && H.gtr.dp > -8.0 && H.gtr.dp < 8.0
-Physics_master ALL_events
+Physics_master ALL_HMS_events

@@ -1,0 +1,16 @@
+block T.*
+block H.*
+block H.dc.*fp
+block H.gtr.x
+block H.gtr.y
+block H.gtr.dp
+block H.gtr.th
+block H.gtr.ph
+block H.rb.raster.fr*
+block H.cal.*etot*
+block H.cal.*track*
+block H.react.z
+block H.react.x
+block H.react.y
+block H.extcor.ysieve
+block H.extcor.xsieve

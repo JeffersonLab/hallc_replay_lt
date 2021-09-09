@@ -42,8 +42,8 @@ public :
    TTreeReaderValue<Double_t> H_cer_xAtCer             = {fReader, "H.cer.xAtCer"};
    TTreeReaderValue<Double_t> H_cer_yAtCer             = {fReader, "H.cer.yAtCer"};
 
-   TTreeReaderArray<Double_t> H_tr_beta                = {fReader, "H.tr.beta"};
-   TTreeReaderValue<Int_t> Ndata_H_tr_beta             = {fReader, "Ndata.H.tr.beta"};
+   TTreeReaderArray<Double_t> H_gtr_beta                = {fReader, "H.gtr.beta"};
+   // TTreeReaderValue<Int_t> Ndata_H_tr_beta             = {fReader, "Ndata.H.tr.beta"};
 
    TTreeReaderValue<Double_t> H_cal_etotnorm           = {fReader, "H.cal.etotnorm"};
 

@@ -36,8 +36,8 @@ void fitHodoCalib(TString filename,Int_t runNUM,Bool_t cosmic_flag=kFALSE)
   gROOT->SetBatch(kTRUE);    //do not display plots
 
 
- 
-  Int_t evtNUM = 30000;
+  // changed from 30000 10 sept 2021 N.H.
+  Int_t evtNUM = 3000000;
 
 
 

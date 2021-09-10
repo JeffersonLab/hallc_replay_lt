@@ -31,7 +31,7 @@ void replay_production_coin_HGC (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
-  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_KaonLTCalib.database");
+  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard.database");
   gHcParms->Load(gHcParms->GetString("g_ctp_database_filename"), RunNumber);
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
@@ -41,8 +41,8 @@ void replay_production_coin_HGC (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHcParms->Load("PARAM/HMS/GEN/h_fadc_debug.param");
   gHcParms->Load("PARAM/SHMS/GEN/p_fadc_debug.param");
   //Load params for BCM
-  const char* CurrentFileNamePattern = "PARAM/HMS/BCM/CALIB/bcmcurrent_%d.param";
-  gHcParms->Load(Form(CurrentFileNamePattern, RunNumber));
+  //const char* CurrentFileNamePattern = "PARAM/HMS/BCM/CALIB/bcmcurrent_%d.param";
+  // gHcParms->Load(Form(CurrentFileNamePattern, RunNumber));
 
   // Load the Hall C detector map
   gHcDetectorMap = new THcDetectorMap();
@@ -261,8 +261,8 @@ void replay_production_coin_HGC (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template
-  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/coin_production_new.template",
-  Form("REPORT_OUTPUT/Calib/HGC/replay_coin_production_%d_%d.report", RunNumber, MaxEvent));  // optional
+  // analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/coin_production_new.template",
+  // Form("REPORT_OUTPUT/Calib/HGC/replay_coin_production_%d_%d.report", RunNumber, MaxEvent));  // optional
 
   // Define DEF-file+
   //analyzer->SetOdefFile("DEF-files/PRODUCTION/coin_production_KLT.def");

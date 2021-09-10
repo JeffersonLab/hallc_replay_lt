@@ -18,6 +18,8 @@ class ScalerCalib {
   
  public:
   
+  //RLT 9/10/21... added default constructor to work with ROOT version
+  ScalerCalib();
   ScalerCalib(string name);
   virtual ~ScalerCalib();
 
@@ -37,7 +39,6 @@ class ScalerCalib {
   void ClearContainers();
   int FillContainer();
   int PrintContainer(ScalerContainer sc);
-
 
   ScalerContainer evnum;
   ScalerContainer bcm1;

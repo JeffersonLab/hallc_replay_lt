@@ -14,7 +14,10 @@ block	P.gtr.y
 block	P.gtr.th
 block	P.hgcer.xAtCer
 block	P.hgcer.yAtCer
-
+block   P.dc.x_fp
+block   P.dc.y_fp
+block   P.dc.xp_fp
+block   P.dc.yp_fp
 
 
 

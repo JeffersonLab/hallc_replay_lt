@@ -36,8 +36,8 @@ void fitHodoCalib(TString filename,Int_t runNUM,Bool_t cosmic_flag=kFALSE)
   gROOT->SetBatch(kTRUE);    //do not display plots
 
 
-
-  Int_t evtNUM = 30000; // evtNUm is max number in the fit array
+  // changed this from 30000 N.H. 10 Sept 2021
+  Int_t evtNUM = 3000000; // evtNUm is max number in the fit array
   TFile *data_file = new TFile(filename, "READ"); 
   TTree *T = (TTree*)data_file->Get("T");
 
@@ -87,7 +87,7 @@ void fitHodoCalib(TString filename,Int_t runNUM,Bool_t cosmic_flag=kFALSE)
 
   Double_t etrknrm_low_cut = 0.7;
   Double_t npngcer_npeSum_low_cut = 0.7;
-  Double_t betanotrack_low_cut = 0.5;
+  Double_t betanotrack_low_cut = 0.2;
   Double_t betanotrack_hi_cut = 1.5;
 
   if (cosmic_flag) betanotrack_low_cut = -1.2;
@@ -202,8 +202,8 @@ void fitHodoCalib(TString filename,Int_t runNUM,Bool_t cosmic_flag=kFALSE)
   //1d Fit Function for fitting TW_Corr vs. TrkPos
   TF1 *fit1x = new TF1("fit1x", "[0]*x + [1]", -40., 40.);
   TF1 *fit1y = new TF1("fit1y", "[0]*x + [1]", -40., 40.);                                                                                                     
-  TF1 *fit2x = new TF1("fit2x", "[0]*x + [1]", -20., 40.);                                                                                 
-  TF1 *fit2y = new TF1("fit2y", "[0]*x + [1]", -20., 40.);                                                                             
+  TF1 *fit2x = new TF1("fit2x", "[0]*x + [1]", -40., 40.);                                                                                 
+  TF1 *fit2y = new TF1("fit2y", "[0]*x + [1]", -40., 40.);                                                                             
 
   //Set Param Values/Names
   fit1x->SetParameter(0, 1.), fit1x->SetParName(0, "slope");
@@ -340,7 +340,7 @@ void fitHodoCalib(TString filename,Int_t runNUM,Bool_t cosmic_flag=kFALSE)
     {
       T->GetEntry(i);  
 
-      pcal = pcal_etrkNorm>etrknrm_low_cut;
+      pcal = true; //pcal_etrkNorm>etrknrm_low_cut;
       pngcer = pngcer_npeSum>npngcer_npeSum_low_cut;
       pdctrk = pdc_ntrack>0.0;
       betaCut = beta>betanotrack_low_cut&& beta<betanotrack_hi_cut;
@@ -390,7 +390,7 @@ void fitHodoCalib(TString filename,Int_t runNUM,Bool_t cosmic_flag=kFALSE)
       
       T->GetEntry(i);  
       
-      pcal = pcal_etrkNorm>etrknrm_low_cut;
+      //pcal = pcal_etrkNorm>etrknrm_low_cut;
       pngcer = pngcer_npeSum>npngcer_npeSum_low_cut;
       pdctrk = pdc_ntrack>0.0;
       betaCut = beta>betanotrack_low_cut&& beta<betanotrack_hi_cut;

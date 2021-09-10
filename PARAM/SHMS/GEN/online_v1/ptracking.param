@@ -4,7 +4,7 @@
 ;              kami kaze events which hang the analyzer to a long time.
 
 ; Tracking parameters
-  pmax_pr_hits = 25, 25
+  pmax_pr_hits = 35, 35
 
 ; pminhit(i)   minimum number of hits in each space point (one for each chamber)
 pmin_hit = 5,5
@@ -14,7 +14,7 @@ pmin_combos = 4,4
 ; hspace_point_criterion(i) minimum separation of distinct space points
 ; recommended value for hspace_point_criterion ( based on meeting
 ; Feb 2003)
-  pspace_point_criterion = 1.2, 1.2
+  pspace_point_criterion = 0.9, 0.9
 
 ; The following four criteria are applied to the stub fit results at the
 ; focal plane position to link stubs to tracks

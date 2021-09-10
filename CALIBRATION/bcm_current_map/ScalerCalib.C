@@ -12,6 +12,14 @@ ofstream outfile;
 
 //_________________________________
 
+//RLT 9/10/21... added default constructor to work with ROOT version
+ScalerCalib::ScalerCalib()
+{
+
+}
+
+//_________________________________
+
 ScalerCalib::ScalerCalib(string name) :
   fName(name), fPrintFlag(DEFAULT)
 {

@@ -118,9 +118,13 @@ Bool_t calibration::Process(Long64_t entry)
 
    //for (Int_t itrack = 0; itrack < *Ndata_H_tr_beta; itrack++) {
      //Beta Cut
-     fBeta_Full->Fill(H_gtr_beta);
-     if (TMath::Abs(H_gtr_beta -1.0) > 0.2) return kTRUE;
-     fBeta_Cut->Fill(H_gtr_beta);
+   fBeta_Full->Fill(H_gtr_beta[0]);
+   if (TMath::Abs(H_gtr_beta[0] -1.0) > 0.2) return kTRUE;
+   fBeta_Cut->Fill(H_gtr_beta[0]);
+
+   // fBeta_Full->Fill(1);
+   // if (TMath::Abs(1 -1.0) > 0.2) return kTRUE;
+   // fBeta_Cut->Fill(1);
 
      for (Int_t ipmt = 0; ipmt < 2; ipmt++) {
        //Timing Cut
@@ -167,7 +171,7 @@ void calibration::Terminate()
    // The Terminate() function is the last function to be called during
    // a query. It always runs on the client, it can be used to present
    // the results graphically or save the results to file.
-
+  cout << "test"<<endl;
   Info("Terminate", "'%s' showing", (fFullShow ? "full" : "minimal"));
   Info("Terminate", "Histograms formed, now starting calibration.\n'Peak Buffer full' is a good warning!\n");
   printf("\n");
@@ -177,6 +181,9 @@ void calibration::Terminate()
   TH1F* PulseInt_quad[2][4];
   TH1F* Timing_Cut[2];
   TH1F* Timing_Full[2];
+
+  cout << endl << endl << "test"<< endl << endl;
+
   for (Int_t ipmt = 0; ipmt < 2; ipmt++) {
     Timing_Cut[ipmt] = dynamic_cast<TH1F*> (GetOutputList()->FindObject(Form("Timing_Cut%d",ipmt+1)));
     Timing_Full[ipmt] = dynamic_cast<TH1F*> (GetOutputList()->FindObject(Form("Timing_Full%d",ipmt+1)));
@@ -189,6 +196,7 @@ void calibration::Terminate()
   Double_t Cer_Peak[2];
   //Begin peak Finding
   for (Int_t ipmt = 0; ipmt < 2; ipmt++) {
+    cout << endl << endl << "test loop"<< endl << endl;
     PulseInt[ipmt]->GetXaxis()->SetRangeUser(0,8);
     TSpectrum *s = new TSpectrum(1);
     s->Search(PulseInt[ipmt], 1.0, "nobackground&&nodraw", 0.001);
@@ -197,7 +205,7 @@ void calibration::Terminate()
     Cer_Peak[ipmt] = *pm->GetX();
     PulseInt[ipmt]->GetXaxis()->SetRangeUser(0,100);
   }
-
+  cout << endl << endl << "test"<< endl << endl;
   //Begin Fitting of SPE
   /*TF1 *poisson =  new TF1("poisson","[1]*((pow([0],x)*exp(-[0]))/(tgamma(x+1)))",0,20);
   poisson->SetParName(0,"#mu");

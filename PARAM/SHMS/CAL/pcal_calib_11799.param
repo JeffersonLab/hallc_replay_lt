@@ -1,4 +1,4 @@
-; Calibration constants for file SHMS_Cal_Calib from run 11799, 5351 events processed
+; Calibration constants for file SHMS_Cal_Calib, 5351 events processed
 
 pcal_neg_gain_cor =274.34, 15.42, 25.03, 18.92, 27.38, 21.28, 29.62, 29.17, 35.86, 47.81, 29.13, 33.33, 30.77,142.31,
 pcal_pos_gain_cor = 27.35, 18.81, 22.70, 23.68, 27.83, 31.65, 27.94, 26.44, 28.23, 18.39, 23.82, 23.86, 24.61,169.68,

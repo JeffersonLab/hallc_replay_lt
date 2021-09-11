@@ -33,7 +33,7 @@ pntracks_max_fp = 10
   psingle_stub = 0
 
 ; No small angle approximation for cosmic ray tests
-  pSmallAngleApprox = 1
+  pSmallAngleApprox = 0
 ;
 ; when selecting stub for chamber 
 ;  be sure stub_xp - stub_x*fRatio_xpfp_to_xfp < pstub_max_xpdiff
@@ -46,7 +46,7 @@ pstub_max_xpdiff=.2
 ; psel_using_scin         uses scintillator for track selection
   psel_using_scin = 0
 ; psel_using_prune         using prune
-  psel_using_prune = 0
+  psel_using_prune = 1
 
 ; parameters used in selecting tracks for Hodoscope efficiency in THcHodoEff.cxx
 ;   HodoEff_CalEnergy_Cut  cut on the track energy (GeV)

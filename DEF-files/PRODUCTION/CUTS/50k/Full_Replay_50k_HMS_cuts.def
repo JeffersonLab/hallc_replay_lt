@@ -17,6 +17,7 @@ ALL_SHMS_events     SHMS_event || COIN_ONLY_event || SHMS_COIN_event || COIN_ALL
 #RawDecode_master ALL_events
 
 Block: Decode
+EDTM_Events           T.coin.pEDTM_tdcTimeRaw > 0
 Decode_master ALL_events
 
 Block: CoarseTracking

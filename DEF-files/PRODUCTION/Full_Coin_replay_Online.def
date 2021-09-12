@@ -1,6 +1,7 @@
 #General stuff
 block g.*
 block T.*
+block T.coin.h*
 block CTime.*
 
 # HMS branches

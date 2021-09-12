@@ -1,4 +1,4 @@
-void FullReplay_Online(Int_t RunNumber = 0, Int_t MaxEvent = 0) {
+void FullReplay_Online_mkj(Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   // Get RunNumber and MaxEvent if not provided.
   if(RunNumber == 0) {
@@ -25,7 +25,7 @@ void FullReplay_Online(Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./raw_volatile");
 
   //const char* RunFileNamePattern = "raw/coin_all_%05d.dat";
-  const char* ROOTFileNamePattern = "ROOTfiles/Analysis/General/Full_Online_coin_replay_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfiles/mkj_coin_replay_%d_%d.root";
   
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
@@ -34,7 +34,7 @@ void FullReplay_Online(Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
   // Load params for COIN trigger configuration
-  gHcParms->Load("PARAM/TRIG/tcoin.param");
+  gHcParms->Load("PARAM/TRIG/tcoin_mkj.param");
   // Load fadc debug parameters
   gHcParms->Load("PARAM/HMS/GEN/h_fadc_debug.param");
   gHcParms->Load("PARAM/SHMS/GEN/p_fadc_debug.param");
@@ -256,13 +256,13 @@ void FullReplay_Online(Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file+
   //analyzer->SetOdefFile("UTIL_PION/config/DEF-files/coin_production.def");
-  analyzer->SetOdefFile("DEF-files/PRODUCTION/Full_Coin_replay_Online.def");
+  analyzer->SetOdefFile("DEF-files/PRODUCTION/mkj.def");
   // Define cuts file
-  analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/Full_Coin_replay_Online_Cuts.def");  // optional
+  analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/mkj_cuts.def");  // optional
   // File to record accounting information for cuts
-  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Analysis/General/Full_Online_summary_production_%d_%d.report", RunNumber, MaxEvent)); // optional
+  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/mkj_%d_%d.report", RunNumber, MaxEvent)); // optional
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template	       
-  analyzer->PrintReport("UTIL_PION/config/TEMPLATES/COIN/Online_Coin_Production.template", Form("REPORT_OUTPUT/Full_Online_coin_replay_%d_%d.report", RunNumber, MaxEvent)); // optional}
+  analyzer->PrintReport("UTIL_PION/config/TEMPLATES/COIN/Online_Coin_Production.template", Form("REPORT_OUTPUT/mkj_%d_%d.report", RunNumber, MaxEvent)); // optional}
 }

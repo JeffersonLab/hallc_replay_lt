@@ -34,8 +34,8 @@ cminch=2.54
 
 ; HMS default calibration parameter files
 #include "PARAM/HMS/CER/hcer_calib.param"
-#include "PARAM/HMS/DC/hdc_calib.param"
-#include "PARAM/HMS/DC/hdc_tzero_per_wire.param"
+#include "PARAM/HMS/DC/online_v1/hdc_calib_11827.param"
+#include "PARAM/HMS/DC/online_v1/hdc_tzero_per_wire_11827.param"
 #include "PARAM/HMS/HODO/hhodo_calib.param"
 #include "PARAM/HMS/HODO/hhodo_TWcalib.param"
 #include "PARAM/HMS/HODO/hhodo_Vpcalib.param"
@@ -62,7 +62,7 @@ cminch=2.54
 #include "PARAM/SHMS/NGCER/pngcer_cuts.param"
 #include "PARAM/SHMS/DC/pdc_cuts.param"
 #include "PARAM/SHMS/HODO/phodo_cuts.param"
-#include "PARAM/SHMS/HGCER/phgcer_cuts_test.param"
+#include "PARAM/SHMS/HGCER/phgcer_cuts.param"
 #include "PARAM/SHMS/AERO/paero_cuts.param"
 #include "PARAM/SHMS/CAL/pcal_cuts.param"
 

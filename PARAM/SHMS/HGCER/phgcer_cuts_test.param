@@ -26,6 +26,6 @@ phgcer_adc_tdc_offset   =  200.0
 ;phgcer_adcTimeWindowMax =  1000.0,  1000.0,  1000.0,  1000.0
 
 phgcer_adcTimeWindowMin = -10.0, -10.0, -10.0, -10.0
-phgcer_adcTimeWindowMax =  35.0,  35.0,  35.0,  35.0
+phgcer_adcTimeWindowMax =  40.0,  40.0,  40.0,  40.0
 
 phgcer_PedDefault= 2084, 2139, 2308, 1974

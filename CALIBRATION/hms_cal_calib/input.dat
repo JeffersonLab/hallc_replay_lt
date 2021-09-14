@@ -2,9 +2,9 @@
 0.5 1.5	Beta range
 1.5  	Gas Cherenkov, threshold on signals in p.e.
 5	Minimum number of hits per channel required to be calibrated
-0.05 2.	Range of uncalibrated energy deposition histogram
+0.5 2.	Range of uncalibrated energy deposition histogram
 500	Binning of uncalibrated energy deposition histogram
--.065 0.2	Gaussian fit range around mean e- peak in the uncalibrated Edep histogram 
+0.5 2.0	Gaussian fit range around mean e- peak in the uncalibrated Edep histogram 
 2.2	Gaussian fit range around mean e- peak in the uncalibrated Edep histogram 
 
 ; Initial calibration constants.

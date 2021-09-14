@@ -22,5 +22,9 @@ pngcer_adc_tdc_offset   =  200.0
 
 ; fall 2021 startup
 ; cut variable is P.ngcer.goodAdcTdcDiffTime
-pngcer_adcTimeWindowMin = -1000.0, -1000.0, -1000.0, -1000.0
-pngcer_adcTimeWindowMax =  10000.0,  10000.0,  10000.0,  10000.0
+
+; C.Y. Sep 13, 2021 | https://logbooks.jlab.org/entry/3904970
+pngcer_adcTimeWindowMin = -80.0, -80.0, -80.0, -80.0
+pngcer_adcTimeWindowMax =  80.0,  80.0,  80.0,  80.0
+
+pngcer_PedDefault= 2059, 0, 2137, 1932

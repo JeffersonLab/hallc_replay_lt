@@ -1,1 +1,5 @@
 block T.*
+block P.hgcer.*
+block P.ngcer.*
+block P.cal.*
+block P.gtr.*

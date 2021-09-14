@@ -147,7 +147,7 @@ hpartmass =  0.000511
 ppartmass =  0.139570
 helicity_freq = 120.0007547169
 HMS_RF_Offset = 0
-SHMS_RF_Offset = 0
+SHMS_RF_Offset = -2
 eHadCoinTime_Offset = 75.9
 
 11978 - 99999
@@ -161,5 +161,5 @@ hpartmass =  0.000511
 ppartmass =  0.139570
 helicity_freq = 120.0007547169
 HMS_RF_Offset = 0
-SHMS_RF_Offset = 0
+SHMS_RF_Offset = -2
 eHadCoinTime_Offset = 75.9

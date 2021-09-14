@@ -21,8 +21,9 @@ void FullReplay_Online(Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back(".");
   pathList.push_back("./raw");
   pathList.push_back("./raw/../raw.copiedtotape");
+  pathList.push_back("./raw.volatile");
   pathList.push_back("./cache");
-  pathList.push_back("./raw_volatile");
+  //pathList.push_back("/raw_volatile/raw");
 
   //const char* RunFileNamePattern = "raw/coin_all_%05d.dat";
   const char* ROOTFileNamePattern = "ROOTfiles/Analysis/General/Full_Online_coin_replay_%d_%d.root";

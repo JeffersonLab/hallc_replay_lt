@@ -1,0 +1,2 @@
+Run,Type,Target,EBeam,P_SHMS,Theta_SHMS,P_HMS,Theta_HMS,Current,PS1,PS4,PS5,HMS_Rate_(kHz),SHMS_Rate_(kHz),Coin_Rate_(kHz),Charge_(mC),Raw_HMS,Raw_SHMS,Raw_Coin,EDTM,SHMS_Hadron_Tracking,HMS Time,SHMS Time,Comments
+11829,HeePCoin,LH2,9.203,5.015,23.790,5.015,-23.750,42.536,1,0,0,0.096,4.176,0.014,32.177,60k,1278k,10k,7543,0.978,758.613,758.613,

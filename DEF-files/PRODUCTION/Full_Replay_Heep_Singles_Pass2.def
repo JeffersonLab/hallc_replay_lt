@@ -156,12 +156,22 @@ block P.hgcer.good*
 block P.hgcer.num*
 block P.hgcer.RefTime
 
+# SHMS NGC
+block P.ngcer.xAtCer
+block P.ngcer.yAtCer
+block P.ngcer.tot*
+block P.ngcer.npe*
+block P.ngcer.good*
+block P.ngcer.num*
+block P.ngcer.RefTime
+
 # SHMS Aero
 block P.aero.xAtAero
 block P.aero.yAtAero
 block P.aero.tot*
 block P.aero.npe*
 #block P.aero.RefTime
+
 
 # SHMS DC
 block P.dc.Ch1.*

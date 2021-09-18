@@ -18,7 +18,7 @@ void hcal_calib(string Prefix, int RunNumber, int nstop=-1, int nstart=0) {
   // Initialize the analysis clock
   clock_t t = clock();
   
-  cout << "Calibrating file " << Prefix << "_" << RunNumber << "_" << nstop <<  ".root, events "
+  cout << "Calibrating file is" << Prefix << "_" << RunNumber << "_" << nstop <<  ".root, events "
        << nstart << " -- " << nstop << endl;
 
   THcShowerCalib theShowerCalib(Prefix, RunNumber, nstart, nstop);

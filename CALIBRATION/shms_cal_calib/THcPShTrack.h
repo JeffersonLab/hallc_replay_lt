@@ -82,7 +82,7 @@ class THcPShTrack {
 THcPShTrack::THcPShTrack() { };
 
 THcPShTrack::THcPShTrack(Double_t p, Double_t dp,
-			 Double_t x, Double_t xp, Double_t y, Double_t yp) {
+		       Double_t x, Double_t xp, Double_t y, Double_t yp) {
   P = p;
   Dp = dp;
   X = x;
@@ -94,7 +94,7 @@ THcPShTrack::THcPShTrack(Double_t p, Double_t dp,
 //------------------------------------------------------------------------------
 
 void THcPShTrack::Reset(Double_t p, Double_t dp,
-			Double_t x, Double_t xp, Double_t y, Double_t yp) {
+		       Double_t x, Double_t xp, Double_t y, Double_t yp) {
 
   // Reset track parameters, clear hit list.
 

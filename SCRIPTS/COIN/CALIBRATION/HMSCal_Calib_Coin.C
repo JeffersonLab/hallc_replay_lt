@@ -24,7 +24,7 @@ void HMSCal_Calib_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./raw2");
   pathList.push_back("./raw3");
   pathList.push_back("./raw4");
-  pathList.push_back("./raw_volatile");
+  pathList.push_back("./raw.volatile");
   pathList.push_back("./raw/../raw.copiedtotape");
   pathList.push_back("./cache");
 
@@ -234,7 +234,7 @@ void HMSCal_Calib_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file+
-  analyzer->SetOdefFile("DEF-files/CALIBRATION/HMS_Calib_calo.def");
+  analyzer->SetOdefFile("DEF-files/CALIBRATION/HMS_Calib_calo_spec.def");
   // Define cuts file
   analyzer->SetCutFile("DEF-files/CALIBRATION/HMS_Calib_cuts.def");  // optional
   // Start the actual analysis.

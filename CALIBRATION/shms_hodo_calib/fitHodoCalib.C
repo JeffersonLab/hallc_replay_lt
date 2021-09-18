@@ -340,7 +340,7 @@ void fitHodoCalib(TString filename,Int_t runNUM,Bool_t cosmic_flag=kFALSE)
     {
       T->GetEntry(i);  
 
-      pcal = true; //pcal_etrkNorm>etrknrm_low_cut;
+      pcal = pcal_etrkNorm>etrknrm_low_cut;
       pngcer = pngcer_npeSum>npngcer_npeSum_low_cut;
       pdctrk = pdc_ntrack>0.0;
       betaCut = beta>betanotrack_low_cut&& beta<betanotrack_hi_cut;
@@ -390,7 +390,7 @@ void fitHodoCalib(TString filename,Int_t runNUM,Bool_t cosmic_flag=kFALSE)
       
       T->GetEntry(i);  
       
-      //pcal = pcal_etrkNorm>etrknrm_low_cut;
+      pcal = pcal_etrkNorm>etrknrm_low_cut;
       pngcer = pngcer_npeSum>npngcer_npeSum_low_cut;
       pdctrk = pdc_ntrack>0.0;
       betaCut = beta>betanotrack_low_cut&& beta<betanotrack_hi_cut;

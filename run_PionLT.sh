@@ -29,7 +29,7 @@ echo "Starting physics analysis of PionLT data"
 echo "Required arguments are run number, run type and target"
 echo ""
 echo "Run number must be a positive integer value"
-echo "Run type must be one of - Prod - Lumi - HeePSing - HeePCoin - Optics - Case sensitive!"
+echo "Run type must be one of - Prod - Lumi - HeePSing - HeePCoin - fADC - Optics - Case sensitive!"
 echo "Target must be one of - LH2 - LD2 - Dummy10cm - Carbon0p5 - AuFoil - Optics1 - Optics2 - CarbonHole - Case sensitive!"
 RUNNUMBER=$1
 RUNTYPE=$2
@@ -47,15 +47,15 @@ if [[ -z "$1" || ! "$RUNNUMBER" =~ ^-?[0-9]+$ ]]; then # Check an argument was p
 	esac
     done
 fi
-if [[ -z "$2" || ! "$RUNTYPE" =~ Prod|Lumi|HeePSing|HeePCoin|Optics ]]; then # Check the 2nd argument was provided and that it's one of the valid options
+if [[ -z "$2" || ! "$RUNTYPE" =~ Prod|Lumi|HeePSing|HeePCoin|fADC|Optics ]]; then # Check the 2nd argument was provided and that it's one of the valid options
     echo ""
     echo "I need a valid run type"
     while true; do
 	echo ""
-	read -p "Please type in a run type from - Prod - Lumi - HeePSing - HeePCoin - Optics - Case sensitive! - or press ctrl-c to exit : " RUNTYPE
+	read -p "Please type in a run type from - Prod - Lumi - HeePSing - HeePCoin - fADC - Optics - Case sensitive! - or press ctrl-c to exit : " RUNTYPE
 	case $RUNTYPE in
 	    '');; # If blank, prompt again
-	    'Prod'|'Lumi'|'HeePSing'|'HeePCoin'|'Optics') break;; # If a valid option, break the loop and continue
+	    'Prod'|'Lumi'|'HeePSing'|'HeePCoin'|'Optics'|'fADC') break;; # If a valid option, break the loop and continue
 	esac
     done
 fi
@@ -85,6 +85,9 @@ elif [[ $RUNTYPE == "HeePSing" ]]; then
 elif [[ $RUNTYPE == "HeePCoin" ]]; then
     echo "Running HeeP Coin analysis script - ${UTILPATH}/scripts/heep/coin_heepYield.sh"
     eval '"${UTILPATH}/scripts/heep/coin_heepYield.sh" ${RUNNUMBER}'
+elif [[ $RUNTYPE == "fADC" ]]; then
+    echo "Running fADC Coin analysis script - ${UTILPATH}/scripts/fADC_SIDIS/fADC_Analysis.sh"
+    eval '"${UTILPATH}/scripts/fADC_SIDIS/fADC_Analysis.sh" ${RUNNUMBER}'
 elif [[ $RUNTYPE == "Optics" ]]; then
     echo "Running optics analysis script - "
     eval '"${UTILPATH}/scripts/optics/run_optics.sh" ${RUNNUMBER}'

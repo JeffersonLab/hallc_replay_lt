@@ -1,4 +1,4 @@
-void replay_production_coin_HGC (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
+void replay_production_coin_NGC (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   
   // This script is just a copy of the replay used for KaonLT physics analysis, note that its pathing is based solely upon hallc_replay_lt and does not need the UTIL_KAONLT repo
   // Get RunNumber and MaxEvent if not provided.
@@ -27,7 +27,7 @@ void replay_production_coin_HGC (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   //const char* RunFileNamePattern = "raw/coin_all_%05d.dat";
   //const char* ROOTFileNamePattern = "ROOTfiles/coin_replay_production_%d_%d.root";
-  const char* ROOTFileNamePattern = "ROOTfiles/Calib/HGC/coin_replay_production_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfiles/Calib/NGC/coin_replay_production_%d_%d.root";
   
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
@@ -253,11 +253,11 @@ void replay_production_coin_HGC (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
     // Define DEF-file+
-  analyzer->SetOdefFile("DEF-files/CALIBRATION/HGC_Calib.def");
+  analyzer->SetOdefFile("DEF-files/CALIBRATION/NGC_Calib.def");
   // Define cuts file
   analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/coin_production_cuts.def");  // optional
   // File to record accounting information for cuts
-  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Calib/HGC/summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
+  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Calib/NGC/summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template

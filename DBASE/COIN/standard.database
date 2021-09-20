@@ -1,5 +1,16 @@
 ### PionLT 2021 Kinematics
-8977 - 99999
+8977 - 12223
 g_ctp_parm_filename       = "DBASE/COIN/OnlinePionLT_2021_v1.param"
 g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
 
+12224 - 12230
+g_ctp_parm_filename       = "DBASE/COIN/OnlinePionLT_2021_HMS_1GeV.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+12231 - 12259
+g_ctp_parm_filename       = "DBASE/COIN/OnlinePionLT_2021_v1.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+12260 - 99999
+g_ctp_parm_filename       = "DBASE/COIN/OnlinePionLT_2021_HMS_1GeV.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"

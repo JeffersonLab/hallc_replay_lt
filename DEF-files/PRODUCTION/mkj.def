@@ -1,5 +1,16 @@
-block T.*
-block P.hgcer.*
-block P.ngcer.*
-block P.cal.*
-block P.gtr.*
+#block T.*
+block H.cer.npeSum
+#block P.ngcer.*
+block H.cal.*et*
+block H.gtr.*
+block H.react.x
+block H.react.y
+block H.react.z
+block H.dc.x_fp
+block H.dc.xp_fp
+block H.dc.yp_fp
+block H.dc.y_fp
+block H.extcor.xsieve
+block H.extcor.ysieve
+
+

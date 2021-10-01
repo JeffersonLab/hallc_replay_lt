@@ -15,5 +15,7 @@ block H.cal.3ta.goodPosAdcPulseInt
 block H.cal.4ta.goodNegAdcPulseInt
 block H.cal.4ta.goodPosAdcPulseInt
 block H.cal.nclust
+block H.cal.etotnorm
+block H.cal.etottracknorm
 block H.gtr.p
 block H.gtr.dp

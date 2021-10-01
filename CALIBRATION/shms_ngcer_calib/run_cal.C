@@ -155,7 +155,7 @@ void run_cal(string RunPrefix = "", Int_t NumEvents = 0, Int_t nRuns = 0, Int_t 
     }
   else if(Hostname.Contains("cdaq"))
     {
-      Rootpath = "/home/cdaq/pionLT-2021/hallc_replay_lt/ROOTfiles/Analysis/50k/";
+      Rootpath = "/home/cdaq/pionLT-2021/hallc_replay_lt/ROOTfiles/Calib/NGC/";
     }
   
   rootFileNameString1 = Rootpath + Form("%s_%i_%i.root", RunPrefix.c_str(), RunNumber1, NumEvents);

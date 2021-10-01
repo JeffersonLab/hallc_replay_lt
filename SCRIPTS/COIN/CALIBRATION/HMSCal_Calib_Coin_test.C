@@ -1,4 +1,4 @@
-void HMSCal_Calib_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
+void HMSCal_Calib_Coin_test (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   // Get RunNumber and MaxEvent if not provided.
   if(RunNumber == 0) {

@@ -1,5 +1,6 @@
 block P.hod.beta
 block P.hgcer.npeSum
+block P.ngcer.npeSum
 block P.dc.ntrack
 block P.dc.x_fp
 block P.dc.y_fp
@@ -12,6 +13,8 @@ block P.cal.nclust
 block P.cal.ntracks
 block P.cal.fly.nclust
 block P.cal.fly.ntracks
+block P.cal.etotnorm
+block P.cal.etottracknorm
 
 block P.gtr.p
 block P.gtr.dp

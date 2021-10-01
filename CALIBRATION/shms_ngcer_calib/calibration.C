@@ -162,7 +162,7 @@ Bool_t calibration::Process(Long64_t entry)
   //{
       //Require loose cut on particle velocity                                     
       fBeta_Full->Fill(P_gtr_beta[0]);
-      if (TMath::Abs(P_gtr_beta[0] - 1.0) > 0.4) return kTRUE;
+      if (TMath::Abs(P_gtr_beta[0] - 1.0) > 2.0) return kTRUE;
       fBeta_Cut->Fill(P_gtr_beta[0]);    
       //Filling the histograms
       for (Int_t ipmt = 0; ipmt < fpmts; ipmt++)

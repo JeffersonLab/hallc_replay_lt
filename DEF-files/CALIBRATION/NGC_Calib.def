@@ -2,7 +2,7 @@ block	P.gtr.beta
 block	P.ngcer.goodAdcTdcDiffTime
 block	P.ngcer.goodAdcPulseInt
 block	P.ngcer.goodAdcPulseAmp
-block	P.hgcer.numTracksFired
+block	P.ngcer.numTracksFired
 block	P.cal.fly.earray
 block	P.cal.pr.eplane
 block	P.cal.etotnorm

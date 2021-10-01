@@ -26,6 +26,7 @@ void RefTime_Calib (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./raw4");
   pathList.push_back("./raw/../raw.copiedtotape");
   pathList.push_back("./cache");
+  pathList.push_back("./raw.volatile");
 
   //const char* RunFileNamePattern = "raw/coin_all_%05d.dat";
 const char* ROOTFileNamePattern = "ROOTfiles/Calib/Timing/RefTime%d_%d.root";

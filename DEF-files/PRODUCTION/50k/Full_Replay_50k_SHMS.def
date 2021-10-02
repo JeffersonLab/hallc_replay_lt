@@ -355,7 +355,7 @@ TH2F pngcer_good_pped_vs_pmt 'SHMS Noble Gas Cherenkov Good Pulse Pedestal vs. P
 TH2F paero_npe_pos 'SHMS Aero+ NPE vs. PMT Number; PMT Number; NPE / 0.5 Photoelectrons' [I+1] P.aero.posNpe 7 0.5 7.5 60 0 30 P.aero.posNpe>0.0 
 TH2F paero_npe_neg 'SHMS Aero- NPE vs. PMT Number; PMT Number; NPE / 0.5 Photoelectrons' [I+1] P.aero.negNpe 7 0.5 7.5 60 0 30 P.aero.negNpe>0.0 
 TH2F phgcer_npe 'SHMS Heavy Gas Cherenkov NPE vs. PMT Number; PMT Number; NPE / 0.5 Photoelectrons' [I+1] P.hgcer.npe 4 0.5 4.5 60 0 30 P.hgcer.npe>0.0 
-TH2F pngcer_npe 'SHMS Noble Gas Cherenkov Number of Photoelectrons vs. PMT Number; PMT Number; Number of Photoelectrons / 0.5 Photoelectrons' [I+1] P.ngcer.npe 4 0.5 4.5 100 0 50 P.ngcer.npe>0.0 
+TH2F pngcer_npe 'SHMS Noble Gas Cherenkov Number of Photoelectrons vs. PMT Number; PMT Number; Number of Photoelectrons / 0.5 Photoelectrons' [I+1] P.ngcer.npe 4 0.5 4.5 60 0 30 P.ngcer.npe>0.0 
 TH1F paero_npeSum 'SHMS Aero NPE; NPE' P.aero.npeSum 100 0 30
 TH1F phgcer_npeSum 'SHMS Heavy Gas Cherenkov NPE; NPE' P.hgcer.npeSum 100 0 30
 TH1F pngcer_npeSum 'SHMS Noble Gas Cherenkov NPE; NPE' P.ngcer.npeSum 100 0 50

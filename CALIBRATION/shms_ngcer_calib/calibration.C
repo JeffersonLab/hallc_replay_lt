@@ -56,7 +56,7 @@ void calibration::SlaveBegin(TTree * /*tree*/)
     {  // Separate ADC channel for each quadrant histogram
       if(ipmt == 0)
 	{
-	  ADC_min = 4;
+	  ADC_min = 0;
 	  bins = 2*(abs(ADC_min) + abs(ADC_max));
 	  fPulseInt[ipmt] = new TH1F(Form("PulseInt_PMT%d",ipmt+1),Form("Pulse Integral PMT%d; ADC Channel (pC); Counts",ipmt+1), bins, ADC_min, ADC_max);
 	  GetOutputList()->Add(fPulseInt[ipmt]); 
@@ -70,7 +70,7 @@ void calibration::SlaveBegin(TTree * /*tree*/)
 	}
       if(ipmt == 1)
 	{
-	  ADC_min = 4;
+	  ADC_min = 0;
 	  bins = 2*(abs(ADC_min) + abs(ADC_max));	  
 	  fPulseInt[ipmt] = new TH1F(Form("PulseInt_PMT%d",ipmt+1),Form("Pulse Integral PMT%d; ADC Channel (pC); Counts",ipmt+1), bins, ADC_min, ADC_max);
 	  GetOutputList()->Add(fPulseInt[ipmt]);
@@ -84,7 +84,7 @@ void calibration::SlaveBegin(TTree * /*tree*/)
 	} 
       if(ipmt == 2)
 	{
-	  ADC_min = 4;
+	  ADC_min = 0;
 	  bins = 2*(abs(ADC_min) + abs(ADC_max));
 	  fPulseInt[ipmt] = new TH1F(Form("PulseInt_PMT%d",ipmt+1),Form("Pulse Integral PMT%d; ADC Channel (pC); Counts",ipmt+1), bins, ADC_min, ADC_max);
 	  GetOutputList()->Add(fPulseInt[ipmt]);
@@ -98,7 +98,7 @@ void calibration::SlaveBegin(TTree * /*tree*/)
 	} 
       if(ipmt == 3)
 	{
-	  ADC_min = 4;
+	  ADC_min = 0;
 	  bins = 2*(abs(ADC_min) + abs(ADC_max));
 	  fPulseInt[ipmt] = new TH1F(Form("PulseInt_PMT%d",ipmt+1),Form("Pulse Integral PMT%d; ADC Channel (pC); Counts",ipmt+1), bins, ADC_min, ADC_max);
 	  GetOutputList()->Add(fPulseInt[ipmt]);

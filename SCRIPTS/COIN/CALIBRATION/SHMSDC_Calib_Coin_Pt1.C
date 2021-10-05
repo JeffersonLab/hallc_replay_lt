@@ -78,6 +78,9 @@ void SHMSDC_Calib_Coin_Pt1 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Add calorimeter to SHMS apparatus
   THcShower* pcal = new THcShower("cal", "Calorimeter");
   SHMS->AddDetector(pcal);
+  // Add Noble Gas Cherenkov to SHMS apparatus
+  THcCherenkov* ngcer = new THcCherenkov("ngcer", "Noble Gas Cherenkov");
+  SHMS->AddDetector(ngcer);
 
   // Add rastered beam apparatus
   THaApparatus* pbeam = new THcRasteredBeam("P.rb", "Rastered Beamline");

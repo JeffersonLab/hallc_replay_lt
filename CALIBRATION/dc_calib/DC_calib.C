@@ -873,7 +873,7 @@ void DC_calib::EventLoop(string option="")
       //------READ USER 'pid' input to determine particle type to calibrate----------
       
       //NO PID Cut,
-      if(pid=="pid_kFALSE")
+      if(pid=="pid_KFALSE")
 	{
 	  cal_elec = 1;
 	  cer_elec = 1;         

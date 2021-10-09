@@ -312,9 +312,11 @@ TH1F pdc2u1_drifttime 'SHMS DC 2U1 Drift Time; Drift Time (ns); Number of Entrie
 TH2F pdc_xfp_vs_yfp   'SHMS DC X_{fp} vs Y_{fp}; Y_{fp} (cm) / 1 cm; X_{fp} (cm) / 1 cm' P.dc.y_fp P.dc.x_fp 80 -40 40 80 -40 40
 TH2F pdc_xpfp_vs_ypfp 'SHMS DC X'_{fp} vs Y'_{fp}; Y'_{fp} / 0.002 rad; X'_{fp} / 0.002 rad' P.dc.yp_fp P.dc.xp_fp 100 -.1 .1 100 -.1 .1
 TH2F pdc_xfp_vs_xpfp  'SHMS DC X_{fp} vs X'_{fp}; X'_{fp} / 0.002 rad; X_{fp} / 1 cm' P.dc.xp_fp P.dc.x_fp 100 -.1 .1 80 -40 40
+TH2F P_xfp_vs_beta 'SHMS DC X_{fp} vs Beta; X_{fp} (cm) / 1 cm; Beta' P.dc.x_fp P.gtr.beta 80 -40 40 100 0 2
 TH2F pdc_xfp_vs_ypfp  'SHMS DC X_{fp} vs Y'_{fp}; Y'_{fp} / 0.002 rad; X_{fp} / 1 cm'  P.dc.yp_fp P.dc.x_fp 100 -.1 .1 80 -40 40 
 TH2F pdc_yfp_vs_xpfp  'SHMS DC Y_{fp} vs X'_{fp}; X'_{fp} / 0.002 rad; Y_{fp} / 1 cm' P.dc.xp_fp P.dc.y_fp 100 -.1 .1 80 -40 40
 TH2F pdc_yfp_vs_ypfp  'SHMS DC Y_{fp} vs Y'_{fp}; Y'_{fp} / 0.002 rad; Y_{fp} / 1 cm'  P.dc.yp_fp P.dc.y_fp 100 -.1 .1 80 -40 40
+TH2F P_yfp_vs_beta 'SHMS DC Y_{fp} vs Beta; Y_{fp} (cm) / 1 cm; Beta' P.dc.y_fp P.gtr.beta 80 -40 40 100 0 2
 
 #-------------------
 # TARGET VARIABLES

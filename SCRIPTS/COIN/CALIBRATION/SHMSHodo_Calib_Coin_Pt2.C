@@ -16,7 +16,7 @@ void SHMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   }
 
   // Create file name patterns.
-  const char* RunFileNamePattern = "coin_all_%05d.dat";
+  const char* RunFileNamePattern = "shms_all_%05d.dat";
   vector<TString> pathList;
   pathList.push_back(".");
   pathList.push_back("./raw");
@@ -24,7 +24,7 @@ void SHMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./raw2");
   pathList.push_back("./raw3");
   pathList.push_back("./raw4");
-  pathList.push_back("./raw_volatile");
+  pathList.push_back("./raw.volatile");
   pathList.push_back("./raw/../raw.copiedtotape");
   pathList.push_back("./cache");
 
@@ -32,6 +32,8 @@ void SHMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
   gHcParms->AddString("g_ctp_database_filename", Form("DBASE/COIN/SHMS_HodoCalib/standard_%d.database", RunNumber));
+
+  // gHcParms->AddString("g_ctp_database_filename","DBASE/COIN/standard_KaonLTCalib.database");
   gHcParms->Load(gHcParms->GetString("g_ctp_database_filename"), RunNumber);
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
@@ -107,13 +109,6 @@ void SHMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pscaler->SetDelayedType(129);
   pscaler->SetUseFirstEvent(kTRUE);
   gHaEvtHandlers->Add(pscaler);
-
-  //Add SHMS event handler for helicity scalers
-  THcHelicityScaler *phelscaler = new THcHelicityScaler("P", "Hall C helicity scaler");
-  //phelscaler->SetDebugFile("PHelScaler.txt");
-  phelscaler->SetROC(8);
-  phelscaler->SetUseFirstEvent(kTRUE);
-  gHaEvtHandlers->Add(phelscaler);
 
   //=:=:=
   // HMS 

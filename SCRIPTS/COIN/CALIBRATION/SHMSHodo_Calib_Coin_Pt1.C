@@ -16,7 +16,7 @@ void SHMSHodo_Calib_Coin_Pt1 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   }
 
   // Create file name patterns.
-  const char* RunFileNamePattern = "coin_all_%05d.dat";
+  const char* RunFileNamePattern = "shms_all_%05d.dat";
   vector<TString> pathList;
   pathList.push_back(".");
   pathList.push_back("./raw");
@@ -24,7 +24,7 @@ void SHMSHodo_Calib_Coin_Pt1 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./raw2");
   pathList.push_back("./raw3");
   pathList.push_back("./raw4");
-  pathList.push_back("./raw_volatile");
+  pathList.push_back("./raw.volatile");
   pathList.push_back("./raw/../raw.copiedtotape");
   pathList.push_back("./cache");
 

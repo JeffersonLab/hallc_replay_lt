@@ -106,6 +106,7 @@ block P.cal.xclust*
 block P.cal.xtrack*
 block P.cal.yclust*
 block P.cal.ytrack*
+block P.cal.fly.numGoodAdcHits
 
 # SHMS Hodoscope
 block P.hod.adctdc_offset
@@ -384,7 +385,6 @@ TH1F pcal_prshwr_good_mult_pos 'SHMS PreShower+ Good Multiplicity; Number of PMT
 TH1F pcal_prshwr_good_mult_neg 'SHMS PreShower- Good Multiplicity; Number of PMTs Hit; Total Number of Good -ADC Hits' P.cal.pr.totNumGoodNegAdcHits 14 0.5 14.5
 TH1F pcal_shwr_good_mult 'SHMS Shower Good Multiplicity; Numer of PMTs Hit; Total Number of Good ADC Hits' P.cal.fly.totNumGoodAdcHits 40 0.5 40.5
 
-
 #----------------------------
 # SHMS CALORIMETER PEDESTALS
 #----------------------------
@@ -477,7 +477,6 @@ TH2F pcal_ytrack_vs_etracknorm 'SHMS Calorimeter Y-Track vs Total Track Energy; 
 TH2F pcal_delta_etracknorm      'SHMS Delta vs. Cal E/p; Normalized Track Energy Deposition / 0.025; Delta / 0.25' P.cal.etracknorm P.gtr.dp 60 0. 1.5 128 -10. 22. pcut_CleanTrack
 TH2F paero_vrs_phgcer 'SHMS Areogel NPE vrs HGC NPE; Aerogel Number Photoelectrons; HGC Number of photoelectrons' P.aero.npeSum P.hgcer.npeSum 50 0. 50 50 0. 50 pcut_CleanTrack
 TH2F pngcer_vrs_phgcer 'SHMS NGC NPE vrs HGC NPE; NGC Number Photoelectrons; HGC Number of photoelectrons' P.ngcer.npeSum P.hgcer.npeSum 50 0. 50 50 0. 50 pcut_CleanTrack
-
 
 #---------------------------------
 # SHMS Trigger Pedestal Tracking

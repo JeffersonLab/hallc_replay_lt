@@ -583,7 +583,35 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 2
 eHadCoinTime_Offset = 75.0
 
-12591 - 99999
+12591 - 12676
+gpbeam = 9.172705
+gtargmass_amu = 1.00794
+htheta_lab = -58.535
+ptheta_lab = 5.505
+hpcentral = 0.968
+ppcentral = 7.913
+hpartmass =  0.000511
+ppartmass =  0.139570
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 2
+eHadCoinTime_Offset = 75.0
+
+12677 - 12690
+gpbeam = 9.172705
+gtargmass_amu = 1.00794
+htheta_lab = -58.535
+ptheta_lab = 5.505
+hpcentral = 0.968
+ppcentral = 7.913
+hpartmass =  0.000511
+ppartmass =  0.139570
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0
+eHadCoinTime_Offset = 75.0
+
+12691 - 99999
 gpbeam = 9.172705
 gtargmass_amu = 1.00794
 htheta_lab = -58.535

@@ -85,8 +85,8 @@ void fitHodoCalib(TString filename,Int_t runNUM,Bool_t cosmic_flag=kFALSE)
   TString nhod_nhits = "nhits";
   TString nbeta = "P.hod.betanotrack";
 
-  Double_t etrknrm_low_cut = 0.7;
-  Double_t npngcer_npeSum_low_cut = 0.7;
+  Double_t etrknrm_low_cut = 0.8; //0.7
+  Double_t npngcer_npeSum_low_cut = 0.; //0.7
   Double_t betanotrack_low_cut = 0.2;
   Double_t betanotrack_hi_cut = 1.5;
 

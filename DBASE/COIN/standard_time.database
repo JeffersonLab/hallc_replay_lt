@@ -1,0 +1,64 @@
+### PionLT 2021 Kinematics
+8977 - 11882
+g_ctp_parm_filename       = "DBASE/COIN/OnlinePionLT_2021_kinematic_E_9p2_HeeP_Coin.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+11883 - 11909
+g_ctp_parm_filename       = "DBASE/COIN/OnlinePionLT_2021_kinematic_Q2_1p6_W_3p08_Left_LH2.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+11910 - 11927
+g_ctp_parm_filename       = "DBASE/COIN/OnlinePionLT_2021_kinematic_Q2_1p6_W_3p08_Left_LD2_pt1.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+11928 - 11946
+g_ctp_parm_filename       = "DBASE/COIN/OnlinePionLT_2021_kinematic_Q2_1p6_W_3p08_Left_LD2_pt2.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+11947 - 11970
+g_ctp_parm_filename       = "DBASE/COIN/OnlinePionLT_2021_kinematic_Q2_1p6_W_3p08_Center_LD2.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+11971 - 11977
+g_ctp_parm_filename       = "DBASE/COIN/OnlinePionLT_2021_kinematic_Q2_1p6_W_3p08_Center_LH2.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+11978 - 11991
+g_ctp_parm_filename       = "DBASE/COIN/OnlinePionLT_2021_kinematic_Q2_1p6_W_3p08_Right_LH2.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+11992 - 12021
+g_ctp_parm_filename       = "DBASE/COIN/OnlinePionLT_2021_kinematic_Q2_1p6_W_3p08_Right_LD2.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+12022 - 12051
+g_ctp_parm_filename       = "DBASE/COIN/OnlinePionLT_2021_kinematic_Q2_1p6_W_3p08_Right_LD2_neg.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+12052 - 12067
+g_ctp_parm_filename       = "DBASE/COIN/OnlinePionLT_2021_kinematic_Q2_1p6_W_3p08_Center_LD2_neg_time.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+12068 - 12079
+g_ctp_parm_filename       = "DBASE/COIN/OnlinePionLT_2021_kinematic_Q2_1p6_W_3p08_Left_LD2_neg.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+12080 - 12223
+g_ctp_parm_filename       = "DBASE/COIN/OnlinePionLT_2021_v1.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+12224 - 12230
+g_ctp_parm_filename       = "DBASE/COIN/OnlinePionLT_2021_kinematic_Q2_6p0_W_3p19_Left_LH2.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+12231 - 12259
+g_ctp_parm_filename       = "DBASE/COIN/OnlinePionLT_2021_v1.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+12260 - 12361
+g_ctp_parm_filename       = "DBASE/COIN/OnlinePionLT_2021_kinematic_Q2_6p0_W_3p19_Left_LH2.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+12362 - 99999
+g_ctp_parm_filename       = "DBASE/COIN/OnlinePionLT_2021_kinematic_Q2_6p0_W_3p19_Left_LH2_pt2.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"

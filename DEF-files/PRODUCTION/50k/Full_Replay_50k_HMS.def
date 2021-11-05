@@ -259,7 +259,7 @@ TH1F hBPMT_Y 'Beam BPMT_Y ; BPM_Y projected to target  (CM); Counts' H.rb.raster
 #----------
 TH2F hcer_vs_hpreShwr      'HMS Cer NPE Sum vs. PreSh Energy; Total PreSh Energy Deposition / 0.01 GeV; Cer NPE Sum / 0.5' H.cal.1pr.eplane H.cer.npeSum 400 0 4 80 0 40 H.cal.1pr.eplane>0.0&&H.cer.npeSum>0.0 
 TH2F hcal_hshwr_vs_hpreShwr      'HMS Shower vs. PreShower Energy Deposition; PreShower Energy / 0.01 GeV; Shower Energy / 0.01 GeV' H.cal.1pr.eplane (H.cal.2ta.eplane+H.cal.3ta.eplane+H.cal.4ta.eplane) 400 0 4 800 0 8 H.cal.1pr.eplane>0.0&&(H.cal.2ta.eplane+H.cal.3ta.eplane+H.cal.4ta.eplane)>0.0 
-TH1F hdc_trk_beta  'HMS DC ElectronTrack Beta; Beta; Number of Entires'  H.tr.beta 300 -1.5 1.5 
+TH1F hdc_trk_beta  'HMS DC Electron Golden Track Beta; Beta; Number of Entires'  H.gtr.beta 300 -1.5 1.5 hcut_CleanTrack
 TH2F hcal_xtrack_vs_etracknorm 'HMS Calorimeter xtrack vs Normalized Track Energy; Track Energy Deposition (Gev) / 0.01 GeV; X Track (cm) / 1 cm' H.cal.etracknorm H.cal.xtrack 150 0 1.5 130 -65 65 hcut_CleanTrack
 TH2F hcal_ytrack_vs_etracknorm 'HMS Calorimeter ytrack vs Normalized Track Energy; Track Energy Deposition (Gev) / 0.01 GeV; Y Track (cm) / 1 cm' H.cal.etracknorm H.cal.ytrack 150 0 1.5 70 -35 35 hcut_CleanTrack
 TH2F hcal_delta_etracknorm      'HMS Delta vs. Cal E/p; Normalized Track Energy Deposition / 0.025; Delta / 0.25' H.cal.etracknorm H.gtr.dp 60 0. 1.5 96 -12. 12. hcut_CleanTrack

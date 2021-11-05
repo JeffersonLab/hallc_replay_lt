@@ -57,7 +57,7 @@ static const Double_t maxScale     = 0.75;
 static const UInt_t lineWidth = 2;
 static const UInt_t lineStyle = 7;
 
-static const UInt_t  nbars[nPlanes]      = {13, 13, 14, 18}; 
+static const UInt_t  nbars[nPlanes]      = {13, 13, 14, 16}; //With stPad variable, correcting for 2Y only using paddles 3-1
 static const TString planeNames[nPlanes] = {"1x", "1y", "2x", "2y"};
 static const TString sideNames[nSides]   = {"pos", "neg"};
 static const TString twFitParNames[nTwFitPars]  = {"c_{1}", "c_{2}"};
@@ -135,7 +135,9 @@ Double_t twFitFunc(Double_t *a, Double_t *c) {
 
 // Locate min or max value from input array
 Double_t calcMinOrMax(Double_t *array, UInt_t iplane, TString minOrmax) {
-  auto result = minmax_element(array, array+nbars[iplane]);
+  int stPad = 0;
+  if(iplane==3) stPad = 2;
+  auto result = minmax_element(array+stPad, array+nbars[iplane]+stPad);
   if      (minOrmax == "min") return *result.first;
   else if (minOrmax == "max") return *result.second;
   else return 0.0;
@@ -195,9 +197,11 @@ void doTwFits(UInt_t iplane, UInt_t iside, UInt_t ipaddle) {
 
 // Calculate the averege of the time-walk fit parameters
 void calcParAvg(UInt_t iplane, UInt_t iside) {
+  int stPad = 0;
+  if(iplane==3) stPad = 2;
   for (UInt_t ipar = 0; ipar < nTwFitPars; ipar++) {
     // Calculate the weighted average while ignoring fit errors provided by Minuit
-    avgParFit[iplane][iside][ipar] = new TF1("avgParFit", "pol0", 1, nbars[iplane]);
+    avgParFit[iplane][iside][ipar] = new TF1("avgParFit", "pol0", 1+stPad, nbars[iplane]+stPad);
     avgParFit[iplane][iside][ipar]->SetParName(0, "#bar{"+twFitParNames[ipar]+"}");
     // Add color to fit lines
     if (iside == 0) addColorToFitLine(lineStyle, lineWidth, kRed,  avgParFit[iplane][iside][ipar]);
@@ -314,11 +318,13 @@ void WriteFitParam(int runNUM)
   //Fill 3D Par array
   for (UInt_t iplane=0; iplane < nPlanes; iplane++)
     {
+      int stPad = 0;
+      if(iplane==3) stPad = 2;
       
       for (UInt_t iside=0; iside < nSides; iside++) {
 	      
 
-	for(UInt_t ipaddle = 0; ipaddle < nbars[iplane]; ipaddle++) {
+	for(UInt_t ipaddle = 0+stPad; ipaddle < nbars[iplane]+stPad; ipaddle++) {
 	 
 	  c1[iplane][iside][ipaddle] = twFit[iplane][iside][ipaddle]->GetParameter("c_{1}");
 	  c2[iplane][iside][ipaddle] = twFit[iplane][iside][ipaddle]->GetParameter("c_{2}");
@@ -407,11 +413,13 @@ void WriteFitParamErr(int runNUM)
   //Fill 3D Par array
   for (UInt_t iplane=0; iplane < nPlanes; iplane++)
     {
+      int stPad = 0;
+      if(iplane==3) stPad = 2;
       
       for (UInt_t iside=0; iside < nSides; iside++) {
 	      
 
-	for(UInt_t ipaddle = 0; ipaddle < nbars[iplane]; ipaddle++) {
+	for(UInt_t ipaddle = 0+stPad; ipaddle < nbars[iplane]+stPad; ipaddle++) {
 	 
 	  //c1[iplane][iside][ipaddle] = twFit[iplane][iside][ipaddle]->GetParameter("c_{1}");
 	  c2[iplane][iside][ipaddle] = twFit[iplane][iside][ipaddle]->GetParameter("c_{2}");
@@ -494,6 +502,8 @@ void timeWalkCalib(int run) {
     twFitParCan[ipar] = makeCan(2, 2, 1600, 800, twFitParCan[ipar], twFitParNames[ipar]+"FitParCan", "Parameter "+twFitParNames[ipar]+" Canvas");
   // Loop over the planes
   for(UInt_t iplane = 0; iplane < nPlanes; iplane++) {
+    int stPad = 0;
+    if(iplane==3) stPad = 2;
     //for(UInt_t iplane = 0; iplane < 1; iplane++) {
 
     // Obtain the plane directory
@@ -510,7 +520,7 @@ void timeWalkCalib(int run) {
       if (planeNames[iplane] != "2y") twFitCan[iplane][iside] = makeCan(5, 3, 1600, 800, twFitCan[iplane][iside], planeNames[iplane]+"_"+sideNames[iside]+"_twFitCan", planeNames[iplane]+"_"+sideNames[iside]+"_twFitCan");
       if (planeNames[iplane] == "2y") twFitCan[iplane][iside] = makeCan(6, 4, 1600, 800, twFitCan[iplane][iside], planeNames[iplane]+"_"+sideNames[iside]+"_twFitCan", planeNames[iplane]+"_"+sideNames[iside]+"_twFitCan");
       // Loop over the paddles
-      for(UInt_t ipaddle = 0; ipaddle < nbars[iplane]; ipaddle++) {
+      for(UInt_t ipaddle = 0+stPad; ipaddle < nbars[iplane]+stPad; ipaddle++) {
 		// Populate the paddle index arrays
 		paddleIndex[iplane][iside][ipaddle] = Double_t (ipaddle + 1);
 		// Obtain the time-walk histos

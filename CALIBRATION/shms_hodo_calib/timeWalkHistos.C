@@ -64,12 +64,14 @@ static const Double_t refAdcPulseAmpCutLow   = 40.0;   // Units of mV
 static const Double_t refAdcPulseAmpCutHigh  = 70.0;   // Units of mV
 static const Double_t refAdcPulseTimeCutLow  = 300.0;  // Units of ns
 static const Double_t refAdcPulseTimeCutHigh = 370.0;  // Units of ns
-static const Double_t adcTdcTimeDiffCutLow   = -0.0; // Units of ns
-static const Double_t adcTdcTimeDiffCutHigh  = 60.0;  // Units of ns
+static const Double_t adcTdcTimeDiffCutLow   = 0.0; // Units of ns
+static const Double_t adcTdcTimeDiffCutHigh  = 100.0;  // Units of ns
 static const Double_t calEtotnormCutVal      = 0.9;    // Units of Normalized energy
 static const Double_t cerNpeSumCutVal        = 10;    // Units of NPE in aerogel
 // static const Double_t adcTdcTimeDiffCutLow   = -6000.0;  // Units of ns
 // static const Double_t adcTdcTimeDiffCutHigh  = 1000.0;  // Units of ns
+
+static const bool TimeWalkRangeSet = false; // this will determine if the TDC ADC Time Diff walk is done per plane or set with the adcTdcTimeDiffCutLow/High variables 
 
 static const Double_t fontSize = 0.04;
 
@@ -193,8 +195,19 @@ void generatePlots(UInt_t iplane, UInt_t iside, UInt_t ipaddle) {
   if (!adcTdcTimeDiffWalkDir[iplane][iside]) {adcTdcTimeDiffWalkDir[iplane][iside] = sideUncalibDir[iplane][iside]->mkdir("adcTdcTimeDiffWalk"); adcTdcTimeDiffWalkDir[iplane][iside]->cd();}
   else (outFile->cd("hodoUncalib/"+planeNames[iplane]+"/"+sideNames[iside]+"/adcTdcTimeDiffWalk"));
   // Book histos
-  if (!h2_adcTdcTimeDiffWalk[iplane][iside][ipaddle]) h2_adcTdcTimeDiffWalk[iplane][iside][ipaddle] = new TH2F(Form("h2_adcTdcTimeDiffWalk_paddle_%d", ipaddle+1), "TDC-ADC Time vs. Pulse Amp Plane "+planeNames[iplane]+" Side "+sideNames[iside]+Form(" Paddle %d", ipaddle+1)+"; Pulse Amplitude (mV) / 1 mV;  TDC-ADC Time (ns) / 100 ps", 1000, 0, 1000, 1500, adcTdcTimeDiffCutLow, adcTdcTimeDiffCutHigh); //was 500, -20, 30
-  
+  if (!h2_adcTdcTimeDiffWalk[iplane][iside][ipaddle] && !TimeWalkRangeSet){ // NH 2021 11 26 changed this so that each plane could have the y-range set seperately
+    if (iplane == 0)
+      h2_adcTdcTimeDiffWalk[iplane][iside][ipaddle] = new TH2F(Form("h2_adcTdcTimeDiffWalk_paddle_%d", ipaddle+1), "TDC-ADC Time vs. Pulse Amp Plane "+planeNames[iplane]+" Side "+sideNames[iside]+Form(" Paddle %d", ipaddle+1)+"; Pulse Amplitude (mV) / 1 mV;  TDC-ADC Time (ns) / 100 ps", 500, 0, 500, 1500, 15, 35);
+    if(iplane == 1)
+      h2_adcTdcTimeDiffWalk[iplane][iside][ipaddle] = new TH2F(Form("h2_adcTdcTimeDiffWalk_paddle_%d", ipaddle+1), "TDC-ADC Time vs. Pulse Amp Plane "+planeNames[iplane]+" Side "+sideNames[iside]+Form(" Paddle %d", ipaddle+1)+"; Pulse Amplitude (mV) / 1 mV;  TDC-ADC Time (ns) / 100 ps", 500, 0, 500, 1500, 20, 40);
+    if(iplane == 2)
+      h2_adcTdcTimeDiffWalk[iplane][iside][ipaddle] = new TH2F(Form("h2_adcTdcTimeDiffWalk_paddle_%d", ipaddle+1), "TDC-ADC Time vs. Pulse Amp Plane "+planeNames[iplane]+" Side "+sideNames[iside]+Form(" Paddle %d", ipaddle+1)+"; Pulse Amplitude (mV) / 1 mV;  TDC-ADC Time (ns) / 100 ps", 500, 0, 500, 1500, 15, 35);
+    if(iplane == 3)
+      h2_adcTdcTimeDiffWalk[iplane][iside][ipaddle] = new TH2F(Form("h2_adcTdcTimeDiffWalk_paddle_%d", ipaddle+1), "TDC-ADC Time vs. Pulse Amp Plane "+planeNames[iplane]+" Side "+sideNames[iside]+Form(" Paddle %d", ipaddle+1)+"; Pulse Amplitude (mV) / 1 mV;  TDC-ADC Time (ns) / 100 ps", 500, 0, 500, 1500, 33, 53);
+  }else{
+    if(!h2_adcTdcTimeDiffWalk[iplane][iside][ipaddle] && TimeWalkRangeSet)
+      h2_adcTdcTimeDiffWalk[iplane][iside][ipaddle] = new TH2F(Form("h2_adcTdcTimeDiffWalk_paddle_%d", ipaddle+1), "TDC-ADC Time vs. Pulse Amp Plane "+planeNames[iplane]+" Side "+sideNames[iside]+Form(" Paddle %d", ipaddle+1)+"; Pulse Amplitude (mV) / 1 mV;  TDC-ADC Time (ns) / 100 ps", 500, 0, 500, 1500, adcTdcTimeDiffCutLow, adcTdcTimeDiffCutHigh);
+  }
 } // generatePlots()
 
 void timeWalkHistos(TString inputname, Int_t runNum, string SPEC_flg) {  //SPEC_flg--> "shms" or "coin"

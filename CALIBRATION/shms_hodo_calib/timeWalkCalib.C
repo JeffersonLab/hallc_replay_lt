@@ -38,9 +38,9 @@ static const UInt_t nSides     = 2;
 static const UInt_t nBarsMax   = 21;
 static const UInt_t nTwFitPars = 2;
 
-static const Double_t tdcThresh      = 120.0;  // 30 mV in units of FADC channels
+static const Double_t tdcThresh      = 1200.0;  // 30 mV in units of FADC channels
 static const Double_t twFitRangeLow  = 20.0;
-static const Double_t twFitRangeHigh = 200.0;
+static const Double_t twFitRangeHigh = 300.0;
 static const Double_t c0twParInit    = 1.0;
 static const Double_t c1twParInit    = 1.0;
 
@@ -97,8 +97,8 @@ TPaveText *twFitParText[nPlanes][nSides][nBarsMax];
 
 // Add color to fit lines
 void addColorToFitLine(UInt_t style, UInt_t width, UInt_t color, TF1 *fit1D) {
-  fit1D->SetLineStyle(lineStyle);
-  fit1D->SetLineWidth(lineWidth);
+  fit1D->SetLineStyle(style);
+  fit1D->SetLineWidth(width);
   fit1D->SetLineColor(color);
   return;
 } // addColorToFitLine()
@@ -159,6 +159,7 @@ void doTwFits(UInt_t iplane, UInt_t iside, UInt_t ipaddle) {
     twFit[iplane][iside][ipaddle]->SetParName(ipar, twFitParNames[ipar]);
   twFit[iplane][iside][ipaddle]->SetParameter(0,c0twParInit);
   twFit[iplane][iside][ipaddle]->SetParameter(1,c1twParInit);
+  addColorToFitLine(1, 2, 2, twFit[iplane][iside][ipaddle]);
   // Perform the fits and scream if it failed
   Int_t entry =  h2_adcTdcTimeDiffWalk[iplane][iside][ipaddle]->GetEntries();
   int twFitStatus;
@@ -273,11 +274,12 @@ void drawParams(UInt_t iplane) {
 } // drawParams
 
 //Add method for writing summary plots to ROOT File
-void writePlots() 
+void writePlots(int runNUM) 
 {
 	TDirectory *PSUM = histOutFile->mkdir("Param_Summary");
 	TDirectory *FSUM = histOutFile->mkdir("Fit_Summary");
 	TDirectory *FSUBSUM = FSUM->mkdir("Histos");
+	TString outputpng= Form("Calibration_Plots/TWpng/twFit_run_%d_",runNUM);
 	
 	for (UInt_t ipar = 0; ipar < nTwFitPars; ipar++) {
 		//Parameter Summary Canvases
@@ -288,8 +290,11 @@ void writePlots()
     {
     	for(UInt_t iside = 0; iside < nSides; iside++)
     	{
+	  TString outputpng= Form("Calibration_Plots/TWpng/twFit_run_%d_",runNUM);
     		//TW Fit summary Canvases
     		FSUM->WriteObject(twFitCan[iplane][iside], "twFitCan_"+planeNames[iplane]+"_"+sideNames[iside]);
+		outputpng += "_"+planeNames[iplane]+"_"+sideNames[iside]+".png";
+		twFitCan[iplane][iside]->Print(outputpng);
     		//TW Fit Individual Canvases
     		for (int ibar = 0; ibar < nBarsMax; ibar++)
             {
@@ -491,7 +496,7 @@ void timeWalkCalib(int run) {
   dataDir = dynamic_cast <TDirectory*> (histoFile->FindObjectAny("hodoUncalib"));
   // Create the parameter canvases
   for (UInt_t ipar = 0; ipar < nTwFitPars; ipar++)
-    twFitParCan[ipar] = makeCan(2, 2, 1600, 800, twFitParCan[ipar], twFitParNames[ipar]+"FitParCan", "Parameter "+twFitParNames[ipar]+" Canvas");
+    twFitParCan[ipar] = makeCan(2, 2, 3200, 1600, twFitParCan[ipar], twFitParNames[ipar]+"FitParCan", "Parameter "+twFitParNames[ipar]+" Canvas");
   // Loop over the planes
   for(UInt_t iplane = 0; iplane < nPlanes; iplane++) {
     //for(UInt_t iplane = 0; iplane < 1; iplane++) {
@@ -507,8 +512,8 @@ void timeWalkCalib(int run) {
       sideDir[iplane][iside] = dynamic_cast <TDirectory*> (planeDir[iplane]->FindObjectAny(sideNames[iside]));
       twDir[iplane][iside]   = dynamic_cast <TDirectory*> (sideDir[iplane][iside]->FindObjectAny("adcTdcTimeDiffWalk"));
       // Create the time-walk histo and fit canvases
-      if (planeNames[iplane] != "2y") twFitCan[iplane][iside] = makeCan(5, 3, 1600, 800, twFitCan[iplane][iside], planeNames[iplane]+"_"+sideNames[iside]+"_twFitCan", planeNames[iplane]+"_"+sideNames[iside]+"_twFitCan");
-      if (planeNames[iplane] == "2y") twFitCan[iplane][iside] = makeCan(6, 4, 1600, 800, twFitCan[iplane][iside], planeNames[iplane]+"_"+sideNames[iside]+"_twFitCan", planeNames[iplane]+"_"+sideNames[iside]+"_twFitCan");
+      if (planeNames[iplane] != "2y") twFitCan[iplane][iside] = makeCan(5, 3, 3200, 1600, twFitCan[iplane][iside], planeNames[iplane]+"_"+sideNames[iside]+"_twFitCan", planeNames[iplane]+"_"+sideNames[iside]+"_twFitCan");
+      if (planeNames[iplane] == "2y") twFitCan[iplane][iside] = makeCan(6, 4, 3200, 1600, twFitCan[iplane][iside], planeNames[iplane]+"_"+sideNames[iside]+"_twFitCan", planeNames[iplane]+"_"+sideNames[iside]+"_twFitCan");
       // Loop over the paddles
       for(UInt_t ipaddle = 0; ipaddle < nbars[iplane]; ipaddle++) {
 		// Populate the paddle index arrays
@@ -545,7 +550,7 @@ void timeWalkCalib(int run) {
   //make sure current file is output file
   gFile = histOutFile;
   //write to ROOT file
-  writePlots(); 
+  writePlots(run); 
  
   histOutFile->Close();
   //Write to a param file

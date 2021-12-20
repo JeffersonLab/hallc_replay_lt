@@ -38,7 +38,7 @@ static const UInt_t nSides     = 2;
 static const UInt_t nBarsMax   = 21;
 static const UInt_t nTwFitPars = 2;
 
-static const Double_t tdcThresh      = 12000.0;  // 30 mV in units of FADC channels
+static const Double_t tdcThresh      = 1200.0;  // 30 mV in units of FADC channels
 static const Double_t twFitRangeLow  = 20.0;
 static const Double_t twFitRangeHigh = 300.0;
 static const Double_t c0twParInit    = 1.0;

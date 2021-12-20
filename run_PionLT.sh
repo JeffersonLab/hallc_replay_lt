@@ -73,8 +73,8 @@ if [[ -z "$3" || ! "$TARGET" =~ LH2|LD2|Dummy10cm|Carbon0p5|AuFoil|Optics1|Optic
 fi
 
 if [[ $RUNTYPE == "Prod" ]]; then
-    echo "Running production analysis script - ${UTILPATH}/scripts/online_pion_physics/pion_prod_replay_analysis_sw.sh"
-    eval '"${UTILPATH}/scripts/online_pion_physics/pion_prod_replay_analysis_sw.sh" ${RUNNUMBER}'
+    echo "Running production analysis script - ${UTILPATH}/scripts/online_physics/PionLT/pion_prod_replay_analysis_sw.sh"
+    eval '"${UTILPATH}/scripts/online_physics/PionLT/pion_prod_replay_analysis_sw.sh" ${RUNNUMBER}'
 elif [[ $RUNTYPE == "Lumi" ]]; then
     echo "Running luminosity analysis script - ${UTILPATH}/scripts/luminosity/replay_lumi.sh"
     eval '"${UTILPATH}/scripts/luminosity/replay_lumi.sh" ${RUNNUMBER}'

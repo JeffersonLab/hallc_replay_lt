@@ -857,9 +857,9 @@ void fitHodoCalib(TString filename,Int_t runNUM,Bool_t cosmic_flag=kFALSE)
 	      //Set Reference Paddle (1X7) lambda to ZERO
 	      if (good_pad[0]==7)
 		{
-		  lambda[row1][6] = 0.;
-		  lambda[row2][6] = 0.;
-		  lambda[row3][6] = 0.;
+		  lambda[row1][19] = 0.;
+		  lambda[row4][19] = 0.;
+		  lambda[row5][19] = 0.;
 		}
 	      
 

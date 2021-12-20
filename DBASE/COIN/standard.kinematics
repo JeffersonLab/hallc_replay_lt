@@ -121,7 +121,7 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.990
 eHadCoinTime_Offset = 74.9
 
-11883 - 11928
+11883
 gpbeam = 9.172705
 gtargmass_amu = 1.00794
 htheta_lab = -12.40
@@ -133,6 +133,20 @@ ppartmass =  0.139570
 helicity_freq = 120.0007547169
 HMS_RF_Offset = 0
 SHMS_RF_Offset = -2
+eHadCoinTime_Offset = 74.9
+
+11884 - 11928
+gpbeam = 9.172705
+gtargmass_amu = 1.00794
+htheta_lab = -12.40
+ptheta_lab = 10.26
+hpcentral = 3.738
+ppcentral = 5.422
+hpartmass =  0.000511
+ppartmass =  0.139570
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 0
 eHadCoinTime_Offset = 74.9
 
 11929 - 11944

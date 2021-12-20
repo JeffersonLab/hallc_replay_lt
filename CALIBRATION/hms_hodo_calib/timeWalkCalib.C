@@ -54,7 +54,7 @@ static const Double_t markerSize     = 2.0;
 static const Double_t minScale       = 0.75;
 static const Double_t maxScale       = 0.75;
 
-static const UInt_t lineWidth = 4;
+static const UInt_t lineWidth = 2;
 static const UInt_t lineStyle = 7;
 
 static const UInt_t  nbars[nPlanes]      = {16, 10, 16, 10};
@@ -94,8 +94,8 @@ TPaveText *twFitParText[nPlanes][nSides][nBarsMax];
 
 // Add color to fit lines
 void addColorToFitLine(UInt_t style, UInt_t width, UInt_t color, TF1 *fit1D) {
-  fit1D->SetLineStyle(lineStyle);
-  fit1D->SetLineWidth(lineWidth);
+  fit1D->SetLineStyle(style);
+  fit1D->SetLineWidth(width);
   fit1D->SetLineColor(color);
   return;
 } // addColorToFitLine()
@@ -259,11 +259,12 @@ void drawParams(UInt_t iplane) {
 } // drawParams
 
 //Add method for writing summary plots to file
-void writePlots()
+void writePlots(int runNUM)
 {
   TDirectory *PSUM = histOutFile->mkdir("Param_Summary");
   TDirectory *FSUM = histOutFile->mkdir("Fit_Summary");
   TDirectory *FSUBSUM = FSUM->mkdir("Histos");
+  TString outputpng= Form("Calibration_Plots/TWpng/twFit_run_%d_",runNUM);
 
   for (UInt_t ipar = 0; ipar < nTwFitPars; ipar++)
   {
@@ -273,10 +274,13 @@ void writePlots()
 
   for (UInt_t iplane = 0; iplane < nPlanes; iplane++)
   {
-    for(UInt_t iside; iside < nSides; iside++)
+    for(UInt_t iside = 0; iside < nSides; iside++)
     {
+      TString outputpng= Form("Calibration_Plots/TWpng/twFit_run_%d_",runNUM);
       //TW Fit Summary canvases
       FSUM->WriteObject(twFitCan[iplane][iside], "twFitCan_"+planeNames[iplane]+"_"+sideNames[iside]);
+      outputpng += "_"+planeNames[iplane]+"_"+sideNames[iside]+".png";
+      twFitCan[iplane][iside]->Print(outputpng);
       for (int ibar = 0; ibar < nBarsMax; ibar++)
       {
         FSUBSUM->WriteObject(twFitCan[iplane][iside]->cd(ibar+1)->GetPadPointer(), "twFitCan_"+planeNames[iplane]+"_"+Form("Bar%d", ibar)+"_"+sideNames[iside]);
@@ -525,7 +529,7 @@ using namespace std;
   TString histOutFileName = Form("timeWalkCalib_%d.root", run);
   histOutFile = new TFile(histOutFileName, "RECREATE");
   //write to ROOT File
-  writePlots();
+  writePlots(run);
 
   histOutFile->Close();
  

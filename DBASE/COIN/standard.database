@@ -59,6 +59,10 @@ g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
 g_ctp_parm_filename       = "DBASE/COIN/OnlinePionLT_2021_kinematic_Q2_6p0_W_3p19_Left_LH2.param"
 g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
 
-12362 - 99999
+12362 - 13630
 g_ctp_parm_filename       = "DBASE/COIN/OnlinePionLT_2021_kinematic_Q2_6p0_W_3p19_Left_LH2_pt2.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+
+13631 - 99999
+g_ctp_parm_filename       = "DBASE/COIN/OnlinePionLT_2021_kinematic_Q2_3p85_W_3p07_Left_LD2_one_raster.param"
 g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"

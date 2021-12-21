@@ -37,9 +37,9 @@ static const UInt_t nSides     = 2;
 static const UInt_t nBarsMax   = 16;
 static const UInt_t nTwFitPars = 2;
 
-static const Double_t tdcThresh      = 120.0;  // 30 mV in units of FADC channels
+static const Double_t tdcThresh      = 1200.0;  // 30 mV in units of FADC channels
 static const Double_t twFitRangeLow  = 20.0;
-static const Double_t twFitRangeHigh = 600.0;
+static const Double_t twFitRangeHigh = 300.0;
 static const Double_t c0twParInit    = 1.0;
 static const Double_t c1twParInit    = 1.0;
 
@@ -188,8 +188,8 @@ void calcParAvg(UInt_t iplane, UInt_t iside) {
     avgParFit[iplane][iside][ipar] = new TF1("avgParFit", "pol0", 1, nbars[iplane]);
     avgParFit[iplane][iside][ipar]->SetParName(0, "#bar{"+twFitParNames[ipar]+"}");
     // Add color to fit lines
-    if (iside == 0) addColorToFitLine(lineStyle, lineWidth, kRed,  avgParFit[iplane][iside][ipar]);
-    if (iside == 1) addColorToFitLine(lineStyle, lineWidth, kBlue, avgParFit[iplane][iside][ipar]);
+    if (iside == 0) addColorToFitLine(1,2,2,  avgParFit[iplane][iside][ipar]);
+    if (iside == 1) addColorToFitLine(1,2,2, avgParFit[iplane][iside][ipar]);
     // Initialize the parameters
     if (ipar == 0) avgParFit[iplane][iside][ipar]->SetParameter(0, c0twParInit);
     if (ipar == 1) avgParFit[iplane][iside][ipar]->SetParameter(1, c1twParInit);

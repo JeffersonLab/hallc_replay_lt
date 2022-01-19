@@ -155,6 +155,7 @@ void doTwFits(UInt_t iplane, UInt_t iside, UInt_t ipaddle) {
     twFit[iplane][iside][ipaddle]->SetParName(ipar, twFitParNames[ipar]);
   twFit[iplane][iside][ipaddle]->SetParameter(0, c0twParInit);
   twFit[iplane][iside][ipaddle]->SetParameter(1, c1twParInit);
+  addColorToFitLine(1, 1, 1, twFit[iplane][iside][ipaddle]);
 
   // Perform the fits and scream if it failed
   Int_t twFitStatus = h2_adcTdcTimeDiffWalk[iplane][iside][ipaddle]->Fit("twFit", "REQ");	

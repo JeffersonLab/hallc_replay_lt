@@ -1,27 +1,15 @@
 #! /bin/bash
 
 # Stephen JD Kay - University of Regina - 27/08/21
-# This script should be executed on cdaql1 with the required commands to execute the relevant physics analysis
 # Arguments should be run number, type of run and target type
 # Anything but the valid options should be ignored and bounced back to the user as a prompt
+# Stephen JD Kay - University of Regina 25/02/22
+# I've edited this script to remove the requirement to run on a cdaq machine, it should work OK as anyone
 
-# Set path depending upon hostname, should only run on cdaql1/cdaql2/cdaql3 as cdaq
-if [[ "${HOSTNAME}" = *"cdaql"* ]]; then # Check the user is on cdaql1 or cdaql2
-    if [[ "${USER}" = "cdaq" ]]; then # Check the script is being executed by cdaq
-	REPLAYPATH="/home/cdaq/hallc-online/hallc_replay_lt"
-    else
-	echo " !!!! ERROR !!!!!"
-	echo " Must run as cdaq"
-	echo " !!!! ERROR !!!!!"
-	exit 1
-    fi
-else
-    echo " !!!!!!!!!!!!!!!! ERROR !!!!!!!!!!!!!"
-    echo " Must run on cdaql1, cdaql2 or cdaql3"
-    echo " !!!!!!!!!!!!!!!! ERROR !!!!!!!!!!!!!"
-    exit 1
-fi
-
+REPLAYPATH="/group/c-pionlt/USERS/${USER}/hallc_replay_lt" # Edit as needed!
+echo ""
+echo "Running in ${REPLAYPATH}"
+echo ""
 UTILPATH="${REPLAYPATH}/UTIL_PION"
 cd $REPLAYPATH
 echo ""

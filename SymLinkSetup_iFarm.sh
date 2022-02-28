@@ -278,6 +278,8 @@ echo "${VOLATILEPATH}/${USER}/REPORT_OUTPUT/ - REPORT_OUTPUT"
 echo "${VOLATILEPATH}/${USER}/HISTOGRAMS/ - HISTOGRAMS"
 echo "/cache/hallc/spring17/raw - raw"
 echo "/cache/hallc/spring17/raw - cache"
+echo "/cache/hallc/spring17/raw - raw_KaonLT"
+echo "/cache/hallc/c-pionlt/raw - raw_PionLT"
 echo "${VOLATILEPATH}/${USER}/raw - raw_volatile"
 echo""
 read -p "Proceed with sym link setup setup? <Y/N> " prompt2
@@ -353,6 +355,28 @@ elif [ -L "${USERPATH}/hallc_replay_lt/raw" ]; then
 	rm "${USERPATH}/hallc_replay_lt/raw"
 	ln -s "/cache/hallc/spring17/raw" "${USERPATH}/hallc_replay_lt/raw"
     else echo "${USERPATH}/hallc_replay_lt/raw sym link already exists and not broken"
+    fi
+fi
+# SJDK 28/02/22 - Make a sym link specifically for the PionLT raw data
+if [ ! -L "${USERPATH}/hallc_replay_lt/raw_PionLT" ]; then
+    ln -s "/cache/hallc/c-pionlt/raw" "${USERPATH}/hallc_replay_lt/raw_PionLT"
+elif [ -L "${USERPATH}/hallc_replay_lt/raw_PionLT" ]; then
+    if [ ! -e "${USERPATH}/hallc_replay_lt/raw_PionLT" ]; then
+	echo "raw_PionLT sym link exits but is broken, replacing"
+	rm "${USERPATH}/hallc_replay_lt/raw_PionLT"
+	ln -s "/cache/hallc/c-pionlt/raw" "${USERPATH}/hallc_replay_lt/raw_PionLT"
+    else echo "${USERPATH}/hallc_replay_lt/raw_PionLT sym link already exists and not broken"
+    fi
+fi
+# SJDK 28/02/22 - Make a sym link specifically for the KaonLT raw data
+if [ ! -L "${USERPATH}/hallc_replay_lt/raw_KaonLT" ]; then
+    ln -s "/cache/hallc/spring17/raw" "${USERPATH}/hallc_replay_lt/raw_KaonLT"
+elif [ -L "${USERPATH}/hallc_replay_lt/raw_KaonLT" ]; then
+    if [ ! -e "${USERPATH}/hallc_replay_lt/raw_KaonLT" ]; then
+	echo "raw_KaonLT sym link exits but is broken, replacing"
+	rm "${USERPATH}/hallc_replay_lt/raw_KaonLT"
+	ln -s "/cache/hallc/spring17/raw" "${USERPATH}/hallc_replay_lt/raw_KaonLT"
+    else echo "${USERPATH}/hallc_replay_lt/raw_KaonLT sym link already exists and not broken"
     fi
 fi
 

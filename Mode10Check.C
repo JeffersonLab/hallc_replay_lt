@@ -30,26 +30,27 @@
 
 static const int HGCER_MAX = 16;
 static const int HGC_PMT = 4;
+int length, len;
 
 // Standard
-TBranch *hgcer_adcCounterNdata;
-TBranch *hgcer_adcCounter;
-TBranch *hgcer_adcPulseAmpRaw;
-TBranch *hgcer_adcPulseIntRaw;
-TBranch *hgcer_adcPulseTimeRaw;
-TBranch *hgcer_adcPulseAmp; 
-TBranch *hgcer_adcPulseInt;
-TBranch *hgcer_adcPulseTime;
+TBranch *B_adcCounterNdata;
+TBranch *B_adcCounter;
+TBranch *B_adcPulseAmpRaw;
+TBranch *B_adcPulseIntRaw;
+TBranch *B_adcPulseTimeRaw;
+TBranch *B_adcPulseAmp; 
+TBranch *B_adcPulseInt;
+TBranch *B_adcPulseTime;
 
 // Mode 10
-TBranch *hgcer_adcSampCounterNdata;
-TBranch *hgcer_adcSampCounter;
-TBranch *hgcer_adcSampPulseAmpRaw;
-TBranch *hgcer_adcSampPulseIntRaw;
-TBranch *hgcer_adcSampPulseTimeRaw;
-TBranch *hgcer_adcSampPulseAmp;
-TBranch *hgcer_adcSampPulseInt;
-TBranch *hgcer_adcSampPulseTime;
+TBranch *B_adcSampCounterNdata;
+TBranch *B_adcSampCounter;
+TBranch *B_adcSampPulseAmpRaw;
+TBranch *B_adcSampPulseIntRaw;
+TBranch *B_adcSampPulseTimeRaw;
+TBranch *B_adcSampPulseAmp;
+TBranch *B_adcSampPulseInt;
+TBranch *B_adcSampPulseTime;
 
 // Standard
 Int_t hgcer_adcCounterNdata;
@@ -106,24 +107,44 @@ TH1D* hgcer_SampPulseTime[HGC_PMT];
 void setBranchAddresses(TTree* DataTree)
 {
 	// regular set
-	DataTree->SetBranchAddress("Ndata.P.hgcer.adcCounter", &hgcer_adcCounterNdata);
-	DataTree->SetBranchAddress("P.hgcer.adcCounter", hgcer_adcCounter);
-	DataTree->SetBranchAddress("P.hgcer.adcPulseAmpRaw", hgcer_adcPulseAmpRaw);
-	DataTree->SetBranchAddress("P.hgcer.adcPulseIntRaw", hgcer_adcPulseIntRaw);
-	DataTree->SetBranchAddress("P.hgcer.adcPulseTimeRaw", hgcer_adcPulseTimeRaw);
-	DataTree->SetBranchAddress("P.hgcer.adcPulseAmp", hgcer_adcPulseAmp);
-	DataTree->SetBranchAddress("P.hgcer.adcPulseInt", hgcer_adcPulseInt);
-	DataTree->SetBranchAddress("P.hgcer.adcPulseTime", hgcer_adcPulseTime);
+	B_adcCounterNdata = DataTree->SetBranchAddress("Ndata.P.hgcer.adcCounter", &len;
+	B_adcCounter = DataTree->SetBranchAddress("P.hgcer.adcCounter", &length);
+	B_adcPulseAmpRaw = DataTree->SetBranchAddress("P.hgcer.adcPulseAmpRaw", &length);
+	B_adcPulseIntRaw = DataTree->SetBranchAddress("P.hgcer.adcPulseIntRaw", &length);
+	B_adcPulseTimeRaw = DataTree->SetBranchAddress("P.hgcer.adcPulseTimeRaw", &length);
+	B_adcPulseAmp = DataTree->SetBranchAddress("P.hgcer.adcPulseAmp", &length);
+	B_adcPulseInt = DataTree->SetBranchAddress("P.hgcer.adcPulseInt", &length);
+	B_adcPulseTime = DataTree->SetBranchAddress("P.hgcer.adcPulseTime", &length);
 	
 	// Mode 10 set
-	DataTree->SetBranchAddress("Ndata.P.hgcer.adcSampleCounter", &hgcer_adcSampCounterNdata);
-	DataTree->SetBranchAddress("P.hgcer.adcSampleCounter", hgcer_adcSampCounter);
-	DataTree->SetBranchAddress("P.hgcer.adcSampPulseAmpRaw", hgcer_adcSampPulseAmpRaw);
-	DataTree->SetBranchAddress("P.hgcer.adcSampPulseIntRaw", hgcer_adcSampPulseIntRaw);
-	DataTree->SetBranchAddress("P.hgcer.adcSampPulseTimeRaw", hgcer_adcSampPulseTimeRaw);
-	DataTree->SetBranchAddress("P.hgcer.adcSampPulseAmp", hgcer_adcSampPulseAmp);
-	DataTree->SetBranchAddress("P.hgcer.adcSampPulseInt", hgcer_adcSampPulseInt);
-	DataTree->SetBranchAddress("P.hgcer.adcSampPulseTime", hgcer_adcSampPulseTime);
+	B_adcSampCounterNdata = DataTree->SetBranchAddress("Ndata.P.hgcer.adcSampleCounter", &len);
+	B_adcSampCounter = DataTree->SetBranchAddress("P.hgcer.adcSampleCounter", &length);
+	B_adcSampPulseAmpRaw = DataTree->SetBranchAddress("P.hgcer.adcSampPulseAmpRaw", &length);
+	B_adcSampPulseIntRaw = DataTree->SetBranchAddress("P.hgcer.adcSampPulseIntRaw", &length);
+	B_adcSampPulseTimeRaw = DataTree->SetBranchAddress("P.hgcer.adcSampPulseTimeRaw", &length);
+	B_adcSampPulseAmp = DataTree->SetBranchAddress("P.hgcer.adcSampPulseAmp", &length);
+	B_adcSampPulseInt = DataTree->SetBranchAddress("P.hgcer.adcSampPulseInt", &length);
+	B_adcSampPulseTime = DataTree->SetBranchAddress("P.hgcer.adcSampPulseTime", &length);
+	
+	// Standard
+	B_adcCounterNdata->SetAddress(&hgcer_adcCounterNdata);
+	B_adcCounter->SetAddress(hgcer_adcCounter);
+	B_adcPulseAmpRaw->SetAddress(hgcer_adcPulseAmpRaw);
+	B_adcPulseIntRaw->SetAddress(hgcer_adcPulseIntRaw);
+	B_adcPulseTimeRaw->SetAddress(hgcer_adcPulseTimeRaw);
+	B_adcPulseAmp->SetAddress(hgcer_adcPulseAmp); 
+	B_adcPulseInt->SetAddress(hgcer_adcPulseInt);
+	B_adcPulseTime->SetAddress(hgcer_adcPulseTime);
+
+    // Mode 10
+	B_adcSampCounterNdata->SetAddress(&hgcer_adcSampCounterNdata);
+	B_adcSampCounter->SetAddress(hgcer_adcSampCounter);
+	B_adcSampPulseAmpRaw->SetAddress(hgcer_adcSampPulseAmpRaw);
+	B_adcSampPulseIntRaw->SetAddress(hgcer_adcSampPulseIntRaw);
+	B_adcSampPulseTimeRaw->SetAddress(hgcer_adcSampPulseTimeRaw);
+	B_adcSampPulseAmp->SetAddress(hgcer_adcSampPulseAmp);
+	B_adcSampPulseInt->SetAddress(hgcer_adcSampPulseInt);
+	B_adcSampPulseTime->SetAddress(hgcer_adcSampPulseTime);
 	
 	return;
 }

@@ -107,7 +107,7 @@ TH1D* hgcer_SampPulseTime[HGC_PMT];
 void setBranchAddresses(TTree* DataTree)
 {
 	// regular set
-	B_adcCounterNdata = DataTree->SetBranchAddress("Ndata.P.hgcer.adcCounter", &len;
+        B_adcCounterNdata = DataTree->SetBranchAddress("Ndata.P.hgcer.adcCounter", &len);
 	B_adcCounter = DataTree->SetBranchAddress("P.hgcer.adcCounter", &length);
 	B_adcPulseAmpRaw = DataTree->SetBranchAddress("P.hgcer.adcPulseAmpRaw", &length);
 	B_adcPulseIntRaw = DataTree->SetBranchAddress("P.hgcer.adcPulseIntRaw", &length);

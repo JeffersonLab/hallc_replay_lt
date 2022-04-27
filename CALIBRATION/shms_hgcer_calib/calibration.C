@@ -2,6 +2,8 @@
 // Vijay Kumar, Univerity of Regina - 24/07/20
 // vijay36361@gmail.com
 // For more info on processing with TProof, see https://root.cern.ch/doc/v608/classTProof.html
+//Some updates and changes by Jacob Murphy, Ohio University - 07/09/2020
+//jm443918@ohio.edu
 
 #include "calibration.h"
 #include <TH1.h>
@@ -31,7 +33,11 @@ void calibration::Begin(TTree * /*tree*/)
 
 void calibration::SlaveBegin(TTree * /*tree*/)
 {
+<<<<<<< HEAD
   printf("\nTest\n");
+=======
+  //printf("\nTest\n");
+>>>>>>> origin
   TString option = GetOption();
   // Initialize the histograms. Note they are binned per ADC channel which will be changed in the calibration analysis.
   Int_t ADC_min;
@@ -162,7 +168,11 @@ Bool_t calibration::Process(Long64_t entry)
   //{
       //Require loose cut on particle velocity                                     
       fBeta_Full->Fill(P_gtr_beta[0]);
+<<<<<<< HEAD
       if (TMath::Abs(P_gtr_beta[0] - 1.0) > 2.0) return kTRUE;
+=======
+      if (TMath::Abs(P_gtr_beta[0] - 1.0) > 0.4) return kTRUE;
+>>>>>>> origin
       fBeta_Cut->Fill(P_gtr_beta[0]);    
       //Filling the histograms
       for (Int_t ipmt = 0; ipmt < fpmts; ipmt++)

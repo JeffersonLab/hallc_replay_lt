@@ -1,6 +1,6 @@
 // Macro to generate time-walk histograms for the hodoscopes
 // Author: Eric Pooser, pooser@jlab.org
-// Changes made by/Jacob Murphy (Ohio U) and Nathan Heinrich (UR) 2021/12/08, including new plotting bounds and fit style
+
 #include <time.h>
 #include <TSystem.h>
 #include <TString.h>
@@ -66,8 +66,8 @@ static const Double_t refAdcPulseTimeCutLow  = 300.0;  // Units of ns
 static const Double_t refAdcPulseTimeCutHigh = 370.0;  // Units of ns
 static const Double_t adcTdcTimeDiffCutLow   = 0.0; // Units of ns
 static const Double_t adcTdcTimeDiffCutHigh  = 100.0;  // Units of ns
-static const Double_t calEtotnormCutVal      = 0.7;    // Units of Normalized energy
-static const Double_t cerNpeSumCutVal        = 0.5;    // Units of NPE in aerogel
+static const Double_t calEtotnormCutVal      = 0.9;    // Units of Normalized energy
+static const Double_t cerNpeSumCutVal        = 10;    // Units of NPE in aerogel
 // static const Double_t adcTdcTimeDiffCutLow   = -6000.0;  // Units of ns
 // static const Double_t adcTdcTimeDiffCutHigh  = 1000.0;  // Units of ns
 
@@ -238,27 +238,6 @@ void timeWalkHistos(TString inputname, Int_t runNum, string SPEC_flg) {  //SPEC_
   Double_t phod_2xnhits;
   Double_t phod_2ynhits;
 
-  //C.Y. Dec 21, 2021 | Variables for Good ADC,TDC Hits per plane side (this will be used to require 2-ended PMT hits)
-  Double_t phod_1x_posAdcHits;
-  Double_t phod_1x_negAdcHits;
-  Double_t phod_1x_posTdcHits;
-  Double_t phod_1x_negTdcHits;
-
-  Double_t phod_1y_posAdcHits;
-  Double_t phod_1y_negAdcHits;
-  Double_t phod_1y_posTdcHits;
-  Double_t phod_1y_negTdcHits;
-
-  Double_t phod_2x_posAdcHits;
-  Double_t phod_2x_negAdcHits;
-  Double_t phod_2x_posTdcHits;
-  Double_t phod_2x_negTdcHits;
-
-  Double_t phod_2y_posAdcHits;
-  Double_t phod_2y_negAdcHits;
-  Double_t phod_2y_posTdcHits;
-  Double_t phod_2y_negTdcHits;
-  
   // Acquire the trigger apparatus data
   rawDataTree->SetBranchAddress(Form("T.%s.pFADC_TREF_ROC2_adcPulseTimeRaw", SPEC_flg.c_str()), &refAdcPulseTimeRaw);
   rawDataTree->SetBranchAddress(Form("T.%s.pFADC_TREF_ROC2_adcPulseAmp", SPEC_flg.c_str()),     &refAdcPulseAmp);
@@ -266,40 +245,16 @@ void timeWalkHistos(TString inputname, Int_t runNum, string SPEC_flg) {  //SPEC_
   rawDataTree->SetBranchAddress(Form("T.%s.pT1_tdcTimeRaw", SPEC_flg.c_str()), &refT1TdcTimeRaw);
   rawDataTree->SetBranchAddress(Form("T.%s.pT2_tdcTimeRaw", SPEC_flg.c_str()), &refT2TdcTimeRaw);
   rawDataTree->SetBranchAddress(Form("T.%s.pT3_tdcTimeRaw", SPEC_flg.c_str()), &refT3TdcTimeRaw);
-
-  //C.Y. Dec 21. 2021 | Suggestion: These types of cuts should be placed externaly to let the uset
-  // select the appropiate cut based on their experiment
   rawDataTree->SetBranchAddress("P.cal.etracknorm", &calEtotnorm);
   rawDataTree->SetBranchAddress("P.hgcer.npeSum", &cerNpeSum);
-  //rawDataTree->SetBranchAddress("P.ngcer.npeSum", &cerNpeSum);
 
   rawDataTree->SetBranchAddress("P.hod.1x.nhits", &phod_1xnhits);
   rawDataTree->SetBranchAddress("P.hod.1y.nhits", &phod_1ynhits);
   rawDataTree->SetBranchAddress("P.hod.2x.nhits", &phod_2xnhits);
   rawDataTree->SetBranchAddress("P.hod.2y.nhits", &phod_2ynhits);
 
-  //C.Y. Dec 21, 2021 | Added variable for total number of good ADC, TDC hits per plane side 
-  rawDataTree->SetBranchAddress("P.hod.1x.totNumGoodPosAdcHits", &phod_1x_posAdcHits);
-  rawDataTree->SetBranchAddress("P.hod.1x.totNumGoodNegAdcHits", &phod_1x_negAdcHits);
-  rawDataTree->SetBranchAddress("P.hod.1x.totNumGoodPosTdcHits", &phod_1x_posTdcHits);
-  rawDataTree->SetBranchAddress("P.hod.1x.totNumGoodNegTdcHits", &phod_1x_negTdcHits);
+ 
 
-  rawDataTree->SetBranchAddress("P.hod.1y.totNumGoodPosAdcHits", &phod_1y_posAdcHits);
-  rawDataTree->SetBranchAddress("P.hod.1y.totNumGoodNegAdcHits", &phod_1y_negAdcHits);
-  rawDataTree->SetBranchAddress("P.hod.1y.totNumGoodPosTdcHits", &phod_1y_posTdcHits);
-  rawDataTree->SetBranchAddress("P.hod.1y.totNumGoodNegTdcHits", &phod_1y_negTdcHits);
-
-  rawDataTree->SetBranchAddress("P.hod.2x.totNumGoodPosAdcHits", &phod_2x_posAdcHits);
-  rawDataTree->SetBranchAddress("P.hod.2x.totNumGoodNegAdcHits", &phod_2x_negAdcHits);
-  rawDataTree->SetBranchAddress("P.hod.2x.totNumGoodPosTdcHits", &phod_2x_posTdcHits);
-  rawDataTree->SetBranchAddress("P.hod.2x.totNumGoodNegTdcHits", &phod_2x_negTdcHits);
-
-  rawDataTree->SetBranchAddress("P.hod.2y.totNumGoodPosAdcHits", &phod_2y_posAdcHits);
-  rawDataTree->SetBranchAddress("P.hod.2y.totNumGoodNegAdcHits", &phod_2y_negAdcHits);
-  rawDataTree->SetBranchAddress("P.hod.2y.totNumGoodPosTdcHits", &phod_2y_posTdcHits);
-  rawDataTree->SetBranchAddress("P.hod.2y.totNumGoodNegTdcHits", &phod_2y_negTdcHits);
-
-				
 // Loop over the planes, sides, signals, leafs, and fill data arrays
   for(UInt_t iplane = 0; iplane < nPlanes; iplane++) {
     
@@ -361,14 +316,10 @@ void timeWalkHistos(TString inputname, Int_t runNum, string SPEC_flg) {  //SPEC_
   } // Plane loop
 
   Bool_t good_hits;
-  Bool_t good_two_ended_hits_1x;
-  Bool_t good_two_ended_hits_1y;
-  Bool_t good_two_ended_hits_2x;
-  Bool_t good_two_ended_hits_2y;
   
     // Loop over the events and fill histograms
   nentries = rawDataTree->GetEntries();
-  
+  //nentries = ;
   cout << "\n******************************************"    << endl;
   cout << nentries << " Events Will Be Processed"           << endl;
   cout << "******************************************\n"    << endl;
@@ -377,39 +328,12 @@ void timeWalkHistos(TString inputname, Int_t runNum, string SPEC_flg) {  //SPEC_
     rawDataTree->GetEntry(ievent);
   
     good_hits = phod_1xnhits==1&&phod_1ynhits==1&&phod_2xnhits==1&&phod_2ynhits==1;
-    
-    //C.Y. Dec 21, 2021 | Add 2-ended PMT hit requirement for both ADCs and TDCs
-    good_two_ended_hits_1x = phod_1x_posAdcHits==1 && phod_1x_negAdcHits==1 && phod_1x_posTdcHits==1 && phod_1x_negTdcHits==1;
-    good_two_ended_hits_1y = phod_1y_posAdcHits==1 && phod_1y_negAdcHits==1 && phod_1y_posTdcHits==1 && phod_1y_negTdcHits==1;
-    good_two_ended_hits_2x = phod_2x_posAdcHits==1 && phod_2x_negAdcHits==1 && phod_2x_posTdcHits==1 && phod_2x_negTdcHits==1;
-    good_two_ended_hits_2y = phod_2y_posAdcHits==1 && phod_2y_negAdcHits==1 && phod_2y_posTdcHits==1 && phod_2y_negTdcHits==1;
-    
 
     // Fiducial PID cuts
     calEtotnormCut   = (calEtotnorm < calEtotnormCutVal);
     cerNpeSumCut = (cerNpeSum < cerNpeSumCutVal); // JM 31-10-21: Editing cer cuts for good event selection. Added non-zero requirement
     if (calEtotnormCut || cerNpeSumCut) continue;
-    
-    //if (!good_hits) continue; 
-    //if (!(good_two_ended_hits_1x && good_two_ended_hits_1y && good_two_ended_hits_2x && good_two_ended_hits_2y)) continue; //C.Y. Added 2-ended hit requirement
-    
-    if (!(good_hits && good_two_ended_hits_1x && good_two_ended_hits_1y && good_two_ended_hits_2x && good_two_ended_hits_2y)) continue; //C.Y. Added 2-ended hit requirement         
-
-    //cout << "evt = " << ievent << endl;
-    //cout << "phod_1xnhits = " << phod_1xnhits << endl;
-    //if(good_two_ended_hits_1x){
-    /*
-    cout << "evt = " << ievent << endl;                                                                                                      
-    cout << "phod_1xnhits = " << phod_1xnhits << endl;  
-    cout << "phod_1x_posAdcHits = " << phod_1x_posAdcHits << endl;                     
-    cout << "phod_1x_negAdcHits = " << phod_1x_negAdcHits << endl;                                                                       
-    cout << "phod_1x_posTdcHits = " << phod_1x_posTdcHits << endl;                                                            
-    cout << "phod_1x_negTdcHits = " << phod_1x_negTdcHits << endl;  
-    cout << "-------" << endl;
-    cout << "" << endl;
-    */
-    //}
-    
+    if (!good_hits) continue;
     // Fill trigger apparatus histos
     h1_refAdcPulseTimeRaw->Fill(refAdcPulseTimeRaw*adcChanToTime);
     h1_refAdcPulseAmp->Fill(refAdcPulseAmp);
@@ -538,9 +462,6 @@ void timeWalkHistos(TString inputname, Int_t runNum, string SPEC_flg) {  //SPEC_
 	} // Signal loop
       } // Side loop
     } // Plane loop
-    
-    //C.Y. Feb 25, 2022 | print the percentage of events analyzed 
-    cout << std::setprecision(2) << double(ievent) / nentries * 100. << "  % " << std::flush << "\r"; 
 
     if (ievent % 100000 == 0 && ievent != 0)
       cout << ievent << " Events Have Been Processed..." << endl;
@@ -553,7 +474,7 @@ void timeWalkHistos(TString inputname, Int_t runNum, string SPEC_flg) {  //SPEC_
 
   // Calculate the analysis rate
   t = clock() - t;
-  printf ("The Analysis Took %.1f seconds (%.1f min.) \n", ((float) t) / CLOCKS_PER_SEC,  ((float) t) / CLOCKS_PER_SEC/60.) ;
+  printf ("The Analysis Took %.1f seconds \n", ((float) t) / CLOCKS_PER_SEC);
   printf ("The Analysis Event Rate Was %.3f kHz \n", (ievent + 1) / (((float) t) / CLOCKS_PER_SEC*1000.));
 
   outFile->Write();
@@ -561,4 +482,4 @@ void timeWalkHistos(TString inputname, Int_t runNum, string SPEC_flg) {  //SPEC_
 
   //return 0;
 
-} 
+} // time_walk_calib()

@@ -25,7 +25,8 @@
 using namespace TMath;
 
 void calibration::Begin(TTree * /*tree*/)
-{ printf("\n\n");
+{ 
+  printf("\n\n");
   TString option = GetOption();
   Info("Begin", "Starting calibration process");
   printf("\n\n");
@@ -33,11 +34,6 @@ void calibration::Begin(TTree * /*tree*/)
 
 void calibration::SlaveBegin(TTree * /*tree*/)
 {
-<<<<<<< HEAD
-  printf("\nTest\n");
-=======
-  //printf("\nTest\n");
->>>>>>> origin
   TString option = GetOption();
   // Initialize the histograms. Note they are binned per ADC channel which will be changed in the calibration analysis.
   Int_t ADC_min;
@@ -144,11 +140,11 @@ void calibration::SlaveBegin(TTree * /*tree*/)
   fBeta_Full = new TH1F("Beta_Full", "Full beta for events ; Beta ; Counts", 100, -0.1, 1.5);
   GetOutputList()->Add(fBeta_Full);
   //Testing x/y pos calculations
- fXatYat = new TH2F("hgcX_hgcY", "X vs Y hgcer.x/yAtCer ; X ; Y", 500, -50., 50., 500, -50., 50.);
- GetOutputList()->Add(fXatYat);
+  fXatYat = new TH2F("hgcX_hgcY", "X vs Y hgcer.x/yAtCer ; X ; Y", 500, -50., 50., 500, -50., 50.);
+  GetOutputList()->Add(fXatYat);
 
- fXeqYeq = new TH2F("hgcXeq_hgcYeq", "X vs Y hgcer.x/yEq ; X ; Y", 500, -50., 50., 500, -50., 50.);
-   GetOutputList()->Add(fXeqYeq);
+  fXeqYeq = new TH2F("hgcXeq_hgcYeq", "X vs Y hgcer.x/yEq ; X ; Y", 500, -50., 50., 500, -50., 50.);
+  GetOutputList()->Add(fXeqYeq);
 
   printf("\n\n");
 }
@@ -166,68 +162,65 @@ Bool_t calibration::Process(Long64_t entry)
   //Redundant, but useful if multiple tracks are eventually allowed
   //for (Int_t itrack = 0; itrack < *Ndata_P_tr_beta; itrack++)
   //{
-      //Require loose cut on particle velocity                                     
-      fBeta_Full->Fill(P_gtr_beta[0]);
-<<<<<<< HEAD
-      if (TMath::Abs(P_gtr_beta[0] - 1.0) > 2.0) return kTRUE;
-=======
-      if (TMath::Abs(P_gtr_beta[0] - 1.0) > 0.4) return kTRUE;
->>>>>>> origin
-      fBeta_Cut->Fill(P_gtr_beta[0]);    
-      //Filling the histograms
-      for (Int_t ipmt = 0; ipmt < fpmts; ipmt++)
+  //Require loose cut on particle velocity                                     
+  // SJDK 28/04/22 - This cut got screwed up in a merge somewhere, I've changed it to > 0.4 (> 2 made no sense)
+  fBeta_Full->Fill(P_gtr_beta[0]);
+  if (TMath::Abs(P_gtr_beta[0] - 1.0) > 0.4) return kTRUE;
+  fBeta_Cut->Fill(P_gtr_beta[0]);    
+  //Filling the histograms
+  for (Int_t ipmt = 0; ipmt < fpmts; ipmt++)
+    {
+      //Filling timing info before cut
+      fTiming_Full->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+      //Perform a loose timing cut on each PMT
+      if(ipmt ==0)
 	{
-	  //Filling timing info before cut
-	  fTiming_Full->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-	  //Perform a loose timing cut on each PMT
-	  if(ipmt ==0)
-	    {
-	      fTim1_full->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-	      if(P_hgcer_goodAdcTdcDiffTime[ipmt] >40 || P_hgcer_goodAdcTdcDiffTime[ipmt] < 30) continue;                      
-	      fTim1->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-	    }
-	  if(ipmt ==1)
-	    {
-	      fTim2_full->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-	      if(P_hgcer_goodAdcTdcDiffTime[ipmt] >40 || P_hgcer_goodAdcTdcDiffTime[ipmt] < 30) continue;                          
-	      fTim2->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-	    }
-	  if(ipmt ==2)
-	    {
-	      fTim3_full->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-	      if(P_hgcer_goodAdcTdcDiffTime[ipmt] >40 || P_hgcer_goodAdcTdcDiffTime[ipmt] < 30) continue;                           
-	      fTim3->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-	    }
-	  if(ipmt ==3)
-	    {
-	      fTim4_full->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-	      if(P_hgcer_goodAdcTdcDiffTime[ipmt] >40 || P_hgcer_goodAdcTdcDiffTime[ipmt] < 30) continue;                                  
-	      fTim4->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-	    }
-	  //Cuts to remove entries corresponding to a PMT not registering a hit    
-	  if (P_hgcer_goodAdcPulseInt[ipmt] == 0.0) continue;
-	  //For quadrant cut strategy with no particle ID cut
-	  //Fill histogram of the full PulseInt spectra for each PMT
-	  fPulseInt[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
-	  fPulseInt_poiss[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
-	  //Retrieve information for particle tracking from focal plane
-	  //Fill histograms of what each PMT registers from each quadrant, this requires tracking the particle from the focal plane. Each quadrant is defined from the parameter files
-	 Float_t y_pos = P_hgcer_yAtCer[0];
-	 Float_t y_eq = P_dc_y_fp[0] + P_dc_yp_fp[0]*fhgc_zpos;
-	 Float_t x_pos = P_hgcer_xAtCer[0]; 
-	 Float_t x_eq = P_dc_x_fp[0] + P_dc_xp_fp[0]*fhgc_zpos;	  
-	 fXatYat->Fill(y_pos,x_pos);
-	  fXeqYeq->Fill(y_eq,x_eq);
-	  //Condition for quadrant 1 mirror
-	  if (y_pos >= 4.6 && x_pos >= 9.4) fPulseInt_quad[0][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
-	  //Condition for quadrant 2 mirror
-	  if (y_pos < 4.6 && x_pos >= 9.4) fPulseInt_quad[1][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);	
-	  //Condition for quadrant 3 mirror
-	  if (y_pos >= 4.6 && x_pos < 9.4) fPulseInt_quad[2][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);	
-	  //Condition for quadrant 4 mirror
-	  if (y_pos < 4.6 && x_pos < 9.4) fPulseInt_quad[3][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);	
-	}//Marks end of loop over PMTs
-      // }//Marks end of loop over tracks  
+	  fTim1_full->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+	  if(P_hgcer_goodAdcTdcDiffTime[ipmt] >40 || P_hgcer_goodAdcTdcDiffTime[ipmt] < 30) continue;                      
+	  fTim1->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+	}
+      if(ipmt ==1)
+	{
+	  fTim2_full->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+	  if(P_hgcer_goodAdcTdcDiffTime[ipmt] >40 || P_hgcer_goodAdcTdcDiffTime[ipmt] < 30) continue;                          
+	  fTim2->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+	}
+      if(ipmt ==2)
+	{
+	  fTim3_full->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+	  if(P_hgcer_goodAdcTdcDiffTime[ipmt] >40 || P_hgcer_goodAdcTdcDiffTime[ipmt] < 30) continue;                           
+	  fTim3->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+	}
+      if(ipmt ==3)
+	{
+	  fTim4_full->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+	  if(P_hgcer_goodAdcTdcDiffTime[ipmt] >40 || P_hgcer_goodAdcTdcDiffTime[ipmt] < 30) continue;                                  
+	  fTim4->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+	}
+      //Cuts to remove entries corresponding to a PMT not registering a hit    
+      if (P_hgcer_goodAdcPulseInt[ipmt] == 0.0) continue;
+      //For quadrant cut strategy with no particle ID cut
+      //Fill histogram of the full PulseInt spectra for each PMT
+      fPulseInt[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
+      fPulseInt_poiss[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
+      //Retrieve information for particle tracking from focal plane
+      //Fill histograms of what each PMT registers from each quadrant, this requires tracking the particle from the focal plane. Each quadrant is defined from the parameter files
+      Float_t y_pos = P_hgcer_yAtCer[0];
+      Float_t y_eq = P_dc_y_fp[0] + P_dc_yp_fp[0]*fhgc_zpos;
+      Float_t x_pos = P_hgcer_xAtCer[0]; 
+      Float_t x_eq = P_dc_x_fp[0] + P_dc_xp_fp[0]*fhgc_zpos;	  
+      fXatYat->Fill(y_pos,x_pos);
+      fXeqYeq->Fill(y_eq,x_eq);
+      //Condition for quadrant 1 mirror
+      if (y_pos >= 4.6 && x_pos >= 9.4) fPulseInt_quad[0][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
+      //Condition for quadrant 2 mirror
+      if (y_pos < 4.6 && x_pos >= 9.4) fPulseInt_quad[1][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);	
+      //Condition for quadrant 3 mirror
+      if (y_pos >= 4.6 && x_pos < 9.4) fPulseInt_quad[2][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);	
+      //Condition for quadrant 4 mirror
+      if (y_pos < 4.6 && x_pos < 9.4) fPulseInt_quad[3][ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);	
+    }//Marks end of loop over PMTs
+  // }//Marks end of loop over tracks  
   return kTRUE;
 }
 
@@ -279,14 +272,14 @@ void calibration::Terminate()
   Beta->cd(2);
   fBeta_Cut->Draw(); 
   Beta->Print(outputpdf + '(');
-   TCanvas *XatYat;
-   XatYat = new TCanvas("XatYat", "XatYat information for events");
-    XatYat->Divide(2,1);
-    XatYat->cd(1);
-    fXeqYeq->Draw();
-    XatYat->cd(2);
-    fXatYat->Draw();
-    XatYat->Print(outputpdf);
+  TCanvas *XatYat;
+  XatYat = new TCanvas("XatYat", "XatYat information for events");
+  XatYat->Divide(2,1);
+  XatYat->cd(1);
+  fXeqYeq->Draw();
+  XatYat->cd(2);
+  fXatYat->Draw();
+  XatYat->Print(outputpdf);
   //Canvas to show full timing  information
   TCanvas *Timing;
   Timing = new TCanvas("Timing", "Timing information for events");

@@ -1,5 +1,5 @@
 /*
-	HodoParamCompair.C
+	HodoParamCompare.C
 	Author: Nathan Heinrich
 	
 	This script is for graphing the Parameters from shms Hodoscope Time Walk Calibration.
@@ -131,7 +131,7 @@ void RemoveBad ( TGraphErrors *g1, Double_t *Param, Double_t *ParamErr, UInt_t n
 
 }
 
-void HodoParamCompair ( TString runNums_name ) //input path to run # file
+void HodoParamCompare ( TString runNums_name ) //input path to run # file
 {
 	//open file with run numbers
 	ifstream runFile;
@@ -316,9 +316,3 @@ void HodoParamCompair ( TString runNums_name ) //input path to run # file
 	Outfile->Close();
 	return;
 }
-
-
-
-
-
-

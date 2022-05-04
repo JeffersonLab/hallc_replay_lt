@@ -24,7 +24,7 @@ The two codes have different parameters and it is possible to switch between the
 
      c. Start "root -l" and then .x timeWalkCalib.C+
 
-     d. This creates the parameter file "../../PARAM/SHMS/HODO/phodo_TWcalib_runnumber.param"
+     d. This creates the parameter file "../../PARAM/SHMS/HODO/phodo_TWcalib_runnumber.param", as well as timeWalkCalib_runnumber.root which is a summary of the fits, and /CalibrationPlots/phodo_TWcalib_Err_%d.param which is used for looking at trends across many runs.
 
 3.  Replay the data with ptofusinginvadc=0 and the new parameter files (the simplest is to copy phodo_TWcalib_runnumber.param to phodo_TWcalib.param).
 
@@ -40,3 +40,5 @@ puts cuts on P.cal.etracknorm, P.hgcer.npeSum and P.hod.betanotrack to select el
      d. To analyze cosmic data :  .x  fitHodoCalib.C+("current_dir/to/ROOT_filename.root",Run_Number,kTRUE) 
 
      e. For cosmic data the speed of light is set to -30 cm/ns and the PID cut is just on P.hod.betanotrack with the default of betanotrack_low_cut = -1.2 and betanotrack_hi_cut = -.7
+
+5. Replay the data again with the new parameter file. For a good calibration, the beta distribution should be centred at 1.

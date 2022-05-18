@@ -62,6 +62,7 @@ PARAM/HMS/BCM/CALIB/
 farm_out/
 
 # Symbolic links
+online
 hcana
 scratch
 ROOTfilesPion

@@ -1,0 +1,33 @@
+13/05/22 - SJDK
+
+To do on cdaq -
+
+1. Update hallc_replay_lt ()
+   1a. Cloned and updated online_pionlt (X)
+       -> Sym links set up (X)
+   1b. Update all submodules (X)
+       -> UTIL_BATCH, cloned and online_pionlt updated (X)
+       -> UTIL_PION, cloned and online_pionlt updated (X)
+       	  -> Sym links set up (X)
+   1c. Re-organise PARAM/DB files, set new sym links up as needed, check pathing, clean up ()
+       -> hallc_replay_lt ()
+       	  -> Replay scripts ()
+       	  -> DB files ()
+	  -> Param files ()
+	  -> DEF files ()
+	  -> DEF cut files ()
+	  -> Reportfile templates ()
+       -> UTIL_PION ()
+       	  -> Analysis scripts()
+       	  -> Cut DB files ()
+	  -> Cut Param files ()
+   1d. ScalerCalib.C -> Get this working or remove it ()
+   1e. Remove good soup, freshen memes ()
+2. Get UTIL_OL and online GUI working (X)
+3. Test all replay scripts ()
+   3a. Modify running script as needed ()
+4. Check run_PionLT.sh works as expected after changes ()
+
+To do elsewhere -
+
+1. Update instructions/plots on the wiki ()

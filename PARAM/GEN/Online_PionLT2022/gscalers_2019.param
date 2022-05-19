@@ -1,0 +1,12 @@
+;djm valid from July 4, 2019 (after the major power outage) to end of Summer '19 run
+; This period completed the low Q2 PionLT runs, followed by the entire VCS experiment. 
+; Use bcm1 or 2 for normalization of physics data. 
+gNumBCMs=6
+gBCM_Names =            "BCM1      BCM2    Unser  BCM4A  BCM4B  BCM4C"
+gBCM_Gain =           5757.6,   5590.0,   4011.2,  9364,  2125,  5180 
+gBCM_Offset =       253389.1, 250887.6,   277000,  1521,   764,  1569 
+gBCM_SatOffset =         50.,      50.,    1000., 1000., 1000.,  1000. 
+gBCM_SatQuadratic =  0.00175,    0.002,      0.0,   0.0,   0.0,    0.0 
+gBCM_Current_threshold = 5.0
+; index = 0 to gNumBCMs-1
+gBCM_Current_threshold_index = 3

@@ -1,0 +1,4 @@
+;hcer_adc_to_npe = 1./5.735, 1./5.741
+;hcer_adc_to_npe = 1./10.69, 1./9.81
+;hcer_adc_to_npe = 1./9.069, 1./9.035 Updating with Simona's parameters, 21/09/10
+hcer_adc_to_npe = 1./10.17, 1./9.4

@@ -1,5 +1,12 @@
 void FullReplay_Online_time(Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
+  // WARNING
+  // SJDK - 20/05/22
+  // It is unclear what the purpose of this file is
+  // The databse file in use here has been archived
+  // Please edit this or adjust the file as needed if you want to run this replay
+  // WARNING
+
   // Get RunNumber and MaxEvent if not provided.
   if(RunNumber == 0) {
     cout << "Enter a Run Number (-1 to exit): ";

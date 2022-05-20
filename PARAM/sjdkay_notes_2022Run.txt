@@ -1,0 +1,47 @@
+SJDK - 19/05/2022
+
+- I have restructured the directories since the 2021 run
+- The previous "online_v1" (and v2 where they exist) have been renamed to "Online_PionLT2021" (OR ...2021_v1/v2 where multiple versions existed)
+- New calibration parameters will go into the new "Online_PionLT2022" directories set up in each subfolder
+- Each detector has multiple folders, corresponding to different run periods, at the top level, there is a symbolic link which points to the latest calibration files
+  - As new calibrations are determined, all that needs to change is the symbolic link
+- For example -
+
+[cdaq@cdaql1 CAL]$ pwd
+/home/cdaq/pionLT-2021/hallc_replay_lt_2022_Run/PARAM/HMS/CAL
+[cdaq@cdaql1 CAL]$ ll
+lrwxrwxrwx 1 cdaq c-cdaq   40 May 19 13:02 hcal_calib.param -> Online_PionLT2022/hcal_calib_12054.param*
+lrwxrwxrwx 1 cdaq c-cdaq   39 May 19 13:02 hcal_cuts.param -> Online_PionLT2022/hcal_cuts_11799.param*
+lrwxrwxrwx 1 cdaq c-cdaq   33 May 19 13:03 hcal_geom.param -> Online_PionLT2022/hcal_geom.param*
+drwxr-xr-x 3 cdaq c-cdaq 4.0K May 18 17:38 KaonLT_PARAM/
+drwxr-xr-x 2 cdaq c-cdaq 4.0K May 18 16:21 Online_PionLT2021/
+drwxr-xr-x 2 cdaq c-cdaq 4.0K May 19 13:04 Online_PionLT2022/
+
+- To begin with, the initial parameters are the last set from the previous 2021 run
+- As desired, specific calibrations can be pointed to by the top level .param file
+  - standard.database points to a param file, this contains the list of parameters to use
+  - Typically these are just "PARAM/HMS/CAL/hcal_calib.param" and so on
+  - BUT, you could force - "PARAM/HMS/CAL/Online_PionLT2022/MY_NEW_PARAMFILE.param" if you wanted for example. 
+- The idea is that the sym link should always point to something "sensible" for the ongoing setting
+  - For re-analysis of older data, you can go back to the top level .param file and point this to the parameters specific to the runs you want
+
+- The Param structure in TRIG is unchanged since these are read in directly by the replay scripts
+
+- Some param directories are not so clean, there are some other params floating around at the top level, e.g. -
+
+[cdaq@cdaql1 HODO]$ pwd
+/home/cdaq/pionLT-2021/hallc_replay_lt_2022_Run/PARAM/HMS/HODO
+[cdaq@cdaql1 HODO]$ ll
+lrwxrwxrwx 1 cdaq c-cdaq   35 May 19 14:00 hhodo_calib.param -> Online_PionLT2022/hhodo_calib.param*
+lrwxrwxrwx 1 cdaq c-cdaq   40 May 19 14:00 hhodo_cuts.param -> Online_PionLT2022/hhodo_cuts_11799.param*
+lrwxrwxrwx 1 cdaq c-cdaq   34 May 19 14:00 hhodo_geom.param -> Online_PionLT2022/hhodo_geom.param*
+-rw-r--r-- 1 cdaq c-cdaq 4.6K May 18 16:22 hhodo_TWcalib_11799.param
+-rw-r--r-- 1 cdaq c-cdaq 4.6K May 18 16:22 hhodo_TWcalib_12055.param
+lrwxrwxrwx 1 cdaq c-cdaq   43 May 19 14:00 hhodo_TWcalib.param -> Online_PionLT2022/hhodo_TWcalib_11799.param*
+-rwxr-xr-x 1 cdaq c-cdaq 6.7K May 18 16:22 hhodo_Vpcalib_11112.param*
+lrwxrwxrwx 1 cdaq c-cdaq   43 May 19 14:00 hhodo_Vpcalib.param -> Online_PionLT2022/hhodo_Vpcalib_11799.param*
+drwxr-xr-x 3 cdaq c-cdaq 4.0K May 18 17:38 KaonLT_PARAM/
+drwxr-xr-x 2 cdaq c-cdaq 4.0K May 18 16:22 Online_PionLT2021/
+drwxr-xr-x 2 cdaq c-cdaq 4.0K May 19 14:06 Online_PionLT2022/
+
+- These extra files should be cleaned up if they are not used or needed

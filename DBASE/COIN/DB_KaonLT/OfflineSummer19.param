@@ -50,7 +50,7 @@ cminch=2.54
 #include "PARAM/SHMS/GEN/KaonLT_PARAM/pcana.param"
 #include "PARAM/SHMS/GEN/KaonLT_PARAM/pdebug.param"
 #include "PARAM/SHMS/GEN/KaonLT_PARAM/shmsflags.param"
-#include "PARAM/SHMS/GEN/KaonLT_PARAM/ptracking.param"
+#include "PARAM/SHMS/GEN/KaonLT_PARAM/KaonLT_PARAM/ptracking.param"
 #include "PARAM/SHMS/GEN/KaonLT_PARAM/p_reftime_cut_Summer19_Offline.param"
 
 ; SHMS default geometry parameter files

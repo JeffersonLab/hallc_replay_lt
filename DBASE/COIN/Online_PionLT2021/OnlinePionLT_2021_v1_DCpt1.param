@@ -27,7 +27,7 @@ cminch=2.54
 
 ; HMS default cut parameter files
 #include "PARAM/HMS/CER/hcer_cuts.param"
-#include "PARAM/HMS/DC/hdc_cuts_calib_pt1.param"
+#include "PARAM/HMS/DC/Online_PionLT2021/hdc_cuts_calib_pt1.param"
 #include "PARAM/HMS/HODO/hhodo_cuts.param"
 #include "PARAM/HMS/AERO/haero_cuts.param"
 #include "PARAM/HMS/CAL/hcal_cuts.param"
@@ -47,7 +47,7 @@ cminch=2.54
 #include "PARAM/SHMS/GEN/pcana.param"
 #include "PARAM/SHMS/GEN/pdebug.param"
 #include "PARAM/SHMS/GEN/shmsflags.param"
-#include "PARAM/SHMS/GEN/ptracking.param"
+#include "PARAM/SHMS/GEN/Online_PionLT2021/ptracking.param"
 #include "PARAM/SHMS/GEN/p_reftime_cut.param"
 
 ; SHMS default geometry parameter files

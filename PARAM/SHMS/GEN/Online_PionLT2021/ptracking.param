@@ -7,7 +7,7 @@
   pmax_pr_hits = 35, 35
 
 ; pminhit(i)   minimum number of hits in each space point (one for each chamber)
-pmin_hit = 5,5
+pmin_hit = 5, 5
 ; hmin_combos(i) minimum number of pairs in each space point ( one per chamber)
 ; should be 3/3 for 4/6 tracking, and 4/4 for 5/6 tracking (JRA)
 pmin_combos = 4,4
@@ -19,14 +19,14 @@ pmin_combos = 4,4
 ; The following four criteria are applied to the stub fit results at the
 ; focal plane position to link stubs to tracks
 ; maximum number of possible focal plane tracks, must be <= 20
-pntracks_max_fp = 10
+pntracks_max_fp = 4
 
 ; The following four criteria are applied to the stub fit results at the
 ; focal plane position to link stubs to tracks
   pntracks_max_fp = 10
   pxt_track_criterion = 100.0
   pyt_track_criterion = 20.0
-  pxpt_track_criterion = 1.0
+  pxpt_track_criterion = 1.6
   pypt_track_criterion = 1.0
 
 ; Make a track of all single stubs normally 0
@@ -38,7 +38,7 @@ pntracks_max_fp = 10
 ; when selecting stub for chamber 
 ;  be sure stub_xp - stub_x*fRatio_xpfp_to_xfp < pstub_max_xpdiff
 ;   fRatio_xpfp_to_xfp is set in THcDriftChamber::ReadDatabase according to the spectrometer
-pstub_max_xpdiff=.2
+pstub_max_xpdiff=0.2
 
 
 

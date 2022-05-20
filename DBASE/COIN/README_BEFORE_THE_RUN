@@ -1,7 +1,0 @@
-SJDK - 19/05/22
-
-Just a quick note, for testing I left the 2021 kinematics in the standard_PionLT2022.kinematics file. 
-
-When we start the run, delete these for now so that the file is smaller and clearer.
-
-After the run they can all just be combined.

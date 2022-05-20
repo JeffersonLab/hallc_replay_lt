@@ -2,7 +2,7 @@
 
 To do on cdaq -
 
-1. Update hallc_replay_lt ()
+1. Update hallc_replay_lt (X)
    1a. Cloned and updated online_pionlt (X)
        -> Sym links set up (X)
    1b. Update all submodules (X)
@@ -14,22 +14,24 @@ To do on cdaq -
        	  -> Replay scripts (X)
        	  -> DB files (X)
 	  -> Param files (X)
-	     -> Some detector directories have junk files in them, needs cleaning ()
+	     -> Some detector directories have junk files in them, needs cleaning (X)
 	  -> DEF files (X)
 	  -> DEF cut files (X)
 	  -> Reportfile templates () -> Shelved for now, need updates from Ali/Jacob
        -> UTIL_PION ()
-       	  -> Analysis scripts()
+       	  -> Analysis scripts(X)
        	  -> Cut DB files (X)
 	  -> Cut Param files (X)
 	     -> Need to organise and sort this directory, lots of files at the top level, very confusing. Need to sort them ()
-   1d. ScalerCalib.C -> Get this working or remove it ()
-       -> Do we even need this? Can skip scaler replay if not ()
-   1e. Remove good soup, freshen memes ()
+   1d. ScalerCalib.C -> Get this working or remove it (X)
+       -> Do we even need this? Can skip scaler replay if not (X)
+   1e. Remove good soup, freshen memes (X)
 2. Get UTIL_OL and online GUI working (X)
-3. Test all replay scripts ()
-   3a. Modify running script as needed ()
-4. Check run_PionLT.sh works as expected after changes ()
+3. Test all replay scripts (X)
+   3a. Modify running script as needed (X)
+4. Check run_PionLT.sh works as expected after changes (X)
+5. Merge in Ali's def file and report file updates (see 1c) ()
+   5a. Updated runlist filling script to grab correct variables after changes ()
 
 To do elsewhere -
 

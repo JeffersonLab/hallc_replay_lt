@@ -10,7 +10,7 @@
 # Optics running
 
 4735-4736
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 12.0107
 htheta_lab = -13.01
 ptheta_lab = 9.505
@@ -23,7 +23,7 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.030
 
 4737-4779
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 12.0107
 htheta_lab = -13.01
 ptheta_lab = 9.505
@@ -38,7 +38,7 @@ SHMS_RF_Offset = -1.030
 # Heep single
 
 4780-4784
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 12.0107
 htheta_lab = -22.580
 ptheta_lab = 19.995
@@ -51,7 +51,7 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.030
 
 4785
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
 htheta_lab = -22.580
 ptheta_lab = 19.995
@@ -66,7 +66,7 @@ SHMS_RF_Offset = -1.030
 #Golden Sieve Run 4686
 
 4786
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
 htheta_lab = -22.60
 ptheta_lab = 20.00
@@ -81,7 +81,7 @@ SHMS_RF_Offset = -1.030
 #Beam pos check
 
 4787
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 12.0107
 htheta_lab = -13.01
 ptheta_lab = 9.505
@@ -109,7 +109,7 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.030
 
 4791 - 4792
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
 htheta_lab = -24.165
 ptheta_lab = 16.245
@@ -122,7 +122,7 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.030
 
 4793 - 4794
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
 htheta_lab = -24.165
 ptheta_lab = 19.845
@@ -135,7 +135,7 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.030
 
 4795 - 4799
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
 htheta_lab = -24.165
 ptheta_lab = 13.800
@@ -146,7 +146,7 @@ hpartmass = 0.0005109
 helicity_freq = 29.5596
 
 4800 - 4801
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
 htheta_lab = -24.165
 ptheta_lab = 13.800
@@ -159,7 +159,7 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.030
 
 4802 - 4803
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 12.0107
 htheta_lab = -24.165
 ptheta_lab = 13.800
@@ -172,7 +172,7 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.030
 
 4804 - 4813
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
 htheta_lab = -18.795
 ptheta_lab = 13.700
@@ -185,7 +185,7 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.030
 
 4814 - 4817
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
 htheta_lab = -17.200
 ptheta_lab = 11.700
@@ -198,7 +198,7 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.030
 
 4818 - 4820
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 12.0107
 htheta_lab = -13.005
 ptheta_lab = 11.700
@@ -211,7 +211,7 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.030
 
 4821 - 4825
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
 htheta_lab = -19.755
 ptheta_lab = 15.650
@@ -224,7 +224,7 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.030
 
 4826
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 12.0107
 htheta_lab = -13.000
 ptheta_lab = 15.650
@@ -237,25 +237,25 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.030
 
 4827 - 4864
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
 htheta_lab = -18.845
 ptheta_lab = 26.145
 hpcentral = 6.5900
 ppcentral = 4.8400
-ppartmass = 0.0005109
+ppartmass = 0.938272
 hpartmass = 0.0005109
 helicity_freq = 29.5596
 HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.030
 
 4865 - 4870
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -11.91
-ptheta_lab = 15.18
-hpcentral = 6.590
-ppcentral = 3.486
+htheta_lab = -11.910
+ptheta_lab = 15.175
+hpcentral = 6.5900
+ppcentral = 3.4860
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -263,12 +263,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.030
 
 4871-4880
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -11.91
-ptheta_lab = 18.18
-hpcentral = 6.590
-ppcentral = 3.486
+htheta_lab = -11.910
+ptheta_lab = 18.175
+hpcentral = 6.5900
+ppcentral = 3.4860
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -276,12 +276,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.119
 
 4881 - 4890
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -11.91
+htheta_lab = -11.910
 ptheta_lab = 21.180
-hpcentral = 6.590
-ppcentral = 3.486
+hpcentral = 6.5900
+ppcentral = 3.4860
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -289,12 +289,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.113
 
 4891
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -11.159
-ptheta_lab = 7.738
-hpcentral = 5.292
-ppcentral = 4.983
+htheta_lab = -11.160
+ptheta_lab = 7.735
+hpcentral = 5.2920
+ppcentral = 4.9830
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -302,12 +302,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.000
 
 4892 - 4912
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -11.159
-ptheta_lab = 13.742
-hpcentral = 5.292
-ppcentral = 4.983
+htheta_lab = -11.160
+ptheta_lab = 13.745
+hpcentral = 5.2920
+ppcentral = 4.9830
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -315,12 +315,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.000
 
 4913 - 4924
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -11.159
+htheta_lab = -11.160
 ptheta_lab = 10.735
-hpcentral = 5.292
-ppcentral = 4.983
+hpcentral = 5.2920
+ppcentral = 4.9830
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -328,12 +328,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.145
 
 4925 - 4939
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -11.159
+htheta_lab = -11.160
 ptheta_lab = 7.735
-hpcentral = 5.292
-ppcentral = 4.983
+hpcentral = 5.2920
+ppcentral = 4.9830
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -341,12 +341,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.119
 
 4940 - 4944
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -11.159
+htheta_lab = -11.160
 ptheta_lab = 7.735
-hpcentral = 5.292
-ppcentral = 4.983
+hpcentral = 5.2920
+ppcentral = 4.9830
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -354,12 +354,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.119
 
 4945 - 4947
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -11.159
+htheta_lab = -11.160
 ptheta_lab = 10.730
-hpcentral = 5.292
-ppcentral = 4.983
+hpcentral = 5.2920
+ppcentral = 4.9830
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -367,12 +367,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.145
 
 4948 - 4959
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -11.159
-ptheta_lab = 7.73
-hpcentral = 5.292
-ppcentral = 4.983
+htheta_lab = -11.160
+ptheta_lab = 7.730
+hpcentral = 5.2920
+ppcentral = 4.9830
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -380,12 +380,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.119
 
 4960 - 4979
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -17.08
-ptheta_lab = 9.81
-hpcentral = 4.712
-ppcentral = 5.389
+htheta_lab = -17.075
+ptheta_lab = 9.805
+hpcentral = 4.7120
+ppcentral = 5.3890
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -393,12 +393,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.125
 
 4980 - 4998
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -17.08
-ptheta_lab = 12.81
-hpcentral = 4.712
-ppcentral = 5.389
+htheta_lab = -17.075
+ptheta_lab = 12.810
+hpcentral = 4.7120
+ppcentral = 5.3890
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -406,12 +406,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.050
 
 4999 - 5012
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -17.08
-ptheta_lab = 15.81
-hpcentral = 4.712
-ppcentral = 5.389
+htheta_lab = -17.075
+ptheta_lab = 15.805
+hpcentral = 4.7120
+ppcentral = 5.3890
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -419,12 +419,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -0.097
 
 5013 - 5037
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -14.93
-ptheta_lab = 12.46
-hpcentral = 4.204
-ppcentral = 6.053
+htheta_lab = -14.930
+ptheta_lab = 12.460
+hpcentral = 4.2040
+ppcentral = 6.0530
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -432,12 +432,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -0.040
 
 5038 - 5039
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -14.93
-ptheta_lab = 12.46
-hpcentral = 4.204
-ppcentral = 6.053
+htheta_lab = -14.930
+ptheta_lab = 12.460
+hpcentral = 4.2040
+ppcentral = 6.0530
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -445,12 +445,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.750
 
 5040 - 5046
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -14.93
-ptheta_lab = 9.42
-hpcentral = 4.204
-ppcentral = 6.053
+htheta_lab = -14.930
+ptheta_lab = 9.410
+hpcentral = 4.2040
+ppcentral = 6.0530
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -458,12 +458,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.750
 
 5047 - 5077
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -14.93
-ptheta_lab = 9.42
-hpcentral = 4.204
-ppcentral = 6.053
+htheta_lab = -14.930
+ptheta_lab = 9.410
+hpcentral = 4.2040
+ppcentral = 6.0530
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -471,12 +471,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.250
 
 5078 - 5123
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -14.93
+htheta_lab = -14.930
 ptheta_lab = 6.495
-hpcentral = 4.204
-ppcentral = 6.053
+hpcentral = 4.2040
+ppcentral = 6.0530
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -484,12 +484,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.290
 
 5124 - 5145
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -23.005
-ptheta_lab = 6.490
-hpcentral = 3.266
-ppcentral = 6.842
+htheta_lab = -23.000
+ptheta_lab = 6.495
+hpcentral = 3.2660
+ppcentral = 6.8420
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -497,12 +497,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.290
 
 5149 - 5153
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -12.53
+htheta_lab = -12.530
 ptheta_lab = 6.495
-hpcentral = 3.266
-ppcentral = 6.842
+hpcentral = 3.2660
+ppcentral = 6.8420
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -510,12 +510,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.290
 
 5154 - 5158
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 12.0107
-htheta_lab = -12.53
+htheta_lab = -12.530
 ptheta_lab = 6.495
-hpcentral = 3.266
-ppcentral = 6.842
+hpcentral = 3.2660
+ppcentral = 6.8420
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -523,12 +523,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.290
 
 5159 - 5166
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -12.53
+htheta_lab = -12.530
 ptheta_lab = 6.495
-hpcentral = 3.266
-ppcentral = 6.842
+hpcentral = 3.2660
+ppcentral = 6.8420
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -536,12 +536,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.290
 
 5167 - 5173
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -14.93
+htheta_lab = -14.930
 ptheta_lab = 6.495
-hpcentral = 4.204
-ppcentral = 6.053
+hpcentral = 4.2040
+ppcentral = 6.0530
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -549,12 +549,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.290
 
 5174 - 5181
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 12.0107
-htheta_lab = -14.93
+htheta_lab = -14.930
 ptheta_lab = 6.495
-hpcentral = 4.204
-ppcentral = 6.053
+hpcentral = 4.2040
+ppcentral = 6.0530
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -562,12 +562,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.290
 
 5182 - 5220
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -23.00
+htheta_lab = -23.000
 ptheta_lab = 6.495
-hpcentral = 3.266
-ppcentral = 6.842
+hpcentral = 3.2660
+ppcentral = 6.8420
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -575,12 +575,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.290
 
 5221 - 5233
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -23.00
-ptheta_lab = 9.552
-hpcentral = 3.266
-ppcentral = 6.842
+htheta_lab = -23.000
+ptheta_lab = 9.550
+hpcentral = 3.2660
+ppcentral = 6.8420
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -588,12 +588,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.290
 
 5234 - 5235
-gpbeam = 10.5852
-gtargmass_amu = 12.0107
-htheta_lab = -23.00
-ptheta_lab = 9.552
-hpcentral = 3.266
-ppcentral = 6.842
+gpbeam = 10.58537
+gtargmass_amu = 1.00794
+htheta_lab = -23.000
+ptheta_lab = 9.550
+hpcentral = 3.2660
+ppcentral = 6.8420
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -601,12 +601,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.290
 
 5236 - 5243
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -23.00
+htheta_lab = -23.000
 ptheta_lab = 12.565
-hpcentral = 3.266
-ppcentral = 6.842
+hpcentral = 3.2660
+ppcentral = 6.8420
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -614,12 +614,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.290
 
 5244 - 5248
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -23.00
+htheta_lab = -23.000
 ptheta_lab = 12.565
-hpcentral = 3.266
-ppcentral = 6.842
+hpcentral = 3.2660
+ppcentral = 6.8420
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -627,12 +627,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.680
 
 5249 - 5250
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -23.00
+htheta_lab = -23.000
 ptheta_lab = 12.565
-hpcentral = 3.266
-ppcentral = 6.842
+hpcentral = 3.2660
+ppcentral = 6.8420
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -640,12 +640,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.680
 
 5251 - 5261
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -23.00
+htheta_lab = -23.000
 ptheta_lab = 9.555
-hpcentral = 3.266
-ppcentral = 6.842
+hpcentral = 3.2660
+ppcentral = 6.8420
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -653,12 +653,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.680
 
 5262 - 5263
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -23.00
+htheta_lab = -23.000
 ptheta_lab = 12.555
-hpcentral = 3.266
-ppcentral = 6.842
+hpcentral = 3.2660
+ppcentral = 6.8420
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -666,12 +666,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.680
 
 5264
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
 htheta_lab = -23.00
 ptheta_lab = 6.509
-hpcentral = 3.266
-ppcentral = 6.842
+hpcentral = 3.2660
+ppcentral = 6.8420
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -679,12 +679,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.680
 
 5265 - 5270
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -23.00
+htheta_lab = -23.000
 ptheta_lab = 9.560
-hpcentral = 3.266
-ppcentral = 6.842
+hpcentral = 3.2660
+ppcentral = 6.8420
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -692,12 +692,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.680
 
 5271 - 5274
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -23.00
+htheta_lab = -23.000
 ptheta_lab = 12.565
-hpcentral = 3.266
-ppcentral = 6.842
+hpcentral = 3.2660
+ppcentral = 6.8420
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -705,12 +705,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.680
 
 5275 - 5294
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -23.00
+htheta_lab = -23.000
 ptheta_lab = 6.500
-hpcentral = 3.266
-ppcentral = 6.842
+hpcentral = 3.2660
+ppcentral = 6.8420
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -718,12 +718,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.680
 
 5295 - 5299
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
 htheta_lab = -12.505
 ptheta_lab = 6.500
-hpcentral = 3.266
-ppcentral = 6.842
+hpcentral = 3.2660
+ppcentral = 6.8420
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -731,12 +731,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.680
 
 5300 - 5303
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -14.91
+htheta_lab = -14.910
 ptheta_lab = 6.500
-hpcentral = 4.204
-ppcentral = 6.053
+hpcentral = 4.2040
+ppcentral = 6.0530
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -744,12 +744,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.680
 
 5304 - 5310
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -14.91
+htheta_lab = -14.910
 ptheta_lab = 9.425
-hpcentral = 4.204
-ppcentral = 6.053
+hpcentral = 4.2040
+ppcentral = 6.0530
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -757,12 +757,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.720
 
 5311 - 5312
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -14.91
-ptheta_lab = 12.42
-hpcentral = 4.204
-ppcentral = 6.053
+htheta_lab = -14.910
+ptheta_lab = 12.450
+hpcentral = 4.2040
+ppcentral = 6.0530
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -770,12 +770,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.720
 
 5313 - 5334
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -14.91
+htheta_lab = -14.910
 ptheta_lab = 6.525
-hpcentral = 4.204
-ppcentral = 6.053
+hpcentral = 4.2040
+ppcentral = 6.0530
 ppartmass = 0.493677
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -783,12 +783,12 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.720
 
 5335
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
-htheta_lab = -13.50
-ptheta_lab = 13.50
-hpcentral = 6.269
-ppcentral = 6.269
+htheta_lab = -13.505
+ptheta_lab = 13.555
+hpcentral = 6.3580
+ppcentral = 6.3580
 ppartmass = 0.0005109
 hpartmass = 0.0005109
 helicity_freq = 29.5596
@@ -796,7 +796,7 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.720
 
 5336 - 6589
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
 htheta_lab = -13.50
 ptheta_lab = 13.50
@@ -1440,13 +1440,13 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 1.232
 
 # KaonLT Physics - low epsilon data
-7869 - 7880
+7869 - 7881
 gpbeam = 6.19009
 gtargmass_amu = 1.00794
-hpcentral = 2.185
-ppcentral = 3.486
-htheta_lab = -27.25
-ptheta_lab = 13.28
+hpcentral = 2.1850
+ppcentral = 3.4860
+htheta_lab = -27.245
+ptheta_lab = 13.285
 ppartmass =  0.493677
 hpartmass = 0.000511
 helicity_freq = 29.5596
@@ -1454,13 +1454,13 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.232
 
 # KaonLT Physics - SHMS Left 16.28 deg
-7881 - 7882
+7882
 gpbeam = 6.19009
 gtargmass_amu = 1.00794
-hpcentral = 2.185
-ppcentral = 3.486
-htheta_lab = -27.25
-ptheta_lab = 16.28
+hpcentral = 2.1850
+ppcentral = 3.4860
+htheta_lab = -27.245
+ptheta_lab = 16.275
 ppartmass =  0.493677
 hpartmass = 0.000511
 helicity_freq = 29.5596
@@ -1471,10 +1471,10 @@ SHMS_RF_Offset = 1.235
 7883 - 7888
 gpbeam = 6.19009
 gtargmass_amu = 1.00794
-hpcentral = 2.185
-ppcentral = 3.486
-htheta_lab = -27.25
-ptheta_lab = 16.28
+hpcentral = 2.1850
+ppcentral = 3.4860
+htheta_lab = -27.245
+ptheta_lab = 16.275
 ppartmass =  0.493677
 hpartmass = 0.000511
 helicity_freq = 29.5596
@@ -1485,10 +1485,10 @@ SHMS_RF_Offset = 0.235
 7889 - 7908
 gpbeam = 6.19009
 gtargmass_amu = 1.00794
-hpcentral = 0.888
-ppcentral = 4.983
-htheta_lab = -36.15
-ptheta_lab = 8.48
+hpcentral = 0.8880
+ppcentral = 4.9830
+htheta_lab = -36.150
+ptheta_lab = 8.475
 ppartmass =  0.493677
 hpartmass = 0.000511
 helicity_freq = 29.5596
@@ -1499,9 +1499,9 @@ SHMS_RF_Offset = 0.230
 7909 - 7938
 gpbeam = 6.19009
 gtargmass_amu = 1.00794
-hpcentral = 0.888
-ppcentral = 4.983
-htheta_lab = -36.15
+hpcentral = 0.8880
+ppcentral = 4.9830
+htheta_lab = -36.150
 ptheta_lab = 6.20
 ppartmass =  0.493677
 hpartmass = 0.000511
@@ -1657,9 +1657,9 @@ SHMS_RF_Offset = 0.197
 7978 - 7993
 gpbeam = 8.20883
 gtargmass_amu = 1.00794
-hpcentral = 2.328
-ppcentral = 5.389
-htheta_lab = -27.77
+hpcentral = 2.3280
+ppcentral = 5.3890
+htheta_lab = -27.770
 ptheta_lab = 10.005
 ppartmass =  0.493677
 hpartmass = 0.000511
@@ -1670,9 +1670,9 @@ SHMS_RF_Offset = 2.050
 7994 - 8002
 gpbeam = 8.20883
 gtargmass_amu = 1.00794
-hpcentral = 2.328
-ppcentral = 5.389
-htheta_lab = -27.77
+hpcentral = 2.3280
+ppcentral = 5.3890
+htheta_lab = -27.770
 ptheta_lab = 10.005
 ppartmass =  0.493677
 hpartmass = 0.000511
@@ -1685,9 +1685,9 @@ SHMS_RF_Offset = 4.000
 8003 - 8037
 gpbeam = 8.20883
 gtargmass_amu = 1.00794
-hpcentral = 2.328
-ppcentral = 5.389
-htheta_lab = -27.77
+hpcentral = 2.3280
+ppcentral = 5.3890
+htheta_lab = -27.770
 ptheta_lab = 13.010
 ppartmass =  0.493677
 hpartmass = 0.000511
@@ -1727,7 +1727,7 @@ gtargmass_amu = 1.00794
 hpcentral = 1.8210
 ppcentral = 6.0530
 htheta_lab = -25.895
-ptheta_lab = 9.909
+ptheta_lab = 9.910
 ppartmass =  0.493677
 hpartmass = 0.000511
 helicity_freq = 29.5596
@@ -1740,7 +1740,7 @@ gtargmass_amu = 1.00794
 hpcentral = 1.8210
 ppcentral = 6.0530
 htheta_lab = -25.895
-ptheta_lab = 9.909
+ptheta_lab = 9.910
 ppartmass =  0.493677
 hpartmass = 0.000511
 helicity_freq = 29.5596
@@ -1750,10 +1750,10 @@ SHMS_RF_Offset = 0.050
 8186 - 8246
 gpbeam = 8.20883
 gtargmass_amu = 1.00794
-hpcentral = 0.962
-ppcentral = 6.755
-htheta_lab = -49.308
-ptheta_lab = 8.498
+hpcentral = 0.9620
+ppcentral = 6.7550
+htheta_lab = -49.310
+ptheta_lab = 8.500
 ppartmass =  0.493677
 hpartmass = 0.000511
 helicity_freq = 29.5596
@@ -1763,9 +1763,9 @@ SHMS_RF_Offset = 0.050
 8251 - 8303
 gpbeam = 8.20883
 gtargmass_amu = 1.00794
-hpcentral = 0.962
-ppcentral = 6.755
-htheta_lab = -49.308
+hpcentral = 0.9620
+ppcentral = 6.7550
+htheta_lab = -49.310
 ptheta_lab = 6.205
 ppartmass =  0.493677
 hpartmass = 0.000511
@@ -1776,9 +1776,9 @@ SHMS_RF_Offset = 0.020
 8304 - 8313
 gpbeam = 8.20883
 gtargmass_amu = 1.00794
-hpcentral = 0.962
-ppcentral = 6.755
-htheta_lab = -49.308
+hpcentral = 0.9620
+ppcentral = 6.7550
+htheta_lab = -49.310
 ptheta_lab = 6.205
 ppartmass =  0.493677
 hpartmass = 0.000511
@@ -1789,9 +1789,9 @@ SHMS_RF_Offset = 0.030
 8314 - 8367
 gpbeam = 8.20883
 gtargmass_amu = 1.00794
-hpcentral = 0.962
-ppcentral = 6.755
-htheta_lab = -49.308
+hpcentral = 0.9620
+ppcentral = 6.7550
+htheta_lab = -49.310
 ptheta_lab = 6.205
 ppartmass =  0.493677
 hpartmass = 0.000511

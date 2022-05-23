@@ -1,4 +1,4 @@
-void FullReplay_KaonLT (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
+void FullReplay_KaonLT_HeeP_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   // Get RunNumber and MaxEvent if not provided.
   if(RunNumber == 0) {
@@ -284,7 +284,7 @@ void FullReplay_KaonLT (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Create report file from template
   //  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/COIN_PROD.template",
   analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/KaonLT_TEMP/KaonLT_Offline_HEEP_Coin.template",
-  Form("REPORT_OUTPUT/Analysis/General/replay_coin_production_%d_%d.report", RunNumber, MaxEvent));  // optional
+  Form("REPORT_OUTPUT/Analysis/General/replay_coin_heep_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Helicity scalers output
   analyzer->PrintReport("TEMPLATES/HMS/SCALERS/hhelscalers.template",
   			Form("REPORT_OUTPUT/Scalers/replay_hms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  

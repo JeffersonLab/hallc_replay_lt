@@ -17,7 +17,6 @@ To do on cdaq -
 	     -> Some detector directories have junk files in them, needs cleaning (X)
 	  -> DEF files (X)
 	  -> DEF cut files (X)
-	  -> Reportfile templates () -> Shelved for now, need updates from Ali/Jacob
        -> UTIL_PION ()
        	  -> Analysis scripts(X)
        	  -> Cut DB files (X)
@@ -30,8 +29,19 @@ To do on cdaq -
 3. Test all replay scripts (X)
    3a. Modify running script as needed (X)
 4. Check run_PionLT.sh works as expected after changes (X)
-5. Merge in Ali's def file and report file updates (see 1c) ()
-   5a. Updated runlist filling script to grab correct variables after changes ()
+5. Merge in Ali's def file and report file updates (see 1c) (X)
+   5a. Updated runlist filling script to grab correct variables after changes (X)
+       -> No changes were actually needed for now
+6. Fixes and updates to DEF/DEF-CUTS/Template files
+   -> Need updated computer/EDTM live time calculations. HeePCoin currently uses Production template file, should use its own.
+      In modifying thse, should also check quantities calculated and reported actually make sense. E.g. before I fixed it, the
+      SHMS HeePSingles report file was producing an SHMS hadron efficiency, here it is set to detect electrons so this makes no
+      sense.
+   -> Production ()
+   -> HeeP Singles ()
+   -> HeeP Coin ()
+   -> Luminosity ()
+   -> Once these are done, reconfirm that the runlist filling script gets the right info ()
 
 To do elsewhere -
 

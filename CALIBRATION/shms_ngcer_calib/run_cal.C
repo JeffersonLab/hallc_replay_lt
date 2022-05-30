@@ -147,7 +147,7 @@ void run_cal(string RunPrefix = "", Int_t NumEvents = 0, Int_t nRuns = 0, Int_t 
   // This is where the script will look for the rootfiles to analyse
   if(Hostname.Contains("farm"))
     { 
-      Rootpath = "/group/c-pionlt/USERS/"+User+"/hallc_replay_lt/ROOTfiles/Calib/NGC/";
+      Rootpath = "/group/c-pionlt/USERS/"+User+"/hallc_replay_lt/ROOTfiles/Calib/General/";
     }
   else if(Hostname.Contains("qcd"))
     {

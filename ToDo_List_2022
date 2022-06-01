@@ -37,11 +37,13 @@ To do on cdaq -
       In modifying thse, should also check quantities calculated and reported actually make sense. E.g. before I fixed it, the
       SHMS HeePSingles report file was producing an SHMS hadron efficiency, here it is set to detect electrons so this makes no
       sense.
-   -> Production ()
-   -> HeeP Singles ()
-   -> HeeP Coin ()
-   -> Luminosity ()
-   -> Once these are done, reconfirm that the runlist filling script gets the right info ()
+   -> Production (X)
+      -> Done but needs EDTM/CPULT
+   -> HeeP Singles (X)
+   -> HeeP Coin (X)
+      -> Done but needs EDTM/CPULT
+   -> Luminosity (X)
+   -> Once these are done, reconfirm that the runlist filling script gets the right info (X)
 
 To do elsewhere -
 

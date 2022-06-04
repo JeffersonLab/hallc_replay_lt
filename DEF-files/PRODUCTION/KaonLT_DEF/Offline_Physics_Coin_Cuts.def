@@ -21,7 +21,7 @@ ALL_events             g.evtyp >= 1 && g.evtyp <= 7
 ALL_HMS_events       HMS_event || COIN_ONLY_event || HMS_COIN_event  || COIN_ALL_event 
 ALL_SHMS_events     SHMS_event || COIN_ONLY_event || SHMS_COIN_event || COIN_ALL_event 
 
-RawDecode_master COIN_ONLY_event
+RawDecode_master ALL_events
 
 Block: Decode
 
@@ -39,7 +39,7 @@ ALL_SHMS_events_NOEDTM      T.coin.pEDTM_tdcTime == 0.0 && ALL_SHMS_events
 ALL_COIN_events_NO_EDTM     T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime == 0.0 && ALL_COIN_events
 ALL_events_NO_EDTM          T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime == 0.0 && ALL_events
 
-Decode_master ALL_COIN_events_NO_EDTM
+Decode_master ALL_events_NO_EDTM
 
 Block: Tracking
 
@@ -56,27 +56,37 @@ shmshodstarttime    P.hod.goodstarttime == 1
 # Tracking Efficiency calculation (Should = denominator, Did = Numerator)
 
 shmsScinShould       shmsScinGood && shmsGoodBetanotrk && shmshodstarttime
-shmsCalTrkShouldp    P.cal.etotnorm < 0.7 &&  P.cal.etotnorm > 0.05
+shmsCalTrkShouldp   P.cal.etotnorm < 0.7 &&  P.cal.etotnorm > 0.05
 
 # Vijay's SHMS Cer PID Numbers 
 
-shmsHGCTrkShouldp	       P.hgcer.npeSum < 0.5
-shmsAeroTrknpep		       P.aero.npeSum < 1.0
-shmsHGCTrkShouldpi 	       P.hgcer.npeSum > 1.5
-shmsAeroTrknpepi	       P.aero.npeSum > 1.0
+shmsHGCTrkShouldp   P.hgcer.npeSum < 0.5
+shmsAeroTrknpep     P.aero.npeSum < 1.0
+shmsHGCTrkShouldpi             P.hgcer.npeSum > 1.5
+shmsAeroTrknpepi               P.aero.npeSum > 1.0
 
 # Vijay's SHMS Aero Geom for n = 1.011 (E_Beam = 8.2 GeV)
 
-shmsAeroTrkpos1p011	P.aero.yAtAero > -30 && P.aero.yAtAero < 31
+# shmsAeroTrkpos1p011	    P.aero.yAtAero > -30 && P.aero.yAtAero < 31
 
-shmsCerTrkShouldp	shmsHGCTrkShouldp && shmsAeroTrknpep 
-shmsScinShouldp		shmsScinShould && shmsCalTrkShouldp && shmsCerTrkShouldp
-shmsCerTrkShouldpi	shmsHGCTrkShouldpi && shmsAeroTrknpepi 
-shmsScinShouldpi	shmsScinShould && shmsCalTrkShouldp && shmsCerTrkShouldpi
+shmsCerTrkShouldp     shmsHGCTrkShouldp && shmsAeroTrknpep 
+shmsScinShouldp       shmsScinShould && shmsCalTrkShouldp && shmsCerTrkShouldp
+shmsScinCoinShouldp   shmsScinShouldp && ALL_COIN_events
+shmsScinSingShouldp   shmsScinShouldp && SHMS_event
 
-shmsScinDid		shmsScinShould && P.dc.ntrack > 0
-shmsScinDidp		shmsScinShouldp && P.dc.ntrack > 0
-shmsScinDidpi		shmsScinShouldpi && P.dc.ntrack > 0
+shmsScinDid         shmsScinShould && P.dc.ntrack > 0
+shmsScinDidp        shmsScinShouldp && P.dc.ntrack > 0
+shmsScinCoinDiddp   shmsScinCoinShouldp && P.dc.ntrack > 0
+shmsScinSingDidp    shmsScinSingShouldp && P.dc.ntrack > 0
+
+shmsCerTrkShouldpi      shmsHGCTrkShouldpi && shmsAeroTrknpepi
+shmsScinShouldpi        shmsScinShould && shmsCalTrkShouldp && shmsCerTrkShouldpi
+shmsScinCOINShouldpi	shmsScinShouldpi && ALL_COIN_events
+shmsScinSINGShouldpi	shmsScinShouldpi && SHMS_event
+
+shmsScinDidpi           shmsScinShouldpi && P.dc.ntrack > 0
+shmsScinCOINDidpi	shmsScinCOINShouldpi && P.dc.ntrack > 0
+shmsScinSINGDidpi	shmsScinSINGShouldpi && P.dc.ntrack > 0
 
 # Need SHMS Geom Aero Geom numbers for n = 1.015 and n = 1.03
 
@@ -86,7 +96,7 @@ shmsScinDidpi		shmsScinShouldpi && P.dc.ntrack > 0
 
 # HMS PID cuts for different particles in HGC and CAL
 
-hcut_cer_elec             H.cer.npeSum > 0.5
+hcut_cer_elec             H.cer.npeSum > 1.0
 hcut_cal_elec		  H.cal.etotnorm > 0.7 && H.cal.etotnorm < 2.0
 
 # HMS Scin cuts (untracked) for HMS Tracking Efficiency
@@ -99,10 +109,20 @@ HMShodstarttime       H.hod.goodstarttime == 1
 
 HMSScinShould         HMSScinGood && HMSGoodBetanotrk && HMShodstarttime
 HMSScinShoulde        HMSScinShould && hcut_cer_elec && hcut_cal_elec
+HMSScinCoinShoulde    HMSScinShoulde && ALL_COIN_events
+HMSScinSingShoulde    HMSScinShoulde && HMS_event
+
 HMSScinDid            HMSScinShould && H.dc.ntrack > 0
 HMSScinDide           HMSScinShoulde && H.dc.ntrack > 0
+HMSScinCoinDide	      HMSScinCoinShoulde && H.dc.ntrack > 0
+HMSScinSingDide	      HMSScinSingShoulde && H.dc.ntrack > 0
 
-Tracking_master ALL_COIN_events_NO_EDTM
+HMS_GOOD_TRACK	      		     H.dc.ntrack > 0 && H.cal.etotnorm > 0.5
+SHMS_GOOD_Track			     P.dc.ntrack > 0 && P.cal.etotnorm > 0
+GOOD_COIN_TRACK			     HMS_GOOD_TRACK && SHMS_GOOD_Track
+ALL_GOOD_Track_Events 		     HMS_GOOD_TRACK || SHMS_GOOD_Track
+
+Tracking_master ALL_GOOD_Track_Events
 
 Block: Physics       
 
@@ -118,29 +138,27 @@ SHMScoindcindipole	P.dc.InsideDipoleExit == 1
 
 SHMSGEN		shmshodstarttime && SHMScoindcindipole && pcut_acceptance
 SHMSCalp	P.cal.etottracknorm < 0.7              
-SHMSMMpicut     P.kin.secondary.MMpi > 0.901 && P.kin.secondary.MMpi < 1.054
-SHMSAEROp       P.aero.npeSum  < 1.0
-SHMSAEROpi	P.aero.npeSum > 1.0
 
-SHMSHGCShouldp		SHMSGEN && SHMSCalp && SHMSAEROp && shmsAeroTrkpos1p011
-SHMSHGCDidp		SHMSHGCShouldp && P.hgcer.npeSum < 0.5
-SHMSHGCShouldpi		SHMSGEN && SHMSCalp && SHMSAEROpi && shmsAeroTrkpos1p011 && SHMSMMpicut
-SHMSHGCDidpi		SHMSHGCShouldpi && P.hgcer.npeSum > 1.5
+SHMSAEROpi       P.aero.npeSum  > 1.0
+
+SHMSHGCShouldpi		SHMSGEN && SHMSCalp && SHMSAEROpi
+SHMSHGCDidpi		SHMSHGCShouldpi && P.hgcer.npeSum < 0.5
 
 ###################
 ###  SHMS Aero  ###
 ###################
 
-SHMSHGCp      P.hgcer.npeSum  < 0.5
-SHMSHGCpi     P.hgcer.npeSum > 1.5
+SHMSHGCpi      P.hgcer.npeSum  > 1.5
 
-SHMSAeroShouldp         SHMSGEN && SHMSCalp && SHMSHGCp && shmsAeroTrkpos1p011
-SHMSAeroDidp            SHMSAeroShouldp && P.aero.npeSum < 1.0
-SHMSAeroShouldpi	SHMSGEN && SHMSCalp && SHMSHGCpi && shmsAeroTrkpos1p011 && SHMSMMpicut
-SHMSAeroDidpi		SHMSAeroShouldpi && P.aero.npeSum > 1.0
+SHMSAeroShouldpi         SHMSGEN && SHMSCalp && SHMSHGCpi 
+SHMSAeroDidpi            SHMSAeroShouldpi && P.aero.npeSum > 1.0
+SHMSAeroCOINShouldpi	 SHMSAeroShouldpi && ALL_COIN_events
+SHMSAeroCOINDidpi	 SHMSAeroCOINShouldpi && P.aero.npeSum > 1.0
+SHMSAeroSINGShouldpi	 SHMSAeroShouldpi && SHMS_event
+SHMSAeroSINGDidpi	 SHMSAeroSINGShouldpi && P.aero.npeSum > 1.0
 
 ##################
-###   HMS HGC  ###
+###   HMS CER  ###
 ##################
 
 # HMS Acceptance cuts (Not used in HMS Tracking Efficiency)
@@ -153,6 +171,18 @@ HMSGEN		   HMShodstarttime && HMScoindcindipole && hcut_acceptance
 HMSCalelec         H.cal.etottracknorm > 0.7 &&  H.cal.etottracknorm < 1.6
 
 HMSHGCShouldelec         HMSGEN && HMSCalelec 
-HMSHGCDidelec            HMSHGCShouldelec && H.cer.npeSum > 1.5
+HMSHGCCOINShoulde	 HMSHGCShouldelec && ALL_COIN_events
+HMSHGCSINGShoulde	 HMSHGCShouldelec && HMS_event
 
-Physics_master ALL_COIN_events_NO_EDTM
+HMSHGCDidelec            HMSHGCShouldelec && H.cer.npeSum > 1.5
+HMSHGCCOINDide		HMSHGCCOINShoulde && H.cer.npeSum > 1.5
+HMSHGCSINGDide		HMSHGCSINGShoulde && H.cer.npeSum > 1.5
+
+HMS_DELTA		 H.gtr.dp > -10 && H.gtr.dp < 10
+SHMS_DELTA		 P.gtr.dp > -15 && P.gtr.dp < 25
+
+HMSCalCer                H.cal.etottracknorm > 0.5 && H.cer.npeSum > 0.5
+
+GOOD_COIN_Events	 HMS_DELTA && SHMS_DELTA && GOOD_COIN_TRACK && HMSCalCer
+
+Physics_master GOOD_COIN_Events

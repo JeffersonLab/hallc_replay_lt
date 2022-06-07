@@ -323,7 +323,7 @@ void Mode10Check (TString rootFileName, int runNum)
     //save plots
 	
 	// first set of 2D plots
-	TCanvas *MultiCanRaw = new TCanvas(Form("Mode10_hgcerRaw_%d", runNum),Form("Mode10_hgcerRaw_%d", runNum), 1200, 1200);
+	TCanvas *MultiCanRaw = new TCanvas(Form("Mode10_hgcerRaw_%d", runNum),Form("Mode10_hgcerRaw_%d", runNum), 2400, 2400);
 	MultiCanRaw->cd(1); MultiCanRaw->Divide(3,2);
 	MultiCanRaw->cd(1);
 	hgcer_PMTvPulseAmpRaw->Draw("colz");
@@ -341,7 +341,7 @@ void Mode10Check (TString rootFileName, int runNum)
 	MultiCanRaw->Print(Form("OUTPUT/Analysis/Plots/Mode10_hgcerRaw_%d.png", runNum));
 	
 	// second set of 2d plots
-	TCanvas *MultiCan = new TCanvas(Form("Mode10_hgcer_%d", runNum),Form("Mode10_hgcer_%d", runNum), 1200, 1200);
+	TCanvas *MultiCan = new TCanvas(Form("Mode10_hgcer_%d", runNum),Form("Mode10_hgcer_%d", runNum), 2400, 2400);
 	MultiCan->cd(1); MultiCan->Divide(3,2);	
 	MultiCan->cd(1);
 	hgcer_PMTvPulseAmp->Draw("colz");
@@ -372,7 +372,7 @@ void Mode10Check (TString rootFileName, int runNum)
 	TCanvas *HistCan[HGC_PMT]; 
 	for(int i = 0; i < HGC_PMT; i++)
 	{
-		HistCan[i] = new TCanvas(Form("Mode10_hgcerHist%d_%d", i, runNum),Form("Mode10_hgcerHist%d_%d", i, runNum), 1200, 1200);
+		HistCan[i] = new TCanvas(Form("Mode10_hgcerHist%d_%d", i, runNum),Form("Mode10_hgcerHist%d_%d", i, runNum), 2400, 2400);
 		HistCan[i]->cd(1); HistCan[i]->Divide(3,2);
 		HistCan[i]->cd(1);
 		hgcer_PulseAmpRaw[i]->SetLineColor(1);
@@ -418,7 +418,7 @@ void Mode10Check (TString rootFileName, int runNum)
 			
 		HistCan[i]->Print(Form("OUTPUT/Analysis/Plots/Mode10_hgcerHist%d_%d.png", i, runNum));
 	}
-	TCanvas* PulseAmpZoom = new TCanvas(Form("Mode10_hgcer_PulseAmp_%d", runNum),Form("Mode10_hgcer_PulseAmp_%d", runNum), 1200, 1200);
+	TCanvas* PulseAmpZoom = new TCanvas(Form("Mode10_hgcer_PulseAmp_%d", runNum),Form("Mode10_hgcer_PulseAmp_%d", runNum), 2400, 2400);
 	
 	PulseAmpZoom->cd(1); PulseAmpZoom->Divide(2,2);	
 	PulseAmpZoom->cd(1);

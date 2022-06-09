@@ -32,6 +32,7 @@ void FullReplay_Online(Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./cache");
   pathList.push_back("./cache_kaonlt");
   pathList.push_back("./raw_volatile");
+  pathList.push_back("./raw.volatile"); // It's raw.volatile on cdaq (not raw_volatile)
 
   const char* ROOTFileNamePattern = "ROOTfiles/Analysis/General/Full_Online_coin_replay_%d_%d.root";
   

@@ -45,6 +45,11 @@ To do on cdaq -
    -> Luminosity (X)
    -> Once these are done, reconfirm that the runlist filling script gets the right info (X)
 
+7) Only untested scripts now are the Lumi scripts
+   -> Need to test replay ()
+      -> Check template/cuts files ()
+   -> Check lumi analysis scripts ()
+
 To do elsewhere -
 
 1. Update instructions/plots on the wiki ()

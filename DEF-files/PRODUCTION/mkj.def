@@ -1,5 +1,6 @@
 #block T.*
 block H.cer.npeSum
+block P.*raster*
 #block P.ngcer.*
 block H.cal.*et*
 block H.gtr.*

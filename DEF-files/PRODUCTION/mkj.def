@@ -1,17 +1,42 @@
 #block T.*
-block H.cer.npeSum
+block P.hgcer.npeSum
+block P.ngcer.npeSum
 block P.*raster*
 #block P.ngcer.*
-block H.cal.*et*
-block H.gtr.*
-block H.react.x
-block H.react.y
-block H.react.z
-block H.dc.x_fp
-block H.dc.xp_fp
-block H.dc.yp_fp
-block H.dc.y_fp
-block H.extcor.xsieve
-block H.extcor.ysieve
+block P.cal.*et*
+block P.gtr.*
+block P.cal.*
+block P.hod.*
+block P.react.x
+block P.react.y
+block P.react.z
+block P.dc.x_fp
+block P.dc.xp_fp
+block P.dc.yp_fp
+block P.dc.y_fp
+block P.extcor.xsieve
+block P.extcor.ysieve
 
+
+#----------------------------
+# SHMS CALORIMETER PEDESTALS
+#----------------------------
+
+TH2F pcal_prshwr_good_pped_vs_pmt_pos 'SHMS PreShower+ Good Pulse Pedestal vs. PMT Number; PMT Number; Good Pulse Pedestal / 0.25 mV' [I+1] P.cal.pr.goodPosAdcPed 14 0.5 14.5 200 100 150 
+TH2F pcal_prshwr_good_pped_vs_pmt_neg 'SHMS PreShower- Good Pulse Pedestal vs. PMT Number; PMT Number; Good Pulse Pedestal / 0.25 mV' [I+1] P.cal.pr.goodNegAdcPed 14 0.5 14.5 200 100 150 
+
+TH2F pcal_shwr_good_pped_vs_pmt_grp1 'SHMS Shower Good Pulse Pedestal vs. PMT Number; PMT Number; Good Pulse Pedestal / 0.25 mV' [I+1] P.cal.fly.goodAdcPed 16 0.5 16.5 200 100 150 
+TH2F pcal_shwr_good_pped_vs_pmt_grp2 'SHMS Shower Good Pulse Pedestal vs. PMT Number; PMT Number; Good Pulse Pedestal / 0.25 mV' [I+1] P.cal.fly.goodAdcPed 16 16.5 32.5 200 100 150 
+TH2F pcal_shwr_good_pped_vs_pmt_grp3 'SHMS Shower Good Pulse Pedestal vs. PMT Number; PMT Number; Good Pulse Pedestal / 0.25 mV' [I+1] P.cal.fly.goodAdcPed 16 32.5 48.5 200 100 150 
+TH2F pcal_shwr_good_pped_vs_pmt_grp4 'SHMS Shower Good Pulse Pedestal vs. PMT Number; PMT Number; Good Pulse Pedestal / 0.25 mV' [I+1] P.cal.fly.goodAdcPed 16 48.5 64.5 200 100 150 
+TH2F pcal_shwr_good_pped_vs_pmt_grp5 'SHMS Shower Good Pulse Pedestal vs. PMT Number; PMT Number; Good Pulse Pedestal / 0.25 mV' [I+1] P.cal.fly.goodAdcPed 16 64.5 80.5 200 100 150 
+TH2F pcal_shwr_good_pped_vs_pmt_grp6 'SHMS Shower Good Pulse Pedestal vs. PMT Number; PMT Number; Good Pulse Pedestal / 0.25 mV' [I+1] P.cal.fly.goodAdcPed 16 80.5 96.5 200 100 150 
+TH2F pcal_shwr_good_pped_vs_pmt_grp7 'SHMS Shower Good Pulse Pedestal vs. PMT Number; PMT Number; Good Pulse Pedestal / 0.25 mV' [I+1] P.cal.fly.goodAdcPed 16 96.5 112.5 200 100 150 
+TH2F pcal_shwr_good_pped_vs_pmt_grp8 'SHMS Shower Good Pulse Pedestal vs. PMT Number; PMT Number; Good Pulse Pedestal / 0.25 mV' [I+1] P.cal.fly.goodAdcPed 16 112.5 128.5 200 100 150 
+TH2F pcal_shwr_good_pped_vs_pmt_grp9  'SHMS Shower Good Pulse Pedestal vs. PMT Number; PMT Number; Good Pulse Pedestal / 0.25 mV' [I+1] P.cal.fly.goodAdcPed 16 128.5 144.5 200 100 150 
+TH2F pcal_shwr_good_pped_vs_pmt_grp10 'SHMS Shower Good Pulse Pedestal vs. PMT Number; PMT Number; Good Pulse Pedestal / 0.25 mV' [I+1] P.cal.fly.goodAdcPed 16 144.5 160.5 200 100 150 
+TH2F pcal_shwr_good_pped_vs_pmt_grp11 'SHMS Shower Good Pulse Pedestal vs. PMT Number; PMT Number; Good Pulse Pedestal / 0.25 mV' [I+1] P.cal.fly.goodAdcPed 16 160.5 176.5 200 100 150 
+TH2F pcal_shwr_good_pped_vs_pmt_grp12 'SHMS Shower Good Pulse Pedestal vs. PMT Number; PMT Number; Good Pulse Pedestal / 0.25 mV' [I+1] P.cal.fly.goodAdcPed 16 176.5 192.5 200 100 150 
+TH2F pcal_shwr_good_pped_vs_pmt_grp13 'SHMS Shower Good Pulse Pedestal vs. PMT Number; PMT Number; Good Pulse Pedestal / 0.25 mV' [I+1] P.cal.fly.goodAdcPed 16 192.5 208.5 200 100 150 
+TH2F pcal_shwr_good_pped_vs_pmt_grp14 'SHMS Shower Good Pulse Pedestal vs. PMT Number; PMT Number; Good Pulse Pedestal / 0.25 mV' [I+1] P.cal.fly.goodAdcPed 16 208.5 224.5 200 100 150 
 

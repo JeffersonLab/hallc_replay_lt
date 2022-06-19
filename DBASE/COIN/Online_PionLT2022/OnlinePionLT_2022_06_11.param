@@ -1,0 +1,79 @@
+#real raddeg
+raddeg=3.14159265/180
+#real cminch
+cminch=2.54
+
+; General Hall-C parameter files
+#include "PARAM/GEN/Online_PionLT2022/genflags.param"
+#include "PARAM/GEN/Online_PionLT2022/gdebug.param"
+#include "PARAM/GEN/Online_PionLT2022/gtarget.param"
+;#include "PARAM/GEN/gbeam.param"
+#include "PARAM/GEN/gbeam_oneraster.param"
+#include "PARAM/GEN/Online_PionLT2022/gscalers_2019.param"
+
+; General HMS parameter files
+; Note: hmsflags.param includes spectrometer offsets and options.
+#include "PARAM/HMS/GEN/Online_PionLT2022/hcana.param"
+#include "PARAM/HMS/GEN/Online_PionLT2022/hdebug.param"
+#include "PARAM/HMS/GEN/Online_PionLT2022/hmsflags.param"
+#include "PARAM/HMS/GEN/Online_PionLT2022/htracking.param"
+#include "PARAM/HMS/GEN/Online_PionLT2022/h_reftime_cut_cyero.param"
+
+; HMS default geometry parameter files 
+#include "PARAM/HMS/CER/Online_PionLT2022/hcer_geom.param"
+#include "PARAM/HMS/DC/Online_PionLT2022/hdc_geom.param"
+#include "PARAM/HMS/HODO/Online_PionLT2022/hhodo_geom.param"
+#include "PARAM/HMS/AERO/Online_PionLT2022/haero_geom.param"
+#include "PARAM/HMS/CAL/Online_PionLT2022/hcal_geom.param"
+
+; HMS default cut parameter files
+#include "PARAM/HMS/CER/Online_PionLT2022/hcer_cuts_11799.param"
+#include "PARAM/HMS/DC/Online_PionLT2022/hdc_cuts_11799.param"
+#include "PARAM/HMS/HODO/Online_PionLT2022/hhodo_cuts_11799.param"
+#include "PARAM/HMS/AERO/Online_PionLT2022/haero_cuts.param"
+#include "PARAM/HMS/CAL/Online_PionLT2022/hcal_cuts.param"
+
+; HMS default calibration parameter files
+#include "PARAM/HMS/CER/Online_PionLT2022/hcer_calib.param"
+#include "PARAM/HMS/DC/Online_PionLT2022/hdc_calib_11799.param"
+#include "PARAM/HMS/DC/Online_PionLT2022/hdc_tzero_per_wire.param"
+#include "PARAM/HMS/HODO/Online_PionLT2022/hhodo_calib.param"
+#include "PARAM/HMS/HODO/Online_PionLT2022/hhodo_TWcalib_11799.param"
+#include "PARAM/HMS/HODO/Online_PionLT2022/hhodo_Vpcalib_11799.param"
+#include "PARAM/HMS/AERO/Online_PionLT2022/haero_calib.param"
+#include "PARAM/HMS/CAL/Online_PionLT2022/hcal_calib_12364.param"
+
+; General SHMS parameter files
+; Note: shmsflags.param includes spectrometer offsets and options.
+#include "PARAM/SHMS/GEN/Online_PionLT2022/pcana.param"
+#include "PARAM/SHMS/GEN/Online_PionLT2022/pdebug.param"
+#include "PARAM/SHMS/GEN/Online_PionLT2022/shmsflags.param"
+#include "PARAM/SHMS/GEN/Online_PionLT2022/ptracking.param"
+#include "PARAM/SHMS/GEN/Online_PionLT2022/p_reftime_cut_cyero.param"
+
+; SHMS default geometry parameter files
+#include "PARAM/SHMS/NGCER/Online_PionLT2022/pngcer_geom.param"
+#include "PARAM/SHMS/DC/Online_PionLT2022/pdc_geom.param"
+#include "PARAM/SHMS/HODO/Online_PionLT2022/phodo_geom.param"
+#include "PARAM/SHMS/HGCER/Online_PionLT2022/phgcer_geom.param"
+#include "PARAM/SHMS/AERO/Online_PionLT2022/paero_geom.param"
+#include "PARAM/SHMS/CAL/Online_PionLT2022/pcal_geom.param"
+
+; SHMS default cut parameter files
+#include "PARAM/SHMS/NGCER/Online_PionLT2022/pngcer_cuts.param"
+#include "PARAM/SHMS/DC/Online_PionLT2022/pdc_cuts_12288.param"
+#include "PARAM/SHMS/HODO/Online_PionLT2022/phodo_cuts_11799.param"
+#include "PARAM/SHMS/HGCER/Online_PionLT2022/phgcer_cuts_11799.param"
+#include "PARAM/SHMS/AERO/Online_PionLT2022/paero_cuts.param"
+#include "PARAM/SHMS/CAL/Online_PionLT2022/pcal_cuts_11799.param"
+
+; SHMS default calibration parameter files
+#include "PARAM/SHMS/NGCER/Online_PionLT2022/pngcer_calib.param"
+#include "PARAM/SHMS/DC/Online_PionLT2022/pdc_calib_11799.param"
+#include "PARAM/SHMS/DC/Online_PionLT2022/pdc_tzero_per_wire_11799.param"
+#include "PARAM/SHMS/HODO/Online_PionLT2022/phodo_calib.param"
+#include "PARAM/SHMS/HODO/Online_PionLT2021/phodo_TWcalib_11799.param"
+#include "PARAM/SHMS/HODO/Online_PionLT2021/phodo_Vpcalib_11799.param"
+#include "PARAM/SHMS/HGCER/Online_PionLT2022/phgcer_calib_11796.param"
+#include "PARAM/SHMS/AERO/Online_PionLT2022/paero_calib.param"
+#include "PARAM/SHMS/CAL/Online_PionLT2022/pcal_calib_Run12054.param"

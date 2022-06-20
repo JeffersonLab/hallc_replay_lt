@@ -1,7 +1,8 @@
 #block T.*
 block P.hgcer.npeSum
 block P.ngcer.npeSum
-block P.*raster*
+#block H.*raster*
+#block H.gtr.*
 #block P.ngcer.*
 block P.cal.*et*
 block P.gtr.*

@@ -1,5 +1,5 @@
 block T.*
-block H.*
+block H.kin.*
 block H.dc.*fp
 block H.gtr.x
 block H.gtr.y

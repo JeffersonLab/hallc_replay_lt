@@ -33,6 +33,7 @@ echo "Target must be one of - LH2 - LD2 - Dummy10cm - Carbon0p5 - AuFoil - Optic
 RUNNUMBER=$1
 RUNTYPE=$2
 TARGET=$3
+NUMEVENTS=$4
 # Need to change these a little, should check whether arguments are good or not REGARDLESS of whether they're blank
 if [[ -z "$1" || ! "$RUNNUMBER" =~ ^-?[0-9]+$ ]]; then # Check an argument was provided and that it is a positive integer, if not, prompt for one
     echo ""
@@ -71,27 +72,31 @@ if [[ -z "$3" || ! "$TARGET" =~ LH2|LD2|Dummy10cm|Carbon0p5|AuFoil|Optics1|Optic
     done
 fi
 
+if [[ -z "$4" ]]; then
+    NUMEVENTS=-1
+fi
+
 if [[ $RUNTYPE == "Prod" ]]; then
     echo "Running production analysis script - ${UTILPATH}/scripts/online_physics/PionLT/pion_prod_replay_analysis_sw.sh"
-    eval '"${UTILPATH}/scripts/online_physics/PionLT/pion_prod_replay_analysis_sw.sh" ${RUNNUMBER} ${TARGET}' # NH 19/01/22 - Target now an optional argument for production analysis, sets MM range
+    eval '"${UTILPATH}/scripts/online_physics/PionLT/pion_prod_replay_analysis_sw.sh" ${RUNNUMBER} ${TARGET} ${NUMEVENTS}' # NH 19/01/22 - Target now an optional argument for production analysis, sets MM range
 elif [[ $RUNTYPE == "Lumi" ]]; then
     echo "Running luminosity analysis script - ${UTILPATH}/scripts/luminosity/replay_lumi.sh"
-    eval '"${UTILPATH}/scripts/luminosity/replay_lumi.sh" ${RUNNUMBER}'
+    eval '"${UTILPATH}/scripts/luminosity/replay_lumi.sh" ${RUNNUMBER} ${NUMEVENTS}'
 elif [[ $RUNTYPE == "HeePSing" ]]; then
     echo "Running HeeP Singles analysis script - ${UTILPATH}/scripts/heep/sing_heepYield.sh"
-    eval '"${UTILPATH}/scripts/heep/sing_heepYield.sh" hms ${RUNNUMBER}'
-    eval '"${UTILPATH}/scripts/heep/sing_heepYield.sh" shms ${RUNNUMBER}'
+    eval '"${UTILPATH}/scripts/heep/sing_heepYield.sh" hms ${RUNNUMBER} ${NUMEVENTS}'
+    eval '"${UTILPATH}/scripts/heep/sing_heepYield.sh" shms ${RUNNUMBER} ${NUMEVENTS}'
 elif [[ $RUNTYPE == "HeePCoin" ]]; then
     echo "Running HeeP Coin analysis script - ${UTILPATH}/scripts/heep/coin_heepYield.sh"
-    eval '"${UTILPATH}/scripts/heep/coin_heepYield.sh" ${RUNNUMBER}'
+    eval '"${UTILPATH}/scripts/heep/coin_heepYield.sh" ${RUNNUMBER} ${NUMEVENTS}'
 elif [[ $RUNTYPE == "fADC" ]]; then
     echo "Running fADC Coin analysis script - ${UTILPATH}/scripts/fADC_SIDIS/fADC_Analysis.sh"
-    eval '"${UTILPATH}/scripts/fADC_SIDIS/fADC_Analysis.sh" ${RUNNUMBER}'
+    eval '"${UTILPATH}/scripts/fADC_SIDIS/fADC_Analysis.sh" ${RUNNUMBER} ${NUMEVENTS}'
 elif [[ $RUNTYPE == "Optics" ]]; then
     echo "Running optics analysis script - "
-    eval '"${UTILPATH}/scripts/optics/run_optics.sh" ${RUNNUMBER}'
+    eval '"${UTILPATH}/scripts/optics/run_optics.sh" ${RUNNUMBER} ${NUMEVENTS}'
 fi
-if [[ $RUNTYPE != "Optics" ]]; then
+if [[ $RUNTYPE != "Optics" && $NUMEVENTS == -1 ]]; then
     eval '"${UTILPATH}/scripts/runlist/fill_runList.sh" ${RUNNUMBER} ${RUNTYPE} ${TARGET}'
 else echo "Full replay for HMS and SHMS completed, check output rootfiles for plots"
 fi

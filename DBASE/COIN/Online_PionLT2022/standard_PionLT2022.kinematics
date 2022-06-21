@@ -22,7 +22,7 @@ helicity_freq = 120.0007547169
 HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.95
 eHadCoinTime_Offset = 75.0
-Bunch_Spacing_Override = 2.004
+Bunch_Spacing_Override = 4.008
 
 14959 - 14967
 gpbeam = 10.549355
@@ -37,7 +37,7 @@ helicity_freq = 120.0007547169
 HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.95
 eHadCoinTime_Offset = 75.0
-Bunch_Spacing_Override = 2.004
+Bunch_Spacing_Override = 4.008
 
 14968 - 14972
 gpbeam = 10.549355
@@ -52,7 +52,7 @@ helicity_freq = 120.0007547169
 HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.95
 eHadCoinTime_Offset = 75.0
-Bunch_Spacing_Override = 2.004
+Bunch_Spacing_Override = 4.008
 
 14973 - 14994
 gpbeam = 10.549355
@@ -174,7 +174,7 @@ SHMS_RF_Offset = 1.95
 eHadCoinTime_Offset = 74.85
 Bunch_Spacing_Override = 4.008
 
-15048 - 99999
+15048 - 15052
 gpbeam = 10.549355
 gtargmass_amu = 1.00794
 htheta_lab = -12.040
@@ -189,3 +189,47 @@ SHMS_RF_Offset = 1.95
 eHadCoinTime_Offset = 74.85
 Bunch_Spacing_Override = 4.008
 
+15053 - 15061
+gpbeam = 10.549355
+gtargmass_amu = 1.00794
+htheta_lab = -15.06
+ptheta_lab = 12.28
+hpcentral = 5.309
+ppcentral = 5.127
+hpartmass =  0.000511
+ppartmass =  0.139570
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.95
+eHadCoinTime_Offset = 74.85
+Bunch_Spacing_Override = 4.008
+
+15062 - 15073
+gpbeam = 10.549355
+gtargmass_amu = 1.00794
+htheta_lab = -15.06
+ptheta_lab = 12.28
+hpcentral = 5.309
+ppcentral = 5.127
+hpartmass =  0.000511
+ppartmass =  0.139570
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.95
+eHadCoinTime_Offset = 74.85
+Bunch_Spacing_Override = 4.008
+
+15074 - 999999
+gpbeam = 10.549355
+gtargmass_amu = 1.00794
+htheta_lab = -15.06
+ptheta_lab = 14.28
+hpcentral = 5.309
+ppcentral = 5.127
+hpartmass =  0.000511
+ppartmass =  0.139570
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.95
+eHadCoinTime_Offset = 74.85
+Bunch_Spacing_Override = 4.008

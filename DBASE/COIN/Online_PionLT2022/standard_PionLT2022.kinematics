@@ -1,9 +1,10 @@
 # Need to set htheta_lab to a NEGATIVE value
 # Need to set ptheta_lab to a POSITIVE value
 # Spectrometer P values should ALWAYS be +ve! DO NOT PUT -ve MOMENTA VALUES IN
-# 1H   gtargmass_amu = 1.00794
-# 12C  gtargmass_amu = 12.0107
-# 27Al gtargmass_amu = 26.98  (Dummy target should be analyzed as 1H, since it is the background underneath)
+# 1H   gtargmass_amu = 1.00794 -> This is the proton mass, use this for LH2, LD2+ (LD2 +ve SHMS polarity) AND dummy target running
+# 1n   gtargmass_amu = 1.008665 -> This is the neutron mass, use this for LD2- (LD2 -ve SHMS polarity running)
+# For LD2 running, the PionLT reaction treats either the proton or neutron (depending upon SHMS polarity) as a spectator. As such, we do NOT analyse the LD2 data with the deuteron mass. The dummy target has to be analysed as though it is a proton. DO NOT set it to the mass of aluminium.
+# 12C  gtargmass_amu = 12.0107 -> This is for carbon target running
 # ppartmass = 0.139570 for Pi+ physics production runs
 # ppartmass is the SHMS mass - NOT the HMS mass
 # hpartmass is the HMS mass - NOT the HADRON mass!!!
@@ -11,7 +12,7 @@
 
 14827 - 14958
 gpbeam = 10.549355
-gtargmass_amu = 1.008665
+gtargmass_amu = 1.00794
 htheta_lab = -12.500
 ptheta_lab = 12.00
 hpcentral = 4.400
@@ -26,7 +27,7 @@ Bunch_Spacing_Override = 4.008
 
 14959 - 14967
 gpbeam = 10.549355
-gtargmass_amu = 1.008665
+gtargmass_amu = 1.00794
 htheta_lab = -12.495
 ptheta_lab = 10.00
 hpcentral = 4.400
@@ -219,7 +220,7 @@ SHMS_RF_Offset = 1.95
 eHadCoinTime_Offset = 74.85
 Bunch_Spacing_Override = 4.008
 
-15074 - 999999
+15074 - 15100
 gpbeam = 10.549355
 gtargmass_amu = 1.00794
 htheta_lab = -15.06
@@ -233,3 +234,51 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 1.95
 eHadCoinTime_Offset = 74.85
 Bunch_Spacing_Override = 4.008
+
+15101 - 15108
+gpbeam = 10.549355
+gtargmass_amu = 1.00794
+htheta_lab = -15.06
+ptheta_lab = 14.28
+hpcentral = 5.309
+ppcentral = 5.127
+hpartmass =  0.000511
+ppartmass =  0.139570
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.95
+eHadCoinTime_Offset = 74.85
+Bunch_Spacing_Override = 4.008
+
+15109 - 15128
+gpbeam = 10.549355
+gtargmass_amu = 1.00794
+htheta_lab = -15.06
+ptheta_lab = 16.28
+hpcentral = 5.309
+ppcentral = 5.127
+hpartmass =  0.000511
+ppartmass =  0.139570
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.95
+eHadCoinTime_Offset = 74.85
+Bunch_Spacing_Override = 4.008
+
+15132 - 99999
+gpbeam = 10.549355
+gtargmass_amu = 1.00794
+htheta_lab = -19.92
+ptheta_lab = 16.91
+hpcentral = 4.752
+ppcentral = 5.512
+hpartmass =  0.000511
+ppartmass =  0.139570
+helicity_freq = 120.0007547169
+HMS_RF_Offset = 0
+SHMS_RF_Offset = 1.95
+eHadCoinTime_Offset = 74.85
+Bunch_Spacing_Override = 4.00
+
+
+

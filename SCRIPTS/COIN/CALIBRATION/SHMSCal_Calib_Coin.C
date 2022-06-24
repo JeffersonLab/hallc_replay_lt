@@ -28,7 +28,7 @@ void SHMSCal_Calib_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./raw");
   pathList.push_back("./raw1");
   pathList.push_back("./raw2");
-  pathList.push_back("./raw_volatile");
+  pathList.push_back("./raw.volatile");
   pathList.push_back("./raw_PionLT");
   pathList.push_back("./raw_KaonLT");
   pathList.push_back("./raw/../raw.copiedtotape");

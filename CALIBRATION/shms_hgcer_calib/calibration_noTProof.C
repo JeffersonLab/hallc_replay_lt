@@ -5,7 +5,7 @@
 //Some updates and changes by Jacob Murphy, Ohio University - 07/09/2020
 //jm443918@ohio.edu
 
-#include "calibration.h"
+//#include "calibration.h"
 #include <TH1.h>
 #include <TH2.h>
 #include <TF1.h>
@@ -22,69 +22,195 @@
 #include <fstream>
 #include <TPaveText.h>
 
+const Int_t        fhgc_pmts = 4;
+const Double_t     fhgc_zpos = 156.27;
+const int ARB_LEN = 20; //for most cases these variables should either be single values, or length 4 arrays, this is overkill to be safe.
+
 using namespace TMath;
 
-TTreeReader  fReader;
-TTree     *fChain = 0;  //!pointer to the analyzed TTree or TChain
-Bool_t     fFullRead;
-Bool_t     fFullShow;
-Bool_t     fTrack;
-Bool_t     fCut;
-Bool_t     fPions;
-Bool_t     frun;
-
-// Declaration of histograms
-TH1F     **fPulseInt;
-TH1F     **fPulseInt_poiss;
-TH1F     ***fPulseInt_quad;
-TH1F      *fBeta_Cut;
-TH1F      *fBeta_Full;
-TH2F      *fXatYat;
-TH2F      *fXeqYeq;
-TH1F      *fTiming_Full;
-TH1F      *fTim1;
-TH1F      *fTim2;
-TH1F      *fTim3;
-TH1F      *fTim4;
-TH1F      *fTim1_full; 
-TH1F      *fTim2_full; 
-TH1F      *fTim3_full; 
-TH1F      *fTim4_full; 
-
-// Declaration of histograms used in fitting/analysis
-TH1F *scaled_clone;
-TH1F *fscaled[4];
-TH1F *fscaled_nobackground[4];
-TH1F *fscaled_mk2[4];
-TH1F *fscaled_mk2_nobackground[4];
-TH1F *fscaled_temp[4];
-TH1F *fscaled_combined[4];
-TH1F *fscaled_total;
-TH1F *fscaled_temp_mk2[4];
-TH1F *fscaled_combined_mk2[4];
-TH1F *fscaled_total_mk2;
+class calibration : public TSelector {
+public : 
+  TTree     *fChain = 0;  //!pointer to the analyzed TTree or TChain
+  Bool_t     fFullRead;
+  Bool_t     fFullShow;
+  Bool_t     fTrack;
+  Bool_t     fCut;
+  Bool_t     fPions;
+  Bool_t     frun;
  
-// Declaration of canvases used in fitting/analysis
-TCanvas *t;
-TCanvas *quad_cuts_ipmt;
-TCanvas *quad_cuts[4];
-TCanvas *low_stats_ipmt;
-TCanvas *background_ipmt;
-TCanvas *Full_zoom_fit_ipmt;
-TCanvas *final_spectra_ipmt;
-TCanvas *background_mk2_ipmt;
-TCanvas *final_spectra_mk2_ipmt;
-TCanvas *final_spectra_combined;
-TCanvas *final_spectra_combined_mk2;
-TCanvas *scaled_poisson;
-TCanvas *scaled_total; 
+  Double_t P_gtr_beta[ARB_LEN];
+  Double_t P_hgcer_goodAdcTdcDiffTime[ARB_LEN];
+  Double_t P_hgcer_goodAdcPulseInt[ARB_LEN];
+  Double_t P_hgcer_goodAdcPulseAmp[ARB_LEN];
+  Double_t P_hgcer_numTracksFired[ARB_LEN];
+  Double_t P_cal_fly_earray[ARB_LEN];
+  Double_t P_cal_pr_eplane[ARB_LEN];
+  Double_t P_cal_etotnorm[ARB_LEN];
+  Double_t P_gtr_p[ARB_LEN];
+  Double_t P_gtr_dp[ARB_LEN];
+  Double_t P_gtr_x[ARB_LEN];
+  Double_t P_gtr_ph[ARB_LEN];
+  Double_t P_gtr_y[ARB_LEN];
+  Double_t P_gtr_th[ARB_LEN];
+  Double_t P_dc_x_fp[ARB_LEN];
+  Double_t P_dc_xp_fp[ARB_LEN];
+  Double_t P_dc_y_fp[ARB_LEN];
+  Double_t P_dc_yp_fp[ARB_LEN];
+  Double_t P_hgcer_xAtCer[ARB_LEN];
+  Double_t P_hgcer_yAtCer[ARB_LEN];
 
-// Declaration of preprocessing quantities
-Double_t timing_mean[4];
-Double_t timing_std[4];
-Double_t x;
+  // Declaration of histograms
+  TH1F     **fPulseInt;
+  TH1F     **fPulseInt_poiss;
+  TH1F     ***fPulseInt_quad;
+  TH1F      *fBeta_Cut;
+  TH1F      *fBeta_Full;
+  TH2F      *fXatYat;
+  TH2F      *fXeqYeq;
+  TH1F      *fTiming_Full;
+  TH1F      *fTim1;
+  TH1F      *fTim2;
+  TH1F      *fTim3;
+  TH1F      *fTim4;
+  TH1F      *fTim1_full; 
+  TH1F      *fTim2_full; 
+  TH1F      *fTim3_full; 
+  TH1F      *fTim4_full; 
 
-void MakeHistos(TTree * /*tree*/)
+  // Declaration of histograms used in fitting/analysis
+  TH1F *scaled_clone;
+  TH1F *fscaled[4];
+  TH1F *fscaled_nobackground[4];
+  TH1F *fscaled_mk2[4];
+  TH1F *fscaled_mk2_nobackground[4];
+  TH1F *fscaled_temp[4];
+  TH1F *fscaled_combined[4];
+  TH1F *fscaled_total;
+  TH1F *fscaled_temp_mk2[4];
+  TH1F *fscaled_combined_mk2[4];
+  TH1F *fscaled_total_mk2;
+ 
+  // Declaration of canvases used in fitting/analysis
+  TCanvas *t;
+  TCanvas *quad_cuts_ipmt;
+  TCanvas *quad_cuts[4];
+  TCanvas *low_stats_ipmt;
+  TCanvas *background_ipmt;
+  TCanvas *Full_zoom_fit_ipmt;
+  TCanvas *final_spectra_ipmt;
+  TCanvas *background_mk2_ipmt;
+  TCanvas *final_spectra_mk2_ipmt;
+  TCanvas *final_spectra_combined;
+  TCanvas *final_spectra_combined_mk2;
+  TCanvas *scaled_poisson;
+  TCanvas *scaled_total; 
+
+  // Declaration of preprocessing quantities
+  Double_t timing_mean[4];
+  Double_t timing_std[4];
+  Double_t x;
+
+  calibration(TTree * /*tree*/ =0) : fChain(0) {fPulseInt = 0, fPulseInt_poiss = 0, fPulseInt_quad = 0, fBeta_Cut = 0, fBeta_Full = 0, fXatYat = 0, fXeqYeq = 0, fTiming_Full = 0,fTim1 =0, fTim1_full = 0,fTim2 =0, fTim2_full = 0, fTim3 = 0, fTim3_full = 0, fTim4 = 0, fTim4_full = 0, fFullRead = kFALSE, fFullShow = kFALSE, fTrack = kFALSE, fCut = kFALSE, fPions = kFALSE;}
+
+  void SetReader(TTree *tree);
+
+  virtual ~calibration() { }
+  virtual Int_t   Version() const { return 2; }
+  virtual void    Begin(TTree *tree);
+  //virtual void    SlaveBegin(TTree *tree);
+  virtual void    Init(TTree *tree);
+  virtual Bool_t  Notify();
+  virtual Bool_t  Process(Long64_t entry);
+  virtual Int_t   GetEntry(Long64_t entry, Int_t getall = 0) { return fChain ? fChain->GetTree()->GetEntry(entry, getall) : 0; }
+  virtual void    SetOption(const char *option) { fOption = option; }
+  virtual void    SetObject(TObject *obj) { fObject = obj; }
+  virtual void    SetInputList(TList *input) { fInput = input; }
+  virtual TList  *GetOutputList() const { return fOutput; }
+  //virtual void    SlaveTerminate();
+  virtual void    Terminate(Int_t RunNumStart, Int_t RunNumEnd);
+
+  ClassDef(calibration,0);
+}; 
+
+void calibration::SetReader(TTree *tree)
+{
+  if (fChain != 0)
+  {
+    std::cout << "already defined tree!!\n"; 
+  }else{
+    fChain = tree;
+  }
+  
+  // These leaves MUST all be present in your replay file for this scrip to run!
+  fChain->SetBranchAddress("P.gtr.beta", P_gtr_beta);
+  fChain->SetBranchAddress("P.hgcer.goodAdcTdcDiffTime", P_hgcer_goodAdcTdcDiffTime);
+  fChain->SetBranchAddress("P.hgcer.goodAdcPulseInt",    P_hgcer_goodAdcPulseInt);
+  fChain->SetBranchAddress("P.hgcer.goodAdcPulseAmp",    P_hgcer_goodAdcPulseAmp);
+  fChain->SetBranchAddress("P.hgcer.numTracksFired",     P_hgcer_numTracksFired);
+  fChain->SetBranchAddress("P.cal.fly.earray",           P_cal_fly_earray);
+  fChain->SetBranchAddress("P.cal.pr.eplane",            P_cal_pr_eplane);
+  fChain->SetBranchAddress("P.cal.etotnorm",             P_cal_etotnorm);
+  fChain->SetBranchAddress("P.gtr.p",   P_gtr_p);
+  fChain->SetBranchAddress("P.gtr.dp",  P_gtr_dp);
+  fChain->SetBranchAddress("P.gtr.x",   P_gtr_x);
+  fChain->SetBranchAddress("P.gtr.ph",  P_gtr_ph);
+  fChain->SetBranchAddress("P.gtr.y",   P_gtr_y);
+  fChain->SetBranchAddress("P.gtr.th",  P_gtr_th);
+  fChain->SetBranchAddress("P.dc.x_fp", P_dc_x_fp);
+  fChain->SetBranchAddress("P.dc.xp_fp",P_dc_xp_fp);
+  fChain->SetBranchAddress("P.dc.y_fp", P_dc_y_fp);
+  fChain->SetBranchAddress("P.dc.yp_fp",P_dc_yp_fp);
+  fChain->SetBranchAddress("P.hgcer.xAtCer", P_hgcer_xAtCer);
+  fChain->SetBranchAddress("P.hgcer.yAtCer", P_hgcer_yAtCer);
+  return;
+}
+
+void calibration::Init(TTree *tree)
+{
+  //fReader.SetTree(tree);
+  SetReader(tree);
+}
+
+Bool_t calibration::Notify()
+{
+  return kTRUE;
+}
+
+//Poisson distribution is used to remove background from larger values of NPE
+Double_t poisson(Double_t *x, Double_t *par)
+{
+  Double_t PoissFit1 = (par[1]*pow(par[0],x[0])*exp(-par[0]))/(tgamma(x[0]+1));
+  return PoissFit1;
+}
+
+//Gaussian distribution is used to find the mean of the SPE and determine spacing between subsequent NPE
+Double_t gauss(Double_t *x, Double_t *par)
+{
+  Double_t GaussFit1 = par[0]*exp((-0.5)*(pow((x[0] - par[1]),2)/pow((par[2]),2)));
+  Double_t GaussFit2 = par[3]*exp((-0.5)*(pow((x[0] - par[4]),2)/pow((par[5]),2)));
+  return GaussFit1 + GaussFit2;
+}
+
+// Function used for quality contron of the calibration
+Double_t fun_4gauss_2poisson(Double_t *x, Double_t *par)
+{
+  Double_t GaussFit1 = par[0]*exp((-0.5)*(pow((x[0] - par[1]),2)/pow((par[2]),2)));
+  Double_t GaussFit2 = par[3]*exp((-0.5)*(pow((x[0] - par[4]),2)/pow((par[5]),2)));
+  Double_t GaussFit3 = par[6]*exp((-0.5)*(pow((x[0] - par[7]),2)/pow((par[8]),2)));
+  Double_t GaussFit4 = par[9]*exp((-0.5)*(pow((x[0] - par[10]),2)/pow((par[11]),2)));
+  Double_t PoissFit1 = (par[13]*pow(par[12],x[0])*exp(-par[12]))/(tgamma(x[0]+1));
+  Double_t PoissFit2 = (par[15]*pow(par[14],x[0])*exp(-par[14]))/(tgamma(x[0]+1));
+  return GaussFit1 + GaussFit2 + GaussFit3 + GaussFit4 + PoissFit1 + PoissFit2;
+}
+
+//A simple linear equation is used to determine how linear the means of the NPE are
+Double_t linear(Double_t *x, Double_t *par)
+{
+  Double_t LinFit1 = par[0]*x[0] + par[1];
+  return LinFit1;
+}
+
+void calibration::Begin(TTree * /*tree*/)
 {
 	TString option = "";//GetOption();
 	// Initialize the histograms. Note they are binned per ADC channel which will be changed in the calibration analysis.
@@ -202,9 +328,9 @@ void MakeHistos(TTree * /*tree*/)
 
 }
 
-Bool_t Process(Long64_t entry) 
+Bool_t calibration::Process(Long64_t entry) 
 {
-	fReader.SetEntry(entry);
+	fChain->GetEntry(entry);
 	//Output to verify script is working, and store the total number of events
 	if (entry % 100000 == 0) printf("Processing Entry number %lld\n",entry);
 	//Define quantities to loop over
@@ -277,13 +403,13 @@ Bool_t Process(Long64_t entry)
 	return kTRUE;
 }
 
-void MakePlots()
+void calibration::Terminate(Int_t RunNumStart, Int_t RunNumEnd)
 {	
-	TString option = GetOption();
-	TString RunNumStartStr = option(0,5);
-	TString RunNumEndStr = option(6,20);
-	Int_t RunNumStart = (RunNumStartStr.Atoi());
-	Int_t RunNumEnd = (RunNumEndStr.Atoi());
+        //TString option = GetOption();
+        //TString RunNumStartStr = option(0,5);
+	//TString RunNumEndStr = option(6,20);
+	//Int_t RunNumStart = (RunNumStartStr.Atoi());
+	//Int_t RunNumEnd = (RunNumEndStr.Atoi());
 	printf("\n");
 	Info("Terminate", "Histograms formed, now starting calibration.\n'Peak Buffer full' is a good warning!\n");
 	printf("\n");
@@ -1094,51 +1220,57 @@ void MakePlots()
 	}
 }
 
-void Calibration_noTProof(TString Filename, Int_t RunNum, Int_t NumEvents)
+void calibration_noTProof(TString Filename, Int_t RunNumStart, Int_t RunNumEnd, Int_t NumEvents)
 {
+        int NumRuns = RunNumEnd - RunNumStart;
+	Int_t MaxEvents = 0;
+	TChain *Chain = new TChain();
+	
+	/*for(int i=0; i < NumRuns; i++)
+	{
+	  //openfile
+	  TString ROOTFile = Filename + Form("_%d_%d.root", RunNumStart+i, NumEvents);
+	  std::cout << "Looking for: " + ROOTFile << '\n';
+	  TFile *replayFile = new TFile(ROOTFile, "READ");
+	  //replayFile.Open(ROOTFile, "READ");
+	  if(replayFile->IsOpen())
+	  {
+	    //get tree
+	    TTree *tree = dynamic_cast <TTree*> (replayFile->Get("T"));
+	    MaxEvents += tree->GetEntries();
+	    //Chain->Add(tree);
+	  }else{
+	    std::cout << "Could not find \"" << ROOTFile << "\" Continuing without.\n";
+	  }
+	}*/
+
 	//openfile
-	TString ROOTFile = Filename + form("_%d_%d.root", RunNum, NumEvents);
-	TFile replayFile;
-	replayFile.open(ROOTFile, "READ");
+	TString ROOTFile = Filename + Form("_%d_%d.root", RunNumStart, NumEvents);
+	std::cout << "Looking for: " + ROOTFile << '\n';
+	TFile *replayFile = new TFile(ROOTFile, "READ");
+	//replayFile.Open(ROOTFile, "READ");
+	TTree *tree;
+	if(replayFile->IsOpen())
+	{
+	  //get tree
+	  tree = dynamic_cast <TTree*> (replayFile->Get("T"));
+	  MaxEvents += tree->GetEntries();
+	  //Chain->Add(tree);
+	}else{
+	  std::cout << "Could not find \"" << ROOTFile << "\" Continuing without.\n";
+	}
 	
-	//get tree
-	fChain = dynamic_cast <TTree*> (replayFile->Get("T"));
-	MaxEvents = fChain->GetEntries();
-	
+	calibration *Calib = new calibration(tree);
+	Calib->SetReader(tree);
 	//make histograms
-	makeHistos(fChain);
-	
-	//load seired values into the reader
-	fReader.SetTree(fChain);
-	// Readers to access the data
-	// These leaves MUST all be present in your replay file for this scrip to run!
-	TTreeReaderArray<Double_t> P_gtr_beta         			= {fReader, "P.gtr.beta"};
-	TTreeReaderArray<Double_t> P_hgcer_goodAdcTdcDiffTime 	= {fReader, "P.hgcer.goodAdcTdcDiffTime"};
-	TTreeReaderArray<Double_t> P_hgcer_goodAdcPulseInt  	= {fReader, "P.hgcer.goodAdcPulseInt"};
-	TTreeReaderArray<Double_t> P_hgcer_goodAdcPulseAmp  	= {fReader, "P.hgcer.goodAdcPulseAmp"};
-	TTreeReaderArray<Double_t> P_hgcer_numTracksFired   	= {fReader, "P.hgcer.numTracksFired"};
-	TTreeReaderArray<Double_t> P_cal_fly_earray      		= {fReader, "P.cal.fly.earray"};
-	TTreeReaderValue<Double_t> P_cal_pr_eplane      		= {fReader, "P.cal.pr.eplane"};
-	TTreeReaderValue<Double_t> P_cal_etotnorm       		= {fReader, "P.cal.etotnorm"};
-	TTreeReaderValue<Double_t> P_gtr_p         				= {fReader, "P.gtr.p"};
-	TTreeReaderArray<Double_t> P_gtr_dp          			= {fReader, "P.gtr.dp"};
-	TTreeReaderArray<Double_t> P_gtr_x           			= {fReader, "P.gtr.x"};
-	TTreeReaderArray<Double_t> P_gtr_ph          			= {fReader, "P.gtr.ph"};
-	TTreeReaderArray<Double_t> P_gtr_y           			= {fReader, "P.gtr.y"};
-	TTreeReaderArray<Double_t> P_gtr_th          			= {fReader, "P.gtr.th"};
-	TTreeReaderArray<Double_t> P_dc_x_fp           			= {fReader, "P.dc.x_fp"};
-	TTreeReaderArray<Double_t> P_dc_xp_fp           		= {fReader, "P.dc.xp_fp"};
-	TTreeReaderArray<Double_t> P_dc_y_fp           			= {fReader, "P.dc.y_fp"};
-	TTreeReaderArray<Double_t> P_dc_yp_fp           		= {fReader, "P.dc.yp_fp"};
-	TTreeReaderArray<Double_t> P_hgcer_xAtCer       		= {fReader, "P.hgcer.xAtCer"};
-	TTreeReaderArray<Double_t> P_hgcer_yAtCer       		= {fReader, "P.hgcer.yAtCer"};
+	Calib->Begin(Calib->fChain);
 	
 	//fill histograms
 	for(int i = 0; i < MaxEvents; i++)
-		Proccess(i);
+		Calib->Process(i);
 	
 	//make and save plots
-	MakePlots();
+	Calib->Terminate(RunNumStart, RunNumEnd);
 }
 
 

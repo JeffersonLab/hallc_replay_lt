@@ -234,62 +234,17 @@ void calibration::Begin(TTree * /*tree*/)
 	fPulseInt_quad[3] = new TH1F*[4];
 	for (Int_t ipmt = 0; ipmt < 4; ipmt++)		
 	{	// Separate ADC channel for each quadrant histogram
-		if(ipmt == 0)
+		ADC_min = 1;
+		bins = 2*(abs(ADC_min) + abs(ADC_max));
+		fPulseInt[ipmt] = new TH1F(Form("PulseInt_PMT%d",ipmt+1),Form("Pulse Integral PMT%d; ADC Channel (pC); Counts",ipmt+1), bins, ADC_min, ADC_max);
+		GetOutputList()->Add(fPulseInt[ipmt]); 
+		for (Int_t iquad = 0; iquad < 4; iquad++)
 		{
-			ADC_min = 4;
-			bins = 2*(abs(ADC_min) + abs(ADC_max));
-			fPulseInt[ipmt] = new TH1F(Form("PulseInt_PMT%d",ipmt+1),Form("Pulse Integral PMT%d; ADC Channel (pC); Counts",ipmt+1), bins, ADC_min, ADC_max);
-			GetOutputList()->Add(fPulseInt[ipmt]); 
-			for (Int_t iquad = 0; iquad < 4; iquad++)
-			{
-				fPulseInt_quad[iquad][ipmt] = new TH1F(Form("PulseInt_quad%d_PMT%d",iquad+1,ipmt+1),Form("Pulse Integral PMT%d quad%d; ADC Channel (pC); Counts",ipmt+1,iquad+1),bins, ADC_min,ADC_max);
-				GetOutputList()->Add(fPulseInt_quad[iquad][ipmt]);
-			}			
-			fPulseInt_poiss[ipmt] = new TH1F(Form("PulseInt_poiss_PMT%d",ipmt+1),Form("Pulse Integral PMT%d; ADC Channel (pC); Counts",ipmt+1), bins_poiss, ADC_poiss_min, ADC_poiss_max);
-			GetOutputList()->Add(fPulseInt_poiss[ipmt]);
-		}
-		if(ipmt == 1)
-		{
-			ADC_min = 4;
-			bins = 2*(abs(ADC_min) + abs(ADC_max));		
-			fPulseInt[ipmt] = new TH1F(Form("PulseInt_PMT%d",ipmt+1),Form("Pulse Integral PMT%d; ADC Channel (pC); Counts",ipmt+1), bins, ADC_min, ADC_max);
-			GetOutputList()->Add(fPulseInt[ipmt]);
-			for (Int_t iquad = 0; iquad < 4; iquad++)
-			{
-				fPulseInt_quad[iquad][ipmt] = new TH1F(Form("PulseInt_quad%d_PMT%d",iquad+1,ipmt+1),Form("Pulse Integral PMT%d quad%d; ADC Channel (pC); Counts",ipmt+1,iquad+1),bins, ADC_min,ADC_max);
-				GetOutputList()->Add(fPulseInt_quad[iquad][ipmt]);
-			}			
-			fPulseInt_poiss[ipmt] = new TH1F(Form("PulseInt_poiss_PMT%d",ipmt+1),Form("Pulse Integral PMT%d; ADC Channel (pC); Counts",ipmt+1), bins_poiss, ADC_poiss_min, ADC_poiss_max);
-			GetOutputList()->Add(fPulseInt_poiss[ipmt]);
-		} 
-		if(ipmt == 2)
-		{
-			ADC_min = 4;
-			bins = 2*(abs(ADC_min) + abs(ADC_max));
-			fPulseInt[ipmt] = new TH1F(Form("PulseInt_PMT%d",ipmt+1),Form("Pulse Integral PMT%d; ADC Channel (pC); Counts",ipmt+1), bins, ADC_min, ADC_max);
-			GetOutputList()->Add(fPulseInt[ipmt]);
-			for (Int_t iquad = 0; iquad < 4; iquad++)
-			{
-				fPulseInt_quad[iquad][ipmt] = new TH1F(Form("PulseInt_quad%d_PMT%d",iquad+1,ipmt+1),Form("Pulse Integral PMT%d quad%d; ADC Channel (pC); Counts",ipmt+1,iquad+1), bins, ADC_min, ADC_max);
-				GetOutputList()->Add(fPulseInt_quad[iquad][ipmt]);
-			}			
-			fPulseInt_poiss[ipmt] = new TH1F(Form("PulseInt_poiss_PMT%d",ipmt+1),Form("Pulse Integral PMT%d; ADC Channel (pC); Counts",ipmt+1), bins_poiss, ADC_poiss_min, ADC_poiss_max);
-			GetOutputList()->Add(fPulseInt_poiss[ipmt]);
-		} 
-		if(ipmt == 3)
-		{
-			ADC_min = 4;
-			bins = 2*(abs(ADC_min) + abs(ADC_max));
-			fPulseInt[ipmt] = new TH1F(Form("PulseInt_PMT%d",ipmt+1),Form("Pulse Integral PMT%d; ADC Channel (pC); Counts",ipmt+1), bins, ADC_min, ADC_max);
-			GetOutputList()->Add(fPulseInt[ipmt]);
-			for (Int_t iquad = 0; iquad < 4; iquad++)
-			{
-				fPulseInt_quad[iquad][ipmt] = new TH1F(Form("PulseInt_quad%d_PMT%d",iquad+1,ipmt+1),Form("Pulse Integral PMT%d quad%d; ADC Channel (pC); Counts",ipmt+1,iquad+1),bins, ADC_min,ADC_max);
-				GetOutputList()->Add(fPulseInt_quad[iquad][ipmt]);
-			}
-			fPulseInt_poiss[ipmt] = new TH1F(Form("PulseInt_poiss_PMT%d",ipmt+1),Form("Pulse Integral PMT%d; ADC Channel (pC); Counts",ipmt+1), bins_poiss, ADC_poiss_min, ADC_poiss_max);
-			GetOutputList()->Add(fPulseInt_poiss[ipmt]);
-		}
+			fPulseInt_quad[iquad][ipmt] = new TH1F(Form("PulseInt_quad%d_PMT%d",iquad+1,ipmt+1),Form("Pulse Integral PMT%d quad%d; ADC Channel (pC); Counts",ipmt+1,iquad+1),bins, ADC_min,ADC_max);
+			GetOutputList()->Add(fPulseInt_quad[iquad][ipmt]);
+		}			
+		fPulseInt_poiss[ipmt] = new TH1F(Form("PulseInt_poiss_PMT%d",ipmt+1),Form("Pulse Integral PMT%d; ADC Channel (pC); Counts",ipmt+1), bins_poiss, ADC_poiss_min, ADC_poiss_max);
+		GetOutputList()->Add(fPulseInt_poiss[ipmt]);
 	}
 	
 	// Histograms for Timing info visualizations 
@@ -344,44 +299,28 @@ Bool_t calibration::Process(Long64_t entry)
 	//Require loose cut on particle velocity																		 
 	// SJDK 28/04/22 - This cut got screwed up in a merge somewhere, I've changed it to > 0.4 (> 2 made no sense)
 	fBeta_Full->Fill(P_gtr_beta[0]);
-	if (TMath::Abs(P_gtr_beta[0] - 1.0) > 0.4) return kTRUE;
+	if (TMath::Abs(P_gtr_beta[0] - 1.0) > 0.35) return kTRUE;
 	fBeta_Cut->Fill(P_gtr_beta[0]);		
+
 	//Filling the histograms
 	for (Int_t ipmt = 0; ipmt < fpmts; ipmt++)
 	{
 		//Filling timing info before cut
 		fTiming_Full->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+
 		//Perform a loose timing cut on each PMT
-		if(ipmt ==0)
-		{
-			fTim1_full->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-			if(P_hgcer_goodAdcTdcDiffTime[ipmt] >40 || P_hgcer_goodAdcTdcDiffTime[ipmt] < 30) continue;											
-			fTim1->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-		}
-		if(ipmt ==1)
-		{
-			fTim2_full->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-			if(P_hgcer_goodAdcTdcDiffTime[ipmt] >40 || P_hgcer_goodAdcTdcDiffTime[ipmt] < 30) continue;													
-			fTim2->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-		}
-		if(ipmt ==2)
-		{
-			fTim3_full->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-			if(P_hgcer_goodAdcTdcDiffTime[ipmt] >40 || P_hgcer_goodAdcTdcDiffTime[ipmt] < 30) continue;													 
-			fTim3->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-		}
-		if(ipmt ==3)
-		{
-			fTim4_full->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-			if(P_hgcer_goodAdcTdcDiffTime[ipmt] >40 || P_hgcer_goodAdcTdcDiffTime[ipmt] < 30) continue;																	
-			fTim4->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-		}
+		fTim1_full->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+		if(P_hgcer_goodAdcTdcDiffTime[ipmt] > 18 || P_hgcer_goodAdcTdcDiffTime[ipmt] < -12) continue;											
+		fTim1->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+
 		//Cuts to remove entries corresponding to a PMT not registering a hit		
 		if (P_hgcer_goodAdcPulseInt[ipmt] == 0.0) continue;
+
 		//For quadrant cut strategy with no particle ID cut
 		//Fill histogram of the full PulseInt spectra for each PMT
 		fPulseInt[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
 		fPulseInt_poiss[ipmt]->Fill(P_hgcer_goodAdcPulseInt[ipmt]);
+
 		//Retrieve information for particle tracking from focal plane
 		//Fill histograms of what each PMT registers from each quadrant, this requires tracking the particle from the focal plane. Each quadrant is defined from the parameter files
 		Float_t y_pos = P_hgcer_yAtCer[0];
@@ -487,6 +426,8 @@ void calibration::Terminate(Int_t RunNumStart, Int_t RunNumEnd)
 	fTim4_full->Draw();
 	fTim4->Draw("same");	 
 	Timing1->Print(outputpdf);	
+	
+	//******************* Fitting Code **********************//
 	//Single Gaussian to find mean of SPE
 	TF1 *Gauss1 = new TF1("Gauss1",gauss,100,3,3);
 	Gauss1->SetParNames("Amplitude","Mean","Std. Dev.");

@@ -4,6 +4,8 @@
 // For more info on processing with TProof, see https://root.cern.ch/doc/v608/classTProof.html
 //Some updates and changes by Jacob Murphy, Ohio University - 07/09/2020
 //jm443918@ohio.edu
+//More updates By Nathan Heinrich: Univerity of Regina - 2022
+// heinricn@uregina.ca
 
 //#include "calibration.h"
 #include <TH1.h>
@@ -193,7 +195,7 @@ Double_t gauss(Double_t *x, Double_t *par)
 
 // Function used for quality contron of the calibration
 Double_t fun_4gauss_2poisson(Double_t *x, Double_t *par)
-{
+{// parrameter correspond to amplitude1, mean1, stdev1, amplitude2, mean2, stdev2, amplitude3, mean3, stdev3, amplitude4, mean4, stdev4, poissAmp1, PoissLamda1, poissAmp2, PoissLamda2
   Double_t GaussFit1 = par[0]*exp((-0.5)*(pow((x[0] - par[1]),2)/pow((par[2]),2)));
   Double_t GaussFit2 = par[3]*exp((-0.5)*(pow((x[0] - par[4]),2)/pow((par[5]),2)));
   Double_t GaussFit3 = par[6]*exp((-0.5)*(pow((x[0] - par[7]),2)/pow((par[8]),2)));
@@ -472,386 +474,310 @@ void calibration::Terminate(Int_t RunNumStart, Int_t RunNumEnd)
 			x_npe[i] = 0, y_npe[i] = 0, x_err[i] = 0, y_err[i] = 0;
 			RChi2[i] = 0;
 		} 
-		//Begin strategy for quadrant cut calibration	
-		{
-	//TSpectrum class is used to find the SPE peak using the search method
-	TSpectrum *s = new TSpectrum(2);	
-	//Create Canvas to see the search result for the SPE	
-	quad_cuts[ipmt] = new TCanvas(Form("quad_cuts_%d",ipmt), Form("First Photoelectron peaks PMT%d",ipmt+1));
-	quad_cuts[ipmt]->Divide(3,1);			
-	Int_t ipad = 1; //Variable to draw over pads correctly		
-	for (Int_t iquad=0; iquad<4; iquad++)
-	{ 
-		if (iquad == ipmt) continue; //ignore a PMT looking at its own quadrant
-		quad_cuts[ipmt]->cd(ipad);		
-		if (PulseInt_quad[iquad][ipmt]->GetEntries() > 0)
+		
+		//TSpectrum class is used to find the SPE peak using the search method
+		TSpectrum *s = new TSpectrum(2);	
+		//Create Canvas to see the search result for the SPE	
+		quad_cuts[ipmt] = new TCanvas(Form("quad_cuts_%d",ipmt), Form("First Photoelectron peaks PMT%d",ipmt+1));
+		quad_cuts[ipmt]->Divide(3,1);			
+		Int_t ipad = 1; //Variable to draw over pads correctly		
+		for (Int_t iquad=0; iquad<4; iquad++)
+		{ 
+			if (iquad == ipmt) continue; //ignore a PMT looking at its own quadrant
+			quad_cuts[ipmt]->cd(ipad);		
+			if (PulseInt_quad[iquad][ipmt]->GetEntries() > 0)
 			{		 
-		//Perform search for the SPE and save the peak into the array xpeaks	 //0.00			
-		s->Search(PulseInt_quad[iquad][ipmt], 2.0, "" ,0.05);			
-		TList *functions = PulseInt_quad[iquad][ipmt]->GetListOfFunctions(); 
-		TPolyMarker *pm = (TPolyMarker*)functions->FindObject("TPolyMarker");
+				//Perform search for the SPE and save the peak into the array xpeaks	 //0.00			
+				s->Search(PulseInt_quad[iquad][ipmt], 2.0, "" ,0.05);			
+				TList *functions = PulseInt_quad[iquad][ipmt]->GetListOfFunctions(); 
+				TPolyMarker *pm = (TPolyMarker*)functions->FindObject("TPolyMarker");
 			
-		if ( pm == nullptr)
-			{
-			cout << "pm is null!!!\n\n ";									 
-			cout << "ipmt = " << ipmt << " and iquad = " << iquad <<endl;
-			continue;
-			}	 		 	
-		Double_t k[3];			 
-		Double_t * xpeaks = pm->GetX();	 
+				if ( pm == nullptr)
+				{
+					cout << "pm is null!!!\n\n ";									 
+					cout << "ipmt = " << ipmt << " and iquad = " << iquad <<endl;
+					continue;
+				}	 		 	
+				Double_t k[3];			 
+				Double_t * xpeaks = pm->GetX();	 
 			
-		//If amplitude of second peak greater than first peak then switch the order around	
-		if (xpeaks[1] < xpeaks[0])
-			{
-			k[0] =	xpeaks[0]; xpeaks[0] = xpeaks[1]; xpeaks[1] = k[0];
-			}						 
-		//Use the peak to fit the SPE with a Gaussian to determine the mean		
-		if(ipmt == 0)
-			{	
-			PulseInt_quad[iquad][ipmt]->Draw("E");
-			Gauss2->SetRange(0,16);
-			Gauss2->SetParameter(0, 2000);
-			Gauss2->SetParameter(1, 6.0);
-			Gauss2->SetParameter(2, 2);
-			Gauss2->SetParameter(3, 1000);
-			Gauss2->SetParameter(4, 12);	
-			Gauss2->SetParameter(5, 3.0);
-			Gauss2->SetParLimits(0, 0.0,PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])));
-			Gauss2->SetParLimits(1, 5.0, 8.0); 
-			Gauss2->SetParLimits(2, 0.5 , 4.0);
-			Gauss2->SetParLimits(3, 0.0, PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[1])));
-			Gauss2->SetParLimits(4, 10, 17);	 
-			Gauss2->SetParLimits(5, 2.0, 4.0);
-			PulseInt_quad[iquad][ipmt]->Fit("Gauss2","RQN");				 
-			double x1 = Gauss2->GetParameter(1);
-			double x2 = Gauss2->GetParameter(4);
-			xpeaks[0] = x1;
-			xpeaks[1] = x2;	
-			}	
-
-		if(ipmt == 1)
-			{	
-			PulseInt_quad[iquad][ipmt]->Draw("E");
-			Gauss2->SetRange(0,16);
-			Gauss2->SetParameter(0, 2000);
-			Gauss2->SetParameter(1, 6.0);
-			Gauss2->SetParameter(2, 2);
-			Gauss2->SetParameter(3, 1000);
-			Gauss2->SetParameter(4, 12);	
-			Gauss2->SetParameter(5, 3.0);
-			Gauss2->SetParLimits(0, 0.0,PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])));
-			Gauss2->SetParLimits(1, 5.0, 8.0);
-			Gauss2->SetParLimits(2, 0.5 , 4.0);
-			Gauss2->SetParLimits(3, 0.0, PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[1])));
-			Gauss2->SetParLimits(4, 10, 17);	 
-			Gauss2->SetParLimits(5, 2.0, 4.0);
-			PulseInt_quad[iquad][ipmt]->Fit("Gauss2","RQN");
-			double x1 = Gauss2->GetParameter(1);
-			double x2 = Gauss2->GetParameter(4);	
-			xpeaks[0] = x1;
-			xpeaks[1] = x2;
-			}	
-
-		if(ipmt == 2)			
-			{ 
-			PulseInt_quad[iquad][ipmt]->Draw("E");
-			Gauss2->SetRange(0,16);
-			Gauss2->SetParameter(0, 2000);
-			Gauss2->SetParameter(1, 6.0);
-			Gauss2->SetParameter(2, 2);
-			Gauss2->SetParameter(3, 1000);
-			Gauss2->SetParameter(4, 12);	
-			Gauss2->SetParameter(5, 3.0);
-			Gauss2->SetParLimits(0, 0.0,PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])));
-			Gauss2->SetParLimits(1, 5.0, 7.0); //2.0
-			Gauss2->SetParLimits(2, 0.5 , 4.0);
-			Gauss2->SetParLimits(3, 0.0, PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[1])));
-			Gauss2->SetParLimits(4, 10, 17);	 //2.0
-			Gauss2->SetParLimits(5, 2.0, 4.0);
-			PulseInt_quad[iquad][ipmt]->Fit("Gauss2","RQN");
-	
-			double x1 = Gauss2->GetParameter(1);
-			double x2 = Gauss2->GetParameter(4);	
-			xpeaks[0] = x1;
-			xpeaks[1] = x2;
-			}	
-
-		if(ipmt == 3)
-			{ 
-			PulseInt_quad[iquad][ipmt]->Draw("E");
-			Gauss2->SetRange(0,16);
-			Gauss2->SetParameter(0, 2000);
-			Gauss2->SetParameter(1, 6.0);
-			Gauss2->SetParameter(2, 2);
-			Gauss2->SetParameter(3, 1000);
-			Gauss2->SetParameter(4, 12);	
-			Gauss2->SetParameter(5, 3.0);
-			Gauss2->SetParLimits(0, 0.0,PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])));
-			Gauss2->SetParLimits(1, 5.0, 8.0); //2.0
-			Gauss2->SetParLimits(2, 0.5 , 4.0);
-			Gauss2->SetParLimits(3, 0.0, PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[1])));
-			Gauss2->SetParLimits(4, 10, 17);	 //2.0
-			Gauss2->SetParLimits(5, 2.0, 4.0);
-			PulseInt_quad[iquad][ipmt]->Fit("Gauss2","RQN");		 
-			double x1 = Gauss2->GetParameter(1);
-			double x2 = Gauss2->GetParameter(4);	
-			xpeaks[0] = x1;
-			xpeaks[1] = x2;
-			}
-
-		//Again Use the peak to fit the SPE with a Gaussian to determine the mean
-		Gauss2->SetParameter(0,Gauss2->GetParameter(0));
-		Gauss2->SetParameter(1,Gauss2->GetParameter(1));
-		Gauss2->SetParameter(2,Gauss2->GetParameter(2));
-		Gauss2->SetParameter(3,Gauss2->GetParameter(3));
-		Gauss2->SetParameter(4,Gauss2->GetParameter(4));	
-		Gauss2->SetParameter(5,Gauss2->GetParameter(5));
-		PulseInt_quad[iquad][ipmt]->Fit("Gauss2","RQ");		 
-		// Draw individual functions from the Gauss2 function
-		TF1 *g1 = new TF1("g1","gaus",0,35);
+				//If amplitude of second peak greater than first peak then switch the order around	
+				if (xpeaks[1] < xpeaks[0])
+				{
+					k[0] =	xpeaks[0]; 
+					xpeaks[0] = xpeaks[1]; 
+					xpeaks[1] = k[0];
+				}						 
+				//Use the peak to fit the SPE with a Gaussian to determine the mean		
+				
+				PulseInt_quad[iquad][ipmt]->Draw("E");
+				// Gauss2 Parameters -- "Amplitude 1","Mean 1","Std. Dev. 1","Amplitude 2","Mean 2","Std. Dev. 2"
+				Gauss2->SetRange(0,16);
+				Gauss2->SetParameter(0, 2000);
+				Gauss2->SetParameter(1, 3.0);
+				Gauss2->SetParameter(2, 2);
+				Gauss2->SetParameter(3, 500);
+				Gauss2->SetParameter(4, 12);	
+				Gauss2->SetParameter(5, 3.0);
+				Gauss2->SetParLimits(0, 0.0,PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0]))*1.1); //added *1.1 -NH
+				Gauss2->SetParLimits(1, 1.0, 8.0); 
+				Gauss2->SetParLimits(2, 0.5 , 4.0);
+				Gauss2->SetParLimits(3, 0.0, PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[1]))*1.1); //added *1.1 -NH
+				Gauss2->SetParLimits(4, 5, 17);	 
+				Gauss2->SetParLimits(5, 1.0, 4.0);
+				PulseInt_quad[iquad][ipmt]->Fit("Gauss2","RQN");				 
+				double x1 = Gauss2->GetParameter(1);
+				double x2 = Gauss2->GetParameter(4);
+				xpeaks[0] = x1;
+				xpeaks[1] = x2;	
+					
+				//Again Use the peak to fit the SPE with a Gaussian to determine the mean
+				Gauss2->SetParameter(0,Gauss2->GetParameter(0));
+				Gauss2->SetParameter(1,Gauss2->GetParameter(1));
+				Gauss2->SetParameter(2,Gauss2->GetParameter(2));
+				Gauss2->SetParameter(3,Gauss2->GetParameter(3));
+				Gauss2->SetParameter(4,Gauss2->GetParameter(4));	
+				Gauss2->SetParameter(5,Gauss2->GetParameter(5));
+				PulseInt_quad[iquad][ipmt]->Fit("Gauss2","RQ");		 
+				// Draw individual functions from the Gauss2 function
+				TF1 *g1 = new TF1("g1","gaus",0,35);
+				
+				//Make pair of gaussians from gauss2 fit.
+				if (xpeaks[1] < xpeaks[0])
+				{
+					g1->SetParameter(0,Gauss2->GetParameter(3));
+					g1->SetParameter(1,Gauss2->GetParameter(4));
+					g1->SetParameter(2,Gauss2->GetParameter(5));
+					g1->SetLineColor(1);
+					g1->Draw("same");
+				}else{
+					g1->SetParameter(0,Gauss2->GetParameter(0));
+					g1->SetParameter(1,Gauss2->GetParameter(1));
+					g1->SetParameter(2,Gauss2->GetParameter(2));
+					g1->SetLineColor(1);
+					g1->Draw("same");
+				}
 		
-		if (xpeaks[1] < xpeaks[0])
-			{
-			g1->SetParameter(0,Gauss2->GetParameter(3));
-			g1->SetParameter(1,Gauss2->GetParameter(4));
-			g1->SetParameter(2,Gauss2->GetParameter(5));
-			g1->SetLineColor(1);
-			g1->Draw("same");
-			}
-		
-		else
-			{
-			g1->SetParameter(0,Gauss2->GetParameter(0));
-			g1->SetParameter(1,Gauss2->GetParameter(1));
-			g1->SetParameter(2,Gauss2->GetParameter(2));
-			g1->SetLineColor(1);
-			g1->Draw("same");
-			}
-		
-		TF1 *g2 = new TF1("g2","gaus",0,35);
-		if (xpeaks[1] < xpeaks[0])
-			{
-			g2->SetParameter(0,Gauss2->GetParameter(0));
-			g2->SetParameter(1,Gauss2->GetParameter(1));	
-			g2->SetParameter(2,Gauss2->GetParameter(2));
-			g2->SetParLimits(2, 0.5, 10.0);
-			g2->SetLineColor(3);						 
-			g2->Draw("same");
-			}
-	
-		else
-			{
-			g2->SetParameter(0,Gauss2->GetParameter(3));
-			g2->SetParameter(1,Gauss2->GetParameter(4));	
-			g2->SetParameter(2,Gauss2->GetParameter(5));
-			g2->SetParLimits(2, 0.5, 10.0);
-			g2->SetLineColor(3);						 
-			g2->Draw("same");
-			} 
+				TF1 *g2 = new TF1("g2","gaus",0,35);
+				if (xpeaks[1] < xpeaks[0])
+				{
+					g2->SetParameter(0,Gauss2->GetParameter(0));
+					g2->SetParameter(1,Gauss2->GetParameter(1));	
+					g2->SetParameter(2,Gauss2->GetParameter(2));
+					g2->SetParLimits(2, 0.5, 10.0);
+					g2->SetLineColor(3);						 
+					g2->Draw("same");
+				}else{
+					g2->SetParameter(0,Gauss2->GetParameter(3));
+					g2->SetParameter(1,Gauss2->GetParameter(4));	
+					g2->SetParameter(2,Gauss2->GetParameter(5));
+					g2->SetParLimits(2, 0.5, 10.0);
+					g2->SetLineColor(3);						 
+					g2->Draw("same");
+				} 
 		 
-		Double_t p0, p0_err, p1, p1_err, p2, p2_err, p3, p3_err, p4, p4_err, p5, p5_err, Chi, NDF;
-		TPaveText *t = new TPaveText(0.45, 0.6, 0.9, 0.9, "NDC");
+				Double_t p0, p0_err, p1, p1_err, p2, p2_err, p3, p3_err, p4, p4_err, p5, p5_err, Chi, NDF;
+				TPaveText *t = new TPaveText(0.45, 0.6, 0.9, 0.9, "NDC");
+				{
+					t->SetTextColor(kBlack);
+					t->AddText(Form(" Chi/NDF	 = %3.3f #/ %3.3f", Chi = Gauss2->GetChisquare(), NDF = Gauss2->GetNDF() ));
+					t->AddText(Form(" Amplitude 1	 = %3.3f #pm %3.3f", p0 = Gauss2->GetParameter(0), p0_err = Gauss2->GetParError(0)));
+					t->AddText(Form(" Mean 1		= %3.3f #pm %3.3f", p1 = Gauss2->GetParameter(1), p1_err = Gauss2->GetParError(1)));
+					t->AddText(Form(" Std. 1		= %3.3f #pm %3.3f", p2 = Gauss2->GetParameter(2), p2_err = Gauss2->GetParError(2)));
+					t->AddText(Form(" Amplitude 2	 = %3.3f #pm %3.3f", p3 = Gauss2->GetParameter(3), p3_err = Gauss2->GetParError(3)));
+					t->AddText(Form(" Mean 2		= %3.3f #pm %3.3f", p4 = Gauss2->GetParameter(4), p4_err = Gauss2->GetParError(4)));
+					t->AddText(Form(" Std. 2		= %3.3f #pm %3.3f", p5 = Gauss2->GetParameter(5), p5_err = Gauss2->GetParError(5)));
+					t->Draw();
+				}
+		
+				// Get values ONLY if number of events in first peak is over 40 at its maximum. Values are all 0 if this is NOT true
+				if (xpeaks[0] > 4.0 && PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])) > 40) mean[ipad-1] = Gauss2->GetParameter(1); 
+				if (xpeaks[0] > 4.0 && PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])) > 40) SD[ipad-1] = Gauss2->GetParameter(2); 
+				if (xpeaks[0] > 4.0 && PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])) > 40) RChi2[ipad-1] = Gauss2->GetChisquare()/Gauss2->GetNDF(); 
+				if (xpeaks[0] > 4.0 && PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])) > 40) mean_err[ipad-1] = Gauss2->GetParError(1);
+		
+				if (PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])) > 1500)
+				{
+					// Set Boolean of whether fit is good or not here, based upon reduced Chi2 of the fit
+					TPaveText *BadFitText = new TPaveText (0.65, 0.15, 0.85, 0.2, "NDC");	
+					BadFitText->SetTextColor(kRed);
+					BadFitText->AddText("Bad fit");
+					if (RChi2[ipad-1] < 0.5 || RChi2[ipad-1] > 30)
+					{	
+						GoodFit[ipad-1] = kFALSE; 
+						BadFitText->Draw("same");
+					} 
+					else if	(RChi2[ipad-1] > 0.5 && RChi2[ipad-1] < 30)
+					{
+						GoodFit[ipad-1] = kTRUE;
+						GoodFitText->Draw("same");
+					} 
+				} else {
+					TPaveText *BadFitText = new TPaveText (0.65, 0.15, 0.85, 0.2, "NDC");	
+					BadFitText->SetTextColor(kRed);
+					BadFitText->AddText("Bad fit");			
+					if (RChi2[ipad-1] < 0.5 || RChi2[ipad-1] > 20)
+					{
+						GoodFit[ipad-1] = kFALSE; 
+						BadFitText->Draw("same");
+					} 
+					else if	(RChi2[ipad-1] > 0.5 && RChi2[ipad-1] < 20)
+					{
+						GoodFit[ipad-1] = kTRUE;
+						GoodFitText->Draw("same");
+					} 
+				}
+				ipad++;
+			}
+		}
+		
+		quad_cuts[ipmt]->Print(outputpdf);		
+		//Obtain the conversion from ADC to NPE by taking the error weighted average of the SPE means
+		Double_t xscale = 0.0;
+		Double_t xscaleErr = 0.0;
+		Double_t num_peaks = 0.0;
+		Double_t WeightAvgSum1 = 0.0;
+		Double_t WeightAvgSum2 = 0.0;
+		// Take error weighted avg of calibration constants 26/8/19 SK
+		// ONLY consider quadrants which returned acceptable fits in the weighted average
+		for (Int_t i=0; i<3; i++)
+		{ 
+			if (GoodFit[i] == kFALSE) continue;
+			if (mean_err[i] == 0) continue;
+			WeightAvgSum1 += mean[i]/(mean_err[i]*mean_err[i]);				
+			WeightAvgSum2 += 1/(mean_err[i]*mean_err[i]);
+		}
+		// xscale -> First guess of the calibration constant
+		xscale = WeightAvgSum1/WeightAvgSum2;
+		xscaleErr = 1/TMath::Sqrt(WeightAvgSum2);	
+
+		//Perform check if the statistics were too low to get a good estimate of the SPE mean		
+		//Scale full ADC spectra according to the mean of the SPE. This requires filling a new histogram with the same number of bins but scaled min/max
+		Int_t nbins;
+		nbins = (PulseInt_poiss[ipmt]->GetXaxis()->GetNbins());
+
+		//With the scale of ADC to NPE create a histogram that has the conversion applied
+		fscaled[ipmt] = new TH1F(Form("fscaled_PMT%d", ipmt+1), Form("Scaled ADC spectra for PMT%d; NPE; Normalized Counts",ipmt+1), nbins, 0.0 ,30.0);
+		//Fill this histogram bin by bin
+		for (Int_t ibin=0; ibin<nbins; ibin++)
 		{
-			t->SetTextColor(kBlack);
-			t->AddText(Form(" Chi/NDF	 = %3.3f #/ %3.3f", Chi = Gauss2->GetChisquare(), NDF = Gauss2->GetNDF() ));
-			t->AddText(Form(" Amplitude 1	 = %3.3f #pm %3.3f", p0 = Gauss2->GetParameter(0), p0_err = Gauss2->GetParError(0)));
-			t->AddText(Form(" Mean 1		= %3.3f #pm %3.3f", p1 = Gauss2->GetParameter(1), p1_err = Gauss2->GetParError(1)));
-			t->AddText(Form(" Std. 1		= %3.3f #pm %3.3f", p2 = Gauss2->GetParameter(2), p2_err = Gauss2->GetParError(2)));
-			t->AddText(Form(" Amplitude 2	 = %3.3f #pm %3.3f", p3 = Gauss2->GetParameter(3), p3_err = Gauss2->GetParError(3)));
-			t->AddText(Form(" Mean 2		= %3.3f #pm %3.3f", p4 = Gauss2->GetParameter(4), p4_err = Gauss2->GetParError(4)));
-			t->AddText(Form(" Std. 2		= %3.3f #pm %3.3f", p5 = Gauss2->GetParameter(5), p5_err = Gauss2->GetParError(5)));
-			t->Draw();
-		}
-		
-		// Get values ONLY if number of events in first peak is over 40 at its maximum. Values are all 0 if this is NOT true
-		if (xpeaks[0] > 4.0 && PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])) > 40) mean[ipad-1] = Gauss2->GetParameter(1); 
-		if (xpeaks[0] > 4.0 && PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])) > 40) SD[ipad-1] = Gauss2->GetParameter(2); 
-		if (xpeaks[0] > 4.0 && PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])) > 40) RChi2[ipad-1] = Gauss2->GetChisquare()/Gauss2->GetNDF(); 
-		if (xpeaks[0] > 4.0 && PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])) > 40) mean_err[ipad-1] = Gauss2->GetParError(1);
-		
-		if (PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])) > 2000){
-			// Set Boolean of whether fit is good or not here, based upon reduced Chi2 of the fit
-			TPaveText *BadFitText = new TPaveText (0.65, 0.15, 0.85, 0.2, "NDC");	
-			BadFitText->SetTextColor(kRed);
-			BadFitText->AddText("Bad fit");
-			if (RChi2[ipad-1] < 0.5 || RChi2[ipad-1] > 30)
-			{	
-				GoodFit[ipad-1] = kFALSE; 
-				BadFitText->Draw("same");
-			} 
-			else if	(RChi2[ipad-1] > 0.5 && RChi2[ipad-1] < 30)
-			{
-				GoodFit[ipad-1] = kTRUE;
-				GoodFitText->Draw("same");
-			} 
+			Double_t y = PulseInt_poiss[ipmt]->GetBinContent(ibin);
+			Double_t x = PulseInt_poiss[ipmt]->GetXaxis()->GetBinCenter(ibin);
+			Double_t x_scaled = x/xscale;
+			Int_t bin_scaled = fscaled[ipmt]->GetXaxis()->FindBin(x_scaled); 
+			fscaled[ipmt]->SetBinContent(bin_scaled,y);
 		}
 
-		else
+		//Normalize the histogram for ease of fitting
+		fscaled[ipmt]->Scale(1.0/fscaled[ipmt]->Integral(), "width");						 
+
+		//Tcanvas for draw the	scaled histogram 
+		background_ipmt = new TCanvas(Form("backgrounf_pmt%d",ipmt), Form("Full NPE spectra for PMT%d ",ipmt+1));		
+		background_ipmt->cd();		
+		 
+		//Poisson distribution 
+		Poisson->SetRange(7,35);
+		Poisson->SetParameter(0,9.0);
+		Poisson->SetParameter(1, 0.40);
+		fscaled[ipmt]->Fit("Poisson","RQBN");
+
+		// Gauss4Poiss2 included 4gauss + 2poisson for the quality control check
+		// 								  0    ,   1  ,    2  ,      3    ,   4  ,    5  ,      6    ,   7  ,   8   ,     9     ,  10  ,   11  ,     12   ,      13    ,     14   ,      15
+		// parrameters correspond to amplitude1, mean1, stdev1, amplitude2, mean2, stdev2, amplitude3, mean3, stdev3, amplitude4, mean4, stdev4, poissAmp1, PoissLamda1, poissAmp2, PoissLamda2
+		Gauss4Poiss2->SetRange(0.0, 30.0);
+		Gauss4Poiss2->SetParameter(0, 0.6);
+		Gauss4Poiss2->SetParameter(1, 1.0);
+		Gauss4Poiss2->SetParameter(2, 0.5);
+		Gauss4Poiss2->SetParameter(3, 0.15);
+		Gauss4Poiss2->SetParameter(4, 2.0);
+		Gauss4Poiss2->SetParameter(5, 0.6);	
+		Gauss4Poiss2->SetParameter(6, 0.12);
+		Gauss4Poiss2->SetParameter(7, 3.0);
+		Gauss4Poiss2->SetParameter(8, 0.7);					 
+		Gauss4Poiss2->SetParameter(9, 0.12);
+		Gauss4Poiss2->SetParameter(10, 4.0);
+		Gauss4Poiss2->SetParameter(11, 0.7);
+		Gauss4Poiss2->SetParameter(12, 8.0);
+		Gauss4Poiss2->SetParameter(13, 0.7);
+		Gauss4Poiss2->SetParameter(14, Poisson->GetParameter(0));	
+		Gauss4Poiss2 ->SetParameter(15, Poisson->GetParameter(1));
+			
+		// Constraints on mean 	
+		Gauss4Poiss2->SetParLimits(1, 1 - 3*xscaleErr, 1 + 3*xscaleErr);	
+		Gauss4Poiss2->SetParLimits(4, 2 - 3*xscaleErr, 2 + 3*xscaleErr);
+		Gauss4Poiss2->SetParLimits(7, 3 - 3*xscaleErr, 3 + 3*xscaleErr);
+		Gauss4Poiss2->SetParLimits(10, 4 - 3*xscaleErr, 4 + 3*xscaleErr);
+		if(ipmt == 3) 
 		{
-			TPaveText *BadFitText = new TPaveText (0.65, 0.15, 0.85, 0.2, "NDC");	
-			BadFitText->SetTextColor(kRed);
-			BadFitText->AddText("Bad fit");			
-			if (RChi2[ipad-1] < 0.5 || RChi2[ipad-1] > 20)
-			{
-				GoodFit[ipad-1] = kFALSE; 
-				BadFitText->Draw("same");
-			} 
-			else if	(RChi2[ipad-1] > 0.5 && RChi2[ipad-1] < 20)
-			{
-				GoodFit[ipad-1] = kTRUE;
-				GoodFitText->Draw("same");
-			} 
+			Gauss4Poiss2->SetParLimits(1, 1 - 2*xscaleErr, 1 + 2*xscaleErr);
+			Gauss4Poiss2->SetParLimits(4, 2 - 2*xscaleErr, 4 + 2*xscaleErr);
 		}
-			ipad++;
-	}
+			
+		//Constraints of sigma
+		Gauss4Poiss2->SetParLimits(2, 0.02, 0.6);
+		Gauss4Poiss2->SetParLimits(5, 0.04, 0.7);
+		Gauss4Poiss2->SetParLimits(8, 0.05, 0.9);
+		Gauss4Poiss2->SetParLimits(11, 0.07, 2.0 );
+			
+		if(ipmt == 2)
+		{	
+			Gauss4Poiss2->SetParLimits(2, 0.02, 1.0);
 		}
-		
-	quad_cuts[ipmt]->Print(outputpdf);		
-	//Obtain the conversion from ADC to NPE by taking the error weighted average of the SPE means
-	Double_t xscale = 0.0;
-	Double_t xscaleErr = 0.0;
-	Double_t num_peaks = 0.0;
-	Double_t WeightAvgSum1 = 0.0;
-	Double_t WeightAvgSum2 = 0.0;
-	// Take error weighted avg of calibration constants 26/8/19 SK
-	// ONLY consider quadrants which returned acceptable fits in the weighted average
-	for (Int_t i=0; i<3; i++)
-	{ 
-		if (GoodFit[i] == kFALSE) continue;					 
-		if (mean_err[i] == 0) continue;						
-		WeightAvgSum1 += mean[i]/(mean_err[i]*mean_err[i]);				
-		WeightAvgSum2 += 1/(mean_err[i]*mean_err[i]);
-	}
-	// xscale -> First guess of the calibration constant
-	xscale = WeightAvgSum1/WeightAvgSum2;
-	xscaleErr = 1/TMath::Sqrt(WeightAvgSum2);	
+		if(ipmt == 3)
+		{	
+			Gauss4Poiss2->SetParLimits(2, 0.02, 0.9);
+			Gauss4Poiss2->SetParLimits(5, 0.04, 1.0);
+			Gauss4Poiss2->SetParLimits(11, 0.04, 3.0);
+		}
+		// Clone the histogram before fitting it	 
+		scaled_clone = (TH1F*)fscaled[ipmt]->Clone("scaled_clone");	 
+		fscaled[ipmt]->Fit("Gauss4Poiss2","RQN");
+			
+		// Again fit the normalised histogram taking parameters from the first fit	 
+		Gauss4Poiss2->SetParameter(0, Gauss4Poiss2->GetParameter(0));
+		Gauss4Poiss2->SetParameter(1, Gauss4Poiss2->GetParameter(1));	
+		Gauss4Poiss2->SetParameter(2, Gauss4Poiss2->GetParameter(2));
+		Gauss4Poiss2->SetParameter(3, Gauss4Poiss2->GetParameter(3));
+		Gauss4Poiss2->SetParameter(4, Gauss4Poiss2->GetParameter(4));
+		Gauss4Poiss2->SetParameter(5, Gauss4Poiss2->GetParameter(5));
+		Gauss4Poiss2->SetParameter(6, Gauss4Poiss2->GetParameter(6));
+		Gauss4Poiss2->SetParameter(7, Gauss4Poiss2->GetParameter(7));
+		Gauss4Poiss2->SetParameter(8, Gauss4Poiss2->GetParameter(8));
+		Gauss4Poiss2->SetParameter(9, Gauss4Poiss2->GetParameter(9));
+		Gauss4Poiss2->SetParameter(10,Gauss4Poiss2->GetParameter(10));
+		Gauss4Poiss2->SetParameter(11,Gauss4Poiss2->GetParameter(11));
+		Gauss4Poiss2->SetParameter(12,Gauss4Poiss2->GetParameter(12));
+		Gauss4Poiss2->SetParameter(13,Gauss4Poiss2->GetParameter(13));
+		Gauss4Poiss2->SetParameter(14,Gauss4Poiss2->GetParameter(14));
+		Gauss4Poiss2->SetParameter(15,Gauss4Poiss2->GetParameter(15));
+		Gauss4Poiss2->SetLineColor(5);
 
-	//Perform check if the statistics were too low to get a good estimate of the SPE mean		
-	//Scale full ADC spectra according to the mean of the SPE. This requires filling a new histogram with the same number of bins but scaled min/max
-	Int_t nbins;
-	nbins = (PulseInt_poiss[ipmt]->GetXaxis()->GetNbins());
+		fscaled[ipmt]->Fit("Gauss4Poiss2","RQ+");
+		 
+		// Statistics box for display	parameters from the Gauss4Poiss2 fit
+		// p0 = Offset Gauss1,	p1 = Mean Gauss1, p2 = stdDev Gauss1, p3 = Offset Gauss2,	p4 = Mean Gauss2, p5 = stdDev Gauss2, p6 = Offset Gauss3,	p7 = Mean Gauss3, p8 = stdDev Gauss3,
+		// p9 = Offset Gauss4,	p10 = Mean Gauss4, p11 = stdDev Gauss4, p12 = mean	Poiss1, p13 = amplitude Poiss1, p14 = mean Poiss2, p15 = amplitude Poiss2
+		Double_t	p0, p0_err, p1, p1_err, p2, p2_err, p3, p3_err, p4, p4_err, p5, p5_err, p6, p6_err, p7, p7_err, p8, p8_err,p9,p9_err,p10,p10_err,p11,p11_err,p12, p12_err, p13, p13_err, p14, p14_err, p15, p15_err, Chi, NDF;
 
-	//With the scale of ADC to NPE create a histogram that has the conversion applied
-	fscaled[ipmt] = new TH1F(Form("fscaled_PMT%d", ipmt+1), Form("Scaled ADC spectra for PMT%d; NPE; Normalized Counts",ipmt+1), nbins, 0.0 ,30.0);
-	//Fill this histogram bin by bin
-	for (Int_t ibin=0; ibin<nbins; ibin++)
-	{
-		Double_t y = PulseInt_poiss[ipmt]->GetBinContent(ibin);
-		Double_t x = PulseInt_poiss[ipmt]->GetXaxis()->GetBinCenter(ibin);
-		Double_t x_scaled = x/xscale;
-		Int_t bin_scaled = fscaled[ipmt]->GetXaxis()->FindBin(x_scaled); 
-		fscaled[ipmt]->SetBinContent(bin_scaled,y);
-	}
-
-	//Normalize the histogram for ease of fitting
-	fscaled[ipmt]->Scale(1.0/fscaled[ipmt]->Integral(), "width");						 
-
-	//Tcanvas for draw the	scaled histogram 
-	background_ipmt = new TCanvas(Form("backgrounf_pmt%d",ipmt), Form("Full NPE spectra for PMT%d ",ipmt+1));		
-	background_ipmt->cd();		
-	 
-	//Poisson distribution 
-	Poisson->SetRange(7,35);
-	Poisson->SetParameter(0,9.0);
-	Poisson->SetParameter(1, 0.40);
-	fscaled[ipmt]->Fit("Poisson","RQBN");
-
-	// Gauss4Poiss2 included 4gauss + 2poisson for the quality control check 
-	Gauss4Poiss2->SetRange(0.0, 30.0);
-	Gauss4Poiss2->SetParameter(0, 0.6);	
-	Gauss4Poiss2->SetParameter(1, 1.0);	
-	Gauss4Poiss2->SetParameter(2, 0.5);	
-	Gauss4Poiss2->SetParameter(3, 0.15);	 
-	Gauss4Poiss2->SetParameter(4, 2.0);
-	Gauss4Poiss2->SetParameter(5, 0.6);	
-	Gauss4Poiss2->SetParameter(6, 0.12);
-	Gauss4Poiss2->SetParameter(7, 3.0);
-	Gauss4Poiss2->SetParameter(8, 0.7);					 
-	Gauss4Poiss2->SetParameter(9, 0.12);
-	Gauss4Poiss2->SetParameter(10, 4.0);
-	Gauss4Poiss2->SetParameter(11, 0.7);				 
-	Gauss4Poiss2->SetParameter(12, 8.0);
-	Gauss4Poiss2->SetParameter(13, 0.7);
-	Gauss4Poiss2->SetParameter(14, Poisson->GetParameter(0));	
-	Gauss4Poiss2 ->SetParameter(15, Poisson->GetParameter(1));
-		
-	// Constraints on mean 	
-	Gauss4Poiss2->SetParLimits(1, 1 - 3*xscaleErr, 1 + 3*xscaleErr);	
-	Gauss4Poiss2->SetParLimits(4, 2 - 3*xscaleErr, 2 + 3*xscaleErr);
-	Gauss4Poiss2->SetParLimits(7, 3 - 3*xscaleErr, 3 + 3*xscaleErr);
-	Gauss4Poiss2->SetParLimits(10, 4 - 3*xscaleErr, 4 + 3*xscaleErr);
-	if(ipmt == 3) 
-	{
-		Gauss4Poiss2->SetParLimits(1, 1 - 2*xscaleErr, 1 + 2*xscaleErr);
-		Gauss4Poiss2->SetParLimits(4, 2 - 2*xscaleErr, 4 + 2*xscaleErr);
-	}
-		
-	//Constraints of sigma
-	Gauss4Poiss2->SetParLimits(2, 0.02, 0.6);
-	Gauss4Poiss2->SetParLimits(5, 0.04, 0.7);
-	Gauss4Poiss2->SetParLimits(8, 0.05, 0.9);
-	Gauss4Poiss2->SetParLimits(11, 0.07, 2.0 );
-		
-	if(ipmt == 2)
-	{	
-		Gauss4Poiss2->SetParLimits(2, 0.02, 1.0);
-	}
-	if(ipmt == 3)
-	{	
-		Gauss4Poiss2->SetParLimits(2, 0.02, 0.9);
-		Gauss4Poiss2->SetParLimits(5, 0.04, 1.0);
-		Gauss4Poiss2->SetParLimits(11, 0.04, 3.0);
-	}
-	// Clone the histogram before fitting it	 
-	scaled_clone = (TH1F*)fscaled[ipmt]->Clone("scaled_clone");	 
-	fscaled[ipmt]->Fit("Gauss4Poiss2","RQN");
-		
-	// Again fit the normalised histogram taking parameters from the first fit	 
-	Gauss4Poiss2->SetParameter(0, Gauss4Poiss2->GetParameter(0));
-	Gauss4Poiss2->SetParameter(1, Gauss4Poiss2->GetParameter(1));	
-	Gauss4Poiss2->SetParameter(2, Gauss4Poiss2->GetParameter(2));
-	Gauss4Poiss2->SetParameter(3, Gauss4Poiss2->GetParameter(3));
-	Gauss4Poiss2->SetParameter(4, Gauss4Poiss2->GetParameter(4));
-	Gauss4Poiss2->SetParameter(5, Gauss4Poiss2->GetParameter(5));
-	Gauss4Poiss2->SetParameter(6, Gauss4Poiss2->GetParameter(6));
-	Gauss4Poiss2->SetParameter(7, Gauss4Poiss2->GetParameter(7));
-	Gauss4Poiss2->SetParameter(8, Gauss4Poiss2->GetParameter(8));
-	Gauss4Poiss2->SetParameter(9, Gauss4Poiss2->GetParameter(9));
-	Gauss4Poiss2->SetParameter(10,Gauss4Poiss2->GetParameter(10));
-	Gauss4Poiss2->SetParameter(11,Gauss4Poiss2->GetParameter(11));
-	Gauss4Poiss2->SetParameter(12,Gauss4Poiss2->GetParameter(12));
-	Gauss4Poiss2->SetParameter(13,Gauss4Poiss2->GetParameter(13));
-	Gauss4Poiss2->SetParameter(14,Gauss4Poiss2->GetParameter(14));
-	Gauss4Poiss2->SetParameter(15,Gauss4Poiss2->GetParameter(15));
-	Gauss4Poiss2->SetLineColor(5);
-
-	fscaled[ipmt]->Fit("Gauss4Poiss2","RQ+");
-	 
-	// Statistics box for display	parameters from the Gauss4Poiss2 fit
-	// p0 = Offset Gauss1,	p1 = Mean Gauss1, p2 = stdDev Gauss1, p3 = Offset Gauss2,	p4 = Mean Gauss2, p5 = stdDev Gauss2, p6 = Offset Gauss3,	p7 = Mean Gauss3, p8 = stdDev Gauss3,
-	// p9 = Offset Gauss4,	p10 = Mean Gauss4, p11 = stdDev Gauss4, p12 = mean	Poiss1, p13 = amplitude Poiss1, p14 = mean Poiss2, p15 = amplitude Poiss2
-	Double_t	p0, p0_err, p1, p1_err, p2, p2_err, p3, p3_err, p4, p4_err, p5, p5_err, p6, p6_err, p7, p7_err, p8, p8_err,p9,p9_err,p10,p10_err,p11,p11_err,p12, p12_err, p13, p13_err, p14, p14_err, p15, p15_err, Chi, NDF;
-
-	Chi = Gauss4Poiss2->GetChisquare();	NDF = Gauss4Poiss2->GetNDF(); 
-	p0 = Gauss4Poiss2->GetParameter(0);	p0_err = Gauss4Poiss2->GetParError(0);
-	p1 = Gauss4Poiss2->GetParameter(1);	p1_err = Gauss4Poiss2->GetParError(1);		
-	p2 = Gauss4Poiss2->GetParameter(2);	p2_err = Gauss4Poiss2->GetParError(2);		
-	p3 = Gauss4Poiss2->GetParameter(3);	p3_err = Gauss4Poiss2->GetParError(3);		
-	p4 = Gauss4Poiss2->GetParameter(4);	p4_err = Gauss4Poiss2->GetParError(4);		
-	p5 = Gauss4Poiss2->GetParameter(5);	p5_err = Gauss4Poiss2->GetParError(5);		
-	p6 = Gauss4Poiss2->GetParameter(6);	p6_err = Gauss4Poiss2->GetParError(6);		
-	p7 = Gauss4Poiss2->GetParameter(7);	p7_err = Gauss4Poiss2->GetParError(7);		
-	p8 = Gauss4Poiss2->GetParameter(8);	p8_err = Gauss4Poiss2->GetParError(8);		
-	p9 = Gauss4Poiss2->GetParameter(9);	p9_err = Gauss4Poiss2->GetParError(9);
-	p10 = Gauss4Poiss2->GetParameter(10);	p10_err = Gauss4Poiss2->GetParError(10);		
-	p11 = Gauss4Poiss2->GetParameter(11);	p11_err = Gauss4Poiss2->GetParError(11);		
-	p12 = Gauss4Poiss2->GetParameter(12);	p12_err = Gauss4Poiss2->GetParError(12);
-	p13 = Gauss4Poiss2->GetParameter(13);	p13_err = Gauss4Poiss2->GetParError(13);
-	p14 = Gauss4Poiss2->GetParameter(14);	p14_err = Gauss4Poiss2->GetParError(14);
-	p15 = Gauss4Poiss2->GetParameter(15);	p15_err = Gauss4Poiss2->GetParError(15);
-		
-	TPaveText *t1 = new TPaveText(0.70, 0.35, 0.9, 0.9, "NDC");
-	{
+		Chi = Gauss4Poiss2->GetChisquare();	NDF = Gauss4Poiss2->GetNDF(); 
+		p0 = Gauss4Poiss2->GetParameter(0);	p0_err = Gauss4Poiss2->GetParError(0);
+		p1 = Gauss4Poiss2->GetParameter(1);	p1_err = Gauss4Poiss2->GetParError(1);		
+		p2 = Gauss4Poiss2->GetParameter(2);	p2_err = Gauss4Poiss2->GetParError(2);		
+		p3 = Gauss4Poiss2->GetParameter(3);	p3_err = Gauss4Poiss2->GetParError(3);		
+		p4 = Gauss4Poiss2->GetParameter(4);	p4_err = Gauss4Poiss2->GetParError(4);		
+		p5 = Gauss4Poiss2->GetParameter(5);	p5_err = Gauss4Poiss2->GetParError(5);		
+		p6 = Gauss4Poiss2->GetParameter(6);	p6_err = Gauss4Poiss2->GetParError(6);		
+		p7 = Gauss4Poiss2->GetParameter(7);	p7_err = Gauss4Poiss2->GetParError(7);		
+		p8 = Gauss4Poiss2->GetParameter(8);	p8_err = Gauss4Poiss2->GetParError(8);		
+		p9 = Gauss4Poiss2->GetParameter(9);	p9_err = Gauss4Poiss2->GetParError(9);
+		p10 = Gauss4Poiss2->GetParameter(10);	p10_err = Gauss4Poiss2->GetParError(10);		
+		p11 = Gauss4Poiss2->GetParameter(11);	p11_err = Gauss4Poiss2->GetParError(11);		
+		p12 = Gauss4Poiss2->GetParameter(12);	p12_err = Gauss4Poiss2->GetParError(12);
+		p13 = Gauss4Poiss2->GetParameter(13);	p13_err = Gauss4Poiss2->GetParError(13);
+		p14 = Gauss4Poiss2->GetParameter(14);	p14_err = Gauss4Poiss2->GetParError(14);
+		p15 = Gauss4Poiss2->GetParameter(15);	p15_err = Gauss4Poiss2->GetParError(15);
+			
+		TPaveText *t1 = new TPaveText(0.70, 0.35, 0.9, 0.9, "NDC");
 		t1->SetTextColor(kBlack);
 		t1->AddText(Form(" Chi/NDF	 = %3.3f #/ %3.3f", Chi, NDF ));
 		t1->AddText(Form(" Mean 1		= %3.3f #pm %3.3f ", p1, p1_err ));
@@ -863,70 +789,57 @@ void calibration::Terminate(Int_t RunNumStart, Int_t RunNumEnd)
 		t1->AddText(Form(" Mean 4		= %3.3f #pm %3.3f ", p10, p10_err ));
 		t1->AddText(Form(" Std. Dev 4	= %3.3f #pm %3.3f ", p11, p11_err ));		
 		t1->Draw();
-	}
-		
-	// Draw individual function from the Fuction fit
-	TF1 *g3 = new TF1("g3","gaus",0,35.0);
-	{	
+			
+		// Draw individual function from the Fuction fit
+		TF1 *g3 = new TF1("g3","gaus",0,35.0);
 		g3->SetParameter(0,Gauss4Poiss2->GetParameter(0));
 		g3->SetParameter(1,Gauss4Poiss2->GetParameter(1));
 		g3->SetParameter(2,Gauss4Poiss2->GetParameter(2));
 		g3->SetLineColor(1);
 		g3->Draw("same");
-	}
 
-	TF1 *g4 = new TF1("g4","gaus",0,35.0);
-	{
+		TF1 *g4 = new TF1("g4","gaus",0,35.0);
 		g4->SetParameter(0,Gauss4Poiss2->GetParameter(3));
 		g4->SetParameter(1,Gauss4Poiss2->GetParameter(4));
 		g4->SetParameter(2,Gauss4Poiss2->GetParameter(5));
 		g4->SetLineColor(3);
 		g4->Draw("same");
-	}
 
-	TF1 *g5 = new TF1("g5","gaus",0,35.0);
-	{
+		TF1 *g5 = new TF1("g5","gaus",0,35.0);
 		g5->SetParameter(0,Gauss4Poiss2->GetParameter(6));
 		g5->SetParameter(1,Gauss4Poiss2->GetParameter(7));
 		g5->SetParameter(2,Gauss4Poiss2->GetParameter(8));
 		g5->SetLineColor(4);
 		g5->Draw("same");
-	}
 
-	TF1 *g6 = new TF1("g6","gaus",0,35.0);
-	{
+		TF1 *g6 = new TF1("g6","gaus",0,35.0);
 		g6->SetParameter(0,Gauss4Poiss2->GetParameter(9));
 		g6->SetParameter(1,Gauss4Poiss2->GetParameter(10));
 		g6->SetParameter(2,Gauss4Poiss2->GetParameter(11));
 		g6->SetLineColor(2);
 		g6->Draw("same");
-	}
-	TF1 *g7 = new TF1("g7","[1]*TMath::Poisson(x,[0])",0.0,35.0);
-	{
+
+		TF1 *g7 = new TF1("g7","[1]*TMath::Poisson(x,[0])",0.0,35.0);
 		g7->SetRange(0,35);
 		g7->SetParameter(0,Gauss4Poiss2->GetParameter(12));
 		g7->SetParameter(1,Gauss4Poiss2->GetParameter(13));
 		g7->SetLineColor(6);
 		g7->Draw("same"); 
-	}
 
-	TF1 *g8 = new TF1("g8","[1]*TMath::Poisson(x,[0])",0.0,35.0);
-	{
+		TF1 *g8 = new TF1("g8","[1]*TMath::Poisson(x,[0])",0.0,35.0);
 		g8->SetParameter(0,Gauss4Poiss2->GetParameter(14));
 		g8->SetParameter(1,Gauss4Poiss2->GetParameter(15));
 		g8->SetLineColor(802);
 		g8->Draw("same"); 
-	}
-	background_ipmt->Print(outputpdf);
+		background_ipmt->Print(outputpdf);
 
-	//Tcanvas for draw the zoomed clone histogram 
-	Full_zoom_fit_ipmt = new TCanvas(Form("Full_zoom_fit_pmt%d",ipmt), Form("Zoom in NPE spectra for PMT%d with all fits",ipmt+1));
-	scaled_clone->GetXaxis()->SetRangeUser(0,5); 
-	Full_zoom_fit_ipmt->cd();
-	scaled_clone->Draw();
+		//Tcanvas for draw the zoomed clone histogram 
+		Full_zoom_fit_ipmt = new TCanvas(Form("Full_zoom_fit_pmt%d",ipmt), Form("Zoom in NPE spectra for PMT%d with all fits",ipmt+1));
+		scaled_clone->GetXaxis()->SetRangeUser(0,5); 
+		Full_zoom_fit_ipmt->cd();
+		scaled_clone->Draw();
 
-	TF1 *Gauss4Poiss2_clone = new TF1("Gauss4Poiss2_clone",fun_4gauss_2poisson, 0.0, 35.0, 16.0);
-	{
+		TF1 *Gauss4Poiss2_clone = new TF1("Gauss4Poiss2_clone",fun_4gauss_2poisson, 0.0, 35.0, 16.0);
 		Gauss4Poiss2_clone->SetParameter(0,Gauss4Poiss2->GetParameter(0));
 		Gauss4Poiss2_clone->SetParameter(1,Gauss4Poiss2->GetParameter(1));	
 		Gauss4Poiss2_clone->SetParameter(2,Gauss4Poiss2->GetParameter(2));
@@ -945,158 +858,136 @@ void calibration::Terminate(Int_t RunNumStart, Int_t RunNumEnd)
 		Gauss4Poiss2_clone->SetParameter(15,Gauss4Poiss2->GetParameter(15));		 
 		Gauss4Poiss2_clone->SetLineColor(5);
 		Gauss4Poiss2_clone->Draw("same");
-	}
-					
-	TF1 *g9 = new TF1("g9","gaus",0,35.0);
-	{	
+						
+		TF1 *g9 = new TF1("g9","gaus",0,35.0);
 		g9->SetParameter(0,Gauss4Poiss2->GetParameter(0));
 		g9->SetParameter(1,Gauss4Poiss2->GetParameter(1));
 		g9->SetParameter(2,Gauss4Poiss2->GetParameter(2));
 		g9->SetLineColor(1);
 		g9->Draw("same");
-	}
-	TF1 *g10 = new TF1("g10","gaus",0,35.0);
-	{
+
+		TF1 *g10 = new TF1("g10","gaus",0,35.0);
 		g10->SetParameter(0,Gauss4Poiss2->GetParameter(3));
 		g10->SetParameter(1,Gauss4Poiss2->GetParameter(4));
 		g10->SetParameter(2,Gauss4Poiss2->GetParameter(5));
 		g10->SetLineColor(3);
 		g10->Draw("same");
-	}
-	TF1 *g11 = new TF1("g11","gaus",0,35.0);
-	{
+
+		TF1 *g11 = new TF1("g11","gaus",0,35.0);
 		g11->SetParameter(0,Gauss4Poiss2->GetParameter(6));
 		g11->SetParameter(1,Gauss4Poiss2->GetParameter(7));
 		g11->SetParameter(2,Gauss4Poiss2->GetParameter(8));
 		g11->SetLineColor(4);
 		g11->Draw("same");
-	}
 
-	TF1 *g12 = new TF1("g12","gaus",0,35.0);
-	{
+		TF1 *g12 = new TF1("g12","gaus",0,35.0);
 		g12->SetParameter(0,Gauss4Poiss2->GetParameter(9));
 		g12->SetParameter(1,Gauss4Poiss2->GetParameter(10));
 		g12->SetParameter(2,Gauss4Poiss2->GetParameter(11));
 		g12->SetLineColor(2);
 		g12->Draw("same");
-	}
-
-	TF1 *g13 = new TF1("g13","[1]*TMath::Poisson(x,[0])",0.0,35.0);
-	{
+		
+		TF1 *g13 = new TF1("g13","[1]*TMath::Poisson(x,[0])",0.0,35.0);
 		g13->SetRange(0,35);
 		g13->SetParameter(0,Gauss4Poiss2->GetParameter(12));
 		g13->SetParameter(1,Gauss4Poiss2->GetParameter(13));
 		g13->SetLineColor(6);
 		g13->Draw("same");
-	}
 
-	TF1 *g14 = new TF1("g14","[1]*TMath::Poisson(x,[0])",0.0,35.0);
-	{
+		TF1 *g14 = new TF1("g14","[1]*TMath::Poisson(x,[0])",0.0,35.0);
 		g14->SetParameter(0,Gauss4Poiss2->GetParameter(14));
 		g14->SetParameter(1,Gauss4Poiss2->GetParameter(15));
 		g14->SetLineColor(802);
 		g14->Draw("same");
-	} 
-	Full_zoom_fit_ipmt->Print(outputpdf);
-	
-	//TCanvas for the linear spacing of photo-electrons
-	final_spectra_ipmt = new TCanvas(Form("final_Spectra_%d",ipmt), Form("NPE spectra for PMT%d",ipmt+1));
-	y_npe[0] = Gauss4Poiss2->GetParameter(1), y_npe[1] = Gauss4Poiss2->GetParameter(4), y_npe[2] = Gauss4Poiss2->GetParameter(7);
-	y_err[0] = xscaleErr + p1_err, y_err[1] = xscaleErr + p4_err, y_err[2] = xscaleErr + p7_err;
-	x_npe[0] = 1, x_npe[1] = 2, x_npe[2] = 3;
+		Full_zoom_fit_ipmt->Print(outputpdf);
+		
+		//TCanvas for the linear spacing of photo-electrons
+		final_spectra_ipmt = new TCanvas(Form("final_Spectra_%d",ipmt), Form("NPE spectra for PMT%d",ipmt+1));
+		y_npe[0] = Gauss4Poiss2->GetParameter(1), y_npe[1] = Gauss4Poiss2->GetParameter(4), y_npe[2] = Gauss4Poiss2->GetParameter(7);
+		y_err[0] = xscaleErr + p1_err, y_err[1] = xscaleErr + p4_err, y_err[2] = xscaleErr + p7_err;
+		x_npe[0] = 1, x_npe[1] = 2, x_npe[2] = 3;
 
-	TGraphErrors *gr_npe = new TGraphErrors(3, x_npe, y_npe, x_err, y_err);
-	gr_npe->GetXaxis()->SetLimits(0, 5);
-	gr_npe->SetMinimum(0);
-	gr_npe->SetMaximum(5);
-	gr_npe->SetTitle(Form("Linear Spacing of PE for PMT%d",ipmt+1));
-	gr_npe->GetXaxis()->SetTitle("NPE number");
-	gr_npe->GetYaxis()->SetTitle("Photoelectron peak (NPE)");
+		TGraphErrors *gr_npe = new TGraphErrors(3, x_npe, y_npe, x_err, y_err);
+		gr_npe->GetXaxis()->SetLimits(0, 5);
+		gr_npe->SetMinimum(0);
+		gr_npe->SetMaximum(5);
+		gr_npe->SetTitle(Form("Linear Spacing of PE for PMT%d",ipmt+1));
+		gr_npe->GetXaxis()->SetTitle("NPE number");
+		gr_npe->GetYaxis()->SetTitle("Photoelectron peak (NPE)");
 
-	// Fit with linear function when intercept is not zero
-	TF1 *Linear = new TF1("Linear",linear,0,5,2);
-	Linear->SetParNames("Slope", "Intercept");
-	Linear->SetParameter(0.0, 1.0);
-	Linear->SetParameter(1.0, 0.0);
-	Linear->SetLineColor(1);
+		// Fit with linear function when intercept is not zero
+		TF1 *Linear = new TF1("Linear",linear,0,5,2);
+		Linear->SetParNames("Slope", "Intercept");
+		Linear->SetParameter(0.0, 1.0);
+		Linear->SetParameter(1.0, 0.0);
+		Linear->SetLineColor(1);
 
-	gr_npe->Draw("A*"); 
+		gr_npe->Draw("A*"); 
 
-	//Fit with another linear function when intercept is zero
-	TF1 *g15 = new TF1("g15","[0]*x", 0.0,5.0);
-	{
+		//Fit with another linear function when intercept is zero
+		TF1 *g15 = new TF1("g15","[0]*x", 0.0,5.0);
 		g15->SetParNames("Slope");
 		g15->SetParameter(0.0,1.0);
 		g15->SetLineColor(2);
-	}
 
-	gr_npe->Fit("Linear","RQ");
-	gr_npe->Fit("g15","RQ+");
+		gr_npe->Fit("Linear","RQ");
+		gr_npe->Fit("g15","RQ+");
 
-	//Get parameters from both fitting 
-	Double_t sl1, sl1_err, in1, in1_err, Chi1, NDF1, sl2, sl2_err, Chi2, NDF2 ;
+		//Get parameters from both fitting 
+		Double_t sl1, sl1_err, in1, in1_err, Chi1, NDF1, sl2, sl2_err, Chi2, NDF2 ;
 
-	Chi1 = Linear->GetChisquare();
-	NDF1 = Linear->GetNDF(); 
-	sl1 = Linear->GetParameter(0);
-	sl1_err = Linear->GetParError(0);
-	in1 = Linear->GetParameter(1);
-	in1_err = Linear->GetParError(1);
-		
-	// For second linear fit 
-	Chi2 = g15->GetChisquare();
-	NDF2 = g15->GetNDF(); 
-	sl2 = g15->GetParameter(0);
-	sl2_err = g15->GetParError(0);
+		Chi1 = Linear->GetChisquare();
+		NDF1 = Linear->GetNDF(); 
+		sl1 = Linear->GetParameter(0);
+		sl1_err = Linear->GetParError(0);
+		in1 = Linear->GetParameter(1);
+		in1_err = Linear->GetParError(1);
+			
+		// For second linear fit 
+		Chi2 = g15->GetChisquare();
+		NDF2 = g15->GetNDF(); 
+		sl2 = g15->GetParameter(0);
+		sl2_err = g15->GetParError(0);
 
-	TPaveText *t = new TPaveText(0.10, 0.77, 0.40, 0.90, "NDC");
-	{
+		TPaveText *t = new TPaveText(0.10, 0.77, 0.40, 0.90, "NDC");
 		t->SetTextColor(kBlack);
 		t->AddText(Form(" Chi/NDF = %03.3f #/ %3.3f", Chi1, NDF1 ));
 		t->AddText(Form(" Slope = %3.3f #pm %3.3f",sl1, sl1_err));
 		t->AddText(Form(" Intercept = %3.3f #pm %3.3f",in1, in1_err));
 		t->Draw();
-	}		
-		 
-	TPaveText *t2 = new TPaveText(0.10, 0.65, 0.40, 0.78, "NDC");
-	{
+				
+			 
+		TPaveText *t2 = new TPaveText(0.10, 0.65, 0.40, 0.78, "NDC");
 		t2->SetTextColor(kRed);
 		t2->AddText(Form(" Chi/NDF = %3.3f #/ %3.3f", Chi2, NDF2 ));
 		t2->AddText(Form(" Slope = %3.3f #pm %3.3f",sl2, sl2_err));
 		t2->AddText(Form(" Intercept = 0 " ));
 		t2->Draw();
-	}
-	if(ipmt ==0){
-		final_spectra_ipmt->Print(outputpdf);
-	}
-	if(ipmt ==1){
-		final_spectra_ipmt->Print(outputpdf);
-	}
-	if(ipmt ==2){
-		final_spectra_ipmt->Print(outputpdf);
-	} 
-	if(ipmt ==3){
-		final_spectra_ipmt->Print(outputpdf + ')');
-	} 
-
-	calibration_mk1[ipmt] = xscale;
-	calibration_mk1Err[ipmt] = xscaleErr;
-	pmt_calib[ipmt] = abs(1.0 - Gauss4Poiss2->GetParameter(1));
 		
-	//Initial calibration constant has been obtained. Now I multiply it by the slope of the spacing of the NPE (should be approx. 1) for a second estimate
-	Double_t xscale_mk2 = xscale * p1;	
-	Double_t xscale_mk2Err = Sqrt(Power(xscaleErr*p1, 2) +	Power(xscale*p1_err,2)); 
-	
-	calibration_mk2[ipmt] = xscale_mk2;
-	calibration_mk2Err[ipmt] = xscale_mk2Err;
-	pmt_calib_mk2[ipmt] = abs(1.0 - Gauss4Poiss2->GetParameter(1));
+		
+		if(ipmt ==3){
+			final_spectra_ipmt->Print(outputpdf + ')');
+		} else {
+			final_spectra_ipmt->Print(outputpdf);
+		}
+		
+		calibration_mk1[ipmt] = xscale;
+		calibration_mk1Err[ipmt] = xscaleErr;
+		pmt_calib[ipmt] = abs(1.0 - Gauss4Poiss2->GetParameter(1));
+			
+		//Initial calibration constant has been obtained. Now I multiply it by the slope of the spacing of the NPE (should be approx. 1) for a second estimate
+		Double_t xscale_mk2 = xscale * p1;	
+		Double_t xscale_mk2Err = Sqrt(Power(xscaleErr*p1, 2) +	Power(xscale*p1_err,2)); 
+		
+		calibration_mk2[ipmt] = xscale_mk2;
+		calibration_mk2Err[ipmt] = xscale_mk2Err;
+		pmt_calib_mk2[ipmt] = abs(1.0 - Gauss4Poiss2->GetParameter(1));
 
-	// Take the error weighted average of Guess1 and Guess2 parameters
+		// Take the error weighted average of Guess1 and Guess2 parameters
 
-	calibration_weighted_ave[ipmt] = (calibration_mk1[ipmt]/pow(calibration_mk1Err[ipmt], 2) + calibration_mk2[ipmt]/pow(calibration_mk2Err[ipmt], 2))/(1/pow(calibration_mk1Err[ipmt], 2) + 1/pow(calibration_mk2Err[ipmt], 2));
+		calibration_weighted_ave[ipmt] = (calibration_mk1[ipmt]/pow(calibration_mk1Err[ipmt], 2) + calibration_mk2[ipmt]/pow(calibration_mk2Err[ipmt], 2))/(1/pow(calibration_mk1Err[ipmt], 2) + 1/pow(calibration_mk2Err[ipmt], 2));
 
-	calibration_weighted_ave_err[ipmt] = 1/TMath:: Sqrt((1/pow(calibration_mk1Err[ipmt], 2) + 1/pow(calibration_mk2Err[ipmt], 2))); 
-		} // This brace marks the end of the quadrant cut strategy
+		calibration_weighted_ave_err[ipmt] = 1/TMath:: Sqrt((1/pow(calibration_mk1Err[ipmt], 2) + 1/pow(calibration_mk2Err[ipmt], 2))); 
 	}
 
 	cout << "Calibration constants are \nPMT#:	 First Guess" << setw(25) << "Second Guess\n" << endl;

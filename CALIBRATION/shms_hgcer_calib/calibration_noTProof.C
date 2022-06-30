@@ -70,14 +70,8 @@ public :
   TH2F      *fXatYat;
   TH2F      *fXeqYeq;
   TH1F      *fTiming_Full;
-  TH1F      *fTim1;
-  TH1F      *fTim2;
-  TH1F      *fTim3;
-  TH1F      *fTim4;
-  TH1F      *fTim1_full; 
-  TH1F      *fTim2_full; 
-  TH1F      *fTim3_full; 
-  TH1F      *fTim4_full; 
+  TH1F      *fTim[4];
+  TH1F      *fTim_full[4];
 
   // Declaration of histograms used in fitting/analysis
   TH1F *scaled_clone;
@@ -253,22 +247,14 @@ void calibration::Begin(TTree * /*tree*/)
 	fTiming_Full = new TH1F("fTiming_full", "Full timing information for events;Time (ns);Counts", 200, -40 , 50);
 	GetOutputList()->Add(fTiming_Full);
 	//Individual Histogram for timing info for each PTM
-	fTim1 = new TH1F("Timing_PMT1", "ADC TDC Diff PMT1 ; Time (ns) ;Counts", 200, -40.0, 50.0);
-	GetOutputList()->Add(fTim1);
-	fTim1_full = new TH1F("Timing_full_PMT1", "ADC TDC Diff PMT1 ; Time (ns) ;Counts", 200, -40.0, 50.0);
-	GetOutputList()->Add(fTim1_full);
-	fTim2 = new TH1F("Timing_PMT2", "ADC TDC Diff PMT2 ; Time (ns) ;Counts", 200, -40.0, 50.0);
-	GetOutputList()->Add(fTim2);
-	fTim2_full = new TH1F("Timing_full_PMT2", "ADC TDC Diff PMT1 ; Time (ns) ;Counts", 200, -40.0, 50.0);
-	GetOutputList()->Add(fTim2_full);
-	fTim3 = new TH1F("Timing_PMT3", "ADC TDC Diff PMT3 ; Time (ns) ;Counts", 200, -40.0, 50.0);
-	GetOutputList()->Add(fTim3);
-	fTim3_full = new TH1F("Timing_full_PMT3", "ADC TDC Diff PMT1 ; Time (ns) ;Counts", 200, -40.0, 50.0);
-	GetOutputList()->Add(fTim3_full);
-	fTim4 = new TH1F("Timing_PMT4", "ADC TDC Diff PMT4 ; Time (ns) ;Counts", 200, -40.0, 50.0);
-	GetOutputList()->Add(fTim4);
-	fTim4_full = new TH1F("Timing_full_PMT4", "ADC TDC Diff PMT1 ; Time (ns) ;Counts", 200, -40.0, 50.0);
-	GetOutputList()->Add(fTim4_full);
+	for(int ipmt = 0; ipmt < 4; ipmt++)
+	{
+		fTim[ipmt] = new TH1F(Form("Timing_PMT%d",ipmt), Form("ADC TDC Diff PMT%d ; Time (ns) ;Counts", ipmt), 200, -40.0, 50.0);
+		GetOutputList()->Add(fTim1);
+		fTim1_full = new TH1F(Form("Timing_Full_PMT%d",ipmt), Form("ADC TDC Diff PMT%d ; Time (ns) ;Counts", ipmt), 200, -40.0, 50.0);
+		GetOutputList()->Add(fTim1_full);
+	}
+	
 	//Histograms for Beta visualization
 	fBeta_Cut = new TH1F("Beta_Cut", "Beta cut used for 'good' hits ; Beta ; Counts", 100, -0.1, 1.5);
 	GetOutputList()->Add(fBeta_Cut);	
@@ -311,17 +297,10 @@ Bool_t calibration::Process(Long64_t entry)
 		fTiming_Full->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
 
 		//Perform a loose timing cut on each PMT
-		fTim1_full->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+		fTim_full[ipmt]->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
 		if(P_hgcer_goodAdcTdcDiffTime[ipmt] > 18 || P_hgcer_goodAdcTdcDiffTime[ipmt] < -12) continue;
-		if(ipmt == 0) {
-			fTim1->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-		}else if (ipmt == 1) {
-			fTim2->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-		}else if (ipmt == 2) {
-			fTim3->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-		}else {
-			fTim4->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-		}
+		fTim[ipmt]->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+		
 		
 		//Cuts to remove entries corresponding to a PMT not registering a hit		
 		if (P_hgcer_goodAdcPulseInt[ipmt] == 0.0) continue;
@@ -415,26 +394,14 @@ void calibration::Terminate(Int_t RunNumStart, Int_t RunNumEnd)
 	TCanvas *Timing1;
 	Timing1 = new TCanvas("Timing1","time cuts for each pmts");		
 	Timing1->Divide(2,2);
-	Timing1->cd(1);
-	fTim1->SetFillColor(kRed);
-	fTim1_full->SetFillColor(kBlue);
-	fTim1_full->Draw();
-	fTim1->Draw("same");	 
-	Timing1->cd(2);
-	fTim2->SetFillColor(kRed);
-	fTim2_full->SetFillColor(kBlue);
-	fTim2_full->Draw();
-	fTim2->Draw("same");	
-	Timing1->cd(3);
-	fTim3->SetFillColor(kRed);
-	fTim3_full->SetFillColor(kBlue);
-	fTim3_full->Draw(); 
-	fTim3->Draw("same");		
-	Timing1->cd(4);
-	fTim4->SetFillColor(kRed);
-	fTim4_full->SetFillColor(kBlue);
-	fTim4_full->Draw();
-	fTim4->Draw("same");	 
+	for(int i = 0; i < 4; i++)
+	{
+		Timing1->cd(i+1);
+		fTim[i]->SetFillColor(kRed);
+		fTim_full[i]->SetFillColor(kBlue);
+		fTim_full[i]->Draw();
+		fTim[i]->Draw("same");	 
+	}	 
 	Timing1->Print(outputpdf);	
 	
 	//******************* Fitting Code **********************//
@@ -442,7 +409,7 @@ void calibration::Terminate(Int_t RunNumStart, Int_t RunNumEnd)
 	TF1 *Gauss1 = new TF1("Gauss1",gauss,100,3,3);
 	Gauss1->SetParNames("Amplitude","Mean","Std. Dev.");
 	//Sum of two Gaussians to determine SPE with minimal systematics
-	TF1 *Gauss2 = new TF1("Gauss2",gauss,0, 16,6);												 
+	TF1 *Gauss2 = new TF1("Gauss2",gauss,0, 13,6);												 
 	Gauss2->SetParNames("Amplitude 1","Mean 1","Std. Dev. 1","Amplitude 2","Mean 2","Std. Dev. 2");
 	//Poisson distribution to remove high NPE background
 	TF1 *Poisson = new TF1("Poisson",poisson,0.0,5.0,2.0);

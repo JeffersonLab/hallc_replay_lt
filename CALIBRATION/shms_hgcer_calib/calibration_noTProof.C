@@ -106,7 +106,7 @@ public :
   Double_t timing_std[4];
   Double_t x;
 
-  calibration(TTree * /*tree*/ =0) : fChain(0) {fPulseInt = 0, fPulseInt_poiss = 0, fPulseInt_quad = 0, fBeta_Cut = 0, fBeta_Full = 0, fXatYat = 0, fXeqYeq = 0, fTiming_Full = 0,fTim = 0, fTim_full = 0, fFullRead = kFALSE, fFullShow = kFALSE, fTrack = kFALSE, fCut = kFALSE, fPions = kFALSE;}
+  calibration(TTree * /*tree*/ =0) : fChain(0) {fPulseInt = 0, fPulseInt_poiss = 0, fPulseInt_quad = 0, fBeta_Cut = 0, fBeta_Full = 0, fXatYat = 0, fXeqYeq = 0, fTiming_Full = 0, fFullRead = kFALSE, fFullShow = kFALSE, fTrack = kFALSE, fCut = kFALSE, fPions = kFALSE;}
 
   void SetReader(TTree *tree);
 

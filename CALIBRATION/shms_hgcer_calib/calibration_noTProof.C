@@ -106,7 +106,7 @@ public :
   Double_t timing_std[4];
   Double_t x;
 
-  calibration(TTree * /*tree*/ =0) : fChain(0) {fPulseInt = 0, fPulseInt_poiss = 0, fPulseInt_quad = 0, fBeta_Cut = 0, fBeta_Full = 0, fXatYat = 0, fXeqYeq = 0, fTiming_Full = 0,fTim1 =0, fTim1_full = 0,fTim2 =0, fTim2_full = 0, fTim3 = 0, fTim3_full = 0, fTim4 = 0, fTim4_full = 0, fFullRead = kFALSE, fFullShow = kFALSE, fTrack = kFALSE, fCut = kFALSE, fPions = kFALSE;}
+  calibration(TTree * /*tree*/ =0) : fChain(0) {fPulseInt = 0, fPulseInt_poiss = 0, fPulseInt_quad = 0, fBeta_Cut = 0, fBeta_Full = 0, fXatYat = 0, fXeqYeq = 0, fTiming_Full = 0,fTim = {0,0,0,0}, fTim_full = {0,0,0,0}, fFullRead = kFALSE, fFullShow = kFALSE, fTrack = kFALSE, fCut = kFALSE, fPions = kFALSE;}
 
   void SetReader(TTree *tree);
 
@@ -250,9 +250,9 @@ void calibration::Begin(TTree * /*tree*/)
 	for(int ipmt = 0; ipmt < 4; ipmt++)
 	{
 		fTim[ipmt] = new TH1F(Form("Timing_PMT%d",ipmt), Form("ADC TDC Diff PMT%d ; Time (ns) ;Counts", ipmt), 200, -40.0, 50.0);
-		GetOutputList()->Add(fTim1);
-		fTim1_full = new TH1F(Form("Timing_Full_PMT%d",ipmt), Form("ADC TDC Diff PMT%d ; Time (ns) ;Counts", ipmt), 200, -40.0, 50.0);
-		GetOutputList()->Add(fTim1_full);
+		GetOutputList()->Add(fTim[ipmt]);
+		fTim_full[ipmt] = new TH1F(Form("Timing_Full_PMT%d",ipmt), Form("ADC TDC Diff PMT%d ; Time (ns) ;Counts", ipmt), 200, -40.0, 50.0);
+		GetOutputList()->Add(fTim_full[ipmt]);
 	}
 	
 	//Histograms for Beta visualization

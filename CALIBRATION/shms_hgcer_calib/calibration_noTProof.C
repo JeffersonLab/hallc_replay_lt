@@ -312,9 +312,17 @@ Bool_t calibration::Process(Long64_t entry)
 
 		//Perform a loose timing cut on each PMT
 		fTim1_full->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-		if(P_hgcer_goodAdcTdcDiffTime[ipmt] > 18 || P_hgcer_goodAdcTdcDiffTime[ipmt] < -12) continue;											
-		fTim1->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-
+		if(P_hgcer_goodAdcTdcDiffTime[ipmt] > 18 || P_hgcer_goodAdcTdcDiffTime[ipmt] < -12) continue;
+		if(ipmt == 0) {
+			fTim1->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+		}else if (ipmt == 1) {
+			fTim2->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+		}else if (ipmt == 2) {
+			fTim3->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+		}else {
+			fTim4->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
+		}
+		
 		//Cuts to remove entries corresponding to a PMT not registering a hit		
 		if (P_hgcer_goodAdcPulseInt[ipmt] == 0.0) continue;
 
@@ -392,9 +400,9 @@ void calibration::Terminate(Int_t RunNumStart, Int_t RunNumEnd)
 	XatYat = new TCanvas("XatYat", "XatYat information for events");
 	XatYat->Divide(2,1);
 	XatYat->cd(1);
-	fXeqYeq->Draw();
+	fXeqYeq->Draw("Colz");
 	XatYat->cd(2);
-	fXatYat->Draw();
+	fXatYat->Draw("Colz");
 	XatYat->Print(outputpdf);
 	//Canvas to show full timing	information
 	TCanvas *Timing;
@@ -524,7 +532,7 @@ void calibration::Terminate(Int_t RunNumStart, Int_t RunNumEnd)
 				Gauss2->SetParLimits(2, 0.5 , 4.0);
 				Gauss2->SetParLimits(3, 0.0, PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[1]))*1.1); //added *1.1 -NH
 				Gauss2->SetParLimits(4, 5, 17);	 
-				Gauss2->SetParLimits(5, 1.0, 4.0);
+				Gauss2->SetParLimits(5, 0.5, 4.0);
 				PulseInt_quad[iquad][ipmt]->Fit("Gauss2","RQN");				 
 				double x1 = Gauss2->GetParameter(1);
 				double x2 = Gauss2->GetParameter(4);

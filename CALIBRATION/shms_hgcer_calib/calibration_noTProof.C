@@ -409,7 +409,7 @@ void calibration::Terminate(Int_t RunNumStart, Int_t RunNumEnd)
 	TF1 *Gauss1 = new TF1("Gauss1",gauss,100,3,3);
 	Gauss1->SetParNames("Amplitude","Mean","Std. Dev.");
 	//Sum of two Gaussians to determine SPE with minimal systematics
-	TF1 *Gauss2 = new TF1("Gauss2",gauss,0, 13,6);												 
+	TF1 *Gauss2 = new TF1("Gauss2",gauss,0, 10,6);												 
 	Gauss2->SetParNames("Amplitude 1","Mean 1","Std. Dev. 1","Amplitude 2","Mean 2","Std. Dev. 2");
 	//Poisson distribution to remove high NPE background
 	TF1 *Poisson = new TF1("Poisson",poisson,0.0,5.0,2.0);

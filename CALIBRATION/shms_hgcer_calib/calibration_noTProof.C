@@ -494,7 +494,7 @@ void calibration::Terminate(Int_t RunNumStart, Int_t RunNumEnd)
 				Gauss2->SetParameter(3, 500);
 				Gauss2->SetParameter(4, 9);
 				Gauss2->SetParameter(5, 3.0);
-				if(Ipmt == 2)
+				if(ipmt == 2)
 				{
 					Gauss2->SetParameter(1, 3.0);
 					Gauss2->SetParameter(4, 5.0);

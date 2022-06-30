@@ -298,7 +298,7 @@ Bool_t calibration::Process(Long64_t entry)
 
 		//Perform a loose timing cut on each PMT
 		fTim_full[ipmt]->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
-		if(P_hgcer_goodAdcTdcDiffTime[ipmt] > 18 || P_hgcer_goodAdcTdcDiffTime[ipmt] < -12) continue;
+		if(P_hgcer_goodAdcTdcDiffTime[ipmt] > 12 || P_hgcer_goodAdcTdcDiffTime[ipmt] < -1) continue;
 		fTim[ipmt]->Fill(P_hgcer_goodAdcTdcDiffTime[ipmt]);
 		
 		
@@ -492,13 +492,18 @@ void calibration::Terminate(Int_t RunNumStart, Int_t RunNumEnd)
 				Gauss2->SetParameter(1, 3.0);
 				Gauss2->SetParameter(2, 2);
 				Gauss2->SetParameter(3, 500);
-				Gauss2->SetParameter(4, 12);	
+				Gauss2->SetParameter(4, 9);
 				Gauss2->SetParameter(5, 3.0);
+				if(Ipmt == 2)
+				{
+					Gauss2->SetParameter(1, 3.0);
+					Gauss2->SetParameter(4, 5.0);
+				}
 				Gauss2->SetParLimits(0, 0.0,PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0]))*1.1); //added *1.1 -NH
 				Gauss2->SetParLimits(1, 1.0, 8.0); 
 				Gauss2->SetParLimits(2, 0.5 , 4.0);
 				Gauss2->SetParLimits(3, 0.0, PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[1]))*1.1); //added *1.1 -NH
-				Gauss2->SetParLimits(4, 5, 17);	 
+				Gauss2->SetParLimits(4, 4, 17);	 
 				Gauss2->SetParLimits(5, 0.5, 4.0);
 				PulseInt_quad[iquad][ipmt]->Fit("Gauss2","RQN");				 
 				double x1 = Gauss2->GetParameter(1);

@@ -183,7 +183,7 @@ void replay_production_hms_coin(Int_t RunNumber=0, Int_t MaxEvent=0, Int_t First
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template.
-  //  analyzer->PrintReport("TEMPLATES/HMS/PRODUCTION/hstackana_50k.template",
-  //  			Form("MON_OUTPUT/replay_hms_coin_production_%d_%d.report", RunNumber, MaxEvent));
+    analyzer->PrintReport("TEMPLATES/HMS/PRODUCTION/hstackana_production.template",
+    			Form("MON_OUTPUT/replay_hms_coin_production_%d_%d.report", RunNumber, MaxEvent));
 
 }

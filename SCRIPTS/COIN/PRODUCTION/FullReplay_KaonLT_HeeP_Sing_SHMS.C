@@ -1,4 +1,4 @@
-void FullReplay_KaonLT_HeeP_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
+void FullReplay_KaonLT_HeeP_Sing_SHMS (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   // Get RunNumber and MaxEvent if not provided.
   if(RunNumber == 0) {
@@ -277,16 +277,16 @@ void FullReplay_KaonLT_HeeP_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   //analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/coin_production_cuts.def");  // optional
   //  analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/coin_tracking_cuts.def");  // optional
   if (RunNumber >= 4965 && RunNumber <= 5334){
-   analyzer->SetCutFile("DEF-files/PRODUCTION/KaonLT_DEF/Aero_1p011/Offline_HeeP_Coin_Cuts.def");
+   analyzer->SetCutFile("DEF-files/PRODUCTION/KaonLT_DEF/Aero_1p011/Offline_HeeP_Sing_SHMS_Cuts.def");
   }
   else if (RunNumber >= 7840 && RunNumber <= 7888){
-   analyzer->SetCutFile("DEF-files/PRODUCTION/KaonLT_DEF/Aero_1p011/Offline_HeeP_Coin_Cuts.def");
+   analyzer->SetCutFile("DEF-files/PRODUCTION/KaonLT_DEF/Aero_1p011/Offline_HeeP_Sing_SHMS_Cuts.def");
   }
   else if (RunNumber >= 8038 && RunNumber <= 8356){
-   analyzer->SetCutFile("DEF-files/PRODUCTION/KaonLT_DEF/Aero_1p011/Offline_HeeP_Coin_Cuts.def");
+   analyzer->SetCutFile("DEF-files/PRODUCTION/KaonLT_DEF/Aero_1p011/Offline_HeeP_Sing_SHMS_Cuts.def");
   }
   else {
-   analyzer->SetCutFile("DEF-files/PRODUCTION/KaonLT_DEF/Offline_HeeP_Coin_Cuts.def");
+   analyzer->SetCutFile("DEF-files/PRODUCTION/KaonLT_DEF/Offline_HeeP_Sing_SHMS_Cuts.def");
   }
   // File to record accounting information for cuts
   analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Analysis/General/summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
@@ -294,8 +294,8 @@ void FullReplay_KaonLT_HeeP_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   analyzer->Process(run);
   // Create report file from template
   //  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/COIN_PROD.template",
-  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/KaonLT_TEMP/KaonLT_Offline_HEEP_Coin.template",
-  Form("REPORT_OUTPUT/Analysis/General/replay_coin_heep_%d_%d.report", RunNumber, MaxEvent));  // optional
+  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/KaonLT_TEMP/KaonLT_Offline_HEEP_Sing.template",
+  Form("REPORT_OUTPUT/Analysis/General/replay_Sing_heep_SHMS_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Helicity scalers output
   analyzer->PrintReport("TEMPLATES/HMS/SCALERS/hhelscalers.template",
   			Form("REPORT_OUTPUT/Scalers/replay_hms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  

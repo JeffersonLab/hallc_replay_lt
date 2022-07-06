@@ -63,10 +63,10 @@ shmsCalTrkShouldp   P.cal.etotnorm < 0.7 &&  P.cal.etotnorm > 0.05
 shmsHGCTrkShouldp   P.hgcer.npeSum < 0.5
 shmsAeroTrknpep     P.aero.npeSum < 1.0
 
-# SHMS Aero Geom for n = All except 1.011
+# SHMS Aero Geom for n = 1.011
 
-shmsAeroxposalln           P.aero.xAtAero > -55 && P.aero.xAtAero < 55
-shmsAeroyposalln            P.aero.yAtAero > -50 && P.aero.yAtAero < 50                                                                                                                                                                    
+shmsAeroxposalln           P.aero.xAtAero > -45 && P.aero.xAtAero < 45
+shmsAeroyposalln            P.aero.yAtAero > -30 && P.aero.yAtAero < 30                                                                                                                                                                    
 
 shmsAerogeomalln            shmsAeroxgeomalln && shmsAeroygeomalln
 

@@ -68,9 +68,9 @@ shmsAeroTrknpepi               P.aero.npeSum > 1.0
 # SHMS Aero Geom for n = 1.011
 
 shmsAeroxposalln           P.aero.xAtAero > -45 && P.aero.xAtAero < 45
-shmsAeroyposalln	    P.aero.yAtAero > -30 && P.aero.yAtAero < 30
+shmsAeroyposalln	   P.aero.yAtAero > -30 && P.aero.yAtAero < 30
 
-shmsAerogeomalln	    shmsAeroxgeomalln && shmsAeroygeomalln
+shmsAerogeomalln	   shmsAeroxposalln && shmsAeroyposalln
 
 shmsCerTrkShouldp     shmsHGCTrkShouldp && shmsAeroTrknpep && shmsAerogeomalln
 shmsScinShouldp       shmsScinShould && shmsCalTrkShouldp && shmsCerTrkShouldp

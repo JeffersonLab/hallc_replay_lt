@@ -86,7 +86,7 @@ KLT_Non_Scaler_EDTM_Live_Time	 	     :    {edtm_accepted.npassed/(P.EDTM.scaler+
 
 *New* work in progress calculations, might give numbers that make sense
 
-KLT_HMS_CPULT     	          :	     {((pTRIG4_ROC2.npassed)/(P.pTRIG4.scaler)):%8.4f} +- {(sqrt(((P.pTRIG4.scaler*pTRIG4_ROC2.npassed)+((pTRIG4_ROC2.npassed)*(pTRIG4_ROC2.npassed)))/(P.pTRIG4.scaler*P.pTRIG4.scaler*P.pTRIG4.scaler))):%8.4f}
+KLT_HMS_CPULT     	          :	     {((pTRIG3_ROC2.npassed)/(P.pTRIG3.scaler)):%8.4f} +- {(sqrt(((P.pTRIG3.scaler*pTRIG3_ROC2.npassed)+((pTRIG3_ROC2.npassed)*(pTRIG3_ROC2.npassed)))/(P.pTRIG3.scaler*P.pTRIG3.scaler*P.pTRIG3.scaler))):%8.4f}
 KLT_SHMS_CPULT		  	  :	     {((pTRIG1_ROC2.npassed)/(P.pTRIG1.scaler)):%8.4f} +- {(sqrt(((P.pTRIG1.scaler*pTRIG1_ROC2.npassed)+((pTRIG1_ROC2.npassed)*(pTRIG1_ROC2.npassed)))/(P.pTRIG1.scaler*P.pTRIG1.scaler*P.pTRIG1.scaler))):%8.4f}
 KLT_COIN_CPULT  	          :	     {((pTRIG5_ROC2.npassed)/(P.pTRIG5.scaler)):%8.4f} +- {(sqrt(((P.pTRIG5.scaler*pTRIG5_ROC2.npassed)+((pTRIG5_ROC2.npassed)*(pTRIG5_ROC2.npassed)))/(P.pTRIG5.scaler*P.pTRIG5.scaler*P.pTRIG5.scaler))):%8.4f}
 

@@ -273,10 +273,21 @@ void FullReplay_KaonLT_Phys_Prod (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file+
   analyzer->SetOdefFile("DEF-files/PRODUCTION/Full_Replay_Pass2_Coin_v2.def"); // New version, slimmed down
-  // Define cuts file
+  // Define cuts file with different Aerogel trays
   //analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/coin_production_cuts.def");  // optional
   //  analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/coin_tracking_cuts.def");  // optional
-  analyzer->SetCutFile("DEF-files/PRODUCTION/KaonLT_DEF/Offline_Physics_Coin_Cuts.def");
+  if (RunNumber >= 4965 && RunNumber <= 5334){
+   analyzer->SetCutFile("DEF-files/PRODUCTION/KaonLT_DEF/Aero_1p011/Offline_Physics_Coin_Cuts.def");
+  }
+  else if (RunNumber >= 7840 && RunNumber <= 7888){
+   analyzer->SetCutFile("DEF-files/PRODUCTION/KaonLT_DEF/Aero_1p011/Offline_Physics_Coin_Cuts.def");
+  }
+  else if (RunNumber >= 8038 && RunNumber <= 8356){
+   analyzer->SetCutFile("DEF-files/PRODUCTION/KaonLT_DEF/Aero_1p011/Offline_Physics_Coin_Cuts.def"); 
+  }
+  else {
+   analyzer->SetCutFile("DEF-files/PRODUCTION/KaonLT_DEF/Offline_Physics_Coin_Cuts.def");
+  }    
   // File to record accounting information for cuts
   analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Analysis/General/summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.

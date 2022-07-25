@@ -73,7 +73,7 @@ shmsAeroyposalln           P.aero.yAtAero > -30 && P.aero.yAtAero < 30
 
 shmsAerogeomalln           shmsAeroxposalln && shmsAeroyposalln
 
-shmsCerTrkShoulde     shmsHGCTrkShoulde && shmsAeroTrknpee && shmsAerogeomalln
+shmsCerTrkShoulde     shmsHGCTrkShoulde && shmsAeroTrknpee 
 shmsScinShoulde       shmsScinShould && shmsCalTrkShoulde && shmsCerTrkShoulde
 shmsScinSingShoulde   shmsScinShoulde && SHMS_event
 

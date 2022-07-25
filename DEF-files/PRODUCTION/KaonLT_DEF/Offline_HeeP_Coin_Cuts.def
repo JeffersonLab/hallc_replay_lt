@@ -70,7 +70,7 @@ shmsAeroyposalln            P.aero.yAtAero > -50 && P.aero.yAtAero < 50
 
 shmsAerogeomalln            shmsAeroxposalln && shmsAeroyposalln
 
-shmsCerTrkShouldp     shmsHGCTrkShouldp && shmsAeroTrknpep && shmsAerogeomalln
+shmsCerTrkShouldp     shmsHGCTrkShouldp && shmsAeroTrknpep 
 shmsScinShouldp       shmsScinShould && shmsCalTrkShouldp && shmsCerTrkShouldp
 shmsScinCoinShouldp   shmsScinShouldp && ALL_COIN_events
 shmsScinSingShouldp   shmsScinShouldp && SHMS_event

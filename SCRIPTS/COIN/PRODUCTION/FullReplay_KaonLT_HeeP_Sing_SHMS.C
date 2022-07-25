@@ -279,10 +279,7 @@ void FullReplay_KaonLT_HeeP_Sing_SHMS (Int_t RunNumber = 0, Int_t MaxEvent = 0) 
   if (RunNumber >= 4965 && RunNumber <= 5334){
    analyzer->SetCutFile("DEF-files/PRODUCTION/KaonLT_DEF/Aero_1p011/Offline_HeeP_Sing_SHMS_Cuts.def");
   }
-  else if (RunNumber >= 7840 && RunNumber <= 7888){
-   analyzer->SetCutFile("DEF-files/PRODUCTION/KaonLT_DEF/Aero_1p011/Offline_HeeP_Sing_SHMS_Cuts.def");
-  }
-  else if (RunNumber >= 8038 && RunNumber <= 8356){
+  else if (RunNumber >= 7940 && RunNumber <= 8356){
    analyzer->SetCutFile("DEF-files/PRODUCTION/KaonLT_DEF/Aero_1p011/Offline_HeeP_Sing_SHMS_Cuts.def");
   }
   else {

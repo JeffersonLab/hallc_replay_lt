@@ -17,7 +17,9 @@ SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
 #)
 
 lastRun=$( \
-     ls raw/shms_all_*.dat raw/../raw.copiedtotape/shms_all_*.dat cache/shms_all_*.dat -R 2>/dev/null | perl -ne 'if(/0*(\d+)/) {print "$1\n"}' | sort -n | tail -1 \
+     ls raw/shms_all_*.dat raw/../raw.copiedtotape/shms_all_*.dat LUSTER_LINKS/cache/shms_all_*.dat -R 2>/dev/null | perl -ne 'if(/0*(\d+)/) {print "$1\n"}' | sort -n | tail -1 \
+     #ls raw/shms_all_*.dat raw/../raw.copiedtotape/shms_all_*.dat -R 2>/dev/null | perl -ne 'if(/0*(\d+)/) {print "$1\n"}' | sort -n | tail -1 \
+    #cache was down so I made a version that does not check it - NH
  )
 
 # Which run to analyze.

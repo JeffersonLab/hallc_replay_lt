@@ -92,6 +92,11 @@ if [[ $RUNTYPE == "Prod" ]]; then
 elif [[ $RUNTYPE == "Lumi" ]]; then
     echo "Running luminosity analysis script - ${UTILPATH}/scripts/luminosity/replay_lumi.sh"
     eval '"${UTILPATH}/scripts/luminosity/replay_lumi.sh" ${RUNNUMBER} ${NUMEVENTS}'
+    echo""
+    echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    echo "Ignore SHMS electron tracking runlist print out from lumi replay, trust the run_50k.sh output"
+    echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    echo ""
 elif [[ $RUNTYPE == "HeePSing" ]]; then
     echo "Running HeeP Singles analysis script - ${UTILPATH}/scripts/heep/sing_heepYield.sh"
     eval '"${UTILPATH}/scripts/heep/sing_heepYield.sh" hms ${RUNNUMBER} ${NUMEVENTS}'
@@ -108,5 +113,12 @@ elif [[ $RUNTYPE == "Optics" ]]; then
 fi
 if [[ $RUNTYPE != "Optics" && $NUMEVENTS == -1 ]]; then
     eval '"${UTILPATH}/scripts/runlist/fill_runList.sh" ${RUNNUMBER} ${RUNTYPE} ${TARGET}'
+    if [[ $RUNTYPE == "Lumi" ]]; then 
+	echo""
+	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+	echo "Ignore SHMS electron tracking runlist print out from lumi replay, trust the run_50k.sh output"
+	echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+	echo ""
+    fi
 else echo "Full replay for HMS and SHMS completed, check output rootfiles for plots"
 fi

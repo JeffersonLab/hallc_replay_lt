@@ -16,15 +16,11 @@ SPEC=$(echo "$spec" | tr '[:lower:]' '[:upper:]')
 #    ls raw/coin_all_*.dat raw/../raw.copiedtotape/coin_all_*.dat cache/coin_all_*.dat -R 2>/dev/null | perl -ne 'if(/0*(\d+)/) {print "$1\n"}' | sort -n | tail -1 \
 #)
 
-echo "something"
-
 lastRun=$( \
      ls raw/shms_all_*.dat raw/../raw.copiedtotape/shms_all_*.dat LUSTER_LINKS/cache/shms_all_*.dat -R 2>/dev/null | perl -ne 'if(/0*(\d+)/) {print "$1\n"}' | sort -n | tail -1 \
 #     ls raw/shms_all_*.dat raw/../raw.copiedtotape/shms_all_*.dat -R 2>/dev/null | perl -ne 'if(/0*(\d+)/) {print "$1\n"}' | sort -n | tail -1 \
 	 # cache was down so I made a copy that does not check it. No good long term - NH
  )
-
-echo "else"
 
 # Which run to analyze.
 runNum=$1
@@ -103,7 +99,6 @@ replayReport="${reportFileDir}/replayReport_${spec}_production_${runNum}_${numEv
 
   sleep 2
   eval ${runHcana}
-
   
   # Link the ROOT file to latest for online monitoring
   ln -sf ${rootFile} ${latestRootFile}

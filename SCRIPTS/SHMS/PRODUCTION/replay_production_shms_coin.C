@@ -29,7 +29,7 @@ void replay_production_shms_coin (Int_t RunNumber = 0, Int_t MaxEvent = 0, Int_t
   pathList.push_back("./raw.PionLT");
   pathList.push_back("./raw_KaonLT");
   pathList.push_back("./raw/../raw.copiedtotape");
-  //pathList.push_back("./raw.cache");
+  pathList.push_back("./cache");
   //pathList.push_back("./cache_kaonlt");
   //pathList.push_back("./raw.volatile");
 

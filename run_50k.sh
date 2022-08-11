@@ -82,43 +82,29 @@ if [[ -z "$4" ]]; then
     NUMEVENTS=50000
 fi
 
-if [[ $RUNTYPE == "Prod" ]]; then
+if [[ $RUNTYPE == "Prod" || $RUNTYPE == "fADC" ]]; then
     eval "$REPLAYPATH/hcana -l -q \"UTIL_PION/scripts/replay/PionLT/replay_production_coin.C($RUNNUMBER,$NUMEVENTS)\""
     REPORT_FILE="${REPLAYPATH}/REPORT_OUTPUT/Analysis/PionLT/Pion_replay_coin_production_${RUNNUMBER}_${NUMEVENTS}.report"
     El_Track_Eff=$(sed -n 82p $REPORT_FILE)
     Had_Track_Eff=$(sed -n 80p $REPORT_FILE)
     HMS_3of4_Eff=$(sed -n 289p $REPORT_FILE)
     SHMS_3of4_Eff=$(sed -n 274p $REPORT_FILE)
-elif [[ $RUNTYPE == "Lumi" ]]; then
-    "$REPLAYPATH/hcana -l -q -b \"$UTILPATH/scripts/replay/${ANATYPE}LT/replay_luminosity.C($RUNNUMBER,$NUMEVENTS)\"" 
-    REPORT_FILE="${REPLAYPATH}/REPORT_OUTPUT/Analysis/Lumi/Pion_replay_luminosity_${RUNNUMBER}_${NUMEVENTS}.report"
-    El_Track_Eff=$(sed -n 82p $REPORT_FILE)
-    Had_Track_Eff=$(sed -n 80p $REPORT_FILE)
-    HMS_3of4_Eff=$(sed -n 289p $REPORT_FILE)
-    SHMS_3of4_Eff=$(sed -n 274p $REPORT_FILE)
-elif [[ $RUNTYPE == "HeePSing" ]]; then
-    eval "$REPLAYPATH/hcana -l -q \"$UTILPATH/scripts/replay/${ANATYPE}LT/replay_hms_heep.C($RUNNUMBER,$NUMEVENTS)\""
-    eval "$REPLAYPATH/hcana -l -q \"$UTILPATH/scripts/replay/${ANATYPE}LT/replay_shms_heep.C($RUNNUMBER,$NUMEVENTS)\""
+elif [[ $RUNTYPE == "HeePSing" || $RUNTYPE == "Lumi" ]]; then # HeePSingles and Lumi get analysed in the same way effectively
+    eval "$REPLAYPATH/hcana -l -q \"$UTILPATH/scripts/replay/PionLT/replay_hms_heep.C($RUNNUMBER,$NUMEVENTS)\""
+    eval "$REPLAYPATH/hcana -l -q \"$UTILPATH/scripts/replay/PionLT/replay_shms_heep.C($RUNNUMBER,$NUMEVENTS)\""
     HMS_REPORT_FILE="${REPLAYPATH}/REPORT_OUTPUT/Analysis/HeeP/Pion_replay_hms_production_${RUNNUMBER}_${NUMEVENTS}.report"
     SHMS_REPORT_FILE="${REPLAYPATH}/REPORT_OUTPUT/Analysis/HeeP/Pion_replay_shms_production_${RUNNUMBER}_${NUMEVENTS}.report"
     El_Track_Eff=$(sed -n 86p $HMS_REPORT_FILE)
-    Had_Track_Eff=$(sed -n 84p $SHMS_REPORT_FILE)
-    HMS_3of4_Eff=$(sed -n 255p $HMS_REPORT_FILE) # These will need double checking when we actually get to these
+    Had_Track_Eff=$(sed -n 84p $SHMS_REPORT_FILE) # Actually an electron tracking efficiency for lumi and heep singles
+    HMS_3of4_Eff=$(sed -n 255p $HMS_REPORT_FILE)
     SHMS_3of4_Eff=$(sed -n 240p $SHMS_REPORT_FILE)
 elif [[ $RUNTYPE == "HeePCoin" ]]; then
-    eval "$REPLAYPATH/hcana -l -q \"$UTILPATH/scripts/replay/${ANATYPE}LT/replay_coin_heep.C($RUNNUMBER,$NUMEVENTS)\"" 
+    eval "$REPLAYPATH/hcana -l -q \"$UTILPATH/scripts/replay/PionLT/replay_coin_heep.C($RUNNUMBER,$NUMEVENTS)\"" 
     REPORT_FILE="${REPLAYPATH}/REPORT_OUTPUT/Analysis/HeeP/Pion_replay_coin_production_${RUNNUMBER}_${NUMEVENTS}.report"
     El_Track_Eff=$(sed -n 82p $REPORT_FILE)
     Had_Track_Eff=$(sed -n 80p $REPORT_FILE)
-    HMS_3of4_Eff=$(sed -n 283p $REPORT_FILE)
-    SHMS_3of4_Eff=$(sed -n 268p $REPORT_FILE)
-elif [[ $RUNTYPE == "fADC" ]]; then
-    "$REPLAYPATH/hcana -l -q \"UTIL_PION/scripts/replay/PionLT/replay_production_coin.C($RaUNNUMBER,$NUMEVENTS)\"" 
-    REPORT_FILE="${REPLAYPATH}/REPORT_OUTPUT/Analysis/PionLT/Pion_replay_coin_production_${RUNNUMBER}_${NUMEVENTS}.report"
-    El_Track_Eff=$(sed -n 82p $REPORT_FILE)
-    Had_Track_Eff=$(sed -n 80p $REPORT_FILE)
-    HMS_3of4_Eff=$(sed -n 289p $REPORT_FILE)
-    SHMS_3of4_Eff=$(sed -n 274p $REPORT_FILE)
+    HMS_3of4_Eff=$(sed -n 246p $REPORT_FILE)
+    SHMS_3of4_Eff=$(sed -n 231p $REPORT_FILE)
 elif [[ $RUNTYPE == "Optics" ]]; then
     echo "Nope - Doesn't work for this yet"
 fi
@@ -139,6 +125,7 @@ echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 echo "!!!!!!!!!!!!!!!!!!! If under 95%, check DAQ windows !!!!!!!!!!!!!!!!!!!"
 echo "!!!!!!!!!!!!!!!!!!! Look for errors in replay above !!!!!!!!!!!!!!!!!!!"
+echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 
 sleep 3
@@ -162,6 +149,7 @@ echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 echo "!!!!!!!!!!!!!!!!!!! If under 95%, check DAQ windows !!!!!!!!!!!!!!!!!!!"
 echo "!!!!!!!!!!!!!!!!!!! Look for errors in replay above !!!!!!!!!!!!!!!!!!!"
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 
 eval '"${REPLAYPATH}/run_coin_shms.sh" ${RUNNUMBER} ${NUMEVENTS}'
 
@@ -182,8 +170,8 @@ echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 echo "!!!!!!!!!!!!!!!!!!! If under 95%, check DAQ windows !!!!!!!!!!!!!!!!!!!"
 echo "!!!!!!!!!!!!!!!!!!! Look for errors in replay above !!!!!!!!!!!!!!!!!!!"
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 echo ""
-
 
 exit 0
 

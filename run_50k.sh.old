@@ -1,10 +1,12 @@
 #! /bin/bash
 
-# Stephen JD Kay - University of Regina - 13/07/22 - See .old version for original comments
+# Stephen JD Kay - University of Regina - 13/07/22
+# Arguments should be run number, type of run and target type
+# Anything but the valid options should be ignored and bounced back to the user as a prompt
 
-# Nathan Heinrich - University of Regina - 24/08/22
-# I have updated this so that it only does 1 replay.
-# SJDK - 27/08/22 - Added some extra print outs to clarify expected inputs for the user
+# This script runs a quick 50k of each spectrometer, and then does a 50k analysis replay before printing the tracking efficiencies
+# I did this in a slightly lazy way where it just uses the line number in the report files, if the report templates get changed, these will need adjusting!
+# Free beer/chocolate to anyone who improves this and switches it to some grep/sed based statement which just gets the correct line wherever it is
 
 # Set path depending upon hostname, should only run on cdaql1/cdaql2/cdaql3 as cdaq
 if [[ "${HOSTNAME}" = *"cdaql"* ]]; then # Check the user is on cdaql1 or cdaql2
@@ -25,32 +27,20 @@ fi
 
 UTILPATH="${REPLAYPATH}/UTIL_PION"
 cd $REPLAYPATH
-
-lastRun=$( \
-     ls raw/shms_all_*.dat raw/../raw.copiedtotape/shms_all_*.dat LUSTER_LINKS/cache/shms_all_*.dat -R 2>/dev/null | perl -ne 'if(/0*(\d+)/) {print "$1\n"}' | sort -n | tail -1 \
-     #ls raw/shms_all_*.dat raw/../raw.copiedtotape/shms_all_*.dat -R 2>/dev/null | perl -ne 'if(/0*(\d+)/) {print "$1\n"}' | sort -n | tail -1 \
-    #cache was down so I made a version that does not check it - NH
- )
-
 echo ""
 echo "Starting physics analysis of PionLT data"
-echo "Arguments are run number and run type "
+echo "Required arguments are run number, run type and target"
 echo ""
 echo "Run number must be a positive integer value"
-echo "Run number defaults to latest run of no argument provided"
 echo "Run type must be one of - Prod - Lumi - HeePSing - HeePCoin - fADC - Optics - Case sensitive!"
-echo "Run type defualts to Prod, which will NOT work for HeeP Singles!!!"
+echo "Target must be one of - LH2 - LD2 - Dummy10cm - Carbon0p5 - AuFoil - Optics1 - Optics2 - CarbonHole - Case sensitive!"
 RUNNUMBER=$1
 RUNTYPE=$2
-NUMEVENTS=$3
+TARGET=$3
+NUMEVENTS=$4
 
-#echo "${lastRun}"
-if [ -z "$1" ]; then # If no run number provided, default to latest run
-    RUNNUMBER=$lastRun
-fi
-
-#echo "${RUNNUMBER}"
-if [[ ! "$RUNNUMBER" =~ ^-?[0-9]+$ ]]; then # Check an argument was provided and that it is a positive integer, if not, prompt for one
+# Need to change these a little, should check whether arguments are good or not REGARDLESS of whether they're blank
+if [[ -z "$1" || ! "$RUNNUMBER" =~ ^-?[0-9]+$ ]]; then # Check an argument was provided and that it is a positive integer, if not, prompt for one
     echo ""
     echo "I need a valid run number - MUST be a positive integer"
     while true; do
@@ -62,11 +52,7 @@ if [[ ! "$RUNNUMBER" =~ ^-?[0-9]+$ ]]; then # Check an argument was provided and
 	esac
     done
 fi
-
-if [[ -z "$2" ]]; then # If no arguments, default to production
-    RUNTYPE="Prod"
-fi
-if [[ ! "$RUNTYPE" =~ Prod|Lumi|HeePSing|HeePCoin|fADC|Optics ]]; then # Check the 2nd argument was provided and that it's one of the valid options
+if [[ -z "$2" || ! "$RUNTYPE" =~ Prod|Lumi|HeePSing|HeePCoin|fADC|Optics ]]; then # Check the 2nd argument was provided and that it's one of the valid options
     echo ""
     echo "I need a valid run type"
     while true; do
@@ -78,28 +64,32 @@ if [[ ! "$RUNTYPE" =~ Prod|Lumi|HeePSing|HeePCoin|fADC|Optics ]]; then # Check t
 	esac
     done
 fi
+if [[ -z "$3" || ! "$TARGET" =~ LH2|LD2|Dummy10cm|Carbon0p5|AuFoil|Optics1|Optics2|CarbonHole ]]; then # Check the 3rd argument was provided and that it's one of the valid options
+    echo ""
+    echo "I need a valid target"
+    while true; do	
+	echo ""
+	read -p "Please type in a target from - LH2 - LD2 - Dummy10cm - Carbon0p5 - AuFoil - Optics1 - Optics2 - CarbonHole - Case sensitive! - or press ctrl-c to exit : " TARGET
+	case $TARGET in
+	    '');; # If blank, prompt again
+	    'LH2'|'LD2'|'Dummy10cm'|'Carbon0p5'|'AuFoil'|'Optics1'|'Optics2'|'CarbonHole') break;; # If a valid option, break the loop and continue
+	esac
+    done
+fi
 echo ""
 
-if [[ -z "$3" ]]; then
+if [[ -z "$4" ]]; then
     NUMEVENTS=50000
 fi
 
-eval "$REPLAYPATH/hcana -l -q \"UTIL_PION/scripts/replay/PionLT/replay_production_coin_50k.C($RUNNUMBER,$NUMEVENTS)\""
-if [ -f "${REPLAYPATH}/ROOTfiles/Analysis/50k/Pion_coin_replay_production_${RUNNUMBER}_latest.root" ]; then
-    echo "Removing old soft link to rootfile."
-    eval "rm ${REPLAYPATH}/ROOTfiles/Analysis/50k/Pion_coin_replay_production_${RUNNUMBER}_latest.root"
-fi
-eval "ln -sf ${REPLAYPATH}/ROOTfiles/Analysis/50k/Pion_coin_replay_production_${RUNNUMBER}_${NUMEVENTS}.root ${REPLAYPATH}/ROOTfiles/Analysis/50k/Pion_coin_replay_production_${RUNNUMBER}_latest.root"
-
 if [[ $RUNTYPE == "Prod" || $RUNTYPE == "fADC" ]]; then
+    eval "$REPLAYPATH/hcana -l -q \"UTIL_PION/scripts/replay/PionLT/replay_production_coin.C($RUNNUMBER,$NUMEVENTS)\""
     REPORT_FILE="${REPLAYPATH}/REPORT_OUTPUT/Analysis/PionLT/Pion_replay_coin_production_${RUNNUMBER}_${NUMEVENTS}.report"
-    El_Track_Eff=$(sed -n 80p $REPORT_FILE)
-    Had_Track_Eff=$(sed -n 82p $REPORT_FILE)
-    SHMS_Pi_Track_EFF=$(sed -n 86p $REPORT_FILE)
+    El_Track_Eff=$(sed -n 82p $REPORT_FILE)
+    Had_Track_Eff=$(sed -n 80p $REPORT_FILE)
     HMS_3of4_Eff=$(sed -n 289p $REPORT_FILE)
     SHMS_3of4_Eff=$(sed -n 274p $REPORT_FILE)
 elif [[ $RUNTYPE == "HeePSing" || $RUNTYPE == "Lumi" ]]; then # HeePSingles and Lumi get analysed in the same way effectively
-    # SJDK - 27/08/22 - I'm not sure we actually need two replays for the HeePSingles either, we could just add the electron tracking efficiency to the 50k replay output and then grab that instead in this loop here
     eval "$REPLAYPATH/hcana -l -q \"$UTILPATH/scripts/replay/PionLT/replay_hms_heep.C($RUNNUMBER,$NUMEVENTS)\""
     eval "$REPLAYPATH/hcana -l -q \"$UTILPATH/scripts/replay/PionLT/replay_shms_heep.C($RUNNUMBER,$NUMEVENTS)\""
     HMS_REPORT_FILE="${REPLAYPATH}/REPORT_OUTPUT/Analysis/HeeP/Pion_replay_hms_production_${RUNNUMBER}_${NUMEVENTS}.report"
@@ -128,7 +118,6 @@ echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 echo ""
 echo "${El_Track_Eff}"
 echo "${Had_Track_Eff}"
-echo "${SHMS_Pi_Track_EFF}"
 echo "HMS Hodo 3/4 Eff - ${HMS_3of4_Eff}"
 echo "SHMS Hodo 3/4 Eff - ${SHMS_3of4_Eff}"
 echo ""
@@ -141,8 +130,7 @@ echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 
 sleep 3
 
-eval "./online -f onlineGUI/CONFIG/COIN/PRODUCTION/hms_coin_production.cfg -r ${RUNNUMBER}"
-eval "./online -f onlineGUI/CONFIG/COIN/PRODUCTION/hms_coin_production_expert.cfg -r ${RUNNUMBER} -P"
+eval '"${REPLAYPATH}/run_coin_hms.sh" ${RUNNUMBER} ${NUMEVENTS}'
 
 echo ""
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
@@ -153,7 +141,6 @@ echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 echo ""
 echo "${El_Track_Eff}"
 echo "${Had_Track_Eff}"
-echo "${SHMS_Pi_Track_EFF}"
 echo "HMS Hodo 3/4 Eff - ${HMS_3of4_Eff}"
 echo "SHMS Hodo 3/4 Eff - ${SHMS_3of4_Eff}"
 echo ""
@@ -164,8 +151,7 @@ echo "!!!!!!!!!!!!!!!!!!! Look for errors in replay above !!!!!!!!!!!!!!!!!!!"
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 
-eval "./online -f onlineGUI/CONFIG/COIN/PRODUCTION/shms_coin_production.cfg -r ${RUNNUMBER}"
-eval "./online -f onlineGUI/CONFIG/COIN/PRODUCTION/shms_coin_production_expert.cfg -r ${RUNNUMBER} -P"
+eval '"${REPLAYPATH}/run_coin_shms.sh" ${RUNNUMBER} ${NUMEVENTS}'
 
 echo ""
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
@@ -176,7 +162,6 @@ echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 echo ""
 echo "${El_Track_Eff}"
 echo "${Had_Track_Eff}"
-echo "${SHMS_Pi_Track_EFF}"
 echo "HMS Hodo 3/4 Eff - ${HMS_3of4_Eff}"
 echo "SHMS Hodo 3/4 Eff - ${SHMS_3of4_Eff}"
 echo ""

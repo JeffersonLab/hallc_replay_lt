@@ -143,6 +143,7 @@ sleep 3
 
 eval "./online -f onlineGUI/CONFIG/COIN/PRODUCTION/hms_coin_production.cfg -r ${RUNNUMBER}"
 eval "./online -f onlineGUI/CONFIG/COIN/PRODUCTION/hms_coin_production_expert.cfg -r ${RUNNUMBER} -P"
+eval "mv ${REPLAYPATH}/hms_coin_production_expert_${RUNNUMBER}.pdf ${REPLAYPATH}/HISTOGRAMS/Analysis/50k/PDF/"
 
 echo ""
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
@@ -166,6 +167,7 @@ echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 
 eval "./online -f onlineGUI/CONFIG/COIN/PRODUCTION/shms_coin_production.cfg -r ${RUNNUMBER}"
 eval "./online -f onlineGUI/CONFIG/COIN/PRODUCTION/shms_coin_production_expert.cfg -r ${RUNNUMBER} -P"
+eval "mv ${REPLAYPATH}/shms_coin_production_expert_${RUNNUMBER}.pdf ${REPLAYPATH}/HISTOGRAMS/Analysis/50k/PDF/"
 
 echo ""
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"

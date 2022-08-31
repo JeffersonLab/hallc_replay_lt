@@ -29,7 +29,7 @@ void replay_production_hms_coin(Int_t RunNumber=0, Int_t MaxEvent=0, Int_t First
   pathList.push_back("./raw_PionLT");
   pathList.push_back("./raw_KaonLT");
   pathList.push_back("./raw/../raw.copiedtotape");
-  pathList.push_back("./LUSER_LINKS/cache");
+  pathList.push_back("./LUSTRE_LINKS/cache");
   //pathList.push_back("./cache_kaonlt");
   //pathList.push_back("./raw_volatile");
 

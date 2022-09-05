@@ -166,6 +166,6 @@ SHMS_DELTA		 P.gtr.dp > -15 && P.gtr.dp < 25
 HMSCalCer                H.cal.etottracknorm > 0.5 && H.cer.npeSum > 0.5
 SHMSCalCer               P.cal.etottracknorm > 0.5 && P.aero.npeSum > 0.5
 
-GOOD_HMS_Events	 	 HMS_DELTA && HMSCalCer
+GOOD_SINGLES_Events	 	 HMS_DELTA && HMSCalCer
 
-Physics_master GOOD_HMS_Events
+Physics_master GOOD_SINGLES_Events

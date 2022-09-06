@@ -24,6 +24,8 @@ KLT_SHMS_Angle		:		{ptheta_lab}
 KLT_SHMS_Run_Length	:		{P.1MHz.scalerTime:%.3f} sec
 KLT_HMS_Run_Length	:		{H.1MHz.scalerTime:%.3f} sec
 
+KLT_Total_Events	:		{GOOD_COIN_Events.npassed}
+
 Cut on BCM{gBCM_Current_threshold_index+1} current of {gBCM_Current_threshold} uA. Beam over threshold for {H.1MHz.scalerTimeCut:%.3f}s, or {((H.1MHz.scalerTimeCut/H.1MHz.scalerTime)*100.):%.3f}% of total run time.
 
 KLT_BCM_Cut_SHMS_Run_Length      :               {P.1MHz.scalerTimeCut:%.3f} sec

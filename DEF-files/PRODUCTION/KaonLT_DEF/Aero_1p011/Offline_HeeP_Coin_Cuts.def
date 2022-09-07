@@ -107,8 +107,8 @@ HMSScinDide           HMSScinShoulde && H.dc.ntrack > 0
 HMSScinCoinDide	      HMSScinCoinShoulde && H.dc.ntrack > 0
 HMSScinSingDide	      HMSScinSingShoulde && H.dc.ntrack > 0
 
-HMS_GOOD_TRACK	      		     H.dc.ntrack > 0 && H.cal.etotnorm > 0.5
-SHMS_GOOD_Track			     P.dc.ntrack > 0 && P.cal.etotnorm > 0
+HMS_GOOD_TRACK	      		     H.dc.ntrack > 0
+SHMS_GOOD_Track			     P.dc.ntrack > 0 
 GOOD_COIN_TRACK			     HMS_GOOD_TRACK && SHMS_GOOD_Track
 ALL_GOOD_Track_Events 		     HMS_GOOD_TRACK || SHMS_GOOD_Track
 
@@ -169,6 +169,6 @@ SHMS_DELTA		 P.gtr.dp > -15 && P.gtr.dp < 25
 
 HMSCalCer                H.cal.etottracknorm > 0.5 && H.cer.npeSum > 0.5
 
-GOOD_COIN_Events	 HMS_DELTA && SHMS_DELTA && GOOD_COIN_TRACK && HMSCalCer && shmsAerogeomalln
+GOOD_COIN_Events	 HMS_DELTA && SHMS_DELTA && GOOD_COIN_TRACK && shmsAerogeomalln
 
 Physics_master GOOD_COIN_Events

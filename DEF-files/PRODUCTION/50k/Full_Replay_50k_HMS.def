@@ -10,6 +10,14 @@ block H.cal.etottracknorm
 block H.cer.*
 block H.kin.*
 block H.rb.*
+block H.react.x
+block H.react.y
+block H.react.z
+block H.extcor.ysieve
+block H.extcor.xsieve
+block H.rb.raster.fr_xbpm_tar
+block H.rb.raster.fr_ybpm_tar
+
 
 begin epics
 ibcm1

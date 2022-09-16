@@ -2923,6 +2923,27 @@ helicity_freq = 120.0007547169
 HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.990
 
+4827
+eHadCoinTime_Offset = 47.307
+
+4828
+eHadCoinTime_Offset = 47.307
+
+4855
+eHadCoinTime_Offset = 47.307
+
+4856
+eHadCoinTime_Offset = 47.307
+
+4857
+eHadCoinTime_Offset = 47.307
+
+4858
+eHadCoinTime_Offset = 47.307
+
+4859
+eHadCoinTime_Offset = 47.307
+
 4865
 eHadCoinTime_Offset = 47.307
 
@@ -4476,6 +4497,15 @@ eHadCoinTime_Offset = 47.996
 
 6857
 eHadCoinTime_Offset = 47.990
+
+6881
+eHadCoinTime_Offset = 47.995
+
+6882
+eHadCoinTime_Offset = 47.995
+
+6883
+eHadCoinTime_Offset = 47.995
 
 6885
 eHadCoinTime_Offset = 47.995

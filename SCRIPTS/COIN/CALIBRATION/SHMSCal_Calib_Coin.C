@@ -28,11 +28,11 @@ void SHMSCal_Calib_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./raw");
   pathList.push_back("./raw1");
   pathList.push_back("./raw2");
-  pathList.push_back("./raw_volatile");
+  pathList.push_back("./raw.volatile");
   pathList.push_back("./raw_PionLT");
   pathList.push_back("./raw_KaonLT");
   pathList.push_back("./raw/../raw.copiedtotape");
-  pathList.push_back("./cache");
+  pathList.push_back("./raw.cache");
 
   const char* ROOTFileNamePattern = "ROOTfiles/Calib/Cal/SHMS_Cal_Calib_%d_%d.root";
   // Load global parameters

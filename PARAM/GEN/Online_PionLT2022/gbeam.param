@@ -42,18 +42,28 @@ gbpmc_zpos = 129.38 ; cm
 ; Various fast raster quantities: gUse* are flags
 
 ; Raster constants for pionlt Sept 5 2021
-gfr_cal_mom  = 9.203
-gfrxa_adc_zero_offset = 54290
-gfrxb_adc_zero_offset = 54290
-gfrya_adc_zero_offset = 54290
+;gfr_cal_mom  = 9.203
+;gfrxa_adc_zero_offset = 54290
+;gfrxb_adc_zero_offset = 54290
+;gfrya_adc_zero_offset = 54290
+;gfryb_adc_zero_offset = 54800
+;
+;gfrxa_adcpercm = (66346-42290)/.2
+;gfrxb_adcpercm = (64590-43750)/.2
+;gfrya_adcpercm = -(65450-43750)/.2
+;gfryb_adcpercm = -(64750-44860)/.2
+
+; Raster constants for pionlt June 2 2022
+gfr_cal_mom  = 7.950
+gfrxa_adc_zero_offset = 54300
+gfrxb_adc_zero_offset = 54300
+gfrya_adc_zero_offset = 54630
 gfryb_adc_zero_offset = 54800
 ;
-gfrxa_adcpercm = (66346-42290)/.2
-gfrxb_adcpercm = (64590-43750)/.2
-gfrya_adcpercm = -(65450-43750)/.2
-gfryb_adcpercm = -(64750-44860)/.2
-
- 
+gfrxa_adcpercm = (63427-44954)/.2
+gfrxb_adcpercm = (63841-44824)/.2
+gfrya_adcpercm = -(65450-44885)/.2
+gfryb_adcpercm = -(64417-45240)/.2 
  
 ; positions of FR magnets relative to target
   gfrx_dist  = 1375   ; cm

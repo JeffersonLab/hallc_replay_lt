@@ -164,9 +164,9 @@ Bool_t calibration::Process(Long64_t entry)
   //{
   //Require loose cut on particle velocity                                     
   // SJDK 28/04/22 - This cut got screwed up in a merge somewhere, I've changed it to > 0.4 (> 2 made no sense)
-  fBeta_Full->Fill(P_gtr_beta[0]);
-  if (TMath::Abs(P_gtr_beta[0] - 1.0) > 0.4) return kTRUE;
-  fBeta_Cut->Fill(P_gtr_beta[0]);    
+  fBeta_Full->Fill(P_gtr_beta);
+  if (TMath::Abs(P_gtr_beta - 1.0) > 0.4) return kTRUE;
+  fBeta_Cut->Fill(P_gtr_beta);    
   //Filling the histograms
   for (Int_t ipmt = 0; ipmt < fpmts; ipmt++)
     {

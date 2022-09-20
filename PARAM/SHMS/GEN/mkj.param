@@ -1,0 +1,4 @@
+pcal_arr_SampThreshold = 0
+phodo_SampThreshold = 0
+;pcal_arr_UseSampWaveform = 1
+;phodo_UseSampWaveform = 1

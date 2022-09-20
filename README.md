@@ -1,23 +1,18 @@
-# Introduction - online_pionlt
+# Introduction - LTSep_Analysis_2022
 
-This branch, online_pionlt, is the active running branch for the 2022 PionLT experiment. It will be kept up to date during the experiment.
-Cdaq should be fully up to date at all times. Regular snapshots of this branch will be taken for quick access to specific states of the repo.
+- This branch is the offline analysis branch for the LT separation experiments. hallc_replay_lt is common to KaonLT and PionLT
+- If you're just getting started, consider executing the SymLinkSetup_iFarm.sh script to set up various folders and subdirectories that many of the analysis scripts rely upon to run successfully.
 
 # Script Info
 
-- The scripts are set up such that they will NOT run another replay IF an existing root file exists.
-If you want to replay again, comment out the relevant line in each script.
+- The scripts are set up such that they will NOT run another replay IF an existing root file exists. If you want to replay again, comment out the relevant line in each script.	   
 - Many rely upon symbolic links and folder being in place, see the comment above on running SymLinkSetup_iFarm.sh
-  - You should NOT need to run this on cdaq, contact an expert if a sym link seems to be missing or you see a pathing issue
-- During the oline running, one steering script is used to run a selection of other analysis scripts
+- During the oline running, one steering script was used to run a selection of other analysis scripts
   - run_PionLT.sh
     - See the comments and info in this script to see how it works
     - This has been edited to run on the iFarm if desired
-
-# PionLT Experts
-
-- If you have any issues running any of the scripts or bump into any errors or issues, contact one of the experts listed below
-  - Stephen Kay - stephen.kay@uregina.ca - JLab ID - sjdkay
-  - Nathan Heinrich - heinricn@uregina.ca - JLab ID - heinricn
-  - Muhammad Junaid - junaid@jlab.org - JLab ID - junaid
-  - Jacob Murphy - jm443918@ohio.edu - JLab ID - jmurphy
+    - Most analysis is done it UTIL repositories
+      - UTIL_PION - https://github.com/JeffersonLab/UTIL_PION
+      - UTIL_KAONLT - https://github.com/JeffersonLab/UTIL_KAONLT
+    - There is also a repository of scripts for processing files using the JLab batch queueing system
+      - UTIL_BATCH - https://github.com/JeffersonLab/UTIL_BATCH

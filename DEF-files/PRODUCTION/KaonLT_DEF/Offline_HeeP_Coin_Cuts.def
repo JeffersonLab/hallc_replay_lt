@@ -140,7 +140,7 @@ SHMSHGCDidp		SHMSHGCShouldp && P.hgcer.npeSum < 0.5
 
 SHMSHGCp      P.hgcer.npeSum  < 0.5
 
-SHMSAeroShouldp         SHMSGEN && SHMSCalp && SHMSHGCp && shmsAerogeomalln
+SHMSAeroShouldp         SHMSGEN && SHMSCalp && SHMSHGCp && shmsAerogeomalln 
 SHMSAeroDidp            SHMSAeroShouldp && P.aero.npeSum < 1.0
 
 ##################

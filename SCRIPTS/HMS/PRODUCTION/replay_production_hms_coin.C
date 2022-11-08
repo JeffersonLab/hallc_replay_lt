@@ -29,9 +29,9 @@ void replay_production_hms_coin(Int_t RunNumber=0, Int_t MaxEvent=0, Int_t First
   pathList.push_back("./raw_PionLT");
   pathList.push_back("./raw_KaonLT");
   pathList.push_back("./raw/../raw.copiedtotape");
-  pathList.push_back("./cache");
-  pathList.push_back("./cache_kaonlt");
-  pathList.push_back("./raw_volatile");
+  pathList.push_back("./LUSTRE_LINKS/cache");
+  //pathList.push_back("./cache_kaonlt");
+  //pathList.push_back("./raw_volatile");
 
   const char* ROOTFileNamePattern = "ROOTfiles/Analysis/50k/hms_coin_replay_production_%d_%d.root";
 
@@ -183,7 +183,7 @@ void replay_production_hms_coin(Int_t RunNumber=0, Int_t MaxEvent=0, Int_t First
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template.
-  //analyzer->PrintReport("TEMPLATES/HMS/PRODUCTION/hstackana_50k.template",
-  //			Form("MON_OUTPUT/replay_hms_coin_production_%d_%d.report", RunNumber, MaxEvent));
+    analyzer->PrintReport("TEMPLATES/HMS/PRODUCTION/hstackana_production.template",
+    			Form("MON_OUTPUT/replay_hms_coin_production_%d_%d.report", RunNumber, MaxEvent));
 
 }

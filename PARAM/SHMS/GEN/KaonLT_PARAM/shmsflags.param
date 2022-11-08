@@ -28,3 +28,22 @@ p_oopcentral_offset = 0.0
 ppcentral_offset = 0.0
 
 
+;; The following offsets are applied to the central kinematic variables
+;;      ptheta_lab=htheta_lab + pthetacentral_offset/degree 
+;;pthetacentral_offset  = 0.0 ;     (rad)   For no offset data
+;;pthetacentral_offset = 0.0 ;     (rad)   New offset for 3.6 & 3.9 GeV
+;;pthetacentral_offset =  1.0e-3  ;  (rad)   New offset for 4.5 GeV
+;;pthetacentral_offset = 1.2e-3  ; (rad)   New offset for 4.9 GeV
+;pthetacentral_offset = 2.1e-3  ; (rad)    New offset for 2.7 GeV
+;p_oopcentral_offset = 0.0
+;;  SHMS central momentum offset determined from carbon elastic data fall 2017
+;; sets ppcentral = ppcentral * ( 1. + ppcentral_offset / 100. )
+;;ppcentral_offset = -0.4      ; Old offset
+;;ppcentral_offset = 0.0        ; For no offset data
+;;ppcentral_offset = -0.0894   ; New offset for 3.9 & 3.6 GeV data
+;;ppcentral_offset = 0.0        ; just to test
+;;ppcentral_offset = -0.2937     ; New offset for 4.5 GeV data
+;;ppcentral_offset = -0.312    ; New offset for 4.9 GeV data
+;ppcentral_offset = -0.450     ; New offset for 2.7 GeV data
+
+

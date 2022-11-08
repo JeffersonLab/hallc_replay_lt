@@ -39,3 +39,23 @@ h_oopcentral_offset = 0.00  ; (rad)
 ;      htheta_lab=htheta_lab + hthetacentral_offset/degree 
 
 hcer_debug_adc = 1
+
+;; These offsets are determined from elastic ep data.
+;; central field  correction
+;;  hpcentral_offset = 0.0      ; For no offset data    
+;;  hpcentral_offset = -0.0842 ; New offset for 3.6 &3.9 GeV data    
+;;  hpcentral_offset = 0.0     ; just to test    
+;; hpcentral_offset = -0.2745   ; New offset for 4.5 GeV data   
+;; hpcentral_offset = -0.269   ; New offset for 4.9 GeV data   
+;hpcentral_offset = -0.287   ; New offset for 2.7 GeV data    
+;;
+;;hthetacentral_offset = 0.0   ; (rad)  For no offset data  
+;;hthetacentral_offset = 0.0  ; (rad)  New offset for 3.6 & 3.9 GeV 
+;;hthetacentral_offset = 0.0  ; (rad)  New offset for 4.5 GeV 
+;hthetacentral_offset = 0.3e-3  ; (rad)  New offset for 2.7 & 4.9 GeV 
+; 
+; h_oopcentral_offset = 0.0   ; (rad)
+;; sets hpcentral = hpcentral * ( 1. + hpcentral_offset / 100. )
+;;      htheta_lab=htheta_lab + hthetacentral_offset/degree 
+
+

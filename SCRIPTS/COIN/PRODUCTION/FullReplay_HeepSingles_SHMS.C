@@ -1,4 +1,4 @@
-void SHMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
+void FullReplay_HeepSingles_SHMS (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   // Get RunNumber and MaxEvent if not provided.
   if(RunNumber == 0) {
@@ -15,7 +15,7 @@ void SHMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
     }
   }
 
-  // Create file name patterns.
+
   const char* RunFileNamePattern;
   // Create file name patterns. Base this upon run number
   if (RunNumber >= 10000){
@@ -35,12 +35,12 @@ void SHMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./raw/../raw.copiedtotape");
   pathList.push_back("./cache");
 
-  const char* ROOTFileNamePattern = "ROOTfiles/Calib/Hodo/SHMS_Hodo_Calib_Pt2_%d_%d.root";
+  //const char* RunFileNamePattern = "raw/coin_all_%05d.dat";
+  const char* ROOTFileNamePattern = "ROOTfiles/Analysis/HeeP/Kaon_SHMS_replay_production_%d_%d.root";
+
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
-  gHcParms->AddString("g_ctp_database_filename", Form("DBASE/COIN/DB_KaonLT/SHMS_HodoCalib/standard_%d.database", RunNumber));
-
-  // gHcParms->AddString("g_ctp_database_filename","DBASE/COIN/standard_KaonLTCalib.database");
+  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_KaonLTCalib.database");
   gHcParms->Load(gHcParms->GetString("g_ctp_database_filename"), RunNumber);
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
@@ -117,6 +117,13 @@ void SHMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pscaler->SetUseFirstEvent(kTRUE);
   gHaEvtHandlers->Add(pscaler);
 
+  //Add SHMS event handler for helicity scalers
+  THcHelicityScaler *phelscaler = new THcHelicityScaler("P", "Hall C helicity scaler");
+  //phelscaler->SetDebugFile("PHelScaler.txt");
+  phelscaler->SetROC(8);
+  phelscaler->SetUseFirstEvent(kTRUE);
+  gHaEvtHandlers->Add(phelscaler);
+
   //=:=:=
   // HMS 
   //=:=:=
@@ -180,7 +187,9 @@ void SHMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   // Add Physics Module to calculate primary (scattered electrons) beam kinematics
   THcPrimaryKine* hkin_primary = new THcPrimaryKine("H.kin.primary", "HMS Single Arm Kinematics", "H", "H.rb");
+  THcPrimaryKine* pkin_primary = new THcPrimaryKine("P.kin.primary", "SHMS Single Arm Kinematics", "P", "P.rb");
   gHaPhysics->Add(hkin_primary);
+  gHaPhysics->Add(pkin_primary);
   // Add Physics Module to calculate secondary (scattered hadrons) beam kinematics
   THcSecondaryKine* pkin_secondary = new THcSecondaryKine("P.kin.secondary", "SHMS Single Arm Kinematics", "P", "H.kin.primary");
   gHaPhysics->Add(pkin_secondary);
@@ -203,8 +212,6 @@ void SHMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // const char* elecArmName, const char* coinname) :
   THcCoinTime* coinTime = new THcCoinTime("CTime", "Coincidende Time Determination", "P", "H", "T.coin");
   gHaPhysics->Add(coinTime);
-  //Add RF physics module THcRFTime::THcRFTime (const char *name, const char* description, const char* hadArmName, 
-  // const char* elecArmName, const char* RFname) :
   THcRFTime* RFTime = new THcRFTime("RFTime", "RF Time Determination", "P", "H", "T.coin");
   gHaPhysics->Add(RFTime);
 
@@ -218,7 +225,7 @@ void SHMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Set up the analyzer - we use the standard one,
   // but this could be an experiment-specific one as well.
   // The Analyzer controls the reading of the data, executes
-  // tests/cuts, loops over Apparatus's and PhysicsModules,
+  // tests/cuts, loops over Acpparatus's and PhysicsModules,
   // and executes the output routines.
   THcAnalyzer* analyzer = new THcAnalyzer;
 
@@ -248,15 +255,29 @@ void SHMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   analyzer->SetEvent(event);
   // Set EPICS event type
-  analyzer->SetEpicsEvtType(181);
+  analyzer->SetEpicsEvtType(180);
   // Define crate map
   analyzer->SetCrateMapFileName("MAPS/db_cratemap.dat");
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file+
-  analyzer->SetOdefFile("DEF-files/CALIBRATION/SHMS_Calib.def");
+
+  analyzer->SetOdefFile("UTIL_KAONLT/config/DEF-files/shms_heep.def");
   // Define cuts file
-  analyzer->SetCutFile("DEF-files/CALIBRATION/SHMS_Calib_cuts.def");  // optional
+  //analyzer->SetCutFile("UTIL_KAONLT/config/DEF-files/HeePSing_HMS_Cuts.def");  // optional
+  analyzer->SetCutFile("UTIL_KAONLT/config/DEF-files/HeePSing_SHMS_Cuts.def");  // optional
+
+  // This
+  //analyzer->SetOdefFile("DEF-files/PRODUCTION/HeepSingles_Production.def");
+  // Define cuts file
+  // This
+  //analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/HeepSingles_Production_Cuts.def");  // optional
+  // File to record accounting information for cuts
+  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Analysis/HeeP/summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.
   analyzer->Process(run);
+  // Create report file from template
+  //analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/coin_production_new.template",
+  //			 Form("REPORT_OUTPUT/COIN/PRODUCTION/replay_coin_production_%d_%d.report", RunNumber, MaxEvent));  // optional
+
 }

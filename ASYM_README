@@ -1,0 +1,33 @@
+Beam Single-Spin Asymmetry Analysis
+
+Alicia Postuma
+University of Regina
+Dec 2022
+
+
+This file outlines the scripts used for asymmetry analysis. The main changes include:
+- The replay script records the helicity state of each event
+- The report file contains detector efficiencies for each helicity state independantly
+- The analysis script splits output into positive and negative helicity trees
+
+To be added later:
+- Scripts for PID, t-binning, the actual asymmetry calculation, and fitting
+- Analysis batch script (doesn't work yet)
+
+
+
+
+REPLAY
+hcana script: SCRIPTS/COIN/PRODUCTION/FullReplay_Helicity.C
+cut file: DEF-files/PRODUCTION/KaonLT_DEF/Offline_Physics_Helicity.def
+report output: TEMPLATES/COIN/PRODUCTION/KaonLT_TEMP/KaonLT_Helicity_Physics_Coin.template
+
+ANALYSIS
+in my branch of UTIL_KAONLT
+script: UTIL_KAONLT/scripts/asymmetry/KaonLT/pion_start_helicity.py
+
+BATCH MODE
+in my branch of UTIL_BATCH
+batch script: UTIL_BATCH/batch_scripts/run_batch_FullReplay_Helicity.sh
+analysis script:  UTIL_BATCH/Analysis_Scripts/FullReplay_KaonLT_Helicity.sh
+uses runlists in: UTIL_BATCH/InputRunLists/KaonLT_2018_2019/helicity 

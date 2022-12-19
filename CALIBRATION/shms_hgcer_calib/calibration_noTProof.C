@@ -496,16 +496,21 @@ void calibration::Terminate(Int_t RunNumStart, Int_t RunNumEnd)
 				Gauss2->SetParameter(5, 3.0);
 				if(ipmt == 2)
 				{
-					Gauss2->SetParameter(1, 3.0);
-					Gauss2->SetParameter(4, 5.0);
+					Gauss2->SetParameter(1, 2.0);
+					Gauss2->SetParameter(4, 4.0);
 				}
 				Gauss2->SetParLimits(0, 0.0,PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0]))*1.1); //added *1.1 -NH
 				Gauss2->SetParLimits(1, 1.0, 8.0); 
-				Gauss2->SetParLimits(2, 0.5 , 4.0);
+				Gauss2->SetParLimits(2, 0.3 , 5.0);
 				Gauss2->SetParLimits(3, 0.0, PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[1]))*1.1); //added *1.1 -NH
-				Gauss2->SetParLimits(4, 4, 17);	 
-				Gauss2->SetParLimits(5, 0.5, 4.0);
-				PulseInt_quad[iquad][ipmt]->Fit("Gauss2","RQN");				 
+				Gauss2->SetParLimits(4, 3, 10);	 
+				Gauss2->SetParLimits(5, 0.3, 5.0);
+				if(ipmt == 2)
+				{
+				        Gauss2->SetParLimits(1, 0.5, 4.0);
+					Gauss2->SetParLimits(4, 2.0, 7.0);
+				}
+				PulseInt_quad[iquad][ipmt]->Fit(Gauss2,"RQN");				 
 				double x1 = Gauss2->GetParameter(1);
 				double x2 = Gauss2->GetParameter(4);
 				xpeaks[0] = x1;
@@ -576,7 +581,7 @@ void calibration::Terminate(Int_t RunNumStart, Int_t RunNumEnd)
 				if (xpeaks[0] > 4.0 && PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])) > 40) RChi2[ipad-1] = Gauss2->GetChisquare()/Gauss2->GetNDF(); 
 				if (xpeaks[0] > 4.0 && PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])) > 40) mean_err[ipad-1] = Gauss2->GetParError(1);
 		
-				if (PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])) > 1500)
+				if (PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])) > 500)
 				{
 					// Set Boolean of whether fit is good or not here, based upon reduced Chi2 of the fit
 					TPaveText *BadFitText = new TPaveText (0.65, 0.15, 0.85, 0.2, "NDC");	
@@ -606,6 +611,10 @@ void calibration::Terminate(Int_t RunNumStart, Int_t RunNumEnd)
 						GoodFit[ipad-1] = kTRUE;
 						GoodFitText->Draw("same");
 					} 
+					if (ipmt == 2)
+					{
+					        GoodFit[ipad-1] = kTRUE;
+					}
 				}
 				ipad++;
 			}
@@ -689,8 +698,8 @@ void calibration::Terminate(Int_t RunNumStart, Int_t RunNumEnd)
 		Gauss4Poiss2->SetParLimits(10, 4 - 3*xscaleErr, 4 + 3*xscaleErr);
 		if(ipmt == 3) 
 		{
-			Gauss4Poiss2->SetParLimits(1, 1 - 2*xscaleErr, 1 + 2*xscaleErr);
-			Gauss4Poiss2->SetParLimits(4, 2 - 2*xscaleErr, 4 + 2*xscaleErr);
+		  //	Gauss4Poiss2->SetParLimits(1, 1 - 2*xscaleErr, 1 + 2*xscaleErr);
+		  //	Gauss4Poiss2->SetParLimits(4, 2 - 2*xscaleErr, 4 + 2*xscaleErr);
 		}
 			
 		//Constraints of sigma
@@ -701,13 +710,13 @@ void calibration::Terminate(Int_t RunNumStart, Int_t RunNumEnd)
 			
 		if(ipmt == 2)
 		{	
-			Gauss4Poiss2->SetParLimits(2, 0.02, 1.0);
+		  //	Gauss4Poiss2->SetParLimits(2, 0.02, 1.0);
 		}
 		if(ipmt == 3)
 		{	
-			Gauss4Poiss2->SetParLimits(2, 0.02, 0.9);
-			Gauss4Poiss2->SetParLimits(5, 0.04, 1.0);
-			Gauss4Poiss2->SetParLimits(11, 0.04, 3.0);
+		  //	Gauss4Poiss2->SetParLimits(2, 0.02, 0.9);
+		  //	Gauss4Poiss2->SetParLimits(5, 0.04, 1.0);
+		  //	Gauss4Poiss2->SetParLimits(11, 0.04, 3.0);
 		}
 		// Clone the histogram before fitting it	 
 		scaled_clone = (TH1F*)fscaled[ipmt]->Clone("scaled_clone");	 

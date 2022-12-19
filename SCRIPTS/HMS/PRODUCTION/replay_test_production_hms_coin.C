@@ -1,5 +1,11 @@
 void replay_test_production_hms_coin(Int_t RunNumber=0, Int_t MaxEvent=0, Int_t FirstEvent=0) {
 
+  // WARNING
+  // SJDK 20/05/22
+  // This file uses a database file that has been archived
+  // If this file is no longer in use or does not get updated, it will be deleted
+  // WARNING
+
   // Get RunNumber and MaxEvent if not provided.
   if(RunNumber == 0) {
     cout << "Enter a Run Number (-1 to exit): ";

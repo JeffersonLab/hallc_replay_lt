@@ -12,7 +12,10 @@ SHMS_CentralPathLen = 18.1*100   ; 18.1 m (or 1810 cm)
 ;p_recon_coeff_filename = "DATFILES/shms-2019-newopt-Jan19.dat"
 
 ; New SHMS Optics by Holly from August 2020
-p_recon_coeff_filename = "DATFILES/hsv_fit_global.dat" 
+; p_recon_coeff_filename = "DATFILES/hsv_fit_global.dat" 
 
 ; fall 2019 defocused tune -> Q2 current set to 120% of nominal tune
 ; p_recon_coeff_filename = "DATFILES/shms-2017-26cm-monte_quads_p18_q2_120_rec.dat"
+
+; SHMS Optics April 2020 (suggested by M. Jones for PION-LT 2021)
+p_recon_coeff_filename = "DATFILES/shms_newfit_xptar_april2020.dat"

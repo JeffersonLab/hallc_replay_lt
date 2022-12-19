@@ -15,14 +15,23 @@ void replay_production_shms_coin (Int_t RunNumber = 0, Int_t MaxEvent = 0, Int_t
     }
   }
 
-  // Create file name patterns.
-  const char* RunFileNamePattern = "shms_all_%05d.dat";
-  vector<TString> pathList;
+  const char* RunFileNamePattern;
+  // Create file name patterns. Base this upon run number
+  if (RunNumber >= 10000){ // PionLT 2021/2022 data
+    RunFileNamePattern = "shms_all_%05d.dat";
+  }
+  else if (RunNumber < 10000){ // PionLT 2019 and KaonLT
+    RunFileNamePattern = "coin_all_%05d.dat";
+  }
+  vector<TString> pathList;  
   pathList.push_back(".");
   pathList.push_back("./raw");
-  pathList.push_back("./raw.volatile");
+  pathList.push_back("./raw.PionLT");
+  pathList.push_back("./raw_KaonLT");
   pathList.push_back("./raw/../raw.copiedtotape");
-  pathList.push_back("./cache");
+  pathList.push_back("./LUSTRE_LINKS/cache");
+  //pathList.push_back("./cache_kaonlt");
+  //pathList.push_back("./raw.volatile");
 
   const char* ROOTFileNamePattern = "ROOTfiles/Analysis/50k/shms_coin_replay_production_%d_%d.root";
   
@@ -50,37 +59,30 @@ void replay_production_shms_coin (Int_t RunNumber = 0, Int_t MaxEvent = 0, Int_t
   SHMS->AddEvtType(6);
   SHMS->AddEvtType(7);
   gHaApps->Add(SHMS);
-  
-  
+    
   // Add Noble Gas Cherenkov to SHMS apparatus
   THcCherenkov* ngcer = new THcCherenkov("ngcer", "Noble Gas Cherenkov");
   SHMS->AddDetector(ngcer);
-  
   // Add drift chambers to SHMS apparatus
   THcDC* dc = new THcDC("dc", "Drift Chambers");
   SHMS->AddDetector(dc);
-  
   // Add hodoscope to SHMS apparatus
   THcHodoscope* hod = new THcHodoscope("hod", "Hodoscope");
   SHMS->AddDetector(hod);
-  
   // Add Heavy Gas Cherenkov to SHMS apparatus
   THcCherenkov* hgcer = new THcCherenkov("hgcer", "Heavy Gas Cherenkov");
-  SHMS->AddDetector(hgcer);
-  
+  SHMS->AddDetector(hgcer);  
   // Add Aerogel Cherenkov to SHMS apparatus
   THcAerogel* aero = new THcAerogel("aero", "Aerogel");
   SHMS->AddDetector(aero);
   // Add calorimeter to SHMS apparatus
-  
   THcShower* cal = new THcShower("cal", "Calorimeter");
   SHMS->AddDetector(cal);
-
   // Add trigger apparatus
   THaApparatus* TRG = new THcTrigApp("T", "TRG");
   gHaApps->Add(TRG);
+
   // Add trigger detector to trigger apparatus
-  
   THcTrigDet* coin = new THcTrigDet("coin", "Coincidence Trigger Information");
   coin->SetEvtType(1);
   coin->AddEvtType(2);
@@ -94,34 +96,26 @@ void replay_production_shms_coin (Int_t RunNumber = 0, Int_t MaxEvent = 0, Int_t
   // Calculate reaction point
   THcReactionPoint* prp = new THcReactionPoint("P.react", "SHMS reaction point", "P", "P.rb");
   gHaPhysics->Add(prp);
-  
   // Calculate extended target corrections
-  THcExtTarCor* pext = new THcExtTarCor("P.extcor", "HMS extended target corrections", "P", "P.react");
+  THcExtTarCor* pext = new THcExtTarCor("P.extcor", "SHMS extended target corrections", "P", "P.react");
   gHaPhysics->Add(pext);
-  
   // Calculate golden track quantites
   THaGoldenTrack* gtr = new THaGoldenTrack("P.gtr", "SHMS Golden Track", "P");
   gHaPhysics->Add(gtr);
-  
   // Calculate primary (scattered beam - usually electrons) kinematics
   THcPrimaryKine* kin = new THcPrimaryKine("P.kin", "SHMS Single Arm Kinematics", "P", "P.rb");
   gHaPhysics->Add(kin);
-  
   // Calculate the hodoscope efficiencies
   THcHodoEff* peff = new THcHodoEff("phodeff", "SHMS hodo efficiency", "P.hod");
   gHaPhysics->Add(peff);   
-  
   // Add event handler for prestart event 125.
   THcConfigEvtHandler* ev125 = new THcConfigEvtHandler("HC", "Config Event type 125");
   gHaEvtHandlers->Add(ev125);
-  
   // Add event handler for EPICS events
   THaEpicsEvtHandler* hcepics = new THaEpicsEvtHandler("epics", "HC EPICS event type 182");
   gHaEvtHandlers->Add(hcepics);
-  
   // Add event handler for scaler events
   THcScalerEvtHandler* pscaler = new THcScalerEvtHandler("P", "Hall C scaler event type 1");
-  
   pscaler->AddEvtType(1);
   pscaler->AddEvtType(4);
   pscaler->AddEvtType(5);
@@ -151,12 +145,10 @@ void replay_production_shms_coin (Int_t RunNumber = 0, Int_t MaxEvent = 0, Int_t
   // tests/cuts, loops over Acpparatus's and PhysicsModules,
   // and executes the output routines.
   THcAnalyzer* analyzer = new THcAnalyzer;
-
   // A simple event class to be output to the resulting tree.
   // Creating your own descendant of THaEvent is one way of
   // defining and controlling the output.
   THaEvent* event = new THaEvent;
-
   // Define the run(s) that we want to analyze.
   // We just set up one, but this could be many.
   THcRun* run = new THcRun( pathList, Form(RunFileNamePattern, RunNumber) );
@@ -177,7 +169,7 @@ void replay_production_shms_coin (Int_t RunNumber = 0, Int_t MaxEvent = 0, Int_t
                               // 2 = counter is event number
 
   analyzer->SetEvent(event);
-  analyzer->SetMarkInterval(5000);
+  analyzer->SetMarkInterval(5000); // Print out every 5000 events
   // Set EPICS event type
   analyzer->SetEpicsEvtType(182);
   // Define crate map

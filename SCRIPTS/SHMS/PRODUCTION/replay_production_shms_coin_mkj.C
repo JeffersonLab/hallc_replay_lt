@@ -32,9 +32,10 @@ void replay_production_shms_coin_mkj (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
   // Load parameters for SHMS trigger configuration
-  gHcParms->Load("PARAM/TRIG/tcoin_mkj.param");
+  gHcParms->Load("PARAM/TRIG/tshms.param");
   // Load fadc debug parameters
   gHcParms->Load("PARAM/SHMS/GEN/p_fadc_debug.param");
+  gHcParms->Load("PARAM/SHMS/GEN/mkj.param");
 
   // Load the Hall C detector map
   gHcDetectorMap = new THcDetectorMap();
@@ -167,7 +168,7 @@ void replay_production_shms_coin_mkj (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Define DEF-file
   analyzer->SetOdefFile("DEF-files/PRODUCTION/mkj.def");
   // Define cuts file
-  analyzer->SetCutFile("DEF-files/SHMS/PRODUCTION/CUTS/mkj_cuts.def");  // optional
+  analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/mkj_cuts.def");  // optional
   // File to record accounting information for cuts
   analyzer->SetSummaryFile(Form("REPORT_OUTPUT/SHMS/PRODUCTION/summary_coin_mkj_production_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.

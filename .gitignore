@@ -52,14 +52,19 @@ PARAM/HMS/BCM/CALIB/
 PARAM/HMS/BCM/CALIB/*
 DBASE/COIN/KaonLT_Calib_MKJTest/PedDefault_0_Files/
 UTIL_BATCH/
+UTIL_BATCH
 UTIL_KAONLT/
 UTIL_PION/
+UTIL_PION
 UTIL_PROTON/
 hcswif
 PARAM/HMS/BCM/CALIB/
 farm_out/
 
 # Symbolic links
+online
 hcana
 scratch
 ROOTfilesPion
+runlist.csv
+cache_kaonlt

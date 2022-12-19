@@ -38,7 +38,7 @@ void SHMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   const char* ROOTFileNamePattern = "ROOTfiles/Calib/Hodo/SHMS_Hodo_Calib_Pt2_%d_%d.root";
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
-  gHcParms->AddString("g_ctp_database_filename", Form("DBASE/COIN/SHMS_HodoCalib/standard_%d.database", RunNumber));
+  gHcParms->AddString("g_ctp_database_filename", Form("DBASE/COIN/DB_KaonLT/SHMS_HodoCalib/standard_%d.database", RunNumber));
 
   // gHcParms->AddString("g_ctp_database_filename","DBASE/COIN/standard_KaonLTCalib.database");
   gHcParms->Load(gHcParms->GetString("g_ctp_database_filename"), RunNumber);

@@ -19,8 +19,8 @@ Tracking_master  ALL_HMS_NO_EDTM
 Block: Reconstruct
 #include "DEF-files/Archive/HMS/PRODUCTION/CUTS/hstackana_reconstruct_cuts.def"
 hcut_cer_elec1       	  H.cer.npeSum>3
-Reconstruct_master hcut_cer_elec1
+Reconstruct_master  ALL_HMS_NO_EDTM
 
 Block: Physics
 #include "DEF-files/Archive/HMS/PRODUCTION/CUTS/hstackana_physics_cuts.def"
-Physics_master hcut_cer_elec1
+Physics_master  ALL_HMS_NO_EDTM

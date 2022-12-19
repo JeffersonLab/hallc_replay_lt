@@ -398,10 +398,10 @@ void makeHistos ()
     //shms
     for(Int_t iPmt = 0; iPmt < cerNpmts; iPmt++)
     {
-        hgcerAdcTdcDiffTime_Hist[iPmt] = new TH1D(Form("P.hgcer.goodAdcTdcDiffTime_Pmt%d", iPmt+1), Form("H.cer.goodAdcTdcDiffTime_Pmt%d", iPmt+1), 1500, 0, 1500);
-        ngcerAdcTdcDiffTime_Hist[iPmt] = new TH1D(Form("P.ngcer.goodAdcTdcDiffTime_Pmt%d", iPmt+1), Form("H.cer.goodAdcTdcDiffTime_Pmt%d", iPmt+1), 1500, 0, 1500);
-        hgcerAdcMult_Hist[iPmt] = new TH1D(Form("P.hgcer.goodAdcMult_Pmt%d", iPmt+1), Form("H.cer.goodAdcMult_Pmt%d", iPmt+1), 10, 0, 10);
-        ngcerAdcMult_Hist[iPmt] = new TH1D(Form("P.ngcer.goodAdcMult_Pmt%d", iPmt+1), Form("H.cer.goodAdcMult_Pmt%d", iPmt+1), 10, 0, 10);
+        hgcerAdcTdcDiffTime_Hist[iPmt] = new TH1D(Form("P.hgcer.goodAdcTdcDiffTime_Pmt%d", iPmt+1), Form("P.hgcer.goodAdcTdcDiffTime_Pmt%d", iPmt+1), 1500, 0, 1500);
+        ngcerAdcTdcDiffTime_Hist[iPmt] = new TH1D(Form("P.ngcer.goodAdcTdcDiffTime_Pmt%d", iPmt+1), Form("P.ngcer.goodAdcTdcDiffTime_Pmt%d", iPmt+1), 400, -200, 200);
+        hgcerAdcMult_Hist[iPmt] = new TH1D(Form("P.hgcer.goodAdcMult_Pmt%d", iPmt+1), Form("P.hgcer.goodAdcMult_Pmt%d", iPmt+1), 10, 0, 10);
+        ngcerAdcMult_Hist[iPmt] = new TH1D(Form("P.ngcer.goodAdcMult_Pmt%d", iPmt+1), Form("P.ngcer.goodAdcMult_Pmt%d", iPmt+1), 10, 0, 10);
     }
     
     //aerogel 

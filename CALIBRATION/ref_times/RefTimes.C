@@ -4,7 +4,7 @@
     
     This is a script for creating referance time time plots, both the overall and detector specific.
     The intent is for an expert to consault the plots while manually setting the referance times.
-    This script also automatically applies a multiplicity cut for each variable (where applicable) which is simply be hard coded, this should be fine though.
+    This script also automatically applies a multiplicity cut for each variable (where applicable) which is simply hard coded, this should be fine though.
     Also this script assumes running with coin daq, for use in singles daq some alteration is required. 
     
 */

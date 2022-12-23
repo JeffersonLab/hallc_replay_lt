@@ -148,7 +148,7 @@ KLT_Non_Scaler_EDTM_Live_Time	 	     :    {edtm_accepted.npassed/(P.EDTM.scaler+
 
 EDTM Live Time is corrected with threshold current cut. Added by AU on 20/12/22
 
-KLT_Non_Scaler_EDTM_Live_Time_Corr           :    {((edtm_accepted.npassed/(P.EDTM.scaler+0.0001):%8.4f)-(1-((H.BCM1.scalerCharge/H.1MHz.scalerTime:%.3f)/(H.BCM1.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f)))/((H.BCM1.scalerCharge/H.1MHz.scalerTime:%.3f)/(H.BCM1.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f)))} +- {(sqrt((((P.EDTM.scaler)*(edtm_accepted.npassed))-((edtm_accepted.npassed)*(edtm_accepted.npassed))) / ((P.EDTM.scaler)*(P.EDTM.scaler)*(P.EDTM.scaler)))):%8.4f}
+KLT_Non_Scaler_EDTM_Live_Time_Corr           :    {(((edtm_accepted.npassed / (P.EDTM.scaler+0.0001))-(1-((H.BCM1.scalerCharge / (H.1MHz.scalerTime)) / (H.BCM1.scalerChargeCut / (H.1MHz.scalerTimeCut))))) / ((H.BCM1.scalerCharge / (H.1MHz.scalerTime))/(H.BCM1.scalerChargeCut / (H.1MHz.scalerTimeCut)))):%8.4f} +- {(sqrt((((P.EDTM.scaler)*(edtm_accepted.npassed))-((edtm_accepted.npassed)*(edtm_accepted.npassed))) / ((P.EDTM.scaler)*(P.EDTM.scaler)*(P.EDTM.scaler)))):%8.4f}
 
 =:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
 =   Computer Live/Dead Times   =

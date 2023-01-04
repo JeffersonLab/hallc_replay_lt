@@ -56,8 +56,8 @@ void FullReplay_KaonLT_HeeP_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHcDetectorMap->Load("MAPS/COIN/DETEC/coin.map");
 
   // Load the BCM current params
-  //  const char* CurrentFileNamePattern = "PARAM/HMS/BCM/CALIB/bcmcurrent_%d.param";
-  //  gHcParms->Load(Form(CurrentFileNamePattern, RunNumber));
+  const char* CurrentFileNamePattern = "PARAM/HMS/BCM/CALIB/bcmcurrent_%d.param";
+  gHcParms->Load(Form(CurrentFileNamePattern, RunNumber));
 
   // Dec data
   //  gHaApps->Add(new Podd::DecData("D","Decoder raw data"));
@@ -90,8 +90,8 @@ void FullReplay_KaonLT_HeeP_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   THcShower* pcal = new THcShower("cal", "Calorimeter");
   SHMS->AddDetector(pcal);
   
-  // THcBCMCurrent* hbc = new THcBCMCurrent("H.bcm", "BCM current check");
-  // gHaPhysics->Add(hbc);
+  THcBCMCurrent* hbc = new THcBCMCurrent("H.bcm", "BCM current check");
+  gHaPhysics->Add(hbc);
 
   // Add rastered beam apparatus
   THaApparatus* pbeam = new THcRasteredBeam("P.rb", "Rastered Beamline");

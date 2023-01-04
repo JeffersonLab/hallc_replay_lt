@@ -1,4 +1,4 @@
-void SHMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
+void FullReplay_KaonLT_Luminosity(Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   // Get RunNumber and MaxEvent if not provided.
   if(RunNumber == 0) {
@@ -11,11 +11,10 @@ void SHMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
     cin >> MaxEvent;
     if(MaxEvent == 0) {
       cerr << "...Invalid entry\n";
-      exit;
+      //exit;
     }
   }
 
-  // Create file name patterns.
   const char* RunFileNamePattern;
   // Create file name patterns. Base this upon run number
   if (RunNumber >= 10000){
@@ -35,27 +34,27 @@ void SHMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./raw/../raw.copiedtotape");
   pathList.push_back("./cache");
 
-  const char* ROOTFileNamePattern = "ROOTfiles/Calib/Hodo/SHMS_Hodo_Calib_Pt2_%d_%d.root";
+  //const char* RunFileNamePattern = "raw/coin_all_%05d.dat";
+  const char* ROOTFileNamePattern = "ROOTfiles/Analysis/Lumi/Kaon_replay_luminosity_%d_%d.root";
+  
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
-  gHcParms->AddString("g_ctp_database_filename", Form("DBASE/COIN/DB_KaonLT/SHMS_HodoCalib/standard_%d.database", RunNumber));
-
-  // gHcParms->AddString("g_ctp_database_filename","DBASE/COIN/standard_KaonLTCalib.database");
+  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_KaonLT.database");
   gHcParms->Load(gHcParms->GetString("g_ctp_database_filename"), RunNumber);
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
   // Load params for COIN trigger configuration
-  gHcParms->Load("PARAM/TRIG/tcoin.param");
+  // gHcParms->Load("PARAM/TRIG/tcoin.param");
   // Load fadc debug parameters
   gHcParms->Load("PARAM/HMS/GEN/h_fadc_debug.param");
   gHcParms->Load("PARAM/SHMS/GEN/p_fadc_debug.param");
+  //Load params for BCM
+  const char* CurrentFileNamePattern = "PARAM/HMS/BCM/CALIB/bcmcurrent_%d.param";
+  gHcParms->Load(Form(CurrentFileNamePattern, RunNumber));
 
   // Load the Hall C detector map
   gHcDetectorMap = new THcDetectorMap();
   gHcDetectorMap->Load("MAPS/COIN/DETEC/coin.map");
-
-  // Dec data
-  gHaApps->Add(new Podd::DecData("D","Decoder raw data"));
 
   //=:=:=:=
   // SHMS 
@@ -69,6 +68,9 @@ void SHMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   SHMS->AddEvtType(6);
   SHMS->AddEvtType(7);
   gHaApps->Add(SHMS);
+  // Add Noble Gas Cherenkov to SHMS apparatus
+  //THcCherenkov* pngcer = new THcCherenkov("ngcer", "Noble Gas Cherenkov");
+  //SHMS->AddDetector(pngcer);
   // Add drift chambers to SHMS apparatus
   THcDC* pdc = new THcDC("dc", "Drift Chambers");
   SHMS->AddDetector(pdc);
@@ -85,15 +87,12 @@ void SHMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   THcShower* pcal = new THcShower("cal", "Calorimeter");
   SHMS->AddDetector(pcal);
 
-  // THcBCMCurrent* hbc = new THcBCMCurrent("H.bcm", "BCM current check");
-  // gHaPhysics->Add(hbc);
-
   // Add rastered beam apparatus
   THaApparatus* pbeam = new THcRasteredBeam("P.rb", "Rastered Beamline");
   gHaApps->Add(pbeam);
   // Add physics modules
   // Calculate reaction point
-  THcReactionPoint* prp = new THcReactionPoint("P.react", "SHMS reaction point", "P", "P.rb");
+  THaReactionPoint* prp = new THaReactionPoint("P.react", "SHMS reaction point", "P", "P.rb");
   gHaPhysics->Add(prp);
   // Calculate extended target corrections
   THcExtTarCor* pext = new THcExtTarCor("P.extcor", "HMS extended target corrections", "P", "P.react");
@@ -150,7 +149,7 @@ void SHMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHaApps->Add(hbeam);  
   // Add physics modules
   // Calculate reaction point
-  THcReactionPoint* hrp = new THcReactionPoint("H.react", "HMS reaction point", "H", "H.rb");
+  THaReactionPoint* hrp = new THaReactionPoint("H.react", "HMS reaction point", "H", "H.rb");
   gHaPhysics->Add(hrp);
   // Calculate extended target corrections
   THcExtTarCor* hext = new THcExtTarCor("H.extcor", "HMS extended target corrections", "H", "H.react");
@@ -161,6 +160,9 @@ void SHMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Calculate the hodoscope efficiencies
   THcHodoEff* heff = new THcHodoEff("hhodeff", "HMS hodo efficiency", "H.hod");
   gHaPhysics->Add(heff);
+  // Add BCM Current check
+  THcBCMCurrent* hbc = new THcBCMCurrent("H.bcm", "BCM current check");
+  gHaPhysics->Add(hbc);
 
   // Add event handler for scaler events
   THcScalerEvtHandler *hscaler = new THcScalerEvtHandler("H", "Hall C scaler event type 4");  
@@ -198,7 +200,16 @@ void SHMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   coin->SetEvtType(1);
   coin->AddEvtType(2);
   TRG->AddDetector(coin); 
- 
+
+  // THcHelicityScaler *helscaler = new THcHelicityScaler("HS", "Hall C helicity scalers"); 
+  // helscaler->SetROC(8);
+  // helscaler->SetUseFirstEvent(kTRUE);
+  // gHaEvtHandlers->Add(helscaler);
+  // // Add helicity detector to trigger apparatus
+  // THcHelicity* helicity = new THcHelicity("helicity","Helicity Detector");
+  // TRG->AddDetector(helicity);
+  // helicity->SetHelicityScaler(helscaler);
+  
   //Add coin physics module THcCoinTime::THcCoinTime (const char *name, const char* description, const char* hadArmName, 
   // const char* elecArmName, const char* coinname) :
   THcCoinTime* coinTime = new THcCoinTime("CTime", "Coincidende Time Determination", "P", "H", "T.coin");
@@ -218,7 +229,7 @@ void SHMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Set up the analyzer - we use the standard one,
   // but this could be an experiment-specific one as well.
   // The Analyzer controls the reading of the data, executes
-  // tests/cuts, loops over Apparatus's and PhysicsModules,
+  // tests/cuts, loops over Acpparatus's and PhysicsModules,
   // and executes the output routines.
   THcAnalyzer* analyzer = new THcAnalyzer;
 
@@ -247,16 +258,29 @@ void SHMSHodo_Calib_Coin_Pt2 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
                               // 2 = counter is event number
 
   analyzer->SetEvent(event);
+  analyzer->SetMarkInterval(10000);
   // Set EPICS event type
-  analyzer->SetEpicsEvtType(181);
+  analyzer->SetEpicsEvtType(180);
   // Define crate map
   analyzer->SetCrateMapFileName("MAPS/db_cratemap.dat");
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file+
-  analyzer->SetOdefFile("DEF-files/CALIBRATION/SHMS_Calib.def");
-  // Define cuts file
-  analyzer->SetCutFile("DEF-files/CALIBRATION/SHMS_Calib_cuts.def");  // optional
+  analyzer->SetOdefFile("DEF-files/PRODUCTION/Full_Replay_Luminosity.def");
+  // Define cuts file with different Aerogel trays
+  if (RunNumber >= 4965 && RunNumber <= 5334){
+   analyzer->SetCutFile("DEF-files/PRODUCTION/KaonLT_DEF/Aero_1p011/Offline_Luminosity_Cuts.def");
+  }
+  else if (RunNumber >= 7940 && RunNumber <= 8356){
+   analyzer->SetCutFile("DEF-files/PRODUCTION/KaonLT_DEF/Aero_1p011/Offline_Luminosity_Cuts.def");
+  }
+  else {
+   analyzer->SetCutFile("DEF-files/PRODUCTION/KaonLT_DEF/Offline_Luminosity_Cuts.def");
+  }
+  // File to record accounting information for cuts
+  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/summary_luminosity_%d_%d.report", RunNumber, MaxEvent)); // optional
   // Start the actual analysis.
   analyzer->Process(run);
+  // Create report file from template	       
+  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/KaonLT_TEMP/KaonLT_Offline_Luminosity.template", Form("REPORT_OUTPUT/Analysis/Lumi/Kaon_replay_luminosity_%d_%d.report", RunNumber, MaxEvent)); // optional}
 }

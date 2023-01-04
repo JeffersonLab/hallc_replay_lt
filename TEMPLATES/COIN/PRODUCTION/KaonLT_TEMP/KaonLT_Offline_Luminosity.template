@@ -1,10 +1,10 @@
-******************************
-******Author - Ali Usman******
-*****Created - May, 2022******
-******************************.
+***********************************
+******Author - Richard Trotta******
+*****Created - Sep, 2022***********
+***********************************
 
 =====================================
-=========== General Info ============
+======= Shift Worker Section ========
 =====================================
 
 KLT_Run_Number		:		{gen_run_number}
@@ -26,7 +26,7 @@ KLT_Total_Events	:		{GOOD_COIN_Events.npassed}
 
 Cut on BCM{gBCM_Current_threshold_index+1} current of {gBCM_Current_threshold} uA. Beam over threshold for {H.1MHz.scalerTimeCut:%.3f}s, or {((H.1MHz.scalerTimeCut/H.1MHz.scalerTime)*100.):%.3f}% of total run time.
 
-KLT_BCM_Cut_SHMS_Run_Length      :               {P.1MHz.scalerTimeCut:%.3f} sec                                  
+KLT_BCM_Cut_SHMS_Run_Length      :               {P.1MHz.scalerTimeCut:%.3f} sec
 KLT_BCM_Cut_HMS_Run_Length       :               {H.1MHz.scalerTimeCut:%.3f} sec
 
  With no cuts on BCM{gBCM_Current_threshold_index+1}.
@@ -70,6 +70,72 @@ KLT_Pre-Scaled_COIN_Triggers                  :		{(P.pTRIG5.scaler/gHC_ti_ps_fac
 KLT_COIN_Trigger_Rate                         :		{P.pTRIG5.scalerCut/P.1MHz.scalerTimeCut/1000.:%.3f} kHz
 KLT_Accepted_COIN_Triggers                    :		{pTRIG5_ROC2.npassed}
 
+***********
+* Beamline
+***********
+
+ With no cuts on BCM{gBCM_Current_threshold_index+1}.
+
+HMS BCM1 Current: {H.BCM1.scalerCharge/H.1MHz.scalerTime:%.3f} uA
+HMS BCM2 Current: {H.BCM2.scalerCharge/H.1MHz.scalerTime:%.3f} uA
+HMS BCM4A Current: {H.BCM4A.scalerCharge/H.1MHz.scalerTime:%.3f} uA
+HMS BCM4B Current: {H.BCM4B.scalerCharge/H.1MHz.scalerTime:%.3f} uA
+HMS BCM4C Current: {H.BCM4C.scalerCharge/H.1MHz.scalerTime:%.3f} uA
+HMS Unser Current: {H.Unser.scalerCharge/H.1MHz.scalerTime:%.3f} uA
+
+HMS BCM1  Charge: {H.BCM1.scalerCharge/1000.:%.3f} mC
+HMS BCM2  Charge: {H.BCM2.scalerCharge/1000.:%.3f} mC
+HMS BCM4A Charge: {H.BCM4A.scalerCharge/1000.:%.3f} mC
+HMS BCM4B Charge: {H.BCM4B.scalerCharge/1000.:%.3f} mC
+HMS BCM4C Charge: {H.BCM4C.scalerCharge/1000.:%.3f} mC
+HMS Unser Charge: {H.Unser.scalerCharge/1000.:%.3f} mC
+
+Cut on BCM{gBCM_Current_threshold_index+1} current of {gBCM_Current_threshold} uA. Beam over threshold for {H.1MHz.scalerTimeCut:%.3f}s, or {((H.1MHz.scalerTimeCut/H.1MHz.scalerTime)*100.):%.3f}% of total run time.
+HMS BCM1 Beam Cut Current: {H.BCM1.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA
+HMS BCM2 Beam Cut Current: {H.BCM2.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA
+HMS BCM4A Beam Cut Current: {H.BCM4A.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA
+HMS BCM4B Beam Cut Current: {H.BCM4B.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA
+HMS BCM4C Beam Cut Current: {H.BCM4C.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA
+HMS Unser Beam Cut Current: {H.Unser.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA
+
+HMS BCM1  Beam Cut Charge: {H.BCM1.scalerChargeCut/1000. :%.3f} mC
+HMS BCM2  Beam Cut Charge: {H.BCM2.scalerChargeCut/1000.:%.3f} mC
+HMS BCM4A Beam Cut Charge: {H.BCM4A.scalerChargeCut/1000.:%.3f} mC
+HMS BCM4B Beam Cut Charge: {H.BCM4B.scalerChargeCut/1000.:%.3f} mC
+HMS BCM4C Beam Cut Charge: {H.BCM4C.scalerChargeCut/1000.:%.3f} mC
+HMS Unser Beam Cut Charge: {H.Unser.scalerChargeCut/1000.:%.3f} mC
+
+ With no cuts on BCM{gBCM_Current_threshold_index+1}.
+
+SHMS BCM1 Current: {P.BCM1.scalerCharge/P.1MHz.scalerTime:%.3f} uA
+SHMS BCM2 Current: {P.BCM2.scalerCharge/P.1MHz.scalerTime:%.3f} uA
+SHMS BCM4A Current: {P.BCM4A.scalerCharge/P.1MHz.scalerTime:%.3f} uA
+SHMS BCM4B Current: {P.BCM4B.scalerCharge/P.1MHz.scalerTime:%.3f} uA
+SHMS BCM4C Current: {P.BCM4C.scalerCharge/P.1MHz.scalerTime:%.3f} uA
+SHMS Unser Current: {P.Unser.scalerCharge/P.1MHz.scalerTime:%.3f} uA
+
+SHMS BCM1  Charge: {P.BCM1.scalerCharge/1000.:%.3f} mC
+SHMS BCM2  Charge: {P.BCM2.scalerCharge/1000.:%.3f} mC
+SHMS BCM4A Charge: {P.BCM4A.scalerCharge/1000.:%.3f} mC
+SHMS BCM4B Charge: {P.BCM4B.scalerCharge/1000.:%.3f} mC
+SHMS BCM4C Charge: {P.BCM4C.scalerCharge/1000.:%.3f} mC
+SHMS Unser Charge: {P.Unser.scalerCharge/1000.:%.3f} mC
+
+Cut on BCM{gBCM_Current_threshold_index+1} current of {gBCM_Current_threshold} uA. Beam over threshold for {P.1MHz.scalerTimeCut:%.3f}s, or {((P.1MHz.scalerTimeCut/P.1MHz.scalerTime)*100.):%.3f}% of total run time.
+SHMS BCM1 Beam Cut Current: {P.BCM1.scalerChargeCut/P.1MHz.scalerTimeCut:%.3f} uA
+SHMS BCM2 Beam Cut Current: {P.BCM2.scalerChargeCut/P.1MHz.scalerTimeCut:%.3f} uA
+SHMS BCM4A Beam Cut Current: {P.BCM4A.scalerChargeCut/P.1MHz.scalerTimeCut:%.3f} uA
+SHMS BCM4B Beam Cut Current: {P.BCM4B.scalerChargeCut/P.1MHz.scalerTimeCut:%.3f} uA
+SHMS BCM4C Beam Cut Current: {P.BCM4C.scalerChargeCut/P.1MHz.scalerTimeCut:%.3f} uA
+SHMS Unser Beam Cut Current: {P.Unser.scalerChargeCut/P.1MHz.scalerTimeCut:%.3f} uA
+
+SHMS BCM1  Beam Cut Charge: {P.BCM1.scalerChargeCut/1000.:%.3f} mC
+SHMS BCM2  Beam Cut Charge: {P.BCM2.scalerChargeCut/1000.:%.3f} mC
+SHMS BCM4A Beam Cut Charge: {P.BCM4A.scalerChargeCut/1000.:%.3f} mC
+SHMS BCM4B Beam Cut Charge: {P.BCM4B.scalerChargeCut/1000.:%.3f} mC
+SHMS BCM4C Beam Cut Charge: {P.BCM4C.scalerChargeCut/1000.:%.3f} mC
+SHMS Unser Beam Cut Charge: {P.Unser.scalerChargeCut/1000.:%.3f} mC
+
 =:=:=:=:
 = EDTM =
 =:=:=:=:
@@ -88,7 +154,7 @@ KLT_Non_Scaler_EDTM_Live_Time_Corr           :    {(((edtm_accepted.npassed / (P
 =   Computer Live/Dead Times   =
 =:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
 
-Only reliable for COIN data as it's not prescaled. HMS and SHMS CPULT may not be accurate
+*New* work in progress calculations, might give numbers that make sense
 
 KLT_HMS_CPULT     	          :	     {((pTRIG3_ROC2.npassed)/(P.pTRIG3.scaler)):%8.4f} +- {(sqrt(((P.pTRIG3.scaler*pTRIG3_ROC2.npassed)-((pTRIG3_ROC2.npassed)*(pTRIG3_ROC2.npassed)))/(P.pTRIG3.scaler*P.pTRIG3.scaler*P.pTRIG3.scaler))):%8.4f}
 KLT_SHMS_CPULT		  	  :	     {((pTRIG1_ROC2.npassed)/(P.pTRIG1.scaler)):%8.4f} +- {(sqrt(((P.pTRIG1.scaler*pTRIG1_ROC2.npassed)-((pTRIG1_ROC2.npassed)*(pTRIG1_ROC2.npassed)))/(P.pTRIG1.scaler*P.pTRIG1.scaler*P.pTRIG1.scaler))):%8.4f}
@@ -110,6 +176,18 @@ KLT_SHMS_Prot_Coin_Trk_Should		:	{shmsScinCoinShouldp.npassed}
 KLT_SHMS_Prot_Coin_Trk_Did		:	{shmsScinCoinDiddp.npassed}
 KLT_SHMS_Prot_Sing_Trk_Should		:	{shmsScinSingShouldp.npassed}
 KLT_SHMS_Prot_Sing_Trk_Did		:	{shmsScinSingDidp.npassed}
+KLT_SHMS_Pion_ALL_Trk_Should		:	{shmsScinShouldpi.npassed}
+KLT_SHMS_Pion_ALL_Trk_Did		:	{shmsScinDidpi.npassed}
+KLT_SHMS_Pion_Coin_Trk_Should		:	{shmsScinCOINShouldpi.npassed}
+KLT_SHMS_Pion_Coin_Trk_Did		:	{shmsScinCOINDidpi.npassed}
+KLT_SHMS_Pion_Sing_Trk_Should		:	{shmsScinSINGShouldpi.npassed}
+KLT_SHMS_Pion_Sing_Trk_Did		:	{shmsScinSINGDidpi.npassed}
+KLT_SHMS_Elec_ALL_Trk_Should		:	{shmsScinShoulde.npassed}
+KLT_SHMS_Elec_ALL_Trk_Did		:	{shmsScinDide.npassed}
+KLT_SHMS_Elec_Coin_Trk_Should		:	{shmsScinCOINShoulde.npassed}
+KLT_SHMS_Elec_Coin_Trk_Did		:	{shmsScinCOINDide.npassed}
+KLT_SHMS_Elec_Sing_Trk_Should		:	{shmsScinSINGShoulde.npassed}
+KLT_SHMS_Elec_Sing_Trk_Did		:	{shmsScinSINGDide.npassed}
 KLT_HMS_Elec_ALL_Trk_Should		:	{HMSScinShoulde.npassed}
 KLT_HMS_Elec_ALL_Trk_Did		:	{HMSScinDide.npassed}
 KLT_HMS_Elec_Coin_Trk_Should		:	{HMSScinCoinShoulde.npassed}
@@ -125,6 +203,16 @@ KLT_SHMS_Prot_COIN_TRACK_EFF		:	   {shmsScinCoinDiddp.npassed / (shmsScinCoinSho
 
 KLT_SHMS_Prot_SING_TRACK_EFF		:	   {shmsScinSingDidp.npassed / (shmsScinSingShouldp.npassed+0.0001):%8.4f} +- {(sqrt((((shmsScinSingShouldp.npassed)*(shmsScinSingDidp.npassed))-((shmsScinSingDidp.npassed)*(shmsScinSingDidp.npassed))) / ((shmsScinSingShouldp.npassed)*(shmsScinSingShouldp.npassed)*(shmsScinSingShouldp.npassed)))):%8.4f}
 
+KLT_SHMS_Pion_ALL_TRACK_EFF		:	   {shmsScinDidpi.npassed / (shmsScinShouldpi.npassed+0.0001):%8.4f} +- {(sqrt((((shmsScinShouldpi.npassed)*(shmsScinDidpi.npassed))-((shmsScinDidpi.npassed)*(shmsScinDidpi.npassed))) / ((shmsScinShouldpi.npassed)*(shmsScinShouldpi.npassed)*(shmsScinShouldpi.npassed)))):%8.4f}
+
+KLT_SHMS_Pion_COIN_TRACK_EFF		:	   {shmsScinCOINDidpi.npassed / (shmsScinCOINShouldpi.npassed+0.0001):%8.4f} +- {(sqrt((((shmsScinCOINShouldpi.npassed)*(shmsScinCOINDidpi.npassed))-((shmsScinCOINDidpi.npassed)*(shmsScinCOINDidpi.npassed))) / ((shmsScinCOINShouldpi.npassed)*(shmsScinCOINShouldpi.npassed)*(shmsScinCOINShouldpi.npassed)))):%8.4f}
+
+KLT_SHMS_Pion_SING_TRACK_EFF		:	   {shmsScinSINGDidpi.npassed / (shmsScinSINGShouldpi.npassed+0.0001):%8.4f} +- {(sqrt((((shmsScinSINGShouldpi.npassed)*(shmsScinSINGDidpi.npassed))-((shmsScinSINGDidpi.npassed)*(shmsScinSINGDidpi.npassed))) / ((shmsScinSINGShouldpi.npassed)*(shmsScinSINGShouldpi.npassed)*(shmsScinSINGShouldpi.npassed)))):%8.4f}
+
+KLT_SHMS_Elec_ALL_TRACK_EFF	        :	   {shmsScinDide.npassed / (shmsScinShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((shmsScinShoulde.npassed)*(shmsScinDide.npassed))-((shmsScinDide.npassed)*(shmsScinDide.npassed))) / ((shmsScinShoulde.npassed)*(shmsScinShoulde.npassed)*(shmsScinShoulde.npassed)))):%8.4f}
+
+KLT_SHMS_Elec_SING_TRACK_EFF            :          {shmsScinSINGDide.npassed / (shmsScinSINGShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((shmsScinSINGShoulde.npassed)*(shmsScinSINGDide.npassed))-((shmsScinSINGDide.npassed)*(shmsScinSINGDide.npassed))) / ((shmsScinSINGShoulde.npassed)*(shmsScinSINGShoulde.npassed)*(shmsScinSINGShoulde.npassed)))):%8.4f}
+
 KLT_HMS_Elec_ALL_TRACK_EFF		:          {HMSScinDide.npassed / (HMSScinShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((HMSScinShoulde.npassed)*(HMSScinDide.npassed))-((HMSScinDide.npassed)*(HMSScinDide.npassed))) / ((HMSScinShoulde.npassed)*(HMSScinShoulde.npassed)*(HMSScinShoulde.npassed)))):%8.4f}
 
 KLT_HMS_Elec_COIN_TRACK_EFF		:	   {HMSScinCoinDide.npassed / (HMSScinCoinShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((HMSScinCoinShoulde.npassed)*(HMSScinCoinDide.npassed))-((HMSScinCoinDide.npassed)*(HMSScinCoinDide.npassed))) / ((HMSScinCoinShoulde.npassed)*(HMSScinCoinShoulde.npassed)*(HMSScinCoinShoulde.npassed)))):%8.4f}
@@ -139,19 +227,27 @@ KLT_HMS_Elec_SING_TRACK_EFF		:	   {HMSScinSingDide.npassed / (HMSScinSingShoulde
 * HGC Cerenkov
 ***************
 
-KLT_SHMS_Prot_HGC_Did		    :   {SHMSHGCDidp.npassed}
-KLT_SHMS_Prot_HGC_Should	    :	{SHMSHGCShouldp.npassed}
+KLT_SHMS_Pion_HGC_Did		    :   {SHMSHGCDidpi.npassed}
+KLT_SHMS_Pion_HGC_Should	    :	{SHMSHGCShouldpi.npassed}
 
-KLT_SHMS_HGC_Prot_Eff		      :   {SHMSHGCDidp.npassed/(SHMSHGCShouldp.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSHGCShouldp.npassed)*(SHMSHGCDidp.npassed))-((SHMSHGCDidp.npassed)*(SHMSHGCDidp.npassed))) / ((SHMSHGCShouldp.npassed)*(SHMSHGCShouldp.npassed)*(SHMSHGCShouldp.npassed)))):%8.4f}
+KLT_SHMS_HGC_Pion_Eff		      :   {SHMSHGCDidpi.npassed/(SHMSHGCShouldpi.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSHGCShouldpi.npassed)*(SHMSHGCDidpi.npassed))-((SHMSHGCDidpi.npassed)*(SHMSHGCDidpi.npassed))) / ((SHMSHGCShouldpi.npassed)*(SHMSHGCShouldpi.npassed)*(SHMSHGCShouldpi.npassed)))):%8.4f}
 
 **********
 * Aerogel
 **********
 
-KLT_SHMS_Prot_Aero_Did		    :   {SHMSAeroDidp.npassed}
-KLT_SHMS_Prot_Aero_Should	    :	{SHMSAeroShouldp.npassed}
+KLT_SHMS_Pion_ALL_Aero_Did		    :   {SHMSAeroDidpi.npassed}
+KLT_SHMS_Pion_ALL_Aero_Should		    :	{SHMSAeroShouldpi.npassed}
+KLT_SHMS_Pion_COIN_Aero_Did		    :	{SHMSAeroCOINDidpi.npassed}
+KLT_SHMS_Pion_COIN_Aero_Should		    :	{SHMSAeroCOINShouldpi.npassed}
+KLT_SHMS_Pion_SING_Aero_Did		    :	{SHMSAeroSINGDidpi.npassed}
+KLT_SHMS_Pion_SING_Aero_Should		    :	{SHMSAeroSINGShouldpi.npassed}
 
-KLT_SHMS_Aero_Prot_Eff		      :   {SHMSAeroDidp.npassed/(SHMSAeroShouldp.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSAeroShouldp.npassed)*(SHMSAeroDidp.npassed))-((SHMSAeroDidp.npassed)*(SHMSAeroDidp.npassed))) / ((SHMSAeroShouldp.npassed)*(SHMSAeroShouldp.npassed)*(SHMSAeroShouldp.npassed)))):%8.4f}
+KLT_SHMS_Aero_ALL_Pion_Eff		      :   {SHMSAeroDidpi.npassed / (SHMSAeroShouldpi.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSAeroShouldpi.npassed)*(SHMSAeroDidpi.npassed))-((SHMSAeroDidpi.npassed)*(SHMSAeroDidpi.npassed))) / ((SHMSAeroShouldpi.npassed)*(SHMSAeroShouldpi.npassed)*(SHMSAeroShouldpi.npassed)))):%8.4f}
+
+KLT_SHMS_Aero_COIN_Pion_Eff		      :	  {SHMSAeroCOINDidpi.npassed / (SHMSAeroCOINShouldpi.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSAeroCOINShouldpi.npassed)*(SHMSAeroCOINDidpi.npassed))-((SHMSAeroCOINDidpi.npassed)*(SHMSAeroCOINDidpi.npassed))) / ((SHMSAeroCOINShouldpi.npassed)*(SHMSAeroCOINShouldpi.npassed)*(SHMSAeroCOINShouldpi.npassed)))):%8.4f}
+
+KLT_SHMS_Aero_SING_Pion_Eff		      :	  {SHMSAeroSINGDidpi.npassed / (SHMSAeroSINGShouldpi.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSAeroSINGShouldpi.npassed)*(SHMSAeroSINGDidpi.npassed))-((SHMSAeroSINGDidpi.npassed)*(SHMSAeroSINGDidpi.npassed))) / ((SHMSAeroSINGShouldpi.npassed)*(SHMSAeroSINGShouldpi.npassed)*(SHMSAeroSINGShouldpi.npassed)))):%8.4f}
 
 =:=:=:=:=:=:=:=:=:=:=:=:=
 =      HMS Cerenkov     =
@@ -231,8 +327,8 @@ hD       Counts: {H.cal.stat_trksum4} eff : {H.cal.stat_hitsum4 / H.cal.stat_trk
 == Triggers Info ==
 ===================
 
-KLT_SHMS_Hodoscope_S1X_Triggers         :       {P.S1X.scalerCut}
-KLT_HMS_Hodoscope_S1X_Triggers          :       {H.S1X.scalerCut}
+KLT_SHMS_Hodoscope_S1X_Triggers		:	{P.S1X.scalerCut}
+KLT_HMS_Hodoscope_S1X_Triggers		:	{H.S1X.scalerCut}
 
-KLT_SHMS_Hodoscope_S1X_Rate         :    {(P.S1X.scalerCut/P.1MHz.scalerTimeCut)/1000.:%.3f} kHz
-KLT_HMS_Hodoscope_S1X_Rate          :    {(H.S1X.scalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz
+KLT_SHMS_Hodoscope_S1X_Rate         :     {(P.S1X.scalerCut/P.1MHz.scalerTimeCut)/1000.:%.3f} kHz 
+KLT_HMS_Hodoscope_S1X_Rate          :     {(H.S1X.scalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz 

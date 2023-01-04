@@ -1,8 +1,7 @@
-
 #################################
 ###### Author - Ali Usman #######
 ##### University of Regina ######
-###### Created - May, 2022 ######
+###### Created - May, 2021 ######
 #################################
 
 Block: RawDecode
@@ -39,7 +38,7 @@ ALL_SHMS_events_NOEDTM      T.coin.pEDTM_tdcTime == 0.0 && ALL_SHMS_events
 ALL_COIN_events_NO_EDTM     T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime == 0.0 && ALL_COIN_events
 ALL_events_NO_EDTM          T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime == 0.0 && ALL_events
 
-Decode_master ALL_events_NO_EDTM
+Decode_master ALL_events
 
 Block: Tracking
 
@@ -57,18 +56,23 @@ shmshodstarttime    P.hod.goodstarttime == 1
 
 shmsScinShould       shmsScinGood && shmsGoodBetanotrk && shmshodstarttime
 shmsCalTrkShouldp   P.cal.etotnorm < 0.7 &&  P.cal.etotnorm > 0.05
+shmsCalTrkShoulde   P.cal.etotnorm > 0.6 &&  P.cal.etotnorm < 1.6
 
 # SHMS Cer PID Numbers 
 
 shmsHGCTrkShouldp   P.hgcer.npeSum < 0.5
 shmsAeroTrknpep     P.aero.npeSum < 1.0
+shmsHGCTrkShouldpi             P.hgcer.npeSum > 1.5
+shmsHGCTrkShoulde             P.hgcer.npeSum > 1.5
+shmsAeroTrknpepi               P.aero.npeSum > 1.0
+shmsAeroTrknpee               P.aero.npeSum > 1.5
 
 # SHMS Aero Geom for n = All except 1.011
 
-shmsAeroxposalln            P.aero.xAtAero > -55 && P.aero.xAtAero < 55
-shmsAeroyposalln            P.aero.yAtAero > -50 && P.aero.yAtAero < 50
+shmsAeroxposalln           P.aero.xAtAero > -55 && P.aero.xAtAero < 55
+shmsAeroyposalln	   P.aero.yAtAero > -50 && P.aero.yAtAero < 50
 
-shmsAerogeomalln            shmsAeroxposalln && shmsAeroyposalln
+shmsAerogeomalln	   shmsAeroxposalln && shmsAeroyposalln
 
 shmsCerTrkShouldp     shmsHGCTrkShouldp && shmsAeroTrknpep 
 shmsScinShouldp       shmsScinShould && shmsCalTrkShouldp && shmsCerTrkShouldp
@@ -79,6 +83,24 @@ shmsScinDid         shmsScinShould && P.dc.ntrack > 0
 shmsScinDidp        shmsScinShouldp && P.dc.ntrack > 0
 shmsScinCoinDiddp   shmsScinCoinShouldp && P.dc.ntrack > 0
 shmsScinSingDidp    shmsScinSingShouldp && P.dc.ntrack > 0
+
+shmsCerTrkShouldpi      shmsHGCTrkShouldpi && shmsAeroTrknpepi 
+shmsScinShouldpi        shmsScinShould && shmsCalTrkShouldp && shmsCerTrkShouldpi
+shmsScinCOINShouldpi	shmsScinShouldpi && ALL_COIN_events
+shmsScinSINGShouldpi	shmsScinShouldpi && SHMS_event
+
+shmsScinDidpi           shmsScinShouldpi && P.dc.ntrack > 0
+shmsScinCOINDidpi	shmsScinCOINShouldpi && P.dc.ntrack > 0
+shmsScinSINGDidpi	shmsScinSINGShouldpi && P.dc.ntrack > 0
+
+shmsCerTrkShoulde       shmsHGCTrkShoulde && shmsAeroTrknpee 
+shmsScinShoulde         shmsScinShould && shmsCalTrkShoulde && shmsCerTrkShoulde
+shmsScinCOINShoulde	shmsScinShoulde && ALL_COIN_events
+shmsScinSINGShoulde	shmsScinShoulde && SHMS_event
+
+shmsScinDide            shmsScinShoulde && P.dc.ntrack > 0
+shmsScinCOINDide	shmsScinCOINShoulde && P.dc.ntrack > 0
+shmsScinSINGDide	shmsScinSINGShoulde && P.dc.ntrack > 0
 
 ##################
 ####    HMS    ###
@@ -107,12 +129,12 @@ HMSScinDide           HMSScinShoulde && H.dc.ntrack > 0
 HMSScinCoinDide	      HMSScinCoinShoulde && H.dc.ntrack > 0
 HMSScinSingDide	      HMSScinSingShoulde && H.dc.ntrack > 0
 
-HMS_GOOD_TRACK	      		     H.dc.ntrack > 0
-SHMS_GOOD_Track			     P.dc.ntrack > 0
+HMS_GOOD_TRACK	      		     H.dc.ntrack > 0 
+SHMS_GOOD_Track			     P.dc.ntrack > 0 
 GOOD_COIN_TRACK			     HMS_GOOD_TRACK && SHMS_GOOD_Track
 ALL_GOOD_Track_Events 		     HMS_GOOD_TRACK || SHMS_GOOD_Track
 
-Tracking_master ALL_GOOD_Track_Events
+Tracking_master ALL_events
 
 Block: Physics       
 
@@ -129,19 +151,23 @@ SHMScoindcindipole	P.dc.InsideDipoleExit == 1
 SHMSGEN		shmshodstarttime && SHMScoindcindipole && pcut_acceptance
 SHMSCalp	P.cal.etottracknorm < 0.7              
 
-SHMSAEROp       P.aero.npeSum  < 1.0
+SHMSAEROpi       P.aero.npeSum  > 1.0
 
-SHMSHGCShouldp		SHMSGEN && SHMSCalp && SHMSAEROp && shmsAerogeomalln
-SHMSHGCDidp		SHMSHGCShouldp && P.hgcer.npeSum < 0.5
+SHMSHGCShouldpi		SHMSGEN && SHMSCalp && SHMSAEROpi && shmsAerogeomalln
+SHMSHGCDidpi		SHMSHGCShouldpi && P.hgcer.npeSum < 0.5
 
 ###################
 ###  SHMS Aero  ###
 ###################
 
-SHMSHGCp      P.hgcer.npeSum  < 0.5
+SHMSHGCpi      P.hgcer.npeSum  > 1.5
 
-SHMSAeroShouldp         SHMSGEN && SHMSCalp && SHMSHGCp && shmsAerogeomalln 
-SHMSAeroDidp            SHMSAeroShouldp && P.aero.npeSum < 1.0
+SHMSAeroShouldpi         SHMSGEN && SHMSCalp && SHMSHGCpi && shmsAerogeomalln
+SHMSAeroDidpi            SHMSAeroShouldpi && P.aero.npeSum > 1.0
+SHMSAeroCOINShouldpi	 SHMSAeroShouldpi && ALL_COIN_events
+SHMSAeroCOINDidpi	 SHMSAeroCOINShouldpi && P.aero.npeSum > 1.0
+SHMSAeroSINGShouldpi	 SHMSAeroShouldpi && SHMS_event
+SHMSAeroSINGDidpi	 SHMSAeroSINGShouldpi && P.aero.npeSum > 1.0
 
 ##################
 ###   HMS CER  ###
@@ -161,8 +187,8 @@ HMSHGCCOINShoulde	 HMSHGCShouldelec && ALL_COIN_events
 HMSHGCSINGShoulde	 HMSHGCShouldelec && HMS_event
 
 HMSHGCDidelec            HMSHGCShouldelec && H.cer.npeSum > 1.5
-HMSHGCCOINDide		 HMSHGCCOINShoulde && H.cer.npeSum > 1.5
-HMSHGCSINGDide		 HMSHGCSINGShoulde && H.cer.npeSum > 1.5
+HMSHGCCOINDide		HMSHGCCOINShoulde && H.cer.npeSum > 1.5
+HMSHGCSINGDide		HMSHGCSINGShoulde && H.cer.npeSum > 1.5
 
 HMS_DELTA		 H.gtr.dp > -10 && H.gtr.dp < 10
 SHMS_DELTA		 P.gtr.dp > -15 && P.gtr.dp < 25
@@ -171,4 +197,4 @@ HMSCalCer                H.cal.etottracknorm > 0.5 && H.cer.npeSum > 0.5
 
 GOOD_COIN_Events	 HMS_DELTA && SHMS_DELTA && GOOD_COIN_TRACK && shmsAerogeomalln
 
-Physics_master GOOD_COIN_Events
+Physics_master ALL_events

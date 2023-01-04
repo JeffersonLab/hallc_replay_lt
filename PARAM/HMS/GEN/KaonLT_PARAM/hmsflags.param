@@ -15,8 +15,9 @@ hmomentum_factor = 0.000 ; leave 0 so it will have no effect
 ;  plots will be screwed up.
 hdelta_offset = 0.       ; (%)   hdelta_tar = hdelta_tar + hdelta_offset
 htheta_offset = 0.  ; (rad) hyp_tar = hyp_tar + htheta_offset
+;htheta_offset = -0.0027  ; (rad) Peter's vertical angle offset hyp_tar = hyp_tar + htheta_offset
 ;  hphi_offset   = -4.946337367e-3 ; (rad) hxp_tar = hxp_tar + hphi_offset
-hphi_offset = 0.
+hphi_offset = 0
 ;
 
 ;saturation correction flag
@@ -32,10 +33,30 @@ hphi_offset = 0.
 ; These offsets are determined from elastic ep data.
 ; central field  correction
 ;  hpcentral_offset = -0.00188 ; default??
-hpcentral_offset = 0.00 ;
-hthetacentral_offset = .0 ; (rad) 
+;hpcentral_offset = 0.00 ;
+;hthetacentral_offset = .0 ; (rad) 
 h_oopcentral_offset = 0.00  ; (rad)
 ; sets hpcentral = hpcentral * ( 1. + hpcentral_offset / 100. )
 ;      htheta_lab=htheta_lab + hthetacentral_offset/degree 
 
 hcer_debug_adc = 1
+
+;; These offsets are determined from elastic ep data.
+;; central field  correction
+  hpcentral_offset = 0.0      ; For no offset data    
+;;  hpcentral_offset = -0.0842 ; New offset for 3.6 &3.9 GeV data    
+::  hpcentral_offset = -0.2     ; just to test    
+;; hpcentral_offset = -0.2745   ; New offset for 4.5 GeV data   
+;;hpcentral_offset = -0.269   ; New offset for 4.9 GeV data   
+;hpcentral_offset = -0.287   ; New offset for 2.7 GeV data    
+;;
+hthetacentral_offset = 0.0   ; (rad)  For no offset data  
+;;hthetacentral_offset = 0.0  ; (rad)  New offset for 3.6 & 3.9 GeV 
+;;hthetacentral_offset = 0.0  ; (rad)  New offset for 4.5 GeV 
+;;hthetacentral_offset = 0.3e-3  ; (rad)  New offset for 2.7 & 4.9 GeV 
+; 
+; h_oopcentral_offset = 0.0   ; (rad)
+;; sets hpcentral = hpcentral * ( 1. + hpcentral_offset / 100. )
+;;      htheta_lab=htheta_lab + hthetacentral_offset/degree 
+
+

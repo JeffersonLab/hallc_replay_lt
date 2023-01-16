@@ -7,7 +7,12 @@
     This script also automatically applies a multiplicity cut for each variable (where applicable) which is simply hard coded, this should be fine though.
     Also this script assumes running with coin daq, for use in singles daq some alteration is required. 
     
+    can save to either PDF or Root File (or both), by changing bools below
 */
+/*******************************/
+//Save options
+static const bool SavePDF = true; 
+static const bool SaveRoot = true;
 
 /*******************************/
 //Detector specific Constants
@@ -238,18 +243,18 @@ void setBranchAddresses(TTree* DataTree)
 
             DataTree->SetBranchAddress(Form("P.hod.%s.Good%sAdcTdcDiffTime", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data()), &pHodAdcTdcDiffTime[iPlane][iSide]);
             DataTree->SetBranchAddress(Form("P.hod.%s.Good%sAdcMult", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data()), &pHodAdcMult[iPlane][iSide]);
-	}
+    }
     }
 
     for(Int_t iPlane = 0; iPlane < HodPlanes; iPlane++)
     {
         for(Int_t iSide = 0; iSide < HodSides1; iSide++)
-	{
+    {
            DataTree->SetBranchAddress(Form("H.hod.%s.%sAdcPulseTimeRaw", HodPlaneNames[iPlane].Data(), HodSideNames1[iSide].Data()), &hHodAdcPulseTimeRaw[iPlane][iSide]);
-	              DataTree->SetBranchAddress(Form("H.hod.%s.%sTdcTimeRaw", HodPlaneNames[iPlane].Data(), HodSideNames1[iSide].Data()), &hHodTdcTimeRaw[iPlane][iSide]);
+                  DataTree->SetBranchAddress(Form("H.hod.%s.%sTdcTimeRaw", HodPlaneNames[iPlane].Data(), HodSideNames1[iSide].Data()), &hHodTdcTimeRaw[iPlane][iSide]);
 
            DataTree->SetBranchAddress(Form("P.hod.%s.%sAdcPulseTimeRaw", HodPlaneNames[iPlane].Data(), HodSideNames1[iSide].Data()), &pHodAdcPulseTimeRaw[iPlane][iSide]);
-	              DataTree->SetBranchAddress(Form("P.hod.%s.%sTdcTimeRaw", HodPlaneNames[iPlane].Data(), HodSideNames1[iSide].Data()), &pHodTdcTimeRaw[iPlane][iSide]);
+                  DataTree->SetBranchAddress(Form("P.hod.%s.%sTdcTimeRaw", HodPlaneNames[iPlane].Data(), HodSideNames1[iSide].Data()), &pHodTdcTimeRaw[iPlane][iSide]);
         }
     }
 
@@ -279,7 +284,7 @@ void setBranchAddresses(TTree* DataTree)
         {
             DataTree->SetBranchAddress(Form("H.cal.%s.good%sAdcTdcDiffTime", hcalPlaneNames[iPlane].Data(), calSideNames[iSide].Data()), &hcalAdcTdcDiffTime[iPlane][iSide]);
             DataTree->SetBranchAddress(Form("H.cal.%s.good%sAdcMult", hcalPlaneNames[iPlane].Data(), calSideNames[iSide].Data()), &hcalAdcMult[iPlane][iSide]);
-	}
+    }
     }
     
     //shms calorimeter
@@ -361,12 +366,12 @@ void makeHistos ()
             {
                 hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt] = new TH1D(Form("H.hod.%s.%sAdcTdcDiffTimeRaw_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), Form("H.hod.%s.%sAdcTdcDiffTimeRaw_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), 2000, -1000, 1000);
                 hHodAdcMult_Hist[iPlane][iSide][iPmt] = new TH1D(Form("H.hod.%s.good%sAdcMult_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), Form("H.hod.%s.good%sAdcMult_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), 10, 0, 10);
-	    }
+        }
             for(Int_t iPmt = 0; iPmt < pHodbars[iPlane]; iPmt++)
             {
                 pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt] = new TH1D(Form("P.hod.%s.%sAdcTdcDiffTimeRaw_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), Form("P.hod.%s.%sAdcTdcDiffTimeRaw_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1),2000, -1000, 1000);
                 pHodAdcMult_Hist[iPlane][iSide][iPmt] = new TH1D(Form("P.hod.%s.%sAdcMult_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), Form("P.hod.%s.good%sAdcMult_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), 10, 0, 10);
-	    }
+        }
         }
     }
  
@@ -375,17 +380,17 @@ void makeHistos ()
         for(Int_t iSide = 0; iSide < HodSides1; iSide++)
         {
             for(Int_t iPmt = 0; iPmt < hHodbars[iPlane]; iPmt++)
-	    {
+        {
                 hHodAdcPulseTimeRaw_Hist[iPlane][iSide][iPmt] = new TH1D(Form("H.hod.%s.%sAdcPulseTimeRaw_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), Form("H.hod.%s.%sAdcPulseTimeRaw_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), 100000, 0, 100000);
                 hHodTdcTimeRaw_Hist[iPlane][iSide][iPmt] = new TH1D(Form("H.hod.%s.%sTdcTimeRaw_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), Form("H.hod.%s.%sTdcTimeRaw_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), 100000, 0, 100000);
             }
-	    for(Int_t iPmt = 0; iPmt < pHodbars[iPlane]; iPmt++)
-	    {
+        for(Int_t iPmt = 0; iPmt < pHodbars[iPlane]; iPmt++)
+        {
                 pHodAdcPulseTimeRaw_Hist[iPlane][iSide][iPmt] = new TH1D(Form("P.hod.%s.%sAdcPulseTimeRaw_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), Form("P.hod.%s.%sAdcPulseTimeRaw_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), 100000, 0, 100000);
                 pHodTdcTimeRaw_Hist[iPlane][iSide][iPmt] = new TH1D(Form("P.hod.%s.%sTdcTimeRaw_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), Form("P.hod.%s.%sTdcTimeRaw_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), 100000, 0, 100000);
             }
         }
-    }	
+    }    
 
     //Gas cherenkovs
     //hms
@@ -531,25 +536,25 @@ void fillHistos(TTree *DataTree)
                 { 
                     pHodAdcMult_Hist[iPlane][iSide][iPmt]->Fill(pHodAdcMult[iPlane][iSide][iPmt]);
                     pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->Fill(hHodTdcTimeRaw[iPlane][iSide][iPmt] - hHodAdcPulseTimeRaw[iPlane][iSide][iPmt]); //same here
-	      	} 
+              } 
             } 
         } 
 
         for(Int_t iPlane = 0; iPlane < HodPlanes; iPlane++)
-	{
+    {
             for(Int_t iSide = 0; iSide < HodSides1; iSide++)
             {
                 for(Int_t iPmt = 0; iPmt < hHodbars[iPlane]; iPmt++)
-		{
+        {
  
                     hHodAdcPulseTimeRaw_Hist[iPlane][iSide][iPmt]->Fill(hHodAdcPulseTimeRaw[iPlane][iSide][iPmt]);
-		    hHodTdcTimeRaw_Hist[iPlane][iSide][iPmt]->Fill(hHodTdcTimeRaw[iPlane][iSide][iPmt]);
-		}
+            hHodTdcTimeRaw_Hist[iPlane][iSide][iPmt]->Fill(hHodTdcTimeRaw[iPlane][iSide][iPmt]);
+        }
                 for(Int_t iPmt = 0; iPmt < pHodbars[iPlane]; iPmt++)
-                {		    
-		    pHodAdcPulseTimeRaw_Hist[iPlane][iSide][iPmt]->Fill(pHodAdcPulseTimeRaw[iPlane][iSide][iPmt]);
-		    pHodTdcTimeRaw_Hist[iPlane][iSide][iPmt]->Fill(pHodTdcTimeRaw[iPlane][iSide][iPmt]);
-		}
+                {            
+            pHodAdcPulseTimeRaw_Hist[iPlane][iSide][iPmt]->Fill(pHodAdcPulseTimeRaw[iPlane][iSide][iPmt]);
+            pHodTdcTimeRaw_Hist[iPlane][iSide][iPmt]->Fill(pHodTdcTimeRaw[iPlane][iSide][iPmt]);
+        }
             }
          }
 
@@ -560,7 +565,7 @@ void fillHistos(TTree *DataTree)
         { 
             cerAdcMult_Hist[iPmt]->Fill(cerAdcMult[iPmt]);
             //if(cerAdcMult[iPmt] > 0 ) 
-	      cerAdcTdcDiffTime_Hist[iPmt]->Fill(cerAdcTdcDiffTime[iPmt]);
+            cerAdcTdcDiffTime_Hist[iPmt]->Fill(cerAdcTdcDiffTime[iPmt]);
         } 
          
         //shms 
@@ -569,9 +574,9 @@ void fillHistos(TTree *DataTree)
             hgcerAdcMult_Hist[iPmt]->Fill(hgcerAdcMult[iPmt]);
             ngcerAdcMult_Hist[iPmt]->Fill(ngcerAdcMult[iPmt]);
             //if (hgcerAdcMult[iPmt] > 0) 
-	    hgcerAdcTdcDiffTime_Hist[iPmt]->Fill(hgcerAdcTdcDiffTime[iPmt]);
-	    //if (ngcerAdcMult[iPmt] > 0) 
-	    ngcerAdcTdcDiffTime_Hist[iPmt]->Fill(ngcerAdcTdcDiffTime[iPmt]);
+            hgcerAdcTdcDiffTime_Hist[iPmt]->Fill(hgcerAdcTdcDiffTime[iPmt]);
+            //if (ngcerAdcMult[iPmt] > 0) 
+            ngcerAdcTdcDiffTime_Hist[iPmt]->Fill(ngcerAdcTdcDiffTime[iPmt]);
         } 
          
         //aerogel  
@@ -579,8 +584,8 @@ void fillHistos(TTree *DataTree)
         { 
             for(Int_t iPmt = 0; iPmt < aeroNumPmts; iPmt++)
             { 
-	      //if (aeroAdcMult[iSide][iPmt] > 0) 
-	        aeroAdcTdcDiffTime_Hist[iSide][iPmt]->Fill(aeroAdcTdcDiffTime[iSide][iPmt]);
+                //if (aeroAdcMult[iSide][iPmt] > 0) 
+                aeroAdcTdcDiffTime_Hist[iSide][iPmt]->Fill(aeroAdcTdcDiffTime[iSide][iPmt]);
                 aeroAdcMult_Hist[iSide][iPmt]->Fill(aeroAdcMult[iSide][iPmt]);
             } 
         } 
@@ -593,8 +598,8 @@ void fillHistos(TTree *DataTree)
             { 
                 for(Int_t iPmt = 0; iPmt < hcalNumPmts[iPlane]; iPmt++)
                 { 
-		  //if (hcalAdcMult[iPlane][iSide][iPmt] > 0) 
-		    hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->Fill(hcalAdcTdcDiffTime[iPlane][iSide][iPmt]);
+                    //if (hcalAdcMult[iPlane][iSide][iPmt] > 0) 
+                    hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->Fill(hcalAdcTdcDiffTime[iPlane][iSide][iPmt]);
                     hcalAdcMult_Hist[iPlane][iSide][iPmt]->Fill(hcalAdcMult[iPlane][iSide][iPmt]);
                 } 
             } 
@@ -617,6 +622,230 @@ void fillHistos(TTree *DataTree)
         } 
     }
     return; 
+}
+
+void SaveToPDF(Int_t RunNumber)
+{
+    //write histogrames to pdf
+    TCanvas* canvas = new TCanvas("PDFOutput", "PDFOutput", 600, 600);
+    
+    hFADC_TREF_ROC1_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf(",RunNumber),  hFADC_TREF_ROC1_Hist->GetName());
+    hTref1_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hTref1_Hist->GetName());
+    hTref2_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hTref2_Hist->GetName());
+    hDCREF1_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hDCREF1_Hist->GetName()); 
+    hDCREF2_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hDCREF2_Hist->GetName()); 
+    hDCREF3_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hDCREF3_Hist->GetName());  
+    hDCREF4_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hDCREF4_Hist->GetName());  
+    hDCREF5_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hDCREF5_Hist->GetName()); 
+    
+    hFADC_TREF_ROC1_Mult_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hFADC_TREF_ROC1_Mult_Hist->GetName());
+    hTref1_Mult_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hTref1_Mult_Hist->GetName());
+    hTref2_Mult_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hTref2_Mult_Hist->GetName());
+    hDCREF1_Mult_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hDCREF1_Mult_Hist->GetName());
+    hDCREF2_Mult_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hDCREF2_Mult_Hist->GetName());
+    hDCREF3_Mult_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hDCREF3_Mult_Hist->GetName()); 
+    hDCREF4_Mult_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hDCREF4_Mult_Hist->GetName()); 
+    hDCREF5_Mult_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hDCREF5_Mult_Hist->GetName());
+
+    pFADC_TREF_ROC2_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pFADC_TREF_ROC2_Hist->GetName());
+    pTref1_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pTref1_Hist->GetName()); 
+    pTref2_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pTref2_Hist->GetName()); 
+    pDCREF1_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF1_Hist->GetName());
+    pDCREF2_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF2_Hist->GetName());
+    pDCREF3_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF3_Hist->GetName()); 
+    pDCREF4_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF4_Hist->GetName()); 
+    pDCREF5_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF5_Hist->GetName()); 
+    pDCREF6_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF6_Hist->GetName()); 
+    pDCREF7_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF7_Hist->GetName()); 
+    pDCREF8_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF8_Hist->GetName()); 
+    pDCREF9_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF9_Hist->GetName()); 
+    pDCREF10_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF10_Hist->GetName());
+    
+    pFADC_TREF_ROC2_Mult_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pFADC_TREF_ROC2_Mult_Hist->GetName());
+    pTref1_Mult_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pTref1_Mult_Hist->GetName());
+    pTref2_Mult_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pTref2_Mult_Hist->GetName());
+    pDCREF1_Mult_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF1_Mult_Hist->GetName());
+    pDCREF2_Mult_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF2_Mult_Hist->GetName());
+    pDCREF3_Mult_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF3_Mult_Hist->GetName()); 
+    pDCREF4_Mult_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF4_Mult_Hist->GetName()); 
+    pDCREF5_Mult_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF5_Mult_Hist->GetName()); 
+    pDCREF6_Mult_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF6_Mult_Hist->GetName()); 
+    pDCREF7_Mult_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF7_Mult_Hist->GetName()); 
+    pDCREF8_Mult_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF8_Mult_Hist->GetName()); 
+    pDCREF9_Mult_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF9_Mult_Hist->GetName()); 
+    pDCREF10_Mult_Hist->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF10_Mult_Hist->GetName());
+    
+
+    //dc variables
+    for(Int_t i = 0; i < dcPlanes; i++)
+    {
+        hdcrawtdc_Hist[i]->Draw();
+        canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hdcrawtdc_Hist[i]->GetName());
+        pdcrawtdc_Hist[i]->Draw();
+        canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pdcrawtdc_Hist[i]->GetName());
+        
+        hdcnhit_Hist[i]->Draw();
+        canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hdcnhit_Hist[i]->GetName());
+        pdcnhit_Hist[i]->Draw();
+        canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pdcnhit_Hist[i]->GetName());
+    }
+
+    // hodoscope variables
+    for(Int_t iPlane = 0; iPlane < HodPlanes; iPlane++)
+    {
+        for(Int_t iSide = 0; iSide < HodSides; iSide++)
+        {
+            for(Int_t iPmt = 0; iPmt < hHodbars[iPlane]; iPmt++)
+            {
+                hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->Draw();
+                canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetName());
+                hHodAdcMult_Hist[iPlane][iSide][iPmt]->Draw();
+                canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hHodAdcMult_Hist[iPlane][iSide][iPmt]->GetName());
+        }
+            for(Int_t iPmt = 0; iPmt < pHodbars[iPlane]; iPmt++)
+            {
+                pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->Draw();
+                canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetName());
+                pHodAdcMult_Hist[iPlane][iSide][iPmt]->Draw();
+                canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pHodAdcMult_Hist[iPlane][iSide][iPmt]->GetName());
+        }
+        }
+    }
+ 
+    for(Int_t iPlane = 0; iPlane < HodPlanes; iPlane++)
+    {
+        for(Int_t iSide = 0; iSide < HodSides1; iSide++)
+        {
+            for(Int_t iPmt = 0; iPmt < hHodbars[iPlane]; iPmt++)
+            {
+                hHodAdcPulseTimeRaw_Hist[iPlane][iSide][iPmt]->Draw();
+                canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hHodAdcPulseTimeRaw_Hist[iPlane][iSide][iPmt]->GetName());
+                hHodTdcTimeRaw_Hist[iPlane][iSide][iPmt]->Draw();
+                canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hHodTdcTimeRaw_Hist[iPlane][iSide][iPmt]->GetName());
+            }
+            for(Int_t iPmt = 0; iPmt < pHodbars[iPlane]; iPmt++)
+            {
+                pHodAdcPulseTimeRaw_Hist[iPlane][iSide][iPmt]->Draw();
+                canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pHodAdcPulseTimeRaw_Hist[iPlane][iSide][iPmt]->GetName());
+                pHodTdcTimeRaw_Hist[iPlane][iSide][iPmt]->Draw();
+                canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pHodTdcTimeRaw_Hist[iPlane][iSide][iPmt]->GetName());
+
+            }
+        }
+    }
+
+    //Gas cherenkovs
+    //hms
+    for(Int_t iPmt = 0; iPmt < cerNpmts; iPmt++)
+    {
+        cerAdcTdcDiffTime_Hist[iPmt]->Draw();
+        canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  cerAdcTdcDiffTime_Hist[iPmt]->GetName());
+        cerAdcMult_Hist[iPmt]->Draw();
+        canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  cerAdcMult_Hist[iPmt]->GetName());
+    }
+    
+    //shms
+    for(Int_t iPmt = 0; iPmt < cerNpmts; iPmt++)
+    {
+        hgcerAdcTdcDiffTime_Hist[iPmt]->Draw();
+        canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hgcerAdcTdcDiffTime_Hist[iPmt]->GetName());
+        ngcerAdcTdcDiffTime_Hist[iPmt]->Draw();
+        canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  ngcerAdcTdcDiffTime_Hist[iPmt]->GetName());
+        hgcerAdcMult_Hist[iPmt]->Draw();
+        canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hgcerAdcMult_Hist[iPmt]->GetName());
+        ngcerAdcMult_Hist[iPmt]->Draw();
+        canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  ngcerAdcMult_Hist[iPmt]->GetName());
+    }
+    
+    //aerogel 
+    for(Int_t iSide = 0; iSide < aeroSides; iSide++)
+    {
+        for(Int_t iPmt = 0; iPmt < aeroNumPmts; iPmt++)
+        {
+            aeroAdcTdcDiffTime_Hist[iSide][iPmt]->Draw();
+            canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  aeroAdcTdcDiffTime_Hist[iSide][iPmt]->GetName());
+            aeroAdcMult_Hist[iSide][iPmt]->Draw();
+            canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  aeroAdcMult_Hist[iSide][iPmt]->GetName());
+        }
+    }
+
+    //Calorimeters
+    //hms
+    for(Int_t iPlane = 0; iPlane < hcalPlanes; iPlane++)
+    {
+        for(Int_t iSide = 0; iSide < calSides; iSide++)
+        {
+            for(Int_t iPmt = 0; iPmt < hcalNumPmts[iPlane]; iPmt++)
+            {
+                hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->Draw();
+                canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetName());
+                hcalAdcMult_Hist[iPlane][iSide][iPmt]->Draw();
+                canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hcalAdcMult_Hist[iPlane][iSide][iPmt]->GetName());
+            }
+        }
+    }
+    
+    //shms calorimeter
+    for(Int_t iSide = 0; iSide < calSides; iSide++)
+    {
+        for(Int_t iPmt = 0; iPmt < pcalPrNumPmts; iPmt++)
+        {
+            pcalprAdcTdcDiffTime_Hist[iSide][iPmt]->Draw();
+            canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pcalprAdcTdcDiffTime_Hist[iSide][iPmt]->GetName());
+            pcalprAdcMult_Hist[iSide][iPmt]->Draw();
+            canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pcalprAdcMult_Hist[iSide][iPmt]->GetName());
+        } 
+    }    
+    
+    for(Int_t iPmt = 0; iPmt < pcalFlyNumPmts; iPmt++)
+    {
+        pcalflyAdcTdcDiffTime_Hist[iPmt]->Draw();
+        canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pcalflyAdcTdcDiffTime_Hist[iPmt]->GetName());
+        pcalflyAdcMult_Hist[iPmt]->Draw();
+        canvas->Print(Form("REF_TimePlots_%d.pdf)",RunNumber),  pcalflyAdcMult_Hist[iPmt]->GetName());
+    }
 }
 
 // input is the path from ref_times directory to rootfile and the run number that your using
@@ -646,182 +875,188 @@ void RefTimes( TString rootFileName, Int_t RunNumber)
     cout << "Finished filling plots, saving output!\n";
     
     //save plots
+    if(SavePDF){
+        SaveToPDF(RunNumber);
+    }
     
-    //make output file
-    TFile* outFile = new TFile(Form("./output/REF_TimePlots_%d.root", RunNumber), "RECREATE");
-    
-    //make directories for drawing the files in
-    TDirectory *TVar = outFile->mkdir("T");
-    
-    TDirectory *HMS = outFile->mkdir("HMS");
-    
-    TDirectory *hDC     = HMS->mkdir("dc");
-    TDirectory *hHodo   = HMS->mkdir("hodo");
-    TDirectory *hCer    = HMS->mkdir("cer");
-    TDirectory *hCal    = HMS->mkdir("cal");
-    
-    TDirectory *SHMS = outFile->mkdir("SHMS");
-    
-    TDirectory *pDC     = SHMS->mkdir("dc"); 
-    TDirectory *pHodo   = SHMS->mkdir("hodo"); 
-    TDirectory *pHgcer  = SHMS->mkdir("hgcer"); 
-    TDirectory *pNgcer  = SHMS->mkdir("ngcer"); 
-    TDirectory *pAero   = SHMS->mkdir("aero"); 
-    TDirectory *pCal    = SHMS->mkdir("cal"); 
-    
-    
-    //write histogrames to file
-    TVar->WriteObject(hFADC_TREF_ROC1_Hist, hFADC_TREF_ROC1_Hist->GetName());
-    TVar->WriteObject(hTref1_Hist, hTref1_Hist->GetName());
-    TVar->WriteObject(hTref2_Hist, hTref2_Hist->GetName());
-    TVar->WriteObject(hDCREF1_Hist, hDCREF1_Hist->GetName()); 
-    TVar->WriteObject(hDCREF2_Hist, hDCREF2_Hist->GetName()); 
-    TVar->WriteObject(hDCREF3_Hist, hDCREF3_Hist->GetName());  
-    TVar->WriteObject(hDCREF4_Hist, hDCREF4_Hist->GetName());  
-    TVar->WriteObject(hDCREF5_Hist, hDCREF5_Hist->GetName()); 
-    
-    TVar->WriteObject(hFADC_TREF_ROC1_Mult_Hist, hFADC_TREF_ROC1_Mult_Hist->GetName());
-    TVar->WriteObject(hTref1_Mult_Hist, hTref1_Mult_Hist->GetName());
-    TVar->WriteObject(hTref2_Mult_Hist, hTref2_Mult_Hist->GetName());
-    TVar->WriteObject(hDCREF1_Mult_Hist, hDCREF1_Mult_Hist->GetName());
-    TVar->WriteObject(hDCREF2_Mult_Hist, hDCREF2_Mult_Hist->GetName());
-    TVar->WriteObject(hDCREF3_Mult_Hist, hDCREF3_Mult_Hist->GetName()); 
-    TVar->WriteObject(hDCREF4_Mult_Hist, hDCREF4_Mult_Hist->GetName()); 
-    TVar->WriteObject(hDCREF5_Mult_Hist, hDCREF5_Mult_Hist->GetName());
-
-    TVar->WriteObject(pFADC_TREF_ROC2_Hist, pFADC_TREF_ROC2_Hist->GetName());
-    TVar->WriteObject(pTref1_Hist, pTref1_Hist->GetName()); 
-    TVar->WriteObject(pTref2_Hist, pTref2_Hist->GetName()); 
-    TVar->WriteObject(pDCREF1_Hist, pDCREF1_Hist->GetName());
-    TVar->WriteObject(pDCREF2_Hist, pDCREF2_Hist->GetName());
-    TVar->WriteObject(pDCREF3_Hist, pDCREF3_Hist->GetName()); 
-    TVar->WriteObject(pDCREF4_Hist, pDCREF4_Hist->GetName()); 
-    TVar->WriteObject(pDCREF5_Hist, pDCREF5_Hist->GetName()); 
-    TVar->WriteObject(pDCREF6_Hist, pDCREF6_Hist->GetName()); 
-    TVar->WriteObject(pDCREF7_Hist, pDCREF7_Hist->GetName()); 
-    TVar->WriteObject(pDCREF8_Hist, pDCREF8_Hist->GetName()); 
-    TVar->WriteObject(pDCREF9_Hist, pDCREF9_Hist->GetName()); 
-    TVar->WriteObject(pDCREF10_Hist, pDCREF10_Hist->GetName());
-    
-    TVar->WriteObject(pFADC_TREF_ROC2_Mult_Hist, pFADC_TREF_ROC2_Mult_Hist->GetName());
-    TVar->WriteObject(pTref1_Mult_Hist, pTref1_Mult_Hist->GetName());
-    TVar->WriteObject(pTref2_Mult_Hist, pTref2_Mult_Hist->GetName());
-    TVar->WriteObject(pDCREF1_Mult_Hist, pDCREF1_Mult_Hist->GetName());
-    TVar->WriteObject(pDCREF2_Mult_Hist, pDCREF2_Mult_Hist->GetName());
-    TVar->WriteObject(pDCREF3_Mult_Hist, pDCREF3_Mult_Hist->GetName()); 
-    TVar->WriteObject(pDCREF4_Mult_Hist, pDCREF4_Mult_Hist->GetName()); 
-    TVar->WriteObject(pDCREF5_Mult_Hist, pDCREF5_Mult_Hist->GetName()); 
-    TVar->WriteObject(pDCREF6_Mult_Hist, pDCREF6_Mult_Hist->GetName()); 
-    TVar->WriteObject(pDCREF7_Mult_Hist, pDCREF7_Mult_Hist->GetName()); 
-    TVar->WriteObject(pDCREF8_Mult_Hist, pDCREF8_Mult_Hist->GetName()); 
-    TVar->WriteObject(pDCREF9_Mult_Hist, pDCREF9_Mult_Hist->GetName()); 
-    TVar->WriteObject(pDCREF10_Mult_Hist, pDCREF10_Mult_Hist->GetName());
-    
-
-    //dc variables
-    for(Int_t i = 0; i < dcPlanes; i++)
-    {
-        hDC->WriteObject(hdcrawtdc_Hist[i], hdcrawtdc_Hist[i]->GetName());
-        pDC->WriteObject(pdcrawtdc_Hist[i], pdcrawtdc_Hist[i]->GetName());
+    //save to root file as histograms, (in case you wanted to fit them or something)
+    if(SaveRoot){
+        //make output file
+        TFile* outFile = new TFile(Form("./output/REF_TimePlots_%d.root", RunNumber), "RECREATE");
         
-        hDC->WriteObject(hdcnhit_Hist[i], hdcnhit_Hist[i]->GetName());
-        pDC->WriteObject(pdcnhit_Hist[i], pdcnhit_Hist[i]->GetName());
-    }
+        //make directories for drawing the files in
+        TDirectory *TVar = outFile->mkdir("T");
+        
+        TDirectory *HMS = outFile->mkdir("HMS");
+        
+        TDirectory *hDC     = HMS->mkdir("dc");
+        TDirectory *hHodo   = HMS->mkdir("hodo");
+        TDirectory *hCer    = HMS->mkdir("cer");
+        TDirectory *hCal    = HMS->mkdir("cal");
+        
+        TDirectory *SHMS = outFile->mkdir("SHMS");
+        
+        TDirectory *pDC     = SHMS->mkdir("dc"); 
+        TDirectory *pHodo   = SHMS->mkdir("hodo"); 
+        TDirectory *pHgcer  = SHMS->mkdir("hgcer"); 
+        TDirectory *pNgcer  = SHMS->mkdir("ngcer"); 
+        TDirectory *pAero   = SHMS->mkdir("aero"); 
+        TDirectory *pCal    = SHMS->mkdir("cal"); 
+        
+        
+        //write histogrames to file
+        TVar->WriteObject(hFADC_TREF_ROC1_Hist, hFADC_TREF_ROC1_Hist->GetName());
+        TVar->WriteObject(hTref1_Hist, hTref1_Hist->GetName());
+        TVar->WriteObject(hTref2_Hist, hTref2_Hist->GetName());
+        TVar->WriteObject(hDCREF1_Hist, hDCREF1_Hist->GetName()); 
+        TVar->WriteObject(hDCREF2_Hist, hDCREF2_Hist->GetName()); 
+        TVar->WriteObject(hDCREF3_Hist, hDCREF3_Hist->GetName());  
+        TVar->WriteObject(hDCREF4_Hist, hDCREF4_Hist->GetName());  
+        TVar->WriteObject(hDCREF5_Hist, hDCREF5_Hist->GetName()); 
+        
+        TVar->WriteObject(hFADC_TREF_ROC1_Mult_Hist, hFADC_TREF_ROC1_Mult_Hist->GetName());
+        TVar->WriteObject(hTref1_Mult_Hist, hTref1_Mult_Hist->GetName());
+        TVar->WriteObject(hTref2_Mult_Hist, hTref2_Mult_Hist->GetName());
+        TVar->WriteObject(hDCREF1_Mult_Hist, hDCREF1_Mult_Hist->GetName());
+        TVar->WriteObject(hDCREF2_Mult_Hist, hDCREF2_Mult_Hist->GetName());
+        TVar->WriteObject(hDCREF3_Mult_Hist, hDCREF3_Mult_Hist->GetName()); 
+        TVar->WriteObject(hDCREF4_Mult_Hist, hDCREF4_Mult_Hist->GetName()); 
+        TVar->WriteObject(hDCREF5_Mult_Hist, hDCREF5_Mult_Hist->GetName());
 
-    // hodoscope variables
-    for(Int_t iPlane = 0; iPlane < HodPlanes; iPlane++)
-    {
-        for(Int_t iSide = 0; iSide < HodSides; iSide++)
+        TVar->WriteObject(pFADC_TREF_ROC2_Hist, pFADC_TREF_ROC2_Hist->GetName());
+        TVar->WriteObject(pTref1_Hist, pTref1_Hist->GetName()); 
+        TVar->WriteObject(pTref2_Hist, pTref2_Hist->GetName()); 
+        TVar->WriteObject(pDCREF1_Hist, pDCREF1_Hist->GetName());
+        TVar->WriteObject(pDCREF2_Hist, pDCREF2_Hist->GetName());
+        TVar->WriteObject(pDCREF3_Hist, pDCREF3_Hist->GetName()); 
+        TVar->WriteObject(pDCREF4_Hist, pDCREF4_Hist->GetName()); 
+        TVar->WriteObject(pDCREF5_Hist, pDCREF5_Hist->GetName()); 
+        TVar->WriteObject(pDCREF6_Hist, pDCREF6_Hist->GetName()); 
+        TVar->WriteObject(pDCREF7_Hist, pDCREF7_Hist->GetName()); 
+        TVar->WriteObject(pDCREF8_Hist, pDCREF8_Hist->GetName()); 
+        TVar->WriteObject(pDCREF9_Hist, pDCREF9_Hist->GetName()); 
+        TVar->WriteObject(pDCREF10_Hist, pDCREF10_Hist->GetName());
+        
+        TVar->WriteObject(pFADC_TREF_ROC2_Mult_Hist, pFADC_TREF_ROC2_Mult_Hist->GetName());
+        TVar->WriteObject(pTref1_Mult_Hist, pTref1_Mult_Hist->GetName());
+        TVar->WriteObject(pTref2_Mult_Hist, pTref2_Mult_Hist->GetName());
+        TVar->WriteObject(pDCREF1_Mult_Hist, pDCREF1_Mult_Hist->GetName());
+        TVar->WriteObject(pDCREF2_Mult_Hist, pDCREF2_Mult_Hist->GetName());
+        TVar->WriteObject(pDCREF3_Mult_Hist, pDCREF3_Mult_Hist->GetName()); 
+        TVar->WriteObject(pDCREF4_Mult_Hist, pDCREF4_Mult_Hist->GetName()); 
+        TVar->WriteObject(pDCREF5_Mult_Hist, pDCREF5_Mult_Hist->GetName()); 
+        TVar->WriteObject(pDCREF6_Mult_Hist, pDCREF6_Mult_Hist->GetName()); 
+        TVar->WriteObject(pDCREF7_Mult_Hist, pDCREF7_Mult_Hist->GetName()); 
+        TVar->WriteObject(pDCREF8_Mult_Hist, pDCREF8_Mult_Hist->GetName()); 
+        TVar->WriteObject(pDCREF9_Mult_Hist, pDCREF9_Mult_Hist->GetName()); 
+        TVar->WriteObject(pDCREF10_Mult_Hist, pDCREF10_Mult_Hist->GetName());
+        
+
+        //dc variables
+        for(Int_t i = 0; i < dcPlanes; i++)
         {
-            for(Int_t iPmt = 0; iPmt < hHodbars[iPlane]; iPmt++)
-            {
-                hHodo->WriteObject(hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt], hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetName());
-                hHodo->WriteObject(hHodAdcMult_Hist[iPlane][iSide][iPmt], hHodAdcMult_Hist[iPlane][iSide][iPmt]->GetName());
-	    }
-            for(Int_t iPmt = 0; iPmt < pHodbars[iPlane]; iPmt++)
-            {
-                pHodo->WriteObject(pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt], pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetName());
-                pHodo->WriteObject(pHodAdcMult_Hist[iPlane][iSide][iPmt], pHodAdcMult_Hist[iPlane][iSide][iPmt]->GetName());
-	    }
+                hDC->WriteObject(hdcrawtdc_Hist[i], hdcrawtdc_Hist[i]->GetName());
+                pDC->WriteObject(pdcrawtdc_Hist[i], pdcrawtdc_Hist[i]->GetName());
+                
+                hDC->WriteObject(hdcnhit_Hist[i], hdcnhit_Hist[i]->GetName());
+                pDC->WriteObject(pdcnhit_Hist[i], pdcnhit_Hist[i]->GetName());
         }
-    }
+
+        // hodoscope variables
+        for(Int_t iPlane = 0; iPlane < HodPlanes; iPlane++)
+        {
+                for(Int_t iSide = 0; iSide < HodSides; iSide++)
+                {
+                        for(Int_t iPmt = 0; iPmt < hHodbars[iPlane]; iPmt++)
+                        {
+                                hHodo->WriteObject(hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt], hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetName());
+                                hHodo->WriteObject(hHodAdcMult_Hist[iPlane][iSide][iPmt], hHodAdcMult_Hist[iPlane][iSide][iPmt]->GetName());
+            }
+                        for(Int_t iPmt = 0; iPmt < pHodbars[iPlane]; iPmt++)
+                        {
+                                pHodo->WriteObject(pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt], pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetName());
+                                pHodo->WriteObject(pHodAdcMult_Hist[iPlane][iSide][iPmt], pHodAdcMult_Hist[iPlane][iSide][iPmt]->GetName());
+            }
+                }
+        }
  
-    for(Int_t iPlane = 0; iPlane < HodPlanes; iPlane++)
-    {
-        for(Int_t iSide = 0; iSide < HodSides1; iSide++)
-	{
-            for(Int_t iPmt = 0; iPmt < hHodbars[iPlane]; iPmt++)
-            {
-                hHodo->WriteObject(hHodAdcPulseTimeRaw_Hist[iPlane][iSide][iPmt], hHodAdcPulseTimeRaw_Hist[iPlane][iSide][iPmt]->GetName());
-		hHodo->WriteObject(hHodTdcTimeRaw_Hist[iPlane][iSide][iPmt], hHodTdcTimeRaw_Hist[iPlane][iSide][iPmt]->GetName());
-            }
-	    for(Int_t iPmt = 0; iPmt < pHodbars[iPlane]; iPmt++)
-	    {
-                pHodo->WriteObject(pHodAdcPulseTimeRaw_Hist[iPlane][iSide][iPmt], pHodAdcPulseTimeRaw_Hist[iPlane][iSide][iPmt]->GetName());
-		pHodo->WriteObject(pHodTdcTimeRaw_Hist[iPlane][iSide][iPmt], pHodTdcTimeRaw_Hist[iPlane][iSide][iPmt]->GetName());
-
-            }
-        }
-    }
-
-    //Gas cherenkovs
-    //hms
-    for(Int_t iPmt = 0; iPmt < cerNpmts; iPmt++)
-    {
-        hCer->WriteObject(cerAdcTdcDiffTime_Hist[iPmt], cerAdcTdcDiffTime_Hist[iPmt]->GetName());
-        hCer->WriteObject(cerAdcMult_Hist[iPmt], cerAdcMult_Hist[iPmt]->GetName());
-    }
-    
-    //shms
-    for(Int_t iPmt = 0; iPmt < cerNpmts; iPmt++)
-    {
-        pHgcer->WriteObject(hgcerAdcTdcDiffTime_Hist[iPmt], hgcerAdcTdcDiffTime_Hist[iPmt]->GetName());
-        pNgcer->WriteObject(ngcerAdcTdcDiffTime_Hist[iPmt], ngcerAdcTdcDiffTime_Hist[iPmt]->GetName());
-        pHgcer->WriteObject(hgcerAdcMult_Hist[iPmt], hgcerAdcMult_Hist[iPmt]->GetName());
-        pNgcer->WriteObject(ngcerAdcMult_Hist[iPmt], ngcerAdcMult_Hist[iPmt]->GetName());
-    }
-    
-    //aerogel 
-    for(Int_t iSide = 0; iSide < aeroSides; iSide++)
-    {
-        for(Int_t iPmt = 0; iPmt < aeroNumPmts; iPmt++)
+        for(Int_t iPlane = 0; iPlane < HodPlanes; iPlane++)
         {
-            pAero->WriteObject(aeroAdcTdcDiffTime_Hist[iSide][iPmt], aeroAdcTdcDiffTime_Hist[iSide][iPmt]->GetName());
-            pAero->WriteObject(aeroAdcMult_Hist[iSide][iPmt], aeroAdcMult_Hist[iSide][iPmt]->GetName());
-        }
-    }
+                for(Int_t iSide = 0; iSide < HodSides1; iSide++)
+        {
+                        for(Int_t iPmt = 0; iPmt < hHodbars[iPlane]; iPmt++)
+                        {
+                                hHodo->WriteObject(hHodAdcPulseTimeRaw_Hist[iPlane][iSide][iPmt], hHodAdcPulseTimeRaw_Hist[iPlane][iSide][iPmt]->GetName());
+                hHodo->WriteObject(hHodTdcTimeRaw_Hist[iPlane][iSide][iPmt], hHodTdcTimeRaw_Hist[iPlane][iSide][iPmt]->GetName());
+                        }
+                for(Int_t iPmt = 0; iPmt < pHodbars[iPlane]; iPmt++)
+                {
+                                pHodo->WriteObject(pHodAdcPulseTimeRaw_Hist[iPlane][iSide][iPmt], pHodAdcPulseTimeRaw_Hist[iPlane][iSide][iPmt]->GetName());
+                pHodo->WriteObject(pHodTdcTimeRaw_Hist[iPlane][iSide][iPmt], pHodTdcTimeRaw_Hist[iPlane][iSide][iPmt]->GetName());
 
-    //Calorimeters
-    //hms
-    for(Int_t iPlane = 0; iPlane < hcalPlanes; iPlane++)
-    {
+                        }
+                }
+        }
+
+        //Gas cherenkovs
+        //hms
+        for(Int_t iPmt = 0; iPmt < cerNpmts; iPmt++)
+        {
+                hCer->WriteObject(cerAdcTdcDiffTime_Hist[iPmt], cerAdcTdcDiffTime_Hist[iPmt]->GetName());
+                hCer->WriteObject(cerAdcMult_Hist[iPmt], cerAdcMult_Hist[iPmt]->GetName());
+        }
+        
+        //shms
+        for(Int_t iPmt = 0; iPmt < cerNpmts; iPmt++)
+        {
+                pHgcer->WriteObject(hgcerAdcTdcDiffTime_Hist[iPmt], hgcerAdcTdcDiffTime_Hist[iPmt]->GetName());
+                pNgcer->WriteObject(ngcerAdcTdcDiffTime_Hist[iPmt], ngcerAdcTdcDiffTime_Hist[iPmt]->GetName());
+                pHgcer->WriteObject(hgcerAdcMult_Hist[iPmt], hgcerAdcMult_Hist[iPmt]->GetName());
+                pNgcer->WriteObject(ngcerAdcMult_Hist[iPmt], ngcerAdcMult_Hist[iPmt]->GetName());
+        }
+        
+        //aerogel 
+        for(Int_t iSide = 0; iSide < aeroSides; iSide++)
+        {
+                for(Int_t iPmt = 0; iPmt < aeroNumPmts; iPmt++)
+                {
+                        pAero->WriteObject(aeroAdcTdcDiffTime_Hist[iSide][iPmt], aeroAdcTdcDiffTime_Hist[iSide][iPmt]->GetName());
+                        pAero->WriteObject(aeroAdcMult_Hist[iSide][iPmt], aeroAdcMult_Hist[iSide][iPmt]->GetName());
+                }
+        }
+
+        //Calorimeters
+        //hms
+        for(Int_t iPlane = 0; iPlane < hcalPlanes; iPlane++)
+        {
+                for(Int_t iSide = 0; iSide < calSides; iSide++)
+                {
+                        for(Int_t iPmt = 0; iPmt < hcalNumPmts[iPlane]; iPmt++)
+                        {
+                                hCal->WriteObject(hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt], hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetName());
+                                hCal->WriteObject(hcalAdcMult_Hist[iPlane][iSide][iPmt], hcalAdcMult_Hist[iPlane][iSide][iPmt]->GetName());
+                        }
+                }
+        }
+        
+        //shms calorimeter
         for(Int_t iSide = 0; iSide < calSides; iSide++)
         {
-            for(Int_t iPmt = 0; iPmt < hcalNumPmts[iPlane]; iPmt++)
-            {
-                hCal->WriteObject(hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt], hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetName());
-                hCal->WriteObject(hcalAdcMult_Hist[iPlane][iSide][iPmt], hcalAdcMult_Hist[iPlane][iSide][iPmt]->GetName());
-            }
-        }
-    }
-    
-    //shms calorimeter
-    for(Int_t iSide = 0; iSide < calSides; iSide++)
-    {
-        for(Int_t iPmt = 0; iPmt < pcalPrNumPmts; iPmt++)
+                for(Int_t iPmt = 0; iPmt < pcalPrNumPmts; iPmt++)
+                {
+                        pCal->WriteObject(pcalprAdcTdcDiffTime_Hist[iSide][iPmt], pcalprAdcTdcDiffTime_Hist[iSide][iPmt]->GetName());
+                        pCal->WriteObject(pcalprAdcMult_Hist[iSide][iPmt], pcalprAdcMult_Hist[iSide][iPmt]->GetName());
+                } 
+        }        
+        
+        for(Int_t iPmt = 0; iPmt < pcalFlyNumPmts; iPmt++)
         {
-            pCal->WriteObject(pcalprAdcTdcDiffTime_Hist[iSide][iPmt], pcalprAdcTdcDiffTime_Hist[iSide][iPmt]->GetName());
-            pCal->WriteObject(pcalprAdcMult_Hist[iSide][iPmt], pcalprAdcMult_Hist[iSide][iPmt]->GetName());
-        } 
-    }    
-    
-    for(Int_t iPmt = 0; iPmt < pcalFlyNumPmts; iPmt++)
-    {
-        pCal->WriteObject(pcalflyAdcTdcDiffTime_Hist[iPmt], pcalflyAdcTdcDiffTime_Hist[iPmt]->GetName());
-        pCal->WriteObject(pcalflyAdcMult_Hist[iPmt], pcalflyAdcMult_Hist[iPmt]->GetName());
+                pCal->WriteObject(pcalflyAdcTdcDiffTime_Hist[iPmt], pcalflyAdcTdcDiffTime_Hist[iPmt]->GetName());
+                pCal->WriteObject(pcalflyAdcMult_Hist[iPmt], pcalflyAdcMult_Hist[iPmt]->GetName());
+        }
+        
+        outFile->Close();
     }
-    
-    outFile->Close();
     cout << "Finished saving output!\n---- End ----\n"; 
     return;
 }

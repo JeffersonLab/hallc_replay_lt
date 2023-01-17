@@ -839,13 +839,18 @@ void SaveToPDF(Int_t RunNumber)
         } 
     }    
     
-    for(Int_t iPmt = 0; iPmt < pcalFlyNumPmts; iPmt++)
+    for(Int_t iPmt = 0; iPmt < pcalFlyNumPmts - 1; iPmt++)
     {
         pcalflyAdcTdcDiffTime_Hist[iPmt]->Draw();
         canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pcalflyAdcTdcDiffTime_Hist[iPmt]->GetName());
         pcalflyAdcMult_Hist[iPmt]->Draw();
-        canvas->Print(Form("REF_TimePlots_%d.pdf)",RunNumber),  pcalflyAdcMult_Hist[iPmt]->GetName());
+        canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pcalflyAdcMult_Hist[iPmt]->GetName());
     }
+    
+    pcalflyAdcTdcDiffTime_Hist[pcalFlyNumPmts]->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pcalflyAdcTdcDiffTime_Hist[pcalFlyNumPmts]->GetName());
+    pcalflyAdcMult_Hist[pcalFlyNumPmts]->Draw();
+    canvas->Print(Form("REF_TimePlots_%d.pdf)",RunNumber),  pcalflyAdcMult_Hist[pcalFlyNumPmts]->GetName());
 }
 
 // input is the path from ref_times directory to rootfile and the run number that your using

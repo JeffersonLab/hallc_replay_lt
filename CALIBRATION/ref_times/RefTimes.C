@@ -628,7 +628,7 @@ void SaveToPDF(Int_t RunNumber)
 {
     //write histogrames to pdf
     TCanvas* canvas = new TCanvas("PDFOutput", "PDFOutput", 600, 600);
-    TPad->SetLogy();
+    gPad->SetLogy();
     
     hFADC_TREF_ROC1_Hist->Draw();
     canvas->Print(Form("output/REF_TimePlots_%d.pdf(",RunNumber),  hFADC_TREF_ROC1_Hist->GetName());

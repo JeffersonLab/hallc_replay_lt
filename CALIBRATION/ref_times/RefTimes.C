@@ -628,108 +628,109 @@ void SaveToPDF(Int_t RunNumber)
 {
     //write histogrames to pdf
     TCanvas* canvas = new TCanvas("PDFOutput", "PDFOutput", 600, 600);
+    TPad->SetLogy();
     
     hFADC_TREF_ROC1_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf(",RunNumber),  hFADC_TREF_ROC1_Hist->GetName());
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf(",RunNumber),  hFADC_TREF_ROC1_Hist->GetName());
     hTref1_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hTref1_Hist->GetName());
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hTref1_Hist->GetName());
     hTref2_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hTref2_Hist->GetName());
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hTref2_Hist->GetName());
     hDCREF1_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hDCREF1_Hist->GetName()); 
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hDCREF1_Hist->GetName()); 
     hDCREF2_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hDCREF2_Hist->GetName()); 
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hDCREF2_Hist->GetName()); 
     hDCREF3_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hDCREF3_Hist->GetName());  
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hDCREF3_Hist->GetName());  
     hDCREF4_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hDCREF4_Hist->GetName());  
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hDCREF4_Hist->GetName());  
     hDCREF5_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hDCREF5_Hist->GetName()); 
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hDCREF5_Hist->GetName()); 
     
     hFADC_TREF_ROC1_Mult_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hFADC_TREF_ROC1_Mult_Hist->GetName());
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hFADC_TREF_ROC1_Mult_Hist->GetName());
     hTref1_Mult_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hTref1_Mult_Hist->GetName());
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hTref1_Mult_Hist->GetName());
     hTref2_Mult_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hTref2_Mult_Hist->GetName());
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hTref2_Mult_Hist->GetName());
     hDCREF1_Mult_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hDCREF1_Mult_Hist->GetName());
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hDCREF1_Mult_Hist->GetName());
     hDCREF2_Mult_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hDCREF2_Mult_Hist->GetName());
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hDCREF2_Mult_Hist->GetName());
     hDCREF3_Mult_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hDCREF3_Mult_Hist->GetName()); 
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hDCREF3_Mult_Hist->GetName()); 
     hDCREF4_Mult_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hDCREF4_Mult_Hist->GetName()); 
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hDCREF4_Mult_Hist->GetName()); 
     hDCREF5_Mult_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hDCREF5_Mult_Hist->GetName());
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hDCREF5_Mult_Hist->GetName());
 
     pFADC_TREF_ROC2_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pFADC_TREF_ROC2_Hist->GetName());
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pFADC_TREF_ROC2_Hist->GetName());
     pTref1_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pTref1_Hist->GetName()); 
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTref1_Hist->GetName()); 
     pTref2_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pTref2_Hist->GetName()); 
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTref2_Hist->GetName()); 
     pDCREF1_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF1_Hist->GetName());
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF1_Hist->GetName());
     pDCREF2_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF2_Hist->GetName());
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF2_Hist->GetName());
     pDCREF3_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF3_Hist->GetName()); 
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF3_Hist->GetName()); 
     pDCREF4_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF4_Hist->GetName()); 
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF4_Hist->GetName()); 
     pDCREF5_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF5_Hist->GetName()); 
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF5_Hist->GetName()); 
     pDCREF6_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF6_Hist->GetName()); 
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF6_Hist->GetName()); 
     pDCREF7_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF7_Hist->GetName()); 
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF7_Hist->GetName()); 
     pDCREF8_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF8_Hist->GetName()); 
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF8_Hist->GetName()); 
     pDCREF9_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF9_Hist->GetName()); 
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF9_Hist->GetName()); 
     pDCREF10_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF10_Hist->GetName());
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF10_Hist->GetName());
     
     pFADC_TREF_ROC2_Mult_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pFADC_TREF_ROC2_Mult_Hist->GetName());
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pFADC_TREF_ROC2_Mult_Hist->GetName());
     pTref1_Mult_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pTref1_Mult_Hist->GetName());
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTref1_Mult_Hist->GetName());
     pTref2_Mult_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pTref2_Mult_Hist->GetName());
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTref2_Mult_Hist->GetName());
     pDCREF1_Mult_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF1_Mult_Hist->GetName());
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF1_Mult_Hist->GetName());
     pDCREF2_Mult_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF2_Mult_Hist->GetName());
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF2_Mult_Hist->GetName());
     pDCREF3_Mult_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF3_Mult_Hist->GetName()); 
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF3_Mult_Hist->GetName()); 
     pDCREF4_Mult_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF4_Mult_Hist->GetName()); 
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF4_Mult_Hist->GetName()); 
     pDCREF5_Mult_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF5_Mult_Hist->GetName()); 
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF5_Mult_Hist->GetName()); 
     pDCREF6_Mult_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF6_Mult_Hist->GetName()); 
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF6_Mult_Hist->GetName()); 
     pDCREF7_Mult_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF7_Mult_Hist->GetName()); 
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF7_Mult_Hist->GetName()); 
     pDCREF8_Mult_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF8_Mult_Hist->GetName()); 
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF8_Mult_Hist->GetName()); 
     pDCREF9_Mult_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF9_Mult_Hist->GetName()); 
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF9_Mult_Hist->GetName()); 
     pDCREF10_Mult_Hist->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pDCREF10_Mult_Hist->GetName());
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF10_Mult_Hist->GetName());
     
 
     //dc variables
     for(Int_t i = 0; i < dcPlanes; i++)
     {
         hdcrawtdc_Hist[i]->Draw();
-        canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hdcrawtdc_Hist[i]->GetName());
+        canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hdcrawtdc_Hist[i]->GetName());
         pdcrawtdc_Hist[i]->Draw();
-        canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pdcrawtdc_Hist[i]->GetName());
+        canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pdcrawtdc_Hist[i]->GetName());
         
         hdcnhit_Hist[i]->Draw();
-        canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hdcnhit_Hist[i]->GetName());
+        canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hdcnhit_Hist[i]->GetName());
         pdcnhit_Hist[i]->Draw();
-        canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pdcnhit_Hist[i]->GetName());
+        canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pdcnhit_Hist[i]->GetName());
     }
 
     // hodoscope variables
@@ -740,16 +741,16 @@ void SaveToPDF(Int_t RunNumber)
             for(Int_t iPmt = 0; iPmt < hHodbars[iPlane]; iPmt++)
             {
                 hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->Draw();
-                canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetName());
+                canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetName());
                 hHodAdcMult_Hist[iPlane][iSide][iPmt]->Draw();
-                canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hHodAdcMult_Hist[iPlane][iSide][iPmt]->GetName());
+                canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hHodAdcMult_Hist[iPlane][iSide][iPmt]->GetName());
         }
             for(Int_t iPmt = 0; iPmt < pHodbars[iPlane]; iPmt++)
             {
                 pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->Draw();
-                canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetName());
+                canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetName());
                 pHodAdcMult_Hist[iPlane][iSide][iPmt]->Draw();
-                canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pHodAdcMult_Hist[iPlane][iSide][iPmt]->GetName());
+                canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pHodAdcMult_Hist[iPlane][iSide][iPmt]->GetName());
         }
         }
     }
@@ -761,16 +762,16 @@ void SaveToPDF(Int_t RunNumber)
             for(Int_t iPmt = 0; iPmt < hHodbars[iPlane]; iPmt++)
             {
                 hHodAdcPulseTimeRaw_Hist[iPlane][iSide][iPmt]->Draw();
-                canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hHodAdcPulseTimeRaw_Hist[iPlane][iSide][iPmt]->GetName());
+                canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hHodAdcPulseTimeRaw_Hist[iPlane][iSide][iPmt]->GetName());
                 hHodTdcTimeRaw_Hist[iPlane][iSide][iPmt]->Draw();
-                canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hHodTdcTimeRaw_Hist[iPlane][iSide][iPmt]->GetName());
+                canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hHodTdcTimeRaw_Hist[iPlane][iSide][iPmt]->GetName());
             }
             for(Int_t iPmt = 0; iPmt < pHodbars[iPlane]; iPmt++)
             {
                 pHodAdcPulseTimeRaw_Hist[iPlane][iSide][iPmt]->Draw();
-                canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pHodAdcPulseTimeRaw_Hist[iPlane][iSide][iPmt]->GetName());
+                canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pHodAdcPulseTimeRaw_Hist[iPlane][iSide][iPmt]->GetName());
                 pHodTdcTimeRaw_Hist[iPlane][iSide][iPmt]->Draw();
-                canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pHodTdcTimeRaw_Hist[iPlane][iSide][iPmt]->GetName());
+                canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pHodTdcTimeRaw_Hist[iPlane][iSide][iPmt]->GetName());
 
             }
         }
@@ -781,22 +782,22 @@ void SaveToPDF(Int_t RunNumber)
     for(Int_t iPmt = 0; iPmt < cerNpmts; iPmt++)
     {
         cerAdcTdcDiffTime_Hist[iPmt]->Draw();
-        canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  cerAdcTdcDiffTime_Hist[iPmt]->GetName());
+        canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  cerAdcTdcDiffTime_Hist[iPmt]->GetName());
         cerAdcMult_Hist[iPmt]->Draw();
-        canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  cerAdcMult_Hist[iPmt]->GetName());
+        canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  cerAdcMult_Hist[iPmt]->GetName());
     }
     
     //shms
     for(Int_t iPmt = 0; iPmt < cerNpmts; iPmt++)
     {
         hgcerAdcTdcDiffTime_Hist[iPmt]->Draw();
-        canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hgcerAdcTdcDiffTime_Hist[iPmt]->GetName());
+        canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hgcerAdcTdcDiffTime_Hist[iPmt]->GetName());
         ngcerAdcTdcDiffTime_Hist[iPmt]->Draw();
-        canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  ngcerAdcTdcDiffTime_Hist[iPmt]->GetName());
+        canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  ngcerAdcTdcDiffTime_Hist[iPmt]->GetName());
         hgcerAdcMult_Hist[iPmt]->Draw();
-        canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hgcerAdcMult_Hist[iPmt]->GetName());
+        canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hgcerAdcMult_Hist[iPmt]->GetName());
         ngcerAdcMult_Hist[iPmt]->Draw();
-        canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  ngcerAdcMult_Hist[iPmt]->GetName());
+        canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  ngcerAdcMult_Hist[iPmt]->GetName());
     }
     
     //aerogel 
@@ -805,9 +806,9 @@ void SaveToPDF(Int_t RunNumber)
         for(Int_t iPmt = 0; iPmt < aeroNumPmts; iPmt++)
         {
             aeroAdcTdcDiffTime_Hist[iSide][iPmt]->Draw();
-            canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  aeroAdcTdcDiffTime_Hist[iSide][iPmt]->GetName());
+            canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  aeroAdcTdcDiffTime_Hist[iSide][iPmt]->GetName());
             aeroAdcMult_Hist[iSide][iPmt]->Draw();
-            canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  aeroAdcMult_Hist[iSide][iPmt]->GetName());
+            canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  aeroAdcMult_Hist[iSide][iPmt]->GetName());
         }
     }
 
@@ -820,9 +821,9 @@ void SaveToPDF(Int_t RunNumber)
             for(Int_t iPmt = 0; iPmt < hcalNumPmts[iPlane]; iPmt++)
             {
                 hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->Draw();
-                canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetName());
+                canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetName());
                 hcalAdcMult_Hist[iPlane][iSide][iPmt]->Draw();
-                canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  hcalAdcMult_Hist[iPlane][iSide][iPmt]->GetName());
+                canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hcalAdcMult_Hist[iPlane][iSide][iPmt]->GetName());
             }
         }
     }
@@ -833,24 +834,24 @@ void SaveToPDF(Int_t RunNumber)
         for(Int_t iPmt = 0; iPmt < pcalPrNumPmts; iPmt++)
         {
             pcalprAdcTdcDiffTime_Hist[iSide][iPmt]->Draw();
-            canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pcalprAdcTdcDiffTime_Hist[iSide][iPmt]->GetName());
+            canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pcalprAdcTdcDiffTime_Hist[iSide][iPmt]->GetName());
             pcalprAdcMult_Hist[iSide][iPmt]->Draw();
-            canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pcalprAdcMult_Hist[iSide][iPmt]->GetName());
+            canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pcalprAdcMult_Hist[iSide][iPmt]->GetName());
         } 
     }    
     
     for(Int_t iPmt = 0; iPmt < pcalFlyNumPmts - 1; iPmt++)
     {
         pcalflyAdcTdcDiffTime_Hist[iPmt]->Draw();
-        canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pcalflyAdcTdcDiffTime_Hist[iPmt]->GetName());
+        canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pcalflyAdcTdcDiffTime_Hist[iPmt]->GetName());
         pcalflyAdcMult_Hist[iPmt]->Draw();
-        canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pcalflyAdcMult_Hist[iPmt]->GetName());
+        canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pcalflyAdcMult_Hist[iPmt]->GetName());
     }
     
     pcalflyAdcTdcDiffTime_Hist[pcalFlyNumPmts]->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf",RunNumber),  pcalflyAdcTdcDiffTime_Hist[pcalFlyNumPmts]->GetName());
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pcalflyAdcTdcDiffTime_Hist[pcalFlyNumPmts]->GetName());
     pcalflyAdcMult_Hist[pcalFlyNumPmts]->Draw();
-    canvas->Print(Form("REF_TimePlots_%d.pdf)",RunNumber),  pcalflyAdcMult_Hist[pcalFlyNumPmts]->GetName());
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf)",RunNumber),  pcalflyAdcMult_Hist[pcalFlyNumPmts]->GetName());
 }
 
 // input is the path from ref_times directory to rootfile and the run number that your using

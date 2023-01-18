@@ -848,16 +848,17 @@ void SaveToPDF(Int_t RunNumber)
         canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pcalflyAdcMult_Hist[iPmt]->GetName());
     }
     
-    pcalflyAdcTdcDiffTime_Hist[pcalFlyNumPmts]->Draw();
-    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pcalflyAdcTdcDiffTime_Hist[pcalFlyNumPmts]->GetName());
-    pcalflyAdcMult_Hist[pcalFlyNumPmts]->Draw();
-    canvas->Print(Form("output/REF_TimePlots_%d.pdf)",RunNumber),  pcalflyAdcMult_Hist[pcalFlyNumPmts]->GetName());
+    // print last one seperate, so that it save properly
+    pcalflyAdcTdcDiffTime_Hist[pcalFlyNumPmts-1]->Draw();
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pcalflyAdcTdcDiffTime_Hist[pcalFlyNumPmts-1]->GetName());
+    pcalflyAdcMult_Hist[pcalFlyNumPmts-1]->Draw();
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf)",RunNumber),  pcalflyAdcMult_Hist[pcalFlyNumPmts-1]->GetName());
 }
 
 // input is the path from ref_times directory to rootfile and the run number that your using
 void RefTimes( TString rootFileName, Int_t RunNumber)
 {
-    
+    gROOT->SetBatch(kTRUE);
     //get root file
     TFile* inFile = new TFile(rootFileName, "READ");
     

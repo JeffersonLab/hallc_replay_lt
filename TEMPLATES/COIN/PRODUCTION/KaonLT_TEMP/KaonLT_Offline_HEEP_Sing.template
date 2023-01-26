@@ -3,7 +3,6 @@
 *****Created - May, 2022******
 ******************************
 
-Note - The uncertainties for the efficiencies are purely statistical and blow up quickly with low statistics (e.g. individual run). Therefore, they should not be used for yield calculations. An overall error for entire setting must be used instead which should be calculated using same formula. Please contact AU for further details.
 
 =====================================
 =========== General Info ============
@@ -70,7 +69,7 @@ KLT_Accepted_HMS_Triggers                     	  :		{pTRIG3_ROC2.npassed}
 = EDTM =
 =:=:=:=:
 
-ote, the following calculations rely upon the assumption that both the SHMS and HMS are triggering on ELREAL and that there is no COIN trigger.
+Note, the following calculations rely upon the assumption that both the SHMS and HMS are triggering on ELREAL and that there is no COIN trigger.
 
 KLT_EDTM_Accepted_Triggers	     : 	  {edtm_accepted.npassed}
 KLT_HMS_EDTM_Accepted_Triggers	     :	  {hms_edtm_accepted.npassed}

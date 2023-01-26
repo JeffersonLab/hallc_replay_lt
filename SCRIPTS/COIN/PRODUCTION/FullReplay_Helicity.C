@@ -1,4 +1,4 @@
-void FullReplay_KaonLT_HeeP_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
+void FullReplay_Helicity (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   // Get RunNumber and MaxEvent if not provided.
   if(RunNumber == 0) {
@@ -35,12 +35,11 @@ void FullReplay_KaonLT_HeeP_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./cache");
 
   //const char* RunFileNamePattern = "raw/coin_all_%05d.dat";
-  //const char* ROOTFileNamePattern = "ROOTfiles/Analysis/General/coin_replay_Full_%d_%d.root";
-  const char* ROOTFileNamePattern = "ROOTfiles/Analysis/HeeP/Kaon_coin_replay_production_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfiles/Analysis/General/coin_replay_Full_%d_%d.root";
 
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
-  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_KaonLT.database");
+  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_KaonLT_pion.database");
   gHcParms->Load(gHcParms->GetString("g_ctp_database_filename"), RunNumber);
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
@@ -56,8 +55,8 @@ void FullReplay_KaonLT_HeeP_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHcDetectorMap->Load("MAPS/COIN/DETEC/coin.map");
 
   // Load the BCM current params
-  const char* CurrentFileNamePattern = "PARAM/HMS/BCM/CALIB/bcmcurrent_%d.param";
-  gHcParms->Load(Form(CurrentFileNamePattern, RunNumber));
+  //  const char* CurrentFileNamePattern = "PARAM/HMS/BCM/CALIB/bcmcurrent_%d.param";
+  //  gHcParms->Load(Form(CurrentFileNamePattern, RunNumber));
 
   // Dec data
   //  gHaApps->Add(new Podd::DecData("D","Decoder raw data"));
@@ -90,8 +89,8 @@ void FullReplay_KaonLT_HeeP_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   THcShower* pcal = new THcShower("cal", "Calorimeter");
   SHMS->AddDetector(pcal);
   
-  THcBCMCurrent* hbc = new THcBCMCurrent("H.bcm", "BCM current check");
-  gHaPhysics->Add(hbc);
+  // THcBCMCurrent* hbc = new THcBCMCurrent("H.bcm", "BCM current check");
+  // gHaPhysics->Add(hbc);
 
   // Add rastered beam apparatus
   THaApparatus* pbeam = new THcRasteredBeam("P.rb", "Rastered Beamline");
@@ -124,7 +123,7 @@ void FullReplay_KaonLT_HeeP_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   //Add SHMS event handler for helicity scalers
   THcHelicityScaler *phelscaler = new THcHelicityScaler("P", "Hall C helicity scaler");
-  //phelscaler->SetDebugFile("PHelScaler.txt");
+  phelscaler->SetDebugFile("PHelScaler.txt");
   phelscaler->SetROC(8);
   phelscaler->SetUseFirstEvent(kTRUE);
   gHaEvtHandlers->Add(phelscaler);
@@ -188,7 +187,7 @@ void FullReplay_KaonLT_HeeP_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   // Add event handler for helicity scalers
   THcHelicityScaler *hhelscaler = new THcHelicityScaler("H", "Hall C helicity scaler");
-  //hhelscaler->SetDebugFile("HHelScaler.txt");
+  hhelscaler->SetDebugFile("HHelScaler.txt");
   hhelscaler->SetROC(5);
   hhelscaler->SetUseFirstEvent(kTRUE);
   gHaEvtHandlers->Add(hhelscaler);
@@ -217,6 +216,13 @@ void FullReplay_KaonLT_HeeP_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   coin->SetEvtType(1);
   coin->AddEvtType(2);
   TRG->AddDetector(coin); 
+  
+  // Add helicity detector to trigger apparatus
+  THcHelicity* helicity = new THcHelicity("helicity","Helicity Detector");
+  TRG->AddDetector(helicity);
+  //no difference made by defining either or both of these
+  helicity->SetHelicityScaler(hhelscaler);
+  helicity->SetHelicityScaler(phelscaler);
  
   //Add coin physics module THcCoinTime::THcCoinTime (const char *name, const char* description, const char* hadArmName, 
   // const char* elecArmName, const char* coinname) :
@@ -266,6 +272,7 @@ void FullReplay_KaonLT_HeeP_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
                               // 2 = counter is event number
 
   analyzer->SetEvent(event);
+  analyzer->SetMarkInterval(10000); // Print out every 10k events
   // Set EPICS event type
   analyzer->SetEpicsEvtType(181);
   // Define crate map
@@ -274,30 +281,22 @@ void FullReplay_KaonLT_HeeP_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file+
   analyzer->SetOdefFile("DEF-files/PRODUCTION/Full_Replay_Pass2_Coin_v2.def"); // New version, slimmed down
-  // Define cuts file with different Aerogel trays
+  // Define cuts file
   //analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/coin_production_cuts.def");  // optional
   //  analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/coin_tracking_cuts.def");  // optional
-  if (RunNumber >= 4965 && RunNumber <= 5334){
-   analyzer->SetCutFile("DEF-files/PRODUCTION/KaonLT_DEF/Aero_1p011/Offline_HeeP_Coin_Cuts.def");
-  }
-  else if (RunNumber >= 7940 && RunNumber <= 8356){
-   analyzer->SetCutFile("DEF-files/PRODUCTION/KaonLT_DEF/Aero_1p011/Offline_HeeP_Coin_Cuts.def");
-  }
-  else {
-   analyzer->SetCutFile("DEF-files/PRODUCTION/KaonLT_DEF/Offline_HeeP_Coin_Cuts.def");
-  }
+  analyzer->SetCutFile("DEF-files/PRODUCTION/KaonLT_DEF/Offline_Physics_Helicity.def");
   // File to record accounting information for cuts
   analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Analysis/General/summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template
-  //  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/COIN_PROD.template",
-  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/KaonLT_TEMP/KaonLT_Offline_HEEP_Coin.template",
-  Form("REPORT_OUTPUT/Analysis/General/replay_coin_heep_%d_%d.report", RunNumber, MaxEvent));  // optional
+    analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/KaonLT_TEMP/KaonLT_Helicity_Physics_Coin.template",
+  //analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/KaonLT_TEMP/KaonLT_Offline_HEEP_Coin.template",
+  Form("REPORT_OUTPUT/Analysis/General/replay_coin_production_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Helicity scalers output
-  analyzer->PrintReport("TEMPLATES/HMS/SCALERS/hhelscalers.template",
-  			Form("REPORT_OUTPUT/Scalers/replay_hms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
-  analyzer->PrintReport("TEMPLATES/SHMS/SCALERS/phelscalers.template",
-  			Form("REPORT_OUTPUT/Scalers/replay_shms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
+ // analyzer->PrintReport("TEMPLATES/HMS/SCALERS/hhelscalers.template",
+  //			Form("REPORT_OUTPUT/Scalers/replay_hms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
+  //analyzer->PrintReport("TEMPLATES/SHMS/SCALERS/phelscalers.template",
+  //			Form("REPORT_OUTPUT/Scalers/replay_shms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
 
 }

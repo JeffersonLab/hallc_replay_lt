@@ -9,10 +9,11 @@
 ; Cut is on reference time per detector.
 
 
-; C.Y. Sept, 11 2021: Suggested
-
-hdc_tdcrefcut   =-14500.
-hhodo_tdcrefcut =-2400.
-hhodo_adcrefcut =-3400.
-hcer_adcrefcut  =-3400.
-hcal_adcrefcut  =-3400.
+; N.H. 2023 Jan 25 set for elReal trigger
+pdc_tdcrefcut    =-14200.
+phodo_tdcrefcut  =-4400.
+phodo_adcrefcut  =-3800.
+pngcer_adcrefcut =-3800
+phgcer_adcrefcut =-3800.
+paero_adcrefcut  =-3800.
+pcal_adcrefcut   =-3800.

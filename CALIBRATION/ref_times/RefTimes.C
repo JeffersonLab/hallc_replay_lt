@@ -1140,28 +1140,28 @@ Double_t paero_adcPosTimeWindowMin[aeroNumPmts], paero_adcNegTimeWindowMin[aeroN
     hFADC_TREF_ROC1_Hist->Draw();
     cout << "\n\n\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\nBug fixing Info: \n p_adcrefcut/hFADC_TREF_ROC1_Hist->GetXaxis()->GetXmax() = " << p_adcrefcut/hFADC_TREF_ROC1_Hist->GetXaxis()->GetXmax();
     cout << "\np_adcrefcut = " << p_adcrefcut << "\nhFADC_TREF_ROC1_Hist->GetXaxis()->GetXmax() = " << hFADC_TREF_ROC1_Hist->GetXaxis()->GetXmax();
-    LeftLine->DrawLine(p_adcrefcut/hFADC_TREF_ROC1_Hist->GetXaxis()->GetXmax(), 0, p_adcrefcut, 10);
+    LeftLine->DrawLine(h_adcrefcut, 0, h_adcrefcut, 10);
     canvas->Print(Form("output/REF_TimePlots_%d.pdf(",RunNumber),  hFADC_TREF_ROC1_Hist->GetName());
     hTref1_Hist->Draw();
-    LeftLine->DrawLine(phodo_tdcrefcut/hTref1_Hist->GetMaximum(), 0, phodo_tdcrefcut/hTref1_Hist->GetMaximum(), 10);
+    LeftLine->DrawLine(hhodo_tdcrefcut, 0, hhodo_tdcrefcut, 10);
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hTref1_Hist->GetName());
     hTref2_Hist->Draw();
-    LeftLine->DrawLine(phodo_tdcrefcut, 0, phodo_tdcrefcut, 10);
+    LeftLine->DrawLine(hhodo_tdcrefcut, 0, hhodo_tdcrefcut, 10);
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hTref2_Hist->GetName());
     hDCREF1_Hist->Draw();
-    LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, 10);
+    LeftLine->DrawLine(hdc_tdcrefcut, 0, hdc_tdcrefcut, 10);
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hDCREF1_Hist->GetName()); 
     hDCREF2_Hist->Draw();
-    LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, 10);
+    LeftLine->DrawLine(hdc_tdcrefcut, 0, hdc_tdcrefcut, 10);
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hDCREF2_Hist->GetName()); 
     hDCREF3_Hist->Draw();
-    LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, 10);
+    LeftLine->DrawLine(hdc_tdcrefcut, 0, hdc_tdcrefcut, 10);
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hDCREF3_Hist->GetName());  
     hDCREF4_Hist->Draw();
-    LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, 10);
+    LeftLine->DrawLine(hdc_tdcrefcut, 0, hdc_tdcrefcut, 10);
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hDCREF4_Hist->GetName());  
     hDCREF5_Hist->Draw();
-    LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, 10);
+    LeftLine->DrawLine(hdc_tdcrefcut, 0, hdc_tdcrefcut, 10);
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hDCREF5_Hist->GetName()); 
     
     /*
@@ -1184,6 +1184,7 @@ Double_t paero_adcPosTimeWindowMin[aeroNumPmts], paero_adcNegTimeWindowMin[aeroN
     */
 
     pFADC_TREF_ROC2_Hist->Draw();
+    LeftLine->DrawLine(p_adcrefcut, 0, p_adcrefcut, 10);
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pFADC_TREF_ROC2_Hist->GetName());
     pTref1_Hist->Draw();
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTref1_Hist->GetName()); 

@@ -30,9 +30,9 @@ void paero_calib(string rootname = "") {
   
   string fname = "../../ROOTfiles/" + rootname + ".root";
   TString outputpdf;
-  outputpdf = "OUTPUT/" + rootname + ".pdf";
+  outputpdf = "../../OUTPUT/" + rootname + ".pdf";
   TString outputpng;
-  outputpng = "OUTPUT/" + rootname + ".png";
+  outputpng = "../../OUTPUT/" + rootname + ".png";
 
   TFile *f = new TFile(fname.c_str());
   TTree* tree;
@@ -67,7 +67,9 @@ void paero_calib(string rootname = "") {
       hneg[i]->Fill(adc_neg[i], 1.);
     }
     
-    cout << "Entry " << ientry << "/" << nentries << '\n';
+    if(ientry % 10000 == 0){
+      cout << "Entry " << ientry << "/" << nentries << '\n';
+    }
 
   }
 

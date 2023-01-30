@@ -30,7 +30,7 @@ void run_cal(Int_t RunNumber = 0, Int_t NumEvents = 0, Int_t coin = 0)
   cout << "\n\n";
 
   TChain ch("T");
-  if (coin == 1) ch.Add(Form("../../ROOTfiles/Calib/hms_cer_calib_%d_%d.root", RunNumber, NumEvents));
+  if (coin == 1) ch.Add(Form("../../ROOTfiles/Calib/General/Pion_coin_replay_calibration_%d_%d.root", RunNumber, NumEvents));
   else ch.Add(Form("../../ROOTfiles/Analysis/50k/hms_coin_replay_production_%d_%d.root", RunNumber, NumEvents));
   TProof *proof = TProof::Open("");
   //proof->SetProgressDialog(0);  

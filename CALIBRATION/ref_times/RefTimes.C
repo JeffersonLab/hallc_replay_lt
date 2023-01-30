@@ -1130,13 +1130,18 @@ Double_t paero_adcPosTimeWindowMin[aeroNumPmts], paero_adcNegTimeWindowMin[aeroN
     gPad->SetLogy();
     TLine *LeftLine, *RightLine;
     LeftLine = new TLine();
+    LeftLine->SetLineWidth(4);
+    LeftLine->SetLineStyle(9);
+
     RightLine = new TLine();
+    RightLine->SetLineWidth(4);
+    RightLine->SetLineStyle(9);
     
     hFADC_TREF_ROC1_Hist->Draw();
-    LeftLine->DrawLine(p_adcrefcut, 0, p_adcrefcut, 10);
+    LeftLine->DrawLine(p_adcrefcut/hFADC_TREF_ROC1_Hist->GetXaxis()->GetXmax(), 0, p_adcrefcut/hFADC_TREF_ROC1_Hist->GetMaximum(), 10);
     canvas->Print(Form("output/REF_TimePlots_%d.pdf(",RunNumber),  hFADC_TREF_ROC1_Hist->GetName());
     hTref1_Hist->Draw();
-    LeftLine->DrawLine(phodo_tdcrefcut, 0, phodo_tdcrefcut, 10);
+    LeftLine->DrawLine(phodo_tdcrefcut/hTref1_Hist->GetMaximum(), 0, phodo_tdcrefcut/hTref1_Hist->GetMaximum(), 10);
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hTref1_Hist->GetName());
     hTref2_Hist->Draw();
     LeftLine->DrawLine(phodo_tdcrefcut, 0, phodo_tdcrefcut, 10);

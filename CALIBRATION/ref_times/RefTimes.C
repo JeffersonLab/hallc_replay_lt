@@ -1138,7 +1138,9 @@ Double_t paero_adcPosTimeWindowMin[aeroNumPmts], paero_adcNegTimeWindowMin[aeroN
     RightLine->SetLineStyle(9);
     
     hFADC_TREF_ROC1_Hist->Draw();
-    LeftLine->DrawLine(p_adcrefcut/hFADC_TREF_ROC1_Hist->GetXaxis()->GetXmax(), 0, p_adcrefcut/hFADC_TREF_ROC1_Hist->GetMaximum(), 10);
+    cout << "\n\n\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\nBug fixing Info: \n p_adcrefcut/hFADC_TREF_ROC1_Hist->GetXaxis()->GetXmax() = " << p_adcrefcut/hFADC_TREF_ROC1_Hist->GetXaxis()->GetXmax();
+    cout << "\np_adcrefcut = " << p_adcrefcut << "\nhFADC_TREF_ROC1_Hist->GetXaxis()->GetXmax() = " << hFADC_TREF_ROC1_Hist->GetXaxis()->GetXmax();
+    LeftLine->DrawLine(p_adcrefcut/hFADC_TREF_ROC1_Hist->GetXaxis()->GetXmax(), 0, p_adcrefcut, 10);
     canvas->Print(Form("output/REF_TimePlots_%d.pdf(",RunNumber),  hFADC_TREF_ROC1_Hist->GetName());
     hTref1_Hist->Draw();
     LeftLine->DrawLine(phodo_tdcrefcut/hTref1_Hist->GetMaximum(), 0, phodo_tdcrefcut/hTref1_Hist->GetMaximum(), 10);

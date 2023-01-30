@@ -403,13 +403,13 @@ Double_t paero_adcNegTimeWindowMax[aeroNumPmts] = {295., 295., 295., 295., 295.,
 void setCutValues(/* Could put the standard.database file here. */)
 {   
     //shms refTime
-    pdc_tdcrefcut    =-14400.;
-    phodo_tdcrefcut  =-4200.;
-    p_adcrefcut  =-5100.;
+    pdc_tdcrefcut    =14400.;
+    phodo_tdcrefcut  =4200.;
+    p_adcrefcut  =5100.;
 
-    hdc_tdcrefcut   =-14500.;
-    hhodo_tdcrefcut =-2600.;
-    h_adcrefcut =-3400.;
+    hdc_tdcrefcut   =14500.;
+    hhodo_tdcrefcut =2600.;
+    h_adcrefcut =3400.;
 /*    
     //phodo
 //                              1x                 1y              2x              2y 

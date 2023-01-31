@@ -1203,69 +1203,69 @@ Double_t paero_adcPosTimeWindowMin[aeroNumPmts], paero_adcNegTimeWindowMin[aeroN
     */
 
     pFADC_TREF_ROC2_Hist->Draw();
-    LeftLine->DrawLine(p_adcrefcut, 0, p_adcrefcut, pFADC_TREF_ROC2_Hist->GetYaxis()->GetXmax());
+    LeftLine->DrawLine(p_adcrefcut, 0, p_adcrefcut, pFADC_TREF_ROC2_Hist->GetBinContent(pFADC_TREF_ROC2_Hist->GetMaximumBin()));
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pFADC_TREF_ROC2_Hist->GetName());
     pTref1_Hist->Draw();
-    LeftLine->DrawLine(phodo_tdcrefcut, 0, phodo_tdcrefcut, pTref1_Hist->GetYaxis()->GetXmax());
+    LeftLine->DrawLine(phodo_tdcrefcut, 0, phodo_tdcrefcut, pTref1_Hist->GetBinContent(pTref1_Hist->GetMaximumBin()));
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTref1_Hist->GetName()); 
     pTref2_Hist->Draw();
-    LeftLine->DrawLine(phodo_tdcrefcut, 0, phodo_tdcrefcut, pTref2_Hist->GetYaxis()->GetXmax());
+    LeftLine->DrawLine(phodo_tdcrefcut, 0, phodo_tdcrefcut, pTref2_Hist->GetBinContent(pTref2_Hist->GetMaximumBin()));
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTref2_Hist->GetName()); 
     pDCREF1_Hist->Draw();
-    LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, pDCREF1_Hist->GetYaxis()->GetXmax());
+    LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, pDCREF1_Hist->GetBinContent(pDCREF1_Hist->GetMaximumBin()));
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF1_Hist->GetName());
     pDCREF2_Hist->Draw();
-    LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, pDCREF2_Hist->GetYaxis()->GetXmax());
+    LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, pDCREF2_Hist->GetBinContent(pDCREF2_Hist->GetMaximumBin()));
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF2_Hist->GetName());
     pDCREF3_Hist->Draw();
-    LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, pDCREF3_Hist->GetYaxis()->GetXmax());
+    LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, pDCREF3_Hist->GetBinContent(pDCREF3_Hist->GetMaximumBin()));
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF3_Hist->GetName()); 
     pDCREF4_Hist->Draw();
-    LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, pDCREF4_Hist->GetYaxis()->GetXmax());
+    LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, pDCREF4_Hist->GetBinContent(pDCREF4_Hist->GetMaximumBin()));
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF4_Hist->GetName()); 
     pDCREF5_Hist->Draw();
-    LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, pDCREF5_Hist->GetYaxis()->GetXmax());
+    LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, pDCREF5_Hist->GetBinContent(pDCREF5_Hist->GetMaximumBin()));
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF5_Hist->GetName()); 
     pDCREF6_Hist->Draw();
-    LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, pDCREF6_Hist->GetYaxis()->GetXmax());
+    LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, pDCREF6_Hist->GetBinContent(pDCREF6_Hist->GetMaximumBin()));
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF6_Hist->GetName()); 
     pDCREF7_Hist->Draw();
-    LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, pDCREF7_Hist->GetYaxis()->GetXmax());
+    LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, pDCREF7_Hist->GetBinContent(pDCREF7_Hist->GetMaximumBin()));
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF7_Hist->GetName()); 
     pDCREF8_Hist->Draw();
-    LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, pDCREF8_Hist->GetYaxis()->GetXmax());
+    LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, pDCREF8_Hist->GetBinContent(pDCREF8_Hist->GetMaximumBin()));
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF8_Hist->GetName()); 
     pDCREF9_Hist->Draw();
-    LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, pDCREF9_Hist->GetYaxis()->GetXmax());
+    LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, pDCREF9_Hist->GetBinContent(pDCREF9_Hist->GetMaximumBin()));
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF9_Hist->GetName()); 
     pDCREF10_Hist->Draw();
-    LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, pDCREF10_Hist->GetYaxis()->GetXmax());
+    LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, pDCREF10_Hist->GetBinContent(pDCREF10_Hist->GetMaximumBin()));
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF10_Hist->GetName());
     
     //Sum Plots
     cerAdcTdcDiffTime_Hist_Sum->Draw();
-    LeftLine->DrawLine(hcer_adcTimeWindowMin[0], 0, hcer_adcTimeWindowMin[0], cerAdcTdcDiffTime_Hist_Sum->GetYaxis()->GetXmax());
-    RightLine->DrawLine(hcer_adcTimeWindowMax[0], 0, hcer_adcTimeWindowMax[0], cerAdcTdcDiffTime_Hist_Sum->GetYaxis()->GetXmax());
+    LeftLine->DrawLine(hcer_adcTimeWindowMin[0], 0, hcer_adcTimeWindowMin[0], cerAdcTdcDiffTime_Hist_Sum->GetBinContent(cerAdcTdcDiffTime_Hist_Sum->GetMaximumBin()));
+    RightLine->DrawLine(hcer_adcTimeWindowMax[0], 0, hcer_adcTimeWindowMax[0], cerAdcTdcDiffTime_Hist_Sum->GetBinContent(cerAdcTdcDiffTime_Hist_Sum->GetMaximumBin()));
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  cerAdcTdcDiffTime_Hist_Sum->GetName());
     
     hgcerAdcTdcDiffTime_Hist_Sum->Draw();
-    LeftLine->DrawLine(phgcer_adcTimeWindowMin[0], 0, phgcer_adcTimeWindowMin[0], hgcerAdcTdcDiffTime_Hist_Sum->GetYaxis()->GetXmax());
-    RightLine->DrawLine(phgcer_adcTimeWindowMax[0], 0, phgcer_adcTimeWindowMax[0], hgcerAdcTdcDiffTime_Hist_Sum->GetYaxis()->GetXmax());
+    LeftLine->DrawLine(phgcer_adcTimeWindowMin[0], 0, phgcer_adcTimeWindowMin[0], hgcerAdcTdcDiffTime_Hist_Sum->GetBinContent(hgcerAdcTdcDiffTime_Hist_Sum->GetMaximumBin()));
+    RightLine->DrawLine(phgcer_adcTimeWindowMax[0], 0, phgcer_adcTimeWindowMax[0], hgcerAdcTdcDiffTime_Hist_Sum->GetBinContent(hgcerAdcTdcDiffTime_Hist_Sum->GetMaximumBin()));
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hgcerAdcTdcDiffTime_Hist_Sum->GetName());
     
     ngcerAdcTdcDiffTime_Hist_Sum->Draw();
-    LeftLine->DrawLine(pngcer_adcTimeWindowMin[0], 0, pngcer_adcTimeWindowMin[0], hgcerAdcTdcDiffTime_Hist_Sum->GetYaxis()->GetXmax());
-    RightLine->DrawLine(pngcer_adcTimeWindowMax[0], 0, pngcer_adcTimeWindowMax[0], hgcerAdcTdcDiffTime_Hist_Sum->GetYaxis()->GetXmax());
+    LeftLine->DrawLine(pngcer_adcTimeWindowMin[0], 0, pngcer_adcTimeWindowMin[0], ngcerAdcTdcDiffTime_Hist_Sum->GetBinContent(ngcerAdcTdcDiffTime_Hist_Sum->GetMaximumBin()));
+    RightLine->DrawLine(pngcer_adcTimeWindowMax[0], 0, pngcer_adcTimeWindowMax[0], ngcerAdcTdcDiffTime_Hist_Sum->GetBinContent(ngcerAdcTdcDiffTime_Hist_Sum->GetMaximumBin()));
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  ngcerAdcTdcDiffTime_Hist_Sum->GetName());
     
     aeroAdcTdcDiffTime_Hist_Sum[0]->Draw();
-    LeftLine->DrawLine(paero_adcPosTimeWindowMin[0], 0, paero_adcPosTimeWindowMin[0], aeroAdcTdcDiffTime_Hist_Sum[0]->GetYaxis()->GetXmax());
-    RightLine->DrawLine(paero_adcPosTimeWindowMax[0], 0, paero_adcPosTimeWindowMax[0], aeroAdcTdcDiffTime_Hist_Sum[0]->GetYaxis()->GetXmax());
+    LeftLine->DrawLine(paero_adcPosTimeWindowMin[0], 0, paero_adcPosTimeWindowMin[0], aeroAdcTdcDiffTime_Hist_Sum[0]->GetBinContent(aeroAdcTdcDiffTime_Hist_Sum[0]->GetMaximumBin()));
+    RightLine->DrawLine(paero_adcPosTimeWindowMax[0], 0, paero_adcPosTimeWindowMax[0], aeroAdcTdcDiffTime_Hist_Sum[0]->GetBinContent(aeroAdcTdcDiffTime_Hist_Sum[0]->GetMaximumBin()));
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  aeroAdcTdcDiffTime_Hist_Sum[0]->GetName());
     
     aeroAdcTdcDiffTime_Hist_Sum[1]->Draw();
-    LeftLine->DrawLine(paero_adcNegTimeWindowMin[0], 0, paero_adcNegTimeWindowMin[0], aeroAdcTdcDiffTime_Hist_Sum[1]->GetYaxis()->GetXmax());
-    RightLine->DrawLine(paero_adcNegTimeWindowMax[0], 0, paero_adcNegTimeWindowMax[0], aeroAdcTdcDiffTime_Hist_Sum[1]->GetYaxis()->GetXmax());
+    LeftLine->DrawLine(paero_adcNegTimeWindowMin[0], 0, paero_adcNegTimeWindowMin[0], aeroAdcTdcDiffTime_Hist_Sum[1]->GetBinContent(aeroAdcTdcDiffTime_Hist_Sum[1]->GetMaximumBin()));
+    RightLine->DrawLine(paero_adcNegTimeWindowMax[0], 0, paero_adcNegTimeWindowMax[0], aeroAdcTdcDiffTime_Hist_Sum[1]->GetBinContent(aeroAdcTdcDiffTime_Hist_Sum[1]->GetMaximumBin()));
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  aeroAdcTdcDiffTime_Hist_Sum[1]->GetName());
     
     for(Int_t iPlane = 0; iPlane < hcalPlanes; iPlane++)
@@ -1274,11 +1274,11 @@ Double_t paero_adcPosTimeWindowMin[aeroNumPmts], paero_adcNegTimeWindowMin[aeroN
         {
             hcalAdcTdcDiffTime_Hist_Sum[iPlane][iSide]->Draw();
             if (iSide == 0) {    
-                LeftLine->DrawLine(hcal_pos_AdcTimeWindowMin[ 0], 0, hcal_pos_AdcTimeWindowMin[0], hcalAdcTdcDiffTime_Hist_Sum[iPlane][iSide]->GetYaxis()->GetXmax());
-                RightLine->DrawLine(hcal_pos_AdcTimeWindowMax[0], 0, hcal_pos_AdcTimeWindowMax[0], hcalAdcTdcDiffTime_Hist_Sum[iPlane][iSide]->GetYaxis()->GetXmax());
+                LeftLine->DrawLine(hcal_pos_AdcTimeWindowMin[ 0], 0, hcal_pos_AdcTimeWindowMin[0], hcalAdcTdcDiffTime_Hist_Sum[iPlane][iSide]->GetBinContent(hcalAdcTdcDiffTime_Hist_Sum[iPlane][iSide]->GetMaximumBin()));
+                RightLine->DrawLine(hcal_pos_AdcTimeWindowMax[0], 0, hcal_pos_AdcTimeWindowMax[0], hcalAdcTdcDiffTime_Hist_Sum[iPlane][iSide]->GetBinContent(hcalAdcTdcDiffTime_Hist_Sum[iPlane][iSide]->GetMaximumBin()));
             } else {
-                LeftLine->DrawLine(hcal_neg_AdcTimeWindowMin[0], 0, hcal_neg_AdcTimeWindowMin[0], hcalAdcTdcDiffTime_Hist_Sum[iPlane][iSide]->GetYaxis()->GetXmax());
-                RightLine->DrawLine(hcal_neg_AdcTimeWindowMax[0], 0, hcal_neg_AdcTimeWindowMax[0], hcalAdcTdcDiffTime_Hist_Sum[iPlane][iSide]->GetYaxis()->GetXmax());
+                LeftLine->DrawLine(hcal_neg_AdcTimeWindowMin[0], 0, hcal_neg_AdcTimeWindowMin[0], hcalAdcTdcDiffTime_Hist_Sum[iPlane][iSide]->GetBinContent(hcalAdcTdcDiffTime_Hist_Sum[iPlane][iSide]->GetMaximumBin()));
+                RightLine->DrawLine(hcal_neg_AdcTimeWindowMax[0], 0, hcal_neg_AdcTimeWindowMax[0], hcalAdcTdcDiffTime_Hist_Sum[iPlane][iSide]->GetBinContent(hcalAdcTdcDiffTime_Hist_Sum[iPlane][iSide]->GetMaximumBin()));
             }
             canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hcalAdcTdcDiffTime_Hist_Sum[iPlane][iSide]->GetName());
         }
@@ -1288,18 +1288,18 @@ Double_t paero_adcPosTimeWindowMin[aeroNumPmts], paero_adcNegTimeWindowMin[aeroN
     {
         pcalprAdcTdcDiffTime_Hist_Sum[iSide]->Draw();
         if (iSide == 0) {    
-            LeftLine->DrawLine(pcal_pos_AdcTimeWindowMin[0], 0, pcal_pos_AdcTimeWindowMin[0], pcalprAdcTdcDiffTime_Hist_Sum[iSide]->GetYaxis()->GetXmax());
-            RightLine->DrawLine(pcal_pos_AdcTimeWindowMax[0], 0, hcal_pos_AdcTimeWindowMax[0], pcalprAdcTdcDiffTime_Hist_Sum[iSide]->GetYaxis()->GetXmax());
+            LeftLine->DrawLine(pcal_pos_AdcTimeWindowMin[0], 0, pcal_pos_AdcTimeWindowMin[0], pcalprAdcTdcDiffTime_Hist_Sum[iSide]->GetBinContent(pcalprAdcTdcDiffTime_Hist_Sum[iSide]->GetMaximumBin()));
+            RightLine->DrawLine(pcal_pos_AdcTimeWindowMax[0], 0, hcal_pos_AdcTimeWindowMax[0], pcalprAdcTdcDiffTime_Hist_Sum[iSide]->GetBinContent(pcalprAdcTdcDiffTime_Hist_Sum[iSide]->GetMaximumBin()));
         } else {
-            LeftLine->DrawLine(pcal_neg_AdcTimeWindowMin[0], 0, pcal_neg_AdcTimeWindowMin[0], pcalprAdcTdcDiffTime_Hist_Sum[iSide]->GetYaxis()->GetXmax());
-            RightLine->DrawLine(pcal_neg_AdcTimeWindowMax[0], 0, pcal_neg_AdcTimeWindowMax[0], pcalprAdcTdcDiffTime_Hist_Sum[iSide]->GetYaxis()->GetXmax());
+            LeftLine->DrawLine(pcal_neg_AdcTimeWindowMin[0], 0, pcal_neg_AdcTimeWindowMin[0], pcalprAdcTdcDiffTime_Hist_Sum[iSide]->GetBinContent(pcalprAdcTdcDiffTime_Hist_Sum[iSide]->GetMaximumBin()));
+            RightLine->DrawLine(pcal_neg_AdcTimeWindowMax[0], 0, pcal_neg_AdcTimeWindowMax[0], pcalprAdcTdcDiffTime_Hist_Sum[iSide]->GetBinContent(pcalprAdcTdcDiffTime_Hist_Sum[iSide]->GetMaximumBin()));
         }
         canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pcalprAdcTdcDiffTime_Hist_Sum[iSide]->GetName());
     }
     
     pcalflyAdcTdcDiffTime_Hist_Sum->Draw();
-    LeftLine->DrawLine(pcal_arr_AdcTimeWindowMin[0], 0, pcal_arr_AdcTimeWindowMin[0], pcalflyAdcTdcDiffTime_Hist_Sum->GetYaxis()->GetXmax());
-    RightLine->DrawLine(pcal_arr_AdcTimeWindowMin[0], 0, pcal_arr_AdcTimeWindowMin[0], pcalflyAdcTdcDiffTime_Hist_Sum->GetYaxis()->GetXmax());
+    LeftLine->DrawLine(pcal_arr_AdcTimeWindowMin[0], 0, pcal_arr_AdcTimeWindowMin[0], pcalflyAdcTdcDiffTime_Hist_Sum->GetBinContent(pcalflyAdcTdcDiffTime_Hist_Sum->GetMaximumBin()));
+    RightLine->DrawLine(pcal_arr_AdcTimeWindowMin[0], 0, pcal_arr_AdcTimeWindowMin[0], pcalflyAdcTdcDiffTime_Hist_Sum->GetBinContent(pcalflyAdcTdcDiffTime_Hist_Sum->GetMaximumBin()));
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pcalflyAdcTdcDiffTime_Hist_Sum->GetName());
     
     /*
@@ -1340,11 +1340,11 @@ Double_t paero_adcPosTimeWindowMin[aeroNumPmts], paero_adcNegTimeWindowMin[aeroN
             {
                 hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->Draw();
                 if(iSide == 0) {
-                    LeftLine->DrawLine(hhodo_PosAdcTimeWindowMin[iPmt+iPlane*MaxHodBars], 0, hhodo_PosAdcTimeWindowMin[iPmt+iPlane*MaxHodBars], hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetYaxis()->GetXmax()); 
-                    RightLine->DrawLine(hhodo_PosAdcTimeWindowMax[iPmt+iPlane*MaxHodBars], 0, hhodo_PosAdcTimeWindowMax[iPmt+iPlane*MaxHodBars], hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetYaxis()->GetXmax());
+                    LeftLine->DrawLine(hhodo_PosAdcTimeWindowMin[iPmt+iPlane*MaxHodBars], 0, hhodo_PosAdcTimeWindowMin[iPmt+iPlane*MaxHodBars], hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetBinContent(hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetMaximumBin())); 
+                    RightLine->DrawLine(hhodo_PosAdcTimeWindowMax[iPmt+iPlane*MaxHodBars], 0, hhodo_PosAdcTimeWindowMax[iPmt+iPlane*MaxHodBars], hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetBinContent(hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetMaximumBin()));
                 } else {
-                    LeftLine->DrawLine(hhodo_NegAdcTimeWindowMin[iPmt+iPlane*MaxHodBars], 0, hhodo_NegAdcTimeWindowMin[iPmt+iPlane*MaxHodBars], hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetYaxis()->GetXmax()); 
-                    RightLine->DrawLine(hhodo_NegAdcTimeWindowMax[iPmt+iPlane*MaxHodBars], 0, hhodo_NegAdcTimeWindowMax[iPmt+iPlane*MaxHodBars], hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetYaxis()->GetXmax());
+                    LeftLine->DrawLine(hhodo_NegAdcTimeWindowMin[iPmt+iPlane*MaxHodBars], 0, hhodo_NegAdcTimeWindowMin[iPmt+iPlane*MaxHodBars], hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetBinContent(hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetMaximumBin())); 
+                    RightLine->DrawLine(hhodo_NegAdcTimeWindowMax[iPmt+iPlane*MaxHodBars], 0, hhodo_NegAdcTimeWindowMax[iPmt+iPlane*MaxHodBars], hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetBinContent(hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetMaximumBin()));
                 }
                 canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetName());
                 //hHodAdcMult_Hist[iPlane][iSide][iPmt]->Draw();
@@ -1354,11 +1354,11 @@ Double_t paero_adcPosTimeWindowMin[aeroNumPmts], paero_adcNegTimeWindowMin[aeroN
             {
                 pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->Draw();
                 if(iSide == 0) {
-                    LeftLine->DrawLine(phodo_PosAdcTimeWindowMin[iPmt+iPlane*MaxHodBars], 0, phodo_PosAdcTimeWindowMin[iPmt+iPlane*MaxHodBars], pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetYaxis()->GetXmax()); 
-                    RightLine->DrawLine(phodo_PosAdcTimeWindowMax[iPmt+iPlane*MaxHodBars], 0, phodo_PosAdcTimeWindowMax[iPmt+iPlane*MaxHodBars], pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetYaxis()->GetXmax());
+                    LeftLine->DrawLine(phodo_PosAdcTimeWindowMin[iPmt+iPlane*MaxHodBars], 0, phodo_PosAdcTimeWindowMin[iPmt+iPlane*MaxHodBars], pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetBinContent(pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetMaximumBin())); 
+                    RightLine->DrawLine(phodo_PosAdcTimeWindowMax[iPmt+iPlane*MaxHodBars], 0, phodo_PosAdcTimeWindowMax[iPmt+iPlane*MaxHodBars], pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetBinContent(pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetMaximumBin()));
                 } else {
-                    LeftLine->DrawLine(phodo_NegAdcTimeWindowMin[iPmt+iPlane*MaxHodBars], 0, phodo_NegAdcTimeWindowMin[iPmt+iPlane*MaxHodBars], pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetYaxis()->GetXmax()); 
-                    RightLine->DrawLine(phodo_NegAdcTimeWindowMax[iPmt+iPlane*MaxHodBars], 0, phodo_NegAdcTimeWindowMax[iPmt+iPlane*MaxHodBars], pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetYaxis()->GetXmax());
+                    LeftLine->DrawLine(phodo_NegAdcTimeWindowMin[iPmt+iPlane*MaxHodBars], 0, phodo_NegAdcTimeWindowMin[iPmt+iPlane*MaxHodBars], pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetBinContent(pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetMaximumBin())); 
+                    RightLine->DrawLine(phodo_NegAdcTimeWindowMax[iPmt+iPlane*MaxHodBars], 0, phodo_NegAdcTimeWindowMax[iPmt+iPlane*MaxHodBars], pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetBinContent(pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetMaximumBin()));
                 }
                 canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetName());
                 //pHodAdcMult_Hist[iPlane][iSide][iPmt]->Draw();
@@ -1393,12 +1393,12 @@ Double_t paero_adcPosTimeWindowMin[aeroNumPmts], paero_adcNegTimeWindowMin[aeroN
     for(Int_t i = 0; i < dcPlanes; i++)
     {
         hdcrawtdc_Hist[i]->Draw();
-        LeftLine->DrawLine(hdc_tdc_min_win[i], 0, hdc_tdc_min_win[i], hdcrawtdc_Hist[i]->GetYaxis()->GetXmax());
-        RightLine->DrawLine(hdc_tdc_max_win[i], 0, hdc_tdc_max_win[i], hdcrawtdc_Hist[i]->GetYaxis()->GetXmax());
+        LeftLine->DrawLine(hdc_tdc_min_win[i], 0, hdc_tdc_min_win[i], hdcrawtdc_Hist[i]->GetBinContent(hdcrawtdc_Hist[i]->GetMaximumBin()));
+        RightLine->DrawLine(hdc_tdc_max_win[i], 0, hdc_tdc_max_win[i], hdcrawtdc_Hist[i]->GetBinContent(hdcrawtdc_Hist[i]->GetMaximumBin()));
         canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hdcrawtdc_Hist[i]->GetName());
         pdcrawtdc_Hist[i]->Draw();
-        LeftLine->DrawLine(pdc_tdc_min_win[i], 0, pdc_tdc_min_win[i], pdcrawtdc_Hist[i]->GetYaxis()->GetXmax());
-        RightLine->DrawLine(pdc_tdc_max_win[i], 0, pdc_tdc_max_win[i], pdcrawtdc_Hist[i]->GetYaxis()->GetXmax());
+        LeftLine->DrawLine(pdc_tdc_min_win[i], 0, pdc_tdc_min_win[i], pdcrawtdc_Hist[i]->GetBinContent(pdcrawtdc_Hist[i]->GetMaximumBin()));
+        RightLine->DrawLine(pdc_tdc_max_win[i], 0, pdc_tdc_max_win[i], pdcrawtdc_Hist[i]->GetBinContent(pdcrawtdc_Hist[i]->GetMaximumBin()));
         canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pdcrawtdc_Hist[i]->GetName());
         
         //hdcnhit_Hist[i]->Draw();
@@ -1412,8 +1412,8 @@ Double_t paero_adcPosTimeWindowMin[aeroNumPmts], paero_adcNegTimeWindowMin[aeroN
     for(Int_t iPmt = 0; iPmt < hcerNpmts; iPmt++)
     {
         cerAdcTdcDiffTime_Hist[iPmt]->Draw();
-        LeftLine->DrawLine(hcer_adcTimeWindowMin[iPmt], 0, hcer_adcTimeWindowMin[iPmt], cerAdcTdcDiffTime_Hist[iPmt]->GetYaxis()->GetXmax());
-        RightLine->DrawLine(hcer_adcTimeWindowMax[iPmt], 0, hcer_adcTimeWindowMax[iPmt], cerAdcTdcDiffTime_Hist[iPmt]->GetYaxis()->GetXmax());
+        LeftLine->DrawLine(hcer_adcTimeWindowMin[iPmt], 0, hcer_adcTimeWindowMin[iPmt], cerAdcTdcDiffTime_Hist[iPmt]->GetBinContent(cerAdcTdcDiffTime_Hist[iPmt]->GetMaximumBin()));
+        RightLine->DrawLine(hcer_adcTimeWindowMax[iPmt], 0, hcer_adcTimeWindowMax[iPmt], cerAdcTdcDiffTime_Hist[iPmt]->GetBinContent(cerAdcTdcDiffTime_Hist[iPmt]->GetMaximumBin()));
         canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  cerAdcTdcDiffTime_Hist[iPmt]->GetName());
         //cerAdcMult_Hist[iPmt]->Draw();
         //canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  cerAdcMult_Hist[iPmt]->GetName());
@@ -1423,12 +1423,12 @@ Double_t paero_adcPosTimeWindowMin[aeroNumPmts], paero_adcNegTimeWindowMin[aeroN
     for(Int_t iPmt = 0; iPmt < pcerNpmts; iPmt++)
     {
         hgcerAdcTdcDiffTime_Hist[iPmt]->Draw();
-        LeftLine->DrawLine(phgcer_adcTimeWindowMin[iPmt], 0, phgcer_adcTimeWindowMin[iPmt], hgcerAdcTdcDiffTime_Hist[iPmt]->GetYaxis()->GetXmax());
-        RightLine->DrawLine(phgcer_adcTimeWindowMax[iPmt], 0, phgcer_adcTimeWindowMax[iPmt], hgcerAdcTdcDiffTime_Hist[iPmt]->GetYaxis()->GetXmax());
+        LeftLine->DrawLine(phgcer_adcTimeWindowMin[iPmt], 0, phgcer_adcTimeWindowMin[iPmt], hgcerAdcTdcDiffTime_Hist[iPmt]->GetBinContent(hgcerAdcTdcDiffTime_Hist[iPmt]->GetMaximumBin()));
+        RightLine->DrawLine(phgcer_adcTimeWindowMax[iPmt], 0, phgcer_adcTimeWindowMax[iPmt], hgcerAdcTdcDiffTime_Hist[iPmt]->GetBinContent(hgcerAdcTdcDiffTime_Hist[iPmt]->GetMaximumBin()));
         canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hgcerAdcTdcDiffTime_Hist[iPmt]->GetName());
         ngcerAdcTdcDiffTime_Hist[iPmt]->Draw();
-        LeftLine->DrawLine(pngcer_adcTimeWindowMin[iPmt], 0, pngcer_adcTimeWindowMin[iPmt], hgcerAdcTdcDiffTime_Hist[iPmt]->GetYaxis()->GetXmax());
-        RightLine->DrawLine(pngcer_adcTimeWindowMax[iPmt], 0, pngcer_adcTimeWindowMax[iPmt], hgcerAdcTdcDiffTime_Hist[iPmt]->GetYaxis()->GetXmax());
+        LeftLine->DrawLine(pngcer_adcTimeWindowMin[iPmt], 0, pngcer_adcTimeWindowMin[iPmt], ngcerAdcTdcDiffTime_Hist[iPmt]->GetBinContent(ngcerAdcTdcDiffTime_Hist[iPmt]->GetMaximumBin()));
+        RightLine->DrawLine(pngcer_adcTimeWindowMax[iPmt], 0, pngcer_adcTimeWindowMax[iPmt], ngcerAdcTdcDiffTime_Hist[iPmt]->GetBinContent(ngcerAdcTdcDiffTime_Hist[iPmt]->GetMaximumBin()));
         canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  ngcerAdcTdcDiffTime_Hist[iPmt]->GetName());
         //hgcerAdcMult_Hist[iPmt]->Draw();
         //canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hgcerAdcMult_Hist[iPmt]->GetName());
@@ -1443,11 +1443,11 @@ Double_t paero_adcPosTimeWindowMin[aeroNumPmts], paero_adcNegTimeWindowMin[aeroN
         {
             aeroAdcTdcDiffTime_Hist[iSide][iPmt]->Draw();
             if (iSide == 0) {    
-                LeftLine->DrawLine(paero_adcPosTimeWindowMin[iPmt], 0, paero_adcPosTimeWindowMin[iPmt], aeroAdcTdcDiffTime_Hist[iSide][iPmt]->GetYaxis()->GetXmax());
-                RightLine->DrawLine(paero_adcPosTimeWindowMax[iPmt], 0, paero_adcPosTimeWindowMax[iPmt], aeroAdcTdcDiffTime_Hist[iSide][iPmt]->GetYaxis()->GetXmax());
+                LeftLine->DrawLine(paero_adcPosTimeWindowMin[iPmt], 0, paero_adcPosTimeWindowMin[iPmt], aeroAdcTdcDiffTime_Hist[iSide][iPmt]->GetBinContent(aeroAdcTdcDiffTime_Hist[iSide][iPmt]->GetMaximumBin()));
+                RightLine->DrawLine(paero_adcPosTimeWindowMax[iPmt], 0, paero_adcPosTimeWindowMax[iPmt], aeroAdcTdcDiffTime_Hist[iSide][iPmt]->GetBinContent(aeroAdcTdcDiffTime_Hist[iSide][iPmt]->GetMaximumBin()));
             } else {
-                LeftLine->DrawLine(paero_adcNegTimeWindowMin[iPmt], 0, paero_adcNegTimeWindowMin[iPmt], aeroAdcTdcDiffTime_Hist[iSide][iPmt]->GetYaxis()->GetXmax());
-                RightLine->DrawLine(paero_adcNegTimeWindowMax[iPmt], 0, paero_adcNegTimeWindowMax[iPmt], aeroAdcTdcDiffTime_Hist[iSide][iPmt]->GetYaxis()->GetXmax());
+                LeftLine->DrawLine(paero_adcNegTimeWindowMin[iPmt], 0, paero_adcNegTimeWindowMin[iPmt], aeroAdcTdcDiffTime_Hist[iSide][iPmt]->GetBinContent(aeroAdcTdcDiffTime_Hist[iSide][iPmt]->GetMaximumBin()));
+                RightLine->DrawLine(paero_adcNegTimeWindowMax[iPmt], 0, paero_adcNegTimeWindowMax[iPmt], aeroAdcTdcDiffTime_Hist[iSide][iPmt]->GetBinContent(aeroAdcTdcDiffTime_Hist[iSide][iPmt]->GetMaximumBin()));
             }
             canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  aeroAdcTdcDiffTime_Hist[iSide][iPmt]->GetName());
             //aeroAdcMult_Hist[iSide][iPmt]->Draw();
@@ -1465,11 +1465,11 @@ Double_t paero_adcPosTimeWindowMin[aeroNumPmts], paero_adcNegTimeWindowMin[aeroN
             {
                 hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->Draw();
                 if (iSide == 0) {    
-                    LeftLine->DrawLine(hcal_pos_AdcTimeWindowMin[iPmt+iPlane*hcalNumPmtsMax], 0, hcal_pos_AdcTimeWindowMin[iPmt+iPlane*hcalNumPmtsMax], hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetYaxis()->GetXmax());
-                    RightLine->DrawLine(hcal_pos_AdcTimeWindowMax[iPmt+iPlane*hcalNumPmtsMax], 0, hcal_pos_AdcTimeWindowMax[iPmt+iPlane*hcalNumPmtsMax], hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetYaxis()->GetXmax());
+                    LeftLine->DrawLine(hcal_pos_AdcTimeWindowMin[iPmt+iPlane*hcalNumPmtsMax], 0, hcal_pos_AdcTimeWindowMin[iPmt+iPlane*hcalNumPmtsMax], hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetBinContent(hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetMaximumBin()));
+                    RightLine->DrawLine(hcal_pos_AdcTimeWindowMax[iPmt+iPlane*hcalNumPmtsMax], 0, hcal_pos_AdcTimeWindowMax[iPmt+iPlane*hcalNumPmtsMax], hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetBinContent(hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetMaximumBin()));
                 } else {
-                    LeftLine->DrawLine(hcal_neg_AdcTimeWindowMin[iPmt+iPlane*hcalNumPmtsMax], 0, hcal_neg_AdcTimeWindowMin[iPmt+iPlane*hcalNumPmtsMax], hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetYaxis()->GetXmax());
-                    RightLine->DrawLine(hcal_neg_AdcTimeWindowMax[iPmt+iPlane*hcalNumPmtsMax], 0, hcal_neg_AdcTimeWindowMax[iPmt+iPlane*hcalNumPmtsMax], hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetYaxis()->GetXmax());
+                    LeftLine->DrawLine(hcal_neg_AdcTimeWindowMin[iPmt+iPlane*hcalNumPmtsMax], 0, hcal_neg_AdcTimeWindowMin[iPmt+iPlane*hcalNumPmtsMax], hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetBinContent(hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetMaximumBin()));
+                    RightLine->DrawLine(hcal_neg_AdcTimeWindowMax[iPmt+iPlane*hcalNumPmtsMax], 0, hcal_neg_AdcTimeWindowMax[iPmt+iPlane*hcalNumPmtsMax], hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetBinContent(hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetMaximumBin()));
                 }
                 canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->GetName());
                 //hcalAdcMult_Hist[iPlane][iSide][iPmt]->Draw();
@@ -1485,11 +1485,11 @@ Double_t paero_adcPosTimeWindowMin[aeroNumPmts], paero_adcNegTimeWindowMin[aeroN
         {
             pcalprAdcTdcDiffTime_Hist[iSide][iPmt]->Draw();
             if (iSide == 0) {    
-                LeftLine->DrawLine(pcal_pos_AdcTimeWindowMin[iPmt], 0, pcal_pos_AdcTimeWindowMin[iPmt], pcalprAdcTdcDiffTime_Hist[iSide][iPmt]->GetYaxis()->GetXmax());
-                RightLine->DrawLine(pcal_pos_AdcTimeWindowMax[iPmt], 0, hcal_pos_AdcTimeWindowMax[iPmt], pcalprAdcTdcDiffTime_Hist[iSide][iPmt]->GetYaxis()->GetXmax());
+                LeftLine->DrawLine(pcal_pos_AdcTimeWindowMin[iPmt], 0, pcal_pos_AdcTimeWindowMin[iPmt], pcalprAdcTdcDiffTime_Hist[iSide][iPmt]->GetBinContent(pcalprAdcTdcDiffTime_Hist[iSide][iPmt]->GetMaximumBin()));
+                RightLine->DrawLine(pcal_pos_AdcTimeWindowMax[iPmt], 0, hcal_pos_AdcTimeWindowMax[iPmt], pcalprAdcTdcDiffTime_Hist[iSide][iPmt]->GetBinContent(pcalprAdcTdcDiffTime_Hist[iSide][iPmt]->GetMaximumBin()));
             } else {
-                LeftLine->DrawLine(pcal_neg_AdcTimeWindowMin[iPmt], 0, pcal_neg_AdcTimeWindowMin[iPmt], pcalprAdcTdcDiffTime_Hist[iSide][iPmt]->GetYaxis()->GetXmax());
-                RightLine->DrawLine(pcal_neg_AdcTimeWindowMax[iPmt], 0, pcal_neg_AdcTimeWindowMax[iPmt], pcalprAdcTdcDiffTime_Hist[iSide][iPmt]->GetYaxis()->GetXmax());
+                LeftLine->DrawLine(pcal_neg_AdcTimeWindowMin[iPmt], 0, pcal_neg_AdcTimeWindowMin[iPmt], pcalprAdcTdcDiffTime_Hist[iSide][iPmt]->GetBinContent(pcalprAdcTdcDiffTime_Hist[iSide][iPmt]->GetMaximumBin()));
+                RightLine->DrawLine(pcal_neg_AdcTimeWindowMax[iPmt], 0, pcal_neg_AdcTimeWindowMax[iPmt], pcalprAdcTdcDiffTime_Hist[iSide][iPmt]->GetBinContent(pcalprAdcTdcDiffTime_Hist[iSide][iPmt]->GetMaximumBin()));
             }
             canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pcalprAdcTdcDiffTime_Hist[iSide][iPmt]->GetName());
             //pcalprAdcMult_Hist[iSide][iPmt]->Draw();
@@ -1500,8 +1500,8 @@ Double_t paero_adcPosTimeWindowMin[aeroNumPmts], paero_adcNegTimeWindowMin[aeroN
     for(Int_t iPmt = 0; iPmt < pcalFlyNumPmts - 1; iPmt++)
     {
         pcalflyAdcTdcDiffTime_Hist[iPmt]->Draw();
-        LeftLine->DrawLine(pcal_arr_AdcTimeWindowMin[iPmt], 0, pcal_arr_AdcTimeWindowMin[iPmt], pcalflyAdcTdcDiffTime_Hist[iPmt]->GetYaxis()->GetXmax());
-        RightLine->DrawLine(pcal_arr_AdcTimeWindowMin[iPmt], 0, pcal_arr_AdcTimeWindowMin[iPmt], pcalflyAdcTdcDiffTime_Hist[iPmt]->GetYaxis()->GetXmax());
+        LeftLine->DrawLine(pcal_arr_AdcTimeWindowMin[iPmt], 0, pcal_arr_AdcTimeWindowMin[iPmt], pcalflyAdcTdcDiffTime_Hist[iPmt]->GetBinContent(pcalflyAdcTdcDiffTime_Hist[iPmt]->GetMaximumBin()));
+        RightLine->DrawLine(pcal_arr_AdcTimeWindowMin[iPmt], 0, pcal_arr_AdcTimeWindowMin[iPmt], pcalflyAdcTdcDiffTime_Hist[iPmt]->GetBinContent(pcalflyAdcTdcDiffTime_Hist[iPmt]->GetMaximumBin()));
         canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pcalflyAdcTdcDiffTime_Hist[iPmt]->GetName());
         //pcalflyAdcMult_Hist[iPmt]->Draw();
         //canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pcalflyAdcMult_Hist[iPmt]->GetName());
@@ -1509,8 +1509,8 @@ Double_t paero_adcPosTimeWindowMin[aeroNumPmts], paero_adcNegTimeWindowMin[aeroN
     
     // print last one seperate, so that it save properly
     pcalflyAdcTdcDiffTime_Hist[pcalFlyNumPmts-1]->Draw();
-    LeftLine->DrawLine(pcal_arr_AdcTimeWindowMin[pcalFlyNumPmts-1], 0, pcal_arr_AdcTimeWindowMin[pcalFlyNumPmts-1], pcalflyAdcTdcDiffTime_Hist[pcalFlyNumPmts-1]->GetYaxis()->GetXmax());
-    RightLine->DrawLine(pcal_arr_AdcTimeWindowMin[pcalFlyNumPmts-1], 0, pcal_arr_AdcTimeWindowMin[pcalFlyNumPmts-1], pcalflyAdcTdcDiffTime_Hist[pcalFlyNumPmts-1]->GetYaxis()->GetXmax());
+    LeftLine->DrawLine(pcal_arr_AdcTimeWindowMin[pcalFlyNumPmts-1], 0, pcal_arr_AdcTimeWindowMin[pcalFlyNumPmts-1], pcalflyAdcTdcDiffTime_Hist[pcalFlyNumPmts-1]->GetBinContent(pcalflyAdcTdcDiffTime_Hist[pcalFlyNumPmts-1]->GetMaximumBin()));
+    RightLine->DrawLine(pcal_arr_AdcTimeWindowMin[pcalFlyNumPmts-1], 0, pcal_arr_AdcTimeWindowMin[pcalFlyNumPmts-1], pcalflyAdcTdcDiffTime_Hist[pcalFlyNumPmts-1]->GetBinContent(pcalflyAdcTdcDiffTime_Hist[pcalFlyNumPmts-1]->GetMaximumBin()));
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pcalflyAdcTdcDiffTime_Hist[pcalFlyNumPmts-1]->GetName());
     //pcalflyAdcMult_Hist[pcalFlyNumPmts-1]->Draw();
     //canvas->Print(Form("output/REF_TimePlots_%d.pdf)",RunNumber),  pcalflyAdcMult_Hist[pcalFlyNumPmts-1]->GetName());

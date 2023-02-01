@@ -41,7 +41,7 @@ static const Int_t pcerNpmts                     = 4;
 static const Int_t hcerNpmts                     = 2;
 
 //aerogel
-static const Int_t aeroNumPmts                  = 14;
+static const Int_t aeroNumPmts                  = 7;
 static const Int_t aeroSides                    = 2;
 static const TString aeroSideNames[aeroSides]   = {"Pos", "Neg"};
 
@@ -377,17 +377,17 @@ Double_t hcal_neg_AdcTimeWindowMax[hcalNumPmtsMax*4] = {14.50,17.50,14.50,11.50,
                          -108.50,-108.50,-108.50,-108.50,-108.50,-108.50,-108.50,-108.50,-108.50,-108.50,-108.50,-108.50,-108.50,
                          -108.50,-108.50,-108.50,-108.50,-108.50,-108.50,-108.50,-108.50,-108.50,-108.50,-108.50,-108.50,-108.50};
 
-Double_t pdc_tdc_min_win[dcPlanes] = {-12900.00, -12900.00, -12900.00, -12900.00, -12900.00, -12900.00, -12900.00, -12900.00, -12900.00, -12900.00, -12900.00, -12900.00};
+Double_t pdc_tdc_min_win[dcPlanes] = {-12700.00, -12700.00, -12700.00, -12700.00, -12700.00, -12700.00, -12700.00, -12700.00, -12700.00, -12700.00, -12700.00, -12700.00};
 Double_t pdc_tdc_max_win[dcPlanes] = {-11000.00, -11000.00, -11000.00, -11000.00, -11000.00, -11000.00, -11000.00, -11000.00, -11000.00, -11000.00, -11000.00, -11000.00};
 
-Double_t hdc_tdc_min_win[dcPlanes] = {-15000.00, -15000.00, -15000.00, -15000.00, -15000.00, -15000.00, -15000.00, -15000.00, -15000.00, -15000.00, -15000.00, -15000.00,};
-Double_t hdc_tdc_max_win[dcPlanes] = {-10000., -10000., -10000., -10000., -10000., -10000., -10000., -10000., -10000., -10000., -10000., -10000.};
+Double_t hdc_tdc_min_win[dcPlanes] = {-13300.00, -13300.00, -13300.00, -13300.00, -13300.00, -13300.00, -13300.00, -13300.00, -13300.00, -13300.00, -13300.00, -13300.00,};
+Double_t hdc_tdc_max_win[dcPlanes] = {-11500.00, -11500.00, -11500.00, -11500.00, -11500.00, -11500.00, -11500.00, -11500.00, -11500.00, -11500.00, -11500.00, -11500.00};
 
-Double_t phgcer_adcTimeWindowMin[pcerNpmts] = {-10.0, -10.0, -10.0, -10.0};
-Double_t phgcer_adcTimeWindowMax[pcerNpmts] = {40.0,  40.0,  40.0,  40.0};
+Double_t phgcer_adcTimeWindowMin[pcerNpmts] = {-6.0, -6.0, -6.0, -6.0};
+Double_t phgcer_adcTimeWindowMax[pcerNpmts] = {20.0,  20.0,  20.0,  20.0};
 
-Double_t pngcer_adcTimeWindowMin[pcerNpmts] = {-80.0, -80.0, -80.0, -80.0};
-Double_t pngcer_adcTimeWindowMax[pcerNpmts] = {80.0,  80.0,  80.0,  80.0};
+Double_t pngcer_adcTimeWindowMin[pcerNpmts] = {-5.0, -5.0, -5.0, -5.0};
+Double_t pngcer_adcTimeWindowMax[pcerNpmts] = {30.0,  30.0,  30.0,  30.0};
 
 Double_t hcer_adcTimeWindowMin[hcerNpmts] =  {110., 110.};
 Double_t hcer_adcTimeWindowMax[hcerNpmts] =  {170., 170.};
@@ -723,18 +723,18 @@ void setBranchAddresses(TTree* DataTree)
 
             DataTree->SetBranchAddress(Form("P.hod.%s.Good%sAdcTdcDiffTime", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data()), &pHodAdcTdcDiffTime[iPlane][iSide]);
             DataTree->SetBranchAddress(Form("P.hod.%s.Good%sAdcMult", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data()), &pHodAdcMult[iPlane][iSide]);
-    }
+        }
     }
 
     for(Int_t iPlane = 0; iPlane < HodPlanes; iPlane++)
     {
         for(Int_t iSide = 0; iSide < HodSides1; iSide++)
-    {
+        {
            DataTree->SetBranchAddress(Form("H.hod.%s.%sAdcPulseTimeRaw", HodPlaneNames[iPlane].Data(), HodSideNames1[iSide].Data()), &hHodAdcPulseTimeRaw[iPlane][iSide]);
-                  DataTree->SetBranchAddress(Form("H.hod.%s.%sTdcTimeRaw", HodPlaneNames[iPlane].Data(), HodSideNames1[iSide].Data()), &hHodTdcTimeRaw[iPlane][iSide]);
+           DataTree->SetBranchAddress(Form("H.hod.%s.%sTdcTimeRaw", HodPlaneNames[iPlane].Data(), HodSideNames1[iSide].Data()), &hHodTdcTimeRaw[iPlane][iSide]);
 
            DataTree->SetBranchAddress(Form("P.hod.%s.%sAdcPulseTimeRaw", HodPlaneNames[iPlane].Data(), HodSideNames1[iSide].Data()), &pHodAdcPulseTimeRaw[iPlane][iSide]);
-                  DataTree->SetBranchAddress(Form("P.hod.%s.%sTdcTimeRaw", HodPlaneNames[iPlane].Data(), HodSideNames1[iSide].Data()), &pHodTdcTimeRaw[iPlane][iSide]);
+           DataTree->SetBranchAddress(Form("P.hod.%s.%sTdcTimeRaw", HodPlaneNames[iPlane].Data(), HodSideNames1[iSide].Data()), &pHodTdcTimeRaw[iPlane][iSide]);
         }
     }
 
@@ -764,7 +764,7 @@ void setBranchAddresses(TTree* DataTree)
         {
             DataTree->SetBranchAddress(Form("H.cal.%s.good%sAdcTdcDiffTime", hcalPlaneNames[iPlane].Data(), calSideNames[iSide].Data()), &hcalAdcTdcDiffTime[iPlane][iSide]);
             DataTree->SetBranchAddress(Form("H.cal.%s.good%sAdcMult", hcalPlaneNames[iPlane].Data(), calSideNames[iSide].Data()), &hcalAdcMult[iPlane][iSide]);
-    }
+        }
     }
     
     //shms calorimeter
@@ -844,7 +844,7 @@ void makeHistos ()
         {
             for(Int_t iPmt = 0; iPmt < hHodbars[iPlane]; iPmt++)
             {
-                hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt] = new TH1D(Form("H.hod.%s.%sAdcTdcDiffTimeRaw_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), Form("H.hod.%s.%sAdcTdcDiffTimeRaw_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), 1000, -500, 500);
+                hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt] = new TH1D(Form("H.hod.%s.%sAdcTdcDiffTimeRaw_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), Form("H.hod.%s.%sAdcTdcDiffTimeRaw_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), 1500, -1000, 500);
                 hHodAdcMult_Hist[iPlane][iSide][iPmt] = new TH1D(Form("H.hod.%s.good%sAdcMult_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), Form("H.hod.%s.good%sAdcMult_pmt%d", HodPlaneNames[iPlane].Data(), HodSideNames[iSide].Data(), iPmt+1), 10, 0, 10);
         }
             for(Int_t iPmt = 0; iPmt < pHodbars[iPlane]; iPmt++)
@@ -895,10 +895,10 @@ void makeHistos ()
     //aerogel 
     for(Int_t iSide = 0; iSide < aeroSides; iSide++)
     {
-        aeroAdcTdcDiffTime_Hist_Sum[iSide] = new TH1D(Form("P.aero.good%sAdcTdcDiffTime_Sum", aeroSideNames[iSide].Data()), Form("P.aero.good%sAdcTdcDiffTime_Sum", aeroSideNames[iSide].Data()), 500, 0, 500);
+        aeroAdcTdcDiffTime_Hist_Sum[iSide] = new TH1D(Form("P.aero.good%sAdcTdcDiffTime_Sum", aeroSideNames[iSide].Data()), Form("P.aero.good%sAdcTdcDiffTime_Sum", aeroSideNames[iSide].Data()), 750, -250, 500);
         for(Int_t iPmt = 0; iPmt < aeroNumPmts; iPmt++)
         {
-            aeroAdcTdcDiffTime_Hist[iSide][iPmt] = new TH1D(Form("P.aero.good%sAdcTdcDiffTime_Pmt%d", aeroSideNames[iSide].Data(), iPmt+1), Form("P.aero.good%sAdcTdcDiffTime_Pmt%d", aeroSideNames[iSide].Data(), iPmt+1), 500, 0, 500);
+            aeroAdcTdcDiffTime_Hist[iSide][iPmt] = new TH1D(Form("P.aero.good%sAdcTdcDiffTime_Pmt%d", aeroSideNames[iSide].Data(), iPmt+1), Form("P.aero.good%sAdcTdcDiffTime_Pmt%d", aeroSideNames[iSide].Data(), iPmt+1), 750, -250, 500);
             aeroAdcMult_Hist[iSide][iPmt] = new TH1D(Form("P.aero.good%sAdcMult_Pmt%d", aeroSideNames[iSide].Data(), iPmt+1), Form("P.aero.good%sAdcMult_Pmt%d", aeroSideNames[iSide].Data(), iPmt+1), 10, 0, 10);
         }
     }
@@ -1017,31 +1017,30 @@ void fillHistos(TTree *DataTree)
                 for(Int_t iPmt = 0; iPmt < hHodbars[iPlane]; iPmt++)
                 { 
                     hHodAdcMult_Hist[iPlane][iSide][iPmt]->Fill(hHodAdcMult[iPlane][iSide][iPmt]);
-                    hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->Fill(hHodTdcTimeRaw[iPlane][iSide][iPmt] - hHodAdcPulseTimeRaw[iPlane][iSide][iPmt]); //changed this to fill raw variables 
+                    if ( hHodAdcMult[iPlane][iSide][iPmt] > 0) hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->Fill(hHodTdcTimeRaw[iPlane][iSide][iPmt] - hHodAdcPulseTimeRaw[iPlane][iSide][iPmt]); //changed this to fill raw variables 
                 } 
                 for(Int_t iPmt = 0; iPmt < pHodbars[iPlane]; iPmt++)
                 { 
                     pHodAdcMult_Hist[iPlane][iSide][iPmt]->Fill(pHodAdcMult[iPlane][iSide][iPmt]);
-                    pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->Fill(hHodTdcTimeRaw[iPlane][iSide][iPmt] - hHodAdcPulseTimeRaw[iPlane][iSide][iPmt]); //same here
-              } 
+                    if ( pHodAdcMult[iPlane][iSide][iPmt] > 0) pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->Fill(hHodTdcTimeRaw[iPlane][iSide][iPmt] - hHodAdcPulseTimeRaw[iPlane][iSide][iPmt]); //same here
+                } 
             } 
         } 
 
         for(Int_t iPlane = 0; iPlane < HodPlanes; iPlane++)
-    {
+        {
             for(Int_t iSide = 0; iSide < HodSides1; iSide++)
             {
                 for(Int_t iPmt = 0; iPmt < hHodbars[iPlane]; iPmt++)
-        {
- 
+                {
                     hHodAdcPulseTimeRaw_Hist[iPlane][iSide][iPmt]->Fill(hHodAdcPulseTimeRaw[iPlane][iSide][iPmt]);
-            hHodTdcTimeRaw_Hist[iPlane][iSide][iPmt]->Fill(hHodTdcTimeRaw[iPlane][iSide][iPmt]);
-        }
+                    hHodTdcTimeRaw_Hist[iPlane][iSide][iPmt]->Fill(hHodTdcTimeRaw[iPlane][iSide][iPmt]);
+                }
                 for(Int_t iPmt = 0; iPmt < pHodbars[iPlane]; iPmt++)
                 {            
-            pHodAdcPulseTimeRaw_Hist[iPlane][iSide][iPmt]->Fill(pHodAdcPulseTimeRaw[iPlane][iSide][iPmt]);
-            pHodTdcTimeRaw_Hist[iPlane][iSide][iPmt]->Fill(pHodTdcTimeRaw[iPlane][iSide][iPmt]);
-        }
+                    pHodAdcPulseTimeRaw_Hist[iPlane][iSide][iPmt]->Fill(pHodAdcPulseTimeRaw[iPlane][iSide][iPmt]);
+                    pHodTdcTimeRaw_Hist[iPlane][iSide][iPmt]->Fill(pHodTdcTimeRaw[iPlane][iSide][iPmt]);
+                }
             }
          }
 
@@ -1051,9 +1050,10 @@ void fillHistos(TTree *DataTree)
         for(Int_t iPmt = 0; iPmt < hcerNpmts; iPmt++)
         { 
             cerAdcMult_Hist[iPmt]->Fill(cerAdcMult[iPmt]);
-            //if(cerAdcMult[iPmt] > 0 ) 
-            cerAdcTdcDiffTime_Hist_Sum->Fill(cerAdcTdcDiffTime[iPmt]);
-            cerAdcTdcDiffTime_Hist[iPmt]->Fill(cerAdcTdcDiffTime[iPmt]);
+            if(cerAdcMult[iPmt] > 0 ) {
+                cerAdcTdcDiffTime_Hist_Sum->Fill(cerAdcTdcDiffTime[iPmt]);
+                cerAdcTdcDiffTime_Hist[iPmt]->Fill(cerAdcTdcDiffTime[iPmt]);
+            }
         } 
          
         //shms 
@@ -1061,12 +1061,14 @@ void fillHistos(TTree *DataTree)
         { 
             hgcerAdcMult_Hist[iPmt]->Fill(hgcerAdcMult[iPmt]);
             ngcerAdcMult_Hist[iPmt]->Fill(ngcerAdcMult[iPmt]);
-            //if (hgcerAdcMult[iPmt] > 0) 
-            hgcerAdcTdcDiffTime_Hist[iPmt]->Fill(hgcerAdcTdcDiffTime[iPmt]);
-            //if (ngcerAdcMult[iPmt] > 0) 
-            ngcerAdcTdcDiffTime_Hist[iPmt]->Fill(ngcerAdcTdcDiffTime[iPmt]);
-            hgcerAdcTdcDiffTime_Hist_Sum->Fill(cerAdcTdcDiffTime[iPmt]);
-            ngcerAdcTdcDiffTime_Hist_Sum->Fill(cerAdcTdcDiffTime[iPmt]);
+            if (hgcerAdcMult[iPmt] > 0) { 
+                hgcerAdcTdcDiffTime_Hist[iPmt]->Fill(hgcerAdcTdcDiffTime[iPmt]);
+                hgcerAdcTdcDiffTime_Hist_Sum->Fill(hgcerAdcTdcDiffTime[iPmt]);
+            }
+            if (ngcerAdcMult[iPmt] > 0) {
+                ngcerAdcTdcDiffTime_Hist[iPmt]->Fill(ngcerAdcTdcDiffTime[iPmt]);
+                ngcerAdcTdcDiffTime_Hist_Sum->Fill(ngcerAdcTdcDiffTime[iPmt]);
+            }
         } 
          
         //aerogel  
@@ -1074,10 +1076,11 @@ void fillHistos(TTree *DataTree)
         { 
             for(Int_t iPmt = 0; iPmt < aeroNumPmts; iPmt++)
             { 
-                //if (aeroAdcMult[iSide][iPmt] > 0) 
-                aeroAdcTdcDiffTime_Hist[iSide][iPmt]->Fill(aeroAdcTdcDiffTime[iSide][iPmt]);
-                aeroAdcTdcDiffTime_Hist_Sum[iSide]->Fill(aeroAdcTdcDiffTime[iSide][iPmt]);
                 aeroAdcMult_Hist[iSide][iPmt]->Fill(aeroAdcMult[iSide][iPmt]);
+                if (aeroAdcMult[iSide][iPmt] > 0) { 
+                    aeroAdcTdcDiffTime_Hist[iSide][iPmt]->Fill(aeroAdcTdcDiffTime[iSide][iPmt]);
+                    aeroAdcTdcDiffTime_Hist_Sum[iSide]->Fill(aeroAdcTdcDiffTime[iSide][iPmt]);
+                }
             } 
         } 
      
@@ -1089,10 +1092,11 @@ void fillHistos(TTree *DataTree)
             { 
                 for(Int_t iPmt = 0; iPmt < hcalNumPmts[iPlane]; iPmt++)
                 { 
-                    //if (hcalAdcMult[iPlane][iSide][iPmt] > 0) 
-                    hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->Fill(hcalAdcTdcDiffTime[iPlane][iSide][iPmt]);
-                    hcalAdcTdcDiffTime_Hist_Sum[iPlane][iSide]->Fill(hcalAdcTdcDiffTime[iPlane][iSide][iPmt]);
                     hcalAdcMult_Hist[iPlane][iSide][iPmt]->Fill(hcalAdcMult[iPlane][iSide][iPmt]);
+                    if (hcalAdcMult[iPlane][iSide][iPmt] > 0) { 
+                        hcalAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->Fill(hcalAdcTdcDiffTime[iPlane][iSide][iPmt]);
+                        hcalAdcTdcDiffTime_Hist_Sum[iPlane][iSide]->Fill(hcalAdcTdcDiffTime[iPlane][iSide][iPmt]);
+                    }
                 } 
             } 
         } 
@@ -1124,26 +1128,6 @@ void fillHistos(TTree *DataTree)
 
 void SaveToPDF(Int_t RunNumber)
 {
-/*
-    pdc_tdcrefcut, phodo_tdcrefcut, , hdc_tdcrefcut, hhodo_tdcrefcut, h_adcrefcut;
-
-Double_t phodo_PosAdcTimeWindowMin[4*MaxHodBars], phodo_PosAdcTimeWindowMax[4*MaxHodBars], phodo_NegAdcTimeWindowMin[4*MaxHodBars], phodo_NegAdcTimeWindowMax[4*MaxHodBars];
-Double_t hhodo_PosAdcTimeWindowMin[4*MaxHodBars], hhodo_PosAdcTimeWindowMax[4*MaxHodBars], hhodo_NegAdcTimeWindowMin[4*MaxHodBars], hhodo_NegAdcTimeWindowMax[4*MaxHodBars];
-
-Double_t pcal_pos_AdcTimeWindowMin[pcalPrNumPmts], pcal_pos_AdcTimeWindowMax[pcalPrNumPmts], pcal_neg_AdcTimeWindowMin[pcalPrNumPmts], pcal_neg_AdcTimeWindowMax[pcalPrNumPmts];
-Double_t pcal_arr_AdcTimeWindowMin[pcalFlyNumPmts], pcal_arr_AdcTimeWindowMax[pcalFlyNumPmts];
-
-Double_t hcal_pos_AdcTimeWindowMin[hcalNumPmtsMax*4], hcal_pos_AdcTimeWindowMax[hcalNumPmtsMax*4], hcal_neg_AdcTimeWindowMin[hcalNumPmtsMax*4], hcal_neg_AdcTimeWindowMax[hcalNumPmtsMax*4]; // 52 = 13*4
-
-Double_t pdc_tdc_min_win[dcPlanes], pdc_tdc_max_win[dcPlanes];
-Double_t hdc_tdc_min_win[dcPlanes], hdc_tdc_max_win[dcPlanes];
-
-Double_t phgcer_adcTimeWindowMin[pcerNpmts], phgcer_adcTimeWindowMax[pcerNpmts];
-Double_t pngcer_adcTimeWindowMin[pcerNpmts], pngcer_adcTimeWindowMax[pcerNpmts];
-Double_t hcer_adcTimeWindowMin[hcerNpmts], hcer_adcTimeWindowMax[hcerNpmts];
-
-Double_t paero_adcPosTimeWindowMin[aeroNumPmts], paero_adcNegTimeWindowMin[aeroNumPmts], paero_adcPosTimeWindowMax[aeroNumPmts], paero_adcNegTimeWindowMax[aeroNumPmts];
-*/
     //write histogrames to pdf
     TCanvas* canvas = new TCanvas("PDFOutput", "PDFOutput", 600, 600);
     gPad->SetLogy();
@@ -1289,7 +1273,7 @@ Double_t paero_adcPosTimeWindowMin[aeroNumPmts], paero_adcNegTimeWindowMin[aeroN
         pcalprAdcTdcDiffTime_Hist_Sum[iSide]->Draw();
         if (iSide == 0) {    
             LeftLine->DrawLine(pcal_pos_AdcTimeWindowMin[0], 0, pcal_pos_AdcTimeWindowMin[0], pcalprAdcTdcDiffTime_Hist_Sum[iSide]->GetBinContent(pcalprAdcTdcDiffTime_Hist_Sum[iSide]->GetMaximumBin()));
-            RightLine->DrawLine(pcal_pos_AdcTimeWindowMax[0], 0, hcal_pos_AdcTimeWindowMax[0], pcalprAdcTdcDiffTime_Hist_Sum[iSide]->GetBinContent(pcalprAdcTdcDiffTime_Hist_Sum[iSide]->GetMaximumBin()));
+            RightLine->DrawLine(pcal_pos_AdcTimeWindowMax[0], 0, pcal_pos_AdcTimeWindowMax[0], pcalprAdcTdcDiffTime_Hist_Sum[iSide]->GetBinContent(pcalprAdcTdcDiffTime_Hist_Sum[iSide]->GetMaximumBin()));
         } else {
             LeftLine->DrawLine(pcal_neg_AdcTimeWindowMin[0], 0, pcal_neg_AdcTimeWindowMin[0], pcalprAdcTdcDiffTime_Hist_Sum[iSide]->GetBinContent(pcalprAdcTdcDiffTime_Hist_Sum[iSide]->GetMaximumBin()));
             RightLine->DrawLine(pcal_neg_AdcTimeWindowMax[0], 0, pcal_neg_AdcTimeWindowMax[0], pcalprAdcTdcDiffTime_Hist_Sum[iSide]->GetBinContent(pcalprAdcTdcDiffTime_Hist_Sum[iSide]->GetMaximumBin()));

@@ -360,18 +360,18 @@ Double_t pcal_arr_AdcTimeWindowMin[pcalFlyNumPmts] = {-42,-41.50,-38.50,-38.50,-
 			    -41.50,-47.50,-44.50,-44.50,-44.50,-44.50,-44.50,-44.50,-44.50,-44.50,-44.50,-44.50,-44.50,-44.50};
 Double_t pcal_arr_AdcTimeWindowMax[pcalFlyNumPmts] = {38.50,38.50,41.50,41.50,38.50,38.50,35.50,38.50,41.50,35.50,35.50,38.50,38.50,38.50, 38.50,38.50,38.50,38.50,41.50,38.50,38.50,38.50,38.50,38.50,38.50,38.50,41.50,38.50, 38.50,38.50,38.50,35.50,38.50,38.50,38.50,38.50,38.50,38.50,38.50,38.50,38.50,38.50, 38.50,38.50,35.50,35.50,38.50,38.50,38.50,38.50,35.50,38.50,38.50,35.50,41.50,38.50, 38.50,38.50,41.50,35.50,38.50,38.50,38.50,38.50,35.50,35.50,35.50,35.50,38.50,38.50, 38.50,35.50,35.50,38.50,38.50,35.50,38.50,38.50,35.50,35.50,38.50,38.50,35.50,38.50,  35.50,35.50,38.50,38.50,38.50,35.50,38.50,38.50,38.50,32.50,35.50,35.50,38.50,35.50, 38.50,38.50,35.50,38.50,38.50,38.50,38.50,35.50,35.50,32.50,38.50,35.50,35.50,35.50, 35.50,32.50,35.50,32.50,32.50,32.50,32.50,35.50,32.50,32.50,35.50,32.50,35.50,32.50, 29.50,35.50,35.50,32.50,32.50,32.50,35.50,35.50,29.50,32.50,35.50,35.50,29.50,35.50, 32.50,32.50,32.50,29.50,35.50,35.50,29.50,32.50,32.50,35.50,32.50,35.50,32.50,32.50, 32.50,32.50,32.50,32.50,29.50,32.50,38.50,32.50,35.50,35.50,32.50,35.50,32.50,35.50, 35.50,35.50,32.50,32.50,32.50,32.50,32.50,32.50,35.50,35.50,35.50,35.50,35.50,32.50, 32.50,32.50,35.50,35.50,32.50,32.50,35.50,35.50,35.50,32.50,35.50,35.50,32.50,38.50, 35.50,38.50,35.50,35.50,38.50,35.50,35.50,35.50,35.50,35.50,35.50,35.50,35.50,38.50, 38.50,32.50,35.50,35.50,35.50,35.50,35.50,35.50,35.50,35.50,35.50,35.50,35.50,35.50};
 
-Double_t hcal_pos_AdcTimeWindowMin[hcalNumPmtsMax*4] = {-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,
-                                                        -50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,
-                                                        -50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,
-                                                        -50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.};
+Double_t hcal_pos_AdcTimeWindowMin[hcalNumPmtsMx*4] = {-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,
+                                                       -70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,
+                                                       -70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,
+                                                       -70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.};
 Double_t hcal_pos_AdcTimeWindowMax[hcalNumPmtsMax*4] = {-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,
                                                         -10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,
                                                         -10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,
                                                         -10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.};
-Double_t hcal_neg_AdcTimeWindowMin[hcalNumPmtsMax*4] = {-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,
-                                                        -50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,
-                                                        -50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,
-                                                        -50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.,-50.};
+Double_t hcal_neg_AdcTimeWindowMin[hcalNumPmtsMax*4] = {-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,
+                                                        -70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,
+                                                        -70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,
+                                                        -70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.,-70.};
 Double_t hcal_neg_AdcTimeWindowMax[hcalNumPmtsMax*4] = {-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,
                                                         -10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,
                                                         -10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,-10.,
@@ -701,6 +701,9 @@ void makeHistos ()
 //function for filling the histograms, this is where any cuts will be implimented
 void fillHistos(TTree *DataTree)
 {
+    int hHodDiffCounter = 0;
+    int pHodDiffCounter = 0;
+    
     Int_t MaxEvents = DataTree->GetEntries();
     cout << "Begining to fill histograms, " << MaxEvents << " events will be processed!\n";
     for(Int_t iEntry = 0; iEntry < MaxEvents; iEntry++)
@@ -767,7 +770,7 @@ void fillHistos(TTree *DataTree)
             if (pdcnhit[i] > 0)    pdcrawtdc_Hist[i]->Fill(pdcrawtdc[i]);
             
         } 
-     
+        
         // hodoscope variables 
         for(Int_t iPlane = 0; iPlane < HodPlanes; iPlane++)
         { 
@@ -777,14 +780,16 @@ void fillHistos(TTree *DataTree)
                 { 
                     hHodAdcMult_Hist[iPlane][iSide][iPmt]->Fill(hHodAdcMult[iPlane][iSide][iPmt]);
                     if ( hHodAdcMult[iPlane][iSide][iPmt] > 0) hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->Fill(hHodTdcTimeRaw[iPlane][iSide][iPmt] - hHodAdcPulseTimeRaw[iPlane][iSide][iPmt]); //changed this to fill raw variables 
+                    if ( hHodAdcTdcDiffTime[iPlane][iSide][iPmt] - (hHodTdcTimeRaw[iPlane][iSide][iPmt] - hHodAdcPulseTimeRaw[iPlane][iSide][iPmt]) > 1 && hHodAdcTdcDiffTime[iPlane][iSide][iPmt] != 0) hHodDiffCounter++;
                 } 
                 for(Int_t iPmt = 0; iPmt < pHodbars[iPlane]; iPmt++)
                 { 
                     pHodAdcMult_Hist[iPlane][iSide][iPmt]->Fill(pHodAdcMult[iPlane][iSide][iPmt]);
-                    if ( pHodAdcMult[iPlane][iSide][iPmt] > 0) pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->Fill(hHodTdcTimeRaw[iPlane][iSide][iPmt] - hHodAdcPulseTimeRaw[iPlane][iSide][iPmt]); //same here
+                    if ( pHodAdcMult[iPlane][iSide][iPmt] > 0) pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->Fill(pHodTdcTimeRaw[iPlane][iSide][iPmt] - pHodAdcPulseTimeRaw[iPlane][iSide][iPmt]); //same here
+                    if ( pHodAdcTdcDiffTime[iPlane][iSide][iPmt] - (pHodTdcTimeRaw[iPlane][iSide][iPmt] - pHodAdcPulseTimeRaw[iPlane][iSide][iPmt]) > 1 && pHodAdcTdcDiffTime[iPlane][iSide][iPmt] != 0) pHodDiffCounter++;
                 } 
             } 
-        } 
+        }
 
         for(Int_t iPlane = 0; iPlane < HodPlanes; iPlane++)
         {
@@ -882,6 +887,7 @@ void fillHistos(TTree *DataTree)
             pcalflyAdcMult_Hist[iPmt]->Fill(pcalflyAdcMult[iPmt]);
         } 
     }
+    cout << "\n\n\n !!!!!!!!!!!!!!!!! \nhHod test: " << hHodDiffCounter << "\npHod Test: " << pHodDiffCounter << "\n\n\n\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n";
     return; 
 }
 

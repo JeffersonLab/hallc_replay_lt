@@ -779,14 +779,14 @@ void fillHistos(TTree *DataTree)
                 for(Int_t iPmt = 0; iPmt < hHodbars[iPlane]; iPmt++)
                 { 
                     hHodAdcMult_Hist[iPlane][iSide][iPmt]->Fill(hHodAdcMult[iPlane][iSide][iPmt]);
-                    if ( hHodAdcMult[iPlane][iSide][iPmt] > 0) hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->Fill(hHodTdcTimeRaw[iPlane][iSide][iPmt] - hHodAdcPulseTimeRaw[iPlane][iSide][iPmt]); //changed this to fill raw variables 
-                    if ( hHodAdcTdcDiffTime[iPlane][iSide][iPmt] - (hHodTdcTimeRaw[iPlane][iSide][iPmt] - hHodAdcPulseTimeRaw[iPlane][iSide][iPmt]) > 1 && hHodAdcTdcDiffTime[iPlane][iSide][iPmt] != 0) hHodDiffCounter++;
+                    if ( hHodAdcMult[iPlane][iSide][iPmt] > 0) hHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->Fill(hHodAdcTdcDiffTime[iPlane][iSide][iPmt]);  
+                   // if ( hHodAdcTdcDiffTime[iPlane][iSide][iPmt] - (hHodTdcTimeRaw[iPlane][iSide][iPmt] - hHodAdcPulseTimeRaw[iPlane][iSide][iPmt]) > 1 && hHodAdcTdcDiffTime[iPlane][iSide][iPmt] != 0) hHodDiffCounter++;
                 } 
                 for(Int_t iPmt = 0; iPmt < pHodbars[iPlane]; iPmt++)
                 { 
                     pHodAdcMult_Hist[iPlane][iSide][iPmt]->Fill(pHodAdcMult[iPlane][iSide][iPmt]);
-                    if ( pHodAdcMult[iPlane][iSide][iPmt] > 0) pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->Fill(pHodTdcTimeRaw[iPlane][iSide][iPmt] - pHodAdcPulseTimeRaw[iPlane][iSide][iPmt]); //same here
-                    if ( pHodAdcTdcDiffTime[iPlane][iSide][iPmt] - (pHodTdcTimeRaw[iPlane][iSide][iPmt] - pHodAdcPulseTimeRaw[iPlane][iSide][iPmt]) > 1 && pHodAdcTdcDiffTime[iPlane][iSide][iPmt] != 0) pHodDiffCounter++;
+                    if ( pHodAdcMult[iPlane][iSide][iPmt] > 0) pHodAdcTdcDiffTime_Hist[iPlane][iSide][iPmt]->Fill(pHodAdcTdcDiffTime[iPlane][iSide][iPmt]); 
+                    //if ( pHodAdcTdcDiffTime[iPlane][iSide][iPmt] - (pHodTdcTimeRaw[iPlane][iSide][iPmt] - pHodAdcPulseTimeRaw[iPlane][iSide][iPmt]) > 1 && pHodAdcTdcDiffTime[iPlane][iSide][iPmt] != 0) pHodDiffCounter++;
                 } 
             } 
         }

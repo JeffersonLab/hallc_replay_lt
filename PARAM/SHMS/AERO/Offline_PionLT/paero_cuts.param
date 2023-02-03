@@ -20,8 +20,8 @@ paero_npe_thresh = 0.5
 ; ADC time window cut values used to select "good" ADC events
 paero_adc_tdc_offset = 200.
 
-paero_adcPosTimeWindowMin = -100., -100., -100., -100., -100., -100., -100.
-paero_adcNegTimeWindowMin = 0, 0, 0, 0, 0, 0, 0
+paero_adcPosTimeWindowMin = -20., -20., -20., -20., -20., -20., -20.
+paero_adcNegTimeWindowMin = 170., 170., 170., 170., 170., 170., 170.
 
-paero_adcPosTimeWindowMax = 200., 200., 200., 200., 200., 200., 200.
-paero_adcNegTimeWindowMax = 395., 395., 395., 395., 395., 395., 395.
+paero_adcPosTimeWindowMax = 40., 40., 40., 40., 40., 40., 40.
+paero_adcNegTimeWindowMax = 240., 240., 240., 240., 240., 240., 240.

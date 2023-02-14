@@ -59,7 +59,7 @@ cminch=2.54
 #include "PARAM/SHMS/CAL/pcal_geom.param"
 
 ; SHMS default cut parameter files
-#include "PARAM/SHMS/NGCER/Offline_PionLT/pngcer_cuts_11799.param"
+#include "PARAM/SHMS/NGCER/Offline_PionLT/pngcer_cuts.param"
 #include "PARAM/SHMS/DC/Offline_PionLT/pdc_cuts.param"
 #include "PARAM/SHMS/HODO/Offline_PionLT/phodo_cuts.param"
 #include "PARAM/SHMS/HGCER/Offline_PionLT/phgcer_cuts.param"

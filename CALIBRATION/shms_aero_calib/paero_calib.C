@@ -28,15 +28,14 @@ void paero_calib(string rootname = "") {
   cin >> rootname;
   }
   
-  string fname = "../../ROOTfiles/" + rootname + ".root";
+  string fname = "../../ROOTfiles/Calib/General/" + rootname + ".root";
   TString outputpdf;
-  outputpdf = "../../OUTPUT/" + rootname + ".pdf";
+  outputpdf = "../../OUTPUT/Calib/Aero" + rootname + ".pdf";
   TString outputpng;
-  outputpng = "../../OUTPUT/" + rootname + ".png";
+  outputpng = "../../OUTPUT/Calib/Aero" + rootname + ".png";
 
   TFile *f = new TFile(fname.c_str());
-  TTree* tree;
-  f->GetObject("T",tree);
+  TTree* tree = dynamic_cast <TTree*> (f->Get("T"));
 
   int nentries = tree->GetEntries();
   cout << "nentries= " << nentries << endl;
@@ -114,7 +113,7 @@ void paero_calib(string rootname = "") {
   c1->Print(outputpng);
 
   ofstream of;
-  of.open("gain.r",ios::out);
+  of.open(rootname + "_gain.r",ios::out);
   of << "paero_neg_gain = ";
   for (int i=0; i<NPMT; i++)
     of << "1./" << gain_neg[i] << ", ";

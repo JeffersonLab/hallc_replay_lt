@@ -30,9 +30,9 @@ void paero_calib(string rootname = "") {
   
   string fname = "../../ROOTfiles/Calib/General/" + rootname + ".root";
   TString outputpdf;
-  outputpdf = "../../OUTPUT/Calib/Aero" + rootname + ".pdf";
+  outputpdf = "../../OUTPUT/Calib/Aero/" + rootname + ".pdf";
   TString outputpng;
-  outputpng = "../../OUTPUT/Calib/Aero" + rootname + ".png";
+  outputpng = "../../OUTPUT/Calib/Aero/" + rootname + ".png";
 
   TFile *f = new TFile(fname.c_str());
   TTree* tree = dynamic_cast <TTree*> (f->Get("T"));
@@ -77,12 +77,12 @@ void paero_calib(string rootname = "") {
 
 
   //ADC                {-1, -2, -3, -4, -5, -6, -7}
-  double flo_neg[NPMT] { 9., 7.,8., 8., 6., 5., 8.};
-  double fhi_neg[NPMT] {17.,14.,18.,15.,15.,12.,16.};
+  double flo_neg[NPMT] { 7., 7.,7., 7., 6., 5., 7.};
+  double fhi_neg[NPMT] {16.,16.,17.,16.,16.,16.,16.};
 
   //ADC                {+1, +2, +3, +4, +5, +6, +7}
-  double flo_pos[NPMT] { 5., 6., 7.,9., 6., 7., 7.};
-  double fhi_pos[NPMT] {9.,14.,14.,17.,14.,14.,14.};
+  double flo_pos[NPMT] { 5., 6., 6.,6., 6., 6., 6.};
+  double fhi_pos[NPMT] {10.,15.,15.,15.,15.,15.,15.};
 
   float gain_pos[NPMT] {NPMT*0.};
   float gain_neg[NPMT] {NPMT*0.};

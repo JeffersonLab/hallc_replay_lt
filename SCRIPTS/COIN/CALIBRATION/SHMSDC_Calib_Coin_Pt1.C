@@ -41,7 +41,7 @@ void SHMSDC_Calib_Coin_Pt1 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   //gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_DCCalib_Offline.database");
   // New version, uses latest calibrations
   // gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_DCCalib_Offline_v2.database");
-  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_DCpt1.database");
+  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard.database");
   gHcParms->Load(gHcParms->GetString("g_ctp_database_filename"), RunNumber);
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);

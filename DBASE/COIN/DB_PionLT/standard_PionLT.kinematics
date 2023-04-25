@@ -1833,7 +1833,7 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = 0
 eHadCoinTime_Offset = 75.0
 
-12691 - 13032
+12691 - 13037
 gpbeam = 9.172705
 gtargmass_amu = 1.00794
 htheta_lab = -58.535

@@ -1,22 +1,20 @@
-# Aerogel Replay
+Aerogel Calibration Directory.
 
-A ROOT script that extracts data from the beam raw data and exports series of corresponding PMT histograms. Every output ROOT file contains seven Positive and seven negative PMT histograms.
-There are two ROOT scripts in the repository. Script `replay.c` uses the TTreeReader interface to iterate the ROOT trees. It works quick but will more likely crash if the input ROOT files are corrupt.
-A better ROOT TFile error handling is implemented in the script `replayConv.c` which uses a conventional TTRee::GetEntry() mechanism for reading the tree. The downside of this mechanism is the speed which is about 10 times more slow compared to the TTreeReader.
+This Is the combination of wo sets of scripts.
 
-## How to use
+In the oldCode directory is the old fit method. 
+This code does a simple guassian fit to the PMT channel distribution, 
+then 1/mean of these fits is saved as the calibration parameters.
 
-1. Checkout the repository to the folder where the output data will be located.
-```
-git clone https://github.com/petrstepanov/aerogel-replay/ && cd aerogel-replay
-```
-2. Tweak the RegExp input filename pattern on the line 14 of the script to match the desired name of the input files.
-3. Limit the the output spectra statistics by setting the maximum number of the reads from thetree on the line 77.
-4. Run either `replay.c` or `replayConv.c` script specifying the path to the directory containing the raw spectra:
+The other two dirrectories are for the new fit method. 
+The RootFileProccessor directory contains code in oder to preprocesses the replayed root files for the next fitting step.
+The aerogel fit dirrectory contains code for the fit function. This code needs to be compiled in order to run.
+Further instructions on how to use and compile the code are contained in its readme file.
 
-```
-root 'replayConv.c("/path/to/the/root/replay/files")'
-```
-5. Script will automatically scan the directory for the input files and start processing them.
-
-If the script crashes during the run you can restart the script from the desired input filename index. In order to do so specify the starting input filename index on line 13 of the script.
+The second method containes a much more robust fit method, fitting multiple gaussians with exponential tails.
+The code fits on the Photo-electron distribution so the mean it gives is actually the percent error from the true mean.
+For more details see presentations by Petr Stepenov on the calibration (2020):
+https://redmine.jlab.org/attachments/1865
+https://redmine.jlab.org/attachments/1864
+You can also see the results from Nathan Heinrich's calibration (2023):
+https://redmine.jlab.org/attachments/1863

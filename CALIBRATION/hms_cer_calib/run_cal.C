@@ -42,8 +42,8 @@ void run_cal(Int_t RunNumber = 0, Int_t NumEvents = 0, Int_t coin = 0)
 
     cout << "\n\nUpdate calibration constants with the better estimate (y/n)? ";
       
-    TString user_input;
-    cin >> user_input;
+    TString user_input = "y";
+    //cin >> user_input;
     if (user_input == "y") {
       ifstream temp;
       temp.open("calibration_temp.txt", ios::in);

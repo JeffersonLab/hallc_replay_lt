@@ -75,10 +75,5 @@ cminch=2.54
 #include "PARAM/SHMS/HODO/phodo_TWcalib.param"
 #include "PARAM/SHMS/HODO/phodo_Vpcalib.param"
 #include "PARAM/SHMS/HGCER/phgcer_calib.param"
-<<<<<<< HEAD
-#include "PARAM/SHMS/AERO/paero_calib.param"
-#include "PARAM/SHMS/CAL/pcal_calib.param"
-=======
 #include "PARAM/SHMS/AERO/Offline_PionLT/paero_calib_11883-12493.param"
 #include "PARAM/SHMS/CAL/pcal_calib.param"
->>>>>>> f6c244d18a3015b12fcae31e8ea2bf1a96ad7b4c

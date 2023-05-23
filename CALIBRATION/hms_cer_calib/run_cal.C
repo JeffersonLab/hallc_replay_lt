@@ -50,6 +50,8 @@ void run_cal(Int_t RunNumber = 0, Int_t NumEvents = 0, Int_t coin = 0)
       temp.open("calibration_temp.txt", ios::in);
       ifstream temp2;
       temp2.open("plots/HMS_cer_1.pdf", ios::in);
+      ifstream temp3;
+      temp3.open("Calib/calib_error.csv", ios::in);
       if (temp.is_open()) {
 	rename("calibration_temp.txt", Form("Calib/hcer_calib_%d.param", RunNumber));
       }
@@ -59,6 +61,9 @@ void run_cal(Int_t RunNumber = 0, Int_t NumEvents = 0, Int_t coin = 0)
       {
 	rename("plots/HMS_cer_1.pdf", Form("plots/HMS_cer_%d.pdf", RunNumber));
       }
+      temp2.close();
+      if(temp3.is_open()) rename("Calib/calib_error.csv", Form("Calib/calib_error_%d.csv", RunNumber));
+      temp3.close();
     }
 
     else {

@@ -35,6 +35,7 @@ public :
    TH1F           *fBeta_Full;
    TH1F          **fTiming_Cut;
    TH1F          **fTiming_Full;
+   //   TH2           **fPulseIntXTimingFull;
 
    // Readers to access the data (delete the ones you do not need).
    TTreeReaderArray<Double_t> H_cer_goodAdcPulseInt    = {fReader, "H.cer.goodAdcPulseInt"};

@@ -7,7 +7,7 @@ cminch=2.54
 #include "PARAM/GEN/genflags.param"
 #include "PARAM/GEN/gdebug.param"
 #include "PARAM/GEN/gtarget.param"
-#include "PARAM/GEN/gbeam_oneraster.param"
+#include "PARAM/GEN/gbeam.param"
 #include "PARAM/GEN/gscalers.param"
 
 ; General HMS parameter files
@@ -16,7 +16,7 @@ cminch=2.54
 #include "PARAM/HMS/GEN/hdebug.param"
 #include "PARAM/HMS/GEN/hmsflags.param"
 #include "PARAM/HMS/GEN/htracking.param"
-#include "PARAM/HMS/GEN/Offline_PionLT/h_reftime_cut_PionLT.param"
+#include "PARAM/HMS/GEN/h_reftime_cut.param"
 
 ; HMS default geometry parameter files 
 #include "PARAM/HMS/CER/hcer_geom.param"
@@ -40,14 +40,14 @@ cminch=2.54
 #include "PARAM/HMS/HODO/hhodo_TWcalib.param"
 #include "PARAM/HMS/HODO/hhodo_Vpcalib.param"
 #include "PARAM/HMS/AERO/haero_calib.param"
-#include "PARAM/HMS/CAL/Online_PionLT2021/hcal_calib_12364.param"
+#include "PARAM/HMS/CAL/hcal_calib.param"
 
 ; General SHMS parameter files
 ; Note: shmsflags.param includes spectrometer offsets and options.
 #include "PARAM/SHMS/GEN/pcana.param"
 #include "PARAM/SHMS/GEN/pdebug.param"
 #include "PARAM/SHMS/GEN/shmsflags.param"
-#include "PARAM/SHMS/GEN/Online_PionLT2021/ptracking.param"
+#include "PARAM/SHMS/GEN/ptracking.param"
 #include "PARAM/SHMS/GEN/Offline_PionLT/p_reftime_cut_PionLT_3-4Trig.param"
 
 ; SHMS default geometry parameter files
@@ -74,5 +74,5 @@ cminch=2.54
 #include "PARAM/SHMS/HODO/phodo_TWcalib.param"
 #include "PARAM/SHMS/HODO/phodo_Vpcalib.param"
 #include "PARAM/SHMS/HGCER/phgcer_calib.param"
-#include "PARAM/SHMS/AERO/Offline_PionLT/paero_calib_12493-14997.param"
+#include "PARAM/SHMS/AERO/Offline_PionLT/paero_calib_14997-16900.param"
 #include "PARAM/SHMS/CAL/pcal_calib.param"

@@ -48,6 +48,7 @@ CALIBRATION/ref_times/HMS/
 CALIBRATION/ref_times/SHMS/
 CALIBRATION/shms_hodo_calib/Calibration_Plots/
 CALIBRATION/hms_hodo_calib/Calibration_Plots/
+CALIBRATION/hms_cer_calib/calib/*
 PARAM/HMS/BCM/CALIB/
 PARAM/HMS/BCM/CALIB/*
 DBASE/COIN/KaonLT_Calib_MKJTest/PedDefault_0_Files/

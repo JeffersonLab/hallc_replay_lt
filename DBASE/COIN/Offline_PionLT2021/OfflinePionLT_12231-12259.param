@@ -33,7 +33,7 @@ cminch=2.54
 #include "PARAM/HMS/CAL/Offline_PionLT/hcal_cuts.param"
 
 ; HMS default calibration parameter files
-#include "PARAM/HMS/CER/hcer_calib.param"
+#include "PARAM/HMS/CER/Offline_PionLT/hcer_calib11800-12299.param"
 #include "PARAM/HMS/DC/hdc_calib.param"
 #include "PARAM/HMS/DC/hdc_tzero_per_wire.param"
 #include "PARAM/HMS/HODO/hhodo_calib.param"

@@ -12,6 +12,70 @@ root -l pngcer_calib.C
 #include <TF1.h>
 #include <TLine.h>
 
+// This fuction is a faithful recreation of the math shown in petr stepanov's slides for the aerogel calibration
+Double_t multiGausPetr(Double_t *x, Double_t *par)
+{
+    int n = 5; // Number of gausians to use
+    Double_t z = x[0];
+    Double_t f = 0;
+    
+    // fit parameters
+    Double_t w = par[0]; //omega    - probability that signal is accompanied by type II background process
+    Double_t s = par[1]; //sigma0   - standard deviation of the type I background process (pedestal)
+    Double_t a = par[2]; //Alpha    - coefficient of the exponential decrease of the type II background
+    Double_t u = par[3]; //mu       - number of photo-electrons
+    Double_t S = par[4]; //Sigma1   - corresponding standard deviation of the charge distribution
+    Double_t Q = par[5]; //Q1       - average charge at the PM output
+    
+    // Background Term
+    Double_t B = (TMath::Exp(-TMath::Power(z,2)/(2*TMath::Power(s,2)))*(1 - w)/(s * TMath::Sqrt(2*TMath::Pi()))) + w*a*TMath::Exp(-a*z); // invalid for z < 0 !!!
+    
+    // i = 0 term
+    f += u*TMath::Exp(-u)/(1-TMath::Exp(-u))
+    // multi guasian being added together.
+    for (int i = 1; i < (n+1); n++)
+    {
+        f += (TMath::Power(u,i)*TMath::Exp(-u)/(TMath::Factorial(i)*(1-TMath::Exp(-u))))*(1/(S*TMath::Sqrt(2*TMath::Pi()*i)))*TMath::Exp(-1*TMath::Power((z-Q),2)/(2*n*TMath::Power(S,2)));
+    }
+    
+    return B*f;
+}
+
+// approximate fitting function for pmts from E.H.Bellamy paper https://doi.org/10.1016/0168-9002(94)90183-X
+Double_t multiGaus(Double_t *x, Double_t *par)
+{
+    int n = 5; // Number of gausians to use
+    Double_t z = x[0];
+    Double_t f = 0;
+    
+    // fit parameters
+    Double_t w = par[0]; //omega    - probability that signal is accompanied by type II background process
+    Double_t q = par[1]; //Q0       - pedestal position
+    Double_t s = par[2]; //sigma0   - standard deviation of the type I background process (pedestal)
+    Double_t a = par[3]; //Alpha    - coefficient of the exponential decrease of the type II background
+    Double_t u = par[4]; //mu       - number of photo-electrons
+    Double_t Q = par[5]; //Q1       - average charge at the PM output
+    Double_t S = par[6]; //Sigma1   - corresponding standard deviation of the charge distribution
+    
+    // Background Term
+    Double_t B = 0;
+    if ( (x - q) <= 0 ) // step function
+    {
+        B = TMath::Exp(-u)*(1-w)*TMath::Exp(-1*TMath::Power(z-q,2)/(2*TMath::Power(s,2)))/(s*TMath::Sqrt(2*TMath::Pi()))
+    }else{
+        B = TMath::Exp(-u)*( (1-w)*TMath::Exp(-1*TMath::Power(z-q,2)/(2*TMath::Power(s,2)))/(s*TMath::Sqrt(2*TMath::Pi())) + (w*a*TMath::Exp(-a*(z-q))) );
+    }
+    
+    // multi guasian being added together.
+    for (int i = 1; i < (n+1); n++)
+    {
+        f += (TMath::Power(u,i)*TMath::Exp(-u)/(TMath::Factorial(i)))*(1/(S*TMath::Sqrt(2*TMath::Pi()*i)))*TMath::Exp(-1*TMath::Power((z-q-(w/a)-i*Q),2)/(2*i*TMath::Power(S,2)));
+    }
+    
+    return B+f;
+    //return f;
+}
+
 int pngcer_calib() {
 	// Input file format
 	std::string replay_file_form = "../../ROOTfiles/Calib/CER/Pion_coin_replay_calibration_%i_-1.root";
@@ -124,12 +188,21 @@ int pngcer_calib() {
 	TCanvas* c1 = new TCanvas("c1", "Cerenkov Calibration", 1200, 1200);
 	c1->Divide(2,2);
 	c1->cd(1);
+	
+	Double_t startParam[7] = {0.5, 1, 1, 1,5, 20,2};
+	TF1* g1 = new TF1("G1",multiGaus,20,100,7);
+	g1->SetParameters(startParam);
+	g1->SetParLimits(0,0,1);
+	h_pmt1_int->Fit(g1,"R");
+	
 	TF1* f1 = new TF1("f1","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1)",30,70);
 	f1->SetParameters(2000,50,3);
 	h_pmt1_int->Fit(f1,"R");
+	
 	double yscale1 = f1->GetParameter(0);
 	double mean1 = f1->GetParameter(1);
 	double xscale1 = f1->GetParameter(2); // this is the calibration constant
+	
 	h_pmt1_int->SetTitle("PMT 1 Cerenkov Calibration Poisson Fit; Pulse Integral");
 	auto h_pmt1_int_clone = h_pmt1_int->DrawClone();
 	

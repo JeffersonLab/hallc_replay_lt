@@ -13,6 +13,7 @@ root -l pngcer_calib.C
 #include <TLine.h>
 
 // This fuction is a faithful recreation of the math shown in petr stepanov's slides for the aerogel calibration
+/*
 Double_t multiGausPetr(Double_t *x, Double_t *par)
 {
     int n = 5; // Number of gausians to use
@@ -31,7 +32,7 @@ Double_t multiGausPetr(Double_t *x, Double_t *par)
     Double_t B = (TMath::Exp(-TMath::Power(z,2)/(2*TMath::Power(s,2)))*(1 - w)/(s * TMath::Sqrt(2*TMath::Pi()))) + w*a*TMath::Exp(-a*z); // invalid for z < 0 !!!
     
     // i = 0 term
-    f += u*TMath::Exp(-u)/(1-TMath::Exp(-u))
+    f += u*TMath::Exp(-u)/(1-TMath::Exp(-u));
     // multi guasian being added together.
     for (int i = 1; i < (n+1); n++)
     {
@@ -40,6 +41,7 @@ Double_t multiGausPetr(Double_t *x, Double_t *par)
     
     return B*f;
 }
+*/
 
 // approximate fitting function for pmts from E.H.Bellamy paper https://doi.org/10.1016/0168-9002(94)90183-X
 Double_t multiGaus(Double_t *x, Double_t *par)
@@ -59,9 +61,9 @@ Double_t multiGaus(Double_t *x, Double_t *par)
     
     // Background Term
     Double_t B = 0;
-    if ( (x - q) <= 0 ) // step function
+    if ( (z - q) <= 0 ) // step function
     {
-        B = TMath::Exp(-u)*(1-w)*TMath::Exp(-1*TMath::Power(z-q,2)/(2*TMath::Power(s,2)))/(s*TMath::Sqrt(2*TMath::Pi()))
+        B = TMath::Exp(-u)*(1-w)*TMath::Exp(-1*TMath::Power(z-q,2)/(2*TMath::Power(s,2)))/(s*TMath::Sqrt(2*TMath::Pi()));
     }else{
         B = TMath::Exp(-u)*( (1-w)*TMath::Exp(-1*TMath::Power(z-q,2)/(2*TMath::Power(s,2)))/(s*TMath::Sqrt(2*TMath::Pi())) + (w*a*TMath::Exp(-a*(z-q))) );
     }

@@ -14,7 +14,7 @@ root -l pngcer_calib.C
 
 int pngcer_calib() {
 	// Input file format
-	std::string replay_file_form = "../../ROOTfiles/SHMS/CALIBRATION/shms_replay_cer_%i_-1.root";
+	std::string replay_file_form = "../../ROOTfiles/Calib/CER/Pion_coin_replay_calibration_%i_-1.root";
 
 	// Taking user input
 	std::string raw_run_input;
@@ -67,12 +67,12 @@ int pngcer_calib() {
 	double dpmax = 22;
 
 	// Plotting Calorimeter distribution for entire dataset
-	ROOT::RDF::TH1DModel m_etottracknorm ("h_etottracknorm","P.cal.etottracknorm Cuts on All Events", 300, 0, 3);
-	auto h_etottracknorm = df.Filter(Form("P.cal.etottracknorm > 0.01 && P.gtr.dp > %.1f && P.gtr.dp < %.1f"
-										  ,dpmin,dpmax)).Histo1D(m_etottracknorm,"P.cal.etottracknorm");
+	ROOT::RDF::TH1DModel m_etottracknorm ("h_etotnorm","P.cal.etotnorm Cuts on All Events", 300, 0, 3);
+	auto h_etottracknorm = df.Filter(Form("P.cal.etotnorm > 0.01 && P.gtr.dp > %.1f && P.gtr.dp < %.1f"
+										  ,dpmin,dpmax)).Histo1D(m_etottracknorm,"P.cal.etotnorm");
 
 	// New RDataFrame with general good electron cuts applied
-	auto df2 = df.Filter(Form("P.cal.etottracknorm > %.1f && P.cal.etottracknorm < %.1f && P.gtr.dp > %.1f"
+	auto df2 = df.Filter(Form("P.cal.etotnorm > %.1f && P.cal.etotnorm < %.1f && P.gtr.dp > %.1f"
 							  "&& P.gtr.dp < %.1f",emin,emax,dpmin,dpmax));
 	
 	// Making Cerenkov position and pulse integral plots for each PMT

@@ -238,6 +238,8 @@ int pngcer_calib() {
 	h_pmt4_int->SetTitle("PMT 4 Cerenkov Calibration Poisson Fit; Pulse Integral");
 	auto h_pmt4_int_clone = h_pmt4_int->DrawClone();
 	
+	c1->Print("pngcer_fit_1.pdf");
+	
 	// Drawing Cerenkov position distribution histograms
 	TCanvas* c2 = new TCanvas("c2", "Cerenkov Position Cuts", 1200, 1200);
 	c2->Divide(2,2);
@@ -306,6 +308,8 @@ int pngcer_calib() {
     l16->SetLineColor(kRed);
     l16->Draw();
 	
+	c2->Print("pngcer_posCut_1.pdf");
+	
 	// Drawing calorimeter distribution histogram
 	TCanvas* c3 = new TCanvas("c3", "P.cal.etottracknorm Cuts", 1200, 1200);
 	auto h_etottracknorm_clone = h_etottracknorm->DrawClone();
@@ -316,6 +320,8 @@ int pngcer_calib() {
     TLine *l18 = new TLine(emax,0,emax,c3->GetUymax());
     l18->SetLineColor(kRed);
     l18->Draw();
+
+    c3->Print("pngcer_calCuts_1.pdf");
 	
 	// Printing calibration constants to terminal
 	std::cout << "1/PMT1 Calibration Constant: " << xscale1 << std::endl;

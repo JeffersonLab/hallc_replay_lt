@@ -51,7 +51,8 @@ Double_t multiGaus(Double_t *x, Double_t *par)
     Double_t f = 0;
     
     // fit parameters
-    Double_t w = par[0]; //omega    - probability that signal is accompanied by type II background process
+    //Double_t w = par[0]; //omega    - probability that signal is accompanied by type II background process
+    Double_t c = par[0]; //overall constant
     Double_t q = par[1]; //Q0       - pedestal position
     Double_t s = par[2]; //sigma0   - standard deviation of the type I background process (pedestal)
     Double_t a = par[3]; //Alpha    - coefficient of the exponential decrease of the type II background
@@ -80,7 +81,7 @@ Double_t multiGaus(Double_t *x, Double_t *par)
     }
     */
     //Root does not like that for loop for whatever reason, so here are the first 5 terms explicitly
-    f = (u/(S*2.506627)*TMath::Exp(-u+(-1/2)*((z-q-(w/a)-Q)/S)*((z-q-(w/a)-Q)/S)))+(u*u/(S*7.089812))*TMath::Exp(-u+(-1/(4))*((z-q-(w/a)-2*Q)/S)*((z-q-(w/a)-2*Q)/S))+(u*u*u/(S*26.049632))*TMath::Exp(-u+(-1/(6))*((z-q-(w/a)-3*Q)/S)*((z-q-(w/a)-3*Q)/S))+(u*u*u*u/(S*120.318096))*TMath::Exp(-u+(-1/(8))*((z-q-(w/a)-4*Q)/S)*((z-q-(w/a)-4*Q)/S))+(u*u*u*u*u/(S*672.598604))*TMath::Exp(-u+(-1/(10))*((z-q-(w/a)-5*Q)/S)*((z-q-(w/a)-5*Q)/S));
+    f = c*((u/(S*2.506627)*TMath::Exp(-u+(-1/2)*((z-q-Q)/S)*((z-q-Q)/S)))+(u*u/(S*7.089812))*TMath::Exp(-u+(-1/(4))*((z-q-2*Q)/S)*((z-q-2*Q)/S))+(u*u*u/(S*26.049632))*TMath::Exp(-u+(-1/(6))*((z-q-3*Q)/S)*((z-q-3*Q)/S))+(u*u*u*u/(S*120.318096))*TMath::Exp(-u+(-1/(8))*((z-q-4*Q)/S)*((z-q-4*Q)/S))+(u*u*u*u*u/(S*672.598604))*TMath::Exp(-u+(-1/(10))*((z-q-5*Q)/S)*((z-q-5*Q)/S)));
     //    return B+f;
     return f;
 }

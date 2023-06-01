@@ -321,7 +321,7 @@ int pngcer_calib() {
     l18->SetLineColor(kRed);
     l18->Draw();
 
-    c3->Print("pngcer_calCuts_1.pdf");
+    c3->Print("pngcer_fit_1.pdf");
 	
 	// Printing calibration constants to terminal
 	std::cout << "1/PMT1 Calibration Constant: " << xscale1 << std::endl;

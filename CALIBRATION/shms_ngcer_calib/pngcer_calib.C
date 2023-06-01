@@ -46,7 +46,7 @@ Double_t multiGausPetr(Double_t *x, Double_t *par)
 // approximate fitting function for pmts from E.H.Bellamy paper https://doi.org/10.1016/0168-9002(94)90183-X
 Double_t multiGaus(Double_t *x, Double_t *par)
 {
-    int n = 5; // Number of gausians to use
+    int n = 2; // Number of gausians to use
     Double_t z = x[0];
     Double_t f = 0;
     
@@ -59,6 +59,7 @@ Double_t multiGaus(Double_t *x, Double_t *par)
     Double_t Q = par[5]; //Q1       - average charge at the PM output
     Double_t S = par[6]; //Sigma1   - corresponding standard deviation of the charge distribution
     
+    /*
     // Background Term
     Double_t B = 0;
     if ( (z - q) <= 0 ) // step function
@@ -66,19 +67,25 @@ Double_t multiGaus(Double_t *x, Double_t *par)
         B = TMath::Exp(-u)*(1-w)*TMath::Exp(-1*TMath::Power(z-q,2)/(2*TMath::Power(s,2)))/(s*TMath::Sqrt(2*TMath::Pi()));
     }else{
         B = TMath::Exp(-u)*( (1-w)*TMath::Exp(-1*TMath::Power(z-q,2)/(2*TMath::Power(s,2)))/(s*TMath::Sqrt(2*TMath::Pi())) + (w*a*TMath::Exp(-a*(z-q))) );
-    }
+	}*/
     
+    /*    
     // multi guasian being added together.
     for (int i = 1; i < (n+1); n++)
     {
-        f += (TMath::Power(u,i)*TMath::Exp(-u)/(TMath::Factorial(i)))*(1/(S*TMath::Sqrt(2*TMath::Pi()*i)))*TMath::Exp(-1*TMath::Power((z-q-(w/a)-i*Q),2)/(2*i*TMath::Power(S,2)));
+      //This version is exactly how it's writen in the paper
+      //f += (TMath::Power(u,i)*TMath::Exp(-u)/(TMath::Factorial(i)))*(1/(S*TMath::Sqrt(2*TMath::Pi()*i)))*TMath::Exp(-1*TMath::Power((z-q-(w/a)-i*Q),2)/(2*i*TMath::Power(S,2)));
+      //this version is streamlined to reduce function calls
+      f += (TMath::Power(u,i)/(TMath::Factorial(i)*S*2.506627*TMath::Sqrt(i)))*TMath::Exp(-u + (-1/(2*i))*((z-q-(w/a)-i*Q)/S)*((z-q-(w/a)-i*Q)/S));
     }
-    
-    return B+f;
-    //return f;
+    */
+    //Root does not like that for loop for whatever reason, so here are the first 5 terms explicitly
+    f = (u/(S*2.506627)*TMath::Exp(-u+(-1/2)*((z-q-(w/a)-Q)/S)*((z-q-(w/a)-Q)/S)))+(u*u/(S*7.089812))*TMath::Exp(-u+(-1/(4))*((z-q-(w/a)-2*Q)/S)*((z-q-(w/a)-2*Q)/S))+(u*u*u/(S*26.049632))*TMath::Exp(-u+(-1/(6))*((z-q-(w/a)-3*Q)/S)*((z-q-(w/a)-3*Q)/S))+(u*u*u*u/(S*120.318096))*TMath::Exp(-u+(-1/(8))*((z-q-(w/a)-4*Q)/S)*((z-q-(w/a)-4*Q)/S))+(u*u*u*u*u/(S*672.598604))*TMath::Exp(-u+(-1/(10))*((z-q-(w/a)-5*Q)/S)*((z-q-(w/a)-5*Q)/S));
+    //    return B+f;
+    return f;
 }
 
-int pngcer_calib() {
+int pngcer_calib(string cmdInput) {
 	// Input file format
 	std::string replay_file_form = "../../ROOTfiles/Calib/CER/Pion_coin_replay_calibration_%i_-1.root";
 
@@ -88,7 +95,11 @@ int pngcer_calib() {
 	bool valid_runs = true;
 	do {
 		std::cout << "Please Enter Run Numbers for Calibation, Space Separated: ";
-		std::getline(std::cin, raw_run_input);
+		if (cmdInput == ""){
+		  std::getline(std::cin, raw_run_input);
+		}else{
+		  raw_run_input = cmdInput;
+		}
 		std::istringstream iss(raw_run_input);
 		int run_num;
 		run_list.clear();
@@ -195,19 +206,22 @@ int pngcer_calib() {
 	TF1* g1 = new TF1("G1",multiGaus,20,100,7);
 	g1->SetParameters(startParam);
 	g1->SetParLimits(0,0,1);
+	cout << "Starting Fit of pmt1, multiGuass (May take awhile)\n";
 	h_pmt1_int->Fit(g1,"R");
-	
+	cout << "\npmt1 multiGaus fit complete\n";
 	TF1* f1 = new TF1("f1","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1)",30,70);
 	f1->SetParameters(2000,50,3);
-	h_pmt1_int->Fit(f1,"R");
+	//h_pmt1_int->Fit(f1,"R");
 	
 	double yscale1 = f1->GetParameter(0);
 	double mean1 = f1->GetParameter(1);
 	double xscale1 = f1->GetParameter(2); // this is the calibration constant
 	
+	
 	h_pmt1_int->SetTitle("PMT 1 Cerenkov Calibration Poisson Fit; Pulse Integral");
 	auto h_pmt1_int_clone = h_pmt1_int->DrawClone();
-	
+	//g1->Draw("Same");
+
 	c1->cd(2);
 	TF1* f2 = new TF1("f2","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1)",30,70);
 	f2->SetParameters(2000,50,3);
@@ -238,7 +252,7 @@ int pngcer_calib() {
 	h_pmt4_int->SetTitle("PMT 4 Cerenkov Calibration Poisson Fit; Pulse Integral");
 	auto h_pmt4_int_clone = h_pmt4_int->DrawClone();
 	
-	c1->Print("pngcer_fit_1.pdf");
+	c1->Print("pngcer_fit_1.pdf(");
 	
 	// Drawing Cerenkov position distribution histograms
 	TCanvas* c2 = new TCanvas("c2", "Cerenkov Position Cuts", 1200, 1200);
@@ -308,7 +322,7 @@ int pngcer_calib() {
     l16->SetLineColor(kRed);
     l16->Draw();
 	
-	c2->Print("pngcer_posCut_1.pdf");
+	c2->Print("pngcer_fit_1.pdf");
 	
 	// Drawing calorimeter distribution histogram
 	TCanvas* c3 = new TCanvas("c3", "P.cal.etottracknorm Cuts", 1200, 1200);
@@ -321,7 +335,7 @@ int pngcer_calib() {
     l18->SetLineColor(kRed);
     l18->Draw();
 
-    c3->Print("pngcer_fit_1.pdf");
+    c3->Print("pngcer_fit_1.pdf)");
 	
 	// Printing calibration constants to terminal
 	std::cout << "1/PMT1 Calibration Constant: " << xscale1 << std::endl;

@@ -202,10 +202,10 @@ int pngcer_calib(string cmdInput) {
 	c1->Divide(2,2);
 	c1->cd(1);
 	
-	Double_t startParam[7] = {0.5, 1, 1, 1,5, 20,2};
-	TF1* g1 = new TF1("G1",multiGaus,20,100,7);
+	Double_t startParam[7] = {1000, 10, 1, 1, 2, 20,1};
+	TF1* g1 = new TF1("G1",multiGaus,0,100,7);
 	g1->SetParameters(startParam);
-	g1->SetParLimits(0,0,1);
+	//g1->SetParLimits(0,0,1);
 	cout << "Starting Fit of pmt1, multiGuass (May take awhile)\n";
 	h_pmt1_int->Fit(g1,"R");
 	cout << "\npmt1 multiGaus fit complete\n";

@@ -12,6 +12,10 @@ root -l pngcer_calib.C
 #include <TF1.h>
 #include <TLine.h>
 
+//Initial Fit parameters for the multiGaus and multiGausNoBackground fit functions
+Double_t startParam[9] = {50000, 1, 1, 1, 2, 5, 1, 0.5, 10};
+Double_t startParamNB[5] = {50000, 1, 2, 5, 1};	
+
 // approximate fitting function for pmts from E.H.Bellamy paper https://doi.org/10.1016/0168-9002(94)90183-X
 Double_t multiGaus(Double_t *x, Double_t *par)
 {
@@ -39,7 +43,7 @@ Double_t multiGaus(Double_t *x, Double_t *par)
     }else{
         B = TMath::Exp(-u)*( (1-w)*TMath::Exp(-1*TMath::Power(z-q,2)/(2*TMath::Power(s,2)))/(s*TMath::Sqrt(2*TMath::Pi())) + (w*a*TMath::Exp(-a*(z-q))) );
 	}*/
-    B = b*(TMath::Exp(-u)*( (1-w)*TMath::Exp(-1*TMath::Power(z-q,2)/(2*TMath::Power(s,2)))/(s*TMath::Sqrt(2*TMath::Pi())) ) );
+    B = b*(TMath::Exp(-u)*( (1-w)*TMath::Exp(-1*TMath::Power(z-q,2)/(2*TMath::Power(s,2)))/(s*TMath::Sqrt(2*TMath::Pi())) + (w*a*TMath::Exp(-a*(z-q)))) );
 	
     /*    
     // multi guasian being added together.
@@ -198,8 +202,6 @@ int pngcer_calib(string cmdInput) {
 	c1->Divide(2,2);
 	c1->cd(1);
 	
-	Double_t startParam[9] = {50000, 1, 1, 1, 2, 5, 1, 0.5, 10};
-	Double_t startParamNB[5] = {50000, 1, 2, 5, 1};	
 	TF1* g1 = new TF1("G1",multiGaus,0,150,9);
 	g1->SetParameters(startParam);
 	g1->SetParLimits(0,1,1000000000);
@@ -217,14 +219,13 @@ int pngcer_calib(string cmdInput) {
 	//g1->SetParLimits(3,0,400);
 	g1->SetParLimits(4,0.01,400);
 	*/
-	cout << "Starting Fit of pmt1, multiGuass (May take awhile)\n";
-	h_pmt1_int->Fit(g1,"R L");
-	cout << "\npmt1 multiGaus fit complete\n";
-
-	TF1* f1 = new TF1("f1","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1)",30,70);
-	f1->SetParameters(2000,50,3);
-	//h_pmt1_int->Fit(f1,"R");
+	cout << "Starting Fit of multiGuass (May take awhile)\n";
+	h_pmt1_int->Fit(g1,"R");
 	
+	TF1* f1 = new TF1("f1","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1)",30,70);
+	f1->SetLineColor(kViolet-6);
+	f1->SetParameters(2000,50,3);
+	h_pmt1_int->Fit(f1,"R+");
 	double yscale1 = f1->GetParameter(0);
 	double mean1 = f1->GetParameter(1);
 	double xscale1 = f1->GetParameter(2); // this is the calibration constant	
@@ -265,14 +266,14 @@ int pngcer_calib(string cmdInput) {
     
 	TF1* f2 = new TF1("f2","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1)",30,70);
 	f2->SetParameters(2000,50,3);
-	//h_pmt2_int->Fit(f2,"R");
+	f2->SetLineColor(kViolet-6);
+	h_pmt2_int->Fit(f2,"R+");
 	double yscale2 = f2->GetParameter(0);
 	double mean2 = f2->GetParameter(1);
 	double xscale2 = f2->GetParameter(2); // this is the calibration constant
 	h_pmt2_int->SetTitle("PMT 2 Cerenkov Calibration Poisson Fit; Pulse Integral");
 	auto h_pmt2_int_clone = h_pmt2_int->DrawClone();
 
-	//const int Ngaus = 5;
 	TF1* manyGaus2[Ngaus]; 
 	for (int i = 0; i < Ngaus; i++)
         {
@@ -286,28 +287,88 @@ int pngcer_calib(string cmdInput) {
 	    manyGaus2[i]->SetParameter(4,g2->GetParameter(6));
 	    manyGaus2[i]->SetParameter(5,b);
 	    
-	    manyGaus[i]->Draw("Same");
+	    manyGaus2[i]->Draw("Same");
 	}
 	
 	c1->cd(3);
+	TF1* g3 = new TF1("G2",multiGaus,0,100,9);
+	g3->SetParameters(startParam);
+	g3->SetParLimits(0,1,1000000000);
+	g3->SetParLimits(1,-1,40);
+	g3->SetParLimits(2,0,20);
+	g3->SetParLimits(3,0,400);
+	g3->SetParLimits(4,0,400);
+	g3->SetParLimits(5,-1,400);
+	g3->SetParLimits(6,0.01,500);
+	g3->SetParLimits(7,0,1);
+	g3->SetParLimits(8,0,1000000000);
+	h_pmt2_int->Fit(g3,"R");
+    
 	TF1* f3 = new TF1("f3","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1)",30,70);
 	f3->SetParameters(2000,50,3);
-	h_pmt3_int->Fit(f3,"R");
+	f3->SetLineColor(kViolet-6);
+	h_pmt3_int->Fit(f3,"R+");
 	double yscale3 = f3->GetParameter(0);
 	double mean3 = f3->GetParameter(1);
 	double xscale3 = f3->GetParameter(2); // this is the calibration constant
 	h_pmt3_int->SetTitle("PMT 3 Cerenkov Calibration Poisson Fit; Pulse Integral");
 	auto h_pmt3_int_clone = h_pmt3_int->DrawClone();
 	
+	TF1* manyGaus3[Ngaus]; 
+	for (int i = 0; i < Ngaus; i++)
+        {
+	    int b = i+1;
+	    manyGaus3[i] = new TF1(Form("G2_%d",i+1), "[0]*([2]/([5]*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))", 0, 150);
+	    manyGaus3[i]->SetLineColor(kAzure-3);
+	    manyGaus3[i]->SetParameter(0,g3->GetParameter(0));
+	    manyGaus3[i]->SetParameter(1,g3->GetParameter(1) + (g3->GetParameter(7)/g3->GetParameter(3)));
+	    manyGaus3[i]->SetParameter(2,g3->GetParameter(4));
+	    manyGaus3[i]->SetParameter(3,g3->GetParameter(5));
+	    manyGaus3[i]->SetParameter(4,g3->GetParameter(6));
+	    manyGaus3[i]->SetParameter(5,b);
+	    
+	    manyGaus3[i]->Draw("Same");
+	}
+	
 	c1->cd(4);
+	TF1* g4 = new TF1("G2",multiGaus,0,100,9);
+	g4->SetParameters(startParam);
+	g4->SetParLimits(0,1,1000000000);
+	g4->SetParLimits(1,-1,40);
+	g4->SetParLimits(2,0,20);
+	g4->SetParLimits(3,0,400);
+	g4->SetParLimits(4,0,400);
+	g4->SetParLimits(5,-1,400);
+	g4->SetParLimits(6,0.01,500);
+	g4->SetParLimits(7,0,1);
+	g4->SetParLimits(8,0,1000000000);
+	h_pmt2_int->Fit(g4,"R");
+	
 	TF1* f4 = new TF1("f4","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1)",30,70);
 	f4->SetParameters(2000,50,3);
-	h_pmt4_int->Fit(f4,"R");
+	f4->SetLineColor(kViolet-6);
+	h_pmt4_int->Fit(f4,"R+");
 	double yscale4 = f4->GetParameter(0);
 	double mean4 = f4->GetParameter(1);
 	double xscale4 = f4->GetParameter(2); // this is the calibration constant
 	h_pmt4_int->SetTitle("PMT 4 Cerenkov Calibration Poisson Fit; Pulse Integral");
 	auto h_pmt4_int_clone = h_pmt4_int->DrawClone();
+	
+	TF1* manyGaus4[Ngaus]; 
+	for (int i = 0; i < Ngaus; i++)
+        {
+	    int b = i+1;
+	    manyGaus4[i] = new TF1(Form("G2_%d",i+1), "[0]*([2]/([5]*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))", 0, 150);
+	    manyGaus4[i]->SetLineColor(kAzure-3);
+	    manyGaus4[i]->SetParameter(0,g4->GetParameter(0));
+	    manyGaus4[i]->SetParameter(1,g4->GetParameter(1) + (g4->GetParameter(7)/g4->GetParameter(3)));
+	    manyGaus4[i]->SetParameter(2,g4->GetParameter(4));
+	    manyGaus4[i]->SetParameter(3,g4->GetParameter(5));
+	    manyGaus4[i]->SetParameter(4,g4->GetParameter(6));
+	    manyGaus4[i]->SetParameter(5,b);
+	    
+	    manyGaus4[i]->Draw("Same");
+	}
 	
 	c1->Print("pngcer_fit_1.pdf(");
 	

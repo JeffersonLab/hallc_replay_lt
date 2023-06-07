@@ -58,7 +58,7 @@ Double_t multiGaus(Double_t *x, Double_t *par)
       }*/
     
     //Root does not like that for loop for whatever reason, so here are the first 5 terms explicitly
-    f = c*((u/S)*TMath::Exp(-u-((z-q-(w/a)-Q)*(z-q-(w/a)-Q))/(2*S*S)) + (u*u/(2*S*TMath::Sqrt(2)))*TMath::Exp(-u-((z-q-(w/a)-2*Q)*(z-q-(w/a)-2*Q))/(4*S*S)) + (u*u*u/(6*S*TMath::Sqrt(3)))*TMath::Exp(-u-((z-q-(w/a)-3*Q)*(z-q-(w/a)-3*Q))/(6*S*S)) + (u*u*u*u/(24*S*TMath::Sqrt(4)))*TMath::Exp(-u-((z-q-(w/a)-4*Q)*(z-q-(w/a)-4*Q))/(8*S*S)) + (u*u*u*u*u/(120*S*TMath::Sqrt(5)))*TMath::Exp(-u-((z-q-(w/a)-5*Q)*(z-q-(w/a)-5*Q))/(10*S*S)) + (u*u*u*u*u*u/(720*S*TMath::Sqrt(6)))*TMath::Exp(-u-((z-q-(w/a)-6*Q)*(z-q-(w/a)-6*Q))/(12*S*S)) + (u*u*u*u*u*u*u/(5040*S*TMath::Sqrt(7)))*TMath::Exp(-u-((z-q-(w/a)-7*Q)*(z-q-(w/a)-7*Q))/(14*S*S)) + (u*u*u*u*u*u*u*u/(40320*S*TMath::Sqrt(8)))*TMath::Exp(-u-((z-q-(w/a)-8*Q)*(z-q-(w/a)-8*Q))/(16*S*S)) + (u*u*u*u*u*u*u*u*u*u/(362880*S*TMath::Sqrt(9)))*TMath::Exp(-u-((z-q-(w/a)-9*Q)*(z-q-(w/a)-9*Q))/(18*S*S)) + (u*u*u*u*u*u*u*u*u*u/(3628800*S*TMath::Sqrt(10)))*TMath::Exp(-u-((z-q-(w/a)-10*Q)*(z-q-(w/a)-10*Q))/(20*S*S)));
+    f = c*((u/S)*TMath::Exp(-u-((z-q-(w/a)-Q)*(z-q-(w/a)-Q))/(2*S*S)) + (TMath::Power(u,2)/(2*S*TMath::Sqrt(2)))*TMath::Exp(-u-((z-q-(w/a)-2*Q)*(z-q-(w/a)-2*Q))/(4*S*S)) + (TMath::Power(u,3)/(6*S*TMath::Sqrt(3)))*TMath::Exp(-u-((z-q-(w/a)-3*Q)*(z-q-(w/a)-3*Q))/(6*S*S)) + (TMath::Power(u,4)/(24*S*TMath::Sqrt(4)))*TMath::Exp(-u-((z-q-(w/a)-4*Q)*(z-q-(w/a)-4*Q))/(8*S*S)) + (TMath::Power(u,5)/(120*S*TMath::Sqrt(5)))*TMath::Exp(-u-((z-q-(w/a)-5*Q)*(z-q-(w/a)-5*Q))/(10*S*S)) + (TMath::Power(u,6)/(720*S*TMath::Sqrt(6)))*TMath::Exp(-u-((z-q-(w/a)-6*Q)*(z-q-(w/a)-6*Q))/(12*S*S)) + (TMath::Power(u,7)/(5040*S*TMath::Sqrt(7)))*TMath::Exp(-u-((z-q-(w/a)-7*Q)*(z-q-(w/a)-7*Q))/(14*S*S)) + (TMath::Power(u,8)/(40320*S*TMath::Sqrt(8)))*TMath::Exp(-u-((z-q-(w/a)-8*Q)*(z-q-(w/a)-8*Q))/(16*S*S)) + (TMath::Power(u,9)/(362880*S*TMath::Sqrt(9)))*TMath::Exp(-u-((z-q-(w/a)-9*Q)*(z-q-(w/a)-9*Q))/(18*S*S)) + (TMath::Power(u,10)/(3628800*S*TMath::Sqrt(10)))*TMath::Exp(-u-((z-q-(w/a)-10*Q)*(z-q-(w/a)-10*Q))/(20*S*S)));
     //f = c*((u/(S*2.506627)*TMath::Exp(-u+(-1/2)*((z-q-Q)/S)*((z-q-Q)/S))));
     return B+f;    
 }
@@ -246,7 +246,7 @@ int pngcer_calib(string cmdInput) {
 
 	TF1* manyGaus[Ngaus]; 
 	TF1* Back1 = new TF1("B1","[0]*TMath::Exp(-[1])*((1-[2])*TMath::Exp(-1*TMath::Power(x-[1],2)/(2*TMath::Power([3],2)))/([4]*2.506628275) + ([2]*[4]*TMath::Exp(-[4]*(x-[1]))))", fitL1,fitH1);
-	Back1->SetLineColor(kAzure-3);
+	Back1->SetLineColor(kOrange);
 	Back1->SetParameter(0,g1->GetParameter(8));
 	Back1->SetParameter(1,g1->GetParameter(4));
 	Back1->SetParameter(2,g1->GetParameter(1));
@@ -257,7 +257,7 @@ int pngcer_calib(string cmdInput) {
         {
 	    int b = i+1;
 	    manyGaus[i] = new TF1(Form("G1_%d",i+1), "[0]*(TMath::Power([2],[5])/([5]*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))", fitL1, fitH1);
-	    manyGaus[i]->SetLineColor(kAzure+i);
+	    manyGaus[i]->SetLineColor(kBlue-i);
 	    manyGaus[i]->SetParameter(0,g1->GetParameter(0));
 	    manyGaus[i]->SetParameter(1,g1->GetParameter(1) + (g1->GetParameter(7)/g1->GetParameter(3)));
 	    manyGaus[i]->SetParameter(2,g1->GetParameter(4));

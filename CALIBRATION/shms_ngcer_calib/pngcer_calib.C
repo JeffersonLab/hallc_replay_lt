@@ -44,21 +44,21 @@ Double_t multiGaus(Double_t *x, Double_t *par)
     }else{
         B = TMath::Exp(-u)*( (1-w)*TMath::Exp(-1*TMath::Power(z-q,2)/(2*TMath::Power(s,2)))/(s*TMath::Sqrt(2*TMath::Pi())) + (w*a*TMath::Exp(-a*(z-q))) );
 	}*/
-    B = b*(TMath::Exp(-u)*((1-w)*TMath::Exp(-1*TMath::Power(z-q,2)/(2*TMath::Power(s,2)))/(s*TMa5Dth::Sqrt(2*TMath::Pi())) + (w*a*TMath::Exp(-a*(z-q)))) );
+    B = b*(TMath::Exp(-u)*((1-w)*TMath::Exp(-1*TMath::Power(z-q,2)/(2*TMath::Power(s,2)))/(s*TMath::Sqrt(2*TMath::Pi())) + (w*a*TMath::Exp(-a*(z-q)))) );
     //B = b*TMath::Exp(-u)*(w*a*TMath::Exp(-a*(z-q)));
     //B = 0;
         
     // multi guasian being added together.
-    for (int i = 1; i < (N+1); i++)
+    /*for (int i = 1; i < (Ngaus+1); i++)
     {
       //This version is exactly how it's writen in the paper
       //f += (TMath::Power(u,i)*TMath::Exp(-u)/(TMath::Factorial(i)))*(1/(S*TMath::Sqrt(2*TMath::Pi()*i)))*TMath::Exp(-1*TMath::Power((z-q-(w/a)-i*Q),2)/(2*i*TMath::Power(S,2)));
       //this version is streamlined to reduce function calls
       f += (TMath::Power(u,i)/(TMath::Factorial(i)*S*2.506627*TMath::Sqrt(i)))*TMath::Exp(-u + (-1/(2*i))*((z-q-(w/a)-i*Q)/S)*((z-q-(w/a)-i*Q)/S));
-    }
+      }*/
     
     //Root does not like that for loop for whatever reason, so here are the first 5 terms explicitly
-    //f = c*((u/S)*TMath::Exp(-u-((z-q-(w/a)-Q)*(z-q-(w/a)-Q))/(2*S*S)) + (u*u/(2*S*TMath::Sqrt(2)))*TMath::Exp(-u-((z-q-(w/a)-2*Q)*(z-q-(w/a)-2*Q))/(4*S*S)) + (u*u*u/(6*S*TMath::Sqrt(3)))*TMath::Exp(-u-((z-q-(w/a)-3*Q)*(z-q-(w/a)-3*Q))/(6*S*S)) + (u*u*u*u/(24*S*TMath::Sqrt(4)))*TMath::Exp(-u-((z-q-(w/a)-4*Q)*(z-q-(w/a)-4*Q))/(8*S*S)) + (u*u*u*u*u/(120*S*TMath::Sqrt(5)))*TMath::Exp(-u-((z-q-(w/a)-5*Q)*(z-q-(w/a)-5*Q))/(10*S*S)) + (u*u*u*u*u*u/(720*S*TMath::Sqrt(6)))*TMath::Exp(-u-((z-q-(w/a)-6*Q)*(z-q-(w/a)-6*Q))/(12*S*S)) + (u*u*u*u*u*u*u/(5040*S*TMath::Sqrt(7)))*TMath::Exp(-u-((z-q-(w/a)-7*Q)*(z-q-(w/a)-7*Q))/(14*S*S)) + (u*u*u*u*u*u*u*u/(40320*S*TMath::Sqrt(8)))*TMath::Exp(-u-((z-q-(w/a)-8*Q)*(z-q-(w/a)-8*Q))/(16*S*S)) + (u*u*u*u*u*u*u*u*u*u/(362880*S*TMath::Sqrt(9)))*TMath::Exp(-u-((z-q-(w/a)-9*Q)*(z-q-(w/a)-9*Q))/(18*S*S)) + (u*u*u*u*u*u*u*u*u*u/(3628800*S*TMath::Sqrt(10)))*TMath::Exp(-u-((z-q-(w/a)-10*Q)*(z-q-(w/a)-10*Q))/(20*S*S)));
+    f = c*((u/S)*TMath::Exp(-u-((z-q-(w/a)-Q)*(z-q-(w/a)-Q))/(2*S*S)) + (u*u/(2*S*TMath::Sqrt(2)))*TMath::Exp(-u-((z-q-(w/a)-2*Q)*(z-q-(w/a)-2*Q))/(4*S*S)) + (u*u*u/(6*S*TMath::Sqrt(3)))*TMath::Exp(-u-((z-q-(w/a)-3*Q)*(z-q-(w/a)-3*Q))/(6*S*S)) + (u*u*u*u/(24*S*TMath::Sqrt(4)))*TMath::Exp(-u-((z-q-(w/a)-4*Q)*(z-q-(w/a)-4*Q))/(8*S*S)) + (u*u*u*u*u/(120*S*TMath::Sqrt(5)))*TMath::Exp(-u-((z-q-(w/a)-5*Q)*(z-q-(w/a)-5*Q))/(10*S*S)) + (u*u*u*u*u*u/(720*S*TMath::Sqrt(6)))*TMath::Exp(-u-((z-q-(w/a)-6*Q)*(z-q-(w/a)-6*Q))/(12*S*S)) + (u*u*u*u*u*u*u/(5040*S*TMath::Sqrt(7)))*TMath::Exp(-u-((z-q-(w/a)-7*Q)*(z-q-(w/a)-7*Q))/(14*S*S)) + (u*u*u*u*u*u*u*u/(40320*S*TMath::Sqrt(8)))*TMath::Exp(-u-((z-q-(w/a)-8*Q)*(z-q-(w/a)-8*Q))/(16*S*S)) + (u*u*u*u*u*u*u*u*u*u/(362880*S*TMath::Sqrt(9)))*TMath::Exp(-u-((z-q-(w/a)-9*Q)*(z-q-(w/a)-9*Q))/(18*S*S)) + (u*u*u*u*u*u*u*u*u*u/(3628800*S*TMath::Sqrt(10)))*TMath::Exp(-u-((z-q-(w/a)-10*Q)*(z-q-(w/a)-10*Q))/(20*S*S)));
     //f = c*((u/(S*2.506627)*TMath::Exp(-u+(-1/2)*((z-q-Q)/S)*((z-q-Q)/S))));
     return B+f;    
 }
@@ -204,7 +204,7 @@ int pngcer_calib(string cmdInput) {
 	c1->Divide(2,2);
 	c1->cd(1);
 	
-	int fitH1 = 130, fitL1 = 0;
+	int fitH1 = 140, fitL1 = 0;
 	TF1* g1 = new TF1("G1",multiGaus,fitL1,fitH1,9);
 	g1->SetParameters(startParam);
 	g1->SetParLimits(0,1,1000000000);
@@ -245,6 +245,14 @@ int pngcer_calib(string cmdInput) {
 	auto h_pmt1_int_clone = h_pmt1_int->DrawClone();
 
 	TF1* manyGaus[Ngaus]; 
+	TF1* Back1 = new TF1("B1","[0]*TMath::Exp(-[1])*((1-[2])*TMath::Exp(-1*TMath::Power(x-[1],2)/(2*TMath::Power([3],2)))/([4]*TMath::Sqrt(2*TMath::Pi())) + ([2]*[4]*TMath::Exp(-[4]*(x-[1])))))", fitL1,fitH1);
+	Back1->SetLineColor(kAzure-3);
+	Back1->SetParameter(0,g1->GetParameter(8));
+	Back1->SetParameter(1,g1->GetParameter(4));
+	Back1->SetParameter(2,g1->GetParameter(1));
+	Back1->SetParameter(3,g1->GetParameter(2));
+	Back1->SetParameter(4,g1->GetParameter(3));
+	Back1->Draw("Same");
 	for (int i = 0; i < Ngaus; i++)
         {
 	    int b = i+1;
@@ -269,7 +277,7 @@ int pngcer_calib(string cmdInput) {
 	Leg1->Draw("Same");
 	*/
 	c1->cd(2);
-	int fitH2 = 100, fitL2 = 0;
+	int fitH2 = 110, fitL2 = 0;
 	TF1* g2 = new TF1("G2",multiGaus,fitL2,fitH2,9);
 	g2->SetParameters(startParam);
 	g2->SetParLimits(0,1,1000000000);

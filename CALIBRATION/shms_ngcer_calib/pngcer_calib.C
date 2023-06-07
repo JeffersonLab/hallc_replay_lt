@@ -63,15 +63,13 @@ Double_t multiGaus(Double_t *x, Double_t *par)
     return B+f;    
 }
 
-// approximate fitting function for pmts from E.H.Bellamy paper https://doi.org/10.1016/0168-9002(94)90183-X
+// approximate fitting function for pmts from E.H.Bellamy paper https://doi.org/10.1016/0168-9002(94)90183-X with the background terms removed
 Double_t multiGausNoBackground(Double_t *x, Double_t *par)
 {
-    int n = 2; // Number of gausians to use
     Double_t z = x[0];
     Double_t f = 0;
     
     // fit parameters
-    //Double_t w = par[0]; //omega    - probability that signal is accompanied by type II background process
     Double_t c = par[0]; //overall constant
     Double_t q = par[1]; //Q0       - pedestal position
     Double_t u = par[2]; //mu       - number of photo-electrons
@@ -81,7 +79,7 @@ Double_t multiGausNoBackground(Double_t *x, Double_t *par)
     //f = c*((u/(S*2.506627)*TMath::Exp(-u+(-1/2)*((z-q-Q)/S)*((z-q-Q)/S)))+(u*u/(S*7.089812))*TMath::Exp(-u+(-1/(4))*((z-q-2*Q)/S)*((z-q-2*Q)/S))+(u*u*u/(S*26.049632))*TMath::Exp(-u+(-1/(6))*((z-q-3*Q)/S)*((z-q-3*Q)/S))+(u*u*u*u/(S*120.318096))*TMath::Exp(-u+(-1/(8))*((z-q-4*Q)/S)*((z-q-4*Q)/S))+(u*u*u*u*u/(S*672.598604))*TMath::Exp(-u+(-1/(10))*((z-q-5*Q)/S)*((z-q-5*Q)/S)));
     //f = c*(u/(S*2.506627)*TMath::Exp(-u+((-1/2)*((z-q-Q)/S)*((z-q-Q)/S))));
     
-    f = c*((u/S)*TMath::Exp(-u-((z-q-Q)*(z-q-Q))/(2*S*S)) + (u/(2*S*TMath::Sqrt(2)))*TMath::Exp(-u-((z-q-2*Q)*(z-q-2*Q))/(4*S*S)) + (u/(6*S*TMath::Sqrt(3)))*TMath::Exp(-u-((z-q-3*Q)*(z-q-3*Q))/(6*S*S)) + (u/(24*S*TMath::Sqrt(4)))*TMath::Exp(-u-((z-q-4*Q)*(z-q-4*Q))/(8*S*S)) + (u/(120*S*TMath::Sqrt(5)))*TMath::Exp(-u-((z-q-5*Q)*(z-q-5*Q))/(10*S*S)) + (u/(720*S*TMath::Sqrt(6)))*TMath::Exp(-u-((z-q-6*Q)*(z-q-6*Q))/(12*S*S)) + (u/(5040*S*TMath::Sqrt(7)))*TMath::Exp(-u-((z-q-7*Q)*(z-q-7*Q))/(14*S*S)));
+    f = c*((u/S)*TMath::Exp(-u-((z-q-Q)*(z-q-Q))/(2*S*S)) + (TMath::Power(u,2)/(2*S*TMath::Sqrt(2)))*TMath::Exp(-u-((z-q-2*Q)*(z-q-2*Q))/(4*S*S)) + (TMath::Power(u,3)/(6*S*TMath::Sqrt(3)))*TMath::Exp(-u-((z-q-3*Q)*(z-q-3*Q))/(6*S*S)) + (TMath::Power(u,4)/(24*S*TMath::Sqrt(4)))*TMath::Exp(-u-((z-q-4*Q)*(z-q-4*Q))/(8*S*S)) + (TMath::Power(u,5)/(120*S*TMath::Sqrt(5)))*TMath::Exp(-u-((z-q-5*Q)*(z-q-5*Q))/(10*S*S)) + (TMath::Power(u,6)/(720*S*TMath::Sqrt(6)))*TMath::Exp(-u-((z-q-6*Q)*(z-q-6*Q))/(12*S*S)) + (TMath::Power(u,7)/(5040*S*TMath::Sqrt(7)))*TMath::Exp(-u-((z-q-7*Q)*(z-q-7*Q))/(14*S*S)) + (TMath::Power(u,8)/(40320*S*TMath::Sqrt(8)))*TMath::Exp(-u-((z-q-8*Q)*(z-q-8*Q))/(16*S*S)) + (TMath::Power(u,9)/(362880*S*TMath::Sqrt(9)))*TMath::Exp(-u-((z-q-9*Q)*(z-q-9*Q))/(18*S*S)) + (TMath::Power(u,10)/(3628800*S*TMath::Sqrt(10)))*TMath::Exp(-u-((z-q-10*Q)*(z-q-10*Q))/(20*S*S)));
     
     return f;
 }
@@ -256,8 +254,8 @@ int pngcer_calib(string cmdInput) {
 	for (int i = 0; i < Ngaus; i++)
         {
 	    int b = i+1;
-	    manyGaus[i] = new TF1(Form("G1_%d",i+1), "[0]*(TMath::Power([2],[5])/([5]*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))", fitL1, fitH1);
-	    manyGaus[i]->SetLineColor(kBlue-i);
+	    manyGaus[i] = new TF1(Form("G1_%d",i+1), "[0]*(TMath::Power([2],[5])/(TMath::Factorial([5])*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))", fitL1, fitH1);
+	    manyGaus[i]->SetLineColor(kAzure-3);
 	    manyGaus[i]->SetParameter(0,g1->GetParameter(0));
 	    manyGaus[i]->SetParameter(1,g1->GetParameter(1) + (g1->GetParameter(7)/g1->GetParameter(3)));
 	    manyGaus[i]->SetParameter(2,g1->GetParameter(4));
@@ -267,15 +265,15 @@ int pngcer_calib(string cmdInput) {
 	    
 	    manyGaus[i]->Draw("Same");
 	}
-	/*
+	
 	TLegend *Leg1 = new TLegend(0.67, 0.5, 1.0, 0.75, "Fit Info");
-	Leg1->SetTextSize(1);
+	Leg1->SetTextSize(0.1);
 	Leg1->AddEntry(g1, "Multi Gaus Fit", "l"); 
-        Leg1->AddEntry((TObject*)0, Form("Param = %f +- %f", gausParam1, gausParamErr1), ""); 
+    Leg1->AddEntry((TObject*)0, Form("Param = %f +- %f", gausParam1, gausParamErr1), ""); 
 	Leg1->AddEntry(f1, "Poison Fit", "l"); 
 	Leg1->AddEntry((TObject*)0, Form("Param = %f +- %f", xscale1, xscaleErr1), ""); 
 	Leg1->Draw("Same");
-	*/
+	
 	c1->cd(2);
 	int fitH2 = 110, fitL2 = 0;
 	TF1* g2 = new TF1("G2",multiGaus,fitL2,fitH2,9);
@@ -310,7 +308,7 @@ int pngcer_calib(string cmdInput) {
 	auto h_pmt2_int_clone = h_pmt2_int->DrawClone();
 
 	TF1* Back2 = new TF1("B2","[0]*TMath::Exp(-[1])*((1-[2])*TMath::Exp(-1*TMath::Power(x-[1],2)/(2*TMath::Power([3],2)))/([4]*2.506628275) + ([2]*[4]*TMath::Exp(-[4]*(x-[1]))))", fitL1,fitH1);
-	Back2->SetLineColor(kAzure-3);
+	Back2->SetLineColor(kOrange);
 	Back2->SetParameter(0,g2->GetParameter(8));
 	Back2->SetParameter(1,g2->GetParameter(4));
 	Back2->SetParameter(2,g2->GetParameter(1));
@@ -332,6 +330,14 @@ int pngcer_calib(string cmdInput) {
 	    
 	    manyGaus2[i]->Draw("Same");
 	}
+	
+	TLegend *Leg2 = new TLegend(0.67, 0.5, 1.0, 0.75, "Fit Info");
+	Leg2->SetTextSize(0.1);
+	Leg2->AddEntry(g2, "Multi Gaus Fit", "l"); 
+    Leg2->AddEntry((TObject*)0, Form("Param = %f +- %f", gausParam2, gausParamErr2), ""); 
+	Leg2->AddEntry(f2, "Poison Fit", "l"); 
+	Leg2->AddEntry((TObject*)0, Form("Param = %f +- %f", xscale2, xscaleErr2), ""); 
+	Leg2->Draw("Same");
 	
 	c1->cd(3);
 	int fitH3 = 100, fitL3 = 0;
@@ -367,7 +373,7 @@ int pngcer_calib(string cmdInput) {
 	auto h_pmt3_int_clone = h_pmt3_int->DrawClone();
 	
 	TF1* Back3 = new TF1("B3","[0]*TMath::Exp(-[1])*((1-[2])*TMath::Exp(-1*TMath::Power(x-[1],2)/(2*TMath::Power([3],2)))/([4]*2.506628275) + ([2]*[4]*TMath::Exp(-[4]*(x-[1]))))", fitL1,fitH1);
-	Back3->SetLineColor(kAzure-3);
+	Back3->SetLineColor(kOrange);
 	Back3->SetParameter(0,g2->GetParameter(8));
 	Back3->SetParameter(1,g2->GetParameter(4));
 	Back3->SetParameter(2,g2->GetParameter(1));
@@ -378,7 +384,7 @@ int pngcer_calib(string cmdInput) {
 	for (int i = 0; i < Ngaus; i++)
         {
 	    int b = i+1;
-	    manyGaus3[i] = new TF1(Form("G3_%d",i+1), "[0]*(TMath::Power([2],[5])/([5]*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))",fitL3,fitH3);
+	    manyGaus3[i] = new TF1(Form("G3_%d",i+1), "[0]*(TMath::Power([2],[5])/(TMath::Factorial([5])*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))",fitL3,fitH3);
 	    manyGaus3[i]->SetLineColor(kAzure-3);
 	    manyGaus3[i]->SetParameter(0,g3->GetParameter(0));
 	    manyGaus3[i]->SetParameter(1,g3->GetParameter(1) + (g3->GetParameter(7)/g3->GetParameter(3)));
@@ -389,6 +395,14 @@ int pngcer_calib(string cmdInput) {
 	    
 	    manyGaus3[i]->Draw("Same");
 	}
+	
+	TLegend *Leg3 = new TLegend(0.67, 0.5, 1.0, 0.75, "Fit Info");
+	Leg3->SetTextSize(0.1);
+	Leg3->AddEntry(g3, "Multi Gaus Fit", "l"); 
+    Leg3->AddEntry((TObject*)0, Form("Param = %f +- %f", gausParam3, gausParamErr3), ""); 
+	Leg3->AddEntry(f3, "Poison Fit", "l"); 
+	Leg3->AddEntry((TObject*)0, Form("Param = %f +- %f", xscale3, xscaleErr3), ""); 
+	Leg3->Draw("Same");
 	
 	c1->cd(4);
 	int fitH4 = 100, fitL4 = 0;	
@@ -424,7 +438,7 @@ int pngcer_calib(string cmdInput) {
 	auto h_pmt4_int_clone = h_pmt4_int->DrawClone();
 	
 	TF1* Back4 = new TF1("B4","[0]*TMath::Exp(-[1])*((1-[2])*TMath::Exp(-1*TMath::Power(x-[1],2)/(2*TMath::Power([3],2)))/([4]*2.506628275) + ([2]*[4]*TMath::Exp(-[4]*(x-[1]))))", fitL1,fitH1);
-	Back4->SetLineColor(kAzure-3);
+	Back4->SetLineColor(kOrange);
 	Back4->SetParameter(0,g2->GetParameter(8));
 	Back4->SetParameter(1,g2->GetParameter(4));
 	Back4->SetParameter(2,g2->GetParameter(1));
@@ -435,7 +449,7 @@ int pngcer_calib(string cmdInput) {
 	for (int i = 0; i < Ngaus; i++)
         {
 	    int b = i+1;
-	    manyGaus4[i] = new TF1(Form("G4_%d",i+1), "[0]*(TMath::Power([2],[5])/([5]*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))", fitL4, fitH4);
+	    manyGaus4[i] = new TF1(Form("G4_%d",i+1), "[0]*(TMath::Power([2],[5])/(TMath::Factorial([5])*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))", fitL4, fitH4);
 	    manyGaus4[i]->SetLineColor(kAzure-3);
 	    manyGaus4[i]->SetParameter(0,g4->GetParameter(0));
 	    manyGaus4[i]->SetParameter(1,g4->GetParameter(1) + (g4->GetParameter(7)/g4->GetParameter(3)));
@@ -447,7 +461,15 @@ int pngcer_calib(string cmdInput) {
 	    manyGaus4[i]->Draw("Same");
 	}
 	
-	c1->Print("pngcer_fit_1.pdf(");
+	TLegend *Leg4 = new TLegend(0.67, 0.5, 1.0, 0.75, "Fit Info");
+	Leg4->SetTextSize(0.1);
+	Leg4->AddEntry(g4, "Multi Gaus Fit", "l"); 
+    Leg4->AddEntry((TObject*)0, Form("Param = %f +- %f", gausParam4, gausParamErr4), ""); 
+	Leg4->AddEntry(f4, "Poison Fit", "l"); 
+	Leg4->AddEntry((TObject*)0, Form("Param = %f +- %f", xscale4, xscaleErr4), ""); 
+	Leg4->Draw("Same");
+	
+	c1->Print(Form("Calib/pngcer_fit_%d.pdf(",run_list.Front()));
 	
 	// Drawing Cerenkov position distribution histograms
 	TCanvas* c2 = new TCanvas("c2", "Cerenkov Position Cuts", 1200, 1200);
@@ -517,7 +539,7 @@ int pngcer_calib(string cmdInput) {
     l16->SetLineColor(kRed);
     l16->Draw();
 	
-	c2->Print("pngcer_fit_1.pdf");
+	c2->Print(Form("Calib/pngcer_fit_%d.pdf",run_list.Front()));
 	
 	// Drawing calorimeter distribution histogram
 	TCanvas* c3 = new TCanvas("c3", "P.cal.etottracknorm Cuts", 1200, 1200);
@@ -530,13 +552,28 @@ int pngcer_calib(string cmdInput) {
     l18->SetLineColor(kRed);
     l18->Draw();
 
-    c3->Print("pngcer_fit_1.pdf)");
+    c3->Print(Form("Calib/pngcer_fit_%d.pdf)",run_list.Front()));
 	
 	// Printing calibration constants to terminal
-	std::cout << "1/PMT1 Calibration Constant: " << xscale1 << std::endl;
-	std::cout << "1/PMT2 Calibration Constant: " << xscale2 << std::endl;
-	std::cout << "1/PMT3 Calibration Constant: " << xscale3 << std::endl;
-	std::cout << "1/PMT4 Calibration Constant: " << xscale4 << std::endl;
+	std::cout << "1/PMT1 Calibration Constant Poisson: " << xscale1 << std::endl;
+	std::cout << "1/PMT2 Calibration Constant Poisson: " << xscale2 << std::endl;
+	std::cout << "1/PMT3 Calibration Constant Poisson: " << xscale3 << std::endl;
+	std::cout << "1/PMT4 Calibration Constant Poisson: " << xscale4 << std::endl;
+
+    std::cout << "1/PMT1 Calibration Constant Gaus: " << gausParam1 << std::endl;
+	std::cout << "1/PMT2 Calibration Constant Gaus: " << gausParam2 << std::endl;
+	std::cout << "1/PMT3 Calibration Constant Gaus: " << gausParam3 << std::endl;
+	std::cout << "1/PMT4 Calibration Constant Gaus: " << gausParam4 << std::endl;
+
+    std::ofstream Calib;
+    Calib.open(Form("Calib/calib_error_%d.csv", run_list.Front()), ios::out);
+
+    Calib << "FirstRunNumber, Poisson1, PoissonErr1, Poisson2, PoissonErr2, Poisson3, PoissonErr3, Poisson4, PoissonErr4, Gaus1, GausErr1, Gaus2, GausErr2, Gaus3, GausErr3, Gaus4, GausErr4\n";
+    if (!Calib.is_open()) cout << "Error file not opened!\n";
+    else {
+        Calib << run_list.Front() << ',' << xscale1 << ',' << xscale2 << ',' << xscale3 << ',' << xscale4 << ',' << guasParam1 << ',' << gausParamErr1 << ',' << guasParam2 << ',' << gausParamErr2 << ',' << guasParam3 << ',' << gausParamErr3 << ',' << guasParam4 << ',' << gausParamErr4 << '\n';
+        Calib.close();
+    }
 	
 	return 0;
 }

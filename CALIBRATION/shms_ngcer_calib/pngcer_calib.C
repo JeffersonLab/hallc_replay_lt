@@ -257,7 +257,7 @@ int pngcer_calib(string cmdInput) {
         {
 	    int b = i+1;
 	    manyGaus[i] = new TF1(Form("G1_%d",i+1), "[0]*(TMath::Power([2],[5])/([5]*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))", fitL1, fitH1);
-	    manyGaus[i]->SetLineColor(kAzure-3);
+	    manyGaus[i]->SetLineColor(kAzure+i);
 	    manyGaus[i]->SetParameter(0,g1->GetParameter(0));
 	    manyGaus[i]->SetParameter(1,g1->GetParameter(1) + (g1->GetParameter(7)/g1->GetParameter(3)));
 	    manyGaus[i]->SetParameter(2,g1->GetParameter(4));

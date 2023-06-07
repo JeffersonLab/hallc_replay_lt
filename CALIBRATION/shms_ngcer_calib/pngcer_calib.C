@@ -44,7 +44,7 @@ Double_t multiGaus(Double_t *x, Double_t *par)
     }else{
         B = TMath::Exp(-u)*( (1-w)*TMath::Exp(-1*TMath::Power(z-q,2)/(2*TMath::Power(s,2)))/(s*TMath::Sqrt(2*TMath::Pi())) + (w*a*TMath::Exp(-a*(z-q))) );
 	}*/
-    B = b*(TMath::Exp(-u)*((1-w)*TMath::Exp(-1*TMath::Power(z-q,2)/(2*TMath::Power(s,2)))/(s*TMath::Sqrt(2*TMath::Pi())) + (w*a*TMath::Exp(-a*(z-q)))) );
+    B = b*(TMath::Exp(-u)*((1-w)*TMath::Exp(-1*TMath::Power(z-q,2)/(2*TMath::Power(s,2)))/(s*2.506628275) + (w*a*TMath::Exp(-a*(z-q)))) );
     //B = b*TMath::Exp(-u)*(w*a*TMath::Exp(-a*(z-q)));
     //B = 0;
         
@@ -245,7 +245,7 @@ int pngcer_calib(string cmdInput) {
 	auto h_pmt1_int_clone = h_pmt1_int->DrawClone();
 
 	TF1* manyGaus[Ngaus]; 
-	TF1* Back1 = new TF1("B1","[0]*TMath::Exp(-[1])*((1-[2])*TMath::Exp(-1*TMath::Power(x-[1],2)/(2*TMath::Power([3],2)))/([4]*TMath::Sqrt(2*TMath::Pi())) + ([2]*[4]*TMath::Exp(-[4]*(x-[1])))))", fitL1,fitH1);
+	TF1* Back1 = new TF1("B1","[0]*TMath::Exp(-[1])*((1-[2])*TMath::Exp(-1*TMath::Power(x-[1],2)/(2*TMath::Power([3],2)))/([4]*2.506628275) + ([2]*[4]*TMath::Exp(-[4]*(x-[1]))))", fitL1,fitH1);
 	Back1->SetLineColor(kAzure-3);
 	Back1->SetParameter(0,g1->GetParameter(8));
 	Back1->SetParameter(1,g1->GetParameter(4));
@@ -309,6 +309,14 @@ int pngcer_calib(string cmdInput) {
 	h_pmt2_int->SetTitle("PMT 2 Cerenkov Calibration Poisson Fit; Pulse Integral");
 	auto h_pmt2_int_clone = h_pmt2_int->DrawClone();
 
+	TF1* Back2 = new TF1("B2","[0]*TMath::Exp(-[1])*((1-[2])*TMath::Exp(-1*TMath::Power(x-[1],2)/(2*TMath::Power([3],2)))/([4]*2.506628275) + ([2]*[4]*TMath::Exp(-[4]*(x-[1]))))", fitL1,fitH1);
+	Back2->SetLineColor(kAzure-3);
+	Back2->SetParameter(0,g2->GetParameter(8));
+	Back2->SetParameter(1,g2->GetParameter(4));
+	Back2->SetParameter(2,g2->GetParameter(1));
+	Back2->SetParameter(3,g2->GetParameter(2));
+	Back2->SetParameter(4,g2->GetParameter(3));
+	Back2->Draw("Same");
 	TF1* manyGaus2[Ngaus]; 
 	for (int i = 0; i < Ngaus; i++)
         {
@@ -358,6 +366,14 @@ int pngcer_calib(string cmdInput) {
 	h_pmt3_int->SetTitle("PMT 3 Cerenkov Calibration Poisson Fit; Pulse Integral");
 	auto h_pmt3_int_clone = h_pmt3_int->DrawClone();
 	
+	TF1* Back3 = new TF1("B3","[0]*TMath::Exp(-[1])*((1-[2])*TMath::Exp(-1*TMath::Power(x-[1],2)/(2*TMath::Power([3],2)))/([4]*2.506628275) + ([2]*[4]*TMath::Exp(-[4]*(x-[1]))))", fitL1,fitH1);
+	Back3->SetLineColor(kAzure-3);
+	Back3->SetParameter(0,g2->GetParameter(8));
+	Back3->SetParameter(1,g2->GetParameter(4));
+	Back3->SetParameter(2,g2->GetParameter(1));
+	Back3->SetParameter(3,g2->GetParameter(2));
+	Back3->SetParameter(4,g2->GetParameter(3));
+	Back3->Draw("Same");
 	TF1* manyGaus3[Ngaus]; 
 	for (int i = 0; i < Ngaus; i++)
         {
@@ -407,6 +423,14 @@ int pngcer_calib(string cmdInput) {
 	h_pmt4_int->SetTitle("PMT 4 Cerenkov Calibration Poisson Fit; Pulse Integral");
 	auto h_pmt4_int_clone = h_pmt4_int->DrawClone();
 	
+	TF1* Back4 = new TF1("B4","[0]*TMath::Exp(-[1])*((1-[2])*TMath::Exp(-1*TMath::Power(x-[1],2)/(2*TMath::Power([3],2)))/([4]*2.506628275) + ([2]*[4]*TMath::Exp(-[4]*(x-[1]))))", fitL1,fitH1);
+	Back4->SetLineColor(kAzure-3);
+	Back4->SetParameter(0,g2->GetParameter(8));
+	Back4->SetParameter(1,g2->GetParameter(4));
+	Back4->SetParameter(2,g2->GetParameter(1));
+	Back4->SetParameter(3,g2->GetParameter(2));
+	Back4->SetParameter(4,g2->GetParameter(3));
+	Back4->Draw("Same");
 	TF1* manyGaus4[Ngaus]; 
 	for (int i = 0; i < Ngaus; i++)
         {

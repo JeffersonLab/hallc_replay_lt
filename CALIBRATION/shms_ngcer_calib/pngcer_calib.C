@@ -222,7 +222,7 @@ int pngcer_calib(string cmdInput) {
 	cout << "Starting Fit of multiGuass (May take awhile)\n";
 	h_pmt1_int->Fit(g1,"R");
 	
-	TF1* f1 = new TF1("f1","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1)",30,70);
+	TF1* f1 = new TF1("f1","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1)",30,120);
 	f1->SetLineColor(kViolet-6);
 	f1->SetParameters(2000,50,3);
 	h_pmt1_int->Fit(f1,"R+");
@@ -302,7 +302,7 @@ int pngcer_calib(string cmdInput) {
 	g3->SetParLimits(6,0.01,500);
 	g3->SetParLimits(7,0,1);
 	g3->SetParLimits(8,0,1000000000);
-	h_pmt2_int->Fit(g3,"R");
+	h_pmt3_int->Fit(g3,"R");
     
 	TF1* f3 = new TF1("f3","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1)",30,70);
 	f3->SetParameters(2000,50,3);
@@ -342,7 +342,7 @@ int pngcer_calib(string cmdInput) {
 	g4->SetParLimits(6,0.01,500);
 	g4->SetParLimits(7,0,1);
 	g4->SetParLimits(8,0,1000000000);
-	h_pmt2_int->Fit(g4,"R");
+	h_pmt4_int->Fit(g4,"R");
 	
 	TF1* f4 = new TF1("f4","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1)",30,70);
 	f4->SetParameters(2000,50,3);

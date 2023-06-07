@@ -12,37 +12,6 @@ root -l pngcer_calib.C
 #include <TF1.h>
 #include <TLine.h>
 
-// This fuction is a faithful recreation of the math shown in petr stepanov's slides for the aerogel calibration
-/*
-Double_t multiGausPetr(Double_t *x, Double_t *par)
-{
-    int n = 5; // Number of gausians to use
-    Double_t z = x[0];
-    Double_t f = 0;
-    
-    // fit parameters
-    Double_t w = par[0]; //omega    - probability that signal is accompanied by type II background process
-    Double_t s = par[1]; //sigma0   - standard deviation of the type I background process (pedestal)
-    Double_t a = par[2]; //Alpha    - coefficient of the exponential decrease of the type II background
-    Double_t u = par[3]; //mu       - number of photo-electrons
-    Double_t S = par[4]; //Sigma1   - corresponding standard deviation of the charge distribution
-    Double_t Q = par[5]; //Q1       - average charge at the PM output
-    
-    // Background Term
-    Double_t B = (TMath::Exp(-TMath::Power(z,2)/(2*TMath::Power(s,2)))*(1 - w)/(s * TMath::Sqrt(2*TMath::Pi()))) + w*a*TMath::Exp(-a*z); // invalid for z < 0 !!!
-    
-    // i = 0 term
-    f += u*TMath::Exp(-u)/(1-TMath::Exp(-u));
-    // multi guasian being added together.
-    for (int i = 1; i < (n+1); n++)
-    {
-        f += (TMath::Power(u,i)*TMath::Exp(-u)/(TMath::Factorial(i)*(1-TMath::Exp(-u))))*(1/(S*TMath::Sqrt(2*TMath::Pi()*i)))*TMath::Exp(-1*TMath::Power((z-Q),2)/(2*n*TMath::Power(S,2)));
-    }
-    
-    return B*f;
-}
-*/
-
 // approximate fitting function for pmts from E.H.Bellamy paper https://doi.org/10.1016/0168-9002(94)90183-X
 Double_t multiGaus(Double_t *x, Double_t *par)
 {
@@ -51,7 +20,6 @@ Double_t multiGaus(Double_t *x, Double_t *par)
     Double_t f = 0;
     
     // fit parameters
-    //Double_t w = par[0]; //omega    - probability that signal is accompanied by type II background process
     Double_t c = par[0]; //overall constant
     Double_t q = par[1]; //Q0       - pedestal position
     Double_t s = par[2]; //sigma0   - standard deviation of the type I background process (pedestal)
@@ -59,6 +27,8 @@ Double_t multiGaus(Double_t *x, Double_t *par)
     Double_t u = par[4]; //mu       - number of photo-electrons
     Double_t Q = par[5]; //Q1       - average charge at the PM output
     Double_t S = par[6]; //Sigma1   - corresponding standard deviation of the charge distribution
+    Double_t w = par[7]; //omega    - probability that signal is accompanied by type II background process
+    Double_t b = par[8]; //overall constant for background
     
     /*
     // Background Term
@@ -69,7 +39,8 @@ Double_t multiGaus(Double_t *x, Double_t *par)
     }else{
         B = TMath::Exp(-u)*( (1-w)*TMath::Exp(-1*TMath::Power(z-q,2)/(2*TMath::Power(s,2)))/(s*TMath::Sqrt(2*TMath::Pi())) + (w*a*TMath::Exp(-a*(z-q))) );
 	}*/
-    
+    B = b*(TMath::Exp(-u)*( (1-w)*TMath::Exp(-1*TMath::Power(z-q,2)/(2*TMath::Power(s,2)))/(s*TMath::Sqrt(2*TMath::Pi())) + (w*a*TMath::Exp(-a*(z-q))) ) );
+	
     /*    
     // multi guasian being added together.
     for (int i = 1; i < (n+1); n++)
@@ -81,10 +52,9 @@ Double_t multiGaus(Double_t *x, Double_t *par)
     }
     */
     //Root does not like that for loop for whatever reason, so here are the first 5 terms explicitly
-    //f = c*((u/(S*2.506627)*TMath::Exp(-u+(-1/2)*((z-q-Q)/S)*((z-q-Q)/S)))+(u*u/(S*7.089812))*TMath::Exp(-u+(-1/(4))*((z-q-2*Q)/S)*((z-q-2*Q)/S))+(u*u*u/(S*26.049632))*TMath::Exp(-u+(-1/(6))*((z-q-3*Q)/S)*((z-q-3*Q)/S))+(u*u*u*u/(S*120.318096))*TMath::Exp(-u+(-1/(8))*((z-q-4*Q)/S)*((z-q-4*Q)/S))+(u*u*u*u*u/(S*672.598604))*TMath::Exp(-u+(-1/(10))*((z-q-5*Q)/S)*((z-q-5*Q)/S)));
-    f = c*((u/(S*2.506627)*TMath::Exp(-u+(-1/2)*((z-q-Q)/S)*((z-q-Q)/S))));
-    //    return B+f;
-    return f;
+    f = c*((u/S)*TMath::Exp(-u-((z-q-(w/a)-Q)*(z-q-(w/a)-Q))/(2*S*S)) + (u/(2*S*TMath::Sqrt(2)))*TMath::Exp(-u-((z-q-(w/a)-2*Q)*(z-q-(w/a)-2*Q))/(4*S*S)) + (u/(6*S*TMath::Sqrt(3)))*TMath::Exp(-u-((z-q-(w/a)-3*Q)*(z-q-(w/a)-3*Q))/(6*S*S)) + (u/(24*S*TMath::Sqrt(4)))*TMath::Exp(-u-((z-q-(w/a)-4*Q)*(z-q-(w/a)-4*Q))/(8*S*S)) + (u/(120*S*TMath::Sqrt(5)))*TMath::Exp(-u-((z-q-(w/a)-5*Q)*(z-q-(w/a)-5*Q))/(10*S*S)));
+    //f = c*((u/(S*2.506627)*TMath::Exp(-u+(-1/2)*((z-q-Q)/S)*((z-q-Q)/S))));
+    return B+f;    
 }
 
 // approximate fitting function for pmts from E.H.Bellamy paper https://doi.org/10.1016/0168-9002(94)90183-X
@@ -104,8 +74,9 @@ Double_t multiGausNoBackground(Double_t *x, Double_t *par)
     
     //f = c*((u/(S*2.506627)*TMath::Exp(-u+(-1/2)*((z-q-Q)/S)*((z-q-Q)/S)))+(u*u/(S*7.089812))*TMath::Exp(-u+(-1/(4))*((z-q-2*Q)/S)*((z-q-2*Q)/S))+(u*u*u/(S*26.049632))*TMath::Exp(-u+(-1/(6))*((z-q-3*Q)/S)*((z-q-3*Q)/S))+(u*u*u*u/(S*120.318096))*TMath::Exp(-u+(-1/(8))*((z-q-4*Q)/S)*((z-q-4*Q)/S))+(u*u*u*u*u/(S*672.598604))*TMath::Exp(-u+(-1/(10))*((z-q-5*Q)/S)*((z-q-5*Q)/S)));
     //f = c*(u/(S*2.506627)*TMath::Exp(-u+((-1/2)*((z-q-Q)/S)*((z-q-Q)/S))));
-    f = c*((u/S)*TMath::Exp(-u-((z-q-Q)*(z-q-Q))/(2*S*S)) + (u/(2*S*TMath::Sqrt(2)))*TMath::Exp(-u-((z-q-2*Q)*(z-q-2*Q))/(4*S*S)) + (u/(6*S*TMath::Sqrt(3)))*TMath::Exp(-u-((z-q-3*Q)*(z-q-3*Q))/(6*S*S)) + (u/(24*S*TMath::Sqrt(4)))*TMath::Exp(-u-((z-q-4*Q)*(z-q-4*Q))/(8*S*S)) + (u/(120*S*TMath::Sqrt(5)))*TMath::Exp(-u-((z-q-5*Q)*(z-q-5*Q))/(10*S*S)));
-    //    return B+f;
+    
+    f = c*((u/S)*TMath::Exp(-u-((z-q-Q)*(z-q-Q))/(2*S*S)) + (u/(2*S*TMath::Sqrt(2)))*TMath::Exp(-u-((z-q-2*Q)*(z-q-2*Q))/(4*S*S)) + (u/(6*S*TMath::Sqrt(3)))*TMath::Exp(-u-((z-q-3*Q)*(z-q-3*Q))/(6*S*S)) + (u/(24*S*TMath::Sqrt(4)))*TMath::Exp(-u-((z-q-4*Q)*(z-q-4*Q))/(8*S*S)) + (u/(120*S*TMath::Sqrt(5)))*TMath::Exp(-u-((z-q-5*Q)*(z-q-5*Q))/(10*S*S)) + (u/(720*S*TMath::Sqrt(6)))*TMath::Exp(-u-((z-q-6*Q)*(z-q-6*Q))/(12*S*S)) + (u/(5040*S*TMath::Sqrt(7)))*TMath::Exp(-u-((z-q-7*Q)*(z-q-7*Q))/(14*S*S)));
+    
     return f;
 }
 
@@ -164,7 +135,7 @@ int pngcer_calib(string cmdInput) {
 	double xmax = 25;
 	double ymax = 25;
 	double emin = 0.7;
-	double emax = 2.0;
+	double emax = 3.0;
 	double dpmin = -10;
 	double dpmax = 22;
 
@@ -227,10 +198,10 @@ int pngcer_calib(string cmdInput) {
 	c1->Divide(2,2);
 	c1->cd(1);
 	
-	Double_t startParam[7] = {50000, 1, 1, 1, 2, 5, 1};
-	Double_t startParamNB[7] = {50000, 1, 2, 5, 1};	
+	Double_t startParam[9] = {50000, 1, 1, 1, 2, 5, 1, 0.5, 10};
+	Double_t startParamNB[5] = {50000, 1, 2, 5, 1};	
 	TF1* g1 = new TF1("G1",multiGausNoBackground,0,150,5);
-	g1->SetParameters(startParam);
+	g1->SetParameters(startParamNB);
 	g1->SetParLimits(0,1,100000000);
 	g1->SetParLimits(1,0,4000);
 	g1->SetParLimits(2,1,200);
@@ -239,6 +210,23 @@ int pngcer_calib(string cmdInput) {
 	cout << "Starting Fit of pmt1, multiGuass (May take awhile)\n";
 	h_pmt1_int->Fit(g1,"R L");
 	cout << "\npmt1 multiGaus fit complete\n";
+
+    const int Ngaus = 7;
+    TF1* manyGaus[Ngaus]; 
+    for (int i = 0; i < Ngaus; i++)
+    {
+        int b = i+1;
+        manyGaus[i] = new TF1(Form("G1_%d",i+1), "[0]*([2]/([5]*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))", 0, 150);
+        manyGaus[i]->SetLineColor(kAzure-3);
+        manyGaus[i]->SetParameter(0,g1->GetParameter(0));
+        manyGaus[i]->SetParameter(1,g1->GetParameter(1));
+        manyGaus[i]->SetParameter(2,g1->GetParameter(2));
+        manyGaus[i]->SetParameter(3,g1->GetParameter(3));
+        manyGaus[i]->SetParameter(4,g1->GetParameter(4));
+        manyGaus[i]->SetParameter(5,b);
+        
+        manyGaus[i]->Draw("Same");
+    }
 
 	TF1* f1 = new TF1("f1","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1)",30,70);
 	f1->SetParameters(2000,50,3);
@@ -254,14 +242,19 @@ int pngcer_calib(string cmdInput) {
 	//g1->Draw("Same");
 
 	c1->cd(2);
-	TF1* g2 = new TF1("G2",multiGaus,0,100,7);
+	TF1* g2 = new TF1("G2",multiGaus,0,100,9);
 	g2->SetParameters(startParam);
 	g2->SetParLimits(0,1,1000000000);
-	g2->SetParLimits(1,0,40);
-	g2->SetParLimits(5,0,40);
+	g2->SetParLimits(1,-1,40);
+	g2->SetParLimits(2,0,20);
+	g2->SetParLimits(3,0,400);
+	g2->SetParLimits(4,0,400);
+	g2->SetParLimits(5,-1,400);
 	g2->SetParLimits(6,0.01,5);
+	g2->SetParLimits(7,0,1);
+	g2->SetParLimits(8,0,1000000000);
 	h_pmt2_int->Fit(g2,"R");
-
+    
 	TF1* f2 = new TF1("f2","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1)",30,70);
 	f2->SetParameters(2000,50,3);
 	//h_pmt2_int->Fit(f2,"R");

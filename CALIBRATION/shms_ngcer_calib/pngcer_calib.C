@@ -81,10 +81,34 @@ Double_t multiGaus(Double_t *x, Double_t *par)
     }
     */
     //Root does not like that for loop for whatever reason, so here are the first 5 terms explicitly
-    f = c*((u/(S*2.506627)*TMath::Exp(-u+(-1/2)*((z-q-Q)/S)*((z-q-Q)/S)))+(u*u/(S*7.089812))*TMath::Exp(-u+(-1/(4))*((z-q-2*Q)/S)*((z-q-2*Q)/S))+(u*u*u/(S*26.049632))*TMath::Exp(-u+(-1/(6))*((z-q-3*Q)/S)*((z-q-3*Q)/S))+(u*u*u*u/(S*120.318096))*TMath::Exp(-u+(-1/(8))*((z-q-4*Q)/S)*((z-q-4*Q)/S))+(u*u*u*u*u/(S*672.598604))*TMath::Exp(-u+(-1/(10))*((z-q-5*Q)/S)*((z-q-5*Q)/S)));
+    //f = c*((u/(S*2.506627)*TMath::Exp(-u+(-1/2)*((z-q-Q)/S)*((z-q-Q)/S)))+(u*u/(S*7.089812))*TMath::Exp(-u+(-1/(4))*((z-q-2*Q)/S)*((z-q-2*Q)/S))+(u*u*u/(S*26.049632))*TMath::Exp(-u+(-1/(6))*((z-q-3*Q)/S)*((z-q-3*Q)/S))+(u*u*u*u/(S*120.318096))*TMath::Exp(-u+(-1/(8))*((z-q-4*Q)/S)*((z-q-4*Q)/S))+(u*u*u*u*u/(S*672.598604))*TMath::Exp(-u+(-1/(10))*((z-q-5*Q)/S)*((z-q-5*Q)/S)));
+    f = c*((u/(S*2.506627)*TMath::Exp(-u+(-1/2)*((z-q-Q)/S)*((z-q-Q)/S))));
     //    return B+f;
     return f;
 }
+
+// approximate fitting function for pmts from E.H.Bellamy paper https://doi.org/10.1016/0168-9002(94)90183-X
+Double_t multiGausNoBackground(Double_t *x, Double_t *par)
+{
+    int n = 2; // Number of gausians to use
+    Double_t z = x[0];
+    Double_t f = 0;
+    
+    // fit parameters
+    //Double_t w = par[0]; //omega    - probability that signal is accompanied by type II background process
+    Double_t c = par[0]; //overall constant
+    Double_t q = par[1]; //Q0       - pedestal position
+    Double_t u = par[2]; //mu       - number of photo-electrons
+    Double_t Q = par[3]; //Q1       - average charge at the PM output
+    Double_t S = par[4]; //Sigma1   - corresponding standard deviation of the charge distribution
+    
+    //f = c*((u/(S*2.506627)*TMath::Exp(-u+(-1/2)*((z-q-Q)/S)*((z-q-Q)/S)))+(u*u/(S*7.089812))*TMath::Exp(-u+(-1/(4))*((z-q-2*Q)/S)*((z-q-2*Q)/S))+(u*u*u/(S*26.049632))*TMath::Exp(-u+(-1/(6))*((z-q-3*Q)/S)*((z-q-3*Q)/S))+(u*u*u*u/(S*120.318096))*TMath::Exp(-u+(-1/(8))*((z-q-4*Q)/S)*((z-q-4*Q)/S))+(u*u*u*u*u/(S*672.598604))*TMath::Exp(-u+(-1/(10))*((z-q-5*Q)/S)*((z-q-5*Q)/S)));
+    //f = c*(u/(S*2.506627)*TMath::Exp(-u+((-1/2)*((z-q-Q)/S)*((z-q-Q)/S))));
+    f = c*((u/S)*TMath::Exp(-u-((z-q-Q)*(z-q-Q))/(2*S*S)) + (u/(2*S*TMath::Sqrt(2)))*TMath::Exp(-u-((z-q-2*Q)*(z-q-2*Q))/(4*S*S)) + (u/(6*S*TMath::Sqrt(3)))*TMath::Exp(-u-((z-q-3*Q)*(z-q-3*Q))/(6*S*S)) + (u/(24*S*TMath::Sqrt(4)))*TMath::Exp(-u-((z-q-4*Q)*(z-q-4*Q))/(8*S*S)) + (u/(120*S*TMath::Sqrt(5)))*TMath::Exp(-u-((z-q-5*Q)*(z-q-5*Q))/(10*S*S)));
+    //    return B+f;
+    return f;
+}
+
 
 int pngcer_calib(string cmdInput) {
 	// Input file format
@@ -203,13 +227,19 @@ int pngcer_calib(string cmdInput) {
 	c1->Divide(2,2);
 	c1->cd(1);
 	
-	Double_t startParam[7] = {1000, 10, 1, 1, 2, 20,1};
-	TF1* g1 = new TF1("G1",multiGaus,0,100,7);
+	Double_t startParam[7] = {50000, 1, 1, 1, 2, 5, 1};
+	Double_t startParamNB[7] = {50000, 1, 2, 5, 1};	
+	TF1* g1 = new TF1("G1",multiGausNoBackground,0,150,5);
 	g1->SetParameters(startParam);
-	//g1->SetParLimits(0,0,1);
+	g1->SetParLimits(0,1,100000000);
+	g1->SetParLimits(1,0,4000);
+	g1->SetParLimits(2,1,200);
+	//g1->SetParLimits(3,0,400);
+	g1->SetParLimits(4,0.01,400);
 	cout << "Starting Fit of pmt1, multiGuass (May take awhile)\n";
-	h_pmt1_int->Fit(g1,"R");
+	h_pmt1_int->Fit(g1,"R L");
 	cout << "\npmt1 multiGaus fit complete\n";
+
 	TF1* f1 = new TF1("f1","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1)",30,70);
 	f1->SetParameters(2000,50,3);
 	//h_pmt1_int->Fit(f1,"R");
@@ -224,9 +254,17 @@ int pngcer_calib(string cmdInput) {
 	//g1->Draw("Same");
 
 	c1->cd(2);
+	TF1* g2 = new TF1("G2",multiGaus,0,100,7);
+	g2->SetParameters(startParam);
+	g2->SetParLimits(0,1,1000000000);
+	g2->SetParLimits(1,0,40);
+	g2->SetParLimits(5,0,40);
+	g2->SetParLimits(6,0.01,5);
+	h_pmt2_int->Fit(g2,"R");
+
 	TF1* f2 = new TF1("f2","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1)",30,70);
 	f2->SetParameters(2000,50,3);
-	h_pmt2_int->Fit(f2,"R");
+	//h_pmt2_int->Fit(f2,"R");
 	double yscale2 = f2->GetParameter(0);
 	double mean2 = f2->GetParameter(1);
 	double xscale2 = f2->GetParameter(2); // this is the calibration constant

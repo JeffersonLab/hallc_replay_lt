@@ -221,6 +221,13 @@ int pngcer_calib(string cmdInput) {
 	*/
 	cout << "Starting Fit of multiGuass (May take awhile)\n";
 	h_pmt1_int->Fit(g1,"R");
+	double guasParam1 = g1->GetParameter(1) + g1->GetParameter(7)/g1->GetParameter(2) + g1->GetParameter(5);
+	double gausParamErr1;
+	if ( g1->GetParameter(7) != 0 ) {
+	    gausParamErr1 = g1->GetParError(1) + g1->GetParError(5) + sqrt((g1->GetParError(2)/g1->GetParameter(2))*(g1->GetParError(2)/g1->GetParameter(2)) + (g1->GetParError(2)/g1->GetParameter(2))*(g1->GetParError(2)/g1->GetParameter(2));
+	}else{
+	    gausParamErr1 = g1->GetParError(1) + g1->GetParError(5);
+	}
 	
 	TF1* f1 = new TF1("f1","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1)",30,120);
 	f1->SetLineColor(kViolet-6);
@@ -229,6 +236,7 @@ int pngcer_calib(string cmdInput) {
 	double yscale1 = f1->GetParameter(0);
 	double mean1 = f1->GetParameter(1);
 	double xscale1 = f1->GetParameter(2); // this is the calibration constant	
+	double xscaleErr1 = f1->GetParError(2); 	
 	h_pmt1_int->SetTitle("PMT 1 Cerenkov Calibration Poisson Fit; Pulse Integral");
 	//	h_pmt1_int->GetXaxis()->SetRangeUser(0, h_pmt1_int->GetMaximum(h_pmt1_int->GetMaximumBin(1,1000)));
 	auto h_pmt1_int_clone = h_pmt1_int->DrawClone();
@@ -249,6 +257,10 @@ int pngcer_calib(string cmdInput) {
 	    
 	    manyGaus[i]->Draw("Same");
 	}
+	TLegend *Leg1 = new TLegend(0.7, 0.4, 1.0, 0.7, "Fit Info");
+	Leg1->AddEntry(g1, Form("Multi Gaus Fit: Param = %d +- %d", gausParam1, gausParamErr1), "l"); 
+	Leg1->AddEntry(f1, Form("Poison Fit: Param = %d +- %d", xscale1, xscaleErr1), "l"); 
+    Leg1->Draw("Same");
 
 	c1->cd(2);
 	TF1* g2 = new TF1("G2",multiGaus,0,100,9);
@@ -263,7 +275,14 @@ int pngcer_calib(string cmdInput) {
 	g2->SetParLimits(7,0,1);
 	g2->SetParLimits(8,0,1000000000);
 	h_pmt2_int->Fit(g2,"R");
-    
+    double guasParam2 = g2->GetParameter(1) + g2->GetParameter(7)/g2->GetParameter(2) + g2->GetParameter(5);
+	double gausParamErr2;
+	if ( g2->GetParameter(7) != 0 ) {
+	    gausParamErr2 = g2->GetParError(1) + g2->GetParError(5) + sqrt((g2->GetParError(2)/g2->GetParameter(2))*(g2->GetParError(2)/g2->GetParameter(2)) + (g2->GetParError(2)/g2->GetParameter(2))*(g2->GetParError(2)/g2->GetParameter(2));
+	}else{
+	    gausParamErr2 = g2->GetParError(1) + g2->GetParError(5);
+	}
+	
 	TF1* f2 = new TF1("f2","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1)",30,70);
 	f2->SetParameters(2000,50,3);
 	f2->SetLineColor(kViolet-6);
@@ -303,7 +322,14 @@ int pngcer_calib(string cmdInput) {
 	g3->SetParLimits(7,0,1);
 	g3->SetParLimits(8,0,1000000000);
 	h_pmt3_int->Fit(g3,"R");
-    
+    double guasParam3 = g3->GetParameter(1) + g3->GetParameter(7)/g3->GetParameter(2) + g3->GetParameter(5);
+	double gausParamErr3;
+	if ( g3->GetParameter(7) != 0 ) {
+	    gausParamErr3 = g3->GetParError(1) + g3->GetParError(5) + sqrt((g3->GetParError(2)/g3->GetParameter(2))*(g3->GetParError(2)/g3->GetParameter(2)) + (g3->GetParError(2)/g3->GetParameter(2))*(g3->GetParError(2)/g3->GetParameter(2));
+	}else{
+	    gausParamErr3 = g3->GetParError(1) + g3->GetParError(5);
+	}
+	
 	TF1* f3 = new TF1("f3","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1)",30,70);
 	f3->SetParameters(2000,50,3);
 	f3->SetLineColor(kViolet-6);
@@ -343,6 +369,13 @@ int pngcer_calib(string cmdInput) {
 	g4->SetParLimits(7,0,1);
 	g4->SetParLimits(8,0,1000000000);
 	h_pmt4_int->Fit(g4,"R");
+	double guasParam4 = g4->GetParameter(1) + g4->GetParameter(7)/g4->GetParameter(2) + g4->GetParameter(5);
+	double gausParamErr4;
+	if ( g4->GetParameter(7) != 0 ) {
+	    gausParamErr4 = g4->GetParError(1) + g4->GetParError(5) + sqrt((g4->GetParError(2)/g4->GetParameter(2))*(g4->GetParError(2)/g4->GetParameter(2)) + (g4->GetParError(2)/g4->GetParameter(2))*(g4->GetParError(2)/g4->GetParameter(2));
+	}else{
+	    gausParamErr4 = g4->GetParError(1) + g4->GetParError(5);
+	}
 	
 	TF1* f4 = new TF1("f4","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1)",30,70);
 	f4->SetParameters(2000,50,3);

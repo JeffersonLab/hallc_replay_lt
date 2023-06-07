@@ -256,7 +256,7 @@ int pngcer_calib(string cmdInput) {
 	for (int i = 0; i < Ngaus; i++)
         {
 	    int b = i+1;
-	    manyGaus[i] = new TF1(Form("G1_%d",i+1), "[0]*([2]/([5]*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))", fitL1, fitH1);
+	    manyGaus[i] = new TF1(Form("G1_%d",i+1), "[0]*(TMath::Power([2],[5])/([5]*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))", fitL1, fitH1);
 	    manyGaus[i]->SetLineColor(kAzure-3);
 	    manyGaus[i]->SetParameter(0,g1->GetParameter(0));
 	    manyGaus[i]->SetParameter(1,g1->GetParameter(1) + (g1->GetParameter(7)/g1->GetParameter(3)));
@@ -321,7 +321,7 @@ int pngcer_calib(string cmdInput) {
 	for (int i = 0; i < Ngaus; i++)
         {
 	    int b = i+1;
-	    manyGaus2[i] = new TF1(Form("G2_%d",i+1), "[0]*([2]/([5]*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))", fitL2, fitH2);
+	    manyGaus2[i] = new TF1(Form("G2_%d",i+1), "[0]*(TMath::Power([2],[5])/([5]*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))", fitL2, fitH2);
 	    manyGaus2[i]->SetLineColor(kAzure-3);
 	    manyGaus2[i]->SetParameter(0,g2->GetParameter(0));
 	    manyGaus2[i]->SetParameter(1,g2->GetParameter(1) + (g2->GetParameter(7)/g2->GetParameter(3)));
@@ -378,7 +378,7 @@ int pngcer_calib(string cmdInput) {
 	for (int i = 0; i < Ngaus; i++)
         {
 	    int b = i+1;
-	    manyGaus3[i] = new TF1(Form("G3_%d",i+1), "[0]*([2]/([5]*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))",fitL3,fitH3);
+	    manyGaus3[i] = new TF1(Form("G3_%d",i+1), "[0]*(TMath::Power([2],[5])/([5]*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))",fitL3,fitH3);
 	    manyGaus3[i]->SetLineColor(kAzure-3);
 	    manyGaus3[i]->SetParameter(0,g3->GetParameter(0));
 	    manyGaus3[i]->SetParameter(1,g3->GetParameter(1) + (g3->GetParameter(7)/g3->GetParameter(3)));
@@ -435,7 +435,7 @@ int pngcer_calib(string cmdInput) {
 	for (int i = 0; i < Ngaus; i++)
         {
 	    int b = i+1;
-	    manyGaus4[i] = new TF1(Form("G4_%d",i+1), "[0]*([2]/([5]*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))", fitL4, fitH4);
+	    manyGaus4[i] = new TF1(Form("G4_%d",i+1), "[0]*(TMath::Power([2],[5])/([5]*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))", fitL4, fitH4);
 	    manyGaus4[i]->SetLineColor(kAzure-3);
 	    manyGaus4[i]->SetParameter(0,g4->GetParameter(0));
 	    manyGaus4[i]->SetParameter(1,g4->GetParameter(1) + (g4->GetParameter(7)/g4->GetParameter(3)));

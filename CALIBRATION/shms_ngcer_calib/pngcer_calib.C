@@ -43,8 +43,9 @@ Double_t multiGaus(Double_t *x, Double_t *par)
     }else{
         B = TMath::Exp(-u)*( (1-w)*TMath::Exp(-1*TMath::Power(z-q,2)/(2*TMath::Power(s,2)))/(s*TMath::Sqrt(2*TMath::Pi())) + (w*a*TMath::Exp(-a*(z-q))) );
 	}*/
-    B = b*(TMath::Exp(-u)*( (1-w)*TMath::Exp(-1*TMath::Power(z-q,2)/(2*TMath::Power(s,2)))/(s*TMath::Sqrt(2*TMath::Pi())) + (w*a*TMath::Exp(-a*(z-q)))) );
-	
+    //B = b*(TMath::Exp(-u)*((1-w)*TMath::Exp(-1*TMath::Power(z-q,2)/(2*TMath::Power(s,2)))/(s*TMa5Dth::Sqrt(2*TMath::Pi())) + (w*a*TMath::Exp(-a*(z-q)))) );
+    //B = b*TMath::Exp(-u)*(w*a*TMath::Exp(-a*(z-q)));
+    B = 0;
     /*    
     // multi guasian being added together.
     for (int i = 1; i < (n+1); n++)
@@ -202,7 +203,7 @@ int pngcer_calib(string cmdInput) {
 	c1->Divide(2,2);
 	c1->cd(1);
 	
-	TF1* g1 = new TF1("G1",multiGaus,0,150,9);
+	TF1* g1 = new TF1("G1",multiGaus,0,130,9);
 	g1->SetParameters(startParam);
 	g1->SetParLimits(0,1,1000000000);
 	g1->SetParLimits(1,-1,40);
@@ -221,7 +222,7 @@ int pngcer_calib(string cmdInput) {
 	*/
 	cout << "Starting Fit of multiGuass (May take awhile)\n";
 	h_pmt1_int->Fit(g1,"R");
-	double guasParam1 = g1->GetParameter(1) + g1->GetParameter(7)/g1->GetParameter(2) + g1->GetParameter(5);
+	double gausParam1 = g1->GetParameter(1) + g1->GetParameter(7)/g1->GetParameter(2) + g1->GetParameter(5);
 	double gausParamErr1;
 	if ( g1->GetParameter(7) != 0 ) {
 	    gausParamErr1 = g1->GetParError(1) + g1->GetParError(5) + sqrt((g1->GetParError(2)/g1->GetParameter(2))*(g1->GetParError(2)/g1->GetParameter(2)) + (g1->GetParError(2)/g1->GetParameter(2))*(g1->GetParError(2)/g1->GetParameter(2)));
@@ -229,7 +230,7 @@ int pngcer_calib(string cmdInput) {
 	    gausParamErr1 = g1->GetParError(1) + g1->GetParError(5);
 	}
 	
-	TF1* f1 = new TF1("f1","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1)",30,120);
+	TF1* f1 = new TF1("f1","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1)",50,100);
 	f1->SetLineColor(kViolet-6);
 	f1->SetParameters(2000,50,3);
 	h_pmt1_int->Fit(f1,"R+");
@@ -246,7 +247,7 @@ int pngcer_calib(string cmdInput) {
 	for (int i = 0; i < Ngaus; i++)
         {
 	    int b = i+1;
-	    manyGaus[i] = new TF1(Form("G1_%d",i+1), "[0]*([2]/([5]*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))", 0, 150);
+	    manyGaus[i] = new TF1(Form("G1_%d",i+1), "[0]*([2]/([5]*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))", 0, 130);
 	    manyGaus[i]->SetLineColor(kAzure-3);
 	    manyGaus[i]->SetParameter(0,g1->GetParameter(0));
 	    manyGaus[i]->SetParameter(1,g1->GetParameter(1) + (g1->GetParameter(7)/g1->GetParameter(3)));
@@ -257,11 +258,15 @@ int pngcer_calib(string cmdInput) {
 	    
 	    manyGaus[i]->Draw("Same");
 	}
-	TLegend *Leg1 = new TLegend(0.7, 0.4, 1.0, 0.7, "Fit Info");
-	Leg1->AddEntry(g1, Form("Multi Gaus Fit: Param = %f +- %f", gausParam1, gausParamErr1), "l"); 
-	Leg1->AddEntry(f1, Form("Poison Fit: Param = %f +- %f", xscale1, xscaleErr1), "l"); 
-    Leg1->Draw("Same");
-
+	/*
+	TLegend *Leg1 = new TLegend(0.67, 0.5, 1.0, 0.75, "Fit Info");
+	Leg1->SetTextSize(1);
+	Leg1->AddEntry(g1, "Multi Gaus Fit", "l"); 
+        Leg1->AddEntry((TObject*)0, Form("Param = %f +- %f", gausParam1, gausParamErr1), ""); 
+	Leg1->AddEntry(f1, "Poison Fit", "l"); 
+	Leg1->AddEntry((TObject*)0, Form("Param = %f +- %f", xscale1, xscaleErr1), ""); 
+	Leg1->Draw("Same");
+	*/
 	c1->cd(2);
 	TF1* g2 = new TF1("G2",multiGaus,0,100,9);
 	g2->SetParameters(startParam);
@@ -298,7 +303,7 @@ int pngcer_calib(string cmdInput) {
 	for (int i = 0; i < Ngaus; i++)
         {
 	    int b = i+1;
-	    manyGaus2[i] = new TF1(Form("G2_%d",i+1), "[0]*([2]/([5]*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))", 0, 150);
+	    manyGaus2[i] = new TF1(Form("G2_%d",i+1), "[0]*([2]/([5]*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))", 0, 100);
 	    manyGaus2[i]->SetLineColor(kAzure-3);
 	    manyGaus2[i]->SetParameter(0,g2->GetParameter(0));
 	    manyGaus2[i]->SetParameter(1,g2->GetParameter(1) + (g2->GetParameter(7)/g2->GetParameter(3)));
@@ -311,7 +316,7 @@ int pngcer_calib(string cmdInput) {
 	}
 	
 	c1->cd(3);
-	TF1* g3 = new TF1("G2",multiGaus,0,100,9);
+	TF1* g3 = new TF1("G3",multiGaus,0,100,9);
 	g3->SetParameters(startParam);
 	g3->SetParLimits(0,1,1000000000);
 	g3->SetParLimits(1,-1,40);
@@ -346,7 +351,7 @@ int pngcer_calib(string cmdInput) {
 	for (int i = 0; i < Ngaus; i++)
         {
 	    int b = i+1;
-	    manyGaus3[i] = new TF1(Form("G2_%d",i+1), "[0]*([2]/([5]*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))", 0, 150);
+	    manyGaus3[i] = new TF1(Form("G3_%d",i+1), "[0]*([2]/([5]*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))", 0,100);
 	    manyGaus3[i]->SetLineColor(kAzure-3);
 	    manyGaus3[i]->SetParameter(0,g3->GetParameter(0));
 	    manyGaus3[i]->SetParameter(1,g3->GetParameter(1) + (g3->GetParameter(7)/g3->GetParameter(3)));
@@ -359,7 +364,7 @@ int pngcer_calib(string cmdInput) {
 	}
 	
 	c1->cd(4);
-	TF1* g4 = new TF1("G2",multiGaus,0,100,9);
+	TF1* g4 = new TF1("G4",multiGaus, 1, 100,9);
 	g4->SetParameters(startParam);
 	g4->SetParLimits(0,1,1000000000);
 	g4->SetParLimits(1,-1,40);
@@ -394,7 +399,7 @@ int pngcer_calib(string cmdInput) {
 	for (int i = 0; i < Ngaus; i++)
         {
 	    int b = i+1;
-	    manyGaus4[i] = new TF1(Form("G2_%d",i+1), "[0]*([2]/([5]*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))", 0, 150);
+	    manyGaus4[i] = new TF1(Form("G4_%d",i+1), "[0]*([2]/([5]*[4]*TMath::Sqrt([5])))*TMath::Exp(-[2]-((x-[1]-[5]*[3])*(x-[1]-[5]*[3]))/(2*[5]*[4]*[4]))", 1, 100);
 	    manyGaus4[i]->SetLineColor(kAzure-3);
 	    manyGaus4[i]->SetParameter(0,g4->GetParameter(0));
 	    manyGaus4[i]->SetParameter(1,g4->GetParameter(1) + (g4->GetParameter(7)/g4->GetParameter(3)));

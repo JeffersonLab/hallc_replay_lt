@@ -17,7 +17,7 @@ Double_t startParam[9] = {50000, 0, 1, 1, 2, 5, 1, 0.5, 1};
 Double_t startParamNB[5] = {50000, 1, 2, 5, 1};	
 
 // if you change the number of hardcoded
-const int Ngaus = 10;
+const int Ngaus = 15;
 // approximate fitting function for pmts from E.H.Bellamy paper https://doi.org/10.1016/0168-9002(94)90183-X
 Double_t multiGaus(Double_t *x, Double_t *par)
 {
@@ -58,7 +58,7 @@ Double_t multiGaus(Double_t *x, Double_t *par)
       }*/
     
     //Root does not like that for loop for whatever reason, so here are the first 5 terms explicitly
-    f = c*((u/S)*TMath::Exp(-u-((z-q-(w/a)-Q)*(z-q-(w/a)-Q))/(2*S*S)) + (TMath::Power(u,2)/(2*S*TMath::Sqrt(2)))*TMath::Exp(-u-((z-q-(w/a)-2*Q)*(z-q-(w/a)-2*Q))/(4*S*S)) + (TMath::Power(u,3)/(6*S*TMath::Sqrt(3)))*TMath::Exp(-u-((z-q-(w/a)-3*Q)*(z-q-(w/a)-3*Q))/(6*S*S)) + (TMath::Power(u,4)/(24*S*TMath::Sqrt(4)))*TMath::Exp(-u-((z-q-(w/a)-4*Q)*(z-q-(w/a)-4*Q))/(8*S*S)) + (TMath::Power(u,5)/(120*S*TMath::Sqrt(5)))*TMath::Exp(-u-((z-q-(w/a)-5*Q)*(z-q-(w/a)-5*Q))/(10*S*S)) + (TMath::Power(u,6)/(720*S*TMath::Sqrt(6)))*TMath::Exp(-u-((z-q-(w/a)-6*Q)*(z-q-(w/a)-6*Q))/(12*S*S)) + (TMath::Power(u,7)/(5040*S*TMath::Sqrt(7)))*TMath::Exp(-u-((z-q-(w/a)-7*Q)*(z-q-(w/a)-7*Q))/(14*S*S)) + (TMath::Power(u,8)/(40320*S*TMath::Sqrt(8)))*TMath::Exp(-u-((z-q-(w/a)-8*Q)*(z-q-(w/a)-8*Q))/(16*S*S)) + (TMath::Power(u,9)/(362880*S*TMath::Sqrt(9)))*TMath::Exp(-u-((z-q-(w/a)-9*Q)*(z-q-(w/a)-9*Q))/(18*S*S)) + (TMath::Power(u,10)/(3628800*S*TMath::Sqrt(10)))*TMath::Exp(-u-((z-q-(w/a)-10*Q)*(z-q-(w/a)-10*Q))/(20*S*S)));
+    f = c*((u/S)*TMath::Exp(-u-((z-q-(w/a)-Q)*(z-q-(w/a)-Q))/(2*S*S)) + (TMath::Power(u,2)/(2*S*TMath::Sqrt(2)))*TMath::Exp(-u-((z-q-(w/a)-2*Q)*(z-q-(w/a)-2*Q))/(4*S*S)) + (TMath::Power(u,3)/(6*S*TMath::Sqrt(3)))*TMath::Exp(-u-((z-q-(w/a)-3*Q)*(z-q-(w/a)-3*Q))/(6*S*S)) + (TMath::Power(u,4)/(24*S*TMath::Sqrt(4)))*TMath::Exp(-u-((z-q-(w/a)-4*Q)*(z-q-(w/a)-4*Q))/(8*S*S)) + (TMath::Power(u,5)/(120*S*TMath::Sqrt(5)))*TMath::Exp(-u-((z-q-(w/a)-5*Q)*(z-q-(w/a)-5*Q))/(10*S*S)) + (TMath::Power(u,6)/(720*S*TMath::Sqrt(6)))*TMath::Exp(-u-((z-q-(w/a)-6*Q)*(z-q-(w/a)-6*Q))/(12*S*S)) + (TMath::Power(u,7)/(5040*S*TMath::Sqrt(7)))*TMath::Exp(-u-((z-q-(w/a)-7*Q)*(z-q-(w/a)-7*Q))/(14*S*S)) + (TMath::Power(u,8)/(40320*S*TMath::Sqrt(8)))*TMath::Exp(-u-((z-q-(w/a)-8*Q)*(z-q-(w/a)-8*Q))/(16*S*S)) + (TMath::Power(u,9)/(362880*S*TMath::Sqrt(9)))*TMath::Exp(-u-((z-q-(w/a)-9*Q)*(z-q-(w/a)-9*Q))/(18*S*S)) + (TMath::Power(u,10)/(3628800*S*TMath::Sqrt(10)))*TMath::Exp(-u-((z-q-(w/a)-10*Q)*(z-q-(w/a)-10*Q))/(20*S*S)) + (TMath::Power(u,11)/(39916800*S*TMath::Sqrt(11)))*TMath::Exp(-u-((z-q-(w/a)-11*Q)*(z-q-(w/a)-11*Q))/(22*S*S)) + (TMath::Power(u,12)/(479001600*S*TMath::Sqrt(12)))*TMath::Exp(-u-((z-q-(w/a)-12*Q)*(z-q-(w/a)-12*Q))/(24*S*S)) + (TMath::Power(u,13)/(6227020800*S*TMath::Sqrt(13)))*TMath::Exp(-u-((z-q-(w/a)-13*Q)*(z-q-(w/a)-13*Q))/(26*S*S)) + (TMath::Power(u,14)/(87178291200*S*TMath::Sqrt(14)))*TMath::Exp(-u-((z-q-(w/a)-14*Q)*(z-q-(w/a)-14*Q))/(28*S*S)) + (TMath::Power(u,15)/(1307674368000*S*TMath::Sqrt(15)))*TMath::Exp(-u-((z-q-(w/a)-15*Q)*(z-q-(w/a)-15*Q))/(30*S*S)));
     //f = c*((u/(S*2.506627)*TMath::Exp(-u+(-1/2)*((z-q-Q)/S)*((z-q-Q)/S))));
     return B+f;    
 }
@@ -206,7 +206,7 @@ int pngcer_calib(string cmdInput) {
 	TF1* g1 = new TF1("G1",multiGaus,fitL1,fitH1,9);
 	g1->SetParameters(startParam);
 	g1->SetParLimits(0,1,1000000000);
-	g1->SetParLimits(1,-1,5);
+	g1->SetParLimits(1,-1,15);
 	g1->SetParLimits(2,0,20);
 	g1->SetParLimits(3,0,400);
 	g1->SetParLimits(4,0,400);
@@ -243,7 +243,8 @@ int pngcer_calib(string cmdInput) {
 	auto h_pmt1_int_clone = h_pmt1_int->DrawClone();
 
 	TF1* manyGaus[Ngaus]; 
-	TF1* Back1 = new TF1("B1","[0]*TMath::Exp(-[1])*((1-[2])*TMath::Exp(-1*TMath::Power(x-[1],2)/(2*TMath::Power([3],2)))/([4]*2.506628275) + ([2]*[4]*TMath::Exp(-[4]*(x-[1]))))", fitL1,fitH1);
+	TF1* Back1 = new TF1("B1"," [0]*(TMath::Exp(-[1])*((1-[2])*TMath::Exp(-1*TMath::Power(x-[1],2)/(2*TMath::Power([3],2)))/([4]*2.506628275) + ([2]*[4]*TMath::Exp(-[4]*(x-[1])))) )", fitL1,fitH1);
+	B = b*(TMath::Exp(-u)*((1-w)*TMath::Exp(-1*TMath::Power(z-q,2)/(2*TMath::Power(s,2)))/(s*2.506628275) + (w*a*TMath::Exp(-a*(z-q)))) );
 	Back1->SetLineColor(kOrange);
 	Back1->SetParameter(0,g1->GetParameter(8));
 	Back1->SetParameter(1,g1->GetParameter(4));
@@ -307,7 +308,7 @@ int pngcer_calib(string cmdInput) {
 	h_pmt2_int->SetTitle("PMT 2 Cerenkov Calibration Poisson Fit; Pulse Integral");
 	auto h_pmt2_int_clone = h_pmt2_int->DrawClone();
 
-	TF1* Back2 = new TF1("B2","[0]*TMath::Exp(-[1])*((1-[2])*TMath::Exp(-1*TMath::Power(x-[1],2)/(2*TMath::Power([3],2)))/([4]*2.506628275) + ([2]*[4]*TMath::Exp(-[4]*(x-[1]))))", fitL2,fitH2);
+	TF1* Back2 = new TF1("B2"," [0]*(TMath::Exp(-[1])*((1-[2])*TMath::Exp(-1*TMath::Power(x-[1],2)/(2*TMath::Power([3],2)))/([4]*2.506628275) + ([2]*[4]*TMath::Exp(-[4]*(x-[1])))) )", fitL2,fitH2);
 	Back2->SetLineColor(kOrange);
 	Back2->SetParameter(0,g2->GetParameter(8));
 	Back2->SetParameter(1,g2->GetParameter(4));
@@ -372,7 +373,7 @@ int pngcer_calib(string cmdInput) {
 	h_pmt3_int->SetTitle("PMT 3 Cerenkov Calibration Poisson Fit; Pulse Integral");
 	auto h_pmt3_int_clone = h_pmt3_int->DrawClone();
 	
-	TF1* Back3 = new TF1("B3","[0]*TMath::Exp(-[1])*((1-[2])*TMath::Exp(-1*TMath::Power(x-[1],2)/(2*TMath::Power([3],2)))/([4]*2.506628275) + ([2]*[4]*TMath::Exp(-[4]*(x-[1]))))", fitL3,fitH3);
+	TF1* Back3 = new TF1("B3"," [0]*(TMath::Exp(-[1])*((1-[2])*TMath::Exp(-1*TMath::Power(x-[1],2)/(2*TMath::Power([3],2)))/([4]*2.506628275) + ([2]*[4]*TMath::Exp(-[4]*(x-[1])))) )", fitL3,fitH3);
 	Back3->SetLineColor(kOrange);
 	Back3->SetParameter(0,g2->GetParameter(8));
 	Back3->SetParameter(1,g2->GetParameter(4));
@@ -437,7 +438,7 @@ int pngcer_calib(string cmdInput) {
 	h_pmt4_int->SetTitle("PMT 4 Cerenkov Calibration Poisson Fit; Pulse Integral");
 	auto h_pmt4_int_clone = h_pmt4_int->DrawClone();
 	
-	TF1* Back4 = new TF1("B4","[0]*TMath::Exp(-[1])*((1-[2])*TMath::Exp(-1*TMath::Power(x-[1],2)/(2*TMath::Power([3],2)))/([4]*2.506628275) + ([2]*[4]*TMath::Exp(-[4]*(x-[1]))))", fitL4,fitH4);
+	TF1* Back4 = new TF1("B4"," [0]*(TMath::Exp(-[1])*((1-[2])*TMath::Exp(-1*TMath::Power(x-[1],2)/(2*TMath::Power([3],2)))/([4]*2.506628275) + ([2]*[4]*TMath::Exp(-[4]*(x-[1])))) )", fitL4,fitH4);
 	Back4->SetLineColor(kOrange);
 	Back4->SetParameter(0,g2->GetParameter(8));
 	Back4->SetParameter(1,g2->GetParameter(4));

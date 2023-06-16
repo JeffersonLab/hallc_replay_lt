@@ -497,6 +497,10 @@ void setBranchAddresses(TTree* DataTree)
         }
     }
 
+    //hms gas cherenkov
+    DataTree->SetBranchAddress("H.cer.goodAdcTdcDiffTime", &cerAdcTdcDiffTime);
+    DataTree->SetBranchAddress("H.cer.goodAdcMult", &cerAdcMult);
+
     //shms gas cherenkov
     DataTree->SetBranchAddress("P.hgcer.goodAdcTdcDiffTime", &hgcerAdcTdcDiffTime);
     DataTree->SetBranchAddress("P.hgcer.goodAdcMult", &hgcerAdcMult);

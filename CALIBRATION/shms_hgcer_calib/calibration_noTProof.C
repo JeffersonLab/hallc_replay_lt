@@ -1047,7 +1047,7 @@ void calibration_noTProof(TString Filename, Int_t RunNumStart, Int_t RunNumEnd, 
 	Int_t MaxEvents = 0;
 	TChain *Chain = new TChain();
 	
-	/*for(int i=0; i < NumRuns; i++)
+	for(int i=0; i < NumRuns; i++)
 	{
 	  //openfile
 	  TString ROOTFile = Filename + Form("_%d_%d.root", RunNumStart+i, NumEvents);
@@ -1059,12 +1059,13 @@ void calibration_noTProof(TString Filename, Int_t RunNumStart, Int_t RunNumEnd, 
 	    //get tree
 	    TTree *tree = dynamic_cast <TTree*> (replayFile->Get("T"));
 	    MaxEvents += tree->GetEntries();
-	    //Chain->Add(tree);
+	    Chain->Add(tree);
 	  }else{
 	    std::cout << "Could not find \"" << ROOTFile << "\" Continuing without.\n";
 	  }
-	}*/
+	}
 
+    /*
 	//openfile
 	TString ROOTFile = Filename + Form("_%d_%d.root", RunNumStart, NumEvents);
 	std::cout << "Looking for: " + ROOTFile << '\n';
@@ -1079,7 +1080,7 @@ void calibration_noTProof(TString Filename, Int_t RunNumStart, Int_t RunNumEnd, 
 	  //Chain->Add(tree);
 	}else{
 	  std::cout << "Could not find \"" << ROOTFile << "\" Continuing without.\n";
-	}
+	}*/
 	
 	calibration *Calib = new calibration(tree);
 	Calib->SetReader(tree);

@@ -230,7 +230,7 @@ int pngcer_calib(string cmdInput) {
 	    gausParamErr1 = g1->GetParError(1) + g1->GetParError(5);
 	}
 	
-	TF1* f1 = new TF1("f1","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1)",20,80);
+	TF1* f1 = new TF1("f1","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1)",20,90);
 	f1->SetLineColor(kViolet-6);
 	f1->SetParameters(2000,50,3);
 	h_pmt1_int->Fit(f1,"R+");
@@ -244,7 +244,6 @@ int pngcer_calib(string cmdInput) {
 
 	TF1* manyGaus[Ngaus]; 
 	TF1* Back1 = new TF1("B1"," [0]*(TMath::Exp(-[1])*((1-[2])*TMath::Exp(-1*TMath::Power(x-[1],2)/(2*TMath::Power([3],2)))/([4]*2.506628275) + ([2]*[4]*TMath::Exp(-[4]*(x-[1])))) )", fitL1,fitH1);
-	B = b*(TMath::Exp(-u)*((1-w)*TMath::Exp(-1*TMath::Power(z-q,2)/(2*TMath::Power(s,2)))/(s*2.506628275) + (w*a*TMath::Exp(-a*(z-q)))) );
 	Back1->SetLineColor(kOrange);
 	Back1->SetParameter(0,g1->GetParameter(8));
 	Back1->SetParameter(1,g1->GetParameter(4));
@@ -427,7 +426,7 @@ int pngcer_calib(string cmdInput) {
 	    gausParamErr4 = g4->GetParError(1) + g4->GetParError(5);
 	}
 	
-	TF1* f4 = new TF1("f4","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1)",30,70);
+	TF1* f4 = new TF1("f4","[0]*TMath::Power(([1]/[2]),(x/[2]))*(TMath::Exp(-([1]/[2])))/TMath::Gamma((x/[2])+1)",30,90);
 	f4->SetParameters(2000,50,3);
 	f4->SetLineColor(kViolet-6);
 	h_pmt4_int->Fit(f4,"R+");

@@ -1041,12 +1041,13 @@ void calibration::Terminate(Int_t RunNumStart, Int_t RunNumEnd)
 	}
 }
 
-void calibration_noTProof(TString Filename, Int_t RunNumStart, Int_t RunNumEnd, Int_t NumEvents)
+void calibration_noTProof(TString Filename, Int_t RunNumStart, Int_t RunNumEnd, Int_t NumEvents, Int_t UseExactName = 0)
 {
         int NumRuns = RunNumEnd - RunNumStart;
 	Int_t MaxEvents = 0;
 	TChain *Chain = new TChain();
 	
+	/*
 	for(int i=0; i < NumRuns; i++)
 	{
 	  //openfile
@@ -1059,15 +1060,22 @@ void calibration_noTProof(TString Filename, Int_t RunNumStart, Int_t RunNumEnd, 
 	    //get tree
 	    TTree *tree = dynamic_cast <TTree*> (replayFile->Get("T"));
 	    MaxEvents += tree->GetEntries();
-	    Chain->Add(tree);
+	    //replayFile->Close();
+	    Chain->Add(ROOTFile, tree->GetEntries());
 	  }else{
 	    std::cout << "Could not find \"" << ROOTFile << "\" Continuing without.\n";
 	  }
-	}
+	}*/
 
-    /*
+	
 	//openfile
-	TString ROOTFile = Filename + Form("_%d_%d.root", RunNumStart, NumEvents);
+        TString ROOTFile;
+	if(UseExactName == 1)
+	{
+	    ROOTFile = Filename;
+        }else{
+	    ROOTFile = Filename + Form("_%d_%d.root", RunNumStart, NumEvents);
+	}
 	std::cout << "Looking for: " + ROOTFile << '\n';
 	TFile *replayFile = new TFile(ROOTFile, "READ");
 	//replayFile.Open(ROOTFile, "READ");
@@ -1080,12 +1088,15 @@ void calibration_noTProof(TString Filename, Int_t RunNumStart, Int_t RunNumEnd, 
 	  //Chain->Add(tree);
 	}else{
 	  std::cout << "Could not find \"" << ROOTFile << "\" Continuing without.\n";
-	}*/
+	}
 	
-	calibration *Calib = new calibration(tree);
+	Chain->GetListOfFiles()->ls();
+	calibration *Calib = new calibration(0);
+	//TTree *tree = dynamic_cast <TTree*> (Chain->Get("T"));
 	Calib->SetReader(tree);
 	//make histograms
-	Calib->Begin(Calib->fChain);
+	Calib->Begin(tree);
+	
 	
 	//fill histograms
 	for(int i = 0; i < MaxEvents; i++)
@@ -1093,7 +1104,9 @@ void calibration_noTProof(TString Filename, Int_t RunNumStart, Int_t RunNumEnd, 
 	
 	//make and save plots
 	Calib->Terminate(RunNumStart, RunNumEnd);
+	
 }
+
 
 
 

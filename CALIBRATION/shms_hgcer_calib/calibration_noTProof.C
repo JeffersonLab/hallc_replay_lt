@@ -499,17 +499,17 @@ void calibration::Terminate(Int_t RunNumStart, Int_t RunNumEnd)
 					Gauss2->SetParameter(1, 2.0);
 					Gauss2->SetParameter(4, 4.0);
 				}
-				Gauss2->SetParLimits(0, 0.0,PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0]))*1.1); //added *1.1 -NH
-				Gauss2->SetParLimits(1, 1.0, 8.0); 
-				Gauss2->SetParLimits(2, 0.3 , 5.0);
-				Gauss2->SetParLimits(3, 0.0, PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[1]))*1.1); //added *1.1 -NH
-				Gauss2->SetParLimits(4, 3, 10);	 
-				Gauss2->SetParLimits(5, 0.3, 5.0);
-				if(ipmt == 2)
-				{
-				        Gauss2->SetParLimits(1, 0.5, 4.0);
-					Gauss2->SetParLimits(4, 2.0, 7.0);
-				}
+				Gauss2->SetParLimits(0, 0.0,1000000); //changed to this hard coded limit, as I don't trust xpeaks
+				Gauss2->SetParLimits(1, 2.0, 6.0); 
+				Gauss2->SetParLimits(2, 0.1 , 5.0);
+				Gauss2->SetParLimits(3, 0.0,1000000);
+				Gauss2->SetParLimits(4, 3.5, 15);	 
+				Gauss2->SetParLimits(5, 0.1, 5.0);
+				//if(ipmt == 2)
+				//{
+				//        Gauss2->SetParLimits(1, 0.5, 4.5);
+				//	Gauss2->SetParLimits(4, 2.0, 7.0);
+				//}
 				PulseInt_quad[iquad][ipmt]->Fit(Gauss2,"RQN");				 
 				double x1 = Gauss2->GetParameter(1);
 				double x2 = Gauss2->GetParameter(4);
@@ -574,13 +574,16 @@ void calibration::Terminate(Int_t RunNumStart, Int_t RunNumEnd)
 					t->AddText(Form(" Std. 2		= %3.3f #pm %3.3f", p5 = Gauss2->GetParameter(5), p5_err = Gauss2->GetParError(5)));
 					t->Draw();
 				}
-		
+				
+				// I've decided to ignore this constraint -NH
 				// Get values ONLY if number of events in first peak is over 40 at its maximum. Values are all 0 if this is NOT true
-				if (xpeaks[0] > 4.0 && PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])) > 40) mean[ipad-1] = Gauss2->GetParameter(1); 
-				if (xpeaks[0] > 4.0 && PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])) > 40) SD[ipad-1] = Gauss2->GetParameter(2); 
-				if (xpeaks[0] > 4.0 && PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])) > 40) RChi2[ipad-1] = Gauss2->GetChisquare()/Gauss2->GetNDF(); 
-				if (xpeaks[0] > 4.0 && PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])) > 40) mean_err[ipad-1] = Gauss2->GetParError(1);
-		
+				//if (xpeaks[0] > 4.0 && PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])) > 40) {
+				mean[ipad-1] = Gauss2->GetParameter(1); 
+				SD[ipad-1] = Gauss2->GetParameter(2);  
+				RChi2[ipad-1] = Gauss2->GetChisquare()/Gauss2->GetNDF(); 
+				mean_err[ipad-1] = Gauss2->GetParError(1);
+				//}
+
 				if (PulseInt_quad[iquad][ipmt]->GetBinContent(PulseInt_quad[iquad][ipmt]->GetXaxis()->FindBin(xpeaks[0])) > 500)
 				{
 					// Set Boolean of whether fit is good or not here, based upon reduced Chi2 of the fit
@@ -671,7 +674,7 @@ void calibration::Terminate(Int_t RunNumStart, Int_t RunNumEnd)
 		fscaled[ipmt]->Fit("Poisson","RQBN");
 
 		// Gauss4Poiss2 included 4gauss + 2poisson for the quality control check
-		// 								  0    ,   1  ,    2  ,      3    ,   4  ,    5  ,      6    ,   7  ,   8   ,     9     ,  10  ,   11  ,     12   ,      13    ,     14   ,      15
+		// 				0    ,   1  ,    2  ,      3    ,   4  ,    5  ,      6    ,   7  ,   8   ,     9     ,  10  ,   11  ,     12   ,      13    ,     14   ,      15
 		// parrameters correspond to amplitude1, mean1, stdev1, amplitude2, mean2, stdev2, amplitude3, mean3, stdev3, amplitude4, mean4, stdev4, poissAmp1, PoissLamda1, poissAmp2, PoissLamda2
 		Gauss4Poiss2->SetRange(0.0, 30.0);
 		Gauss4Poiss2->SetParameter(0, 0.6);

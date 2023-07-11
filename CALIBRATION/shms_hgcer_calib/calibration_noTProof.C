@@ -919,8 +919,8 @@ void calibration::Terminate(Int_t RunNumStart, Int_t RunNumEnd)
 		g15->SetParameter(0.0,1.0);
 		g15->SetLineColor(2);
 
-		gr_npe->Fit("Linear","RQ");
-		gr_npe->Fit("g15","RQ+");
+		gr_npe->Fit("Linear","R");
+		gr_npe->Fit("g15","R+");
 
 		//Get parameters from both fitting 
 		Double_t sl1, sl1_err, in1, in1_err, Chi1, NDF1, sl2, sl2_err, Chi2, NDF2 ;

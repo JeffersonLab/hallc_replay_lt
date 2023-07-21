@@ -34,8 +34,13 @@ cminch=2.54
 
 ; HMS default calibration parameter files
 #include "PARAM/HMS/CER/Offline_PionLT/hcer_calib12300-16201.param"
+<<<<<<< HEAD
 #include "PARAM/HMS/DC/PionLT_PARAM/hdc_calib_11883.param"
 #include "PARAM/HMS/DC/PionLT_PARAM/hdc_tzero_per_wire_11883.param"
+=======
+#include "PARAM/HMS/DC/hdc_calib.param"
+#include "PARAM/HMS/DC/hdc_tzero_per_wire.param"
+>>>>>>> fec7af8bc16be3c26323cbd3ff1211621401a2d5
 #include "PARAM/HMS/HODO/hhodo_calib.param"
 #include "PARAM/HMS/HODO/hhodo_TWcalib.param"
 #include "PARAM/HMS/HODO/hhodo_Vpcalib.param"
@@ -68,8 +73,13 @@ cminch=2.54
 
 ; SHMS default calibration parameter files
 #include "PARAM/SHMS/NGCER/Offline_PionLT/pngcer_calib.param"
+<<<<<<< HEAD
 #include "PARAM/SHMS/DC/PionLT_PARAM/pdc_calib_13026.param"
 #include "PARAM/SHMS/DC/PionLT_PARAM/pdc_tzero_per_wire_13026.param"
+=======
+#include "PARAM/SHMS/DC/pdc_calib.param"
+#include "PARAM/SHMS/DC/pdc_tzero_per_wire.param"
+>>>>>>> fec7af8bc16be3c26323cbd3ff1211621401a2d5
 #include "PARAM/SHMS/HODO/phodo_calib.param"
 #include "PARAM/SHMS/HODO/phodo_TWcalib.param"
 #include "PARAM/SHMS/HODO/phodo_Vpcalib.param"

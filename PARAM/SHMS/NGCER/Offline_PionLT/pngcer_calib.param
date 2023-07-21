@@ -1,0 +1,2 @@
+; calib from PionLT 2021 and 2022 run periods Pi- runs starting with run numbers 12068, 13472, 15198, 16005, 16588  
+pngcer_adc_to_npe = 1./10.573, 1./5.495, 1./5.029, 1./6.214

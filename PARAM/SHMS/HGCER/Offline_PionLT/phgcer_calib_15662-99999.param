@@ -1,0 +1,3 @@
+; NH - based on study of 2021 and 2022 data see: https://redmine.jlab.org/projects/hall-c/wiki/Detector_Calibration_Updates
+; Valid for runs 15662 - untill the end of pionLT (roughly run 17000) I'd not recomend using these for online data - Nathan Heinrich
+phgcer_adc_to_npe = 1.0/(5.054-0.000252903*(gen_run_number-15662)), 1.0/4.41735, 1.0/3.70524, 1.0/4.60056

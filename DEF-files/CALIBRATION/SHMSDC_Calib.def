@@ -40,6 +40,19 @@ block P.dc.2x2.dist
 block P.dc.residual
 block P.dc.residualExclPlane
 
+block P.dc.1x1.nhit
+block P.dc.1x2.nhit
+block P.dc.1u1.nhit
+block P.dc.1u2.nhit
+block P.dc.1v1.nhit
+block P.dc.1v2.nhit
+block P.dc.2x1.nhit
+block P.dc.2x2.nhit
+block P.dc.2u1.nhit
+block P.dc.2u2.nhit
+block P.dc.2v1.nhit
+block P.dc.2v2.nhit
+
 block P.cal.etot
 block P.hgcer.npeSum
 

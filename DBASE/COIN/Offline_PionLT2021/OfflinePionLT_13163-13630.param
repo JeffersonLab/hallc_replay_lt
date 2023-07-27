@@ -7,7 +7,7 @@ cminch=2.54
 #include "PARAM/GEN/genflags.param"
 #include "PARAM/GEN/gdebug.param"
 #include "PARAM/GEN/gtarget.param"
-#include "PARAM/GEN/gbeam_oneraster.param"
+#include "PARAM/GEN/gbeam.param"
 #include "PARAM/GEN/gscalers.param"
 
 ; General HMS parameter files
@@ -48,7 +48,7 @@ cminch=2.54
 #include "PARAM/SHMS/GEN/pdebug.param"
 #include "PARAM/SHMS/GEN/shmsflags.param"
 #include "PARAM/SHMS/GEN/Online_PionLT2021/ptracking.param"
-#include "PARAM/SHMS/GEN/Offline_PionLT/p_reftime_cut_PionLT_elRealTrig.param"
+#include "PARAM/SHMS/GEN/Offline_PionLT/p_reftime_cut_PionLT_3-4Trig.param"
 
 ; SHMS default geometry parameter files
 #include "PARAM/SHMS/NGCER/pngcer_geom.param"

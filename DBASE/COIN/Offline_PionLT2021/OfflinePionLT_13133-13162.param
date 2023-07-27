@@ -7,7 +7,7 @@ cminch=2.54
 #include "PARAM/GEN/genflags.param"
 #include "PARAM/GEN/gdebug.param"
 #include "PARAM/GEN/gtarget.param"
-#include "PARAM/GEN/gbeam_oneraster.param"
+#include "PARAM/GEN/gbeam.param"
 #include "PARAM/GEN/gscalers.param"
 
 ; General HMS parameter files

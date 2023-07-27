@@ -148,8 +148,8 @@ void DC_Calib_Check_HMS::Terminate()
     ResidualExclPl[i] = dynamic_cast<TH1F*> (GetOutputList()->FindObject(Name));
   }             
   // Note, this is highly inflexible, only works on the farm!
-//  TFile *Histogram_file = new TFile(Form("/group/c-pionlt/USERS/${USER}/hallc_replay_lt/HISTOGRAMS/Calib/DC/HMS_DCCalib_Check_Run%i_Pt%i.root", Run, Part),"RECREATE");
-  TFile *Histogram_file = new TFile(Form("/home/cdaq/pionLT-2021/hallc_replay_lt/HISTOGRAMS/Calib/DC/HMS_DCCalib_Check_Run%i_Pt%i.root", Run, Part),"RECREATE");
+  TFile *Histogram_file = new TFile(Form("/group/c-pionlt/USERS/${USER}/hallc_replay_lt/HISTOGRAMS/Calib/DC/HMS_DCCalib_Check_Run%i_Pt%i.root", Run, Part),"RECREATE");
+//  TFile *Histogram_file = new TFile(Form("/home/cdaq/pionLT-2021/hallc_replay_lt/HISTOGRAMS/Calib/DC/HMS_DCCalib_Check_Run%i_Pt%i.root", Run, Part),"RECREATE");
 
   h1_1u1_DriftDistance->Write();
   h1_1u2_DriftDistance->Write();

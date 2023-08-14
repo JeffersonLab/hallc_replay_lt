@@ -34,8 +34,8 @@ cminch=2.54
 
 ; HMS default calibration parameter files
 #include "PARAM/HMS/CER/Offline_PionLT/hcer_calib12300-16201.param"
-#include "PARAM/HMS/DC/PionLT_PARAM/hdc_calib_14996.param"
-#include "PARAM/HMS/DC/PionLT_PARAM/hdc_tzero_per_wire_14996.param"
+#include "PARAM/HMS/DC/PionLT_PARAM/hdc_calib_11883.param"
+#include "PARAM/HMS/DC/PionLT_PARAM/hdc_tzero_per_wire_11883.param"
 #include "PARAM/HMS/HODO/hhodo_calib.param"
 #include "PARAM/HMS/HODO/hhodo_TWcalib.param"
 #include "PARAM/HMS/HODO/hhodo_Vpcalib.param"
@@ -47,7 +47,7 @@ cminch=2.54
 #include "PARAM/SHMS/GEN/pcana.param"
 #include "PARAM/SHMS/GEN/pdebug.param"
 #include "PARAM/SHMS/GEN/shmsflags.param"
-#include "PARAM/SHMS/GEN/Online_PionLT2022/ptracking.param"
+#include "PARAM/SHMS/GEN/Online_PionLT2021/ptracking.param"
 #include "PARAM/SHMS/GEN/Offline_PionLT/p_reftime_cut_PionLT_3-4Trig.param"
 
 ; SHMS default geometry parameter files
@@ -68,11 +68,11 @@ cminch=2.54
 
 ; SHMS default calibration parameter files
 #include "PARAM/SHMS/NGCER/Offline_PionLT/pngcer_calib.param"
-#include "PARAM/SHMS/DC/PionLT_PARAM/pdc_calib_13026.param"
-#include "PARAM/SHMS/DC/PionLT_PARAM/pdc_tzero_per_wire_13026.param"
+#include "PARAM/SHMS/DC/PionLT_PARAM/pdc_calib_12330.param"
+#include "PARAM/SHMS/DC/PionLT_PARAM/pdc_tzero_per_wire_12330.param"
 #include "PARAM/SHMS/HODO/phodo_calib.param"
 #include "PARAM/SHMS/HODO/phodo_TWcalib.param"
 #include "PARAM/SHMS/HODO/phodo_Vpcalib.param"
-#include "PARAM/SHMS/HGCER/Offline_PionLT/phgcer_calib_14345-15662.param"
-#include "PARAM/SHMS/AERO/Offline_PionLT/paero_calib_14997-16900.param"
+#include "PARAM/SHMS/HGCER/Offline_PionLT/phgcer_calib_11799-12789.param"
+#include "PARAM/SHMS/AERO/Offline_PionLT/paero_calib_12493-14997.param"
 #include "PARAM/SHMS/CAL/pcal_calib.param"

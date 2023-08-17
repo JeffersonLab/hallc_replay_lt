@@ -68,8 +68,8 @@ cminch=2.54
 
 ; SHMS default calibration parameter files
 #include "PARAM/SHMS/NGCER/Offline_PionLT/pngcer_calib.param"
-#include "PARAM/SHMS/DC/PionLT_PARAM/pdc_calib_13026.param"
-#include "PARAM/SHMS/DC/PionLT_PARAM/pdc_tzero_per_wire_13026.param"
+#include "PARAM/SHMS/DC/PionLT_PARAM/pdc_calib_12022.param"
+#include "PARAM/SHMS/DC/PionLT_PARAM/pdc_tzero_per_wire_12022.param"
 #include "PARAM/SHMS/HODO/phodo_calib.param"
 #include "PARAM/SHMS/HODO/phodo_TWcalib.param"
 #include "PARAM/SHMS/HODO/phodo_Vpcalib.param"

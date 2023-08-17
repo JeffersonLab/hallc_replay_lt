@@ -1,15 +1,347 @@
-14986 - 15800
-g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_test1.param"
+### Calib from run 8458 - Summer 19 RP ###
+8358-8475
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8458.param"
 g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
 
-16162 - 16168
-g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_test1.param"
+### Calib from run 8476 - Summer 19 RP ###
+8476-8488
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8476.param"
 g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
 
-16277 - 16284
-g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_test1.param"
+### Calib from run 8489 - Summer 19 RP ###
+8489-8528
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8489.param"
 g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
 
-16509 - 16517
-g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_test1.param"
+### Calib from run 8548 - Summer 19 RP ###
+8529-8569
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8548.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+### Calib from run 8570 - Summer 19 RP ###
+8570-8582
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8570.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+### Calib from run 8583 - Summer 19 RP ###
+8583-8602
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8583.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+### Calib from run 8603 - Summer 19 RP ###
+8603-8611
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8603.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+### Calib from run 8612 - Summer 19 RP ###
+8612-8621
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8612.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+### Calib from run 8622 - Summer 19 RP ###
+8622-8629
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8622.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+### Calib from run 8630 - Summer 19 RP ###
+8630-8647
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8630.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+### Calib from run 8648 - Summer 19 RP ###
+8648-8651
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8648.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+### Calib from run 8652 - Summer 19 RP ###
+8652-8662
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8652.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+### Calib from run 8663 - Summer 19 RP ###
+8663-8667
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8663.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+### Calib from run 8668 - Summer 19 RP ###
+8668-8674
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8668.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+### Calib from run 8675 - Summer 19 RP ###
+8675-8680
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8675.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+### Calib from run 8681 - Summer 19 RP ###
+8681-8690
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8681.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+### Calib from run 8691 - Summer 19 RP ###
+8691-8704
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8691.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+### Calib from run 8705 - Summer 19 RP ###
+8705-8710
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8705.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+### Calib from run 8711 - Summer 19 RP ###
+8711-8720
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8711.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+### Calib from run 8721 - Summer 19 RP ###
+8721-8732
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8721.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+### Calib from run 8733 - Summer 19 RP ###
+8733-8745
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8733.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+### Calib from run 8746 - Summer 19 RP ###
+8746-8758
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8746.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+### Calib from run 8759 - Summer 19 RP ###
+8759-8769
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8759.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+### Calib from run 8770 - Summer 19 RP ###
+8770-8780
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8770.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+### Calib from run 8781 - Summer 19 RP ###
+8781-8784
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8781.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+### Calib from run 8785 - Summer 19 RP ###
+8785-8799
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8785.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+### Calib from run 8800 - Summer 19 RP ###
+8800-8976
+g_ctp_parm_filename       = "DBASE/COIN/DB_KaonLT/KaonLT_Calib/Offline8800.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+### PionLT 2021 Kinematics
+# NH. please note that as of 2023/01/15  I have divided these up only based on SHMS trgger and what was there from online, I left placeholders in some gaps
+# JD - 20/July/2023 - I updated the param file according to aero/hgc/DC calibration parameters.
+
+8977 - 11828
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_8977-11828.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+11829 - 12021
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_11829-12021.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+12022 - 12078
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_12022-12078.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+12079 - 12199
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_12079-12199.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+12200 - 12299
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_12200-12299.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+12300 - 12329
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_12300-12329.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+12330 - 12493
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_12330-12493.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+12494 - 12788
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_12494-12788.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+12789 - 12845
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_12789-12845.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+12846 - 13025
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_12846-13025.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+13026 - 13092
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_13026-13092.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+13093 - 13127
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_13093-13127.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+13128 - 13132
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_13128-13132.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+13133 - 13162
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_13133-13162.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+13163 - 13447
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_13163-13447.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+13448 - 13630
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_13448-13630.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+13631 - 13683
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_13631-13683.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+13684 - 13799
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_13684-13799.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+13800 - 13853
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_13800-13853.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+13854 - 13911
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_13854-13911.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+13912 - 13937
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_13912-13937.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+13938 - 13997
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_13938-13997.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+13998 - 14017
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_13998-14017.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+14018 - 14344
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_14018-14344.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+14345 - 14627
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_14345-14627.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+14628 - 14777
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2021/OfflinePionLT_14628-14777.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+# PionLT 2022 Kinematics
+14778 - 14964
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_14778-14964.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+14965 - 14967
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_14965-14967.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+14968 - 14973
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_14968-14973.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+14974 - 14995
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_14974-14995.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+14996 - 14997
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_14996-14997.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+14998 - 15035
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_14998-15035.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+15036 - 15038
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_15036-15038.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+15039 - 15151
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_15039-15151.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+15152 - 15264
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_15152-15264.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+15265 - 15661
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_15265-15661.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+15662 - 15726
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_15662-15726.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+15727 - 15743
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_15727-15743.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+15744 - 15976
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_15744-15976.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+15977 - 16038
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_15977-16038.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+16039 - 16061
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_16039-16061.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+16062 - 16158
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_16062-16158.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+16159 - 16170
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_16159-16170.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+16171 - 16201
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_16171-16201.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+16202 - 16233
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_16202-16233.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+16234 - 16242
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_16234-16242.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+16243 - 16286
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_16243-16286.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+16287 - 16519
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_16287-16519.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+16520 - 16682
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_16520-16682.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+16683 - 16700
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_16683-16700.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+16701 - 16769
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_16701-16769.param"
+g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+16770 - 17000
+g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_16770-17000.param"
 g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"

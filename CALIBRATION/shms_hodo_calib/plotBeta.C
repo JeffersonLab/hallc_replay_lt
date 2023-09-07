@@ -39,10 +39,12 @@ TDirectory *betaDir, *cutsDir;
 //histograms
 TH1F *beta1, *beta2;
 TH1F *th1_cal, *th1_calCut, *th1_hgcer, *th1_hgcerCut, *th1_aero, *th1_aeroCut;
-
+TH1F *th1_delta1, *th1_xfp1, th1_yfp1;
+TH1F *th1_delta2, *th1_xfp2, th1_yfp2;
 
 //variables for cutting trees and plotting
 Double_t calEtot, hgcerNpeSum, aeroNpeSum, gtrBeta;
+Double_t delta, xfp, yfp;
 
 //cuts
 const Double_t calEtotLow = 0.1; //normaized energy
@@ -62,12 +64,17 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
     // make empty histograms
 	beta1 = new TH1F("Beta_Pt1", "Beta_Pt1", 120, 0.0, 1.2);
 	beta2 = new TH1F("Beta_Pt2", "Beta_Pt2", 120, 0.0, 1.2);
+	
 	th1_cal = new TH1F("P.cal.etottracknorm_Pt1", "P.cal.etottracknorm_Pt1", 100, 0.0, 1.5);
 	th1_calCut = new TH1F("P.cal.etottracknormCut_Pt1", "P.cal.etottracknormCut_Pt1", 100, 0.0, 1.5);
 	th1_hgcer = new TH1F("hgcerNpeSum_Pt1", "hgcerNpeSum_Pt1", 120, 0.0, 30.0);
 	th1_hgcerCut = new TH1F("hgcerNpeSumCut_Pt1", "hgcerNpeSumCut_Pt1", 120, 0.0, 30.0);
 	th1_aero = new TH1F("aeroNpeSum_Pt1", "aeroNpeSum_Pt1", 120, 0.0, 30.0);
 	th1_aeroCut = new TH1F("aeroNpeSumCut_Pt1", "aeroNpeSumCut_Pt1", 120, 0.0, 30.0);
+	
+	th1_delta1 = new TH1F("delta_Pt1", "aeroNpeSumCut_Pt1", 3000, -15.0, 15.0);
+	th1_xfp1 = new TH1F("aeroNpeSumCut_Pt1", "aeroNpeSumCut_Pt1", 8000, -40.0, 40.0);
+	th1_yfp1 = new TH1F("aeroNpeSumCut_Pt1", "aeroNpeSumCut_Pt1", 8000, -40.0, 40.0);
 
 	input1 = new TFile(rootFile1, "READ");
 	input2 = new TFile(rootFile2, "READ");

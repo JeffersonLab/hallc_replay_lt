@@ -306,16 +306,16 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	c2->cd(1);
 	th2_delta1->Draw("colz");
 	
-	c2->cd(2);
+	c2->cd(3);
 	th2_xfp1->Draw("colz");
 	
-	c2->cd(3);
+	c2->cd(5);
 	th2_yfp1->Draw("colz");
 	
-	c2->cd(4);
+	c2->cd(2);
 	th2_delta2->Draw("colz");
 	
-	c2->cd(5);
+	c2->cd(4);
 	th2_xfp2->Draw("colz");
 	
 	c2->cd(6);

@@ -39,8 +39,8 @@ TDirectory *betaDir, *cutsDir;
 //histograms
 TH1F *beta1, *beta2;
 TH1F *th1_cal, *th1_calCut, *th1_hgcer, *th1_hgcerCut, *th1_aero, *th1_aeroCut;
-TH2F *th2_delta1, *th2_xfp1, th2_yfp1;
-TH2F *th2_delta2, *th2_xfp2, th2_yfp2;
+TH2F *th2_delta1, *th2_xfp1, *th2_yfp1;
+TH2F *th2_delta2, *th2_xfp2, *th2_yfp2;
 
 //variables for cutting trees and plotting
 Double_t calEtot, hgcerNpeSum, aeroNpeSum, gtrBeta;
@@ -262,7 +262,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	delete(th1_aeroCut);
 	
 	//make canvas for beta comparison plot
-	TCanvas *c1 = new TCanvas(Form("Beta_Comparison_%d", rumNum),Form("Beta_Comparison_%d", rumNum), 1200, 2400);
+	TCanvas *c1 = new TCanvas(Form("Beta_Comparison_%d", runNum),Form("Beta_Comparison_%d", runNum), 1200, 2400);
 	c1->SetGrid();
    	//gStyle->SetOptTitle(kFALSE);
    	gStyle->SetOptStat("nemr");
@@ -300,7 +300,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	c1->Print(Form("SHMSBeta_output_%d.pdf", runNum));
 	betaDir->WriteObject(c1, Form("Beta_Comp_%d", runNum));
 	
-	TCanvas *c2 = new TCanvas(Form("Beta_Comparison2d_%d", rumNum),Form("Beta_Comparison2d_%d", rumNum), 1200, 2400);
+	TCanvas *c2 = new TCanvas(Form("Beta_Comparison2d_%d", runNum),Form("Beta_Comparison2d_%d", runNum), 1200, 2400);
 	c2->Divide(2,3);
 	
 	c2->cd(1);
@@ -351,8 +351,8 @@ void plotBeta (  Int_t runNumber, Int_t NumEventsInput )
 	// make dirrectories for putting output
 	betaDir = Outfile->mkdir("BetaDists");
 	cutsDir = Outfile->mkdir("CutsSummary");
-	rootFileName1 = Form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt1_%d_-1.root", runNumber);
-	rootFileName2 = Form("../../ROOTfiles/Calib/Hodo/Hodo_Calib_Pt3_%d_-1.root", runNumber);
+	rootFileName1 = Form("../../ROOTfiles/Calib/Hodo/SHMS_Hodo_Calib_Pt1_%d_-1.root", runNumber);
+	rootFileName2 = Form("../../ROOTfiles/Calib/Hodo/SHMS_Hodo_Calib_Pt3_%d_-1.root", runNumber);
 	
 	makePlots(rootFileName1, rootFileName2, runNumber);
 	

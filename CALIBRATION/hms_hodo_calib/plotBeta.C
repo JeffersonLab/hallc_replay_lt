@@ -70,12 +70,12 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th1_cer = new TH1F("cerNpeSum_Pt1", "cerNpeSum_Pt1", 120, 0.0, 30.0);
 	th1_cerCut = new TH1F("cerNpeSumCut_Pt1", "cerNpeSumCut_Pt1", 120, 0.0, 30.0);
 	
-	th2_delta1 = new TH2F("deltaVBeta_Before", "deltaVBeta_Before", 4000, -40.0, 40.0, 100, 0.0, 1.6);
-	th2_xfp1 = new TH2F("xfpVbeta_Before", "xfpVbeta_Before", 4000, -40.0, 40.0, 100, 0.0, 1.6);
-	th2_yfp1 = new TH2F("yfpVbeta_Before", "yfpVbeta_Before", 4000, -40.0, 40.0, 100, 0.0, 1.6);
-	th2_delta2 = new TH2F("deltaVBeta_After", "deltaVBeta_After", 4000, -40.0, 40.0, 100, 0.0, 1.6);
-	th2_xfp2 = new TH2F("xfpVbeta_After", "xfpVbeta_After", 4000, -40.0, 40.0, 100, 0.0, 1.6);
-	th2_yfp2 = new TH2F("yfpVbeta_After", "yfpVbeta_After", 4000, -40.0, 40.0, 100, 0.0, 1.6);
+	th2_delta1 = new TH2F("deltaVBeta_Before", "deltaVBeta_Before", 400, -40.0, 40.0, 100, 0.0, 1.6);
+	th2_xfp1 = new TH2F("xfpVbeta_Before", "xfpVbeta_Before", 400, -40.0, 40.0, 100, 0.0, 1.6);
+	th2_yfp1 = new TH2F("yfpVbeta_Before", "yfpVbeta_Before", 400, -40.0, 40.0, 100, 0.0, 1.6);
+	th2_delta2 = new TH2F("deltaVBeta_After", "deltaVBeta_After", 400, -40.0, 40.0, 100, 0.0, 1.6);
+	th2_xfp2 = new TH2F("xfpVbeta_After", "xfpVbeta_After", 400, -40.0, 40.0, 100, 0.0, 1.6);
+	th2_yfp2 = new TH2F("yfpVbeta_After", "yfpVbeta_After", 400, -40.0, 40.0, 100, 0.0, 1.6);
 
 	input1 = new TFile(rootFile1, "READ");
 	input2 = new TFile(rootFile2, "READ");

@@ -65,19 +65,19 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	beta1 = new TH1F("Beta_Pt1", "Beta_Pt1", 120, 0.0, 1.2);
 	beta2 = new TH1F("Beta_Pt2", "Beta_Pt2", 120, 0.0, 1.2);
 	
-	th1_cal = new TH1F("P.cal.etottracknorm_Pt1", "P.cal.etottracknorm_Pt1", 100, 0.0, 1.5);
-	th1_calCut = new TH1F("P.cal.etottracknormCut_Pt1", "P.cal.etottracknormCut_Pt1", 100, 0.0, 1.5);
+	th1_cal = new TH1F("P.cal.etottracknorm_Pt1", "P.cal.etottracknorm_Pt1", 100, 0.0, 1.6);
+	th1_calCut = new TH1F("P.cal.etottracknormCut_Pt1", "P.cal.etottracknormCut_Pt1", 100, 0.0, 1.6);
 	th1_hgcer = new TH1F("hgcerNpeSum_Pt1", "hgcerNpeSum_Pt1", 120, 0.0, 30.0);
 	th1_hgcerCut = new TH1F("hgcerNpeSumCut_Pt1", "hgcerNpeSumCut_Pt1", 120, 0.0, 30.0);
 	th1_aero = new TH1F("aeroNpeSum_Pt1", "aeroNpeSum_Pt1", 120, 0.0, 30.0);
 	th1_aeroCut = new TH1F("aeroNpeSumCut_Pt1", "aeroNpeSumCut_Pt1", 120, 0.0, 30.0);
 	
-	th2_delta1 = new TH2F("deltaVBeta_Before", "deltaVBeta_Before", 3000, -15.0, 15.0, 120, 0.0, 1.2);
-	th2_xfp1 = new TH2F("xfpVbeta_Before", "xfpVbeta_Before", 8000, -40.0, 40.0, 120, 0.0, 1.2);
-	th2_yfp1 = new TH2F("yfpVbeta_Before", "yfpVbeta_Before", 8000, -40.0, 40.0, 120, 0.0, 1.2);
-	th2_delta2 = new TH2F("deltaVBeta_After", "deltaVBeta_After", 3000, -15.0, 15.0, 120, 0.0, 1.2);
-	th2_xfp2 = new TH2F("xfpVbeta_After", "xfpVbeta_After", 8000, -40.0, 40.0, 120, 0.0, 1.2);
-	th2_yfp2 = new TH2F("yfpVbeta_After", "yfpVbeta_After", 8000, -40.0, 40.0, 120, 0.0, 1.2);
+	th2_delta1 = new TH2F("deltaVBeta_Before", "deltaVBeta_Before", 4000, -40.0, 40.0, 100, 0.0, 1.6);
+	th2_xfp1 = new TH2F("xfpVbeta_Before", "xfpVbeta_Before", 4000, -40.0, 40.0, 100, 0.0, 1.6);
+	th2_yfp1 = new TH2F("yfpVbeta_Before", "yfpVbeta_Before", 4000, -40.0, 40.0, 100, 0.0, 1.6);
+	th2_delta2 = new TH2F("deltaVBeta_After", "deltaVBeta_After", 4000, -40.0, 40.0, 100, 0.0, 1.6);
+	th2_xfp2 = new TH2F("xfpVbeta_After", "xfpVbeta_After", 4000, -40.0, 40.0, 100, 0.0, 1.6);
+	th2_yfp2 = new TH2F("yfpVbeta_After", "yfpVbeta_After", 4000, -40.0, 40.0, 100, 0.0, 1.6);
 
 	input1 = new TFile(rootFile1, "READ");
 	input2 = new TFile(rootFile2, "READ");

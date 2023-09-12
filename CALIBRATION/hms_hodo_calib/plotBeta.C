@@ -70,12 +70,12 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th1_cer = new TH1F("cerNpeSum_Pt1", "cerNpeSum_Pt1", 120, 0.0, 30.0);
 	th1_cerCut = new TH1F("cerNpeSumCut_Pt1", "cerNpeSumCut_Pt1", 120, 0.0, 30.0);
 	
-	th2_delta1 = new TH2F("deltaVBeta_Before", "deltaVBeta_Before", 3000, -15.0, 15.0, 120, 0.0, 1.2);
-	th2_xfp1 = new TH2F("xfpVbeta_Before", "xfpVbeta_Before", 8000, -40.0, 40.0, 120, 0.0, 1.2);
-	th2_yfp1 = new TH2F("yfpVbeta_Before", "yfpVbeta_Before", 8000, -40.0, 40.0, 120, 0.0, 1.2);
-	th2_delta2 = new TH2F("deltaVBeta_After", "deltaVBeta_After", 3000, -15.0, 15.0, 120, 0.0, 1.2);
-	th2_xfp2 = new TH2F("xfpVbeta_After", "xfpVbeta_After", 8000, -40.0, 40.0, 120, 0.0, 1.2);
-	th2_yfp2 = new TH2F("yfpVbeta_After", "yfpVbeta_After", 8000, -40.0, 40.0, 120, 0.0, 1.2);
+	th2_delta1 = new TH2F("deltaVBeta_Before", "deltaVBeta_Before", 4000, -40.0, 40.0, 100, 0.0, 1.6);
+	th2_xfp1 = new TH2F("xfpVbeta_Before", "xfpVbeta_Before", 4000, -40.0, 40.0, 100, 0.0, 1.6);
+	th2_yfp1 = new TH2F("yfpVbeta_Before", "yfpVbeta_Before", 4000, -40.0, 40.0, 100, 0.0, 1.6);
+	th2_delta2 = new TH2F("deltaVBeta_After", "deltaVBeta_After", 4000, -40.0, 40.0, 100, 0.0, 1.6);
+	th2_xfp2 = new TH2F("xfpVbeta_After", "xfpVbeta_After", 4000, -40.0, 40.0, 100, 0.0, 1.6);
+	th2_yfp2 = new TH2F("yfpVbeta_After", "yfpVbeta_After", 4000, -40.0, 40.0, 100, 0.0, 1.6);
 
 	input1 = new TFile(rootFile1, "READ");
 	input2 = new TFile(rootFile2, "READ");
@@ -112,18 +112,18 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 		
 		th1_cal->Fill(calEtot);
 		th1_cer->Fill(cerNpeSum);
-		th1_aero->Fill(aeroNpeSum);
+		//th1_aero->Fill(aeroNpeSum);
 		
 		//cuts
 		calCut = (calEtot >= calEtotLow);
 		cerCut = (cerNpeSum >= cerNpeSumLow);
-		aeroCut = (aeroNpeSum >= aeroNpeSumLow);
+		//aeroCut = (aeroNpeSum >= aeroNpeSumLow);
 	
 		if(calCut)   { th1_calCut->Fill(calEtot); }
 		if(cerCut) { th1_cerCut->Fill(cerNpeSum); }
-		if(aeroCut)  { th1_aeroCut->Fill(aeroNpeSum); }
+		//if(aeroCut)  { th1_aeroCut->Fill(aeroNpeSum); }
 		
-		if(calCut && cerCut && aeroCut) 
+		if(calCut && cerCut ) 
 		{
 			beta1->Fill(gtrBeta);
 			th2_delta1->Fill(delta, gtrBeta);
@@ -166,8 +166,8 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	delete(th1_calCut); 
 	delete(th1_cer);
 	delete(th1_cerCut); 
-	delete(th1_aero);
-	delete(th1_aeroCut);
+	//delete(th1_aero);
+	//delete(th1_aeroCut);
 	
 	//start again for the second tree
 	tree2->SetBranchAddress("H.cal.etottracknorm", &calEtot);
@@ -196,18 +196,18 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 		
 		th1_cal->Fill(calEtot);
 		th1_cer->Fill(cerNpeSum);
-		th1_aero->Fill(aeroNpeSum);
+		//th1_aero->Fill(aeroNpeSum);
 		
 		//cuts
 		calCut = (calEtot >= calEtotLow);
 		cerCut = (cerNpeSum >= cerNpeSumLow);
-		aeroCut = (aeroNpeSum >= aeroNpeSumLow);
+		//aeroCut = (aeroNpeSum >= aeroNpeSumLow);
 	
 		if(calCut)   { th1_calCut->Fill(calEtot); }
 		if(cerCut) { th1_cerCut->Fill(cerNpeSum); }
-		if(aeroCut)  { th1_aeroCut->Fill(aeroNpeSum); }
+		//if(aeroCut)  { th1_aeroCut->Fill(aeroNpeSum); }
 		
-		if(calCut && cerCut && aeroCut) 
+		if(calCut && cerCut ) 
 		{
 			beta2->Fill(gtrBeta);
 			th2_delta2->Fill(delta, gtrBeta);
@@ -231,19 +231,13 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th1_cerCut->SetStats();
 	cutsDir->WriteObject(th1_cerCut, "cerNpeSumCut_Pt3");
 	
-	th1_aero->SetStats();
-	cutsDir->WriteObject(th1_aero, "aeroNpeSum_Pt3");
 	
-	th1_aeroCut->SetStats();
-	cutsDir->WriteObject(th1_aeroCut, "aeroNpeSumCut_Pt3");
 	
 	//to avoid memory leak delete histograms since we make new ones for part 3
 	delete(th1_cal); 
 	delete(th1_calCut); 
 	delete(th1_cer);
 	delete(th1_cerCut);
-	delete(th1_aero);
-	delete(th1_aeroCut);
 	
 	//make canvas for beta comparison plot
 	TCanvas *c1 = new TCanvas(Form("Beta_Comparison_%d", runNum),Form("Beta_Comparison_%d", runNum), 1200, 2400);

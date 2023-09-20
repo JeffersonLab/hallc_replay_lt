@@ -6,7 +6,7 @@
 	It takes in a file with run numbers, and then spits out some graphs of parameter vrs run #
 	requires you to have run the timeWalkCalib.C script first!!!
 
-	This only works for SHMS, a similar script works for HMS 
+	This only works for HMS, a similar script works for SHMS 
 */
 
 #include <TSystem.h>
@@ -223,12 +223,14 @@ void HodoParamCompair ( TString runNums_name ) //input path to run # file
 	gROOT->SetBatch(kTRUE); //don't display plots
 	
 	//make file to store output
-	TFile *Outfile = new TFile("./Calibration_Plots/Hodo_Param_Comp.root", "RECREATE");
+	/*
+	TFile *Outfile = new TFile("./Hodo_Param_Comp.root", "RECREATE");
 	if ( !Outfile->IsOpen() )
 	{
 		cout << "Output File Failed To Create!!!\nShuting down!!!\n";
 		return;
 	}
+	*/
 	
 	/*
 	TCanvas *Temp = new TCanvas(Form("c_s%i_p%i", 0, 1), Form("TW_c2_Comp_"+sideNames[0]+"_side_plane_%i", 1), 1600, 1600); // name, title, width, height
@@ -255,7 +257,7 @@ void HodoParamCompair ( TString runNums_name ) //input path to run # file
 		
 		for (UInt_t iplane = 0; iplane < nPlanes; iplane++)
 		{
-			CompCan[iside][iplane] = new TCanvas(Form("c_s%i_p%i", iside, iplane+1), Form("TW_c2_Comp_"+sideNames[iside]+"_side_plane_%i", iplane+1), 1600, 1600); // name, title, width, height
+			CompCan[iside][iplane] = new TCanvas(Form("c_s%i_p%i", iside, iplane+1), Form("TW_c2_Comp_"+sideNames[iside]+"_side_plane_%i", iplane+1), 3200, 3200); // name, title, width, height
 			
 			//save space on the non-quartz planes
 			if ( iplane == 3)
@@ -289,10 +291,18 @@ void HodoParamCompair ( TString runNums_name ) //input path to run # file
 				//write to file
 				//CompGra[iside][iplane]->Write( Form("TW_c2_Comp_"+sideNames[iside]+"_side_plane%i_Bar%i", iplane+1, ibar+1) );
 			}
-			CompCan[iside][iplane]->Write( Form("TW_c2_Comp_"+sideNames[iside]+"_side_plane%i", iplane+1) );
+			//CompCan[iside][iplane]->Write( Form("TW_c2_Comp_"+sideNames[iside]+"_side_plane%i", iplane+1) );
+			if(iside == 0 && iplane == 0) {
+				CompCan[iside][iplane]->Print("W_c2_Comp_All.pdf(");
+			}else if (iside == (nSides - 1)  && iplane == (nPlanes - 1) ) {
+				CompCan[iside][iplane]->Print("W_c2_Comp_All.pdf)");
+			}else{
+				CompCan[iside][iplane]->Print("W_c2_Comp_All.pdf");
+			}
 		}
 	}
 	
+	/*
 	//move to directory that will contain individual histograms
 	TDirectory* CompHistos = dynamic_cast <TDirectory*> (Outfile->Get("CompHistos;1"));
 	if (!CompHistos) 
@@ -312,8 +322,8 @@ void HodoParamCompair ( TString runNums_name ) //input path to run # file
 			}
 		}
 	}
-	
-	Outfile->Close();
+	*/
+	//Outfile->Close();
 	return;
 }
 

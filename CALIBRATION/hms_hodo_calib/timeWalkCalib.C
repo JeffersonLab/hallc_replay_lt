@@ -393,6 +393,7 @@ void WriteFitParamErr(int runNUM)
 
   TString outPar_Name = Form("Calibration_Plots/hhodo_TWcalib_Err_%d.param", runNUM); //note could put this where ever you wanted to
   outParam.open(outPar_Name);
+  Double_t c1err[nPlanes][nSides][nBarsMax] = {0.};
   Double_t c2err[nPlanes][nSides][nBarsMax] = {0.};
   //Fill 3D Par array
   for (UInt_t iplane=0; iplane < nPlanes; iplane++)
@@ -403,10 +404,11 @@ void WriteFitParamErr(int runNUM)
 
 	for(UInt_t ipaddle = 0; ipaddle < nbars[iplane]; ipaddle++) {
 	 
-	  //c1[iplane][iside][ipaddle] = twFit[iplane][iside][ipaddle]->GetParameter("c_{1}");
+	  c1[iplane][iside][ipaddle] = twFit[iplane][iside][ipaddle]->GetParameter("c_{1}");
+	  c1err[iplane][iside][ipaddle] = twFit[iplane][iside][ipaddle]->GetParError(0);
 	  c2[iplane][iside][ipaddle] = twFit[iplane][iside][ipaddle]->GetParameter("c_{2}");
 	  c2err[iplane][iside][ipaddle] = twFit[iplane][iside][ipaddle]->GetParError(1);
-	  chi2ndf[iplane][iside][ipaddle] =  twFit[iplane][iside][ipaddle]->GetChisquare()/twFit[iplane][iside][ipaddle]->GetNDF();
+	  //chi2ndf[iplane][iside][ipaddle] =  twFit[iplane][iside][ipaddle]->GetChisquare()/twFit[iplane][iside][ipaddle]->GetNDF();
       
 	} //end paddle loop
 
@@ -433,6 +435,23 @@ void WriteFitParamErr(int runNUM)
 	outParam << endl;
   } //end loop over planes
   
+  
+  //Loop over all paddles For c1
+  for (UInt_t iplane = 0; iplane < nPlanes; iplane++)
+  {  
+  	for(UInt_t ipaddle = 0; ipaddle < nBarsMax; ipaddle++) { 
+    //Write c2-Pos values
+     
+		outParam << c1[iplane][0][ipaddle] << " " << fixed; 
+                                              
+	    }//end loop paddles
+	outParam << endl;
+	//write errors
+	for(UInt_t ipaddle = 0; ipaddle < nBarsMax; ipaddle++) {
+		outParam << c1err[iplane][0][ipaddle] << " " << fixed;
+	}
+	outParam << endl;
+  } //end loop over planes
                                                                                                                                                                            
   //Loop over all paddles
   for (UInt_t iplane = 0; iplane < nPlanes; iplane++)

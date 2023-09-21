@@ -91,7 +91,7 @@ bool getRuns ( Double_t *runs, ifstream& runFile, Int_t& Length)
 
 
 //gets the data from runfile
-void getData ( Double_t *Param[nPlanes][nBarsMax][nSides], Double_t *ParamErr[nPlanes][nBarsMax][nSides], UInt_t irun, ifstream &runFile)
+void getData ( Double_t *Param1[nPlanes][nBarsMax][nSides], Double_t *Param1Err[nPlanes][nBarsMax][nSides], Double_t *Param2[nPlanes][nBarsMax][nSides], Double_t *Param2Err[nPlanes][nBarsMax][nSides], UInt_t irun, ifstream &runFile)
 {
 	//loop over sides
 	for (UInt_t iside = 0; iside < nSides; iside++)
@@ -102,14 +102,36 @@ void getData ( Double_t *Param[nPlanes][nBarsMax][nSides], Double_t *ParamErr[nP
 			//loop over Bars
 			for(UInt_t ibar = 0; ibar < nBarsMax; ibar++)
 			{
-				//get Params
-				runFile >> Param[iplanes][ibar][iside][irun];
+				//get Param1s
+				runFile >> Param1[iplanes][ibar][iside][irun];
 			}
 			
 			for(UInt_t ibar = 0; ibar < nBarsMax; ibar++)
 			{
-				//get Param errors
-				runFile >> ParamErr[iplanes][ibar][iside][irun];
+				//get Param1 errors
+				runFile >> Param1Err[iplanes][ibar][iside][irun];
+			}
+			
+		}
+	}
+	
+	//loop over sides
+	for (UInt_t iside = 0; iside < nSides; iside++)
+	{
+		//loop over planes
+		for(UInt_t iplanes = 0; iplanes < nPlanes; iplanes++)
+		{
+			//loop over Bars
+			for(UInt_t ibar = 0; ibar < nBarsMax; ibar++)
+			{
+				//get Param1s
+				runFile >> Param2[iplanes][ibar][iside][irun];
+			}
+			
+			for(UInt_t ibar = 0; ibar < nBarsMax; ibar++)
+			{
+				//get Param1 errors
+				runFile >> Param2Err[iplanes][ibar][iside][irun];
 			}
 			
 		}
@@ -154,6 +176,8 @@ void HodoParamCompare ( TString runNums_name ) //input path to run # file
 		return;
 	}
 	
+	numRuns--; // hopefully fix a bug I'm having
+	
 	//output requested runs to terminal
 	cout << "Processing Runs:" << endl;
 	for (int i = 0; i < numRuns; i++)
@@ -169,10 +193,13 @@ void HodoParamCompare ( TString runNums_name ) //input path to run # file
 	
 	//okay before you get super mad this was the only way, I promise
 	//make place to store parameter arrays
-	Double_t *Param[nPlanes][nBarsMax][nSides];
-	Double_t *ParamErr[nPlanes][nBarsMax][nSides];
+	Double_t *Param1[nPlanes][nBarsMax][nSides];
+	Double_t *Param1Err[nPlanes][nBarsMax][nSides];
 	
-	// make the parameter arrays
+	Double_t *Param2[nPlanes][nBarsMax][nSides];
+	Double_t *Param2Err[nPlanes][nBarsMax][nSides];
+	
+	// make the Param1eter arrays
 	for (UInt_t i = 0; i < nPlanes; i++)
 	{
 		
@@ -181,8 +208,10 @@ void HodoParamCompare ( TString runNums_name ) //input path to run # file
 			
 			for (UInt_t k = 0; k < nSides; k++)
 			{
-				Param[i][j][k] = new Double_t[numRuns];
-				ParamErr[i][j][k] = new Double_t[numRuns];
+				Param1[i][j][k] = new Double_t[numRuns];
+				Param1Err[i][j][k] = new Double_t[numRuns];
+				Param2[i][j][k] = new Double_t[numRuns];
+				Param2Err[i][j][k] = new Double_t[numRuns];
 			}
 		}
 	}
@@ -195,7 +224,7 @@ void HodoParamCompare ( TString runNums_name ) //input path to run # file
 	{
 		
 		//get file
-		fileName = Form("Calibration_Plots/phodo_TWcalib_Err_%.0f.param", runs[irun]); // may need to change this path though
+		fileName = Form("phodo_TWcalib_Err_%.0f.param", runs[irun]); // may need to change this path though
 		runFile.open(fileName);
 		
 		//output error if can't find file
@@ -248,8 +277,9 @@ void HodoParamCompare ( TString runNums_name ) //input path to run # file
 	*/
 	
 	//make canvases and graphs
-	TCanvas *CompCan[nSides][nPlanes];
-	TGraphErrors *CompGra[nSides][nPlanes][nBarsMax];
+	TCanvas *CompCanC2[nSides][nPlanes], *CompCanC1[nSides][nPlanes];
+	TGraphErrors *CompGra[nSides][nPlanes][nBarsMax], *CompGraC1[nSides][nPlanes][nBarsMax];
+	TF1 *Lin2021[nSides][nPlanes][nBarsMax], *Lin2022[nSides][nPlanes][nBarsMax]; 
 	
 	//loop over sides
 	for (UInt_t iside = 0; iside < nSides; iside++)
@@ -257,26 +287,71 @@ void HodoParamCompare ( TString runNums_name ) //input path to run # file
 		
 		for (UInt_t iplane = 0; iplane < nPlanes; iplane++)
 		{
-			CompCan[iside][iplane] = new TCanvas(Form("c_s%i_p%i", iside, iplane+1), Form("TW_c2_Comp_"+sideNames[iside]+"_side_plane_%i", iplane+1), 3200, 3200); // name, title, width, height
+			CompCanC2[iside][iplane] = new TCanvas(Form("c2_s%i_p%i", iside, iplane+1), Form("pHodo_TW_c2_Comp_"+sideNames[iside]+"_side_plane_%i", iplane+1), 3200, 3200); // name, title, width, height
+			CompCanC1[iside][iplane] = new TCanvas(Form("c1_s%i_p%i", iside, iplane+1), Form("pHodo_TW_c1_Comp_"+sideNames[iside]+"_side_plane_%i", iplane+1), 3200, 3200); // name, title, width, height
 			
 			//save space on the non-quartz planes
 			if ( iplane == 3)
 			{
-				CompCan[iside][iplane]->Divide(5,5);
+				CompCanC2[iside][iplane]->Divide(5,5);
+				CompCanC1[iside][iplane]->Divide(5,5);
 			}else {
-				CompCan[iside][iplane]->Divide(4,4);
+				CompCanC2[iside][iplane]->Divide(4,4);
+				CompCanC1[iside][iplane]->Divide(4,4);
 			}
 			
 			//for planes only run as much as is neccessary (13 in first two, 14 in 3rd one and 21 times in quartz
 			for (UInt_t ibar = 0;((ibar < 13) || (ibar < 14 && iplane == 2)) || (ibar < nBarsMax && iplane == 3) ; ibar++)
 			{
 				// make canvas
-				CompCan[iside][iplane]->cd(ibar+1);
-				CompCan[iside][iplane]->SetGrid();
+				CompCanC1[iside][iplane]->cd(ibar+1);
+				CompCanC1[iside][iplane]->SetGrid();
 				
 				// fill then draw graph
-				CompGra[iside][iplane][ibar] = new TGraphErrors (numRuns, runs, Param[iplane][ibar][iside], nullptr, ParamErr[iplane][ibar][iside]);
-				RemoveBad(CompGra[iside][iplane][ibar], Param[iplane][ibar][iside], ParamErr[iplane][ibar][iside], numRuns);
+				//CompGra[iside][iplane][ibar] = new TGraphErrors (numRuns, runs, Param1[iplane][ibar][iside], nullptr, Param1Err[iplane][ibar][iside]);
+				CompGra[iside][iplane][ibar] = new TGraphErrors();
+				CompGraC1[iside][iplane][ibar] = new TGraphErrors();
+				
+				Lin2021[iside][iplane][ibar] = new TF1 ("Const Fit 2021", "[0]", 11700, 14777);
+				Lin2022[iside][iplane][ibar] = new TF1 ("Const Fit 2022", "[0]", 14777, 17200);
+				
+				int *toRemove = new int[numRuns];
+				int ipoint = 0;
+				for (UInt_t irun = 0; irun < numRuns; irun++)
+				{
+					//C2 fill, yes I know retrofitting is hard okay
+					if (( Param1[iplane][ibar][iside][irun] >= 1 || Param1Err[iplane][ibar][iside][irun] == 0 || Param1[iplane][ibar][iside][irun] < 0 || (TMath::Abs(Param1Err[iplane][ibar][iside][irun]/Param1[iplane][ibar][iside][irun]) > 0.5) ) && !( Param1[iplane][ibar][iside][irun] == 0 && Param1Err[iplane][ibar][iside][irun] == 0 ))
+					{
+						cout << "Removing C2 Point From plane " << iplane+1 << ", side " << sideNames[iside] << ", bar " << ibar+1 << ", run " << CompGra[iside][iplane][ibar]->GetPointX(irun) << "\n";
+						cout << "Values: x = " << runs[irun] << ", y = " << CompGra[iside][iplane][ibar]->GetPointY(irun) << ", yerr = " << CompGra[iside][iplane][ibar]->GetErrorY(irun) << '\n';
+						//if (!CompGra[iside][iplane][ibar]->RemovePoint(irun)) cout << "failed!!!\n";
+						toRemove[irun] = irun;
+					}else{
+						toRemove[irun] = 0;
+						CompGra[iside][iplane][ibar]->AddPoint(runs[irun],Param1[iplane][ibar][iside][irun]);
+						CompGra[iside][iplane][ibar]->SetPointError(ipoint,0, Param1Err[iplane][ibar][iside][irun]);
+						ipoint++;
+					}
+					//C1 fill, yes I know retrofitting is hard okay
+					if (( Param2Err[iplane][ibar][iside][irun] == 0 || Param2[iplane][ibar][iside][irun] < 0 || (TMath::Abs(Param2Err[iplane][ibar][iside][irun]/Param2[iplane][ibar][iside][irun]) > 0.5) ) && !( Param2[iplane][ibar][iside][irun] == 0 && Param2Err[iplane][ibar][iside][irun] == 0 ))
+					{
+						cout << "Removing C1 Point From plane " << iplane+1 << ", side " << sideNames[iside] << ", bar " << ibar+1 << ", run " << CompGra[iside][iplane][ibar]->GetPointX(irun) << "\n";
+						cout << "Values: x = " << runs[irun] << ", y = " << CompGra[iside][iplane][ibar]->GetPointY(irun) << ", yerr = " << CompGra[iside][iplane][ibar]->GetErrorY(irun) << '\n';
+						//if (!CompGra[iside][iplane][ibar]->RemovePoint(irun)) cout << "failed!!!\n";
+						toRemove[irun] = irun;
+					}else{
+						toRemove[irun] = 0;
+						CompGraC1[iside][iplane][ibar]->AddPoint(runs[irun],Param2[iplane][ibar][iside][irun]);
+						CompGraC1[iside][iplane][ibar]->SetPointError(ipoint,0, Param2Err[iplane][ibar][iside][irun]);
+						ipoint++;
+					}
+				}
+				//for(UInt_t irun = numRuns; irun < 0; irun++){
+				//	if (!CompGra[iside][iplane][ibar]->RemovePoint(irun)) cout << "failed to remove run " << runs[irun] << "!!!\n";
+				//}
+				
+				
+				//RemoveBad(CompGra[iside][iplane][ibar], Param1[iplane][ibar][iside], Param1Err[iplane][ibar][iside], numRuns);
 				
 				//setting a bunch of stuff
 				CompGra[iside][iplane][ibar]->SetTitle(Form("TW_c2_Comp_"+sideNames[iside]+"_side_plane_%i_Bar%i", iplane+1, ibar+1));
@@ -284,20 +359,45 @@ void HodoParamCompare ( TString runNums_name ) //input path to run # file
 				CompGra[iside][iplane][ibar]->SetMarkerColor(kBlue);
 				CompGra[iside][iplane][ibar]->SetLineColor(kBlue);
 				CompGra[iside][iplane][ibar]->GetXaxis()->SetTitle("Run Number");
-				CompGra[iside][iplane][ibar]->GetYaxis()->SetTitle("TW Fit Parameter Value");
+				CompGra[iside][iplane][ibar]->GetYaxis()->SetTitle("TW C2 Value");
 				CompGra[iside][iplane][ibar]->SetMarkerStyle(35);
    				CompGra[iside][iplane][ibar]->Draw("AP");
 				
+				CompGra[iside][iplane][ibar]->Fit(Lin2021[iside][iplane][ibar], "QR+", "SAME");
+				CompGra[iside][iplane][ibar]->Fit(Lin2022[iside][iplane][ibar], "QR+", "SAME");
+				
+				//Lin2021[iside][iplane][ibar]->Draw("SAME");
+				//Lin2022[iside][iplane][ibar]->Draw("SAME");
 				//write to file
+				// make C2 canvas
+				CompCanC2[iside][iplane]->cd(ibar+1);
+				CompCanC2[iside][iplane]->SetGrid();
+				
+				//setting a bunch of stuff
+				CompGraC1[iside][iplane][ibar]->SetTitle(Form("TW_c1_Comp_"+sideNames[iside]+"_side_plane_%i_Bar%i", iplane+1, ibar+1));
+				CompGraC1[iside][iplane][ibar]->SetMarkerStyle(1);
+				CompGraC1[iside][iplane][ibar]->SetMarkerColor(kBlue);
+				CompGraC1[iside][iplane][ibar]->SetLineColor(kBlue);
+				CompGraC1[iside][iplane][ibar]->GetXaxis()->SetTitle("Run Number");
+				CompGraC1[iside][iplane][ibar]->GetYaxis()->SetTitle("TW C1 Value");
+				CompGraC1[iside][iplane][ibar]->SetMarkerStyle(35);
+   				CompGraC1[iside][iplane][ibar]->Draw("AP");
+				
+				CompGraC1[iside][iplane][ibar]->Fit(Lin2021[iside][iplane][ibar], "QR+", "SAME");
+				CompGraC1[iside][iplane][ibar]->Fit(Lin2022[iside][iplane][ibar], "QR+", "SAME");
+				
 				//CompGra[iside][iplane]->Write( Form("TW_c2_Comp_"+sideNames[iside]+"_side_plane%i_Bar%i", iplane+1, ibar+1) );
 			}
-			//CompCan[iside][iplane]->Write( Form("TW_c2_Comp_"+sideNames[iside]+"_side_plane%i", iplane+1) );
+			//CompCanC2[iside][iplane]->Write( Form("TW_c2_Comp_"+sideNames[iside]+"_side_plane%i", iplane+1) );
 			if(iside == 0 && iplane == 0) {
-				CompCan[iside][iplane]->Print("W_c2_Comp_All.pdf(");
+				CompCanC2[iside][iplane]->Print("pHodo_TW_Comp_All.pdf(");
+				CompCanC1[iside][iplane]->Print("pHodo_TW_Comp_All.pdf");
 			}else if (iside == (nSides - 1)  && iplane == (nPlanes - 1) ) {
-				CompCan[iside][iplane]->Print("W_c2_Comp_All.pdf)");
+				CompCanC2[iside][iplane]->Print("pHodo_TW_Comp_All.pdf");
+				CompCanC1[iside][iplane]->Print("pHodo_TW_Comp_All.pdf)");
 			}else{
-				CompCan[iside][iplane]->Print("W_c2_Comp_All.pdf");
+				CompCanC2[iside][iplane]->Print("pHodo_TW_Comp_All.pdf");
+				CompCanC1[iside][iplane]->Print("pHodo_TW_Comp_All.pdf");
 			}
 		}
 	}

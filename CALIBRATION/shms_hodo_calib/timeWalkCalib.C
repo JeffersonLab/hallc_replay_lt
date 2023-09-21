@@ -353,6 +353,7 @@ void writePlots(int runNUM)
   return;
 }
 
+
 //Add a method to Get Fit Parameters
 void WriteFitParam(int runNUM)
 {
@@ -456,7 +457,7 @@ void WriteFitParam(int runNUM)
 void WriteFitParamErr(int runNUM)
 {
 
-  TString outPar_Name = Form("Calibration_Plots/hhodo_TWcalib_Err_%d.param", runNUM); //note could put this where ever you wanted to
+  TString outPar_Name = Form("Calibration_Plots/phodo_TWcalib_Err_%d.param", runNUM); //note could put this where ever you wanted to
   outParam.open(outPar_Name);
   Double_t c1err[nPlanes][nSides][nBarsMax] = {0.};
   Double_t c2err[nPlanes][nSides][nBarsMax] = {0.};
@@ -469,9 +470,9 @@ void WriteFitParamErr(int runNUM)
 
 	for(UInt_t ipaddle = 0; ipaddle < nbars[iplane]; ipaddle++) {
 	 
-	  c1[iplane][iside][ipaddle] = twFit[iplane][iside][ipaddle]->GetParameter("c_{1}");
+	  //	  c1[iplane][iside][ipaddle] = twFit[iplane][iside][ipaddle]->GetParameter(0);
 	  c1err[iplane][iside][ipaddle] = twFit[iplane][iside][ipaddle]->GetParError(0);
-	  c2[iplane][iside][ipaddle] = twFit[iplane][iside][ipaddle]->GetParameter("c_{2}");
+	  //c2[iplane][iside][ipaddle] = twFit[iplane][iside][ipaddle]->GetParameter("c_{2}");
 	  c2err[iplane][iside][ipaddle] = twFit[iplane][iside][ipaddle]->GetParError(1);
 	  //chi2ndf[iplane][iside][ipaddle] =  twFit[iplane][iside][ipaddle]->GetChisquare()/twFit[iplane][iside][ipaddle]->GetNDF();
       
@@ -639,6 +640,7 @@ void timeWalkCalib(int run) {
  
   histOutFile->Close();
   //Write to a param file
+  //WriteFitParamErr(run);
   WriteFitParam(run);
   //Write parrameters with errors out to seperate file
   WriteFitParamErr(run);

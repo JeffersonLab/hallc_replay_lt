@@ -499,7 +499,23 @@ void WriteFitParamErr(int runNUM)
 	}
 	outParam << endl;
   } //end loop over planes
-  
+                                                                                                                                                                           
+  //Loop over all paddles
+  for (UInt_t iplane = 0; iplane < nPlanes; iplane++)
+  {  
+  	for(UInt_t ipaddle = 0; ipaddle < nBarsMax; ipaddle++) { 
+    //Write c2-Neg values
+     
+		outParam << c2[iplane][1][ipaddle] << " " << fixed; 
+                                              
+	    }//end loop paddles
+	outParam << endl;
+	//write errors
+	for(UInt_t ipaddle = 0; ipaddle < nBarsMax; ipaddle++) {
+		outParam << c2err[iplane][1][ipaddle] << " " << fixed;
+	}
+	outParam << endl;
+  } //end loop over planes
   
   //Loop over all paddles For c1
   for (UInt_t iplane = 0; iplane < nPlanes; iplane++)
@@ -517,20 +533,20 @@ void WriteFitParamErr(int runNUM)
 	}
 	outParam << endl;
   } //end loop over planes
-                                                                                                                                                                           
-  //Loop over all paddles
+  
+  //Loop over all paddles For c1
   for (UInt_t iplane = 0; iplane < nPlanes; iplane++)
   {  
   	for(UInt_t ipaddle = 0; ipaddle < nBarsMax; ipaddle++) { 
     //Write c2-Neg values
      
-		outParam << c2[iplane][1][ipaddle] << " " << fixed; 
+		outParam << c1[iplane][1][ipaddle] << " " << fixed; 
                                               
 	    }//end loop paddles
 	outParam << endl;
 	//write errors
 	for(UInt_t ipaddle = 0; ipaddle < nBarsMax; ipaddle++) {
-		outParam << c2err[iplane][1][ipaddle] << " " << fixed;
+		outParam << c1err[iplane][1][ipaddle] << " " << fixed;
 	}
 	outParam << endl;
   } //end loop over planes

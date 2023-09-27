@@ -38,6 +38,11 @@ static const UInt_t nPlanes     = 4;
 static const UInt_t nSides      = 2;
 static const UInt_t nBarsMax    = 16;
 static const UInt_t nTwFitPars = 2;
+static const bool DEBUGMODE = false;
+
+//C.Y. Dec 09, 2021 | use tdcThresh parameter for scints and quartz independenly
+static const Double_t tdcThresh  = 1200.0;
+
 static const TString sideNames[nSides] = {"Positive", "Negative"};
 
 const Int_t INILENGTH = 64;
@@ -145,13 +150,118 @@ void RemoveBad ( TGraphErrors *g1, Double_t *Param, Double_t *ParamErr, UInt_t n
 {
 	for (UInt_t irun = 0; irun < numRuns; irun++)
 	{
-		if ( Param[irun] >= 1 || ParamErr[irun] == 0 || Param[irun] < 0 || (ParamErr[irun]/Param1[irun]) > 0.5)
+		if ( Param[irun] >= 1 || ParamErr[irun] == 0 || Param[irun] < 0 || (ParamErr[irun]/Param[irun]) > 0.5)
 		{
 			g1->RemovePoint(irun);
 		}
 	}
 
 }
+
+//Add a method to Get Fit Parameters
+void WriteFitParam(double c1[nPlanes][nBarsMax][nSides],double c2[nPlanes][nBarsMax][nSides], bool year)
+{
+  ofstream outParam;
+  TString outPar_Name;
+  if(year) {
+  	outPar_Name = "hhodo_TWcalib_2021.param";
+  }else{
+  	outPar_Name = "hhodo_TWcalib_2022.param";  	
+  }
+  outParam.open(outPar_Name);
+  outParam << ";HMS Hodoscopes Time Walk Output Parameter File: taken from average of many runs" << endl;
+  outParam << " " << endl;
+  outParam << "hTDC_threshold =" << tdcThresh << " ;units of mV" <<endl;          
+  //outParam << "pTDC_threshold_scint  =" << tdcThresh_scint  << " ;units of mV" <<endl;
+  //outParam << "pTDC_threshold_quartz =" << tdcThresh_quartz  << " ;units of mV" <<endl;
+  outParam << " " << endl;
+
+  /*
+  //Fill 3D Par array
+  for (UInt_t iplane=0; iplane < nPlanes; iplane++)
+    {
+      
+      for (UInt_t iside=0; iside < nSides; iside++) {
+	      
+
+	for(UInt_t ipaddle = 0; ipaddle < nbars[iplane]; ipaddle++) {
+	 
+	  //c1[iplane][iside][ipaddle] = twFit[iplane][iside][ipaddle]->GetParameter("c_{1}");
+	  //c2[iplane][iside][ipaddle] = twFit[iplane][iside][ipaddle]->GetParameter("c_{2}");
+	  //chi2ndf[iplane][iside][ipaddle] =  twFit[iplane][iside][ipaddle]->GetChisquare()/twFit[iplane][iside][ipaddle]->GetNDF();
+
+	} //end paddle loop
+
+      } //end side loop
+    
+    } //end plane loop
+	*/
+  //Wrtie to Param FIle
+   
+  outParam << ";Param c1-Pos" << endl;
+  outParam << "; " << setw(12) << "1x " << setw(15) << "1y " << setw(15) << "2x " << setw(15) << "2y " << endl;
+  outParam << "hc1_Pos = ";
+  //Loop over all paddles
+  for(UInt_t ipaddle = 0; ipaddle < nBarsMax; ipaddle++) {
+    //Write c1-Pos values
+    if(ipaddle==0){
+      outParam << c1[0][ipaddle][0] << ", " << setw(15) << c1[1][ipaddle][0] << ", "  << setw(15) << c1[2][ipaddle][0] << ", " << setw(15) << c1[3][ipaddle][0] << fixed << endl; 
+    }
+    else {
+      outParam << setw(17) << c1[0][ipaddle][0] << ", " << setw(15) << c1[1][ipaddle][0] << ", "  << setw(15) << c1[2][ipaddle][0] << ", " << setw(15) << c1[3][ipaddle][0] << fixed << endl;    
+    }
+  } //end loop over paddles
+  
+  outParam << " " << endl;
+  outParam << ";Param c1-Neg" << endl;
+  outParam << "; " << setw(12) << "1x " << setw(15) << "1y " << setw(15) << "2x " << setw(15) << "2y " << endl;
+  outParam << "hc1_Neg = ";                                                                                                                                                                            
+  //Loop over all paddles
+  for(UInt_t ipaddle = 0; ipaddle < nBarsMax; ipaddle++) { 
+    //Write c1-Neg values
+    if(ipaddle==0){
+      outParam << c1[0][ipaddle][1] << ", " << setw(15) << c1[1][ipaddle][1] << ", "  << setw(15) << c1[2][ipaddle][1] << ", " << setw(15) << c1[3][ipaddle][1] << fixed << endl; 
+    }
+    else {
+      outParam << setw(17) << c1[0][ipaddle][1] << ", " << setw(15) << c1[1][ipaddle][1] << ", "  << setw(15) << c1[2][ipaddle][1] << ", " << setw(15) << c1[3][ipaddle][1] << fixed << endl;
+    }
+} //end loop over paddles
+  
+  outParam << " " << endl;
+  outParam << ";Param c2-Pos" << endl;
+  outParam << "; " << setw(12) << "1x " << setw(15) << "1y " << setw(15) << "2x " << setw(15) << "2y " << endl;
+  outParam << "hc2_Pos = ";                                                                                                                                                                            
+  //Loop over all paddles
+  for(UInt_t ipaddle = 0; ipaddle < nBarsMax; ipaddle++) { 
+    //Write c2-Pos values
+    if(ipaddle==0)
+      {
+	outParam << c2[0][ipaddle][0] << ", " << setw(15) << c2[1][ipaddle][0] << ", "  << setw(15) << c2[2][ipaddle][0] << ", " << setw(15) << c2[3][ipaddle][0] << fixed << endl; 
+      }
+    else {
+      outParam << setw(17) << c2[0][ipaddle][0] << ", " << setw(15) << c2[1][ipaddle][0] << ", "  << setw(15) << c2[2][ipaddle][0] << ", " << setw(15) << c2[3][ipaddle][0] << fixed << endl;                                            
+    }
+  } //end loop over paddles
+  
+  outParam << " " << endl;
+  outParam << ";Param c2-Neg" << endl;
+  outParam << "; " << setw(12) << "1x " << setw(15) << "1y " << setw(15) << "2x " << setw(15) << "2y " << endl;
+  outParam << "hc2_Neg = ";                                                                                                                                                                            
+  //Loop over all paddles
+  for(UInt_t ipaddle = 0; ipaddle < nBarsMax; ipaddle++) { 
+    //Write c2-Neg values
+    if (ipaddle==0){
+      outParam << c2[0][ipaddle][1] << ", " << setw(15) << c2[1][ipaddle][1] << ", "  << setw(15) << c2[2][ipaddle][1] << ", " << setw(15) << c2[3][ipaddle][1] << fixed << endl; 
+    }
+    else{
+      outParam << setw(17) << c2[0][ipaddle][1] << ", " << setw(15) << c2[1][ipaddle][1] << ", "  << setw(15) << c2[2][ipaddle][1] << ", " << setw(15) << c2[3][ipaddle][1] << fixed << endl;
+    }
+  } //end loop over paddles
+  
+  outParam.close();
+
+
+} //end method
 
 void HodoParamCompair ( TString runNums_name ) //input path to run # file
 {
@@ -197,6 +307,12 @@ void HodoParamCompair ( TString runNums_name ) //input path to run # file
 	Double_t *Param2[nPlanes][nBarsMax][nSides];
 	Double_t *Param2Err[nPlanes][nBarsMax][nSides];
 	
+	Double_t Param1Out[2][nPlanes][nBarsMax][nSides]; // I've added 2 of these to store both 2021 and 2022
+	Double_t Param1ErrOut[2][nPlanes][nBarsMax][nSides];
+	
+	Double_t Param2Out[2][nPlanes][nBarsMax][nSides]; 
+	Double_t Param2ErrOut[2][nPlanes][nBarsMax][nSides];
+	
 	// make the Param1eter arrays
 	for (UInt_t i = 0; i < nPlanes; i++)
 	{
@@ -210,6 +326,10 @@ void HodoParamCompair ( TString runNums_name ) //input path to run # file
 				Param1Err[i][j][k] = new Double_t[numRuns];
 				Param2[i][j][k] = new Double_t[numRuns];
 				Param2Err[i][j][k] = new Double_t[numRuns];
+				Param1Out[0][i][k][j] = 0.;
+				Param1Out[1][i][k][j] = 0.;
+				Param2Out[0][i][k][j] = 0.;
+				Param2Out[1][i][k][j] = 0.;
 			}
 		}
 	}
@@ -222,7 +342,7 @@ void HodoParamCompair ( TString runNums_name ) //input path to run # file
 	{
 		
 		//get file
-		fileName = Form("hhodo_TWcalib_Err_%.0f.Param1", runs[irun]); // may need to change this path though
+		fileName = Form("hhodo_TWcalib_Err_%.0f.param", runs[irun]); // may need to change this path though
 		runFile.open(fileName);
 		
 		//output error if can't find file
@@ -278,6 +398,9 @@ void HodoParamCompair ( TString runNums_name ) //input path to run # file
 	TCanvas *CompCanC2[nSides][nPlanes], *CompCanC1[nSides][nPlanes];
 	TGraphErrors *CompGra[nSides][nPlanes][nBarsMax], *CompGraC1[nSides][nPlanes][nBarsMax];
 	TF1 *Lin2021[nSides][nPlanes][nBarsMax], *Lin2022[nSides][nPlanes][nBarsMax]; 
+	TF1	*Lin2021b[nSides][nPlanes][nBarsMax], *Lin2022b[nSides][nPlanes][nBarsMax]; 
+	double mean1[2][nSides][nPlanes][nBarsMax], weight1[2][nSides][nPlanes][nBarsMax], mean2[2][nSides][nPlanes][nBarsMax], weight2[2][nSides][nPlanes][nBarsMax]; // for getting the weighted mean
+	bool y1, y2, y3, y4;
 	
 	//loop over sides
 	for (UInt_t iside = 0; iside < nSides; iside++)
@@ -291,16 +414,17 @@ void HodoParamCompair ( TString runNums_name ) //input path to run # file
 			//save space on the non-quartz planes
 			if ( iplane == 3)
 			{
-				CompCanC2[iside][iplane]->Divide(5,5);
-				CompCanC1[iside][iplane]->Divide(5,5);
+				CompCanC2[iside][iplane]->Divide(4,4);
+				CompCanC1[iside][iplane]->Divide(4,4);
 			}else {
 				CompCanC2[iside][iplane]->Divide(4,4);
 				CompCanC1[iside][iplane]->Divide(4,4);
 			}
 			
 			//for planes only run as much as is neccessary (13 in first two, 14 in 3rd one and 21 times in quartz
-			for (UInt_t ibar = 0;((ibar < 13) || (ibar < 14 && iplane == 2)) || (ibar < nBarsMax && iplane == 3) ; ibar++)
+			for (UInt_t ibar = 0;(ibar < nBarsMax && !(iplane == 1 || iplane == 3)) || (ibar < 10) ; ibar++)
 			{
+				
 				// make canvas
 				CompCanC1[iside][iplane]->cd(ibar+1);
 				CompCanC1[iside][iplane]->SetGrid();
@@ -311,36 +435,106 @@ void HodoParamCompair ( TString runNums_name ) //input path to run # file
 				CompGraC1[iside][iplane][ibar] = new TGraphErrors();
 				
 				Lin2021[iside][iplane][ibar] = new TF1 ("Const Fit 2021", "[0]", 11700, 14777);
+				Lin2021[iside][iplane][ibar]->SetParLimits(0,0,0.6);
+				Lin2021[iside][iplane][ibar]->SetParameter(0,0.3);
 				Lin2022[iside][iplane][ibar] = new TF1 ("Const Fit 2022", "[0]", 14777, 17200);
+				Lin2022[iside][iplane][ibar]->SetParLimits(0,0,0.6);
+				Lin2022[iside][iplane][ibar]->SetParameter(0,0.3);
 				
-				int *toRemove = new int[numRuns];
+				Lin2021b[iside][iplane][ibar] = new TF1 ("Const Fit 2021", "[0]", 11700, 14777);
+				Lin2021b[iside][iplane][ibar]->SetParLimits(0,12,27);
+				Lin2021b[iside][iplane][ibar]->SetParameter(0,15);
+				Lin2022b[iside][iplane][ibar] = new TF1 ("Const Fit 2022", "[0]", 14777, 17200);
+				Lin2022b[iside][iplane][ibar]->SetParLimits(0,12,27);
+				Lin2022b[iside][iplane][ibar]->SetParameter(0,15);
+				
+				mean1[0][iside][iplane][ibar] = 0.;
+				mean1[1][iside][iplane][ibar] = 0.;
+				mean2[0][iside][iplane][ibar] = 0.;
+				mean2[1][iside][iplane][ibar] = 0.;
+				weight1[0][iside][iplane][ibar] = 0.;
+				weight1[1][iside][iplane][ibar] = 0.;
+				weight2[0][iside][iplane][ibar] = 0.;
+				weight2[1][iside][iplane][ibar] = 0.;
+				
+				//int *toRemove = new int[numRuns];
 				int ipoint = 0;
+				y1 = false; // markers for average
+				y2 = false;
+				y3 = false;
+				y4 = false;
 				for (UInt_t irun = 0; irun < numRuns; irun++)
 				{
 					//C2 fill, yes I know retrofitting is hard okay
-					if (( Param1[iplane][ibar][iside][irun] >= 1 || Param1Err[iplane][ibar][iside][irun] == 0 || Param1[iplane][ibar][iside][irun] < 0 || (TMath::Abs(Param1Err[iplane][ibar][iside][irun]/Param1[iplane][ibar][iside][irun]) > 0.5) ) && !( Param1[iplane][ibar][iside][irun] == 0 && Param1Err[iplane][ibar][iside][irun] == 0 ))
+					if ((( Param1[iplane][ibar][iside][irun] >= 1 || Param1Err[iplane][ibar][iside][irun] == 0 || Param1[iplane][ibar][iside][irun] < 0 || (TMath::Abs(Param1Err[iplane][ibar][iside][irun]/Param1[iplane][ibar][iside][irun]) > 0.3) ) && !( Param1[iplane][ibar][iside][irun] == 0 && Param1Err[iplane][ibar][iside][irun] == 0 )) || runs[irun] == 0 || TMath::IsNaN(Param1Err[iplane][ibar][iside][irun]) || TMath::IsNaN(Param1[iplane][ibar][iside][irun]))
 					{
-						cout << "Removing C2 Point From plane " << iplane+1 << ", side " << sideNames[iside] << ", bar " << ibar+1 << ", run " << CompGra[iside][iplane][ibar]->GetPointX(irun) << "\n";
-						cout << "Values: x = " << runs[irun] << ", y = " << CompGra[iside][iplane][ibar]->GetPointY(irun) << ", yerr = " << CompGra[iside][iplane][ibar]->GetErrorY(irun) << '\n';
+						if(DEBUGMODE){
+							cout << "Removing C2 Point From plane " << iplane+1 << ", side " << sideNames[iside] << ", bar " << ibar+1 << ", run " << runs[irun] << "\n";
+							cout << "Values: x = " << runs[irun] << ", y = " << Param1[iplane][ibar][iside][irun] << ", yerr = " << Param1Err[iplane][ibar][iside][irun] << '\n';
+						}
 						//if (!CompGra[iside][iplane][ibar]->RemovePoint(irun)) cout << "failed!!!\n";
-						toRemove[irun] = irun;
+						//toRemove[irun] = irun;
 					}else{
-						toRemove[irun] = 0;
+						//toRemove[irun] = 0;
 						CompGra[iside][iplane][ibar]->AddPoint(runs[irun],Param1[iplane][ibar][iside][irun]);
 						CompGra[iside][iplane][ibar]->SetPointError(ipoint,0, Param1Err[iplane][ibar][iside][irun]);
+						if(runs[irun] < 14777){
+							if(y1){
+								mean1[0][iside][iplane][ibar] = mean1[0][iside][iplane][ibar] + Param1[iplane][ibar][iside][irun]*Param1Err[iplane][ibar][iside][irun];
+								weight1[0][iside][iplane][ibar] = weight1[0][iside][iplane][ibar] + Param1Err[iplane][ibar][iside][irun];
+							}else{
+								mean1[0][iside][iplane][ibar] = Param1[iplane][ibar][iside][irun]*Param1Err[iplane][ibar][iside][irun];
+								weight1[0][iside][iplane][ibar] = Param1Err[iplane][ibar][iside][irun];
+								y1 = true;
+							}
+						}else{
+							if(y2){
+								mean1[1][iside][iplane][ibar] = mean1[1][iside][iplane][ibar] + Param1[iplane][ibar][iside][irun]*Param1Err[iplane][ibar][iside][irun];
+								weight1[1][iside][iplane][ibar] = weight1[1][iside][iplane][ibar] + Param1Err[iplane][ibar][iside][irun];
+							}else{
+								mean1[1][iside][iplane][ibar] = Param1[iplane][ibar][iside][irun]*Param1Err[iplane][ibar][iside][irun];
+								weight1[1][iside][iplane][ibar] = Param1Err[iplane][ibar][iside][irun];
+								y2 = true;
+							}
+						}
 						ipoint++;
 					}
+				}
+				ipoint = 0;
+				for(UInt_t irun = 0; irun < numRuns; irun++)
+				{
 					//C1 fill, yes I know retrofitting is hard okay
-					if (( Param2Err[iplane][ibar][iside][irun] == 0 || Param2[iplane][ibar][iside][irun] < 0 || (TMath::Abs(Param2Err[iplane][ibar][iside][irun]/Param2[iplane][ibar][iside][irun]) > 0.5) ) && !( Param2[iplane][ibar][iside][irun] == 0 && Param2Err[iplane][ibar][iside][irun] == 0 ))
+					if ( (( Param2Err[iplane][ibar][iside][irun] == 0 || Param2[iplane][ibar][iside][irun] < 10 || Param2[iplane][ibar][iside][irun] > 30 || (TMath::Abs(Param2Err[iplane][ibar][iside][irun]/Param2[iplane][ibar][iside][irun]) > 0.4) ) && !(Param2[iplane][ibar][iside][irun] == 0 && Param2Err[iplane][ibar][iside][irun] == 0 && (Param2[iplane][ibar][iside][irun+1] == 0 || Param2[iplane][ibar][iside][irun-1] == 0)) ) || runs[irun] == 0 || TMath::IsNaN(Param2Err[iplane][ibar][iside][irun]) || TMath::IsNaN(Param2[iplane][ibar][iside][irun]))
 					{
-						cout << "Removing C1 Point From plane " << iplane+1 << ", side " << sideNames[iside] << ", bar " << ibar+1 << ", run " << CompGra[iside][iplane][ibar]->GetPointX(irun) << "\n";
-						cout << "Values: x = " << runs[irun] << ", y = " << CompGra[iside][iplane][ibar]->GetPointY(irun) << ", yerr = " << CompGra[iside][iplane][ibar]->GetErrorY(irun) << '\n';
+						if(DEBUGMODE){
+							cout << "Removing C1 Point From plane " << iplane+1 << ", side " << sideNames[iside] << ", bar " << ibar+1 << ", run " << runs[irun] << "\n";
+							cout << "Values: x = " << runs[irun] << ", y = " << Param2[iplane][ibar][iside][irun] << ", yerr = " << Param2Err[iplane][ibar][iside][irun] << '\n';
+						}
 						//if (!CompGra[iside][iplane][ibar]->RemovePoint(irun)) cout << "failed!!!\n";
-						toRemove[irun] = irun;
+						//toRemove[irun] = irun;
 					}else{
-						toRemove[irun] = 0;
+						//toRemove[irun] = 0;
 						CompGraC1[iside][iplane][ibar]->AddPoint(runs[irun],Param2[iplane][ibar][iside][irun]);
 						CompGraC1[iside][iplane][ibar]->SetPointError(ipoint,0, Param2Err[iplane][ibar][iside][irun]);
+						if(runs[irun] < 14777){
+							if(y3){
+								mean2[0][iside][iplane][ibar] = mean2[0][iside][iplane][ibar] + Param2[iplane][ibar][iside][irun]*Param2Err[iplane][ibar][iside][irun];
+								weight2[0][iside][iplane][ibar] = weight2[0][iside][iplane][ibar] + Param2Err[iplane][ibar][iside][irun];
+							}else{
+								mean2[0][iside][iplane][ibar] = Param2[iplane][ibar][iside][irun]*Param2Err[iplane][ibar][iside][irun];
+								weight2[0][iside][iplane][ibar] = Param2Err[iplane][ibar][iside][irun];
+								y3 = true;
+							}
+						}else{
+							if(y4){
+								mean2[1][iside][iplane][ibar] = mean2[1][iside][iplane][ibar] + Param2[iplane][ibar][iside][irun]*Param2Err[iplane][ibar][iside][irun];
+								weight2[1][iside][iplane][ibar] = weight2[1][iside][iplane][ibar] + Param2Err[iplane][ibar][iside][irun];
+							}else{
+								mean2[1][iside][iplane][ibar] = Param2[iplane][ibar][iside][irun]*Param2Err[iplane][ibar][iside][irun];
+								weight2[1][iside][iplane][ibar] = Param2Err[iplane][ibar][iside][irun];
+								y4 = true;
+							}
+						}
 						ipoint++;
 					}
 				}
@@ -348,6 +542,12 @@ void HodoParamCompair ( TString runNums_name ) //input path to run # file
 				//	if (!CompGra[iside][iplane][ibar]->RemovePoint(irun)) cout << "failed to remove run " << runs[irun] << "!!!\n";
 				//}
 				
+				// calculate weighted average of the functions
+				mean1[0][iside][iplane][ibar] = mean1[0][iside][iplane][ibar]/weight1[0][iside][iplane][ibar];
+				mean1[1][iside][iplane][ibar] = mean1[1][iside][iplane][ibar]/weight1[1][iside][iplane][ibar];
+				mean2[0][iside][iplane][ibar] = mean2[0][iside][iplane][ibar]/weight2[0][iside][iplane][ibar];
+				mean2[1][iside][iplane][ibar] = mean2[1][iside][iplane][ibar]/weight2[1][iside][iplane][ibar];
+				//cout << weight2[0][iside][iplane][ibar] << "\n";
 				
 				//RemoveBad(CompGra[iside][iplane][ibar], Param1[iplane][ibar][iside], Param1Err[iplane][ibar][iside], numRuns);
 				
@@ -361,12 +561,21 @@ void HodoParamCompair ( TString runNums_name ) //input path to run # file
 				CompGra[iside][iplane][ibar]->SetMarkerStyle(35);
    				CompGra[iside][iplane][ibar]->Draw("AP");
 				
-				CompGra[iside][iplane][ibar]->Fit(Lin2021[iside][iplane][ibar], "QR+", "SAME");
-				CompGra[iside][iplane][ibar]->Fit(Lin2022[iside][iplane][ibar], "QR+", "SAME");
+				//cout << "********************************************************\nFitting From plane " << iplane+1 << ", side " << sideNames[iside] << ", bar " << ibar+1 << "\n:";
+				CompGra[iside][iplane][ibar]->Fit(Lin2021[iside][iplane][ibar], "R+", "SAME");
+				CompGra[iside][iplane][ibar]->Fit(Lin2022[iside][iplane][ibar], "R+", "SAME");
+				//Lin2021[iside][iplane][ibar]->SetParameter(0, mean1[0][iside][iplane][ibar]);
+				//Lin2022[iside][iplane][ibar]->SetParameter(0, mean1[1][iside][iplane][ibar]);
 				
-				//Lin2021[iside][iplane][ibar]->Draw("SAME");
-				//Lin2022[iside][iplane][ibar]->Draw("SAME");
-				//write to file
+				Param2Out[0][iplane][ibar][iside] = Lin2021[iside][iplane][ibar]->GetParameter(0);
+				Param2Out[1][iplane][ibar][iside] = Lin2022[iside][iplane][ibar]->GetParameter(0);
+				
+				if( Param2Out[0][iplane][ibar][iside] < 0.05 || Param2Out[0][iplane][ibar][iside] > 1) Param2Out[0][iplane][ibar][iside] = 0;
+				if( Param2Out[1][iplane][ibar][iside] < 0.05 || Param2Out[1][iplane][ibar][iside] > 1) Param2Out[1][iplane][ibar][iside] = 0;
+				
+				Lin2021[iside][iplane][ibar]->Draw("SAME");
+				Lin2022[iside][iplane][ibar]->Draw("SAME");
+				
 				// make C2 canvas
 				CompCanC2[iside][iplane]->cd(ibar+1);
 				CompCanC2[iside][iplane]->SetGrid();
@@ -381,8 +590,19 @@ void HodoParamCompair ( TString runNums_name ) //input path to run # file
 				CompGraC1[iside][iplane][ibar]->SetMarkerStyle(35);
    				CompGraC1[iside][iplane][ibar]->Draw("AP");
 				
-				CompGraC1[iside][iplane][ibar]->Fit(Lin2021[iside][iplane][ibar], "QR+", "SAME");
-				CompGraC1[iside][iplane][ibar]->Fit(Lin2022[iside][iplane][ibar], "QR+", "SAME");
+				CompGraC1[iside][iplane][ibar]->Fit(Lin2021b[iside][iplane][ibar], "R+", "SAME");
+				CompGraC1[iside][iplane][ibar]->Fit(Lin2022b[iside][iplane][ibar], "R+", "SAME");
+				//Lin2021b[iside][iplane][ibar]->SetParameter(0, mean2[0][iside][iplane][ibar]);
+				//Lin2022b[iside][iplane][ibar]->SetParameter(0, mean2[1][iside][iplane][ibar]);
+				
+				Param1Out[0][iplane][ibar][iside] = Lin2021b[iside][iplane][ibar]->GetParameter(0);
+				Param1Out[1][iplane][ibar][iside] = Lin2022b[iside][iplane][ibar]->GetParameter(0);
+				
+				if( Param1Out[0][iplane][ibar][iside] < 1 || Param1Out[0][iplane][ibar][iside] > 30) Param1Out[0][iplane][ibar][iside] = 0.;
+				if( Param1Out[1][iplane][ibar][iside] < 1 || Param1Out[1][iplane][ibar][iside] > 30) Param1Out[1][iplane][ibar][iside] = 0.;
+				
+				Lin2021b[iside][iplane][ibar]->Draw("SAME");
+				Lin2022b[iside][iplane][ibar]->Draw("SAME");
 				
 				//CompGra[iside][iplane]->Write( Form("TW_c2_Comp_"+sideNames[iside]+"_side_plane%i_Bar%i", iplane+1, ibar+1) );
 			}
@@ -399,6 +619,20 @@ void HodoParamCompair ( TString runNums_name ) //input path to run # file
 			}
 		}
 	}
+	
+	// check for nonsense in the pmts that don't exist 
+	for(int iplane = 10; iplane < nPlanes; iplane++){
+		for(int ibar = 1; ibar < nBarsMax; ibar = ibar + 2){ 
+			for(int iside = 0; iside < nSides; iside++){
+				if( Param2Out[0][iplane][ibar][iside] < 0.05 || Param2Out[0][iplane][ibar][iside] > 1) Param2Out[0][iplane][ibar][iside] = 0.0;
+				if( Param2Out[1][iplane][ibar][iside] < 0.05 || Param2Out[1][iplane][ibar][iside] > 1) Param2Out[1][iplane][ibar][iside] = 0.;
+				if( Param1Out[0][iplane][ibar][iside] < 1 || Param1Out[0][iplane][ibar][iside] > 30) Param1Out[0][iplane][ibar][iside] = 0.;
+				if( Param1Out[1][iplane][ibar][iside] < 1 || Param1Out[1][iplane][ibar][iside] > 30) Param1Out[1][iplane][ibar][iside] = 0.;
+			}
+		}
+	}
+	WriteFitParam(Param1Out[0], Param2Out[0], 0);
+	WriteFitParam(Param1Out[1], Param2Out[1], 1);
 	
 	/*
 	//move to directory that will contain individual histograms

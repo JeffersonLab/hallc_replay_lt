@@ -60,14 +60,14 @@ static const Double_t adcChanTomV     = adcDynamicRange/nAdcChan; // Units of mV
 
 static const Double_t hodoPulseAmpCutLow     = 15.0;   // Units of mV
 static const Double_t hodoPulseAmpCutHigh    = 1000.0; // Units of mV
-static const Double_t refAdcPulseAmpCutLow   = 40.0;   // Units of mV
-static const Double_t refAdcPulseAmpCutHigh  = 70.0;   // Units of mV
-static const Double_t refAdcPulseTimeCutLow  = 300.0;  // Units of ns
-static const Double_t refAdcPulseTimeCutHigh = 370.0;  // Units of ns
+static const Double_t refAdcPulseAmpCutLow   = 0.0;   // Units of mV
+static const Double_t refAdcPulseAmpCutHigh  = 150.0;   // Units of mV
+static const Double_t refAdcPulseTimeCutLow  = 0.0;  // Units of ns
+static const Double_t refAdcPulseTimeCutHigh = 8000.0;  // Units of ns
 static const Double_t adcTdcTimeDiffCutLow   = 0.0; // Units of ns
-static const Double_t adcTdcTimeDiffCutHigh  = 100.0;  // Units of ns
-static const Double_t calEtotnormCutVal      = 0.7;    // Units of Normalized energy
-static const Double_t cerNpeSumCutVal        = 0.5;    // Units of NPE in aerogel
+static const Double_t adcTdcTimeDiffCutHigh  = 1000.0;  // Units of ns
+static const Double_t calEtotnormCutVal      = 0.4;    // Units of Normalized energy
+static const Double_t cerNpeSumCutVal        = 0.1;    // Units of NPE in aerogel
 // static const Double_t adcTdcTimeDiffCutLow   = -6000.0;  // Units of ns
 // static const Double_t adcTdcTimeDiffCutHigh  = 1000.0;  // Units of ns
 
@@ -137,7 +137,7 @@ void generatePlots(UInt_t iplane, UInt_t iside, UInt_t ipaddle) {
   if (!trigRawDir) {trigRawDir = outFile->mkdir("trigAppRaw"); trigRawDir->cd();}
   else outFile->cd("trigAppRaw");
   // FADC reference
-  if (!h1_refAdcPulseTimeRaw) h1_refAdcPulseTimeRaw = new TH1F("h1_refAdcPulseTimeRaw", "ROC2 Raw FADC Reference Pulse Time; Raw FADC Pulse Time (ns); Number of Entries / 100 ps", 4000, 0, 400);
+  if (!h1_refAdcPulseTimeRaw) h1_refAdcPulseTimeRaw = new TH1F("h1_refAdcPulseTimeRaw", "ROC2 Raw FADC Reference Pulse Time; Raw FADC Pulse Time (ns); Number of Entries / 100 ps", 10000, 0, 10000);
   if (!h1_refAdcPulseAmp)     h1_refAdcPulseAmp     = new TH1F("h1_refAdcPulseAmp",     "ROC2 FADC Reference Pulse Amplitude; FADC Pulse Amplitude (mV); Number of Entries / 1 mV", 1000, 0, 1000);
   if (!h1_refAdcMultiplicity) h1_refAdcMultiplicity = new TH1F("h1_refAdcMultiplicity", "ROC2 FADC Reference Multiplicity; Raw FADC Multiplicity; Number of Entries", 5, -0.5, 4.5);
   // TDC reference
@@ -540,7 +540,7 @@ void timeWalkHistos(TString inputname, Int_t runNum, string SPEC_flg) {  //SPEC_
     } // Plane loop
     
     //C.Y. Feb 25, 2022 | print the percentage of events analyzed 
-    cout << std::setprecision(2) << double(ievent) / nentries * 100. << "  % " << std::flush << "\r"; 
+    //cout << std::setprecision(2) << double(ievent) / nentries * 100. << "  % " << std::flush << "\r"; 
 
     if (ievent % 100000 == 0 && ievent != 0)
       cout << ievent << " Events Have Been Processed..." << endl;

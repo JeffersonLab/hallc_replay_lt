@@ -76,3 +76,6 @@ cminch=2.54
 #include "PARAM/SHMS/HGCER/phgcer_calib.param"
 #include "PARAM/SHMS/AERO/paero_calib.param"
 #include "PARAM/SHMS/CAL/pcal_calib.param"
+
+; tcoin.param file
+#include "PARAM/TRIG/Offline_PionLT/tcoin_PionLT.param"

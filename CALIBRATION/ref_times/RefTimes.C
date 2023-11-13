@@ -983,16 +983,20 @@ void SaveToPDF(Int_t RunNumber)
     
     if(SaveOption == 0 || SaveOption == 1){
     pTrig1_Roc1_Hist->Draw();
-    pTrig1_Roc1_Hist->Draw("same");
+    pTrig1_Roc1_Hist_cut->SetLineColorAlpha(2);
+    pTrig1_Roc1_Hist_cut->Draw("same");
     canvas->Print(Form("output/REF_TimePlots_%d.pdf(",RunNumber),  pTrig1_Roc1_Hist->GetName());
     pTrig4_Roc1_Hist->Draw();
-    pTrig4_Roc1_Hist->Draw("same");
+    pTrig4_Roc1_Hist_cut->SetLineColorAlpha(2);
+    pTrig4_Roc1_Hist_cut->Draw("same");
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig4_Roc1_Hist->GetName());
     pTrig1_Roc2_Hist->Draw();
-    pTrig1_Roc2_Hist->Draw("same");
+    pTrig1_Roc2_Hist_cut->SetLineColorAlpha(2);
+    pTrig1_Roc2_Hist_cut->Draw("same");
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig1_Roc2_Hist->GetName());
     pTrig4_Roc2_Hist->Draw();
-    pTrig4_Roc2_Hist->Draw("same");
+    pTrig4_Roc2_Hist_cut->SetLineColorAlpha(2);
+    pTrig4_Roc2_Hist_cut->Draw("same");
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig4_Roc2_Hist->GetName());
     
     pTrig1_Roc1_Mult_Hist->Draw();

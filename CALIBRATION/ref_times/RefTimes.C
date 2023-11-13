@@ -444,15 +444,15 @@ void setCutValues(/* Could put the standard.database file here. */)
 void setBranchAddresses(TTree* DataTree)
 {
     //coin Ref times
-    DataTree->SetBranchAddress(Form("T.coin.pTRIG1_ROC1_tdcTimeRaw", DaqName.Data()), &pTrig1_Roc1);
-    DataTree->SetBranchAddress(Form("T.coin.pTRIG4_ROC1_tdcTimeRaw", DaqName.Data()), &pTrig4_Roc1);
-    DataTree->SetBranchAddress(Form("T.coin.pTRIG1_ROC2_tdcTimeRaw", DaqName.Data()), &pTrig1_Roc2);
-    DataTree->SetBranchAddress(Form("T.coin.pTRIG4_ROC2_tdcTimeRaw", DaqName.Data()), &pTrig4_Roc2);
+    DataTree->SetBranchAddress("T.coin.pTRIG1_ROC1_tdcTimeRaw", &pTrig1_Roc1);
+    DataTree->SetBranchAddress("T.coin.pTRIG4_ROC1_tdcTimeRaw", &pTrig4_Roc1);
+    DataTree->SetBranchAddress("T.coin.pTRIG1_ROC2_tdcTimeRaw", &pTrig1_Roc2);
+    DataTree->SetBranchAddress("T.coin.pTRIG4_ROC2_tdcTimeRaw", &pTrig4_Roc2);
     
-    DataTree->SetBranchAddress(Form("T.coin.pTRIG1_ROC1_tdcMultiplicity", DaqName.Data()), &pTrig1_Roc1_Mult);
-    DataTree->SetBranchAddress(Form("T.coin.pTRIG4_ROC1_tdcMultiplicity", DaqName.Data()), &pTrig4_Roc1_Mult);
-    DataTree->SetBranchAddress(Form("T.coin.pTRIG1_ROC2_tdcMultiplicity", DaqName.Data()), &pTrig1_Roc2_Mult);
-    DataTree->SetBranchAddress(Form("T.coin.pTRIG4_ROC2_tdcMultiplicity", DaqName.Data()), &pTrig4_Roc2_Mult);
+    DataTree->SetBranchAddress("T.coin.pTRIG1_ROC1_tdcMultiplicity", &pTrig1_Roc1_Mult);
+    DataTree->SetBranchAddress("T.coin.pTRIG4_ROC1_tdcMultiplicity", &pTrig4_Roc1_Mult);
+    DataTree->SetBranchAddress("T.coin.pTRIG1_ROC2_tdcMultiplicity", &pTrig1_Roc2_Mult);
+    DataTree->SetBranchAddress("T.coin.pTRIG4_ROC2_tdcMultiplicity", &pTrig4_Roc2_Mult);
     
     //assign Branches to ref Time variables
     DataTree->SetBranchAddress(Form("T.%s.hFADC_TREF_ROC1_adcPulseTimeRaw", DaqName.Data()), &hFADC_TREF_ROC1);

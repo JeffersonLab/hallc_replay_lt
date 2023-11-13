@@ -1097,7 +1097,7 @@ void SaveToPDF(Int_t RunNumber)
     
     } // end save ref times
     
-    if(SaveOption == 0 || SaveOption == 1) {
+    if(SaveOption == 0 || SaveOption == 2) {
     //Sum Plots
     cerAdcTdcDiffTime_Hist_Sum->Draw();
     LeftLine->DrawLine(hcer_adcTimeWindowMin[0], 0, hcer_adcTimeWindowMin[0], cerAdcTdcDiffTime_Hist_Sum->GetBinContent(cerAdcTdcDiffTime_Hist_Sum->GetMaximumBin()));

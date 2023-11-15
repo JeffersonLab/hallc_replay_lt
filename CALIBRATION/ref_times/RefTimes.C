@@ -781,10 +781,10 @@ void fillHistos(TTree *DataTree)
         	pTrig1_Roc2_Mult_Hist->Fill(pTrig1_Roc2_Mult);
         	pTrig4_Roc2_Mult_Hist->Fill(pTrig4_Roc2_Mult);
         	
-        	if(pTrig1_Roc1_Mult > 1) pTrig1_Roc1_Hist_cut->Fill(pTrig1_Roc1);
-        	if(pTrig4_Roc1_Mult > 1) pTrig4_Roc1_Hist_cut->Fill(pTrig4_Roc1);
-        	if(pTrig1_Roc2_Mult > 1) pTrig1_Roc2_Hist_cut->Fill(pTrig1_Roc2);
-        	if(pTrig4_Roc2_Mult > 1) pTrig4_Roc2_Hist_cut->Fill(pTrig4_Roc2);
+        	if(pTrig1_Roc1_Mult == 1) pTrig1_Roc1_Hist_cut->Fill(pTrig1_Roc1);
+        	if(pTrig4_Roc1_Mult == 1) pTrig4_Roc1_Hist_cut->Fill(pTrig4_Roc1);
+        	if(pTrig1_Roc2_Mult == 1) pTrig1_Roc2_Hist_cut->Fill(pTrig1_Roc2);
+        	if(pTrig4_Roc2_Mult == 1) pTrig4_Roc2_Hist_cut->Fill(pTrig4_Roc2);
         	
         	hFADC_TREF_ROC1_Mult_Hist->Fill(hFADC_TREF_ROC1_Mult);
        		hTref1_Mult_Hist->Fill(hTref1_Mult);

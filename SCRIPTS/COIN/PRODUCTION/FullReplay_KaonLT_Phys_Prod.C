@@ -39,7 +39,8 @@ void FullReplay_KaonLT_Phys_Prod (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
-  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_KaonLT.database");
+  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_KaonLT_pion.database");
+  // gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_KaonLT.database");
   gHcParms->Load(gHcParms->GetString("g_ctp_database_filename"), RunNumber);
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);

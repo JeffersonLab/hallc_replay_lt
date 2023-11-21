@@ -465,7 +465,7 @@ void setBranchAddresses(TTree* DataTree)
     DataTree->SetBranchAddress("T.coin.pTRIG4_ROC2_tdcTimeRaw", &pTrig4_Roc2);
     DataTree->SetBranchAddress("T.coin.pTRIG3_ROC1_tdcTimeRaw", &pTrig3_Roc1);
     DataTree->SetBranchAddress("T.coin.pTRIG3_ROC2_tdcTimeRaw", &pTrig3_Roc2);
-    DataTree->SetBranchAddress("T.coin.pT2_tdcTimeRaw", &pT2;
+    DataTree->SetBranchAddress("T.coin.pT2_tdcTimeRaw", &pT2);
     DataTree->SetBranchAddress("T.coin.pT2_tdcMultiplicity", &pT2_Mult);
     
     DataTree->SetBranchAddress("T.coin.pTRIG1_ROC1_tdcMultiplicity", &pTrig1_Roc1_Mult);

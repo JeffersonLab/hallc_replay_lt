@@ -13,6 +13,6 @@
 
 hdc_tdcrefcut   =-14500.
 hhodo_tdcrefcut =-2400.
-hhodo_adcrefcut =-3200.
-hcer_adcrefcut  =-3200.
-hcal_adcrefcut  =-3200.
+hhodo_adcrefcut =-3400.
+hcer_adcrefcut  =-3400.
+hcal_adcrefcut  =-3400.

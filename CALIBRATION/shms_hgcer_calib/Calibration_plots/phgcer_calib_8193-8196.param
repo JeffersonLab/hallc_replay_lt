@@ -1,3 +1,0 @@
-; Calibration parameters from calibrating runs 8193-8196
-; Weighted average of first and second guesses
- phgcer_adc_to_npe = 1.0/6.072, 1.0/6.739, 1.0/5.111, 1.0/-nan

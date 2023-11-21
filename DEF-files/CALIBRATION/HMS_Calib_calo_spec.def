@@ -19,3 +19,4 @@ block H.cal.etotnorm
 block H.cal.etottracknorm
 block H.gtr.p
 block H.gtr.dp
+block CTime.ePiCoinTime_ROC1

@@ -618,14 +618,14 @@ void makeHistos ()
     pTrig4_Roc2_Hist_cut = new TH1D("T.coin.pTRIG4_ROC2_tdcTimeRaw_cut","T.coin.pTRIG4_ROC2_tdcTimeRaw_cut",5000, 0, 10000);
     pTrig3_Roc1_Hist_cut = new TH1D("T.coin.pTRIG3_ROC1_tdcTimeRaw_cut","T.coin.pTRIG3_ROC1_tdcTimeRaw_cut",5000, 0, 10000);
     pTrig3_Roc2_Hist_cut = new TH1D("T.coin.pTRIG3_ROC2_tdcTimeRaw_cut","T.coin.pTRIG3_ROC2_tdcTimeRaw_cut",5000, 0, 10000);
-    pT2_Hist_cut = new TH1D("T.coin.pT2_tdcTimeRaw_cut","T.coin.pT2_tdcTimeRaw_cut",5000, 0, 10000);
+    pT2_Hist_cut = new TH1D("T.coin.pT2_tdcTimeRawcut","T.coin.pT2_tdcTimeRawcut",5000, 0, 10000);
     
     pTrig1_Roc1_Mult_Hist = new TH1D("T.coin.pTRIG1_ROC1_tdcMultiplicity","T.coin.pTRIG1_ROC1_tdcMultiplicity",10, -0.5, 9.5);
     pTrig4_Roc1_Mult_Hist = new TH1D("T.coin.pTRIG4_ROC1_tdcMultiplicity","T.coin.pTRIG4_ROC1_tdcMultiplicity",10, -0.5, 9.5);
     pTrig1_Roc2_Mult_Hist = new TH1D("T.coin.pTRIG1_ROC2_tdcMultiplicity","T.coin.pTRIG1_ROC2_tdcMultiplicity",10, -0.5, 9.5);
     pTrig4_Roc2_Mult_Hist = new TH1D("T.coin.pTRIG4_ROC2_tdcMultiplicity","T.coin.pTRIG4_ROC2_tdcMultiplicity",10, -0.5, 9.5);
-    pTrig3_Roc1_Mult_Hist = new TH1D("T.coin.pTRIG4_ROC1_tdcMultiplicity","T.coin.pTRIG4_ROC1_tdcMultiplicity",10, -0.5, 9.5);
-    pTrig3_Roc2_Mult_Hist = new TH1D("T.coin.pTRIG1_ROC2_tdcMultiplicity","T.coin.pTRIG1_ROC2_tdcMultiplicity",10, -0.5, 9.5);
+    pTrig3_Roc1_Mult_Hist = new TH1D("T.coin.pTRIG3_ROC1_tdcMultiplicity","T.coin.pTRIG3_ROC1_tdcMultiplicity",10, -0.5, 9.5);
+    pTrig3_Roc2_Mult_Hist = new TH1D("T.coin.pTRIG3_ROC2_tdcMultiplicity","T.coin.pTRIG3_ROC2_tdcMultiplicity",10, -0.5, 9.5);
     pT2_Mult_Hist = new TH1D("T.coin.pT2_tdcMultiplicity","T.coin.pT2_tdcMultiplicity",10, -0.5, 9.5);
     
     hFADC_TREF_ROC1_Hist = new TH1D(Form("T.%s.hFADC_TREF_ROC1_adcPulseTimeRaw", DaqName.Data()), Form("T.%s.hFADC_TREF_ROC1_adcPulseTimeRaw", DaqName.Data()), 10000, 0, 10000);

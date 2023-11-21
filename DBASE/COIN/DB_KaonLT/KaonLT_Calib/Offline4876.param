@@ -10,7 +10,7 @@ cminch=2.54
 #include "PARAM/GEN/KaonLT_PARAM/genflags.param"
 #include "PARAM/GEN/KaonLT_PARAM/gdebug.param"
 #include "PARAM/GEN/KaonLT_PARAM/gtarget.param"
-#include "PARAM/GEN/KaonLT_PARAM/gbeam.param"
+#include "PARAM/GEN/KaonLT_PARAM/gbeam_fall18.param"
 #include "PARAM/GEN/KaonLT_PARAM/gscalers_Fall18.param"
 
 ; General HMS parameter files

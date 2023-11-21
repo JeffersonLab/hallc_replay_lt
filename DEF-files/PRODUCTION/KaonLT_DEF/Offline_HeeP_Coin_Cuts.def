@@ -155,6 +155,7 @@ HMScoindcindipole	H.dc.InsideDipoleExit == 1
 
 HMSGEN		   HMShodstarttime && HMScoindcindipole && hcut_acceptance
 HMSCalelec         H.cal.etottracknorm > 0.7 &&  H.cal.etottracknorm < 1.6
+HMSCERelec	   H.cer.npeSum > 1.5
 
 HMSHGCShouldelec         HMSGEN && HMSCalelec 
 HMSHGCCOINShoulde	 HMSHGCShouldelec && ALL_COIN_events
@@ -163,6 +164,24 @@ HMSHGCSINGShoulde	 HMSHGCShouldelec && HMS_event
 HMSHGCDidelec            HMSHGCShouldelec && H.cer.npeSum > 1.5
 HMSHGCCOINDide		 HMSHGCCOINShoulde && H.cer.npeSum > 1.5
 HMSHGCSINGDide		 HMSHGCSINGShoulde && H.cer.npeSum > 1.5
+
+#################
+### SHMS BETA ###
+#################
+
+SHMSGOODBETA		 P.gtr.beta > 0.65
+SHMSBADBETA		 P.gtr.beta < 0.65
+
+SHMSBETASHOULD		 SHMSGEN && SHMSCalp && SHMSHGCp && shmsAerogeomalln && SHMSAEROp
+HMSBETASHOULD		 HMSGEN && HMSCalelec && HMSCERelec
+COINBETASHOULD		 ALL_COIN_events && SHMSBETASHOULD && HMSBETASHOULD
+
+SHMSGOODBETADID		 SHMSBETASHOULD && SHMSGOODBETA
+COINGOODBETADID		 COINBETASHOULD && SHMSGOODBETA
+
+SHMSBADBETADID           SHMSBETASHOULD && SHMSBADBETA
+COINBADBETADID		 COINBETASHOULD && SHMSBADBETA
+
 
 HMS_DELTA		 H.gtr.dp > -10 && H.gtr.dp < 10
 SHMS_DELTA		 P.gtr.dp > -15 && P.gtr.dp < 25

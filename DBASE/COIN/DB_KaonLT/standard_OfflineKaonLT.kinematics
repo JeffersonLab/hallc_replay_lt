@@ -237,7 +237,7 @@ HMS_RF_Offset = 0
 SHMS_RF_Offset = -1.030
 
 4827 - 4864
-gpbeam = 10.58537
+gpbeam = 10.58114
 gtargmass_amu = 1.00794
 htheta_lab = -18.845
 ptheta_lab = 26.145
@@ -1427,7 +1427,7 @@ SHMS_RF_Offset = 1.232
 
 # Heep-coin
 7866 - 7868
-gpbeam = 6.19009
+gpbeam = 6.18823
 gtargmass_amu = 1.00794
 hpcentral = 3.5710
 ppcentral = 3.4860
@@ -1640,7 +1640,7 @@ SHMS_RF_Offset = 0.197
 # Heep coin data 
 
 7973 - 7977
-gpbeam = 8.20883
+gpbeam = 8.21293
 gtargmass_amu = 1.00794
 hpcentral = 4.6720
 ppcentral = 4.3710

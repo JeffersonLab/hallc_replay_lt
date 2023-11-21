@@ -96,7 +96,7 @@ SHMS_RF_Offset = -1.030
 #Heep single
 
 4788 - 4790
-gpbeam = 10.5852
+gpbeam = 10.58537
 gtargmass_amu = 1.00794
 htheta_lab = -24.165
 ptheta_lab = 18.000

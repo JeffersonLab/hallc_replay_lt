@@ -280,6 +280,7 @@ block P.hod.2y.tot*
 block P.hod.2y.Track*
 block P.hod.2y.Scin*
 block P.hod.2y.NumClus
+block P.hod.TimeHist*
 
 # SHMS tracking
 block P.tr.*

@@ -465,8 +465,8 @@ void setBranchAddresses(TTree* DataTree)
     DataTree->SetBranchAddress("T.coin.pTRIG4_ROC2_tdcTimeRaw", &pTrig4_Roc2);
     DataTree->SetBranchAddress("T.coin.pTRIG3_ROC1_tdcTimeRaw", &pTrig3_Roc1);
     DataTree->SetBranchAddress("T.coin.pTRIG3_ROC2_tdcTimeRaw", &pTrig3_Roc2);
-    DataTree->SetBranchAddress("T.coin.pT2_tdcTimeRaw", &pT2);
-    DataTree->SetBranchAddress("T.coin.pT2_tdcMultiplicity", &pT2_Mult);
+    //DataTree->SetBranchAddress("T.coin.pT2_tdcTimeRaw", &pT2);
+    //DataTree->SetBranchAddress("T.coin.pT2_tdcMultiplicity", &pT2_Mult);
     
     DataTree->SetBranchAddress("T.coin.pTRIG1_ROC1_tdcMultiplicity", &pTrig1_Roc1_Mult);
     DataTree->SetBranchAddress("T.coin.pTRIG4_ROC1_tdcMultiplicity", &pTrig4_Roc1_Mult);
@@ -610,7 +610,7 @@ void makeHistos ()
     pTrig4_Roc2_Hist = new TH1D("T.coin.pTRIG4_ROC2_tdcTimeRaw","T.coin.pTRIG4_ROC2_tdcTimeRaw",5000, 0, 10000);
     pTrig3_Roc1_Hist = new TH1D("T.coin.pTRIG3_ROC1_tdcTimeRaw","T.coin.pTRIG3_ROC1_tdcTimeRaw",5000, 0, 10000);
     pTrig3_Roc2_Hist = new TH1D("T.coin.pTRIG3_ROC2_tdcTimeRaw","T.coin.pTRIG3_ROC2_tdcTimeRaw",5000, 0, 10000);
-    pT2_Hist = new TH1D("T.coin.pT2_tdcTimeRaw","T.coin.pT2_tdcTimeRaw",5000, 0, 10000);
+    //pT2_Hist = new TH1D("T.coin.pT2_tdcTimeRaw","T.coin.pT2_tdcTimeRaw",5000, 0, 10000);
     
     pTrig1_Roc1_Hist_cut = new TH1D("T.coin.pTRIG1_ROC1_tdcTimeRaw_cut","T.coin.pTRIG1_ROC1_tdcTimeRaw_cut",5000, 0, 10000);
     pTrig4_Roc1_Hist_cut = new TH1D("T.coin.pTRIG4_ROC1_tdcTimeRaw_cut","T.coin.pTRIG4_ROC1_tdcTimeRaw_cut",5000, 0, 10000);
@@ -618,7 +618,7 @@ void makeHistos ()
     pTrig4_Roc2_Hist_cut = new TH1D("T.coin.pTRIG4_ROC2_tdcTimeRaw_cut","T.coin.pTRIG4_ROC2_tdcTimeRaw_cut",5000, 0, 10000);
     pTrig3_Roc1_Hist_cut = new TH1D("T.coin.pTRIG3_ROC1_tdcTimeRaw_cut","T.coin.pTRIG3_ROC1_tdcTimeRaw_cut",5000, 0, 10000);
     pTrig3_Roc2_Hist_cut = new TH1D("T.coin.pTRIG3_ROC2_tdcTimeRaw_cut","T.coin.pTRIG3_ROC2_tdcTimeRaw_cut",5000, 0, 10000);
-    pT2_Hist_cut = new TH1D("T.coin.pT2_tdcTimeRawcut","T.coin.pT2_tdcTimeRawcut",5000, 0, 10000);
+    //pT2_Hist_cut = new TH1D("T.coin.pT2_tdcTimeRawcut","T.coin.pT2_tdcTimeRawcut",5000, 0, 10000);
     
     pTrig1_Roc1_Mult_Hist = new TH1D("T.coin.pTRIG1_ROC1_tdcMultiplicity","T.coin.pTRIG1_ROC1_tdcMultiplicity",10, -0.5, 9.5);
     pTrig4_Roc1_Mult_Hist = new TH1D("T.coin.pTRIG4_ROC1_tdcMultiplicity","T.coin.pTRIG4_ROC1_tdcMultiplicity",10, -0.5, 9.5);
@@ -626,7 +626,7 @@ void makeHistos ()
     pTrig4_Roc2_Mult_Hist = new TH1D("T.coin.pTRIG4_ROC2_tdcMultiplicity","T.coin.pTRIG4_ROC2_tdcMultiplicity",10, -0.5, 9.5);
     pTrig3_Roc1_Mult_Hist = new TH1D("T.coin.pTRIG3_ROC1_tdcMultiplicity","T.coin.pTRIG3_ROC1_tdcMultiplicity",10, -0.5, 9.5);
     pTrig3_Roc2_Mult_Hist = new TH1D("T.coin.pTRIG3_ROC2_tdcMultiplicity","T.coin.pTRIG3_ROC2_tdcMultiplicity",10, -0.5, 9.5);
-    pT2_Mult_Hist = new TH1D("T.coin.pT2_tdcMultiplicity","T.coin.pT2_tdcMultiplicity",10, -0.5, 9.5);
+    //pT2_Mult_Hist = new TH1D("T.coin.pT2_tdcMultiplicity","T.coin.pT2_tdcMultiplicity",10, -0.5, 9.5);
     
     hFADC_TREF_ROC1_Hist = new TH1D(Form("T.%s.hFADC_TREF_ROC1_adcPulseTimeRaw", DaqName.Data()), Form("T.%s.hFADC_TREF_ROC1_adcPulseTimeRaw", DaqName.Data()), 10000, 0, 10000);
     hTref1_Hist = new TH1D(Form("T.%s.hT1_tdcTimeRaw", DaqName.Data()), Form("T.%s.hT1_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
@@ -807,7 +807,7 @@ void fillHistos(TTree *DataTree)
         	pTrig4_Roc2_Hist->Fill(pTrig4_Roc2);
         	pTrig3_Roc1_Hist->Fill(pTrig3_Roc1);
         	pTrig3_Roc2_Hist->Fill(pTrig3_Roc2);
-        	pT2_Hist->Fill(pT2);
+        	//pT2_Hist->Fill(pT2);
         	
         	pTrig1_Roc1_Mult_Hist->Fill(pTrig1_Roc1_Mult);
         	pTrig4_Roc1_Mult_Hist->Fill(pTrig4_Roc1_Mult);
@@ -815,7 +815,7 @@ void fillHistos(TTree *DataTree)
         	pTrig4_Roc2_Mult_Hist->Fill(pTrig4_Roc2_Mult);
         	pTrig3_Roc1_Mult_Hist->Fill(pTrig3_Roc1_Mult);
         	pTrig3_Roc2_Mult_Hist->Fill(pTrig3_Roc2_Mult);
-        	pT2_Mult_Hist->Fill(pT2_Mult);
+        	//pT2_Mult_Hist->Fill(pT2_Mult);
         	
         	if(pTrig1_Roc1_Mult == 1) pTrig1_Roc1_Hist_cut->Fill(pTrig1_Roc1);
         	if(pTrig4_Roc1_Mult == 1) pTrig4_Roc1_Hist_cut->Fill(pTrig4_Roc1);
@@ -823,7 +823,7 @@ void fillHistos(TTree *DataTree)
         	if(pTrig4_Roc2_Mult == 1) pTrig4_Roc2_Hist_cut->Fill(pTrig4_Roc2);
         	if(pTrig3_Roc1_Mult == 1) pTrig3_Roc1_Hist_cut->Fill(pTrig3_Roc1);
         	if(pTrig3_Roc2_Mult == 1) pTrig3_Roc2_Hist_cut->Fill(pTrig3_Roc2);
-        	if(pT2_Mult == 1) pT2_Hist_cut->Fill(pT2);
+        	//if(pT2_Mult == 1) pT2_Hist_cut->Fill(pT2);
         	
         	hFADC_TREF_ROC1_Mult_Hist->Fill(hFADC_TREF_ROC1_Mult);
        		hTref1_Mult_Hist->Fill(hTref1_Mult);

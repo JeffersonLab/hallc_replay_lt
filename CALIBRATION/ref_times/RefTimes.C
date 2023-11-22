@@ -823,7 +823,7 @@ void fillHistos(TTree *DataTree)
         	if(pTrig4_Roc2_Mult == 1) pTrig4_Roc2_Hist_cut->Fill(pTrig4_Roc2);
         	if(pTrig3_Roc1_Mult == 1) pTrig3_Roc1_Hist_cut->Fill(pTrig3_Roc1);
         	if(pTrig3_Roc2_Mult == 1) pTrig3_Roc2_Hist_cut->Fill(pTrig3_Roc2);
-        	if(pT2_Mult == 1) pT2_Hist_cut->Fill(pTrig3_Roc2);
+        	if(pT2_Mult == 1) pT2_Hist_cut->Fill(pT2);
         	
         	hFADC_TREF_ROC1_Mult_Hist->Fill(hFADC_TREF_ROC1_Mult);
        		hTref1_Mult_Hist->Fill(hTref1_Mult);
@@ -1045,6 +1045,7 @@ void SaveToPDF(Int_t RunNumber)
     pTrig3_Roc2_Hist_cut->SetLineColor(2);
     pTrig3_Roc2_Hist_cut->Draw("same");
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig3_Roc2_Hist->GetName());
+    pT2_Hist->GetYaxis()->SetRangeUser(10,pT2_Hist_cut->GetEntries());
     pT2_Hist->Draw();
     pT2_Hist_cut->SetLineColor(2);
     pT2_Hist_cut->Draw("same");

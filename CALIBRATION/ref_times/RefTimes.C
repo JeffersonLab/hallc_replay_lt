@@ -1045,11 +1045,11 @@ void SaveToPDF(Int_t RunNumber)
     pTrig3_Roc2_Hist_cut->SetLineColor(2);
     pTrig3_Roc2_Hist_cut->Draw("same");
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig3_Roc2_Hist->GetName());
-    pT2_Hist->GetYaxis()->SetRangeUser(10,pT2_Hist_cut->GetEntries());
-    pT2_Hist->Draw();
-    pT2_Hist_cut->SetLineColor(2);
-    pT2_Hist_cut->Draw("same");
-    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pT2_Hist->GetName());
+    //pT2_Hist->GetYaxis()->SetRangeUser(10,pT2_Hist_cut->GetEntries());
+    //pT2_Hist->Draw();
+    //pT2_Hist_cut->SetLineColor(2);
+    //pT2_Hist_cut->Draw("same");
+    //canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pT2_Hist->GetName());
     
     pTrig1_Roc1_Mult_Hist->Draw();
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig1_Roc1_Mult_Hist->GetName());
@@ -1063,8 +1063,8 @@ void SaveToPDF(Int_t RunNumber)
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig3_Roc1_Mult_Hist->GetName());
     pTrig3_Roc2_Mult_Hist->Draw();
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig3_Roc2_Mult_Hist->GetName());
-    pT2_Mult_Hist->Draw();
-    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pT2_Mult_Hist->GetName());
+    //pT2_Mult_Hist->Draw();
+    //canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pT2_Mult_Hist->GetName());
     
     hFADC_TREF_ROC1_Hist->Draw();
     //cout << "\n\n\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\nBug fixing Info: \n p_adcrefcut/hFADC_TREF_ROC1_Hist->GetXaxis()->GetXmax() = " << p_adcrefcut/hFADC_TREF_ROC1_Hist->GetXaxis()->GetXmax();

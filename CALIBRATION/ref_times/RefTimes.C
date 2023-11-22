@@ -860,8 +860,8 @@ void fillHistos(TTree *DataTree)
         	pDCREF10_Mult_Hist->Fill(pDCREF10_Mult);   
      
         	if (pFADC_TREF_ROC2_Mult > 0)  pFADC_TREF_ROC2_Hist->Fill(pFADC_TREF_ROC2);  
-        	if (pTref1_Mult > 0)           pTref1_Hist->Fill(pTref1);
-        	if (pTref2_Mult > 0)           pTref2_Hist->Fill(pTref2);  
+        	if (pTref1_Mult == 1)           pTref1_Hist->Fill(pTref1);
+        	if (pTref2_Mult == 1)           pTref2_Hist->Fill(pTref2);  
         	if (pDCREF1_Mult == 1)          pDCREF1_Hist->Fill(pDCREF1); 
         	if (pDCREF2_Mult == 1)          pDCREF2_Hist->Fill(pDCREF2);
         	if (pDCREF3_Mult == 1)          pDCREF3_Hist->Fill(pDCREF3);  

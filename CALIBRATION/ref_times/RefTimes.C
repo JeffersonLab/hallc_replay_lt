@@ -228,6 +228,7 @@ TH1D    *pcalflyAdcMult_Hist[pcalFlyNumPmts];
 //cut Varibles.
 //these put lines on the plots, not put any cuts on data
 Double_t pdc_tdcrefcut, phodo_tdcrefcut, p_adcrefcut, hdc_tdcrefcut, hhodo_tdcrefcut, h_adcrefcut;
+Double_t pTrigCutLow[6], pTrigCutHigh[6]; // for pTrig cut values (used in tcoin.param)
 //                              1x, 1y, 2x, 2y 
 Double_t phodo_PosAdcTimeWindowMin[4*MaxHodBars]= {-20., -20., -20., 0,
                           -20., -20., -20., 0,
@@ -447,12 +448,36 @@ void setCutValues(/* Could put the standard.database file here. */)
     // These should be posistive even if they are set negative in the code.
     //shms refTime
     pdc_tdcrefcut    =14400.;
-    phodo_tdcrefcut  =4200.;
+    phodo_tdcrefcut  =4700.;
     p_adcrefcut  =5100.;
     //HMS reftime
     hdc_tdcrefcut   =14500.;
     hhodo_tdcrefcut =2600.;
     h_adcrefcut =3400.;
+    
+    pTrigCutLow[0] = 5100; // pTrig1_Roc1
+    pTrigCutLow[1] = 5600;
+    pTrigCutLow[2] = 5900;
+    pTrigCutLow[3] = 6300;
+    pTrigCutLow[4] = 4200;
+    pTrigCutLow[5] = 5200;
+    
+    pTrigCutHigh[0] = 6200;
+    pTrigCutHigh[1] = 6200;
+    pTrigCutHigh[2] = 7000;
+    pTrigCutHigh[3] = 7000;
+    pTrigCutHigh[4] = 5600;
+    pTrigCutHigh[5] = 6300;
+}
+
+// redraws axis border of current plot
+void redrawBorder()
+{
+   gPad->Update();
+   gPad->RedrawAxis();
+   TLine l;
+   l.DrawLine(gPad->GetUxmin(), gPad->GetUymax(), gPad->GetUxmax(), gPad->GetUymax());
+   l.DrawLine(gPad->GetUxmax(), gPad->GetUymin(), gPad->GetUxmax(), gPad->GetUymax());
 }
 
 // sets the addresses of all the variables that are to be used and/or plotted
@@ -1024,33 +1049,57 @@ void SaveToPDF(Int_t RunNumber)
     pTrig1_Roc1_Hist->Draw();
     pTrig1_Roc1_Hist_cut->SetLineColor(2);
     pTrig1_Roc1_Hist_cut->Draw("same");
+    LeftLine->DrawLine(  pTrigCutLow[0], 0,  pTrigCutLow[0], pTrig1_Roc1_Hist->GetBinContent(pTrig1_Roc1_Hist->GetMaximumBin()));
+    RightLine->DrawLine(pTrigCutHigh[0], 0, pTrigCutHigh[0], pTrig1_Roc1_Hist->GetBinContent(pTrig1_Roc1_Hist->GetMaximumBin()));
+    redrawBorder();
     canvas->Print(Form("output/REF_TimePlots_%d.pdf(",RunNumber),  pTrig1_Roc1_Hist->GetName());
     pTrig4_Roc1_Hist->Draw();
     pTrig4_Roc1_Hist_cut->SetLineColor(2);
     pTrig4_Roc1_Hist_cut->Draw("same");
+    LeftLine->DrawLine(  pTrigCutLow[1], 0,  pTrigCutLow[1], pTrig4_Roc1_Hist->GetBinContent(pTrig4_Roc1_Hist->GetMaximumBin()));
+    RightLine->DrawLine(pTrigCutHigh[1], 0, pTrigCutHigh[1], pTrig4_Roc1_Hist->GetBinContent(pTrig4_Roc1_Hist->GetMaximumBin()));
+    redrawBorder();
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig4_Roc1_Hist->GetName());
     pTrig1_Roc2_Hist->Draw();
     pTrig1_Roc2_Hist_cut->SetLineColor(2);
     pTrig1_Roc2_Hist_cut->Draw("same");
+    LeftLine->DrawLine(  pTrigCutLow[2], 0,  pTrigCutLow[2], pTrig1_Roc2_Hist->GetBinContent(pTrig1_Roc2_Hist->GetMaximumBin()));
+    RightLine->DrawLine(pTrigCutHigh[2], 0, pTrigCutHigh[2], pTrig1_Roc2_Hist->GetBinContent(pTrig1_Roc2_Hist->GetMaximumBin()));
+    redrawBorder();
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig1_Roc2_Hist->GetName());
     pTrig4_Roc2_Hist->Draw();
     pTrig4_Roc2_Hist_cut->SetLineColor(2);
     pTrig4_Roc2_Hist_cut->Draw("same");
+    LeftLine->DrawLine(  pTrigCutLow[3], 0,  pTrigCutLow[3], pTrig4_Roc2_Hist->GetBinContent(pTrig4_Roc2_Hist->GetMaximumBin()));
+    RightLine->DrawLine(pTrigCutHigh[3], 0, pTrigCutHigh[3], pTrig4_Roc2_Hist->GetBinContent(pTrig4_Roc2_Hist->GetMaximumBin()));
+    redrawBorder();
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig4_Roc2_Hist->GetName());
     pTrig3_Roc1_Hist->Draw();
     pTrig3_Roc1_Hist_cut->SetLineColor(2);
     pTrig3_Roc1_Hist_cut->Draw("same");
+    LeftLine->DrawLine(  pTrigCutLow[4], 0,  pTrigCutLow[4], pTrig3_Roc1_Hist->GetBinContent(pTrig3_Roc1_Hist->GetMaximumBin()));
+    RightLine->DrawLine(pTrigCutHigh[4], 0, pTrigCutHigh[4], pTrig3_Roc1_Hist->GetBinContent(pTrig3_Roc1_Hist->GetMaximumBin()));
+    redrawBorder();
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig3_Roc1_Hist->GetName());
     pTrig3_Roc2_Hist->Draw();
     pTrig3_Roc2_Hist_cut->SetLineColor(2);
     pTrig3_Roc2_Hist_cut->Draw("same");
+    LeftLine->DrawLine( pTrigCutLow[5], 0,   pTrigCutLow[5], pTrig3_Roc2_Hist->GetBinContent(pTrig3_Roc2_Hist->GetMaximumBin()));
+    RightLine->DrawLine(pTrigCutHigh[5], 0, pTrigCutHigh[5], pTrig3_Roc2_Hist->GetBinContent(pTrig3_Roc2_Hist->GetMaximumBin()));
+    redrawBorder();
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig3_Roc2_Hist->GetName());
+    
+    pTref2_Hist->Draw();
+    LeftLine->DrawLine(phodo_tdcrefcut, 0, phodo_tdcrefcut, pTref2_Hist->GetBinContent(pTref2_Hist->GetMaximumBin()));
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTref2_Hist->GetName());
+    
     //pT2_Hist->GetYaxis()->SetRangeUser(10,pT2_Hist_cut->GetEntries());
     //pT2_Hist->Draw();
     //pT2_Hist_cut->SetLineColor(2);
     //pT2_Hist_cut->Draw("same");
     //canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pT2_Hist->GetName());
     
+    /*
     pTrig1_Roc1_Mult_Hist->Draw();
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig1_Roc1_Mult_Hist->GetName());
     pTrig4_Roc1_Mult_Hist->Draw();
@@ -1063,6 +1112,7 @@ void SaveToPDF(Int_t RunNumber)
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig3_Roc1_Mult_Hist->GetName());
     pTrig3_Roc2_Mult_Hist->Draw();
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig3_Roc2_Mult_Hist->GetName());
+    /*
     //pT2_Mult_Hist->Draw();
     //canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pT2_Mult_Hist->GetName());
     
@@ -1118,9 +1168,7 @@ void SaveToPDF(Int_t RunNumber)
     pTref1_Hist->Draw();
     LeftLine->DrawLine(phodo_tdcrefcut, 0, phodo_tdcrefcut, pTref1_Hist->GetBinContent(pTref1_Hist->GetMaximumBin()));
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTref1_Hist->GetName()); 
-    pTref2_Hist->Draw();
-    LeftLine->DrawLine(phodo_tdcrefcut, 0, phodo_tdcrefcut, pTref2_Hist->GetBinContent(pTref2_Hist->GetMaximumBin()));
-    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTref2_Hist->GetName()); 
+     
     pDCREF1_Hist->Draw();
     LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, pDCREF1_Hist->GetBinContent(pDCREF1_Hist->GetMaximumBin()));
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF1_Hist->GetName());

@@ -455,19 +455,19 @@ void setCutValues(/* Could put the standard.database file here. */)
     hhodo_tdcrefcut =2600.;
     h_adcrefcut =3400.;
     
-    pTrigCutLow[0] = 5100; // pTrig1_Roc1
-    pTrigCutLow[1] = 5600;
-    pTrigCutLow[2] = 5900;
-    pTrigCutLow[3] = 6300;
-    pTrigCutLow[4] = 4200;
-    pTrigCutLow[5] = 5200;
+    pTrigCutLow[0] = 5200; // pTrig1_Roc1
+    pTrigCutLow[1] = 5600; // pTrig4_Roc1
+    pTrigCutLow[2] = 6000; // pTrig1_Roc2
+    pTrigCutLow[3] = 6300; // pTrig4_Roc2
+    pTrigCutLow[4] = 5100; // pTrig3_Roc1
+    pTrigCutLow[5] = 5900; // pTrig3_Roc2
     
-    pTrigCutHigh[0] = 6200;
+    pTrigCutHigh[0] = 6300;
     pTrigCutHigh[1] = 6200;
-    pTrigCutHigh[2] = 7000;
+    pTrigCutHigh[2] = 7100;
     pTrigCutHigh[3] = 7000;
-    pTrigCutHigh[4] = 5600;
-    pTrigCutHigh[5] = 6300;
+    pTrigCutHigh[4] = 5700;
+    pTrigCutHigh[5] = 6500;
 }
 
 // redraws axis border of current plot
@@ -475,9 +475,9 @@ void redrawBorder()
 {
    gPad->Update();
    gPad->RedrawAxis();
-   TLine l;
-   l.DrawLine(gPad->GetUxmin(), gPad->GetUymax(), gPad->GetUxmax(), gPad->GetUymax());
-   l.DrawLine(gPad->GetUxmax(), gPad->GetUymin(), gPad->GetUxmax(), gPad->GetUymax());
+   //TLine l;
+   //   l.DrawLine(gPad->GetUxmin(), gPad->GetUymax(), gPad->GetUxmax(), gPad->GetUymax());
+   //l.DrawLine(gPad->GetUxmax(), gPad->GetUymin(), gPad->GetUxmax(), gPad->GetUymax());
 }
 
 // sets the addresses of all the variables that are to be used and/or plotted
@@ -635,7 +635,7 @@ void makeHistos ()
     pTrig4_Roc2_Hist = new TH1D("T.coin.pTRIG4_ROC2_tdcTimeRaw","T.coin.pTRIG4_ROC2_tdcTimeRaw",5000, 0, 10000);
     pTrig3_Roc1_Hist = new TH1D("T.coin.pTRIG3_ROC1_tdcTimeRaw","T.coin.pTRIG3_ROC1_tdcTimeRaw",5000, 0, 10000);
     pTrig3_Roc2_Hist = new TH1D("T.coin.pTRIG3_ROC2_tdcTimeRaw","T.coin.pTRIG3_ROC2_tdcTimeRaw",5000, 0, 10000);
-    //pT2_Hist = new TH1D("T.coin.pT2_tdcTimeRaw","T.coin.pT2_tdcTimeRaw",5000, 0, 10000);
+    pT2_Hist = new TH1D("T.coin.pT2_tdcTimeRaw","T.coin.pT2_tdcTimeRaw",5000, 0, 10000);
     
     pTrig1_Roc1_Hist_cut = new TH1D("T.coin.pTRIG1_ROC1_tdcTimeRaw_cut","T.coin.pTRIG1_ROC1_tdcTimeRaw_cut",5000, 0, 10000);
     pTrig4_Roc1_Hist_cut = new TH1D("T.coin.pTRIG4_ROC1_tdcTimeRaw_cut","T.coin.pTRIG4_ROC1_tdcTimeRaw_cut",5000, 0, 10000);
@@ -673,7 +673,7 @@ void makeHistos ()
 
     pFADC_TREF_ROC2_Hist = new TH1D(Form("T.%s.pFADC_TREF_ROC2_adcPulseTimeRaw", DaqName.Data()), Form("T.%s.pFADC_TREF_ROC2_adcPulseTimeRaw", DaqName.Data()), 10000, 0, 10000);
     pTref1_Hist = new TH1D(Form("T.%s.pT1_tdcTimeRaw", DaqName.Data()), Form("T.%s.pT1_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
-    pTref2_Hist = new TH1D(Form("T.%s.pT2_tdcTimeRaw", DaqName.Data()), Form("T.%s.pT2_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
+    pTref2_Hist = new TH1D(Form("T.%s.pT2_tdcTimeRaw", DaqName.Data()), Form("T.%s.pT2_tdcTimeRaw", DaqName.Data()), 5000, 0, 10000);
     pDCREF1_Hist = new TH1D(Form("T.%s.pDCREF1_tdcTimeRaw", DaqName.Data()), Form("T.%s.pDCREF1_tdcTimeRaw", DaqName.Data()), 23000, 0, 23000);
     pDCREF2_Hist = new TH1D(Form("T.%s.pDCREF2_tdcTimeRaw", DaqName.Data()), Form("T.%s.pDCREF2_tdcTimeRaw", DaqName.Data()), 23000, 0, 23000);
     pDCREF3_Hist = new TH1D(Form("T.%s.pDCREF3_tdcTimeRaw", DaqName.Data()), Form("T.%s.pDCREF3_tdcTimeRaw", DaqName.Data()), 23000, 0, 23000);
@@ -832,7 +832,7 @@ void fillHistos(TTree *DataTree)
         	pTrig4_Roc2_Hist->Fill(pTrig4_Roc2);
         	pTrig3_Roc1_Hist->Fill(pTrig3_Roc1);
         	pTrig3_Roc2_Hist->Fill(pTrig3_Roc2);
-        	//pT2_Hist->Fill(pT2);
+        	pT2_Hist->Fill(pTref2);
         	
         	pTrig1_Roc1_Mult_Hist->Fill(pTrig1_Roc1_Mult);
         	pTrig4_Roc1_Mult_Hist->Fill(pTrig4_Roc1_Mult);
@@ -1089,7 +1089,9 @@ void SaveToPDF(Int_t RunNumber)
     redrawBorder();
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig3_Roc2_Hist->GetName());
     
-    pTref2_Hist->Draw();
+    pT2_Hist->Draw();
+    pTref2_Hist->SetLineColor(2);
+    pTref2_Hist->Draw("same");
     LeftLine->DrawLine(phodo_tdcrefcut, 0, phodo_tdcrefcut, pTref2_Hist->GetBinContent(pTref2_Hist->GetMaximumBin()));
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTref2_Hist->GetName());
     

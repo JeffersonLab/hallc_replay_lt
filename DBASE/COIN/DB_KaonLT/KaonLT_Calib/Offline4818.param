@@ -17,7 +17,7 @@ cminch=2.54
 ; Note: hmsflags.param includes spectrometer offsets and options.
 #include "PARAM/HMS/GEN/KaonLT_PARAM/hcana_HMS_6p59.param"
 #include "PARAM/HMS/GEN/KaonLT_PARAM/hdebug.param"
-#include "PARAM/HMS/GEN/KaonLT_PARAM/hmsflags.param"
+#include "PARAM/HMS/GEN/KaonLT_PARAM/hmsflags_10p6_GeV.param"
 #include "PARAM/HMS/GEN/KaonLT_PARAM/htracking.param"
 #include "PARAM/HMS/GEN/KaonLT_PARAM/h_reftime_cut_Autumn18_Offline.param"
 

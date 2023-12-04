@@ -170,6 +170,26 @@ KLT_HMS_Cer_COIN_Elec_Eff	    :	{HMSHGCCOINDide.npassed / (HMSHGCCOINShoulde.npa
 
 KLT_HMS_Cer_SING_Elec_Eff	    :	{HMSHGCSINGDide.npassed / (HMSHGCSINGShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((HMSHGCSINGShoulde.npassed)*(HMSHGCSINGDide.npassed))-((HMSHGCSINGDide.npassed)*(HMSHGCSINGDide.npassed))) / ((HMSHGCSINGShoulde.npassed)*(HMSHGCSINGShoulde.npassed)*(HMSHGCSINGShoulde.npassed)))):%8.4f}
 
+**************************
+* SHMS Beta Efficiencies *
+**************************
+
+KLT_SHMS_Good_Beta_Did		:	{SHMSGOODBETADID.npassed}
+KLT_SHMS_Good_Beta_Should	:	{SHMSBETASHOULD.npassed}
+KLT_SHMS_Bad_Beta_Did		:	{SHMSBADBETADID.npassed}
+KLT_SHMS_Bad_Beta_Should	:	{SHMSBETASHOULD.npassed}
+KLT_Coin_Good_Beta_Did		:	{COINGOODBETADID.npassed}	
+KLT_Coin_Good_Beta_Should	:	{COINBETASHOULD.npassed}
+KLT_Coin_Bad_Beta_Did		:	{COINBADBETADID.npassed}
+KLT_Coin_Bad_Beta_Should	:	{COINBETASHOULD.npassed}
+
+KLT_SHMS_Good_Beta_EFF		:	{SHMSGOODBETADID.npassed / (SHMSBETASHOULD.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSBETASHOULD.npassed)*(SHMSGOODBETADID.npassed)) - ((SHMSGOODBETADID.npassed)*(SHMSGOODBETADID.npassed))) / ((SHMSBETASHOULD.npassed)*(SHMSBETASHOULD.npassed)*(SHMSBETASHOULD.npassed)))):%8.4f}
+
+KLT_SHMS_Bad_Beta_EFF		:	{SHMSBADBETADID.npassed / (SHMSBETASHOULD.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSBETASHOULD.npassed)*(SHMSBADBETADID.npassed)) - ((SHMSBADBETADID.npassed)*(SHMSBADBETADID.npassed))) / ((SHMSBETASHOULD.npassed)*(SHMSBETASHOULD.npassed)*(SHMSBETASHOULD.npassed)))):%8.4f}
+
+KLT_Coin_Good_Beta_EFF		:	{COINGOODBETADID.npassed / (COINBETASHOULD.npassed+0.0001):%8.4f} +- {(sqrt((((COINBETASHOULD.npassed)*(COINGOODBETADID.npassed)) - ((COINGOODBETADID.npassed)*(COINGOODBETADID.npassed))) / ((COINBETASHOULD.npassed)*(COINBETASHOULD.npassed)*(COINBETASHOULD.npassed)))):%8.4f}
+
+KLT_Coin_Bad_Beta_EFF		:	{COINBADBETADID.npassed / (COINBETASHOULD.npassed+0.0001):%8.4f} +- {(sqrt((((COINBETASHOULD.npassed)*(COINBADBETADID.npassed)) - ((COINBADBETADID.npassed)*(COINBADBETADID.npassed))) / ((COINBETASHOULD.npassed)*(COINBETASHOULD.npassed)*(COINBETASHOULD.npassed)))):%8.4f}
 
 **************************
 * Hodoscope Efficiencies *

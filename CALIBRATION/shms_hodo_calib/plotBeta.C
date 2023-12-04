@@ -48,7 +48,8 @@ Double_t delta, xfp, yfp;
 
 //cuts
 const Double_t calEtotLow = 0.1; //normaized energy
-const Double_t hgcerNpeSumLow = 1.5; //unit NPE
+//const Double_t hgcerNpeSumLow = 1.5; //unit NPE
+const Double_t hgcerNpeSumLow = 0; //unit NPE
 const Double_t aeroNpeSumLow = 1.5; //unit NPE
 
 Bool_t calCut, hgcerCut, aeroCut;
@@ -72,12 +73,12 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th1_aero = new TH1F("aeroNpeSum_Pt1", "aeroNpeSum_Pt1", 120, 0.0, 30.0);
 	th1_aeroCut = new TH1F("aeroNpeSumCut_Pt1", "aeroNpeSumCut_Pt1", 120, 0.0, 30.0);
 	
-	th2_delta1 = new TH2F("deltaVBeta_Before", "deltaVBeta_Before", 400, -40.0, 40.0, 100, 0.0, 1.6);
-	th2_xfp1 = new TH2F("xfpVbeta_Before", "xfpVbeta_Before", 400, -40.0, 40.0, 100, 0.0, 1.6);
-	th2_yfp1 = new TH2F("yfpVbeta_Before", "yfpVbeta_Before", 400, -40.0, 40.0, 100, 0.0, 1.6);
-	th2_delta2 = new TH2F("deltaVBeta_After", "deltaVBeta_After", 400, -40.0, 40.0, 100, 0.0, 1.6);
-	th2_xfp2 = new TH2F("xfpVbeta_After", "xfpVbeta_After", 400, -40.0, 40.0, 100, 0.0, 1.6);
-	th2_yfp2 = new TH2F("yfpVbeta_After", "yfpVbeta_After", 400, -40.0, 40.0, 100, 0.0, 1.6);
+	th2_delta1 = new TH2F("deltaVBeta_Before", "deltaVBeta_Before", 400, -40.0, 40.0, 100, 0.0, 2.0);
+	th2_xfp1 = new TH2F("xfpVbeta_Before", "xfpVbeta_Before", 400, -40.0, 40.0, 100, 0.0, 2.0);
+	th2_yfp1 = new TH2F("yfpVbeta_Before", "yfpVbeta_Before", 400, -40.0, 40.0, 100, 0.0, 2.0);
+	th2_delta2 = new TH2F("deltaVBeta_After", "deltaVBeta_After", 400, -40.0, 40.0, 100, 0.0, 2.0);
+	th2_xfp2 = new TH2F("xfpVbeta_After", "xfpVbeta_After", 400, -40.0, 40.0, 100, 0.0, 2.0);
+	th2_yfp2 = new TH2F("yfpVbeta_After", "yfpVbeta_After", 400, -40.0, 40.0, 100, 0.0, 2.0);
 
 	input1 = new TFile(rootFile1, "READ");
 	input2 = new TFile(rootFile2, "READ");

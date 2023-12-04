@@ -345,3 +345,227 @@ g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
 16770 - 17000
 g_ctp_parm_filename       = "DBASE/COIN/Offline_PionLT2022/OfflinePionLT_16770-17000.param"
 g_ctp_kinematics_filename = "DBASE/COIN/DB_PionLT/standard_PionLT.kinematics"
+
+11802 - 11802 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_11802.param"
+
+
+14211 - 14211 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_14211.param"
+
+
+15456 - 15456 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_15456.param"
+
+
+16076 - 16076 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_16076.param"
+
+
+13064 - 13064 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_13064.param"
+
+
+15008 - 15008 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_15008.param"
+
+
+11799 - 11799 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_11799.param"
+
+
+14014 - 14014 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_14014.param"
+
+
+11801 - 11801 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_11801.param"
+
+
+14458 - 14458 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_14458.param"
+
+
+14965 - 14965 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_14965.param"
+
+
+15807 - 15807 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_15807.param"
+
+
+13497 - 13497 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_13497.param"
+
+
+15670 - 15670 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_15670.param"
+
+
+15370 - 15370 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_15370.param"
+
+
+15494 - 15494 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_15494.param"
+
+
+16806 - 16806 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_16806.param"
+
+
+16316 - 16316 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_16316.param"
+
+
+16539 - 16539 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_16539.param"
+
+
+15997 - 15997 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_15997.param"
+
+
+15042 - 15042 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_15042.param"
+
+
+15213 - 15213 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_15213.param"
+
+
+16224 - 16224 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_16224.param"
+
+
+12217 - 12217 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_12217.param"
+
+
+12032 - 12032 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_12032.param"
+
+
+12523 - 12523 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_12523.param"
+
+
+11884 - 11884 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_11884.param"
+
+
+11883 - 11883 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_11883.param"
+
+
+13173 - 13173 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_13173.param"
+
+
+13869 - 13869 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_13869.param"
+
+
+13979 - 13979 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_13979.param"
+
+
+11881 - 11881 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_11881.param"
+
+
+13133 - 13133 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_13133.param"
+
+
+13090 - 13090 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_13090.param"
+
+
+12433 - 12433 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_12433.param"
+
+
+12119 - 12119 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_12119.param"
+
+
+14090 - 14090 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_14090.param"
+
+
+12652 - 12652 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_12652.param"
+
+
+14000 - 14000 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_14000.param"
+
+
+13298 - 13298 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_13298.param"
+
+
+14357 - 14357 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_14357.param"
+
+
+14523 - 14523 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_14523.param"
+
+
+13750 - 13750 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_13750.param"
+
+
+13260 - 13260 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_13260.param"
+
+
+14747 - 14747 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_14747.param"
+
+
+12543 - 12543 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_12543.param"
+
+
+12282 - 12282 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_12282.param"
+
+
+13507 - 13507 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_13507.param"
+
+
+14244 - 14244 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_14244.param"
+
+
+13214 - 13214 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_13214.param"
+
+
+12904 - 12904 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_12904.param"
+
+
+13659 - 13659 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_13659.param"
+
+
+14651 - 14651 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_14651.param"
+
+
+11990 - 11990 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_11990.param"
+
+
+13370 - 13370 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_13370.param"
+
+
+11803 - 11803 
+g_ctp_parm_filename       = "DBASE/COIN/HodoCalib/OfflineCalib_11803.param"
+

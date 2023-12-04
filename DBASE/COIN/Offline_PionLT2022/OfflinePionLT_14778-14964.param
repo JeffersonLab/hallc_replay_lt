@@ -78,5 +78,5 @@ cminch=2.54
 #include "PARAM/SHMS/CAL/pcal_calib.param"
 
 ; tcoin.param file
-#include "PARAM/TRIG/Offline_PionLT/tcoin_PionLT.param"
+#include "PARAM/TRIG/tcoin.param"
 

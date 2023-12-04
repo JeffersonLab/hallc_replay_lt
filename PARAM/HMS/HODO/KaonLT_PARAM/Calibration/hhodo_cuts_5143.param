@@ -33,7 +33,7 @@ htofusinginvadc=0
    hscin_tdc_to_time = 0.09766   ;0.1 was before Dave Mack found the correct conversion in C1190 Manual (May 14, 2018); (See HC Log Entry 3574348)
 
 ; tof and you figured out good values
-   htof_tolerance = 100.0
+   htof_tolerance = 2.0
 ;                                                                               
 ; hms_tof_params                                                                
 ; hnum_scin_counters, hhodo_zpos, hhodo_center_coord, hhodo_width               

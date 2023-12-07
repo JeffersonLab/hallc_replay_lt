@@ -65,7 +65,7 @@ hcer_debug_adc = 1
 
 ;; HMS Centeral Momentum (P) Offset (10.6 GeV Kaon-LT Data)
 
-hpcentral_offset = -0.280
+hpcentral_offset = -0.100
 
 :: HMS Central Angle (Theta) Offset (10.6 GeV Kaon-LT Data)
 

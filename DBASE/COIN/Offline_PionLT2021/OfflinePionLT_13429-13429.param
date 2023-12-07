@@ -76,3 +76,8 @@ cminch=2.54
 #include "PARAM/SHMS/HGCER/Offline_PionLT/phgcer_calib_12846-13684.param"
 #include "PARAM/SHMS/AERO/Offline_PionLT/paero_calib_12493-14997.param"
 #include "PARAM/SHMS/CAL/PionLT_PARAM/pcal_calib_13161.param"
+
+
+; Coin trigger parameters
+#include "PARAM/TRIG/Offline_PionLT/tcoin_PionLT_3-4.param"
+ 

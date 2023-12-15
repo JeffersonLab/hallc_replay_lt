@@ -455,16 +455,16 @@ void setCutValues(/* Could put the standard.database file here. */)
     hhodo_tdcrefcut =2600.;
     h_adcrefcut =3400.;
     
-    pTrigCutLow[0] = 5200; // pTrig1_Roc1
+    pTrigCutLow[0] = 5100; // pTrig1_Roc1
     pTrigCutLow[1] = 5600; // pTrig4_Roc1
-    pTrigCutLow[2] = 6000; // pTrig1_Roc2
+    pTrigCutLow[2] = 5900; // pTrig1_Roc2
     pTrigCutLow[3] = 6300; // pTrig4_Roc2
     pTrigCutLow[4] = 5100; // pTrig3_Roc1
     pTrigCutLow[5] = 5900; // pTrig3_Roc2
     
-    pTrigCutHigh[0] = 6300;
+    pTrigCutHigh[0] = 6200;
     pTrigCutHigh[1] = 6200;
-    pTrigCutHigh[2] = 7100;
+    pTrigCutHigh[2] = 7000;
     pTrigCutHigh[3] = 7000;
     pTrigCutHigh[4] = 5700;
     pTrigCutHigh[5] = 6500;

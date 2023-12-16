@@ -61,16 +61,16 @@ hcer_debug_adc = 1
 
 
 ;; The following offsets are finalized based on G. Huber and R. Trotta Study (Fall 2023)
-:: Added by A. Usman on 28/11/2023
+;; Added by A. Usman on 28/11/2023
 
 ;; HMS Centeral Momentum (P) Offset (3.8 GeV Kaon-LT Data)
 
 hpcentral_offset = -0.100
 
-:: HMS Central Angle (Theta) Offset (3.8 GeV Kaon-LT Data)
+;; HMS Central Angle (Theta) Offset (3.8 GeV Kaon-LT Data)
 
 hthetacentral_offset = 0.0010
 
-:: HMS Out-of-Plane (OOP) Offset (3.8 GeV Kaon-LT Data)
+;; HMS Out-of-Plane (OOP) Offset (3.8 GeV Kaon-LT Data)
 
 h_oopcentral_offset = 0.00251

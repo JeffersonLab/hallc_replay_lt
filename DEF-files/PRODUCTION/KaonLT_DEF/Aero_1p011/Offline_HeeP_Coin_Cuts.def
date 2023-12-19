@@ -165,6 +165,22 @@ HMSHGCDidelec            HMSHGCShouldelec && H.cer.npeSum > 1.5
 HMSHGCCOINDide		 HMSHGCCOINShoulde && H.cer.npeSum > 1.5
 HMSHGCSINGDide		 HMSHGCSINGShoulde && H.cer.npeSum > 1.5
 
+##################
+###   HMS CAL  ###
+##################
+
+HMSCerelec         H.cer.npeSum > 1.5
+
+#HMSCALPos               H.cal.xtrack > -50 && H.cal.xtrack < 40
+
+HMSCALShouldelec         HMSGEN && HMSCerelec
+HMSCALCOINShoulde        HMSCALShouldelec && ALL_COIN_events
+HMSCALSINGShoulde        HMSCALShouldelec && HMS_event
+
+HMSCALDidelec            HMSCALShouldelec && H.cal.etottracknorm > 0.7
+HMSCALCOINDide           HMSCALCOINShoulde && H.cal.etottracknorm > 0.7
+HMSCALSINGDide           HMSCALSINGShoulde && H.cal.etottracknorm > 0.7
+
 #################
 ### SHMS BETA ###
 #################

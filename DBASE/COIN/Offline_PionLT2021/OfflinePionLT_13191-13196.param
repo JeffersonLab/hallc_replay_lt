@@ -74,3 +74,8 @@ cminch=2.54
 #include "PARAM/SHMS/HODO/Offline_PionLT/phodo_TWcalib_2021.param"
 #include "PARAM/SHMS/AERO/Offline_PionLT/paero_calib_12493-14997.param"
 #include "PARAM/SHMS/CAL/PionLT_PARAM/pcal_calib_13161.param"
+
+
+; Coin trigger parameters
+#include "PARAM/TRIG/Offline_PionLT/tcoin_PionLT_elReal.param"
+ 

@@ -66,7 +66,7 @@ shmsCalTrkShouldp     P.cal.etotnorm < 0.7 &&  P.cal.etotnorm > 0.05
 shmsHGCTrkShouldp     P.hgcer.npeSum < 1.0
 shmsAeroTrknpep       P.aero.npeSum < 1.0
 
-## SHMS Aero Geom for n = 1.011 tray
+## SHMS Aero Geom for n = 1.030 tray
 
 shmsAeroxposalln      P.aero.xAtAero > -55 && P.aero.xAtAero < 55
 shmsAeroyposalln      P.aero.yAtAero > -50 && P.aero.yAtAero < 50
@@ -110,12 +110,12 @@ HMSScinDide           HMSScinShoulde && H.dc.ntrack > 0
 HMSScinCoinDide	      HMSScinCoinShoulde && H.dc.ntrack > 0
 HMSScinSingDide	      HMSScinSingShoulde && H.dc.ntrack > 0
 
-HMS_GOOD_TRACK	           H.dc.ntrack > 0
-SHMS_GOOD_Track	           P.dc.ntrack > 0
-GOOD_COIN_TRACK	           HMS_GOOD_TRACK && SHMS_GOOD_Track
-ALL_GOOD_Track_Events      HMS_GOOD_TRACK || SHMS_GOOD_Track
+#HMS_GOOD_TRACK	            H.dc.ntrack > 0
+#SHMS_GOOD_Track            P.dc.ntrack > 0
+#GOOD_COIN_TRACK            HMS_GOOD_TRACK && SHMS_GOOD_Track
+#ALL_GOOD_Track_Events      HMS_GOOD_TRACK || SHMS_GOOD_Track
 
-Tracking_master ALL_GOOD_Track_Events
+Tracking_master ALL_events_NO_EDTM
 
 ##########################################################################################################################
 
@@ -125,13 +125,18 @@ Block: Physics
 
 pcut_acceptance	         P.gtr.th > -0.06 && P.gtr.th < 0.06 && P.gtr.ph > -0.04 && P.gtr.ph < 0.04 && P.gtr.dp > -10 && P.gtr.dp < 20
 
+HMS_GOOD_TRACK             H.dc.ntrack > 0
+SHMS_GOOD_Track            P.dc.ntrack > 0
+GOOD_COIN_TRACK            HMS_GOOD_TRACK && SHMS_GOOD_Track
+ALL_GOOD_Track_Events      HMS_GOOD_TRACK || SHMS_GOOD_Track
+
 ##################
 ###  SHMS HGC  ###
 ##################
 
 SHMScoindcindipole	 P.dc.InsideDipoleExit == 1
 
-SHMSGEN		         shmshodstarttime && SHMScoindcindipole && pcut_acceptance
+SHMSGEN		         shmshodstarttime && SHMScoindcindipole && pcut_acceptance && ALL_GOOD_Track_Events
 SHMSCalp	         P.cal.etottracknorm < 0.7              
 
 SHMSAEROp                P.aero.npeSum  < 1.0
@@ -145,7 +150,7 @@ SHMSHGCDidp		 SHMSHGCShouldp && P.hgcer.npeSum < 1.0
 
 SHMSHGCp                 P.hgcer.npeSum  < 1.0
 
-SHMSAeroShouldp          SHMSGEN && SHMSCalp && SHMSHGCp && shmsAerogeomalln 
+SHMSAeroShouldp          SHMSGEN && SHMSCalp && SHMSHGCp && shmsAerogeomalln
 SHMSAeroDidp             SHMSAeroShouldp && P.aero.npeSum < 1.0
 
 ##################
@@ -158,7 +163,7 @@ hcut_acceptance          H.gtr.th > -0.08 && H.gtr.th < 0.08 && H.gtr.ph > -0.04
 
 HMScoindcindipole        H.dc.InsideDipoleExit == 1
 
-HMSGEN		         HMShodstarttime && HMScoindcindipole && hcut_acceptance
+HMSGEN		         HMShodstarttime && HMScoindcindipole && hcut_acceptance && ALL_GOOD_Track_Events
 HMSCalelec               H.cal.etottracknorm > 0.7 &&  H.cal.etottracknorm < 1.6
 HMSCERelec	         H.cer.npeSum > 1.5
 
@@ -195,4 +200,4 @@ HMSCalCer                H.cal.etottracknorm > 0.5 && H.cer.npeSum > 0.5
 
 GOOD_COIN_Events	 HMS_DELTA && SHMS_DELTA && GOOD_COIN_TRACK && shmsAerogeomalln
 
-Physics_master GOOD_COIN_Events
+Physics_master ALL_events_NO_EDTM

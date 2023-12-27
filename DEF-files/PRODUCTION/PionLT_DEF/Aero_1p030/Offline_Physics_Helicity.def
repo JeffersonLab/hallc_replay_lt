@@ -88,12 +88,12 @@ shmsAeroTrknpep                 P.aero.npeSum < 1.0
 shmsHGCTrkShouldpi              P.hgcer.npeSum > 1.5
 shmsHGCTrkShouldpiHelPos        P.hgcer.npeSum > 1.5 && HelPos
 shmsHGCTrkShouldpiHelNeg        P.hgcer.npeSum > 1.5 && HelNeg
-shmsAeroTrknpepi                P.aero.npeSum > 1.0
+shmsAeroTrknpepi                P.aero.npeSum > 1.5
 
-## SHMS Aero Geom for n = 1.011 tray
+## SHMS Aero Geom for n = 1.030 tray
 
-shmsAeroxposalln                P.aero.xAtAero > -45 && P.aero.xAtAero < 45
-shmsAeroyposalln	        P.aero.yAtAero > -30 && P.aero.yAtAero < 30
+shmsAeroxposalln                P.aero.xAtAero > -55 && P.aero.xAtAero < 55
+shmsAeroyposalln	        P.aero.yAtAero > -50 && P.aero.yAtAero < 50
 
 shmsAerogeomalln	        shmsAeroxposalln && shmsAeroyposalln
 
@@ -190,12 +190,12 @@ HMSScinSingDide	                HMSScinSingShoulde && H.dc.ntrack > 0
 HMSScinSingDideHelPos	        HMSScinSingShouldeHelPos && H.dc.ntrack > 0
 HMSScinSingDideHelNeg	        HMSScinSingShouldeHelNeg && H.dc.ntrack > 0
 
-HMS_GOOD_TRACK	      	        H.dc.ntrack > 0 
-SHMS_GOOD_Track		        P.dc.ntrack > 0 
-GOOD_COIN_TRACK		        HMS_GOOD_TRACK && SHMS_GOOD_Track
-ALL_GOOD_Track_Events 	        HMS_GOOD_TRACK || SHMS_GOOD_Track
+#HMS_GOOD_TRACK	      	        H.dc.ntrack > 0 
+#SHMS_GOOD_Track	        P.dc.ntrack > 0 
+#GOOD_COIN_TRACK	        HMS_GOOD_TRACK && SHMS_GOOD_Track
+#ALL_GOOD_Track_Events 	        HMS_GOOD_TRACK || SHMS_GOOD_Track
 
-Tracking_master ALL_GOOD_Track_Events
+Tracking_master ALL_events_NO_EDTM
 
 #################################################################################################################################################
 
@@ -205,16 +205,22 @@ Block: Physics
 
 pcut_acceptance		      P.gtr.th > -0.06 && P.gtr.th < 0.06 && P.gtr.ph > -0.04 && P.gtr.ph < 0.04 && P.gtr.dp > -10 && P.gtr.dp < 20
 
+HMS_GOOD_TRACK                  H.dc.ntrack > 0
+SHMS_GOOD_Track                 P.dc.ntrack > 0
+GOOD_COIN_TRACK                 HMS_GOOD_TRACK && SHMS_GOOD_Track
+ALL_GOOD_Track_Events           HMS_GOOD_TRACK || SHMS_GOOD_Track
+
+
 ##################
 ###  SHMS HGC  ###
 ##################
 
 SHMScoindcindipole	      P.dc.InsideDipoleExit == 1
 
-SHMSGEN		              shmshodstarttime && SHMScoindcindipole && pcut_acceptance
+SHMSGEN		              shmshodstarttime && SHMScoindcindipole && pcut_acceptance && ALL_GOOD_Track_Events
 SHMSCalp	              P.cal.etottracknorm < 0.7              
 
-SHMSAEROpi                    P.aero.npeSum  > 1.0
+SHMSAEROpi                    P.aero.npeSum  > 1.5
 
 SHMSHGCShouldpi		      SHMSGEN && SHMSCalp && SHMSAEROpi && shmsAerogeomalln
 SHMSHGCShouldpiHelPos	      SHMSGEN && SHMSCalp && SHMSAEROpi && shmsAerogeomalln && HelPos
@@ -232,15 +238,15 @@ SHMSHGCpi                     P.hgcer.npeSum  > 1.5
 SHMSAeroShouldpi              SHMSGEN && SHMSCalp && SHMSHGCpi && shmsAerogeomalln
 SHMSAeroShouldpiHelPos        SHMSGEN && SHMSCalp && SHMSHGCpi && shmsAerogeomalln && HelPos
 SHMSAeroShouldpiHelNeg        SHMSGEN && SHMSCalp && SHMSHGCpi && shmsAerogeomalln && HelNeg
-SHMSAeroDidpi                 SHMSAeroShouldpi && P.aero.npeSum > 1.0
-SHMSAeroDidpiHelPos           SHMSAeroShouldpiHelPos && P.aero.npeSum > 1.0
-SHMSAeroDidpiHelNeg           SHMSAeroShouldpiHelNeg && P.aero.npeSum > 1.0
+SHMSAeroDidpi                 SHMSAeroShouldpi && P.aero.npeSum > 1.5
+SHMSAeroDidpiHelPos           SHMSAeroShouldpiHelPos && P.aero.npeSum > 1.5
+SHMSAeroDidpiHelNeg           SHMSAeroShouldpiHelNeg && P.aero.npeSum > 1.5
 SHMSAeroCOINShouldpi	      SHMSAeroShouldpi && ALL_COIN_events
 SHMSAeroCOINShouldpiHelPos    SHMSAeroShouldpi && ALL_COIN_events && HelPos
 SHMSAeroCOINShouldpiHelNeg    SHMSAeroShouldpi && ALL_COIN_events && HelNeg
-SHMSAeroCOINDidpi	      SHMSAeroCOINShouldpi && P.aero.npeSum > 1.0
-SHMSAeroCOINDidpiHelPos	      SHMSAeroCOINShouldpiHelPos && P.aero.npeSum > 1.0
-SHMSAeroCOINDidpiHelNeg	      SHMSAeroCOINShouldpiHelNeg && P.aero.npeSum > 1.0
+SHMSAeroCOINDidpi	      SHMSAeroCOINShouldpi && P.aero.npeSum > 1.5
+SHMSAeroCOINDidpiHelPos	      SHMSAeroCOINShouldpiHelPos && P.aero.npeSum > 1.5
+SHMSAeroCOINDidpiHelNeg	      SHMSAeroCOINShouldpiHelNeg && P.aero.npeSum > 1.5
 SHMSAeroSINGShouldpi	      SHMSAeroShouldpi && SHMS_event
 SHMSAeroSINGShouldpiHelPos    SHMSAeroShouldpi && SHMS_event && HelPos
 SHMSAeroSINGShouldpiHelNeg    SHMSAeroShouldpi && SHMS_event && HelNeg
@@ -258,7 +264,7 @@ hcut_acceptance               H.gtr.th > -0.08 && H.gtr.th < 0.08 && H.gtr.ph > 
 
 HMScoindcindipole	      H.dc.InsideDipoleExit == 1
 
-HMSGEN		              HMShodstarttime && HMScoindcindipole && hcut_acceptance
+HMSGEN		              HMShodstarttime && HMScoindcindipole && hcut_acceptance && ALL_GOOD_Track_Events
 HMSCalelec                    H.cal.etottracknorm > 0.7 &&  H.cal.etottracknorm < 1.6
 
 HMSHGCShouldelec              HMSGEN && HMSCalelec 
@@ -289,4 +295,4 @@ HMSCalCer                     H.cal.etottracknorm > 0.5 && H.cer.npeSum > 0.5
 GOOD_COIN_Events	      HMS_DELTA && SHMS_DELTA && GOOD_COIN_TRACK && shmsAerogeomalln
 
 
-Physics_master GOOD_COIN_Events
+Physics_master ALL_events_NO_EDTM

@@ -1,0 +1,181 @@
+##########################################
+###### Created By - Muhammad Junaid ######
+########## University of Regina ##########
+#########    Date - Dec, 2023 ############
+##########################################
+
+Block: RawDecode
+
+Pedestal_event         g.evtyp == 99
+SHMS_event             g.evtyp == 1
+HMS_event              g.evtyp == 2
+BOTH_SINGLES_event     g.evtyp == 3
+COIN_ONLY_event        g.evtyp == 4
+SHMS_COIN_event        g.evtyp == 5
+HMS_COIN_event         g.evtyp == 6 
+COIN_ALL_event         g.evtyp == 7
+ALL_COIN_events        g.evtyp >= 4 && g.evtyp <= 7 
+ALL_events             g.evtyp >= 1 && g.evtyp <= 7 
+
+ALL_HMS_events         HMS_event || COIN_ONLY_event || HMS_COIN_event  || COIN_ALL_event 
+ALL_SHMS_events        SHMS_event || COIN_ONLY_event || SHMS_COIN_event || COIN_ALL_event 
+
+RawDecode_master ALL_events
+
+###########################################################################################################
+
+Block: Decode
+
+pTRIG1_ROC2   		    T.coin.pTRIG1_ROC2_tdcTimeRaw > 0
+pTRIG2_ROC2    		    T.coin.pTRIG2_ROC2_tdcTimeRaw > 0
+pTRIG3_ROC2    		    T.coin.pTRIG3_ROC2_tdcTimeRaw > 0
+pTRIG4_ROC2    		    T.coin.pTRIG4_ROC2_tdcTimeRaw > 0
+pTRIG5_ROC2    		    T.coin.pTRIG5_ROC2_tdcTimeRaw > 0
+pTRIG6_ROC2		    T.coin.pTRIG6_ROC2_tdcTimeRaw > 0
+
+edtm_accepted		    T.coin.pEDTM_tdcTimeRaw > 0
+hms_edtm_accepted           T.coin.pEDTM_tdcTimeRaw > 0 && ALL_HMS_events
+shms_edtm_accepted          T.coin.pEDTM_tdcTimeRaw > 0 && ALL_SHMS_events
+both_sing_edtm_accepted     T.coin.pEDTM_tdcTimeRaw > 0 && g.evtyp == 3
+
+ALL_HMS_events_NOEDTM       T.coin.hEDTM_tdcTime == 0.0 && ALL_HMS_events
+ALL_SHMS_events_NOEDTM      T.coin.pEDTM_tdcTime == 0.0 && ALL_SHMS_events
+ALL_COIN_events_NO_EDTM     T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime == 0.0 && ALL_COIN_events
+ALL_events_NO_EDTM          T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime == 0.0 && ALL_events
+
+Decode_master ALL_events_NO_EDTM
+
+###########################################################################################################
+
+Block: Tracking
+
+##################
+###    SHMS    ###
+##################
+
+## Scin cuts defined here for SHMS
+
+shmsScinGood           P.hod.goodscinhit == 1
+shmsGoodBetanotrk      P.hod.betanotrack > 0.5 && P.hod.betanotrack < 1.4
+shmshodstarttime       P.hod.goodstarttime == 1
+
+## Tracking Efficiency calculation (Should = denominator, Did = Numerator)
+
+shmsScinShould         shmsScinGood && shmsGoodBetanotrk && shmshodstarttime
+shmsCalTrkShoulde      P.cal.etotnorm > 0.6 &&  P.cal.etotnorm < 1.6
+
+## SHMS Cer PID Numbers 
+
+shmsHGCTrkShoulde      P.hgcer.npeSum > 0.5
+shmsAeroTrknpee        P.aero.npeSum > 1.0
+
+## SHMS Aero Geom for n = 1.030 tray
+
+shmsAeroxposalln       P.aero.xAtAero > -55 && P.aero.xAtAero < 55
+shmsAeroyposalln       P.aero.yAtAero > -50 && P.aero.yAtAero < 50
+
+shmsAerogeomalln       shmsAeroxposalln && shmsAeroyposalln
+
+shmsCerTrkShoulde      shmsHGCTrkShoulde && shmsAeroTrknpee 
+shmsScinShoulde        shmsScinShould && shmsCalTrkShoulde && shmsCerTrkShoulde
+shmsScinSingShoulde    shmsScinShoulde && SHMS_event
+
+shmsScinDide           shmsScinShoulde && P.dc.ntrack > 0
+shmsScinSingDide       shmsScinSingShoulde && P.dc.ntrack > 0
+
+##################
+####    HMS    ###
+##################
+
+## HMS PID cuts for different particles in HGC and CAL
+
+hcut_cer_elec          H.cer.npeSum > 1.5
+hcut_cal_elec	       H.cal.etotnorm > 0.6 && H.cal.etotnorm < 2.0
+
+## HMS Scin cuts (untracked) for HMS Tracking Efficiency
+
+HMSScinGood            H.hod.goodscinhit == 1
+HMSGoodBetanotrk       H.hod.betanotrack > 0.8 && H.hod.betanotrack < 1.3
+HMShodstarttime        H.hod.goodstarttime == 1
+
+## HMS Tracking Efficiency Calculation (Should = Denominator, Did = Numerator)
+
+HMSScinShould          HMSScinGood && HMSGoodBetanotrk && HMShodstarttime
+HMSScinShoulde         HMSScinShould && hcut_cer_elec && hcut_cal_elec
+HMSScinSingShoulde     HMSScinShoulde && HMS_event
+
+HMSScinDid             HMSScinShould && H.dc.ntrack > 0
+HMSScinDide            HMSScinShoulde && H.dc.ntrack > 0
+HMSScinSingDide	       HMSScinSingShoulde && H.dc.ntrack > 0
+
+#HMS_GOOD_TRACK	          H.dc.ntrack > 0
+#SHMS_GOOD_Track          P.dc.ntrack > 0 
+#GOOD_COIN_TRACK          HMS_GOOD_TRACK && SHMS_GOOD_Track
+#ALL_GOOD_Track_Events    HMS_GOOD_TRACK || SHMS_GOOD_Track
+
+Tracking_master ALL_events_NO_EDTM
+
+#####################################################################################################################################
+
+Block: Physics       
+
+## Accceptance cuts for SHMS gloden track defined here (Not used in SHMS Tracking)
+
+pcut_acceptance		P.gtr.th > -0.06 && P.gtr.th < 0.06 && P.gtr.ph > -0.04 && P.gtr.ph < 0.04 && P.gtr.dp > -10 && P.gtr.dp < 20
+
+HMS_GOOD_TRACK            H.dc.ntrack > 0
+SHMS_GOOD_Track           P.dc.ntrack > 0
+GOOD_COIN_TRACK           HMS_GOOD_TRACK && SHMS_GOOD_Track
+ALL_GOOD_Track_Events     HMS_GOOD_TRACK || SHMS_GOOD_Track
+
+##################
+###  SHMS HGC  ###
+##################
+
+SHMScoindcindipole	P.dc.InsideDipoleExit == 1
+
+SHMSGEN		        shmshodstarttime && SHMScoindcindipole && pcut_acceptance && ALL_GOOD_Track_Events
+SHMSCale	        P.cal.etottracknorm > 0.6              
+
+SHMSAEROe               P.aero.npeSum  > 1.0
+
+SHMSHGCShoulde		SHMSGEN && SHMSCale && SHMSAEROe && shmsAerogeomalln
+SHMSHGCDide		SHMSHGCShoulde && P.hgcer.npeSum > 1.0
+
+###################
+###  SHMS Aero  ###
+###################
+
+SHMSHGCe                P.hgcer.npeSum  > 1.0
+
+SHMSAeroShoulde         SHMSGEN && SHMSCale && SHMSHGCe && shmsAerogeomalln
+SHMSAeroDide            SHMSAeroShoulde && P.aero.npeSum > 1.0
+
+##################
+###   HMS CER  ###
+##################
+
+## HMS Acceptance cuts (Not used in HMS Tracking Efficiency)
+
+hcut_acceptance         H.gtr.th > -0.08 && H.gtr.th < 0.08 && H.gtr.ph > -0.045 && H.gtr.ph < 0.04 && H.gtr.dp > -8 && H.gtr.dp < 8
+
+HMScoindcindipole	H.dc.InsideDipoleExit == 1
+
+HMSGEN		        HMShodstarttime && HMScoindcindipole && hcut_acceptance && ALL_GOOD_Track_Events
+HMSCalelec              H.cal.etottracknorm > 0.7 &&  H.cal.etottracknorm < 1.6
+
+HMSHGCShouldelec        HMSGEN && HMSCalelec 
+HMSHGCSINGShoulde       HMSHGCShouldelec && HMS_event
+
+HMSHGCDidelec           HMSHGCShouldelec && H.cer.npeSum > 1.5
+HMSHGCSINGDide          HMSHGCSINGShoulde && H.cer.npeSum > 1.5
+
+HMS_DELTA	        H.gtr.dp > -10 && H.gtr.dp < 10
+SHMS_DELTA	        P.gtr.dp > -15 && P.gtr.dp < 25
+
+HMSCalCer               H.cal.etottracknorm > 0.5 && H.cer.npeSum > 1.5
+SHMSCalCer              P.cal.etottracknorm > 0.5 && P.aero.npeSum > 1.0
+
+GOOD_SINGLES_Events	SHMS_DELTA && SHMS_GOOD_Track && shmsAerogeomalln
+
+Physics_master ALL_events_NO_EDTM

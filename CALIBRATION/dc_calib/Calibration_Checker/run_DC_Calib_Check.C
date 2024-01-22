@@ -35,16 +35,16 @@ void run_DC_Calib_Check(Int_t RunNumber = 0, Int_t MaxEvent = 0, string Detector
   }
   // Need to convert string to char* for use in form command, do via .c_str()
   if(Hostname.Contains("farm")){
-    rootFileNameString1 = Form("/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/ROOTfiles/Calib/DC/%s_DC_Calib_Pt1_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
-    rootFileNameString2 = Form("/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/ROOTfiles/Calib/DC/%s_DC_Calib_Pt2_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
-    Outpath = "/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/OUTPUT/Calib/DC";
-    Histopath = "/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/HISTOGRAMS/Calib/DC";
+    rootFileNameString1 = Form("/group/c-pionlt/USERS/${USER}/hallc_replay_lt/ROOTfiles/Calib/DC/%s_DC_Calib_Pt1_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
+    rootFileNameString2 = Form("/group/c-pionlt/USERS/${USER}/hallc_replay_lt/ROOTfiles/Calib/DC/%s_DC_Calib_Pt2_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
+    Outpath = "/group/c-pionlt/USERS/${USER}/hallc_replay_lt/OUTPUT/Calib/DC";
+    Histopath = "/group/c-pionlt/USERS/${USER}/hallc_replay_lt/HISTOGRAMS/Calib/DC";
   }
   else if(Hostname.Contains("qcd")){
-    rootFileNameString1 = Form("/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/ROOTfiles/Calib/DC/%s_DC_Calib_Pt1_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
-    rootFileNameString2 = Form("/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/ROOTfiles/Calib/DC/%s_DC_Calib_Pt2_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
-    Outpath = "/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/OUTPUT/Calib/DC";
-    Histopath = "/group/c-kaonlt/USERS/${USER}/hallc_replay_lt/HISTOGRAMS/Calib/DC";
+    rootFileNameString1 = Form("/group/c-pionlt/USERS/${USER}/hallc_replay_lt/ROOTfiles/Calib/DC/%s_DC_Calib_Pt1_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
+    rootFileNameString2 = Form("/group/c-pionlt/USERS/${USER}/hallc_replay_lt/ROOTfiles/Calib/DC/%s_DC_Calib_Pt2_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
+    Outpath = "/group/c-pionlt/USERS/${USER}/hallc_replay_lt/OUTPUT/Calib/DC";
+    Histopath = "/group/c-pionlt/USERS/${USER}/hallc_replay_lt/HISTOGRAMS/Calib/DC";
   }
   else if (Hostname.Contains("phys.uregina.ca")){
     rootFileNameString1 = Form("/dsk3/${USER}/JLab/ROOTfiles/DC_Calib/%s_DC_Calib_Pt1_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
@@ -52,6 +52,12 @@ void run_DC_Calib_Check(Int_t RunNumber = 0, Int_t MaxEvent = 0, string Detector
     Outpath = "/dsk3/${USER}/JLab/OUTPUT/DC_Calib";
     Histopath = "/dsk3/${USER}/JLab/HISTOGRAMS/DC_Calib" ;
 }
+  else if (Hostname.Contains("cdaq")){
+    rootFileNameString1 = Form("/home/cdaq/pionLT-2021/hallc_replay_lt/ROOTfiles/Calib/DC/%s_DC_Calib_Pt1_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
+    rootFileNameString2 = Form("/home/cdaq/pionLT-2021/hallc_replay_lt/ROOTfiles/Calib/DC/%s_DC_Calib_Pt2_%i_%i.root", Detector.c_str(), RunNumber, MaxEvent);
+    Outpath = "/home/cdaq/pionLT-2021/hallc_replay_lt/OUTPUT/Calib/DC";
+    Histopath = "/home/cdaq/pionLT-2021/hallc_replay_lt/HISTOGRAMS/Calib/DC";
+    }
 
   TChain ch1("T");
   ch1.Add(rootFileNameString1);

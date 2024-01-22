@@ -1,0 +1,63 @@
+
+; The pdelta_offset,ptheta_offset,pphi_offset effect the
+; reconstructed target quantities. 
+; For transport x is in the dispersive direction with + down
+;               y is in the horizontal + towards small angles.
+;               z is along the central optics axis.
+; In transport coordinates phi = hyptar = dy/dz and theta = hxptar = dx/dz 
+;    but for unknown reasons the yp offset is named  htheta_offset
+;    and  the xp offset is named  hphi_offset
+; Do not to change these values, since these are the zero order
+;  CMOP matrix elements. If you do change then your shms sieve
+;  plots will be screwed up.
+
+; do not change pdelta_offset from zero, use ppcentral_offset
+pdelta_offset = 0.0; (%)   hdelta_tar = hdelta_tar + hdelta_offset
+; 
+ptheta_offset = 0.0 ; (rad) hyp_tar = hyp_tar + htheta_offset
+;pphi_offset = -8.681269905E-4; (rad) hxp_tar = hxp_tar + hphi_offset... default???
+pphi_offset = 0.0; (rad) hxp_tar = hxp_tar + hphi_offset
+
+; The following offsets are applied to the central kinematic variables
+;      ptheta_lab=htheta_lab + pthetacentral_offset/degree 
+;pthetacentral_offset = 0.0
+;;p_oopcentral_offset = 0.0
+;  SHMS central momentum offset determined from carbon elastic data fall 2017
+; sets ppcentral = ppcentral * ( 1. + ppcentral_offset / 100. )
+;ppcentral_offset = -0.250 ; default??
+;ppcentral_offset = 0.0
+
+
+;; The following offsets are applied to the central kinematic variables
+;;      ptheta_lab=htheta_lab + pthetacentral_offset/degree
+;;pthetacentral_offset  = 0.0 ;     (rad)   For no offset data
+;;pthetacentral_offset = 0.0 ;     (rad)   New offset for 3.6 & 3.9 GeV
+;;pthetacentral_offset =  1.0e-3  ;  (rad)   New offset for 4.5 GeV
+;;pthetacentral_offset = 1.2e-3  ; (rad)   New offset for 4.9 GeV
+;pthetacentral_offset = 2.1e-3  ; (rad)    New offset for 2.7 GeV
+;p_oopcentral_offset = 0.0
+;;  SHMS central momentum offset determined from carbon elastic data fall 2017
+;; sets ppcentral = ppcentral * ( 1. + ppcentral_offset / 100. )
+;;ppcentral_offset = -0.4      ; Old offset
+;;ppcentral_offset = 0.0        ; For no offset data
+;;ppcentral_offset = -0.0894   ; New offset for 3.9 & 3.6 GeV data
+;ppcentral_offset = -0.25        ; just to test
+;;ppcentral_offset = -0.2937     ; New offset for 4.5 GeV data
+;;ppcentral_offset = -0.312    ; New offset for 4.9 GeV data
+;ppcentral_offset = -0.450     ; New offset for 2.7 GeV data
+
+
+;; The following offsets are finalized based on G. Huber and R. Trotta Study (Fall 2023)
+;; Added by A. Usman on 28/11/2023
+
+;; SHMS Centeral Momentum (P) Offset (All Kaon-LT Data)
+
+ppcentral_offset = -0.200
+
+;; SHMS Central Angle (Theta) Offset (All Kaon-LT Data)
+
+pthetacentral_offset = 0.0011
+
+;; SHMS Out-of-Plane (Phi) Offset (All Kaon-LT Data)
+
+p_oopcentral_offset = -0.00011

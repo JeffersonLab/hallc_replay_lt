@@ -1,5 +1,3 @@
-#include "DEF-files/HMS/PRODUCTION/hstackana_production_cuts.def"
-#include "DEF-files/SHMS/PRODUCTION/pstackana_production_cuts.def"
 
 Block: RawDecode
 

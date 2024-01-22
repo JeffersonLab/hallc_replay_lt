@@ -25,7 +25,8 @@
 #include <TF1.h>
 
 // Declare ROOT files
-TFile *histoFile, *outFile;
+TFile *histoFile;
+TFile *histOutFile;
 
 // Declare Output  Parameter File
 ofstream outParam;
@@ -36,9 +37,9 @@ static const UInt_t nSides     = 2;
 static const UInt_t nBarsMax   = 16;
 static const UInt_t nTwFitPars = 2;
 
-static const Double_t tdcThresh      = 120.0;  // 30 mV in units of FADC channels
+static const Double_t tdcThresh      = 1200.0;  // 30 mV in units of FADC channels
 static const Double_t twFitRangeLow  = 20.0;
-static const Double_t twFitRangeHigh = 600.0;
+static const Double_t twFitRangeHigh = 300.0;
 static const Double_t c0twParInit    = 1.0;
 static const Double_t c1twParInit    = 1.0;
 
@@ -53,7 +54,7 @@ static const Double_t markerSize     = 2.0;
 static const Double_t minScale       = 0.75;
 static const Double_t maxScale       = 0.75;
 
-static const UInt_t lineWidth = 4;
+static const UInt_t lineWidth = 2;
 static const UInt_t lineStyle = 7;
 
 static const UInt_t  nbars[nPlanes]      = {16, 10, 16, 10};
@@ -93,8 +94,8 @@ TPaveText *twFitParText[nPlanes][nSides][nBarsMax];
 
 // Add color to fit lines
 void addColorToFitLine(UInt_t style, UInt_t width, UInt_t color, TF1 *fit1D) {
-  fit1D->SetLineStyle(lineStyle);
-  fit1D->SetLineWidth(lineWidth);
+  fit1D->SetLineStyle(style);
+  fit1D->SetLineWidth(width);
   fit1D->SetLineColor(color);
   return;
 } // addColorToFitLine()
@@ -154,6 +155,7 @@ void doTwFits(UInt_t iplane, UInt_t iside, UInt_t ipaddle) {
     twFit[iplane][iside][ipaddle]->SetParName(ipar, twFitParNames[ipar]);
   twFit[iplane][iside][ipaddle]->SetParameter(0, c0twParInit);
   twFit[iplane][iside][ipaddle]->SetParameter(1, c1twParInit);
+  addColorToFitLine(1, 1, 1, twFit[iplane][iside][ipaddle]);
 
   // Perform the fits and scream if it failed
   Int_t twFitStatus = h2_adcTdcTimeDiffWalk[iplane][iside][ipaddle]->Fit("twFit", "REQ");	
@@ -187,8 +189,8 @@ void calcParAvg(UInt_t iplane, UInt_t iside) {
     avgParFit[iplane][iside][ipar] = new TF1("avgParFit", "pol0", 1, nbars[iplane]);
     avgParFit[iplane][iside][ipar]->SetParName(0, "#bar{"+twFitParNames[ipar]+"}");
     // Add color to fit lines
-    if (iside == 0) addColorToFitLine(lineStyle, lineWidth, kRed,  avgParFit[iplane][iside][ipar]);
-    if (iside == 1) addColorToFitLine(lineStyle, lineWidth, kBlue, avgParFit[iplane][iside][ipar]);
+    if (iside == 0) addColorToFitLine(1,2,2,  avgParFit[iplane][iside][ipar]);
+    if (iside == 1) addColorToFitLine(1,2,2, avgParFit[iplane][iside][ipar]);
     // Initialize the parameters
     if (ipar == 0) avgParFit[iplane][iside][ipar]->SetParameter(0, c0twParInit);
     if (ipar == 1) avgParFit[iplane][iside][ipar]->SetParameter(1, c1twParInit);
@@ -257,6 +259,37 @@ void drawParams(UInt_t iplane) {
   return;
 } // drawParams
 
+//Add method for writing summary plots to file
+void writePlots(int runNUM)
+{
+  TDirectory *PSUM = histOutFile->mkdir("Param_Summary");
+  TDirectory *FSUM = histOutFile->mkdir("Fit_Summary");
+  TDirectory *FSUBSUM = FSUM->mkdir("Histos");
+  TString outputpng= Form("Calibration_Plots/TWpng/twFit_run_%d_",runNUM);
+
+  for (UInt_t ipar = 0; ipar < nTwFitPars; ipar++)
+  {
+    //parameter summary plots
+    PSUM->WriteObject(twFitParCan[ipar], Form("twFitParCan%d", ipar));
+  }
+
+  for (UInt_t iplane = 0; iplane < nPlanes; iplane++)
+  {
+    for(UInt_t iside = 0; iside < nSides; iside++)
+    {
+      TString outputpng= Form("Calibration_Plots/TWpng/twFit_run_%d_",runNUM);
+      //TW Fit Summary canvases
+      FSUM->WriteObject(twFitCan[iplane][iside], "twFitCan_"+planeNames[iplane]+"_"+sideNames[iside]);
+      outputpng += "_"+planeNames[iplane]+"_"+sideNames[iside]+".png";
+      twFitCan[iplane][iside]->Print(outputpng);
+      for (int ibar = 0; ibar < nBarsMax; ibar++)
+      {
+        FSUBSUM->WriteObject(twFitCan[iplane][iside]->cd(ibar+1)->GetPadPointer(), "twFitCan_"+planeNames[iplane]+"_"+Form("Bar%d", ibar)+"_"+sideNames[iside]);
+      }
+    }
+  }
+  return;
+}
 
 //Add a method to Get Fit Parameters
 void WriteFitParam(int runNUM)
@@ -354,6 +387,109 @@ void WriteFitParam(int runNUM)
   outParam.close();
 } //end method
 
+// This is to write all the parrameters with there errors, so that they may be checked against other Runs - NH 21/05/06
+void WriteFitParamErr(int runNUM)
+{
+
+  TString outPar_Name = Form("Calibration_Plots/hhodo_TWcalib_Err_%d.param", runNUM); //note could put this where ever you wanted to
+  outParam.open(outPar_Name);
+  Double_t c1err[nPlanes][nSides][nBarsMax] = {0.};
+  Double_t c2err[nPlanes][nSides][nBarsMax] = {0.};
+  //Fill 3D Par array
+  for (UInt_t iplane=0; iplane < nPlanes; iplane++)
+    {
+      
+      for (UInt_t iside=0; iside < nSides; iside++) {
+	      
+
+	for(UInt_t ipaddle = 0; ipaddle < nbars[iplane]; ipaddle++) {
+	 
+	  c1[iplane][iside][ipaddle] = twFit[iplane][iside][ipaddle]->GetParameter("c_{1}");
+	  c1err[iplane][iside][ipaddle] = twFit[iplane][iside][ipaddle]->GetParError(0);
+	  c2[iplane][iside][ipaddle] = twFit[iplane][iside][ipaddle]->GetParameter("c_{2}");
+	  c2err[iplane][iside][ipaddle] = twFit[iplane][iside][ipaddle]->GetParError(1);
+	  //chi2ndf[iplane][iside][ipaddle] =  twFit[iplane][iside][ipaddle]->GetChisquare()/twFit[iplane][iside][ipaddle]->GetNDF();
+      
+	} //end paddle loop
+
+      } //end side loop
+    
+    } //end plane loop
+
+  //Wrtie to Param FIle
+                                                                                                                                                                            
+  ///Loop over all paddles
+  for (UInt_t iplane = 0; iplane < nPlanes; iplane++)
+  {  
+  	for(UInt_t ipaddle = 0; ipaddle < nBarsMax; ipaddle++) { 
+    //Write c2-Pos values
+     
+		outParam << c2[iplane][0][ipaddle] << " " << fixed; 
+                                              
+	    }//end loop paddles
+	outParam << endl;
+	//write errors
+	for(UInt_t ipaddle = 0; ipaddle < nBarsMax; ipaddle++) {
+		outParam << c2err[iplane][0][ipaddle] << " " << fixed;
+	}
+	outParam << endl;
+  } //end loop over planes
+                                                                                                                                                                           
+  //Loop over all paddles
+  for (UInt_t iplane = 0; iplane < nPlanes; iplane++)
+  {  
+  	for(UInt_t ipaddle = 0; ipaddle < nBarsMax; ipaddle++) { 
+    //Write c2-Neg values
+     
+		outParam << c2[iplane][1][ipaddle] << " " << fixed; 
+                                              
+	    }//end loop paddles
+	outParam << endl;
+	//write errors
+	for(UInt_t ipaddle = 0; ipaddle < nBarsMax; ipaddle++) {
+		outParam << c2err[iplane][1][ipaddle] << " " << fixed;
+	}
+	outParam << endl;
+  } //end loop over planes
+  
+  //Loop over all paddles For c1
+  for (UInt_t iplane = 0; iplane < nPlanes; iplane++)
+  {  
+  	for(UInt_t ipaddle = 0; ipaddle < nBarsMax; ipaddle++) { 
+    //Write c2-Pos values
+     
+		outParam << c1[iplane][0][ipaddle] << " " << fixed; 
+                                              
+	    }//end loop paddles
+	outParam << endl;
+	//write errors
+	for(UInt_t ipaddle = 0; ipaddle < nBarsMax; ipaddle++) {
+		outParam << c1err[iplane][0][ipaddle] << " " << fixed;
+	}
+	outParam << endl;
+  } //end loop over planes
+  
+  //Loop over all paddles For c1
+  for (UInt_t iplane = 0; iplane < nPlanes; iplane++)
+  {  
+  	for(UInt_t ipaddle = 0; ipaddle < nBarsMax; ipaddle++) { 
+    //Write c2-Neg values
+     
+		outParam << c1[iplane][1][ipaddle] << " " << fixed; 
+                                              
+	    }//end loop paddles
+	outParam << endl;
+	//write errors
+	for(UInt_t ipaddle = 0; ipaddle < nBarsMax; ipaddle++) {
+		outParam << c1err[iplane][1][ipaddle] << " " << fixed;
+	}
+	outParam << endl;
+  } //end loop over planes
+  
+  outParam.close();
+
+} //WriteFitParamErr
+
 
 //=:=:=:=:=
 //=: Main
@@ -364,7 +500,7 @@ void timeWalkCalib(int run) {
 using namespace std;
 
 //prevent root from displaying graphs while executing
-//gROOT->SetBatch(1);
+ gROOT->SetBatch(1);
 
   // ROOT settings
   gStyle->SetTitleFontSize(fontSize);
@@ -423,7 +559,19 @@ using namespace std;
     } // Side loop
     // Draw the time-walk parameter graphs
     drawParams(iplane);
-  } // Plane loop 
+  } // Plane loop
+  
+  // NH 25/03/2021 - Create ROOT File for output plots
+  TString histOutFileName = Form("timeWalkCalib_%d.root", run);
+  histOutFile = new TFile(histOutFileName, "RECREATE");
+  //write to ROOT File
+  writePlots(run);
+
+  histOutFile->Close();
+ 
   //Write to a param file
   WriteFitParam(run);
+  //Write parrameters with errors out to seperate file
+  WriteFitParamErr(run);
+  
 }

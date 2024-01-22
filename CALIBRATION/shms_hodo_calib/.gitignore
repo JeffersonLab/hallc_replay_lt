@@ -2,3 +2,4 @@
 *.root
 *.so
 *.pcm
+*.param

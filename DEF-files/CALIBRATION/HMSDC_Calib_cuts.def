@@ -25,9 +25,36 @@ pTRIG4_ROC2     T.coin.pTRIG4_ROC2_tdcTimeRaw > 0
 pTRIG5_ROC2     T.coin.pTRIG5_ROC2_tdcTimeRaw > 0
 pTRIG6_ROC2	T.coin.pTRIG6_ROC2_tdcTimeRaw > 0
 
-ALL_HMS_events_NOEDTM       T.coin.hEDTM_tdcTime == 0.0 && ALL_HMS_events
-ALL_SHMS_events_NOEDTM      T.coin.pEDTM_tdcTime == 0.0 && ALL_SHMS_events
+ALL_HMS_events_NO_EDTM       T.coin.hEDTM_tdcTime == 0.0 && ALL_HMS_events
+ALL_SHMS_events_NO_EDTM      T.coin.pEDTM_tdcTime == 0.0 && ALL_SHMS_events
 ALL_COIN_events_NO_EDTM     T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime == 0.0 && ALL_COIN_events
 ALL_events_NO_EDTM          T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime == 0.0 && ALL_events
 
 Decode_master ALL_HMS_events_NO_EDTM
+
+Block: Physics
+
+################################
+####    HMS DC Calibration   ###
+################################
+
+hcut_cer_elec             H.cer.npeSum > 1.5
+hcut_cal_elec             H.cal.etotnorm > 0.7
+h_1x1_nhit     		  H.dc.1x1.nhit == 1
+h_1x2_nhit		  H.dc.1x2.nhit == 1
+h_1u1_nhit		  H.dc.1u1.nhit == 1
+h_1u2_nhit		  H.dc.1u2.nhit == 1
+h_1v1_nhit		  H.dc.1v1.nhit == 1
+h_1v2_nhit		  H.dc.1v2.nhit == 1
+h_2x1_nhit		  H.dc.2x1.nhit == 1
+h_2x2_nhit		  H.dc.2x2.nhit == 1
+h_2u1_nhit		  H.dc.2u1.nhit == 1
+h_2u2_nhit		  H.dc.2u2.nhit == 1
+h_2v1_nhit  		  H.dc.2v1.nhit == 1
+h_2v2_nhit		  H.dc.2v2.nhit == 1
+
+H_MULTIPLICITY		  h_1x1_nhit && h_1x2_nhit && h_1u1_nhit && h_1u2_nhit && h_1v1_nhit && h_1v2_nhit && h_2x1_nhit && h_2x2_nhit && h_2u1_nhit && h_2u2_nhit && h_2v1_nhit && h_2v2_nhit
+GOOD_HMS_ELEC		  hcut_cer_elec && hcut_cal_elec
+GOOD_HMS_EVENT		  H_MULTIPLICITY && GOOD_HMS_ELEC
+
+Physics_master GOOD_HMS_EVENT

@@ -1,0 +1,20 @@
+; Cut to select the Reference time when multiple hits in reference time 
+; The units in channels for the module (CAEN tdc or FADC)
+; negative value refcut means that the first reference time greater than the abs(refcut)
+;     is used as reftime. If no ref time is found  greater than the abs(refcut) then first
+;     reference time is used.
+; positive value refcut means that the the first reference time greater than the abs(refcut)
+;     is used as reftime. If no ref time is found  greater than the abs(refcut) then no
+;     reference time is used and warning message is produced.
+; Cut is on reference time per detector.
+
+; N.H. Sept 8, 2021: should be fairly open
+pdc_tdcrefcut    =-10000.
+phodo_tdcrefcut  =-2000.
+phodo_adcrefcut  =-2000.
+pngcer_adcrefcut =-2000
+phgcer_adcrefcut =-2000.
+paero_adcrefcut  =-2000.
+pcal_adcrefcut   =-2000.
+
+

@@ -38,7 +38,7 @@ ALL_SHMS_events_NOEDTM      T.coin.pEDTM_tdcTime == 0.0 && ALL_SHMS_events
 ALL_COIN_events_NO_EDTM     T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime == 0.0 && ALL_COIN_events
 ALL_events_NO_EDTM          T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime == 0.0 && ALL_events
 
-Decode_master ALL_events
+Decode_master ALL_events_NO_EDTM
 
 Block: Tracking
 
@@ -364,7 +364,11 @@ SHMSAeroDidpi            SHMSAeroShouldpi && P.aero.npeSum > 1.5
 ##################
 
 HMSGEN		   HMSScinGood && HMShodstarttime && HMScoindcindipole && hcut_acceptance
+<<<<<<< HEAD
 HMSCalelec         H.cal.etottracknorm > 0.6
+=======
+HMSCalelec         H.cal.etottracknorm > 0.05
+>>>>>>> origin/online_pionlt
 
 HMSHGCShouldelec         HMSGEN && SHMSCT && HMSCalelec 
 HMSHGCDidelec            HMSHGCShouldelec && H.cer.npeSum > 1.5
@@ -377,7 +381,7 @@ SHMSTRIG1_ROC2		T.coin.pTRIG1_ROC2_tdcTime > -10000.0 && T.coin.pTRIG1_ROC2_tdcT
 SHMSTRIG2_ROC2          T.coin.pTRIG2_ROC2_tdcTime > -10000.0 && T.coin.pTRIG2_ROC2_tdcTime < 10000.0
 HMSTRIG3_ROC2		T.coin.hTRIG3_ROC2_tdcTime > -10000.0 && T.coin.hTRIG3_ROC2_tdcTime < 10000.0
 
-Tracking_master ALL_events
+Tracking_master ALL_events_NO_EDTM
 
 
 

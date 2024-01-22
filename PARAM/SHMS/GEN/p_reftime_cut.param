@@ -1,9 +1,1 @@
-; Reference time from run 6749
-pdc_tdcrefcut=-15500.
-phodo_tdcrefcut=-4700.
-
-phodo_adcrefcut=-6150.
-pngcer_adcrefcut=-6150.
-phgcer_adcrefcut=-6150.
-paero_adcrefcut=-6150.
-pcal_adcrefcut=-6150.
+Online_PionLT2022/p_reftime_cut_cyero.param

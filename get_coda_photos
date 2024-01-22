@@ -1,0 +1,147 @@
+#! /usr/bin/perl -w
+#
+# Brad Sawatzky <brads@jlab.org>
+##   This is a bit of a kludge, sorry...
+##   - option handling is rudimentary at best
+
+use Data::Dumper;
+
+my $verbose=0;
+my $MAXEVENT=50000;    # bail out after this many events
+my $single_arm_only=0; # search for all images within $MAXEVENT events
+
+my %IMAGES = (
+  135 => { maxcount => 1, name => "SHMS_angle" },
+  136 => { maxcount => 1, name =>  "HMS_angle" },
+);
+
+my @DATA_DIRS = (
+  "",        # allow for rooted pathname
+  ".",       # current directory
+  "raw",     # should be symlink
+  "cache",   # should be symlink to tape /cache 
+  "raw.copiedtotape",     # should be symlink
+);
+
+sub usage() {
+  my $output="";
+  $output .= "Usage:  $0 [-sh] <codafile_runno.dat>\n";
+  $output .= "  Extracts angle snapshot images from a coda file.\n";
+  $output .= "    ./get_coda_photos shms_all_02229.dat\n";
+  $output .= "    ./get_coda_photos  /cache/hallc/.../raw/shms_all_02229.dat\n";
+  $output .= "  If needed, you can type <ctrl>-C once the snapshot(s) you want have been found.\n";
+  $output .= "  The tool will search in the following (symlinked) directories for a filename:\n";
+  $output .= "    " . join("/, ", @DATA_DIRS[1 .. $#DATA_DIRS]) . "/\n";
+  $output .= "  You can type <ctrl>-C once the snapshot(s) you want have been found.\n";
+  $output .= "  Options:\n";
+  $output .= "    -h, --help     This help text\n";
+  $output .= "    -s, --single   Exit after finding first image.\n";
+  $output .= "                   (Speeds up searching single-arm files.)\n";
+  
+  return $output;
+}
+
+sub find_run($) {
+  my $name=shift;
+  my $runNo;
+
+  if($name =~ /_(\d+)\./) {
+    $runNo = $1;
+  } else {
+    $runNo = "XXXX";
+  }
+  foreach $d (@DATA_DIRS) {
+    my $file="$d/$name";
+    if( -e "$file" ) {
+      print "## Found run: $file\n";
+      return ($runNo, $file);
+    }
+  }
+  die "  Can't find run '${name}' in these paths:\n" . join("\n",@DATA_DIRS) . "\n";
+}
+
+
+############################################
+my $runno;
+
+if($#ARGV < 0) { print usage(); exit 1; }
+my $file=shift;
+if("$file" eq "-h" || $file eq "--help") { print usage(); exit 0; }
+if("$file" eq "-s" || $file eq "--single") { $single_arm_only = 1; $file=shift; }
+
+($runno,$file)=find_run($file) if($file =~ /\d+/);
+
+open DAT,"evio2xml ${file} |"
+    or die "Can't open evio2xml pipe for $file: $!\n";
+if($verbose > 1) {print "Opened pipe: evio2xml ${file}\n";}
+
+my $count=0;
+my %image_data;
+
+if($verbose) {
+  print "Will search for these images:\n";
+  print "(They should be found before event $MAXEVENT in each file.)\n";
+  print Dumper(%IMAGES) . "\n";
+}
+
+EVENT:
+while(<DAT>) {
+  next unless(/^<event format="evio"\s+count="(\d+)" .*tag="(\d+)"/);
+  my $event=$1;
+  my $tag=$2;
+  print "Event $event...\n" if($event%5000 == 0);
+  last if($event > $MAXEVENT);
+
+  last if( scalar(keys(%IMAGES)) == 0 );
+  next if(! $IMAGES{$tag} );
+
+  print "  Found event type '$tag' in event $event\n" if($verbose);
+
+  my $image_name=$IMAGES{$tag}->{"name"} . "_${runno}.jpg";
+
+  $count=0;
+  while(<DAT>) {
+    die "  No image header found?.\n" if($count++ > 5);
+    next unless(/^begin\s+([\d\w]+)\s+(.*)$/);
+
+    my $flag=$1;
+    my $pname=$2;
+    if ($flag eq "PART") {
+      print "    Found PARTIAL image header '$pname'.\n" if($verbose);
+    } else {
+      print "    Found image header for '$pname'.\n  Will save as '${image_name}'. . .\n";
+      $image_data{$image_name}=$_;
+    }
+    while(<DAT>) {
+      last if(/^\s+$/);   ## drop blank line at end if partial image
+      $image_data{$image_name} .= $_;
+      last if(/^end|^\]\]>/);
+      last if(/^<\/event>/);    ## safety check
+    }
+
+    if(/^end$/) {
+      print "\n------ Found all parts for: ${image_name}\n";
+      print "  UUdecoding:  uudecode -o ${image_name}\n";
+      if($verbose > 1) {open TMP,">${image_name}.uu" or die "Can't open '${image_name}.uu': $!\n";}
+      open DECODE,"| uudecode -o ${image_name}" or die "Can't open uudecode pipe: $!\n";
+      foreach ( sort keys(%image_data) ) {
+        print DECODE $image_data{$_};
+        if($verbose) { print TMP $image_data{$_}; }
+      }
+      close DECODE or die "Can't close uudecode pipe: $!\n";
+      if($verbose) { close TMP; }
+      print "------ Saved.\n";
+      unlink("${image_name}.uu");
+      %image_data=();
+      $IMAGES{$tag}->{maxcount}--;
+      delete $IMAGES{$tag} if($IMAGES{$tag}->{maxcount} == 0);
+
+      exit 0 if( (scalar keys %IMAGES) == 0 );  # Image found for all known types
+      exit 0 if( $single_arm_only );            # Image found for single-arm run
+      #exit 0 if($file =~ /(shms|hms)[a-zA-Z0-9_]*.dat$/);  # assume single arm run, single angle cam
+
+      #print "---> You can now type <ctrl>-C if all the snapshot(s) you want have been found.\n\n";
+    }
+    next EVENT;
+  }
+}

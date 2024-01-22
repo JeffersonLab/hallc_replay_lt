@@ -351,7 +351,7 @@ void THcShowerCalib::Init() {
 
   gROOT->Reset();
 
-  char* fname = Form("ROOTfiles/Calib/Cal/%s_%d_%d.root",fPrefix.c_str(), fRunNumber, fNstopRequested);
+  char* fname = Form("../../ROOTfiles/Calib/Cal/%s_%d_%d.root",fPrefix.c_str(), fRunNumber, fNstopRequested);
   //   char* fname = Form("kaonRoot/%s.root",fPrefix.c_str());
  cout << "THcShowerCalib::Init: Root file name = " << fname << endl;
 
@@ -422,7 +422,7 @@ void THcShowerCalib::Init() {
   hBeta = new TH1F("hBeta","H.hod.beta",100, 0, 2);
   hNtrack = new TH1F("hNtrack","H.dc.ntrack",51, -0.5, 50.5);
   hNclust = new TH1F("hNclust","H.cal.nclust",21, -0.5, 20.5);
-
+//  ePiCoinTime = new TH1F("ePiCoinTime", "Electron-Pion CTime", 120, -30, 30)
   hDPvsEcal = new TH2F("hDPvsEcal", "#DeltaP versus Edep/P ",
 		       150,0.,1.5, 250,-12.5,12.5);
   hETAvsEPR = new TH2F("hETAvsEPR", "E_{TA} versus E_{PR}",
@@ -986,8 +986,8 @@ void THcShowerCalib::FillHEcal() {
       yCalVsEp->Fill(Enorm, trk.GetY());
       xCalVsEp->Fill(Enorm, trk.GetX());
 
-      output << Enorm*P/1000. << " " << P/1000. << " " << delta << " "
-      	     << trk.GetX() << " " << trk.GetY() << endl;
+      //output << Enorm*P/1000. << " " << P/1000. << " " << delta << " "
+      //     << trk.GetX() << " " << trk.GetY() << endl;
       nev++;
       evFile << Enorm << "\t" << nev <<endl;
 
@@ -996,7 +996,7 @@ void THcShowerCalib::FillHEcal() {
     if (nev > 200000) break;
   };
 
-  output.close();
+  //  output.close();
   evFile.close();
 
   cout << "FillHEcal: " << nev << " events filled" << endl;

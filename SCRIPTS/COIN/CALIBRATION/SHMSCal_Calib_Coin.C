@@ -15,27 +15,34 @@ void SHMSCal_Calib_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
     }
   }
 
-  // Create file name patterns.
-  const char* RunFileNamePattern = "coin_all_%05d.dat";
+  const char* RunFileNamePattern;
+  // Create file name patterns. Base this upon run number
+  if (RunNumber >= 10000){
+    RunFileNamePattern = "shms_all_%05d.dat";
+  }
+  else if (RunNumber < 10000){
+    RunFileNamePattern = "coin_all_%05d.dat";
+  }
   vector<TString> pathList;
   pathList.push_back(".");
   pathList.push_back("./raw");
   pathList.push_back("./raw1");
   pathList.push_back("./raw2");
-  pathList.push_back("./raw3");
-  pathList.push_back("./raw4");
-  pathList.push_back("./raw_volatile");
+  pathList.push_back("./raw.volatile");
+  pathList.push_back("./raw_PionLT");
+  pathList.push_back("./raw_KaonLT");
   pathList.push_back("./raw/../raw.copiedtotape");
-  pathList.push_back("./cache");
+  pathList.push_back("./raw.cache");
 
   const char* ROOTFileNamePattern = "ROOTfiles/Calib/Cal/SHMS_Cal_Calib_%d_%d.root";
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
-  gHcParms->AddString("g_ctp_database_filename","DBASE/COIN/standard_KaonLTCalib.database");
+  gHcParms->AddString("g_ctp_database_filename","DBASE/COIN/standard.database");
   gHcParms->Load(gHcParms->GetString("g_ctp_database_filename"), RunNumber);
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
   // Load fadc debug parameters
+  gHcParms->Load("PARAM/TRIG/tcoin.param");
   gHcParms->Load("PARAM/HMS/GEN/h_fadc_debug.param");
   gHcParms->Load("PARAM/SHMS/GEN/p_fadc_debug.param");
 
@@ -57,6 +64,7 @@ void SHMSCal_Calib_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   SHMS->AddEvtType(6);
   SHMS->AddEvtType(7);
   gHaApps->Add(SHMS);
+
   // Add drift chambers to SHMS apparatus
   THcDC* pdc = new THcDC("dc", "Drift Chambers");
   SHMS->AddDetector(pdc);
@@ -233,7 +241,7 @@ void SHMSCal_Calib_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file+
-  analyzer->SetOdefFile("DEF-files/CALIBRATION/SHMS_Calib.def");
+  analyzer->SetOdefFile("DEF-files/CALIBRATION/SHMS_Calib_calo_spec.def");
   // Define cuts file
   analyzer->SetCutFile("DEF-files/CALIBRATION/SHMS_Calib_cuts.def");  // optional
   // Start the actual analysis.

@@ -44,17 +44,21 @@ void DC_Calib_Comp(string Det = "", TString Run_List="")
 
   // Set some paths
   if(Hostname.Contains("farm")){
-    Outpath = "/volatile/hallc/c-kaonlt/${USER}/OUTPUT/DC_Calib";
-    Histopath = "/volatile/hallc/c-kaonlt/${USER}/HISTOGRAMS/DC_Calib";
+    Outpath = "/volatile/hallc/c-pionlt/${USER}/OUTPUT/DC_Calib";
+    Histopath = "/volatile/hallc/c-pionlt/${USER}/HISTOGRAMS/DC_Calib";
   }
   else if(Hostname.Contains("qcd")){
-    Outpath = "/volatile/hallc/c-kaonlt/${USER}/OUTPUT/DC_Calib";
-    Histopath = "/volatile/hallc/c-kaonlt/${USER}/HISTOGRAMS/DC_Calib";
+    Outpath = "/volatile/hallc/c-pionlt/${USER}/OUTPUT/DC_Calib";
+    Histopath = "/volatile/hallc/c-pionlt/${USER}/HISTOGRAMS/DC_Calib";
     Rootpath= "/cache/hallc/kaonlt/sjdkay/ROOTfiles/DC_Calib/Pass1_RateTest";
   }
   else if (Hostname.Contains("phys.uregina.ca")){
     Outpath = "/dsk3/${USER}/JLab/OUTPUT/DC_Calib";
     Histopath = "/dsk3/${USER}/JLab/HISTOGRAMS/DC_Calib" ;
+  }
+  else if(Hostname.Contains("cdaq")){
+    Outpath = "/home/cdaq/pionLT-2021/hallc_replay_lt/OUTPUT/DC_Calib";
+    Histopath = "/home/cdaq/pionLT-2021/hallc_replay_lt/HISTOGRAMS/DC_Calib";
   }
 
   // Open our list of runs and grab the run numbers

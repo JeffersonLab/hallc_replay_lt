@@ -15,11 +15,22 @@ void replay_coin_scalers (Int_t RunNumber = 0, Int_t MaxEvent = 0,Int_t FirstEve
     }
   }
 
-  // Create file name patterns.
-  const char* RunFileNamePattern = "coin_all_%05d.dat";
+  const char* RunFileNamePattern;
+  // Create file name patterns. Base this upon run number
+  if (RunNumber >= 10000){
+    RunFileNamePattern = "shms_all_%05d.dat";
+  }
+  else if (RunNumber < 10000){
+    RunFileNamePattern = "coin_all_%05d.dat";
+  }
   vector<TString> pathList;
   pathList.push_back(".");
   pathList.push_back("./raw");
+  pathList.push_back("./raw1");
+  pathList.push_back("./raw2");
+  pathList.push_back("./raw_volatile");
+  pathList.push_back("./raw_PionLT");
+  pathList.push_back("./raw_KaonLT");
   pathList.push_back("./raw/../raw.copiedtotape");
   pathList.push_back("./cache");
 
@@ -27,7 +38,7 @@ void replay_coin_scalers (Int_t RunNumber = 0, Int_t MaxEvent = 0,Int_t FirstEve
 
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
-  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_KaonLTCalib.database");
+  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_KaonLT.database");
   gHcParms->Load(gHcParms->GetString("g_ctp_database_filename"), RunNumber);
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
@@ -162,7 +173,7 @@ void replay_coin_scalers (Int_t RunNumber = 0, Int_t MaxEvent = 0,Int_t FirstEve
                                 // 1 = counter is # of all decode reads
                                 // 2 = counter is event number
   analyzer->SetEvent(event);
-  analyzer->SetMarkInterval(100000);
+  analyzer->SetMarkInterval(10000);
   // Set EPICS event type
   analyzer->SetEpicsEvtType(180);
   // Define crate map
@@ -174,11 +185,11 @@ void replay_coin_scalers (Int_t RunNumber = 0, Int_t MaxEvent = 0,Int_t FirstEve
   // Define cuts file
   analyzer->SetCutFile("DEF-files/SCALERS/coinscaler_cuts.def");  // optional
   // File to record accounting information for cuts
-  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Scalers/summary_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional
+  //analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Scalers/summary_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template
-  analyzer->PrintReport("TEMPLATES/COIN/SCALERS/coinscalers.template",
-  			Form("REPORT_OUTPUT/Scalers/replay_coin_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
+  //analyzer->PrintReport("TEMPLATES/COIN/SCALERS/coinscalers.template",
+  //			Form("REPORT_OUTPUT/Scalers/replay_coin_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
 
 }

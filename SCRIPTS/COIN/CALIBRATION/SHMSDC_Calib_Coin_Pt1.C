@@ -15,16 +15,22 @@ void SHMSDC_Calib_Coin_Pt1 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
     }
   }
 
-  // Create file name patterns.
-  const char* RunFileNamePattern = "coin_all_%05d.dat";
+  const char* RunFileNamePattern;
+  // Create file name patterns. Base this upon run number
+  if (RunNumber >= 10000){
+    RunFileNamePattern = "shms_all_%05d.dat";
+  }
+  else if (RunNumber < 10000){
+    RunFileNamePattern = "coin_all_%05d.dat";
+  }
   vector<TString> pathList;
   pathList.push_back(".");
   pathList.push_back("./raw");
   pathList.push_back("./raw1");
   pathList.push_back("./raw2");
-  pathList.push_back("./raw3");
-  pathList.push_back("./raw4");
   pathList.push_back("./raw_volatile");
+  pathList.push_back("./raw_PionLT");
+  pathList.push_back("./raw_KaonLT");
   pathList.push_back("./raw/../raw.copiedtotape");
   pathList.push_back("./cache");
 
@@ -34,10 +40,13 @@ void SHMSDC_Calib_Coin_Pt1 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Original version, used online calib files as base
   //gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_DCCalib_Offline.database");
   // New version, uses latest calibrations
-  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_DCCalib_Offline_v2.database");
+  // gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_DCCalib_Offline_v2.database");
+  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard.database");
   gHcParms->Load(gHcParms->GetString("g_ctp_database_filename"), RunNumber);
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
+  // Load params for COIN trigger configuration
+  gHcParms->Load("PARAM/TRIG/tcoin.param");
   // Load fadc debug parameters
   gHcParms->Load("PARAM/HMS/GEN/h_fadc_debug.param");
   gHcParms->Load("PARAM/SHMS/GEN/p_fadc_debug.param");
@@ -75,6 +84,9 @@ void SHMSDC_Calib_Coin_Pt1 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Add calorimeter to SHMS apparatus
   THcShower* pcal = new THcShower("cal", "Calorimeter");
   SHMS->AddDetector(pcal);
+  // Add Noble Gas Cherenkov to SHMS apparatus
+  THcCherenkov* ngcer = new THcCherenkov("ngcer", "Noble Gas Cherenkov");
+  SHMS->AddDetector(ngcer);
 
   // Add rastered beam apparatus
   THaApparatus* pbeam = new THcRasteredBeam("P.rb", "Rastered Beamline");

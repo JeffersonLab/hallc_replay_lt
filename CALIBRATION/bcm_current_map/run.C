@@ -1,4 +1,5 @@
-R__LOAD_LIBRARY(ScalerCalib_C)
+//R__LOAD_LIBRARY(ScalerCalib_C) // RLT 9/10/21... may not work with this version of ROOT, using include instead
+#include "ScalerCalib.h"
 
 void run(string fin="fin.root", string spec_name="H")
 {

@@ -1,0 +1,271 @@
+******************************
+******Author - Ali Usman******
+*****Created - May, 2022******
+******************************.
+
+=====================================
+=========== General Info ============
+=====================================
+
+KLT_Run_Number		:		{gen_run_number}
+KLT_Beam_Energy		:		{gpbeam}
+KLT_Target_Mass_(amu)	:		{gtargmass_amu}
+
+KLT_HMS_Particle_Mass	:		{hpartmass}
+KLT_HMS_P_Central	:		{hpcentral}
+KLT_HMS_Angle		:		{htheta_lab}
+
+KLT_SHMS_Particle_Mass	:		{ppartmass}
+KLT_SHMS_P_Central	:		{ppcentral}
+KLT_SHMS_Angle		:		{ptheta_lab}
+
+KLT_SHMS_Run_Length	:		{P.1MHz.scalerTime:%.3f} sec
+KLT_HMS_Run_Length	:		{H.1MHz.scalerTime:%.3f} sec
+
+KLT_Total_Events	:		{GOOD_COIN_Events.npassed}
+
+Cut on BCM{gBCM_Current_threshold_index+1} current of {gBCM_Current_threshold} uA. Beam over threshold for {H.1MHz.scalerTimeCut:%.3f}s, or {((H.1MHz.scalerTimeCut/H.1MHz.scalerTime)*100.):%.3f}% of total run time.
+
+KLT_BCM_Cut_SHMS_Run_Length      :               {P.1MHz.scalerTimeCut:%.3f} sec                                  
+KLT_BCM_Cut_HMS_Run_Length       :               {H.1MHz.scalerTimeCut:%.3f} sec
+
+ With no cuts on BCM{gBCM_Current_threshold_index+1}.
+
+KLT_BCM1_Current			:		{H.BCM1.scalerCharge/H.1MHz.scalerTime:%.3f} uA
+KLT_Unser_Current			:		{H.Unser.scalerCharge/H.1MHz.scalerTime:%.3f} uA
+
+KLT_BCM1_Charge				:		{H.BCM1.scalerCharge/1000.:%.3f} mC
+KLT_Unser_Charge			:		{H.Unser.scalerCharge/1000.:%.3f} mC
+
+Cut on BCM{gBCM_Current_threshold_index+1} current of {gBCM_Current_threshold} uA. Beam over threshold for {H.1MHz.scalerTimeCut:%.3f}s, or {((H.1MHz.scalerTimeCut/H.1MHz.scalerTime)*100.):%.3f}% of total run time.
+
+KLT_BCM1_Beam_Cut_Current		   :	       {H.BCM1.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA
+KLT_Unser_Beam_Cut_Current   	   	   :	       {H.Unser.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA
+
+KLT_BCM1_Beam_Cut_Charge   	   	   :	       {H.BCM1.scalerChargeCut/1000.:%.3f} mC
+KLT_Unser_Beam_Cut_Charge   	   	   :	       {H.Unser.scalerChargeCut/1000.:%.3f} mC
+
+KLT_Ps1_factor	 	 	    	   :		  {gHC_ti_ps_factors[0]}
+KLT_Ps2_factor				   :		  {gHC_ti_ps_factors[1]}
+KLT_Ps3_factor				   :		  {gHC_ti_ps_factors[2]}
+KLT_Ps4_factor				   :		  {gHC_ti_ps_factors[3]}
+KLT_Ps5_factor				   :		  {gHC_ti_ps_factors[4]}
+KLT_Ps6_factor				   :		  {gHC_ti_ps_factors[5]}
+
+KLT_Total_SHMS_3/4_Triggers                   :		{P.pTRIG1.scaler}
+KLT_(current_cut)_Total_SHMS_3/4_Triggers     :		{P.pTRIG1.scalerCut}
+KLT_Pre-Scaled_SHMS_3/4_Triggers              :		{(P.pTRIG1.scaler/gHC_ti_ps_factors[0]):%.0f}
+KLT_SHMS_3/4_Trigger_Rate                     :		{P.pTRIG1.scalerCut/P.1MHz.scalerTimeCut/1000.:%.3f} kHz
+KLT_Accepted_SHMS_Triggers                    :		{pTRIG1_ROC2.npassed}
+
+KLT_Total_HMS_EL-REAL_Triggers                :		{P.pTRIG3.scaler}
+KLT_(current_cut)_Total_HMS_EL-REAL_Triggers  :		{P.pTRIG3.scalerCut}
+KLT_Pre-Scaled_HMS_EL-REAL_Triggers           :		{(P.pTRIG3.scaler/gHC_ti_ps_factors[2]):%.0f}
+KLT_HMS_EL-REAL_Trigger_Rate                  :		{P.pTRIG3.scalerCut/P.1MHz.scalerTimeCut/1000.:%.3f} kHz
+KLT_Accepted_HMS_Triggers                     :		{pTRIG3_ROC2.npassed}
+
+KLT_Total_COIN_Triggers                       :		{P.pTRIG5.scaler}
+KLT_(current_cut)_Total_COIN_Triggers         :		{P.pTRIG5.scalerCut}
+KLT_Pre-Scaled_COIN_Triggers                  :		{(P.pTRIG5.scaler/gHC_ti_ps_factors[4]):%.0f}
+KLT_COIN_Trigger_Rate                         :		{P.pTRIG5.scalerCut/P.1MHz.scalerTimeCut/1000.:%.3f} kHz
+KLT_Accepted_COIN_Triggers                    :		{pTRIG5_ROC2.npassed}
+
+=:=:=:=:
+= EDTM =
+=:=:=:=:
+
+KLT_EDTM_Accepted_Triggers     :    {edtm_accepted.npassed}
+
+EDTM Live Time calculation using non-scaler cut 
+
+KLT_Non_Scaler_EDTM_Live_Time	 	     :    {edtm_accepted.npassed/(P.EDTM.scaler+0.0001):%8.4f} +- {(sqrt((((P.EDTM.scaler)*(edtm_accepted.npassed))-((edtm_accepted.npassed)*(edtm_accepted.npassed))) / ((P.EDTM.scaler)*(P.EDTM.scaler)*(P.EDTM.scaler)))):%8.4f}
+
+EDTM Live Time is corrected with threshold current cut. Added by AU on 20/12/22
+
+KLT_Non_Scaler_EDTM_Live_Time_Corr           :    {(((edtm_accepted.npassed / (P.EDTM.scaler+0.0001))-(1-((H.BCM1.scalerCharge / (H.1MHz.scalerTime)) / (H.BCM1.scalerChargeCut / (H.1MHz.scalerTimeCut))))) / ((H.BCM1.scalerCharge / (H.1MHz.scalerTime))/(H.BCM1.scalerChargeCut / (H.1MHz.scalerTimeCut)))):%8.4f} +- {(sqrt((((P.EDTM.scaler)*(edtm_accepted.npassed))-((edtm_accepted.npassed)*(edtm_accepted.npassed))) / ((P.EDTM.scaler)*(P.EDTM.scaler)*(P.EDTM.scaler)))):%8.4f}
+
+=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
+=   Computer Live/Dead Times   =
+=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
+
+Only reliable for COIN data as it's not prescaled. HMS and SHMS CPULT may not be accurate
+
+KLT_HMS_CPULT     	          :	     {((pTRIG3_ROC2.npassed)/(P.pTRIG3.scaler)):%8.4f} +- {(sqrt(((P.pTRIG3.scaler*pTRIG3_ROC2.npassed)-((pTRIG3_ROC2.npassed)*(pTRIG3_ROC2.npassed)))/(P.pTRIG3.scaler*P.pTRIG3.scaler*P.pTRIG3.scaler))):%8.4f}
+KLT_SHMS_CPULT		  	  :	     {((pTRIG1_ROC2.npassed)/(P.pTRIG1.scaler)):%8.4f} +- {(sqrt(((P.pTRIG1.scaler*pTRIG1_ROC2.npassed)-((pTRIG1_ROC2.npassed)*(pTRIG1_ROC2.npassed)))/(P.pTRIG1.scaler*P.pTRIG1.scaler*P.pTRIG1.scaler))):%8.4f}
+KLT_COIN_CPULT  	          :	     {((pTRIG5_ROC2.npassed)/(P.pTRIG5.scaler)):%8.4f} +- {(sqrt(((P.pTRIG5.scaler*pTRIG5_ROC2.npassed)-((pTRIG5_ROC2.npassed)*(pTRIG5_ROC2.npassed)))/(P.pTRIG5.scaler*P.pTRIG5.scaler*P.pTRIG5.scaler))):%8.4f}
+
+*******************************
+***  Detector Efficiencies  ***
+*******************************
+
+=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
+=     Tracking Efficiency    =
+=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
+
+KLT_SHMS_Had_ALL_Trk_Should		:	{shmsScinShould.npassed}
+KLT_SHMS_Had_ALL_Trk_Did		:	{shmsScinDid.npassed}
+KLT_SHMS_Prot_ALL_Trk_Should		:	{shmsScinShouldp.npassed}
+KLT_SHMS_Prot_ALL_Trk_Did		:	{shmsScinDidp.npassed}
+KLT_SHMS_Prot_Coin_Trk_Should		:	{shmsScinCoinShouldp.npassed}
+KLT_SHMS_Prot_Coin_Trk_Did		:	{shmsScinCoinDiddp.npassed}
+KLT_SHMS_Prot_Sing_Trk_Should		:	{shmsScinSingShouldp.npassed}
+KLT_SHMS_Prot_Sing_Trk_Did		:	{shmsScinSingDidp.npassed}
+KLT_HMS_Elec_ALL_Trk_Should		:	{HMSScinShoulde.npassed}
+KLT_HMS_Elec_ALL_Trk_Did		:	{HMSScinDide.npassed}
+KLT_HMS_Elec_Coin_Trk_Should		:	{HMSScinCoinShoulde.npassed}
+KLT_HMS_Elec_Coin_Trk_Did		:	{HMSScinCoinDide.npassed}
+KLT_HMS_Elec_Sing_Trk_Should		:	{HMSScinSingShoulde.npassed}
+KLT_HMS_Elec_Sing_Trk_Did		:	{HMSScinSingDide.npassed}
+
+KLT_SHMS_Hadron_ALL_TRACK_EFF           :          {shmsScinDid.npassed / (shmsScinShould.npassed+0.0001):%8.4f} +- {(sqrt((((shmsScinShould.npassed)*(shmsScinDid.npassed))-((shmsScinDid.npassed)*(shmsScinDid.npassed))) / ((shmsScinShould.npassed)*(shmsScinShould.npassed)*(shmsScinShould.npassed)))):%8.4f}
+
+KLT_SHMS_Prot_ALL_TRACK_EFF             :          {shmsScinDidp.npassed / (shmsScinShouldp.npassed+0.0001):%8.4f} +- {(sqrt((((shmsScinShouldp.npassed)*(shmsScinDidp.npassed))-((shmsScinDidp.npassed)*(shmsScinDidp.npassed))) / ((shmsScinShouldp.npassed)*(shmsScinShouldp.npassed)*(shmsScinShouldp.npassed)))):%8.4f}
+
+KLT_SHMS_Prot_COIN_TRACK_EFF		:	   {shmsScinCoinDiddp.npassed / (shmsScinCoinShouldp.npassed+0.0001):%8.4f} +- {(sqrt((((shmsScinCoinShouldp.npassed)*(shmsScinCoinDiddp.npassed))-((shmsScinCoinDiddp.npassed)*(shmsScinCoinDiddp.npassed))) / ((shmsScinCoinShouldp.npassed)*(shmsScinCoinShouldp.npassed)*(shmsScinCoinShouldp.npassed)))):%8.4f}
+
+KLT_SHMS_Prot_SING_TRACK_EFF		:	   {shmsScinSingDidp.npassed / (shmsScinSingShouldp.npassed+0.0001):%8.4f} +- {(sqrt((((shmsScinSingShouldp.npassed)*(shmsScinSingDidp.npassed))-((shmsScinSingDidp.npassed)*(shmsScinSingDidp.npassed))) / ((shmsScinSingShouldp.npassed)*(shmsScinSingShouldp.npassed)*(shmsScinSingShouldp.npassed)))):%8.4f}
+
+KLT_HMS_Elec_ALL_TRACK_EFF		:          {HMSScinDide.npassed / (HMSScinShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((HMSScinShoulde.npassed)*(HMSScinDide.npassed))-((HMSScinDide.npassed)*(HMSScinDide.npassed))) / ((HMSScinShoulde.npassed)*(HMSScinShoulde.npassed)*(HMSScinShoulde.npassed)))):%8.4f}
+
+KLT_HMS_Elec_COIN_TRACK_EFF		:	   {HMSScinCoinDide.npassed / (HMSScinCoinShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((HMSScinCoinShoulde.npassed)*(HMSScinCoinDide.npassed))-((HMSScinCoinDide.npassed)*(HMSScinCoinDide.npassed))) / ((HMSScinCoinShoulde.npassed)*(HMSScinCoinShoulde.npassed)*(HMSScinCoinShoulde.npassed)))):%8.4f}
+
+KLT_HMS_Elec_SING_TRACK_EFF		:	   {HMSScinSingDide.npassed / (HMSScinSingShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((HMSScinSingShoulde.npassed)*(HMSScinSingDide.npassed))-((HMSScinSingDide.npassed)*(HMSScinSingDide.npassed))) / ((HMSScinSingShoulde.npassed)*(HMSScinSingShoulde.npassed)*(HMSScinSingShoulde.npassed)))):%8.4f}
+
+=:=:=:=:=:=:=:=:=:=:=:=:=
+=     SHMS Cerenkovs    =
+=:=:=:=:=:=:=:=:=:=:=:=:=
+
+***************
+* HGC Cerenkov
+***************
+
+KLT_SHMS_Prot_HGC_Did		    :   {SHMSHGCDidp.npassed}
+KLT_SHMS_Prot_HGC_Should	    :	{SHMSHGCShouldp.npassed}
+
+KLT_SHMS_HGC_Prot_Eff		      :   {SHMSHGCDidp.npassed/(SHMSHGCShouldp.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSHGCShouldp.npassed)*(SHMSHGCDidp.npassed))-((SHMSHGCDidp.npassed)*(SHMSHGCDidp.npassed))) / ((SHMSHGCShouldp.npassed)*(SHMSHGCShouldp.npassed)*(SHMSHGCShouldp.npassed)))):%8.4f}
+
+**********
+* Aerogel
+**********
+
+KLT_SHMS_Prot_Aero_Did		    :   {SHMSAeroDidp.npassed}
+KLT_SHMS_Prot_Aero_Should	    :	{SHMSAeroShouldp.npassed}
+
+KLT_SHMS_Aero_Prot_Eff		      :   {SHMSAeroDidp.npassed/(SHMSAeroShouldp.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSAeroShouldp.npassed)*(SHMSAeroDidp.npassed))-((SHMSAeroDidp.npassed)*(SHMSAeroDidp.npassed))) / ((SHMSAeroShouldp.npassed)*(SHMSAeroShouldp.npassed)*(SHMSAeroShouldp.npassed)))):%8.4f}
+
+=:=:=:=:=:=:=:=:=:=:=:=:=
+=      HMS Cerenkov     =
+=:=:=:=:=:=:=:=:=:=:=:=:=
+
+KLT_HMS_ALL_Elec_Cer_Did	    :   {HMSHGCDidelec.npassed}
+KLT_HMS_ALL_Elec_Cer_Should	    :	{HMSHGCShouldelec.npassed}
+KLT_HMS_COIN_Elec_Cer_Did	    :	{HMSHGCCOINDide.npassed}
+KLT_HMS_COIN_Elec_Cer_Should	    :	{HMSHGCCOINShoulde.npassed}
+KLT_HMS_SING_Elec_Cer_Did	    :	{HMSHGCSINGDide.npassed}
+KLT_HMS_SING_Elec_Cer_Should	    :	{HMSHGCSINGShoulde.npassed}
+
+KLT_HMS_Cer_ALL_Elec_Eff	    :   {HMSHGCDidelec.npassed / (HMSHGCShouldelec.npassed+0.0001):%8.4f} +- {(sqrt((((HMSHGCShouldelec.npassed)*(HMSHGCDidelec.npassed))-((HMSHGCDidelec.npassed)*(HMSHGCDidelec.npassed))) / ((HMSHGCShouldelec.npassed)*(HMSHGCShouldelec.npassed)*(HMSHGCShouldelec.npassed)))):%8.4f}
+
+KLT_HMS_Cer_COIN_Elec_Eff	    :	{HMSHGCCOINDide.npassed / (HMSHGCCOINShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((HMSHGCCOINShoulde.npassed)*(HMSHGCCOINDide.npassed))-((HMSHGCCOINDide.npassed)*(HMSHGCCOINDide.npassed))) / ((HMSHGCCOINShoulde.npassed)*(HMSHGCCOINShoulde.npassed)*(HMSHGCCOINShoulde.npassed)))):%8.4f}
+
+KLT_HMS_Cer_SING_Elec_Eff	    :	{HMSHGCSINGDide.npassed / (HMSHGCSINGShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((HMSHGCSINGShoulde.npassed)*(HMSHGCSINGDide.npassed))-((HMSHGCSINGDide.npassed)*(HMSHGCSINGDide.npassed))) / ((HMSHGCSINGShoulde.npassed)*(HMSHGCSINGShoulde.npassed)*(HMSHGCSINGShoulde.npassed)))):%8.4f}
+
+**************************
+* SHMS Beta Efficiencies *
+**************************
+
+KLT_SHMS_Good_Beta_Did		:	{SHMSGOODBETADID.npassed}
+KLT_SHMS_Good_Beta_Should	:	{SHMSBETASHOULD.npassed}
+KLT_SHMS_Bad_Beta_Did		:	{SHMSBADBETADID.npassed}
+KLT_SHMS_Bad_Beta_Should	:	{SHMSBETASHOULD.npassed}
+KLT_Coin_Good_Beta_Did		:	{COINGOODBETADID.npassed}	
+KLT_Coin_Good_Beta_Should	:	{COINBETASHOULD.npassed}
+KLT_Coin_Bad_Beta_Did		:	{COINBADBETADID.npassed}
+KLT_Coin_Bad_Beta_Should	:	{COINBETASHOULD.npassed}
+
+KLT_SHMS_Good_Beta_EFF		:	{SHMSGOODBETADID.npassed / (SHMSBETASHOULD.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSBETASHOULD.npassed)*(SHMSGOODBETADID.npassed)) - ((SHMSGOODBETADID.npassed)*(SHMSGOODBETADID.npassed))) / ((SHMSBETASHOULD.npassed)*(SHMSBETASHOULD.npassed)*(SHMSBETASHOULD.npassed)))):%8.4f}
+
+KLT_SHMS_Bad_Beta_EFF		:	{SHMSBADBETADID.npassed / (SHMSBETASHOULD.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSBETASHOULD.npassed)*(SHMSBADBETADID.npassed)) - ((SHMSBADBETADID.npassed)*(SHMSBADBETADID.npassed))) / ((SHMSBETASHOULD.npassed)*(SHMSBETASHOULD.npassed)*(SHMSBETASHOULD.npassed)))):%8.4f}
+
+KLT_Coin_Good_Beta_EFF		:	{COINGOODBETADID.npassed / (COINBETASHOULD.npassed+0.0001):%8.4f} +- {(sqrt((((COINBETASHOULD.npassed)*(COINGOODBETADID.npassed)) - ((COINGOODBETADID.npassed)*(COINGOODBETADID.npassed))) / ((COINBETASHOULD.npassed)*(COINBETASHOULD.npassed)*(COINBETASHOULD.npassed)))):%8.4f}
+
+KLT_Coin_Bad_Beta_EFF		:	{COINBADBETADID.npassed / (COINBETASHOULD.npassed+0.0001):%8.4f} +- {(sqrt((((COINBETASHOULD.npassed)*(COINBADBETADID.npassed)) - ((COINBADBETADID.npassed)*(COINBADBETADID.npassed))) / ((COINBETASHOULD.npassed)*(COINBETASHOULD.npassed)*(COINBETASHOULD.npassed)))):%8.4f}
+
+**************************
+* Hodoscope Efficiencies *
+**************************
+
+=:=:=:=:=
+= SHMS  =
+=:=:=:=:=
+
+KLT_SHMS_Hodo_Plane_1	:	{phodo_plane_AND_eff[0]}
+KLT_SHMS_Hodo_Plane_2	:	{phodo_plane_AND_eff[1]}
+KLT_SHMS_Hodo_Plane_3	:	{phodo_plane_AND_eff[2]}
+KLT_SHMS_Hodo_Plane_4	:	{phodo_plane_AND_eff[3]}
+
+KLT_SHMS_Hodo_S1XY	:	{phodo_s1XY_eff}
+KLT_SHMS_Hodo_S2XY	:	{phodo_s2XY_eff}
+
+KLT_SHMS_Hodo_3_of_4_EFF	:	{phodo_3_of_4_eff}
+KLT_SHMS_Hodo_4_of_4_EFF	:	{phodo_4_of_4_eff}
+
+=:=:=:=:=
+=  HMS  =
+=:=:=:=:=
+
+KLT_HMS_Hodo_Plane_1	:	{hhodo_plane_AND_eff[0]}
+KLT_HMS_Hodo_Plane_2	:	{hhodo_plane_AND_eff[1]}
+KLT_HMS_Hodo_Plane_3	:	{hhodo_plane_AND_eff[2]}
+KLT_HMS_Hodo_Plane_4	:	{hhodo_plane_AND_eff[3]}
+
+KLT_HMS_Hodo_S1XY	:	{hhodo_s1XY_eff}
+KLT_HMS_Hodo_S2XY	:	{hhodo_s2XY_eff}
+
+KLT_HMS_Hodo_3_of_4_EFF	:	{hhodo_3_of_4_eff}
+KLT_HMS_Hodo_4_of_4_EFF	:	{hhodo_4_of_4_eff}
+
+****************************
+* Calorimeter Efficiencies *
+****************************
+
+These are raw efficiencies and should not be used for yield calculation
+
+=:=:=:=:=
+= SHMS  =
+=:=:=:=:=
+
+shmsPreShower        Counts: {P.cal.stat_trksum1} eff : {P.cal.stat_hitsum1 / P.cal.stat_trksum1} 
+shmsShowerArray      Counts: {P.cal.stat_trksum_array} eff : {P.cal.stat_hitsum_array / P.cal.stat_trksum_array}
+
+=:=:=:=:=
+=  HMS  =
+=:=:=:=:=
+
+hA       Counts: {H.cal.stat_trksum1} eff : {H.cal.stat_hitsum1 / H.cal.stat_trksum1}
+hB       Counts: {H.cal.stat_trksum2} eff : {H.cal.stat_hitsum2 / H.cal.stat_trksum2}
+hC       Counts: {H.cal.stat_trksum3} eff : {H.cal.stat_hitsum3 / H.cal.stat_trksum3}
+hD       Counts: {H.cal.stat_trksum4} eff : {H.cal.stat_hitsum4 / H.cal.stat_trksum4}
+
+KLT_HMS_ALL_Elec_Cal_Did            :   {HMSCALDidelec.npassed}
+KLT_HMS_ALL_Elec_Cal_Should         :   {HMSCALShouldelec.npassed}
+KLT_HMS_COIN_Elec_Cal_Did           :   {HMSCALCOINDide.npassed}
+KLT_HMS_COIN_Elec_Cal_Should        :   {HMSCALCOINShoulde.npassed}
+KLT_HMS_SING_Elec_Cal_Did           :   {HMSCALSINGDide.npassed}
+KLT_HMS_SING_Elec_Cal_Should        :   {HMSCALSINGShoulde.npassed}
+
+KLT_HMS_Cal_ALL_Elec_Eff            :   {HMSCALDidelec.npassed / (HMSCALShouldelec.npassed+0.0001):%8.4f} +- {(sqrt((((HMSCALShouldelec.npassed)*(HMSCALDidelec.npassed))-((HMSCALDidelec.npassed)*(HMSCALDidelec.npassed))) / ((HMSCALShouldelec.npassed)*(HMSCALShouldelec.npassed)*(HMSCALShouldelec.npassed)))):%8.4f}
+
+KLT_HMS_Cal_COIN_Elec_Eff           :   {HMSCALCOINDide.npassed / (HMSCALCOINShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((HMSCALCOINShoulde.npassed)*(HMSCALCOINDide.npassed))-((HMSCALCOINDide.npassed)*(HMSCALCOINDide.npassed))) / ((HMSCALCOINShoulde.npassed)*(HMSCALCOINShoulde.npassed)*(HMSCALCOINShoulde.npassed)))):%8.4f}
+
+KLT_HMS_Cal_SING_Elec_Eff           :   {HMSCALSINGDide.npassed / (HMSCALSINGShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((HMSCALSINGShoulde.npassed)*(HMSCALSINGDide.npassed))-((HMSCALSINGDide.npassed)*(HMSCALSINGDide.npassed))) / ((HMSCALSINGShoulde.npassed)*(HMSCALSINGShoulde.npassed)*(HMSCALSINGShoulde.npassed)))):%8.4f}
+
+===================
+== Triggers Info ==
+===================
+
+KLT_SHMS_Hodoscope_S1X_Triggers         :       {P.S1X.scalerCut}
+KLT_HMS_Hodoscope_S1X_Triggers          :       {H.S1X.scalerCut}
+
+KLT_SHMS_Hodoscope_S1X_Rate         :    {(P.S1X.scalerCut/P.1MHz.scalerTimeCut)/1000.:%.3f} kHz
+KLT_HMS_Hodoscope_S1X_Rate          :    {(H.S1X.scalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz

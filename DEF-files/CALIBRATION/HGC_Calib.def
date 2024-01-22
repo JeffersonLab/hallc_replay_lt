@@ -1,0 +1,34 @@
+block	P.gtr.beta
+block	P.hgcer.goodAdcTdcDiffTime
+block	P.hgcer.goodAdcPulseInt
+block	P.hgcer.goodAdcPulseAmp
+block	P.hgcer.numTracksFired
+block	P.cal.fly.earray
+block	P.cal.pr.eplane
+block	P.cal.etotnorm
+block	P.gtr.p
+block	P.gtr.dp
+block	P.gtr.x
+block	P.gtr.ph
+block	P.gtr.y
+block	P.gtr.th
+block	P.hgcer.xAtCer
+block	P.hgcer.yAtCer
+block   P.dc.x_fp
+block   P.dc.y_fp
+block   P.dc.xp_fp
+block   P.dc.yp_fp
+
+
+
+begin epics
+IBC3H00CRCUR4
+hac_bcm_average
+ibcm1
+ibcm2
+iunser
+itov3out
+itov4out
+MOFC1DELTA
+MOFC1FREQ
+end epics

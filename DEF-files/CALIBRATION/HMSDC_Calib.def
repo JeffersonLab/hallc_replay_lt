@@ -40,5 +40,18 @@ block H.dc.2x2.dist
 block H.dc.residual
 block H.dc.residualExclPlane
 
+block H.dc.1x1.nhit
+block H.dc.1x2.nhit
+block H.dc.1u1.nhit
+block H.dc.1u2.nhit
+block H.dc.1v1.nhit
+block H.dc.1v2.nhit
+block H.dc.2x1.nhit
+block H.dc.2x2.nhit
+block H.dc.2u1.nhit
+block H.dc.2u2.nhit
+block H.dc.2v1.nhit
+block H.dc.2v2.nhit
+
 block H.cal.etot
 block H.cer.npeSum

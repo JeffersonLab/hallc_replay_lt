@@ -1,0 +1,5 @@
+### PionLT 2021 Kinematics
+8977 - 99999
+g_ctp_parm_filename       = "DBASE/COIN/OnlinePionLT_2021_cyero.param"
+g_ctp_kinematics_filename = "DBASE/COIN/standard.kinematics"
+

@@ -1,11 +1,11 @@
--15. 27.	Delta range, %
-0.5 1.5	Beta range
-0.  	Heavy Gas Cherenkov, threshold on signals in p.e.
-5.	Minimum number of hits per channel required to be calibrated
-0. 3.	Range of uncalibrated energy deposition histogram
-500	Binning of uncalibrated energy deposition histogram
--.1 1.25	Gaussian fit range around e- peak in the uncalibrated Edep histogram
-2.5	Gaussian fit range around mean e- peak in the uncalibrated Edep histogram 
+-10. 20.  Delta range, %
+0.5 1.5   Beta range
+5.        Heavy Gas Cherenkov, threshold on signals in p.e.
+5.        Minimum number of hits per channel required to be calibrated
+0.05 2.   Range of uncalibrated energy deposition histogram
+500       Binning of uncalibrated energy deposition histogram
+-0.065 0.2        Gaussian fit range around e- peak in the uncalibrated Edep histogram
+2.2     Gaussian fit range around mean e- peak in the uncalibrated Edep histogram
 
 ; Calibration constants for run 1791_300000, 38067 events processed (dec. 17 defocused run)
 

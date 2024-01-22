@@ -17,3 +17,11 @@ It prints out
       # of scaler read, 
       average bcm current values for each bcm
       corresponding event number for each scaler event
+
+# C.Y. Comment (Aug 27, 2021)
+# For some reason when I compile the code in root: >> .L ScalerCalib.C+
+# The relevant .so and .pcm files are actually save to
+# /home/cdaq/.root_build_dir/home/cdaq/pionLT-2021/hallc_replay_lt/CALIBRATION/bcm_current_map/
+# but they don't show up in dir:  ~/pionLT-2021/hallc_replay_lt/CALIBRATION/bcm_current_map/
+# I had to copy the files manually, then I was able to do: .x run("ROOTfile_path") to create the param file,
+# 

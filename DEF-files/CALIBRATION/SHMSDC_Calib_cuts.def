@@ -1,3 +1,9 @@
+#########################################
+####### Author - Muhammad Junaid ########
+##### University of Regina, Canada ######
+######## Modified - April, 2023 #########
+#########################################
+
 Block: RawDecode
 
 Pedestal_event         g.evtyp == 99
@@ -25,9 +31,49 @@ pTRIG4_ROC2     T.coin.pTRIG4_ROC2_tdcTimeRaw > 0
 pTRIG5_ROC2     T.coin.pTRIG5_ROC2_tdcTimeRaw > 0
 pTRIG6_ROC2	T.coin.pTRIG6_ROC2_tdcTimeRaw > 0
 
-ALL_HMS_events_NOEDTM       T.coin.hEDTM_tdcTime == 0.0 && ALL_HMS_events
-ALL_SHMS_events_NOEDTM      T.coin.pEDTM_tdcTime == 0.0 && ALL_SHMS_events
+ALL_HMS_events_NO_EDTM       T.coin.hEDTM_tdcTime == 0.0 && ALL_HMS_events
+ALL_SHMS_events_NO_EDTM      T.coin.pEDTM_tdcTime == 0.0 && ALL_SHMS_events
 ALL_COIN_events_NO_EDTM     T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime == 0.0 && ALL_COIN_events
 ALL_events_NO_EDTM          T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime == 0.0 && ALL_events
 
 Decode_master ALL_SHMS_events_NO_EDTM
+
+Block: Physics
+
+#################################
+####    SHMS DC Calibration   ###
+#################################
+
+pcut_cer_hg_elec          P.hgcer.npeSum > 1.5
+#pcut_cer_hg_pi            P.hgcer.npeSum > 1.5
+#pcut_cer_hg_p             P.hgcer.npeSum <= 1.5
+pcut_cer_ag_elec          P.aero.npeSum > 1.5
+#pcut_cer_ag_pi            P.aero.npeSum > 1.5
+#pcut_cer_ag_p             P.aero.npeSum <= 1.5
+pcut_cal_elec             P.cal.etotnorm > 0.6
+#pcut_cal_pi               P.cal.etotnorm <= 0.6
+#pcut_cal_p                P.cal.etotnorm <= 0.6
+#pcut_ngc_elec             P.nhcer.npeSum > 0.3
+
+p_1x1_nhit                P.dc.1x1.nhit == 1
+p_1x2_nhit                P.dc.1x2.nhit == 1
+p_1u1_nhit                P.dc.1u1.nhit == 1
+p_1u2_nhit                P.dc.1u2.nhit == 1
+p_1v1_nhit                P.dc.1v1.nhit == 1
+p_1v2_nhit                P.dc.1v2.nhit == 1
+p_2x1_nhit                P.dc.2x1.nhit == 1
+p_2x2_nhit                P.dc.2x2.nhit == 1
+p_2u1_nhit                P.dc.2u1.nhit == 1
+p_2u2_nhit                P.dc.2u2.nhit == 1
+p_2v1_nhit                P.dc.2v1.nhit == 1
+p_2v2_nhit                P.dc.2v2.nhit == 1
+
+P_MULTIPLICITY            p_1x1_nhit && p_1x2_nhit && p_1u1_nhit && p_1u2_nhit && p_1v1_nhit && p_1v2_nhit && p_2x1_nhit && p_2x2_nhit && p_2u1_nhit && p_2u2_nhit && p_2v1_nhit && p_2v2_nhit
+
+GOOD_SHMS_ELEC            pcut_cer_hg_elec && pcut_cer_ag_elec && pcut_cal_elec
+#GOOD_SHMS_PION            pcut_cer_hg_pi && pcut_cer_ag_pi && pcut_cal_pi
+#GOOD_SHMS_PROTON          pcut_cer_hg_p && pcut_cer_ag_p && pcut_cal_p
+GOOD_SHMS_EVENT           P_MULTIPLICITY && GOOD_SHMS_ELEC
+
+
+Physics_master GOOD_SHMS_EVENT

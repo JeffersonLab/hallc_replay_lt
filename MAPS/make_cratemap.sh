@@ -7,19 +7,19 @@ function proceed {
     echo ;read -p "Enter the crate(s), separated by spaces, you would like to form a single crate map for > " list
     arr=($list)
     for crate in "${arr[@]}"; do
-	if ((${crate} < 1)) || ((${crate} > 7)); then
-	    echo; echo "You must enter an integer value in the range [1, 7]"; echo
+	if ((${crate} < 1)) || ((${crate} > 8)); then
+	    echo; echo "You must enter an integer value in the range [1, 8]"; echo
 	    exit
 	fi
     done
     for crate in "${arr[@]}"; do
-	if ((crate%2 == 1)) && ((crate != 7)); then
+	if ((crate%2 == 1)) && ((crate != 8)); then
 	    (cat ${PWD}/HMS/CRATE/db_crate${crate}map.dat; echo; echo) >> db_cratemap.dat
 	    echo; echo "HMS  Crate ${crate} has been added to db_cratemap.dat"
-	elif ((crate%2 == 0)) || ((crate == 7)); then
+	elif ((crate%2 == 0)) || ((crate == 8)); then
 	    (cat ${PWD}/SHMS/CRATE/db_crate${crate}map.dat; echo; echo) >> db_cratemap.dat
 	    echo; echo "SHMS Crate ${crate} has been added to db_cratemap.dat"
-	    if ((crate == 7)); then echo; fi
+	    if ((crate == 8)); then echo; fi
 	fi
     done
 }

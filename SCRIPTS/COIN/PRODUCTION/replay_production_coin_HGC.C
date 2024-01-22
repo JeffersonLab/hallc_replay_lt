@@ -16,22 +16,30 @@ void replay_production_coin_HGC (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
     }
   }
 
-  // Create file name patterns.
-  const char* RunFileNamePattern = "coin_all_%05d.dat";
+  const char* RunFileNamePattern;
+  // Create file name patterns. Base this upon run number
+  if (RunNumber >= 10000){
+    RunFileNamePattern = "shms_all_%05d.dat";
+  }
+  else if (RunNumber < 10000){
+    RunFileNamePattern = "coin_all_%05d.dat";
+  }
   vector<TString> pathList;
   pathList.push_back(".");
   pathList.push_back("./raw");
+  pathList.push_back("./raw1");
+  pathList.push_back("./raw2");
+  pathList.push_back("./raw_volatile");
+  pathList.push_back("./raw_PionLT");
+  pathList.push_back("./raw_KaonLT");
   pathList.push_back("./raw/../raw.copiedtotape");
   pathList.push_back("./cache");
-  pathList.push_back("./raw_volatile");
-
-  //const char* RunFileNamePattern = "raw/coin_all_%05d.dat";
   //const char* ROOTFileNamePattern = "ROOTfiles/coin_replay_production_%d_%d.root";
   const char* ROOTFileNamePattern = "ROOTfiles/Calib/HGC/coin_replay_production_%d_%d.root";
   
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
-  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_KaonLTCalib.database");
+  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard.database");
   gHcParms->Load(gHcParms->GetString("g_ctp_database_filename"), RunNumber);
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
@@ -41,8 +49,8 @@ void replay_production_coin_HGC (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHcParms->Load("PARAM/HMS/GEN/h_fadc_debug.param");
   gHcParms->Load("PARAM/SHMS/GEN/p_fadc_debug.param");
   //Load params for BCM
-  const char* CurrentFileNamePattern = "PARAM/HMS/BCM/CALIB/bcmcurrent_%d.param";
-  gHcParms->Load(Form(CurrentFileNamePattern, RunNumber));
+  //const char* CurrentFileNamePattern = "PARAM/HMS/BCM/CALIB/bcmcurrent_%d.param";
+  // gHcParms->Load(Form(CurrentFileNamePattern, RunNumber));
 
   // Load the Hall C detector map
   gHcDetectorMap = new THcDetectorMap();
@@ -61,8 +69,8 @@ void replay_production_coin_HGC (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   SHMS->AddEvtType(7);
   gHaApps->Add(SHMS);
   // Add Noble Gas Cherenkov to SHMS apparatus
-  //THcCherenkov* pngcer = new THcCherenkov("ngcer", "Noble Gas Cherenkov");
-  //SHMS->AddDetector(pngcer);
+  THcCherenkov* pngcer = new THcCherenkov("ngcer", "Noble Gas Cherenkov");
+  SHMS->AddDetector(pngcer);
   // Add drift chambers to SHMS apparatus
   THcDC* pdc = new THcDC("dc", "Drift Chambers");
   SHMS->AddDetector(pdc);
@@ -193,14 +201,14 @@ void replay_production_coin_HGC (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   coin->AddEvtType(2);
   TRG->AddDetector(coin); 
 
-  THcHelicityScaler *helscaler = new THcHelicityScaler("HS", "Hall C helicity scalers"); 
-  helscaler->SetROC(8);
-  helscaler->SetUseFirstEvent(kTRUE);
-  gHaEvtHandlers->Add(helscaler);
-  // Add helicity detector to trigger apparatus
-  THcHelicity* helicity = new THcHelicity("helicity","Helicity Detector");
-  TRG->AddDetector(helicity);
-  helicity->SetHelicityScaler(helscaler);
+  // THcHelicityScaler *helscaler = new THcHelicityScaler("HS", "Hall C helicity scalers"); 
+  // helscaler->SetROC(8);
+  // helscaler->SetUseFirstEvent(kTRUE);
+  // gHaEvtHandlers->Add(helscaler);
+  // // Add helicity detector to trigger apparatus
+  // THcHelicity* helicity = new THcHelicity("helicity","Helicity Detector");
+  // TRG->AddDetector(helicity);
+  // helicity->SetHelicityScaler(helscaler);
   
   //Add coin physics module THcCoinTime::THcCoinTime (const char *name, const char* description, const char* hadArmName, 
   // const char* elecArmName, const char* coinname) :
@@ -253,7 +261,7 @@ void replay_production_coin_HGC (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
     // Define DEF-file+
-  analyzer->SetOdefFile("DEF-files/PRODUCTION/coin_production_hElec_pProt.def");
+  analyzer->SetOdefFile("DEF-files/CALIBRATION/HGC_Calib.def");
   // Define cuts file
   analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/coin_production_cuts.def");  // optional
   // File to record accounting information for cuts
@@ -261,8 +269,8 @@ void replay_production_coin_HGC (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template
-  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/coin_production_new.template",
-  Form("REPORT_OUTPUT/Calib/HGC/replay_coin_production_%d_%d.report", RunNumber, MaxEvent));  // optional
+  // analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/coin_production_new.template",
+  // Form("REPORT_OUTPUT/Calib/HGC/replay_coin_production_%d_%d.report", RunNumber, MaxEvent));  // optional
 
   // Define DEF-file+
   //analyzer->SetOdefFile("DEF-files/PRODUCTION/coin_production_KLT.def");

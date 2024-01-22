@@ -1,0 +1,35 @@
+Author: C. Yero
+Date: Aug 29, 2021
+
+NOTES:
+
+* re-structures the parameter files in each of their corresponding directories
+  
+   - created bacup/ directory, where I store the original files I found 
+
+   - created online_v1/ directory where the initial (version 1) parameters
+     were placed
+
+   - made symbolic link for each parameter file to the onlive_v1 directory
+     (e.g., in the /GEN/ directory, if you type ls -ltrh, you will see:
+----------------------------------------------------------------
+drwxr-xr-x 2 cdaq c-cdaq 4.0K Aug 29 13:15 backup
+drwxr-xr-x 2 cdaq c-cdaq  129 Aug 29 13:17 online_v1
+lrwxrwxrwx 1 cdaq c-cdaq   21 Aug 29 13:18 gbeam.param -> online_v1/gbeam.param
+lrwxrwxrwx 1 cdaq c-cdaq   22 Aug 29 13:18 gdebug.param -> online_v1/gdebug.param
+lrwxrwxrwx 1 cdaq c-cdaq   24 Aug 29 13:18 genflags.param -> online_v1/genflags.param
+lrwxrwxrwx 1 cdaq c-cdaq   24 Aug 29 13:18 gscalers.param -> online_v1/gscalers.param
+lrwxrwxrwx 1 cdaq c-cdaq   23 Aug 29 13:18 gtarget.param -> online_v1/gtarget.param
+-----------------------------------------------------------------
+  
+   - Once new parameters are determined, simply make onlive_v2 directories, copyt the new parameters
+     to said directory and make new symbolic link of parameters 
+     ( e.g. from the .GEN/ directory, do: ln -sf online_v2/gbeam.param ) 
+
+   - The same logic applies to all other parameters in any directory
+
+
+   - I did NOT changed the param structure in the TRIG/ directory, since these params get read
+     directly from the replay scripts, and If I changed this, some replay scripts might not work.
+     (Stephen Kay could check all replay scripts that the PION LT group will use and make sure it
+      is OK to re-structure)

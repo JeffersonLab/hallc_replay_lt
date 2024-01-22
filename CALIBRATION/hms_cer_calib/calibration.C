@@ -43,7 +43,6 @@ void calibration::Begin(TTree * /*tree*/)
    TString option = GetOption();
    Info("Begin", "Starting calibration process with option: %s", option.Data());
    Info("Begin", "To see details of calibration, use option showall");
-
    if (option.Contains("showall")) fFullShow = kTRUE;
 }
 
@@ -55,10 +54,14 @@ void calibration::SlaveBegin(TTree * /*tree*/)
 
   TString option = GetOption();
   
+   cout << "\nTest\n";
   fPulseInt = new TH1F*[2];
+  //fPulseIntXTimingFull = new TH2F*[2]
   for (Int_t ipmt = 0; ipmt < 2; ipmt++) {
-    fPulseInt[ipmt] = new TH1F(Form("PulseInt%d",ipmt+1), Form("Pulse integral PMT %d;ADC Channel (pC);Counts",ipmt+1), 1000, 0, 100);
+    fPulseInt[ipmt] = new TH1F(Form("PulseInt%d",ipmt+1), Form("Pulse integral PMT %d;ADC Channel (pC);Counts",ipmt+1), 500, 0, 500);
+    //    fPulseIntXTimingFull[ipmt] = new TH2F(Form("PulseIntXTimingFull%d", ipmt+1), Form("Pulse Int v Timing PMT %d;ADC Channel \(pC\);Time \(ns\);Counts"), 1000, 0, 1000, 1000, 50, 150);
     GetOutputList()->Add(fPulseInt[ipmt]);
+    //GetOutputList()->Add(fPulseIntXTimingFull[ipmt]);
   }
   
   fPulseInt_quad = new TH1F**[2];
@@ -66,7 +69,7 @@ void calibration::SlaveBegin(TTree * /*tree*/)
   fPulseInt_quad[1] = new TH1F*[4];
   for (Int_t ipmt = 0; ipmt < 2; ipmt++) {
     for (Int_t iquad = 0; iquad < 4; iquad++) {
-      fPulseInt_quad[ipmt][iquad] = new TH1F(Form("PulseInt_quad%d_PMT%d",iquad+1,ipmt+1),Form("Pulse Integral PMT%d quad%d; ADC Channel (pC); Counts",ipmt+1,iquad+1),1000,0,100);
+      fPulseInt_quad[ipmt][iquad] = new TH1F(Form("PulseInt_quad%d_PMT%d",iquad+1,ipmt+1),Form("Pulse Integral PMT%d quad%d; ADC Channel (pC); Counts",ipmt+1,iquad+1),1000,0,1000);
       GetOutputList()->Add(fPulseInt_quad[ipmt][iquad]);
     }
   }
@@ -80,16 +83,16 @@ void calibration::SlaveBegin(TTree * /*tree*/)
   fTiming_Cut = new TH1F*[2];
   fTiming_Full = new TH1F*[2];
   for (Int_t ipmt = 0; ipmt < 2; ipmt++) {
-    fTiming_Cut[ipmt] = new TH1F(Form("Timing_Cut%d",ipmt+1), Form("Timing cut used for 'good' hits in PMT %d;Time (ns);Counts",ipmt+1), 10000, 50, 150);
+    fTiming_Cut[ipmt] = new TH1F(Form("Timing_Cut%d",ipmt+1), Form("Timing cut used for 'good' hits in PMT %d;Time (ns);Counts",ipmt+1), 2000, 0, 200);
     GetOutputList()->Add(fTiming_Cut[ipmt]);
-    fTiming_Full[ipmt] = new TH1F(Form("Timing_Full%d",ipmt+1), Form("Full timing information for events in PMT %d;Time (ns);Counts",ipmt+1), 10000, 50, 150);
+    fTiming_Full[ipmt] = new TH1F(Form("Timing_Full%d",ipmt+1), Form("Full timing information for events in PMT %d;Time (ns);Counts",ipmt+1), 2000, 0, 200);
     GetOutputList()->Add(fTiming_Full[ipmt]);
   }
 
   //Particle ID cut visualization
-  fCut_everything = new TH1F("Cut_everything", "Visualization of no cuts; Normalized Calorimeter Energy (GeV); Counts", 200, 0, 2.0);
+  fCut_everything = new TH1F("Cut_everything", "Visualization of no cuts; Normalized Calorimeter Energy; Counts", 200, 0, 2.0);
   GetOutputList()->Add(fCut_everything);
-  fCut_electron = new TH1F("Cut_electron", "Visualization of pion cut; Normalized Calorimeter Energy (GeV); Counts", 200, 0, 2.0);
+  fCut_electron = new TH1F("Cut_electron", "Visualization of pion cut; Normalized Calorimeter Energy; Counts", 200, 0, 2.0);
   GetOutputList()->Add(fCut_electron);
 }
 
@@ -114,23 +117,28 @@ Bool_t calibration::Process(Long64_t entry)
    fReader.SetEntry(entry);
    
    //Only one track
-   if (*Ndata_H_tr_beta != 1) return kTRUE;
+   //if (*Ndata_H_tr_beta != 1) return kTRUE;
 
-   for (Int_t itrack = 0; itrack < *Ndata_H_tr_beta; itrack++) {
+   //for (Int_t itrack = 0; itrack < *Ndata_H_tr_beta; itrack++) {
      //Beta Cut
-     fBeta_Full->Fill(H_tr_beta[itrack]);
-     if (TMath::Abs(H_tr_beta[itrack] -1.0) > 0.2) return kTRUE;
-     fBeta_Cut->Fill(H_tr_beta[itrack]);
+   fBeta_Full->Fill(H_gtr_beta[0]);
+   if (TMath::Abs(H_gtr_beta[0] -1.0) > 0.2) return kTRUE;
+   fBeta_Cut->Fill(H_gtr_beta[0]);
+
+   // fBeta_Full->Fill(1);
+   // if (TMath::Abs(1 -1.0) > 0.2) return kTRUE;
+   // fBeta_Cut->Fill(1);
 
      for (Int_t ipmt = 0; ipmt < 2; ipmt++) {
        //Timing Cut
+       //fPulseIntXTimingFull[ipmt]->Fill(H_cer_goodAdcPulseInt[ipmt],H_cer_goodAdcTdcDiffTime[ipmt]);
        fTiming_Full[ipmt]->Fill(H_cer_goodAdcTdcDiffTime[ipmt]);
-       if (H_cer_goodAdcTdcDiffTime[ipmt] > 110 || H_cer_goodAdcTdcDiffTime[ipmt] < 90) continue;
+       if (H_cer_goodAdcTdcDiffTime[ipmt] > 165 || H_cer_goodAdcTdcDiffTime[ipmt] < 147) continue;
        fTiming_Cut[ipmt]->Fill(H_cer_goodAdcTdcDiffTime[ipmt]);
 
        if (ipmt == 0) fCut_everything->Fill(*H_cal_etotnorm);
        //Electron Cut
-       if (*H_cal_etotnorm < 0.5) {
+       if (*H_cal_etotnorm > 0.05){ //*H_cal_etotnorm > 0.05 && *H_cal_etotnorm < 0.4) {
 	 if (ipmt == 0) fCut_electron->Fill(*H_cal_etotnorm);
 	 fPulseInt[ipmt]->Fill(H_cer_goodAdcPulseInt[ipmt]);
 
@@ -149,7 +157,7 @@ Bool_t calibration::Process(Long64_t entry)
 	 }
        }//End of electron cut
      }//End of PMT loop
-   }//End of tracking loop
+     //}//End of tracking loop
    
    return kTRUE;
 }
@@ -167,7 +175,7 @@ void calibration::Terminate()
    // The Terminate() function is the last function to be called during
    // a query. It always runs on the client, it can be used to present
    // the results graphically or save the results to file.
-
+  cout << "test"<<endl;
   Info("Terminate", "'%s' showing", (fFullShow ? "full" : "minimal"));
   Info("Terminate", "Histograms formed, now starting calibration.\n'Peak Buffer full' is a good warning!\n");
   printf("\n");
@@ -177,6 +185,10 @@ void calibration::Terminate()
   TH1F* PulseInt_quad[2][4];
   TH1F* Timing_Cut[2];
   TH1F* Timing_Full[2];
+  int RunNumber = 1;
+
+  cout << endl << endl << "test"<< endl << endl;
+
   for (Int_t ipmt = 0; ipmt < 2; ipmt++) {
     Timing_Cut[ipmt] = dynamic_cast<TH1F*> (GetOutputList()->FindObject(Form("Timing_Cut%d",ipmt+1)));
     Timing_Full[ipmt] = dynamic_cast<TH1F*> (GetOutputList()->FindObject(Form("Timing_Full%d",ipmt+1)));
@@ -189,6 +201,7 @@ void calibration::Terminate()
   Double_t Cer_Peak[2];
   //Begin peak Finding
   for (Int_t ipmt = 0; ipmt < 2; ipmt++) {
+    cout << endl << endl << "test loop"<< endl << endl;
     PulseInt[ipmt]->GetXaxis()->SetRangeUser(0,8);
     TSpectrum *s = new TSpectrum(1);
     s->Search(PulseInt[ipmt], 1.0, "nobackground&&nodraw", 0.001);
@@ -197,13 +210,13 @@ void calibration::Terminate()
     Cer_Peak[ipmt] = *pm->GetX();
     PulseInt[ipmt]->GetXaxis()->SetRangeUser(0,100);
   }
-
+  cout << endl << endl << "test"<< endl << endl;
   //Begin Fitting of SPE
   /*TF1 *poisson =  new TF1("poisson","[1]*((pow([0],x)*exp(-[0]))/(tgamma(x+1)))",0,20);
   poisson->SetParName(0,"#mu");
   poisson->SetParName(1,"Amplitude");
   poisson->SetParameters(5.0,100);
-  poisson->SetParLimits(0,0.0,10.0);
+  poisson->SetParLimits(0,10.0,20.0);
   poisson->SetParLimits(1,0.0,9999.0);
   poisson->SetRange(0,Cer_Peak[0]+2); PulseInt[0]->Fit("poisson","RQM");
   TF1 *PulseIntPMT1Fit = PulseInt[0]->GetFunction("poisson");
@@ -215,24 +228,28 @@ void calibration::Terminate()
   gaussian->SetParName(1,"Amplitude");
   gaussian->SetParName(2,"#sigma");
   gaussian->SetParameters(5.0,100,1.0);
-  gaussian->SetParLimits(0,0.0,10.0);
-  gaussian->SetParLimits(1,0.0,9999.0);
+  gaussian->SetParLimits(0,0.0,12.0);
+  gaussian->SetParLimits(1,0.0,999999999.0);
   gaussian->SetParLimits(2,0.0,10.0);
-  gaussian->SetRange(0,Cer_Peak[0]+2); PulseInt[0]->Fit("gaussian","RQM0");
+  gaussian->SetRange(7,13); PulseInt[0]->Fit("gaussian","RQM0");
   TF1 *PulseIntPMT1Fit = PulseInt[0]->GetFunction("gaussian");
-  gaussian->SetRange(0,Cer_Peak[1]+2); PulseInt[1]->Fit("gaussian","RQM0");
+  gaussian->SetRange(6.5,11); PulseInt[1]->Fit("gaussian","RQM0");
   TF1 *PulseIntPMT2Fit = PulseInt[1]->GetFunction("gaussian");
-  
+
+
+  fFullShow = true;
   if (fFullShow) {
     TCanvas *Beta = new TCanvas("Beta","Beta cuts used");
     Beta->Divide(2,1);
     Beta->cd(1); fBeta_Full->Draw();
     Beta->cd(2); fBeta_Cut->Draw();
+    Beta->Print(Form("plots/HMS_cer_%d.pdf(",RunNumber), Beta->GetName());
    
     TCanvas *Cal = new TCanvas("Cal","Calorimeter cuts used");
     Cal->Divide(2,1);
     Cal->cd(1); fCut_everything->Draw();
     Cal->cd(2); fCut_electron->Draw();
+    Cal->Print(Form("plots/HMS_cer_%d.pdf",RunNumber), Cal->GetName());
 
     TCanvas *Timing = new TCanvas("Timing","Timing cuts used");
     Timing->Divide(2,2);
@@ -240,6 +257,7 @@ void calibration::Terminate()
     Timing->cd(2); Timing_Cut[0]->Draw();
     Timing->cd(3); Timing_Full[1]->Draw();
     Timing->cd(4); Timing_Cut[1]->Draw();
+    Timing->Print(Form("plots/HMS_cer_%d.pdf",RunNumber), Timing->GetName());
     /*
     TCanvas *PulseIntPMT1 = new TCanvas("PulseIntPMT1","Good Pulse Integral from Cherenkov PMT 1");
     PulseIntPMT1->Divide(2,2);
@@ -261,6 +279,8 @@ void calibration::Terminate()
     cPulseInt->Divide(2,1);
     cPulseInt->cd(1); PulseInt[0]->Draw(); PulseIntPMT1Fit->Draw("same");
     cPulseInt->cd(2); PulseInt[1]->Draw(); PulseIntPMT2Fit->Draw("same");
+    cPulseInt->Print(Form("plots/HMS_cer_%d.pdf)",RunNumber), cPulseInt->GetName());
+    
   }
 
   //Output the actual calibration information
@@ -278,5 +298,14 @@ void calibration::Terminate()
     calibration << "hcer_adc_to_npe = "; 
     calibration << Form("1./%3.3f, 1./%3.3f", PulseIntPMT1Fit->GetParameter(0), PulseIntPMT2Fit->GetParameter(0));
     calibration.close();
+  }
+
+  ofstream Calib;
+  Calib.open("Calib/calib_error.csv", ios::out);
+
+  if (!Calib.is_open()) cout << "Error file not opened!\n";
+  else {
+    Calib << PulseIntPMT1Fit->GetParameter(0) << ',' << PulseIntPMT1Fit->GetParError(0) << ',' << PulseIntPMT2Fit->GetParameter(0) << ',' << PulseIntPMT2Fit->GetParError(0);
+    Calib.close();
   }
 }

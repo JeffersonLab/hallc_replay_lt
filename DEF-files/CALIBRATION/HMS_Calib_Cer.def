@@ -1,0 +1,24 @@
+block H.cer.goodAdcPulseInt
+block H.cer.goodAdcTdcDiffTime
+block H.cer.xAtCer
+block H.cer.yAtCer
+block H.gtr.beta
+block H.cal.etotnorm
+
+block T.coin.pTRIG5_ROC2_tdcTime
+block T.coin.pEDTM_tdcTime
+block T.helicity.*
+block T.coin.pRF*
+block T.coin.hRF*
+
+begin epics
+IBC3H00CRCUR4
+hac_bcm_average
+ibcm1
+ibcm2
+iunser
+itov3out
+itov4out
+MOFC1DELTA
+MOFC1FREQ
+end epics

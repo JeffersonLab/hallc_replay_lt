@@ -16,7 +16,7 @@ int main_calib(TString SpecFlag, string inputname, Int_t RunNum)
   //measure execution time
   clock_t cl;
   cl = clock();                                                    
-                                                                                                        //pid_elec,  pid_kFALSE (no PID cuts) 
+                                                                                                        //pid_elec,  pid_KFALSE (no PID cuts) 
                                                                                                         // |
                                                                                                         // v
   //  DC_calib obj("HMS", "../../../ROOTfiles/hms_replay_production_all_1856_hodtrefcut1000_-1.root", 1856,-1, "pid_elec", "card");

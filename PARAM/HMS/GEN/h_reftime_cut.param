@@ -1,7 +1,1 @@
-; Reference time from run 6749
-hdc_tdcrefcut=-16500.
-hhodo_tdcrefcut=-3700.
-
-hhodo_adcrefcut=-5150.
-hcer_adcrefcut=-5150.
-hcal_adcrefcut=-5150.
+Online_PionLT2022/h_reftime_cut_cyero.param

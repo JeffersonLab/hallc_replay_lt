@@ -15,15 +15,22 @@ void FullReplay (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
     }
   }
 
-  // Create file name patterns.
-  const char* RunFileNamePattern = "coin_all_%05d.dat";
+  const char* RunFileNamePattern;
+  // Create file name patterns. Base this upon run number
+  if (RunNumber >= 10000){
+    RunFileNamePattern = "shms_all_%05d.dat";
+  }
+  else if (RunNumber < 10000){
+    RunFileNamePattern = "coin_all_%05d.dat";
+  }
   vector<TString> pathList;
   pathList.push_back(".");
   pathList.push_back("./raw");
   pathList.push_back("./raw1");
   pathList.push_back("./raw2");
-  pathList.push_back("./raw3");
-  pathList.push_back("./raw4");
+  pathList.push_back("./raw_volatile");
+  pathList.push_back("./raw_PionLT");
+  pathList.push_back("./raw_KaonLT");
   pathList.push_back("./raw/../raw.copiedtotape");
   pathList.push_back("./cache");
 
@@ -32,12 +39,13 @@ void FullReplay (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
-  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_KaonLTCalib.database");
+  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_KaonLT.database");
   gHcParms->Load(gHcParms->GetString("g_ctp_database_filename"), RunNumber);
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
   // Load params for COIN trigger configuration
-  gHcParms->Load("PARAM/TRIG/tcoin.param");
+  //  gHcParms->Load("PARAM/TRIG/KaonLT_Trig/tcoin_Spring19_Offline.param");
+  //  gHcParms->Load("PARAM/TRIG/tcoin.param");
   // Load fadc debug parameters
   gHcParms->Load("PARAM/HMS/GEN/h_fadc_debug.param");
   gHcParms->Load("PARAM/SHMS/GEN/p_fadc_debug.param");
@@ -47,11 +55,11 @@ void FullReplay (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHcDetectorMap->Load("MAPS/COIN/DETEC/coin.map");
 
   // Load the BCM current params
-  const char* CurrentFileNamePattern = "PARAM/HMS/BCM/CALIB/bcmcurrent_%d.param";
-  gHcParms->Load(Form(CurrentFileNamePattern, RunNumber));
+  //  const char* CurrentFileNamePattern = "PARAM/HMS/BCM/CALIB/bcmcurrent_%d.param";
+  //  gHcParms->Load(Form(CurrentFileNamePattern, RunNumber));
 
   // Dec data
-  gHaApps->Add(new Podd::DecData("D","Decoder raw data"));
+  //  gHaApps->Add(new Podd::DecData("D","Decoder raw data"));
 
   //=:=:=:=
   // SHMS 
@@ -80,9 +88,9 @@ void FullReplay (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Add calorimeter to SHMS apparatus
   THcShower* pcal = new THcShower("cal", "Calorimeter");
   SHMS->AddDetector(pcal);
-
-  THcBCMCurrent* hbc = new THcBCMCurrent("H.bcm", "BCM current check");
-  gHaPhysics->Add(hbc);
+  
+  // THcBCMCurrent* hbc = new THcBCMCurrent("H.bcm", "BCM current check");
+  // gHaPhysics->Add(hbc);
 
   // Add rastered beam apparatus
   THaApparatus* pbeam = new THcRasteredBeam("P.rb", "Rastered Beamline");

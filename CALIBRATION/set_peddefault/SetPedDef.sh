@@ -20,11 +20,11 @@ fi
 
 # Set path depending upon hostname. Change or add more as needed  
 if [[ "${HOSTNAME}" = *"farm"* ]]; then  
-    REPLAYPATH="/group/c-kaonlt/USERS/${USER}/hallc_replay_lt"
+    REPLAYPATH="/group/c-pionlt/USERS/${USER}/hallc_replay_lt"
     cd "$REPLAYPATH"
     source "$REPLAYPATH/setup.sh"
 elif [[ "${HOSTNAME}" = *"qcd"* ]]; then
-    REPLAYPATH="/group/c-kaonlt/USERS/${USER}/hallc_replay_lt"
+    REPLAYPATH="/group/c-pionlt/USERS/${USER}/hallc_replay_lt"
     cd "$REPLAYPATH"
     source "$REPLAYPATH/setup.sh" 
 elif [[ "${HOSTNAME}" = *"cdaq"* ]]; then
@@ -33,7 +33,7 @@ elif [[ "${HOSTNAME}" = *"phys.uregina.ca"* ]]; then
     REPLAYPATH="/home/${USER}/work/JLab/hallc_replay_lt"
 fi
 
-ROOTFILE="$REPLAYPATH/ROOTfiles/Calib/GeneralFull_coin_replay_Offline_${RUNNUMBER}_${MAXEVENTS}.root"
+ROOTFILE="$REPLAYPATH/ROOTfiles/Calib/Timing/RefTime${RUNNUMBER}_${MAXEVENTS}.root"
 
 cd "$REPLAYPATH/CALIBRATION/set_peddefault"
 if [ ! -d "$REPLAYPATH/CALIBRATION/set_peddefault/OUTPUT" ]; then

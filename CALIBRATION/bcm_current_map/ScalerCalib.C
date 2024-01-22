@@ -12,6 +12,14 @@ ofstream outfile;
 
 //_________________________________
 
+//RLT 9/10/21... added default constructor to work with ROOT version
+ScalerCalib::ScalerCalib()
+{
+
+}
+
+//_________________________________
+
 ScalerCalib::ScalerCalib(string name) :
   fName(name), fPrintFlag(DEFAULT)
 {
@@ -50,7 +58,12 @@ int ScalerCalib::Run()
     }
   else
     {
-      runstr = (filename.substr(pos+8)).substr(0,4);  
+      // C.Y. Had to change substr(0,4) to (0, 5) to extract 
+      // run numbers with 5 digits. When this script was written
+      // we probably ONLY had 4-digit run numbers.
+      //runstr = (filename.substr(pos+8)).substr(0,4);  
+      runstr = (filename.substr(pos+8)).substr(0,5);  
+
     }
 
   ofilename = "bcmcurrent_" + runstr + ".param";

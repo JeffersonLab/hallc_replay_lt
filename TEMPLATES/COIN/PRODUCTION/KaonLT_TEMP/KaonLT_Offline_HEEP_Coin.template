@@ -170,6 +170,26 @@ KLT_HMS_Cer_COIN_Elec_Eff	    :	{HMSHGCCOINDide.npassed / (HMSHGCCOINShoulde.npa
 
 KLT_HMS_Cer_SING_Elec_Eff	    :	{HMSHGCSINGDide.npassed / (HMSHGCSINGShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((HMSHGCSINGShoulde.npassed)*(HMSHGCSINGDide.npassed))-((HMSHGCSINGDide.npassed)*(HMSHGCSINGDide.npassed))) / ((HMSHGCSINGShoulde.npassed)*(HMSHGCSINGShoulde.npassed)*(HMSHGCSINGShoulde.npassed)))):%8.4f}
 
+**************************
+* SHMS Beta Efficiencies *
+**************************
+
+KLT_SHMS_Good_Beta_Did		:	{SHMSGOODBETADID.npassed}
+KLT_SHMS_Good_Beta_Should	:	{SHMSBETASHOULD.npassed}
+KLT_SHMS_Bad_Beta_Did		:	{SHMSBADBETADID.npassed}
+KLT_SHMS_Bad_Beta_Should	:	{SHMSBETASHOULD.npassed}
+KLT_Coin_Good_Beta_Did		:	{COINGOODBETADID.npassed}	
+KLT_Coin_Good_Beta_Should	:	{COINBETASHOULD.npassed}
+KLT_Coin_Bad_Beta_Did		:	{COINBADBETADID.npassed}
+KLT_Coin_Bad_Beta_Should	:	{COINBETASHOULD.npassed}
+
+KLT_SHMS_Good_Beta_EFF		:	{SHMSGOODBETADID.npassed / (SHMSBETASHOULD.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSBETASHOULD.npassed)*(SHMSGOODBETADID.npassed)) - ((SHMSGOODBETADID.npassed)*(SHMSGOODBETADID.npassed))) / ((SHMSBETASHOULD.npassed)*(SHMSBETASHOULD.npassed)*(SHMSBETASHOULD.npassed)))):%8.4f}
+
+KLT_SHMS_Bad_Beta_EFF		:	{SHMSBADBETADID.npassed / (SHMSBETASHOULD.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSBETASHOULD.npassed)*(SHMSBADBETADID.npassed)) - ((SHMSBADBETADID.npassed)*(SHMSBADBETADID.npassed))) / ((SHMSBETASHOULD.npassed)*(SHMSBETASHOULD.npassed)*(SHMSBETASHOULD.npassed)))):%8.4f}
+
+KLT_Coin_Good_Beta_EFF		:	{COINGOODBETADID.npassed / (COINBETASHOULD.npassed+0.0001):%8.4f} +- {(sqrt((((COINBETASHOULD.npassed)*(COINGOODBETADID.npassed)) - ((COINGOODBETADID.npassed)*(COINGOODBETADID.npassed))) / ((COINBETASHOULD.npassed)*(COINBETASHOULD.npassed)*(COINBETASHOULD.npassed)))):%8.4f}
+
+KLT_Coin_Bad_Beta_EFF		:	{COINBADBETADID.npassed / (COINBETASHOULD.npassed+0.0001):%8.4f} +- {(sqrt((((COINBETASHOULD.npassed)*(COINBADBETADID.npassed)) - ((COINBADBETADID.npassed)*(COINBADBETADID.npassed))) / ((COINBETASHOULD.npassed)*(COINBETASHOULD.npassed)*(COINBETASHOULD.npassed)))):%8.4f}
 
 **************************
 * Hodoscope Efficiencies *
@@ -226,6 +246,19 @@ hA       Counts: {H.cal.stat_trksum1} eff : {H.cal.stat_hitsum1 / H.cal.stat_trk
 hB       Counts: {H.cal.stat_trksum2} eff : {H.cal.stat_hitsum2 / H.cal.stat_trksum2}
 hC       Counts: {H.cal.stat_trksum3} eff : {H.cal.stat_hitsum3 / H.cal.stat_trksum3}
 hD       Counts: {H.cal.stat_trksum4} eff : {H.cal.stat_hitsum4 / H.cal.stat_trksum4}
+
+KLT_HMS_ALL_Elec_Cal_Did            :   {HMSCALDidelec.npassed}
+KLT_HMS_ALL_Elec_Cal_Should         :   {HMSCALShouldelec.npassed}
+KLT_HMS_COIN_Elec_Cal_Did           :   {HMSCALCOINDide.npassed}
+KLT_HMS_COIN_Elec_Cal_Should        :   {HMSCALCOINShoulde.npassed}
+KLT_HMS_SING_Elec_Cal_Did           :   {HMSCALSINGDide.npassed}
+KLT_HMS_SING_Elec_Cal_Should        :   {HMSCALSINGShoulde.npassed}
+
+KLT_HMS_Cal_ALL_Elec_Eff            :   {HMSCALDidelec.npassed / (HMSCALShouldelec.npassed+0.0001):%8.4f} +- {(sqrt((((HMSCALShouldelec.npassed)*(HMSCALDidelec.npassed))-((HMSCALDidelec.npassed)*(HMSCALDidelec.npassed))) / ((HMSCALShouldelec.npassed)*(HMSCALShouldelec.npassed)*(HMSCALShouldelec.npassed)))):%8.4f}
+
+KLT_HMS_Cal_COIN_Elec_Eff           :   {HMSCALCOINDide.npassed / (HMSCALCOINShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((HMSCALCOINShoulde.npassed)*(HMSCALCOINDide.npassed))-((HMSCALCOINDide.npassed)*(HMSCALCOINDide.npassed))) / ((HMSCALCOINShoulde.npassed)*(HMSCALCOINShoulde.npassed)*(HMSCALCOINShoulde.npassed)))):%8.4f}
+
+KLT_HMS_Cal_SING_Elec_Eff           :   {HMSCALSINGDide.npassed / (HMSCALSINGShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((HMSCALSINGShoulde.npassed)*(HMSCALSINGDide.npassed))-((HMSCALSINGDide.npassed)*(HMSCALSINGDide.npassed))) / ((HMSCALSINGShoulde.npassed)*(HMSCALSINGShoulde.npassed)*(HMSCALSINGShoulde.npassed)))):%8.4f}
 
 ===================
 == Triggers Info ==

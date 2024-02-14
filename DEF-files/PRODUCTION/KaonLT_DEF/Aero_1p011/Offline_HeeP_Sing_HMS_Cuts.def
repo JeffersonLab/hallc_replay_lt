@@ -147,18 +147,41 @@ SHMSAeroDide            SHMSAeroShoulde && P.aero.npeSum > 1.0
 
 # HMS Acceptance cuts (Not used in HMS Tracking Efficiency)
 
-hcut_acceptance           H.gtr.th > -0.08 && H.gtr.th < 0.08 && H.gtr.ph > -0.045 && H.gtr.ph < 0.04 && H.gtr.dp > -8 && H.gtr.dp < 8
+hcut_acceptance           H.gtr.th > -0.08 && H.gtr.th < 0.08 && H.gtr.ph > -0.045 && H.gtr.ph < 0.045 && H.gtr.dp > -8 && H.gtr.dp < 8
 
 HMScoindcindipole	H.dc.InsideDipoleExit == 1
 
 HMSGEN		   HMShodstarttime && HMScoindcindipole && hcut_acceptance
-HMSCalelec         H.cal.etottracknorm > 0.7 &&  H.cal.etottracknorm < 1.6
+#HMSCalelec         H.cal.etottracknorm > 0.7 &&  H.cal.etottracknorm < 1.6
 
-HMSHGCShouldelec         HMSGEN && HMSCalelec 
-HMSHGCSINGShoulde	 HMSHGCShouldelec && HMS_event
+HMSCalelec         H.cal.etottracknorm > 0.85
 
-HMSHGCDidelec            HMSHGCShouldelec && H.cer.npeSum > 1.5
-HMSHGCSINGDide		 HMSHGCSINGShoulde && H.cer.npeSum > 1.5
+HMSHGCShouldelec         HMSGEN && HMSCalelec
+HMSHGCCOINShoulde        HMSHGCShouldelec && ALL_COIN_events
+HMSHGCSINGShoulde        HMSHGCShouldelec && HMS_event
+
+#HMSHGCDidelec           HMSHGCShouldelec && H.cer.npeSum > 1.5
+#HMSHGCCOINDide          HMSHGCCOINShoulde && H.cer.npeSum > 1.5
+#HMSHGCSINGDide          HMSHGCSINGShoulde && H.cer.npeSum > 1.5
+
+HMSHGCDidelec            HMSHGCShouldelec && H.cer.npeSum > 2.0
+HMSHGCCOINDide           HMSHGCCOINShoulde && H.cer.npeSum > 2.0
+HMSHGCSINGDide           HMSHGCSINGShoulde && H.cer.npeSum > 2.0
+
+##################
+###   HMS CAL  ###
+##################
+
+HMSCerelec         H.cer.npeSum > 8.0
+
+HMSCALShouldelec         HMSGEN && HMSCerelec
+HMSCALCOINShoulde        HMSCALShouldelec && ALL_COIN_events
+HMSCALSINGShoulde        HMSCALShouldelec && HMS_event
+
+HMSCALDidelec            HMSCALShouldelec && H.cal.etottracknorm > 0.7
+HMSCALCOINDide           HMSCALCOINShoulde && H.cal.etottracknorm > 0.7
+HMSCALSINGDide           HMSCALSINGShoulde && H.cal.etottracknorm > 0.7
+
 
 HMS_DELTA		 H.gtr.dp > -10 && H.gtr.dp < 10
 SHMS_DELTA		 P.gtr.dp > -15 && P.gtr.dp < 25
@@ -166,6 +189,8 @@ SHMS_DELTA		 P.gtr.dp > -15 && P.gtr.dp < 25
 HMSCalCer                H.cal.etottracknorm > 0.5 && H.cer.npeSum > 0.5
 SHMSCalCer               P.cal.etottracknorm > 0.5 && P.aero.npeSum > 0.5
 
-GOOD_SINGLES_Events	 	 HMS_DELTA && HMS_GOOD_TRACK
+#GOOD_SINGLES_Events	 	 HMS_DELTA && HMS_GOOD_TRACK
+
+GOOD_SINGLES_Events            HMS_DELTA && HMS_GOOD_TRACK && hcut_acceptance && HMScoindcindipole
 
 Physics_master GOOD_SINGLES_Events

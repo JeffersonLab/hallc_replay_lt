@@ -38,7 +38,7 @@ cminch=2.54
 #include "PARAM/HMS/DC/PionLT_PARAM/hdc_tzero_per_wire_11883.param"
 #include "PARAM/HMS/HODO/hhodo_calib.param"
 #include "PARAM/HMS/HODO/Offline_PionLT/hhodo_TWcalib_2021.param"
-#include "PARAM/HMS/HODO/hhodo_Vpcalib.param"
+#include "PARAM/HMS/HODO/PionLT_PARAM/hhodo_Vpcalib_11829.param"
 #include "PARAM/HMS/AERO/haero_calib.param"
 #include "PARAM/HMS/CAL/PionLT_PARAM/hcal_calib_13854.param"
 
@@ -72,7 +72,12 @@ cminch=2.54
 #include "PARAM/SHMS/DC/PionLT_PARAM/pdc_tzero_per_wire_12080.param"
 #include "PARAM/SHMS/HODO/phodo_calib.param"
 #include "PARAM/SHMS/HODO/Offline_PionLT/phodo_TWcalib_2021.param"
-#include "PARAM/SHMS/HODO/phodo_Vpcalib.param"
+#include "PARAM/SHMS/HODO/PionLT_PARAM/phodo_Vpcalib_13063.param"
 #include "PARAM/SHMS/HGCER/Offline_PionLT/phgcer_calib_13800-13938.param"
 #include "PARAM/SHMS/AERO/Offline_PionLT/paero_calib_12493-14997.param"
 #include "PARAM/SHMS/CAL/PionLT_PARAM/pcal_calib_13894.param"
+
+
+; Coin trigger parameters
+#include "PARAM/TRIG/Offline_PionLT/tcoin_PionLT_elReal.param"
+ 

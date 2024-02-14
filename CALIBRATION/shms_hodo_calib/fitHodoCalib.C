@@ -1669,7 +1669,7 @@ void fitHodoCalib(TString filename,Int_t runNUM,Bool_t cosmic_flag=kFALSE)
 		scinTrnsCoord = TrackYPos[npl];
 		scinLongCoord = TrackXPos[npl];
 	      }
-	    else { return -1; }
+	    else cout<<"###################################\n ########################\n##########"<<endl; //{return -1; }
 	    
 	    // --------------------------------------------------------------
 	    

@@ -1,5 +1,5 @@
 ; Utilize per wire tzero offsets, 1 means true
-p_using_tzero_per_wire = 1
+p_using_tzero_per_wire = 0
 
 ; Infinite TDC window limits for each plane.
 ; pdc_tdc_min_win = -1000000, -1000000, -1000000, -1000000, -1000000, -1000000

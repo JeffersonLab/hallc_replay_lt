@@ -75,7 +75,7 @@ cminch=2.54
 #include "PARAM/SHMS/DC/KaonLT_PARAM/CALIB/pdc_tzero_per_wire_6621.param"
 #include "PARAM/SHMS/HODO/KaonLT_PARAM/phodo_calib_Winter18.param"
 #include "PARAM/SHMS/HODO/KaonLT_PARAM/phodo_TWcalib_Winter18.param"
-#include "PARAM/SHMS/HODO/KaonLT_PARAM/winter18/phodo_Vpcalib_Winter18.param"
+#include "PARAM/SHMS/HODO/KaonLT_PARAM/phodo_Vpcalib_Winter18.param"
 #include "PARAM/SHMS/HGCER/KaonLT_PARAM/CALIB/phgcer_calib_6638-6641.param"
 #include "PARAM/SHMS/AERO/KaonLT_PARAM/paero_calib_Winter18.param"
 #include "PARAM/SHMS/CAL/KaonLT_PARAM/pcal_calib_Winter18.param"

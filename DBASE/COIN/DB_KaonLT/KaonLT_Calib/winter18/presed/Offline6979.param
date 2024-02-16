@@ -1,0 +1,81 @@
+#real raddeg
+raddeg=3.14159265/180
+#real cminch
+cminch=2.54
+
+;tcoin.param file
+#include "PARAM/TRIG/KaonLT_PARAM/tcoin_Winter18_Offline.param"
+
+; General Hall-C parameter files
+#include "PARAM/GEN/KaonLT_PARAM/genflags.param"
+#include "PARAM/GEN/KaonLT_PARAM/gdebug.param"
+#include "PARAM/GEN/KaonLT_PARAM/gtarget.param"
+#include "PARAM/GEN/KaonLT_PARAM/gbeam.param"
+#include "PARAM/GEN/KaonLT_PARAM/gscalers_Fall18.param"
+
+; General HMS parameter files
+; Note: hmsflags.param includes spectrometer offsets and options.
+#include "PARAM/HMS/GEN/KaonLT_PARAM/hcana.param"
+#include "PARAM/HMS/GEN/KaonLT_PARAM/hdebug.param"
+#include "PARAM/HMS/GEN/KaonLT_PARAM/hmsflags.param"
+#include "PARAM/HMS/GEN/KaonLT_PARAM/htracking.param"
+#include "PARAM/HMS/GEN/KaonLT_PARAM/h_reftime_cut_Winter18_Offline.param"
+
+; HMS default geometry parameter files 
+#include "PARAM/HMS/CER/KaonLT_PARAM/hcer_geom.param"
+#include "PARAM/HMS/DC/KaonLT_PARAM/hdc_geom.param"
+#include "PARAM/HMS/HODO/KaonLT_PARAM/hhodo_geom.param"
+#include "PARAM/HMS/AERO/KaonLT_PARAM/haero_geom.param"
+#include "PARAM/HMS/CAL/KaonLT_PARAM/hcal_geom.param"
+
+; HMS default cut parameter files
+#include "PARAM/HMS/CER/KaonLT_PARAM/CALIB/hcer_cuts_6979.param"
+#include "PARAM/HMS/DC/KaonLT_PARAM/hdc_cuts_Winter18.param"
+#include "PARAM/HMS/HODO/KaonLT_PARAM/Calibration/hhodo_cuts_6979.param"
+#include "PARAM/HMS/AERO/KaonLT_PARAM/haero_cuts.param"
+#include "PARAM/HMS/CAL/KaonLT_PARAM/CALIB/hcal_cuts_6979.param"
+
+; HMS default calibration parameter files
+#include "PARAM/HMS/CER/KaonLT_PARAM/hcer_calib_Winter18.param"
+#include "PARAM/HMS/DC/KaonLT_PARAM/CALIB/hdc_calib_6979.param"
+#include "PARAM/HMS/DC/KaonLT_PARAM/CALIB/hdc_tzero_per_wire_6979.param"
+#include "PARAM/HMS/HODO/KaonLT_PARAM/hhodo_calib_Winter18.param"
+#include "PARAM/HMS/HODO/KaonLT_PARAM/hhodo_TWcalib_Winter18.param"
+#include "PARAM/HMS/HODO/KaonLT_PARAM/hhodo_Vpcalib_Winter18.param"
+#include "PARAM/HMS/AERO/KaonLT_PARAM/haero_calib.param"
+#include "PARAM/HMS/CAL/KaonLT_PARAM/CALIB/hcal_6979.param"
+
+; General SHMS parameter files
+; Note: shmsflags.param includes spectrometer offsets and options.
+#include "PARAM/SHMS/GEN/KaonLT_PARAM/pcana.param"
+#include "PARAM/SHMS/GEN/KaonLT_PARAM/pdebug.param"
+#include "PARAM/SHMS/GEN/KaonLT_PARAM/shmsflags.param"
+#include "PARAM/SHMS/GEN/KaonLT_PARAM/ptracking.param"
+#include "PARAM/SHMS/GEN/KaonLT_PARAM/p_reftime_cut_Winter18_Offline.param"
+
+; SHMS default geometry parameter files
+#include "PARAM/SHMS/NGCER/KaonLT_PARAM/pngcer_geom.param"
+#include "PARAM/SHMS/DC/KaonLT_PARAM/pdc_geom.param"
+#include "PARAM/SHMS/HODO/KaonLT_PARAM/phodo_geom.param"
+#include "PARAM/SHMS/HGCER/KaonLT_PARAM/phgcer_geom.param"
+#include "PARAM/SHMS/AERO/KaonLT_PARAM/paero_geom.param"
+#include "PARAM/SHMS/CAL/KaonLT_PARAM/pcal_geom.param"
+
+; SHMS default cut parameter files
+#include "PARAM/SHMS/NGCER/KaonLT_PARAM/pngcer_cuts.param"
+#include "PARAM/SHMS/DC/KaonLT_PARAM/pdc_cuts_Winter18.param"
+#include "PARAM/SHMS/HODO/KaonLT_PARAM/Calibration/phodo_cuts_6979.param"
+#include "PARAM/SHMS/HGCER/KaonLT_PARAM/CALIB/phgcer_cuts_6979.param"
+#include "PARAM/SHMS/AERO/KaonLT_PARAM/CALIB/paero_cuts_6979.param"
+#include "PARAM/SHMS/CAL/KaonLT_PARAM/CALIB/pcal_cuts_6979.param"
+
+; SHMS default calibration parameter files
+#include "PARAM/SHMS/NGCER/KaonLT_PARAM/pngcer_calib.param"
+#include "PARAM/SHMS/DC/KaonLT_PARAM/CALIB/pdc_calib_6956.param"
+#include "PARAM/SHMS/DC/KaonLT_PARAM/CALIB/pdc_tzero_per_wire_6956.param"
+#include "PARAM/SHMS/HODO/KaonLT_PARAM/phodo_calib_Winter18.param"
+#include "PARAM/SHMS/HODO/KaonLT_PARAM/phodo_TWcalib_Winter18.param"
+#include "PARAM/SHMS/HODO/KaonLT_PARAM/winter18/phodo_Vpcalib_Winter18.param"
+#include "PARAM/SHMS/HGCER/KaonLT_PARAM/CALIB/phgcer_calib_6976-6978.param"
+#include "PARAM/SHMS/AERO/KaonLT_PARAM/paero_calib_Winter18.param"
+#include "PARAM/SHMS/CAL/KaonLT_PARAM/pcal_calib_Winter18.param"

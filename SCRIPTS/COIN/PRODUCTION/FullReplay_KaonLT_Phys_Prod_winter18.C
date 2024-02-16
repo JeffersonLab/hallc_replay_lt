@@ -39,8 +39,8 @@ void FullReplay_KaonLT_Phys_Prod_winter18 (Int_t RunNumber = 0, Int_t MaxEvent =
 
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
-  // gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_KaonLT.database"); // this was the default
-  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/DB_KaonLT/standard_KaonLT_winter18.database"); // new hodo calibration
+  gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/standard_KaonLT.database"); // this was the default
+  // gHcParms->AddString("g_ctp_database_filename", "DBASE/COIN/DB_KaonLT/standard_KaonLT_winter18.database"); // new hodo calibration
   gHcParms->Load(gHcParms->GetString("g_ctp_database_filename"), RunNumber);
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);

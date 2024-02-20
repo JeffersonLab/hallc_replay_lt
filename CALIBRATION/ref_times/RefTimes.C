@@ -14,7 +14,8 @@
 /*******************************/
 //Save options
 static const bool SavePDF = true; 
-static const bool SaveRoot = true;
+static const bool SaveRoot = false;
+static const int  SaveOption = 1; // choose which set of plots to save in PDF (0 = all, 1 = Ref Times, 2 = detector Times)
 
 /*******************************/
 //Detector specific Constants
@@ -62,6 +63,23 @@ static const TString DaqName = "coin";
 Bool_t IsNgcerIn = false;
 
 //***** Branch variables ******/
+
+//coin Ref times
+Double_t pTrig1_Roc1;
+Double_t pTrig4_Roc1;
+Double_t pTrig1_Roc2;
+Double_t pTrig4_Roc2;
+Double_t pTrig3_Roc1;
+Double_t pTrig3_Roc2;
+Double_t pT2;
+
+Double_t pTrig1_Roc1_Mult;
+Double_t pTrig4_Roc1_Mult;
+Double_t pTrig1_Roc2_Mult;
+Double_t pTrig4_Roc2_Mult;
+Double_t pTrig3_Roc1_Mult;
+Double_t pTrig3_Roc2_Mult;
+Double_t pT2_Mult;
 
 //ref time variables
 Double_t hFADC_TREF_ROC1;
@@ -121,6 +139,30 @@ Double_t pcalflyAdcTdcDiffTime[pcalFlyNumPmts];
 Double_t   pcalflyAdcMult[pcalFlyNumPmts];
 
 /*********** Histograms *************/
+TH1D	*pTrig1_Roc1_Hist;
+TH1D	*pTrig4_Roc1_Hist;
+TH1D	*pTrig1_Roc2_Hist;
+TH1D	*pTrig4_Roc2_Hist;
+TH1D	*pTrig3_Roc1_Hist;
+TH1D	*pTrig3_Roc2_Hist;
+TH1D	*pT2_Hist;
+
+TH1D	*pTrig1_Roc1_Hist_cut;
+TH1D	*pTrig4_Roc1_Hist_cut;
+TH1D	*pTrig1_Roc2_Hist_cut;
+TH1D	*pTrig4_Roc2_Hist_cut;
+TH1D	*pTrig3_Roc1_Hist_cut;
+TH1D	*pTrig3_Roc2_Hist_cut;
+TH1D	*pT2_Hist_cut;
+
+TH1D	*pTrig1_Roc1_Mult_Hist;
+TH1D	*pTrig4_Roc1_Mult_Hist;
+TH1D	*pTrig1_Roc2_Mult_Hist;
+TH1D	*pTrig4_Roc2_Mult_Hist;
+TH1D	*pTrig3_Roc1_Mult_Hist;
+TH1D	*pTrig3_Roc2_Mult_Hist;
+TH1D	*pT2_Mult_Hist;
+
 TH1D    *hFADC_TREF_ROC1_Hist;
 TH1D    *hTref1_Hist, *hTref2_Hist;
 TH1D    *hDCREF1_Hist, *hDCREF2_Hist, *hDCREF3_Hist, *hDCREF4_Hist, *hDCREF5_Hist; //hDCRef5 not avaiable for runs prior to July 2018
@@ -186,6 +228,7 @@ TH1D    *pcalflyAdcMult_Hist[pcalFlyNumPmts];
 //cut Varibles.
 //these put lines on the plots, not put any cuts on data
 Double_t pdc_tdcrefcut, phodo_tdcrefcut, p_adcrefcut, hdc_tdcrefcut, hhodo_tdcrefcut, h_adcrefcut;
+Double_t pTrigCutLow[6], pTrigCutHigh[6]; // for pTrig cut values (used in tcoin.param)
 //                              1x, 1y, 2x, 2y 
 Double_t phodo_PosAdcTimeWindowMin[4*MaxHodBars]= {-20., -20., -20., 0,
                           -20., -20., -20., 0,
@@ -405,17 +448,58 @@ void setCutValues(/* Could put the standard.database file here. */)
     // These should be posistive even if they are set negative in the code.
     //shms refTime
     pdc_tdcrefcut    =14400.;
-    phodo_tdcrefcut  =4200.;
+    phodo_tdcrefcut  =4700.;
     p_adcrefcut  =5100.;
     //HMS reftime
     hdc_tdcrefcut   =14500.;
     hhodo_tdcrefcut =2600.;
     h_adcrefcut =3400.;
+    
+    pTrigCutLow[0] = 5100; // pTrig1_Roc1
+    pTrigCutLow[1] = 5600; // pTrig4_Roc1
+    pTrigCutLow[2] = 5900; // pTrig1_Roc2
+    pTrigCutLow[3] = 6300; // pTrig4_Roc2
+    pTrigCutLow[4] = 5100; // pTrig3_Roc1
+    pTrigCutLow[5] = 5900; // pTrig3_Roc2
+    
+    pTrigCutHigh[0] = 6200;
+    pTrigCutHigh[1] = 6200;
+    pTrigCutHigh[2] = 7000;
+    pTrigCutHigh[3] = 7000;
+    pTrigCutHigh[4] = 5700;
+    pTrigCutHigh[5] = 6500;
+}
+
+// redraws axis border of current plot
+void redrawBorder()
+{
+   gPad->Update();
+   gPad->RedrawAxis();
+   //TLine l;
+   //   l.DrawLine(gPad->GetUxmin(), gPad->GetUymax(), gPad->GetUxmax(), gPad->GetUymax());
+   //l.DrawLine(gPad->GetUxmax(), gPad->GetUymin(), gPad->GetUxmax(), gPad->GetUymax());
 }
 
 // sets the addresses of all the variables that are to be used and/or plotted
 void setBranchAddresses(TTree* DataTree)
 {
+    //coin Ref times
+    DataTree->SetBranchAddress("T.coin.pTRIG1_ROC1_tdcTimeRaw", &pTrig1_Roc1);
+    DataTree->SetBranchAddress("T.coin.pTRIG4_ROC1_tdcTimeRaw", &pTrig4_Roc1);
+    DataTree->SetBranchAddress("T.coin.pTRIG1_ROC2_tdcTimeRaw", &pTrig1_Roc2);
+    DataTree->SetBranchAddress("T.coin.pTRIG4_ROC2_tdcTimeRaw", &pTrig4_Roc2);
+    DataTree->SetBranchAddress("T.coin.pTRIG3_ROC1_tdcTimeRaw", &pTrig3_Roc1);
+    DataTree->SetBranchAddress("T.coin.pTRIG3_ROC2_tdcTimeRaw", &pTrig3_Roc2);
+    //DataTree->SetBranchAddress("T.coin.pT2_tdcTimeRaw", &pT2);
+    //DataTree->SetBranchAddress("T.coin.pT2_tdcMultiplicity", &pT2_Mult);
+    
+    DataTree->SetBranchAddress("T.coin.pTRIG1_ROC1_tdcMultiplicity", &pTrig1_Roc1_Mult);
+    DataTree->SetBranchAddress("T.coin.pTRIG4_ROC1_tdcMultiplicity", &pTrig4_Roc1_Mult);
+    DataTree->SetBranchAddress("T.coin.pTRIG1_ROC2_tdcMultiplicity", &pTrig1_Roc2_Mult);
+    DataTree->SetBranchAddress("T.coin.pTRIG4_ROC2_tdcMultiplicity", &pTrig4_Roc2_Mult);
+    DataTree->SetBranchAddress("T.coin.pTRIG3_ROC1_tdcMultiplicity", &pTrig3_Roc1_Mult);
+    DataTree->SetBranchAddress("T.coin.pTRIG3_ROC2_tdcMultiplicity", &pTrig3_Roc2_Mult);
+    
     //assign Branches to ref Time variables
     DataTree->SetBranchAddress(Form("T.%s.hFADC_TREF_ROC1_adcPulseTimeRaw", DaqName.Data()), &hFADC_TREF_ROC1);
     DataTree->SetBranchAddress(Form("T.%s.hT1_tdcTimeRaw", DaqName.Data()), &hTref1);
@@ -545,6 +629,30 @@ void setBranchAddresses(TTree* DataTree)
 //function for declaring all of the Histograms that are to be filed in the proceding script
 void makeHistos ()
 {
+    pTrig1_Roc1_Hist = new TH1D("T.coin.pTRIG1_ROC1_tdcTimeRaw","T.coin.pTRIG1_ROC1_tdcTimeRaw",5000, 0, 10000);
+    pTrig4_Roc1_Hist = new TH1D("T.coin.pTRIG4_ROC1_tdcTimeRaw","T.coin.pTRIG4_ROC1_tdcTimeRaw",5000, 0, 10000);
+    pTrig1_Roc2_Hist = new TH1D("T.coin.pTRIG1_ROC2_tdcTimeRaw","T.coin.pTRIG1_ROC2_tdcTimeRaw",5000, 0, 10000);
+    pTrig4_Roc2_Hist = new TH1D("T.coin.pTRIG4_ROC2_tdcTimeRaw","T.coin.pTRIG4_ROC2_tdcTimeRaw",5000, 0, 10000);
+    pTrig3_Roc1_Hist = new TH1D("T.coin.pTRIG3_ROC1_tdcTimeRaw","T.coin.pTRIG3_ROC1_tdcTimeRaw",5000, 0, 10000);
+    pTrig3_Roc2_Hist = new TH1D("T.coin.pTRIG3_ROC2_tdcTimeRaw","T.coin.pTRIG3_ROC2_tdcTimeRaw",5000, 0, 10000);
+    pT2_Hist = new TH1D("T.coin.pT2_tdcTimeRaw","T.coin.pT2_tdcTimeRaw",5000, 0, 10000);
+    
+    pTrig1_Roc1_Hist_cut = new TH1D("T.coin.pTRIG1_ROC1_tdcTimeRaw_cut","T.coin.pTRIG1_ROC1_tdcTimeRaw_cut",5000, 0, 10000);
+    pTrig4_Roc1_Hist_cut = new TH1D("T.coin.pTRIG4_ROC1_tdcTimeRaw_cut","T.coin.pTRIG4_ROC1_tdcTimeRaw_cut",5000, 0, 10000);
+    pTrig1_Roc2_Hist_cut = new TH1D("T.coin.pTRIG1_ROC2_tdcTimeRaw_cut","T.coin.pTRIG1_ROC2_tdcTimeRaw_cut",5000, 0, 10000);
+    pTrig4_Roc2_Hist_cut = new TH1D("T.coin.pTRIG4_ROC2_tdcTimeRaw_cut","T.coin.pTRIG4_ROC2_tdcTimeRaw_cut",5000, 0, 10000);
+    pTrig3_Roc1_Hist_cut = new TH1D("T.coin.pTRIG3_ROC1_tdcTimeRaw_cut","T.coin.pTRIG3_ROC1_tdcTimeRaw_cut",5000, 0, 10000);
+    pTrig3_Roc2_Hist_cut = new TH1D("T.coin.pTRIG3_ROC2_tdcTimeRaw_cut","T.coin.pTRIG3_ROC2_tdcTimeRaw_cut",5000, 0, 10000);
+    //pT2_Hist_cut = new TH1D("T.coin.pT2_tdcTimeRawcut","T.coin.pT2_tdcTimeRawcut",5000, 0, 10000);
+    
+    pTrig1_Roc1_Mult_Hist = new TH1D("T.coin.pTRIG1_ROC1_tdcMultiplicity","T.coin.pTRIG1_ROC1_tdcMultiplicity",10, -0.5, 9.5);
+    pTrig4_Roc1_Mult_Hist = new TH1D("T.coin.pTRIG4_ROC1_tdcMultiplicity","T.coin.pTRIG4_ROC1_tdcMultiplicity",10, -0.5, 9.5);
+    pTrig1_Roc2_Mult_Hist = new TH1D("T.coin.pTRIG1_ROC2_tdcMultiplicity","T.coin.pTRIG1_ROC2_tdcMultiplicity",10, -0.5, 9.5);
+    pTrig4_Roc2_Mult_Hist = new TH1D("T.coin.pTRIG4_ROC2_tdcMultiplicity","T.coin.pTRIG4_ROC2_tdcMultiplicity",10, -0.5, 9.5);
+    pTrig3_Roc1_Mult_Hist = new TH1D("T.coin.pTRIG3_ROC1_tdcMultiplicity","T.coin.pTRIG3_ROC1_tdcMultiplicity",10, -0.5, 9.5);
+    pTrig3_Roc2_Mult_Hist = new TH1D("T.coin.pTRIG3_ROC2_tdcMultiplicity","T.coin.pTRIG3_ROC2_tdcMultiplicity",10, -0.5, 9.5);
+    //pT2_Mult_Hist = new TH1D("T.coin.pT2_tdcMultiplicity","T.coin.pT2_tdcMultiplicity",10, -0.5, 9.5);
+    
     hFADC_TREF_ROC1_Hist = new TH1D(Form("T.%s.hFADC_TREF_ROC1_adcPulseTimeRaw", DaqName.Data()), Form("T.%s.hFADC_TREF_ROC1_adcPulseTimeRaw", DaqName.Data()), 10000, 0, 10000);
     hTref1_Hist = new TH1D(Form("T.%s.hT1_tdcTimeRaw", DaqName.Data()), Form("T.%s.hT1_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
     hTref2_Hist = new TH1D(Form("T.%s.hT2_tdcTimeRaw", DaqName.Data()), Form("T.%s.hT2_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
@@ -565,7 +673,7 @@ void makeHistos ()
 
     pFADC_TREF_ROC2_Hist = new TH1D(Form("T.%s.pFADC_TREF_ROC2_adcPulseTimeRaw", DaqName.Data()), Form("T.%s.pFADC_TREF_ROC2_adcPulseTimeRaw", DaqName.Data()), 10000, 0, 10000);
     pTref1_Hist = new TH1D(Form("T.%s.pT1_tdcTimeRaw", DaqName.Data()), Form("T.%s.pT1_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
-    pTref2_Hist = new TH1D(Form("T.%s.pT2_tdcTimeRaw", DaqName.Data()), Form("T.%s.pT2_tdcTimeRaw", DaqName.Data()), 10000, 0, 10000);
+    pTref2_Hist = new TH1D(Form("T.%s.pT2_tdcTimeRaw", DaqName.Data()), Form("T.%s.pT2_tdcTimeRaw", DaqName.Data()), 5000, 0, 10000);
     pDCREF1_Hist = new TH1D(Form("T.%s.pDCREF1_tdcTimeRaw", DaqName.Data()), Form("T.%s.pDCREF1_tdcTimeRaw", DaqName.Data()), 23000, 0, 23000);
     pDCREF2_Hist = new TH1D(Form("T.%s.pDCREF2_tdcTimeRaw", DaqName.Data()), Form("T.%s.pDCREF2_tdcTimeRaw", DaqName.Data()), 23000, 0, 23000);
     pDCREF3_Hist = new TH1D(Form("T.%s.pDCREF3_tdcTimeRaw", DaqName.Data()), Form("T.%s.pDCREF3_tdcTimeRaw", DaqName.Data()), 23000, 0, 23000);
@@ -716,55 +824,82 @@ void fillHistos(TTree *DataTree)
         
         if( iEntry % 10000 == 0 ) cout << iEntry << "\n"; //status report
         
-        hFADC_TREF_ROC1_Mult_Hist->Fill(hFADC_TREF_ROC1_Mult);
-        hTref1_Mult_Hist->Fill(hTref1_Mult);
-        hTref2_Mult_Hist->Fill(hTref2_Mult);
-        hDCREF1_Mult_Hist->Fill(hDCREF1_Mult);
-        hDCREF2_Mult_Hist->Fill(hDCREF2_Mult); 
-        hDCREF3_Mult_Hist->Fill(hDCREF3_Mult); 
-        hDCREF4_Mult_Hist->Fill(hDCREF4_Mult);  
-        hDCREF5_Mult_Hist->Fill(hDCREF5_Mult); 
+        if(SaveOption == 0 || SaveOption == 1)
+        {
+        	pTrig1_Roc1_Hist->Fill(pTrig1_Roc1);
+        	pTrig4_Roc1_Hist->Fill(pTrig4_Roc1);
+        	pTrig1_Roc2_Hist->Fill(pTrig1_Roc2);
+        	pTrig4_Roc2_Hist->Fill(pTrig4_Roc2);
+        	pTrig3_Roc1_Hist->Fill(pTrig3_Roc1);
+        	pTrig3_Roc2_Hist->Fill(pTrig3_Roc2);
+        	pT2_Hist->Fill(pTref2);
+        	
+        	pTrig1_Roc1_Mult_Hist->Fill(pTrig1_Roc1_Mult);
+        	pTrig4_Roc1_Mult_Hist->Fill(pTrig4_Roc1_Mult);
+        	pTrig1_Roc2_Mult_Hist->Fill(pTrig1_Roc2_Mult);
+        	pTrig4_Roc2_Mult_Hist->Fill(pTrig4_Roc2_Mult);
+        	pTrig3_Roc1_Mult_Hist->Fill(pTrig3_Roc1_Mult);
+        	pTrig3_Roc2_Mult_Hist->Fill(pTrig3_Roc2_Mult);
+        	//pT2_Mult_Hist->Fill(pT2_Mult);
+        	
+        	if(pTrig1_Roc1_Mult == 1) pTrig1_Roc1_Hist_cut->Fill(pTrig1_Roc1);
+        	if(pTrig4_Roc1_Mult == 1) pTrig4_Roc1_Hist_cut->Fill(pTrig4_Roc1);
+        	if(pTrig1_Roc2_Mult == 1) pTrig1_Roc2_Hist_cut->Fill(pTrig1_Roc2);
+        	if(pTrig4_Roc2_Mult == 1) pTrig4_Roc2_Hist_cut->Fill(pTrig4_Roc2);
+        	if(pTrig3_Roc1_Mult == 1) pTrig3_Roc1_Hist_cut->Fill(pTrig3_Roc1);
+        	if(pTrig3_Roc2_Mult == 1) pTrig3_Roc2_Hist_cut->Fill(pTrig3_Roc2);
+        	//if(pT2_Mult == 1) pT2_Hist_cut->Fill(pT2);
+        	
+        	hFADC_TREF_ROC1_Mult_Hist->Fill(hFADC_TREF_ROC1_Mult);
+       		hTref1_Mult_Hist->Fill(hTref1_Mult);
+        	hTref2_Mult_Hist->Fill(hTref2_Mult);
+        	hDCREF1_Mult_Hist->Fill(hDCREF1_Mult);
+        	hDCREF2_Mult_Hist->Fill(hDCREF2_Mult); 
+        	hDCREF3_Mult_Hist->Fill(hDCREF3_Mult); 
+        	hDCREF4_Mult_Hist->Fill(hDCREF4_Mult);  
+        	hDCREF5_Mult_Hist->Fill(hDCREF5_Mult); 
 
-        //apply multiplicity cuts
-        if (hFADC_TREF_ROC1_Mult == 1)  hFADC_TREF_ROC1_Hist->Fill(hFADC_TREF_ROC1); 
-        if (hTref1_Mult == 1)           hTref1_Hist->Fill(hTref1); 
-        if (hTref2_Mult == 1)           hTref2_Hist->Fill(hTref2);
-        if (hDCREF1_Mult == 1)          hDCREF1_Hist->Fill(hDCREF1); 
-        if (hDCREF2_Mult == 1)          hDCREF2_Hist->Fill(hDCREF2); 
-        if (hDCREF3_Mult == 1)          hDCREF3_Hist->Fill(hDCREF3);  
-        if (hDCREF4_Mult == 1)          hDCREF4_Hist->Fill(hDCREF4); 
-        if (hDCREF5_Mult == 1)          hDCREF5_Hist->Fill(hDCREF5);
+        	//apply multiplicity cuts
+        	if (hFADC_TREF_ROC1_Mult == 1)  hFADC_TREF_ROC1_Hist->Fill(hFADC_TREF_ROC1); 
+        	if (hTref1_Mult == 1)           hTref1_Hist->Fill(hTref1); 
+        	if (hTref2_Mult == 1)           hTref2_Hist->Fill(hTref2);
+        	if (hDCREF1_Mult == 1)          hDCREF1_Hist->Fill(hDCREF1); 
+        	if (hDCREF2_Mult == 1)          hDCREF2_Hist->Fill(hDCREF2); 
+        	if (hDCREF3_Mult == 1)          hDCREF3_Hist->Fill(hDCREF3);  
+        	if (hDCREF4_Mult == 1)          hDCREF4_Hist->Fill(hDCREF4); 
+        	if (hDCREF5_Mult == 1)          hDCREF5_Hist->Fill(hDCREF5);
         
         
-        pFADC_TREF_ROC2_Mult_Hist->Fill(pFADC_TREF_ROC2_Mult); 
-        pTref1_Mult_Hist->Fill(pTref1_Mult); 
-        pTref2_Mult_Hist->Fill(pTref2_Mult);   
-        pDCREF1_Mult_Hist->Fill(pDCREF1_Mult);   
-        pDCREF2_Mult_Hist->Fill(pDCREF2_Mult); 
-        pDCREF3_Mult_Hist->Fill(pDCREF3_Mult);   
-        pDCREF4_Mult_Hist->Fill(pDCREF4_Mult);   
-        pDCREF5_Mult_Hist->Fill(pDCREF5_Mult);   
-        pDCREF6_Mult_Hist->Fill(pDCREF6_Mult);   
-        pDCREF7_Mult_Hist->Fill(pDCREF7_Mult);   
-        pDCREF8_Mult_Hist->Fill(pDCREF8_Mult);   
-        pDCREF9_Mult_Hist->Fill(pDCREF9_Mult); 
-        pDCREF10_Mult_Hist->Fill(pDCREF10_Mult);   
+        	pFADC_TREF_ROC2_Mult_Hist->Fill(pFADC_TREF_ROC2_Mult); 
+        	pTref1_Mult_Hist->Fill(pTref1_Mult); 
+        	pTref2_Mult_Hist->Fill(pTref2_Mult);   
+        	pDCREF1_Mult_Hist->Fill(pDCREF1_Mult);   
+        	pDCREF2_Mult_Hist->Fill(pDCREF2_Mult); 
+        	pDCREF3_Mult_Hist->Fill(pDCREF3_Mult);   
+        	pDCREF4_Mult_Hist->Fill(pDCREF4_Mult);   
+        	pDCREF5_Mult_Hist->Fill(pDCREF5_Mult);   
+        	pDCREF6_Mult_Hist->Fill(pDCREF6_Mult);   
+        	pDCREF7_Mult_Hist->Fill(pDCREF7_Mult);   
+        	pDCREF8_Mult_Hist->Fill(pDCREF8_Mult);   
+        	pDCREF9_Mult_Hist->Fill(pDCREF9_Mult); 
+        	pDCREF10_Mult_Hist->Fill(pDCREF10_Mult);   
      
-        if (pFADC_TREF_ROC2_Mult > 0)  pFADC_TREF_ROC2_Hist->Fill(pFADC_TREF_ROC2);  
-        if (pTref1_Mult > 0)           pTref1_Hist->Fill(pTref1);
-        if (pTref2_Mult > 0)           pTref2_Hist->Fill(pTref2);  
-        if (pDCREF1_Mult == 1)          pDCREF1_Hist->Fill(pDCREF1); 
-        if (pDCREF2_Mult == 1)          pDCREF2_Hist->Fill(pDCREF2);
-        if (pDCREF3_Mult == 1)          pDCREF3_Hist->Fill(pDCREF3);  
-        if (pDCREF4_Mult == 1)          pDCREF4_Hist->Fill(pDCREF4); 
-        if (pDCREF5_Mult == 1)          pDCREF5_Hist->Fill(pDCREF5); 
-        if (pDCREF6_Mult == 1)          pDCREF6_Hist->Fill(pDCREF6);  
-        if (pDCREF7_Mult == 1)          pDCREF7_Hist->Fill(pDCREF7); 
-        if (pDCREF8_Mult == 1)          pDCREF8_Hist->Fill(pDCREF8);  
-        if (pDCREF9_Mult == 1)          pDCREF9_Hist->Fill(pDCREF9);  
-        if (pDCREF10_Mult == 1)         pDCREF10_Hist->Fill(pDCREF10);  
-         
-
+        	if (pFADC_TREF_ROC2_Mult > 0)  pFADC_TREF_ROC2_Hist->Fill(pFADC_TREF_ROC2);  
+        	if (pTref1_Mult == 1)           pTref1_Hist->Fill(pTref1);
+        	if (pTref2_Mult == 1)           pTref2_Hist->Fill(pTref2);  
+        	if (pDCREF1_Mult == 1)          pDCREF1_Hist->Fill(pDCREF1); 
+        	if (pDCREF2_Mult == 1)          pDCREF2_Hist->Fill(pDCREF2);
+        	if (pDCREF3_Mult == 1)          pDCREF3_Hist->Fill(pDCREF3);  
+        	if (pDCREF4_Mult == 1)          pDCREF4_Hist->Fill(pDCREF4); 
+        	if (pDCREF5_Mult == 1)          pDCREF5_Hist->Fill(pDCREF5); 
+        	if (pDCREF6_Mult == 1)          pDCREF6_Hist->Fill(pDCREF6);  
+        	if (pDCREF7_Mult == 1)          pDCREF7_Hist->Fill(pDCREF7); 
+        	if (pDCREF8_Mult == 1)          pDCREF8_Hist->Fill(pDCREF8);  
+        	if (pDCREF9_Mult == 1)          pDCREF9_Hist->Fill(pDCREF9);  
+        	if (pDCREF10_Mult == 1)         pDCREF10_Hist->Fill(pDCREF10);    
+		} // end Ref Time Fill
+		
+		if(SaveOption == 0 || SaveOption == 2){
         //dc variables 
         for(Int_t i = 0; i < dcPlanes; i++)
         { 
@@ -889,7 +1024,8 @@ void fillHistos(TTree *DataTree)
                 pcalflyAdcTdcDiffTime_Hist_Sum->Fill(pcalflyAdcTdcDiffTime[iPmt]);
             }
             pcalflyAdcMult_Hist[iPmt]->Fill(pcalflyAdcMult[iPmt]);
-        } 
+        }
+    }// end Detector Fill 
     }
     cout << "\n\n\n !!!!!!!!!!!!!!!!! \nhHod test: " << hHodDiffCounter << "\npHod Test: " << pHodDiffCounter << "\n\n\n\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n";
     return; 
@@ -909,11 +1045,84 @@ void SaveToPDF(Int_t RunNumber)
     RightLine->SetLineWidth(4);
     RightLine->SetLineStyle(9);
     
+    if(SaveOption == 0 || SaveOption == 1){
+    pTrig1_Roc1_Hist->Draw();
+    pTrig1_Roc1_Hist_cut->SetLineColor(2);
+    pTrig1_Roc1_Hist_cut->Draw("same");
+    LeftLine->DrawLine(  pTrigCutLow[0], 0,  pTrigCutLow[0], pTrig1_Roc1_Hist->GetBinContent(pTrig1_Roc1_Hist->GetMaximumBin()));
+    RightLine->DrawLine(pTrigCutHigh[0], 0, pTrigCutHigh[0], pTrig1_Roc1_Hist->GetBinContent(pTrig1_Roc1_Hist->GetMaximumBin()));
+    redrawBorder();
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf(",RunNumber),  pTrig1_Roc1_Hist->GetName());
+    pTrig4_Roc1_Hist->Draw();
+    pTrig4_Roc1_Hist_cut->SetLineColor(2);
+    pTrig4_Roc1_Hist_cut->Draw("same");
+    LeftLine->DrawLine(  pTrigCutLow[1], 0,  pTrigCutLow[1], pTrig4_Roc1_Hist->GetBinContent(pTrig4_Roc1_Hist->GetMaximumBin()));
+    RightLine->DrawLine(pTrigCutHigh[1], 0, pTrigCutHigh[1], pTrig4_Roc1_Hist->GetBinContent(pTrig4_Roc1_Hist->GetMaximumBin()));
+    redrawBorder();
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig4_Roc1_Hist->GetName());
+    pTrig1_Roc2_Hist->Draw();
+    pTrig1_Roc2_Hist_cut->SetLineColor(2);
+    pTrig1_Roc2_Hist_cut->Draw("same");
+    LeftLine->DrawLine(  pTrigCutLow[2], 0,  pTrigCutLow[2], pTrig1_Roc2_Hist->GetBinContent(pTrig1_Roc2_Hist->GetMaximumBin()));
+    RightLine->DrawLine(pTrigCutHigh[2], 0, pTrigCutHigh[2], pTrig1_Roc2_Hist->GetBinContent(pTrig1_Roc2_Hist->GetMaximumBin()));
+    redrawBorder();
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig1_Roc2_Hist->GetName());
+    pTrig4_Roc2_Hist->Draw();
+    pTrig4_Roc2_Hist_cut->SetLineColor(2);
+    pTrig4_Roc2_Hist_cut->Draw("same");
+    LeftLine->DrawLine(  pTrigCutLow[3], 0,  pTrigCutLow[3], pTrig4_Roc2_Hist->GetBinContent(pTrig4_Roc2_Hist->GetMaximumBin()));
+    RightLine->DrawLine(pTrigCutHigh[3], 0, pTrigCutHigh[3], pTrig4_Roc2_Hist->GetBinContent(pTrig4_Roc2_Hist->GetMaximumBin()));
+    redrawBorder();
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig4_Roc2_Hist->GetName());
+    pTrig3_Roc1_Hist->Draw();
+    pTrig3_Roc1_Hist_cut->SetLineColor(2);
+    pTrig3_Roc1_Hist_cut->Draw("same");
+    LeftLine->DrawLine(  pTrigCutLow[4], 0,  pTrigCutLow[4], pTrig3_Roc1_Hist->GetBinContent(pTrig3_Roc1_Hist->GetMaximumBin()));
+    RightLine->DrawLine(pTrigCutHigh[4], 0, pTrigCutHigh[4], pTrig3_Roc1_Hist->GetBinContent(pTrig3_Roc1_Hist->GetMaximumBin()));
+    redrawBorder();
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig3_Roc1_Hist->GetName());
+    pTrig3_Roc2_Hist->Draw();
+    pTrig3_Roc2_Hist_cut->SetLineColor(2);
+    pTrig3_Roc2_Hist_cut->Draw("same");
+    LeftLine->DrawLine( pTrigCutLow[5], 0,   pTrigCutLow[5], pTrig3_Roc2_Hist->GetBinContent(pTrig3_Roc2_Hist->GetMaximumBin()));
+    RightLine->DrawLine(pTrigCutHigh[5], 0, pTrigCutHigh[5], pTrig3_Roc2_Hist->GetBinContent(pTrig3_Roc2_Hist->GetMaximumBin()));
+    redrawBorder();
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig3_Roc2_Hist->GetName());
+    
+    pT2_Hist->Draw();
+    pTref2_Hist->SetLineColor(2);
+    pTref2_Hist->Draw("same");
+    LeftLine->DrawLine(phodo_tdcrefcut, 0, phodo_tdcrefcut, pTref2_Hist->GetBinContent(pTref2_Hist->GetMaximumBin()));
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTref2_Hist->GetName());
+    
+    //pT2_Hist->GetYaxis()->SetRangeUser(10,pT2_Hist_cut->GetEntries());
+    //pT2_Hist->Draw();
+    //pT2_Hist_cut->SetLineColor(2);
+    //pT2_Hist_cut->Draw("same");
+    //canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pT2_Hist->GetName());
+    
+    /*
+    pTrig1_Roc1_Mult_Hist->Draw();
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig1_Roc1_Mult_Hist->GetName());
+    pTrig4_Roc1_Mult_Hist->Draw();
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig4_Roc1_Mult_Hist->GetName());
+    pTrig1_Roc2_Mult_Hist->Draw();
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig1_Roc2_Mult_Hist->GetName());
+    pTrig4_Roc2_Mult_Hist->Draw();
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig4_Roc2_Mult_Hist->GetName());
+    pTrig3_Roc1_Mult_Hist->Draw();
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig3_Roc1_Mult_Hist->GetName());
+    pTrig3_Roc2_Mult_Hist->Draw();
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTrig3_Roc2_Mult_Hist->GetName());
+    */
+    //pT2_Mult_Hist->Draw();
+    //canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pT2_Mult_Hist->GetName());
+    
     hFADC_TREF_ROC1_Hist->Draw();
-    cout << "\n\n\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\nBug fixing Info: \n p_adcrefcut/hFADC_TREF_ROC1_Hist->GetXaxis()->GetXmax() = " << p_adcrefcut/hFADC_TREF_ROC1_Hist->GetXaxis()->GetXmax();
-    cout << "\np_adcrefcut = " << p_adcrefcut << "\nhFADC_TREF_ROC1_Hist->GetXaxis()->GetXmax() = " << hFADC_TREF_ROC1_Hist->GetXaxis()->GetXmax();
+    //cout << "\n\n\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\nBug fixing Info: \n p_adcrefcut/hFADC_TREF_ROC1_Hist->GetXaxis()->GetXmax() = " << p_adcrefcut/hFADC_TREF_ROC1_Hist->GetXaxis()->GetXmax();
+    //cout << "\np_adcrefcut = " << p_adcrefcut << "\nhFADC_TREF_ROC1_Hist->GetXaxis()->GetXmax() = " << hFADC_TREF_ROC1_Hist->GetXaxis()->GetXmax();
     LeftLine->DrawLine(h_adcrefcut, 0, h_adcrefcut, 10);
-    canvas->Print(Form("output/REF_TimePlots_%d.pdf(",RunNumber),  hFADC_TREF_ROC1_Hist->GetName());
+    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hFADC_TREF_ROC1_Hist->GetName());
     hTref1_Hist->Draw();
     LeftLine->DrawLine(hhodo_tdcrefcut, 0, hhodo_tdcrefcut, 10);
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  hTref1_Hist->GetName());
@@ -961,9 +1170,7 @@ void SaveToPDF(Int_t RunNumber)
     pTref1_Hist->Draw();
     LeftLine->DrawLine(phodo_tdcrefcut, 0, phodo_tdcrefcut, pTref1_Hist->GetBinContent(pTref1_Hist->GetMaximumBin()));
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTref1_Hist->GetName()); 
-    pTref2_Hist->Draw();
-    LeftLine->DrawLine(phodo_tdcrefcut, 0, phodo_tdcrefcut, pTref2_Hist->GetBinContent(pTref2_Hist->GetMaximumBin()));
-    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pTref2_Hist->GetName()); 
+     
     pDCREF1_Hist->Draw();
     LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, pDCREF1_Hist->GetBinContent(pDCREF1_Hist->GetMaximumBin()));
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF1_Hist->GetName());
@@ -993,14 +1200,25 @@ void SaveToPDF(Int_t RunNumber)
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF9_Hist->GetName()); 
     pDCREF10_Hist->Draw();
     LeftLine->DrawLine(pdc_tdcrefcut, 0, pdc_tdcrefcut, pDCREF10_Hist->GetBinContent(pDCREF10_Hist->GetMaximumBin()));
-    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF10_Hist->GetName());
     
+    if(SaveOption == 0 ){ 
+    	canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pDCREF10_Hist->GetName());
+    }else{
+    	canvas->Print(Form("output/REF_TimePlots_%d.pdf)",RunNumber),  pDCREF10_Hist->GetName());
+    }
+    
+    } // end save ref times
+    
+    if(SaveOption == 0 || SaveOption == 2) {
     //Sum Plots
     cerAdcTdcDiffTime_Hist_Sum->Draw();
     LeftLine->DrawLine(hcer_adcTimeWindowMin[0], 0, hcer_adcTimeWindowMin[0], cerAdcTdcDiffTime_Hist_Sum->GetBinContent(cerAdcTdcDiffTime_Hist_Sum->GetMaximumBin()));
     RightLine->DrawLine(hcer_adcTimeWindowMax[0], 0, hcer_adcTimeWindowMax[0], cerAdcTdcDiffTime_Hist_Sum->GetBinContent(cerAdcTdcDiffTime_Hist_Sum->GetMaximumBin()));
-    canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  cerAdcTdcDiffTime_Hist_Sum->GetName());
-    
+    if(SaveOption == 0){ 
+    	canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  cerAdcTdcDiffTime_Hist_Sum->GetName());
+    }else{
+    	canvas->Print(Form("output/REF_TimePlots_%d.pdf(",RunNumber),  cerAdcTdcDiffTime_Hist_Sum->GetName());
+    }
     hgcerAdcTdcDiffTime_Hist_Sum->Draw();
     LeftLine->DrawLine(phgcer_adcTimeWindowMin[0], 0, phgcer_adcTimeWindowMin[0], hgcerAdcTdcDiffTime_Hist_Sum->GetBinContent(hgcerAdcTdcDiffTime_Hist_Sum->GetMaximumBin()));
     RightLine->DrawLine(phgcer_adcTimeWindowMax[0], 0, phgcer_adcTimeWindowMax[0], hgcerAdcTdcDiffTime_Hist_Sum->GetBinContent(hgcerAdcTdcDiffTime_Hist_Sum->GetMaximumBin()));
@@ -1267,6 +1485,7 @@ void SaveToPDF(Int_t RunNumber)
     canvas->Print(Form("output/REF_TimePlots_%d.pdf",RunNumber),  pcalflyAdcTdcDiffTime_Hist[pcalFlyNumPmts-1]->GetName());
     //pcalflyAdcMult_Hist[pcalFlyNumPmts-1]->Draw();
     //canvas->Print(Form("output/REF_TimePlots_%d.pdf)",RunNumber),  pcalflyAdcMult_Hist[pcalFlyNumPmts-1]->GetName());
+    }// end save detector times
 }
 
 // input is the path from ref_times directory to rootfile and the run number that your using

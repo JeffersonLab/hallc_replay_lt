@@ -1,5 +1,4 @@
-block T.coin.*
-
+block T.*
 block P.dc.*
 block P.tr.*
 block P.hod.*

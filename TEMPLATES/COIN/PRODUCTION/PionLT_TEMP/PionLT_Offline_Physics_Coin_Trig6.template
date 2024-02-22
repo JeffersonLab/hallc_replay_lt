@@ -66,10 +66,10 @@ PLT_Pre-Scaled_SHMS_3/4_Triggers              :		{(P.pTRIG1.scaler/gHC_ti_ps_fac
 PLT_SHMS_3/4_Trigger_Rate                     :		{P.pTRIG1.scalerCut/P.1MHz.scalerTimeCut/1000.:%.3f} kHz
 PLT_Accepted_SHMS_Triggers                    :		{pTRIG1_ROC2.npassed}
 
-PLT_Total_HMS_EL-REAL_Triggers                :		{P.pTRIG3.scaler}
-PLT_(current_cut)_Total_HMS_EL-REAL_Triggers  :		{P.pTRIG3.scalerCut}
-PLT_Pre-Scaled_HMS_EL-REAL_Triggers           :		{(P.pTRIG3.scaler/gHC_ti_ps_factors[2]):%.0f}
-PLT_HMS_EL-REAL_Trigger_Rate                  :		{P.pTRIG3.scalerCut/P.1MHz.scalerTimeCut/1000.:%.3f} kHz
+PLT_Total_HMS_3/4_Triggers                    :		{P.pTRIG3.scaler}
+PLT_(current_cut)_Total_HMS_3/4_Triggers  :		{P.pTRIG3.scalerCut}
+PLT_Pre-Scaled_HMS_3/4_Triggers           :		{(P.pTRIG3.scaler/gHC_ti_ps_factors[2]):%.0f}
+PLT_HMS_3/4_Trigger_Rate                  :		{P.pTRIG3.scalerCut/P.1MHz.scalerTimeCut/1000.:%.3f} kHz
 PLT_Accepted_HMS_Triggers                     :		{pTRIG3_ROC2.npassed}
 
 PLT_Total_COIN_Triggers                       :		{P.pTRIG6.scaler}

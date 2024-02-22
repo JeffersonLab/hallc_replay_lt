@@ -59,22 +59,18 @@ shmsScinGood          P.hod.goodscinhit == 1
 shmsGoodBetanotrk     P.hod.betanotrack > 0.5 && P.hod.betanotrack < 1.4
 shmshodstarttime      P.hod.goodstarttime == 1
 
-## Tracking Efficiency calculation (Should = denominator, Did = Numerator)
+## SHMS CAL Cuts for Electron Selection
 
-shmsScinShould        shmsScinGood && shmsGoodBetanotrk && shmshodstarttime
-shmsCalTrkShoulde     P.cal.etotnorm > 0.6 &&  P.cal.etotnorm < 1.6
+shmsCalTrkShoulde     P.cal.etotnorm > 0.7 &&  P.cal.etotnorm < 2.0
 
-## SHMS Cer PID Numbers 
+## SHMS Cer PID Cuts for Tracking Efficiencies
 
 shmsHGCTrkShoulde     P.hgcer.npeSum > 0.5
 shmsAeroTrknpee       P.aero.npeSum > 1.0
 
-## SHMS Aero Geom for n = 1.011 tray
+## Tracking Efficiency calculation (Should = denominator, Did = Numerator)
 
-shmsAeroxposalln      P.aero.xAtAero > -55 && P.aero.xAtAero < 55
-shmsAeroyposalln      P.aero.yAtAero > -50 && P.aero.yAtAero < 50
-
-shmsAerogeomalln      shmsAeroxposalln && shmsAeroyposalln
+shmsScinShould        shmsScinGood && shmsGoodBetanotrk && shmshodstarttime
 
 shmsCerTrkShoulde     shmsHGCTrkShoulde && shmsAeroTrknpee 
 shmsScinShoulde       shmsScinShould && shmsCalTrkShoulde && shmsCerTrkShoulde
@@ -87,16 +83,16 @@ shmsScinSingDide      shmsScinSingShoulde && P.dc.ntrack > 0
 ####    HMS    ###
 ##################
 
-## HMS PID cuts for different particles in HGC and CAL
-
-hcut_cer_elec         H.cer.npeSum > 1.5
-hcut_cal_elec	      H.cal.etotnorm > 0.6 && H.cal.etotnorm < 2.0
-
 ## HMS Scin cuts (untracked) for HMS Tracking Efficiency
 
 HMSScinGood           H.hod.goodscinhit == 1
 HMSGoodBetanotrk      H.hod.betanotrack > 0.8 && H.hod.betanotrack < 1.3
 HMShodstarttime       H.hod.goodstarttime == 1
+
+## HMS PID cuts for different particles in HGC and CAL
+
+hcut_cer_elec         H.cer.npeSum > 1.5
+hcut_cal_elec         H.cal.etotnorm > 0.7 && H.cal.etotnorm < 2.0
 
 ## HMS Tracking Efficiency Calculation (Should = Denominator, Did = Numerator)
 
@@ -108,20 +104,32 @@ HMSScinDid            HMSScinShould && H.dc.ntrack > 0
 HMSScinDide           HMSScinShoulde && H.dc.ntrack > 0
 HMSScinSingDide	      HMSScinSingShoulde && H.dc.ntrack > 0
 
-HMS_GOOD_TRACK	           H.dc.ntrack > 0 
-SHMS_GOOD_Track	           P.dc.ntrack > 0 
-GOOD_COIN_TRACK	           HMS_GOOD_TRACK && SHMS_GOOD_Track
-ALL_GOOD_Track_Events      HMS_GOOD_TRACK || SHMS_GOOD_Track
+#HMS_GOOD_TRACK	           H.dc.ntrack > 0 
+#SHMS_GOOD_Track           P.dc.ntrack > 0 
+#GOOD_COIN_TRACK           HMS_GOOD_TRACK && SHMS_GOOD_Track
+#ALL_GOOD_Track_Events     HMS_GOOD_TRACK || SHMS_GOOD_Track
 
-Tracking_master ALL_GOOD_Track_Events
+Tracking_master ALL_events_NO_EDTM
 
 #################################################################################################################################
 
 Block: Physics       
 
+HMS_GOOD_TRACK            H.dc.ntrack > 0
+SHMS_GOOD_Track           P.dc.ntrack > 0 
+GOOD_COIN_TRACK           HMS_GOOD_TRACK && SHMS_GOOD_Track
+ALL_GOOD_Track_Events     HMS_GOOD_TRACK || SHMS_GOOD_Track
+
 ## Accceptance cuts for SHMS gloden track defined here (Not used in SHMS Tracking)
 
-pcut_acceptance		P.gtr.th > -0.06 && P.gtr.th < 0.06 && P.gtr.ph > -0.04 && P.gtr.ph < 0.04 && P.gtr.dp > -10 && P.gtr.dp < 20
+pcut_acceptance         P.gtr.th > -0.06 && P.gtr.th < 0.06 && P.gtr.ph > -0.04 && P.gtr.ph < 0.04 && P.gtr.dp > -10 && P.gtr.dp < 20
+
+## SHMS Aero Geom for n = 1.011 tray
+
+shmsAeroxposalln      P.aero.xAtAero > -45 && P.aero.xAtAero < 45
+shmsAeroyposalln      P.aero.yAtAero > -30 && P.aero.yAtAero < 30
+
+shmsAerogeomalln      shmsAeroxposalln && shmsAeroyposalln
 
 ##################
 ###  SHMS HGC  ###
@@ -129,8 +137,8 @@ pcut_acceptance		P.gtr.th > -0.06 && P.gtr.th < 0.06 && P.gtr.ph > -0.04 && P.gt
 
 SHMScoindcindipole	P.dc.InsideDipoleExit == 1
 
-SHMSGEN		        shmshodstarttime && SHMScoindcindipole && pcut_acceptance
-SHMSCale	        P.cal.etottracknorm > 0.6              
+SHMSGEN		        shmshodstarttime && SHMScoindcindipole && pcut_acceptance && ALL_GOOD_Track_Events
+SHMSCale	        P.cal.etottracknorm > 0.7              
 
 SHMSAEROe               P.aero.npeSum  > 1.0
 
@@ -156,10 +164,10 @@ hcut_acceptance         H.gtr.th > -0.08 && H.gtr.th < 0.08 && H.gtr.ph > -0.045
 
 HMScoindcindipole	H.dc.InsideDipoleExit == 1
 
-HMSGEN		        HMShodstarttime && HMScoindcindipole && hcut_acceptance
+HMSGEN		        HMShodstarttime && HMScoindcindipole && hcut_acceptance && ALL_GOOD_Track_Events
 
-#HMSCalelec             H.cal.etottracknorm > 0.7 &&  H.cal.etottracknorm < 1.6
-HMSCalelec              H.cal.etottracknorm > 0.85
+#HMSCalelec              H.cal.etottracknorm > 0.7 &&  H.cal.etottracknorm < 2.0
+HMSCalelec              H.cal.etottracknorm > 0.7
 
 HMSHGCShouldelec        HMSGEN && HMSCalelec
 HMSHGCCOINShoulde       HMSHGCShouldelec && ALL_COIN_events
@@ -168,10 +176,6 @@ HMSHGCSINGShoulde       HMSHGCShouldelec && HMS_event
 HMSHGCDidelec          HMSHGCShouldelec && H.cer.npeSum > 1.5
 HMSHGCCOINDide         HMSHGCCOINShoulde && H.cer.npeSum > 1.5
 HMSHGCSINGDide         HMSHGCSINGShoulde && H.cer.npeSum > 1.5
-
-#HMSHGCDidelec           HMSHGCShouldelec && H.cer.npeSum > 2.0
-#HMSHGCCOINDide          HMSHGCCOINShoulde && H.cer.npeSum > 2.0
-#HMSHGCSINGDide          HMSHGCSINGShoulde && H.cer.npeSum > 2.0
 
 ##################
 ###   HMS CAL  ###
@@ -191,11 +195,11 @@ HMSCALSINGDide          HMSCALSINGShoulde && H.cal.etottracknorm > 0.7
 HMS_DELTA               H.gtr.dp > -10 && H.gtr.dp < 10
 SHMS_DELTA       	P.gtr.dp > -15 && P.gtr.dp < 25
 
-HMSCalCer               H.cal.etottracknorm > 0.5 && H.cer.npeSum > 0.5
-SHMSCalCer              P.cal.etottracknorm > 0.5 && P.aero.npeSum > 0.5
+#HMSCalCer               H.cal.etottracknorm > 0.5 && H.cer.npeSum > 0.5
+#SHMSCalCer              P.cal.etottracknorm > 0.5 && P.aero.npeSum > 0.5
 
 #GOOD_SINGLES_Events	HMS_DELTA && HMS_GOOD_TRACK
 
 GOOD_SINGLES_Events     HMS_DELTA && HMS_GOOD_TRACK && hcut_acceptance && HMScoindcindipole
 
-Physics_master GOOD_SINGLES_Events
+Physics_master ALL_events_NO_EDTM

@@ -55,7 +55,7 @@ cminch=2.54
 #include "PARAM/SHMS/DC/PionLT_PARAM/pdc_geom.param"
 #include "PARAM/SHMS/HODO/phodo_geom.param"
 #include "PARAM/SHMS/HGCER/phgcer_geom.param"
-#include "PARAM/SHMS/AERO/paero_geom.param"
+#include "PARAM/SHMS/AERO/Offline_PionLT/paero_geom_2021.param"
 #include "PARAM/SHMS/CAL/PionLT_PARAM/pcal_geom.param"
 
 ; SHMS default cut parameter files

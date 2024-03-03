@@ -151,57 +151,75 @@ PLT_HMS_Elec_SING_TRACK_EFF		:	   {HMSScinSingDide.npassed / (HMSScinSingShoulde
 * HGC Cerenkov *
 ****************
 
-PLT_SHMS_Prot_HGC_Did		    :   {SHMSHGCDidp.npassed}
-PLT_SHMS_Prot_HGC_Should	    :	{SHMSHGCShouldp.npassed}
+PLT_SHMS_Prot_ALL_HGC_Did            :   {SHMSHGCDidp.npassed}
+PLT_SHMS_Prot_ALL_HGC_Should         :   {SHMSHGCShouldp.npassed}
+PLT_SHMS_Prot_COIN_HGC_Did           :   {SHMSHGCCOINDidp.npassed}
+PLT_SHMS_Prot_COIN_HGC_Should        :   {SHMSHGCCOINShouldp.npassed}
+PLT_SHMS_Prot_SING_HGC_Did           :   {SHMSHGCSINGDidp.npassed}
+PLT_SHMS_Prot_SING_HGC_Should        :   {SHMSHGCSINGShouldp.npassed}
 
-PLT_SHMS_HGC_Prot_Eff		      :   {SHMSHGCDidp.npassed/(SHMSHGCShouldp.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSHGCShouldp.npassed)*(SHMSHGCDidp.npassed))-((SHMSHGCDidp.npassed)*(SHMSHGCDidp.npassed))) / ((SHMSHGCShouldp.npassed)*(SHMSHGCShouldp.npassed)*(SHMSHGCShouldp.npassed)))):%8.4f}
+PLT_SHMS_HGC_ALL_Prot_Eff		      :   {SHMSHGCDidp.npassed/(SHMSHGCShouldp.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSHGCShouldp.npassed)*(SHMSHGCDidp.npassed))-((SHMSHGCDidp.npassed)*(SHMSHGCDidp.npassed))) / ((SHMSHGCShouldp.npassed)*(SHMSHGCShouldp.npassed)*(SHMSHGCShouldp.npassed)))):%8.4f}
+
+PLT_SHMS_HGC_COIN_Prot_Eff                    :   {SHMSHGCCOINDidp.npassed/(SHMSHGCCOINShouldp.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSHGCCOINShouldp.npassed)*(SHMSHGCCOINDidp.npassed))-((SHMSHGCCOINDidp.npassed)*(SHMSHGCCOINDidp.npassed))) / ((SHMSHGCCOINShouldp.npassed)*(SHMSHGCCOINShouldp.npassed)*(SHMSHGCCOINShouldp.npassed)))):%8.4f}
+
+PLT_SHMS_HGC_SING_Prot_Eff                    :   {SHMSHGCSINGDidp.npassed/(SHMSHGCSINGShouldp.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSHGCSINGShouldp.npassed)*(SHMSHGCSINGDidp.npassed))-((SHMSHGCSINGDidp.npassed)*(SHMSHGCSINGDidp.npassed))) / ((SHMSHGCSINGShouldp.npassed)*(SHMSHGCSINGShouldp.npassed)*(SHMSHGCSINGShouldp.npassed)))):%8.4f}
+
 
 ***********
 * Aerogel *
 ***********
 
-PLT_SHMS_Prot_Aero_Did		    :   {SHMSAeroDidp.npassed}
-PLT_SHMS_Prot_Aero_Should	    :	{SHMSAeroShouldp.npassed}
+PLT_SHMS_Prot_ALL_Aero_Did            :   {SHMSAeroDidp.npassed}
+PLT_SHMS_Prot_ALL_Aero_Should         :   {SHMSAeroShouldp.npassed}
+PLT_SHMS_Prot_COIN_Aero_Did           :   {SHMSAeroCOINDidp.npassed}
+PLT_SHMS_Prot_COIN_Aero_Should        :   {SHMSAeroCOINShouldp.npassed}
+PLT_SHMS_Prot_SING_Aero_Did           :   {SHMSAeroSINGDidp.npassed}
+PLT_SHMS_Prot_SING_Aero_Should        :   {SHMSAeroSINGShouldp.npassed}
 
-PLT_SHMS_Aero_Prot_Eff		      :   {SHMSAeroDidp.npassed/(SHMSAeroShouldp.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSAeroShouldp.npassed)*(SHMSAeroDidp.npassed))-((SHMSAeroDidp.npassed)*(SHMSAeroDidp.npassed))) / ((SHMSAeroShouldp.npassed)*(SHMSAeroShouldp.npassed)*(SHMSAeroShouldp.npassed)))):%8.4f}
+PLT_SHMS_Aero_ALL_Prot_Eff		      :   {SHMSAeroDidp.npassed/(SHMSAeroShouldp.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSAeroShouldp.npassed)*(SHMSAeroDidp.npassed))-((SHMSAeroDidp.npassed)*(SHMSAeroDidp.npassed))) / ((SHMSAeroShouldp.npassed)*(SHMSAeroShouldp.npassed)*(SHMSAeroShouldp.npassed)))):%8.4f}
+
+PLT_SHMS_Aero_COIN_Prot_Eff                   :   {SHMSAeroCOINDidp.npassed / (SHMSAeroCOINShouldp.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSAeroCOINShouldp.npassed)*(SHMSAeroCOINDidp.npassed))-((SHMSAeroCOINDidp.npassed)*(SHMSAeroCOINDidp.npassed))) / ((SHMSAeroCOINShouldp.npassed)*(SHMSAeroCOINShouldp.npassed)*(SHMSAeroCOINShouldp.npassed)))):%8.4f}
+
+PLT_SHMS_Aero_SING_Prot_Eff                   :   {SHMSAeroSINGDidp.npassed / (SHMSAeroSINGShouldp.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSAeroSINGShouldp.npassed)*(SHMSAeroSINGDidp.npassed))-((SHMSAeroSINGDidp.npassed)*(SHMSAeroSINGDidp.npassed))) / ((SHMSAeroSINGShouldp.npassed)*(SHMSAeroSINGShouldp.npassed)*(SHMSAeroSINGShouldp.npassed)))):%8.4f}
+
 
 =:=:=:=:=:=:=:=:=:=:=:=:=
 =      HMS Cerenkov     =
 =:=:=:=:=:=:=:=:=:=:=:=:=
 
-PLT_HMS_ALL_Elec_Cer_Did	    :   {HMSHGCDidelec.npassed}
-PLT_HMS_ALL_Elec_Cer_Should	    :	{HMSHGCShouldelec.npassed}
-PLT_HMS_COIN_Elec_Cer_Did	    :	{HMSHGCCOINDide.npassed}
-PLT_HMS_COIN_Elec_Cer_Should	    :	{HMSHGCCOINShoulde.npassed}
-PLT_HMS_SING_Elec_Cer_Did	    :	{HMSHGCSINGDide.npassed}
-PLT_HMS_SING_Elec_Cer_Should	    :	{HMSHGCSINGShoulde.npassed}
+PLT_HMS_ALL_Elec_Cer_Did            :   {HMSHGCDidelec.npassed}
+PLT_HMS_ALL_Elec_Cer_Should         :   {HMSHGCShouldelec.npassed}
+PLT_HMS_COIN_Elec_Cer_Did           :   {HMSHGCCOINDidelec.npassed}
+PLT_HMS_COIN_Elec_Cer_Should        :   {HMSHGCCOINShouldelec.npassed}
+PLT_HMS_SING_Elec_Cer_Did           :   {HMSHGCSINGDidelec.npassed}
+PLT_HMS_SING_Elec_Cer_Should        :   {HMSHGCSINGShouldelec.npassed}
 
-PLT_HMS_Cer_ALL_Elec_Eff	    :   {HMSHGCDidelec.npassed / (HMSHGCShouldelec.npassed+0.0001):%8.4f} +- {(sqrt((((HMSHGCShouldelec.npassed)*(HMSHGCDidelec.npassed))-((HMSHGCDidelec.npassed)*(HMSHGCDidelec.npassed))) / ((HMSHGCShouldelec.npassed)*(HMSHGCShouldelec.npassed)*(HMSHGCShouldelec.npassed)))):%8.4f}
+PLT_HMS_Cer_ALL_Elec_Eff            :   {HMSHGCDidelec.npassed / (HMSHGCShouldelec.npassed+0.0001):%8.4f} +- {(sqrt((((HMSHGCShouldelec.npassed)*(HMSHGCDidelec.npassed))-((HMSHGCDidelec.npassed)*(HMSHGCDidelec.npassed))) / ((HMSHGCShouldelec.npassed)*(HMSHGCShouldelec.npassed)*(HMSHGCShouldelec.npassed)))):%8.4f}
 
-PLT_HMS_Cer_COIN_Elec_Eff	    :	{HMSHGCCOINDide.npassed / (HMSHGCCOINShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((HMSHGCCOINShoulde.npassed)*(HMSHGCCOINDide.npassed))-((HMSHGCCOINDide.npassed)*(HMSHGCCOINDide.npassed))) / ((HMSHGCCOINShoulde.npassed)*(HMSHGCCOINShoulde.npassed)*(HMSHGCCOINShoulde.npassed)))):%8.4f}
+PLT_HMS_Cer_COIN_Elec_Eff           :   {HMSHGCCOINDidelec.npassed / (HMSHGCCOINShouldelec.npassed+0.0001):%8.4f} +- {(sqrt((((HMSHGCCOINShouldelec.npassed)*(HMSHGCCOINDidelec.npassed))-((HMSHGCCOINDidelec.npassed)*(HMSHGCCOINDidelec.npassed))) / ((HMSHGCCOINShouldelec.npassed)*(HMSHGCCOINShouldelec.npassed)*(HMSHGCCOINShouldelec.npassed)))):%8.4f}
 
-PLT_HMS_Cer_SING_Elec_Eff	    :	{HMSHGCSINGDide.npassed / (HMSHGCSINGShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((HMSHGCSINGShoulde.npassed)*(HMSHGCSINGDide.npassed))-((HMSHGCSINGDide.npassed)*(HMSHGCSINGDide.npassed))) / ((HMSHGCSINGShoulde.npassed)*(HMSHGCSINGShoulde.npassed)*(HMSHGCSINGShoulde.npassed)))):%8.4f}
+PLT_HMS_Cer_SING_Elec_Eff           :   {HMSHGCSINGDidelec.npassed / (HMSHGCSINGShouldelec.npassed+0.0001):%8.4f} +- {(sqrt((((HMSHGCSINGShouldelec.npassed)*(HMSHGCSINGDidelec.npassed))-((HMSHGCSINGDidelec.npassed)*(HMSHGCSINGDidelec.npassed))) / ((HMSHGCSINGShouldelec.npassed)*(HMSHGCSINGShouldelec.npassed)*(HMSHGCSINGShouldelec.npassed)))):%8.4f}
 
 **************************
 * SHMS Beta Efficiencies *
 **************************
 
-PLT_SHMS_Good_Beta_Did		:	{SHMSGOODBETADID.npassed}
-PLT_SHMS_Good_Beta_Should	:	{SHMSBETASHOULD.npassed}
-PLT_SHMS_Bad_Beta_Did		:	{SHMSBADBETADID.npassed}
-PLT_SHMS_Bad_Beta_Should	:	{SHMSBETASHOULD.npassed}
-PLT_Coin_Good_Beta_Did		:	{COINGOODBETADID.npassed}	
-PLT_Coin_Good_Beta_Should	:	{COINBETASHOULD.npassed}
-PLT_Coin_Bad_Beta_Did		:	{COINBADBETADID.npassed}
-PLT_Coin_Bad_Beta_Should	:	{COINBETASHOULD.npassed}
+#PLT_SHMS_Good_Beta_Did		:	{SHMSGOODBETADID.npassed}
+#PLT_SHMS_Good_Beta_Should	:	{SHMSBETASHOULD.npassed}
+#PLT_SHMS_Bad_Beta_Did		:	{SHMSBADBETADID.npassed}
+#PLT_SHMS_Bad_Beta_Should	:	{SHMSBETASHOULD.npassed}
+#PLT_Coin_Good_Beta_Did		:	{COINGOODBETADID.npassed}	
+#PLT_Coin_Good_Beta_Should	:	{COINBETASHOULD.npassed}
+#PLT_Coin_Bad_Beta_Did		:	{COINBADBETADID.npassed}
+#PLT_Coin_Bad_Beta_Should	:	{COINBETASHOULD.npassed}
 
-PLT_SHMS_Good_Beta_EFF		:	{SHMSGOODBETADID.npassed / (SHMSBETASHOULD.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSBETASHOULD.npassed)*(SHMSGOODBETADID.npassed)) - ((SHMSGOODBETADID.npassed)*(SHMSGOODBETADID.npassed))) / ((SHMSBETASHOULD.npassed)*(SHMSBETASHOULD.npassed)*(SHMSBETASHOULD.npassed)))):%8.4f}
+#PLT_SHMS_Good_Beta_EFF		:	{SHMSGOODBETADID.npassed / (SHMSBETASHOULD.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSBETASHOULD.npassed)*(SHMSGOODBETADID.npassed)) - ((SHMSGOODBETADID.npassed)*(SHMSGOODBETADID.npassed))) / ((SHMSBETASHOULD.npassed)*(SHMSBETASHOULD.npassed)*(SHMSBETASHOULD.npassed)))):%8.4f}
 
-PLT_SHMS_Bad_Beta_EFF		:	{SHMSBADBETADID.npassed / (SHMSBETASHOULD.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSBETASHOULD.npassed)*(SHMSBADBETADID.npassed)) - ((SHMSBADBETADID.npassed)*(SHMSBADBETADID.npassed))) / ((SHMSBETASHOULD.npassed)*(SHMSBETASHOULD.npassed)*(SHMSBETASHOULD.npassed)))):%8.4f}
+#PLT_SHMS_Bad_Beta_EFF		:	{SHMSBADBETADID.npassed / (SHMSBETASHOULD.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSBETASHOULD.npassed)*(SHMSBADBETADID.npassed)) - ((SHMSBADBETADID.npassed)*(SHMSBADBETADID.npassed))) / ((SHMSBETASHOULD.npassed)*(SHMSBETASHOULD.npassed)*(SHMSBETASHOULD.npassed)))):%8.4f}
 
-PLT_Coin_Good_Beta_EFF		:	{COINGOODBETADID.npassed / (COINBETASHOULD.npassed+0.0001):%8.4f} +- {(sqrt((((COINBETASHOULD.npassed)*(COINGOODBETADID.npassed)) - ((COINGOODBETADID.npassed)*(COINGOODBETADID.npassed))) / ((COINBETASHOULD.npassed)*(COINBETASHOULD.npassed)*(COINBETASHOULD.npassed)))):%8.4f}
+#PLT_Coin_Good_Beta_EFF		:	{COINGOODBETADID.npassed / (COINBETASHOULD.npassed+0.0001):%8.4f} +- {(sqrt((((COINBETASHOULD.npassed)*(COINGOODBETADID.npassed)) - ((COINGOODBETADID.npassed)*(COINGOODBETADID.npassed))) / ((COINBETASHOULD.npassed)*(COINBETASHOULD.npassed)*(COINBETASHOULD.npassed)))):%8.4f}
 
-PLT_Coin_Bad_Beta_EFF		:	{COINBADBETADID.npassed / (COINBETASHOULD.npassed+0.0001):%8.4f} +- {(sqrt((((COINBETASHOULD.npassed)*(COINBADBETADID.npassed)) - ((COINBADBETADID.npassed)*(COINBADBETADID.npassed))) / ((COINBETASHOULD.npassed)*(COINBETASHOULD.npassed)*(COINBETASHOULD.npassed)))):%8.4f}
+#PLT_Coin_Bad_Beta_EFF		:	{COINBADBETADID.npassed / (COINBETASHOULD.npassed+0.0001):%8.4f} +- {(sqrt((((COINBETASHOULD.npassed)*(COINBADBETADID.npassed)) - ((COINBADBETADID.npassed)*(COINBADBETADID.npassed))) / ((COINBETASHOULD.npassed)*(COINBETASHOULD.npassed)*(COINBETASHOULD.npassed)))):%8.4f}
 
 **************************
 * Hodoscope Efficiencies *
@@ -261,17 +279,16 @@ hD       Counts: {H.cal.stat_trksum4} eff : {H.cal.stat_hitsum4 / H.cal.stat_trk
 
 PLT_HMS_ALL_Elec_Cal_Did            :   {HMSCALDidelec.npassed}
 PLT_HMS_ALL_Elec_Cal_Should         :   {HMSCALShouldelec.npassed}
-PLT_HMS_COIN_Elec_Cal_Did           :   {HMSCALCOINDide.npassed}
-PLT_HMS_COIN_Elec_Cal_Should        :   {HMSCALCOINShoulde.npassed}
-PLT_HMS_SING_Elec_Cal_Did           :   {HMSCALSINGDide.npassed}
-PLT_HMS_SING_Elec_Cal_Should        :   {HMSCALSINGShoulde.npassed}
+PLT_HMS_COIN_Elec_Cal_Did           :   {HMSCALCOINDidelec.npassed}
+PLT_HMS_COIN_Elec_Cal_Should        :   {HMSCALCOINShouldelec.npassed}
+PLT_HMS_SING_Elec_Cal_Did           :   {HMSCALSINGDidelec.npassed}
+PLT_HMS_SING_Elec_Cal_Should        :   {HMSCALSINGShouldelec.npassed}
 
 PLT_HMS_Cal_ALL_Elec_Eff            :   {HMSCALDidelec.npassed / (HMSCALShouldelec.npassed+0.0001):%8.4f} +- {(sqrt((((HMSCALShouldelec.npassed)*(HMSCALDidelec.npassed))-((HMSCALDidelec.npassed)*(HMSCALDidelec.npassed))) / ((HMSCALShouldelec.npassed)*(HMSCALShouldelec.npassed)*(HMSCALShouldelec.npassed)))):%8.4f}
 
-PLT_HMS_Cal_COIN_Elec_Eff           :   {HMSCALCOINDide.npassed / (HMSCALCOINShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((HMSCALCOINShoulde.npassed)*(HMSCALCOINDide.npassed))-((HMSCALCOINDide.npassed)*(HMSCALCOINDide.npassed))) / ((HMSCALCOINShoulde.npassed)*(HMSCALCOINShoulde.npassed)*(HMSCALCOINShoulde.npassed)))):%8.4f}
+PLT_HMS_Cal_COIN_Elec_Eff           :   {HMSCALCOINDidelec.npassed / (HMSCALCOINShouldelec.npassed+0.0001):%8.4f} +- {(sqrt((((HMSCALCOINShouldelec.npassed)*(HMSCALCOINDidelec.npassed))-((HMSCALCOINDidelec.npassed)*(HMSCALCOINDidelec.npassed))) / ((HMSCALCOINShouldelec.npassed)*(HMSCALCOINShouldelec.npassed)*(HMSCALCOINShouldelec.npassed)))):%8.4f}
 
-PLT_HMS_Cal_SING_Elec_Eff           :   {HMSCALSINGDide.npassed / (HMSCALSINGShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((HMSCALSINGShoulde.npassed)*(HMSCALSINGDide.npassed))-((HMSCALSINGDide.npassed)*(HMSCALSINGDide.npassed))) / ((HMSCALSINGShoulde.npassed)*(HMSCALSINGShoulde.npassed)*(HMSCALSINGShoulde.npassed)))):%8.4f}
-
+PLT_HMS_Cal_SING_Elec_Eff           :   {HMSCALSINGDidelec.npassed / (HMSCALSINGShouldelec.npassed+0.0001):%8.4f} +- {(sqrt((((HMSCALSINGShouldelec.npassed)*(HMSCALSINGDidelec.npassed))-((HMSCALSINGDidelec.npassed)*(HMSCALSINGDidelec.npassed))) / ((HMSCALSINGShouldelec.npassed)*(HMSCALSINGShouldelec.npassed)*(HMSCALSINGShouldelec.npassed)))):%8.4f}
 
 ========================
 == Triggers Rate Info ==

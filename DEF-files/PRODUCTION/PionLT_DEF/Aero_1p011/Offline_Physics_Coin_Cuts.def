@@ -150,14 +150,19 @@ shmsAerogeomalln      shmsAeroxposalln && shmsAeroyposalln
 ##################
 
 SHMScoindcindipole	 P.dc.InsideDipoleExit == 1
-
 SHMSGEN		         shmshodstarttime && SHMScoindcindipole && pcut_acceptance && ALL_GOOD_Track_Events
-SHMSCalp	         P.cal.etottracknorm < 0.7              
 
+SHMSCalp	         P.cal.etottracknorm < 0.7              
+#SHMSCalp                 P.cal.etottracknorm > 0.05
 SHMSAEROpi               P.aero.npeSum  > 1.5
 
 SHMSHGCShouldpi		 SHMSGEN && SHMSCalp && SHMSAEROpi && shmsAerogeomalln
 SHMSHGCDidpi		 SHMSHGCShouldpi && P.hgcer.npeSum > 1.0
+SHMSHGCCOINShouldpi      SHMSHGCShouldpi && ALL_COIN_events
+SHMSHGCCOINDidpi         SHMSHGCCOINShouldpi && P.hgcer.npeSum > 1.0
+SHMSHGCSINGShouldpi      SHMSHGCShouldpi && SHMS_event
+SHMSHGCSINGDidpi         SHMSHGCSINGShouldpi && P.hgcer.npeSum > 1.0
+
 
 ###################
 ###  SHMS Aero  ###
@@ -184,20 +189,15 @@ HMScoindcindipole	 H.dc.InsideDipoleExit == 1
 
 HMSGEN		         HMShodstarttime && HMScoindcindipole && hcut_acceptance && ALL_GOOD_Track_Events
 #HMSCalelec              H.cal.etottracknorm > 0.5 
-
 HMSCalelec               H.cal.etottracknorm > 0.7
 
 HMSHGCShouldelec         HMSGEN && HMSCalelec 
-HMSHGCCOINShoulde	 HMSHGCShouldelec && ALL_COIN_events
-HMSHGCSINGShoulde	 HMSHGCShouldelec && HMS_event
-
-#HMSHGCDidelec           HMSHGCShouldelec && H.cer.npeSum > 1.5
-#HMSHGCCOINDide		 HMSHGCCOINShoulde && H.cer.npeSum > 1.5
-#HMSHGCSINGDide		 HMSHGCSINGShoulde && H.cer.npeSum > 1.5
+HMSHGCCOINShouldelec	 HMSHGCShouldelec && ALL_COIN_events
+HMSHGCSINGShouldelec	 HMSHGCShouldelec && HMS_event
 
 HMSHGCDidelec            HMSHGCShouldelec && H.cer.npeSum > 1.5
-HMSHGCCOINDide           HMSHGCCOINShoulde && H.cer.npeSum > 1.5
-HMSHGCSINGDide           HMSHGCSINGShoulde && H.cer.npeSum > 1.5
+HMSHGCCOINDidelec        HMSHGCCOINShouldelec && H.cer.npeSum > 1.5
+HMSHGCSINGDidelec        HMSHGCSINGShouldelec && H.cer.npeSum > 1.5
 
 ##################
 ###   HMS CAL  ###
@@ -208,12 +208,12 @@ HMSCerelec               H.cer.npeSum > 1.5
 #HMSCALPos		 H.cal.xtrack > -50 && H.cal.xtrack < 40
 
 HMSCALShouldelec         HMSGEN && HMSCerelec
-HMSCALCOINShoulde        HMSCALShouldelec && ALL_COIN_events
-HMSCALSINGShoulde        HMSCALShouldelec && HMS_event
+HMSCALCOINShouldelec     HMSCALShouldelec && ALL_COIN_events
+HMSCALSINGShouldelec     HMSCALShouldelec && HMS_event
 
 HMSCALDidelec            HMSCALShouldelec && H.cal.etottracknorm > 0.7
-HMSCALCOINDide           HMSCALCOINShoulde && H.cal.etottracknorm > 0.7
-HMSCALSINGDide           HMSCALSINGShoulde && H.cal.etottracknorm > 0.7
+HMSCALCOINDidelec        HMSCALCOINShouldelec && H.cal.etottracknorm > 0.7
+HMSCALSINGDidelec        HMSCALSINGShouldelec && H.cal.etottracknorm > 0.7
 
 HMS_DELTA                H.gtr.dp > -10 && H.gtr.dp < 10
 SHMS_DELTA               P.gtr.dp > -15 && P.gtr.dp < 25

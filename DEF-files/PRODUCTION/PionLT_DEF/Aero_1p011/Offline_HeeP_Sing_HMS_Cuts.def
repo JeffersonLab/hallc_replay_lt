@@ -138,12 +138,14 @@ shmsAerogeomalln      shmsAeroxposalln && shmsAeroyposalln
 SHMScoindcindipole	P.dc.InsideDipoleExit == 1
 
 SHMSGEN		        shmshodstarttime && SHMScoindcindipole && pcut_acceptance && ALL_GOOD_Track_Events
-SHMSCale	        P.cal.etottracknorm > 0.7              
 
+SHMSCale	        P.cal.etottracknorm > 0.7              
 SHMSAEROe               P.aero.npeSum  > 1.0
 
 SHMSHGCShoulde		SHMSGEN && SHMSCale && SHMSAEROe && shmsAerogeomalln
 SHMSHGCDide		SHMSHGCShoulde && P.hgcer.npeSum > 1.0
+SHMSHGCSINGShoulde      SHMSHGCShoulde && SHMS_event
+SHMSHGCSINGDide         SHMSHGCSINGShoulde && P.hgcer.npeSum > 1.0
 
 ###################
 ###  SHMS Aero  ###
@@ -153,6 +155,8 @@ SHMSHGCe                P.hgcer.npeSum  > 1.0
 
 SHMSAeroShoulde         SHMSGEN && SHMSCale && SHMSHGCe && shmsAerogeomalln
 SHMSAeroDide            SHMSAeroShoulde && P.aero.npeSum > 1.0
+SHMSAeroSINGShoulde     SHMSAeroShoulde && SHMS_event
+SHMSAeroSINGDide        SHMSAeroSINGShoulde && P.aero.npeSum > 1.0
 
 ##################
 ###   HMS CER  ###
@@ -170,12 +174,10 @@ HMSGEN		        HMShodstarttime && HMScoindcindipole && hcut_acceptance && ALL_G
 HMSCalelec              H.cal.etottracknorm > 0.7
 
 HMSHGCShouldelec        HMSGEN && HMSCalelec
-HMSHGCCOINShoulde       HMSHGCShouldelec && ALL_COIN_events
-HMSHGCSINGShoulde       HMSHGCShouldelec && HMS_event
+HMSHGCSINGShouldelec    HMSHGCShouldelec && HMS_event
 
-HMSHGCDidelec          HMSHGCShouldelec && H.cer.npeSum > 1.5
-HMSHGCCOINDide         HMSHGCCOINShoulde && H.cer.npeSum > 1.5
-HMSHGCSINGDide         HMSHGCSINGShoulde && H.cer.npeSum > 1.5
+HMSHGCDidelec           HMSHGCShouldelec && H.cer.npeSum > 1.5
+HMSHGCSINGDidelec       HMSHGCSINGShouldelec && H.cer.npeSum > 1.5
 
 ##################
 ###   HMS CAL  ###
@@ -184,12 +186,10 @@ HMSHGCSINGDide         HMSHGCSINGShoulde && H.cer.npeSum > 1.5
 HMSCerelec              H.cer.npeSum > 1.5
 
 HMSCALShouldelec        HMSGEN && HMSCerelec
-HMSCALCOINShoulde       HMSCALShouldelec && ALL_COIN_events
-HMSCALSINGShoulde       HMSCALShouldelec && HMS_event
+HMSCALSINGShouldelec    HMSCALShouldelec && HMS_event
 
 HMSCALDidelec           HMSCALShouldelec && H.cal.etottracknorm > 0.7
-HMSCALCOINDide          HMSCALCOINShoulde && H.cal.etottracknorm > 0.7
-HMSCALSINGDide          HMSCALSINGShoulde && H.cal.etottracknorm > 0.7
+HMSCALSINGDidelec       HMSCALSINGShouldelec && H.cal.etottracknorm > 0.7
 
 
 HMS_DELTA               H.gtr.dp > -10 && H.gtr.dp < 10

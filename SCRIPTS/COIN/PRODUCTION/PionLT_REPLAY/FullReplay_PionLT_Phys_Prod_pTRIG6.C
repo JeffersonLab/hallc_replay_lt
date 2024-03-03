@@ -37,8 +37,8 @@ void FullReplay_PionLT_Phys_Prod_pTRIG6 (Int_t RunNumber = 0, Int_t MaxEvent = 0
 //  pathList.push_back("./cache_pionlt");
 
   const char* ROOTFileNamePattern = "/volatile/hallc/c-pionlt/junaid/ROOTfiles/Analysis/pTRIG6/PionLT_Coin_replay_production_pTRIG6_%d_%d.root";
-  //const char* ROOTFileNamePattern = "/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2021/Analysis/pTRIG6/PionLT_Coin_replay_production_pTRIG6_%d_%d.root";
-  //const char* ROOTFileNamePattern = "/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2022/Analysis/pTRIG6/PionLT_Coin_replay_production_pTRIG6_%d_%d.root";
+  //const char* ROOTFileNamePattern = "/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2021_v2/Analysis/pTRIG6/PionLT_Coin_replay_production_pTRIG6_%d_%d.root";
+  //const char* ROOTFileNamePattern = "/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2022_v2/Analysis/pTRIG6/PionLT_Coin_replay_production_pTRIG6_%d_%d.root";
 
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
@@ -58,8 +58,8 @@ void FullReplay_PionLT_Phys_Prod_pTRIG6 (Int_t RunNumber = 0, Int_t MaxEvent = 0
   gHcDetectorMap->Load("MAPS/COIN/DETEC/coin.map");
 
   // Load the BCM current params
-  //  const char* CurrentFileNamePattern = "PARAM/HMS/BCM/CALIB/bcmcurrent_%d.param";
-  //  gHcParms->Load(Form(CurrentFileNamePattern, RunNumber));
+  const char* CurrentFileNamePattern = "PARAM/HMS/BCM/CALIB/BCM_PionLT/bcmcurrent_%d.param";
+  gHcParms->Load(Form(CurrentFileNamePattern, RunNumber));
 
   // Dec data
   //  gHaApps->Add(new Podd::DecData("D","Decoder raw data"));
@@ -95,9 +95,6 @@ void FullReplay_PionLT_Phys_Prod_pTRIG6 (Int_t RunNumber = 0, Int_t MaxEvent = 0
   THcShower* pcal = new THcShower("cal", "Calorimeter");
   SHMS->AddDetector(pcal);
   
-  // THcBCMCurrent* hbc = new THcBCMCurrent("H.bcm", "BCM current check");
-  // gHaPhysics->Add(hbc);
-
   // Add rastered beam apparatus
   THaApparatus* pbeam = new THcRasteredBeam("P.rb", "Rastered Beamline");
   gHaApps->Add(pbeam);
@@ -180,8 +177,8 @@ void FullReplay_PionLT_Phys_Prod_pTRIG6 (Int_t RunNumber = 0, Int_t MaxEvent = 0
   gHaPhysics->Add(heff);
 
   // Add BCM Current check
-  // THcBCMCurrent* hbc = new THcBCMCurrent("H.bcm", "BCM current check");
-  // gHaPhysics->Add(hbc);       
+  THcBCMCurrent* hbc = new THcBCMCurrent("H.bcm", "BCM current check");
+  gHaPhysics->Add(hbc);       
 
   // Add event handler for scaler events
   THcScalerEvtHandler *hscaler = new THcScalerEvtHandler("H", "Hall C scaler event type 4");  
@@ -292,7 +289,7 @@ void FullReplay_PionLT_Phys_Prod_pTRIG6 (Int_t RunNumber = 0, Int_t MaxEvent = 0
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file+
-  analyzer->SetOdefFile("DEF-files/PRODUCTION/Full_Replay_Pass2_Coin_v2.def"); // New version, slimmed down
+  analyzer->SetOdefFile("DEF-files/PRODUCTION/Full_Replay_Pass2_Coin_PionLT.def"); // New version of PionLT, slimmed down
   // Define cuts file with different Aerogel trays
   //analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/coin_production_cuts.def");  // optional
   //  analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/coin_tracking_cuts.def");  // optional
@@ -329,34 +326,34 @@ void FullReplay_PionLT_Phys_Prod_pTRIG6 (Int_t RunNumber = 0, Int_t MaxEvent = 0
 /*
   if (RunNumber >= 11700 && RunNumber <= 14900){
   // File to record accounting information for cuts
-  analyzer->SetSummaryFile(Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2021/SUMMARY_OUTPUT/pTRIG6/PionLT_summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
+  analyzer->SetSummaryFile(Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2021_v2/SUMMARY_OUTPUT/pTRIG6/PionLT_summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template
   //  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/COIN_PROD.template",
   analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/PionLT_TEMP/PionLT_Offline_Physics_Coin_Trig6.template",
-  Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2021/REPORT_OUTPUT/pTRIG6/PionLT_replay_coin_production_pTRIG6_%d_%d.report", RunNumber, MaxEvent));  // optional
+  Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2021_v2/REPORT_OUTPUT/pTRIG6/PionLT_replay_coin_production_pTRIG6_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Helicity scalers output
   analyzer->PrintReport("TEMPLATES/HMS/SCALERS/hhelscalers.template",
-  			Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2021/Scalers/pTRIG6/PionLT_replay_hms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
+  			Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2021_v2/Scalers/pTRIG6/PionLT_replay_hms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
   analyzer->PrintReport("TEMPLATES/SHMS/SCALERS/phelscalers.template",
-  			Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2021/Scalers/pTRIG6/PionLT_replay_shms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
+  			Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2021_v2/Scalers/pTRIG6/PionLT_replay_shms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
   }
  
   else if (RunNumber >= 14901 && RunNumber <= 17000) {
   // File to record accounting information for cuts
-  analyzer->SetSummaryFile(Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2022/SUMMARY_OUTPUT/pTRIG6/PionLT_summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
+  analyzer->SetSummaryFile(Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2022_v2/SUMMARY_OUTPUT/pTRIG6/PionLT_summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template
   //  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/COIN_PROD.template",
   analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/PionLT_TEMP/PionLT_Offline_Physics_Coin.template",
-  Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2022/REPORT_OUTPUT/pTRIG6/PionLT_replay_coin_production_pTRIG6_%d_%d.report", RunNumber, MaxEvent));  // optional
+  Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2022_v2/REPORT_OUTPUT/pTRIG6/PionLT_replay_coin_production_pTRIG6_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Helicity scalers output
   analyzer->PrintReport("TEMPLATES/HMS/SCALERS/hhelscalers.template",
-                        Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2022/Scalers/pTRIG6/PionLT_replay_hms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
+                        Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2022_v2/Scalers/pTRIG6/PionLT_replay_hms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
   analyzer->PrintReport("TEMPLATES/SHMS/SCALERS/phelscalers.template",
-                        Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2022/Scalers/pTRIG6/PionLT_replay_shms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
+                        Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2022_v2/Scalers/pTRIG6/PionLT_replay_shms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
   }
 */
 

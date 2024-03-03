@@ -53,8 +53,9 @@ int ScalerCalib::Run()
 
   if(pos == -1)
     {
-      pos = filename.find("production_");
-      runstr = (filename.substr(pos+11)).substr(0,4);
+      pos = filename.find("production");
+      runstr = (filename.substr(pos+11)).substr(0,5); // NH - made the same change from 4 to 5 as carlos did
+//      runstr = (filename.substr(pos+18)).substr(0,5); // JD - made changes for pTRIG6 naming 
     }
   else
     {

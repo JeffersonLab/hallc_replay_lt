@@ -1,4 +1,4 @@
-void FullReplay_PionLT_HeeP_Sing_HMS (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
+void FullReplay_PionLT_Lumi_SHMS (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   // Get RunNumber and MaxEvent if not provided.
   if(RunNumber == 0) {
@@ -36,11 +36,12 @@ void FullReplay_PionLT_HeeP_Sing_HMS (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 //  pathList.push_back("./cache_kaonlt");
 //  pathList.push_back("./cache_pionlt");
 
+
   //Output file name
 
-  const char* ROOTFileNamePattern = "/volatile/hallc/c-pionlt/junaid/ROOTfiles/Analysis/HeeP/PionLT_HMS_HeePSing_replay_production_%d_%d.root";
-  //const char* ROOTFileNamePattern = "/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2021_v2/Analysis/HeeP/PionLT_HMS_HeePSing_replay_production_%d_%d.root";
-  //const char* ROOTFileNamePattern = "/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2022_v2/Analysis/HeeP/PionLT_HMS_HeePSing_replay_production_%d_%d.root";
+  const char* ROOTFileNamePattern = "/volatile/hallc/c-pionlt/junaid/ROOTfiles/Analysis/Lumi/PionLT_SHMS_Lumi_replay_production_%d_%d.root";
+  //const char* ROOTFileNamePattern = "/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2021_v2/Analysis/Lumi/PionLT_SHMS_Lumi_replay_production_%d_%d.root";
+  //const char* ROOTFileNamePattern = "/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2022_v2/Analysis/Lumi/PionLT_SHMS_Lumi_replay_production_%d_%d.root";
 
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
@@ -50,7 +51,7 @@ void FullReplay_PionLT_HeeP_Sing_HMS (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
   // Load params for COIN trigger configuration
   //  gHcParms->Load("PARAM/TRIG/KaonLT_Trig/tcoin_Spring19_Offline.param");
-  //  gHcParms->Load("PARAM/TRIG/tcoin.param");
+  // gHcParms->Load("PARAM/TRIG/tcoin.param");
   // Load fadc debug parameters
   gHcParms->Load("PARAM/HMS/GEN/h_fadc_debug.param");
   gHcParms->Load("PARAM/SHMS/GEN/p_fadc_debug.param");
@@ -208,6 +209,7 @@ void FullReplay_PionLT_HeeP_Sing_HMS (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Add Physics Module to calculate primary (scattered electrons) beam kinematics
   THcPrimaryKine* hkin_primary = new THcPrimaryKine("H.kin.primary", "HMS Single Arm Kinematics", "H", "H.rb");
   gHaPhysics->Add(hkin_primary);
+  
   // Add Physics Module to calculate secondary (scattered hadrons) beam kinematics
   THcSecondaryKine* pkin_secondary = new THcSecondaryKine("P.kin.secondary", "SHMS Single Arm Kinematics", "P", "H.kin.primary");
   gHaPhysics->Add(pkin_secondary);
@@ -290,73 +292,72 @@ void FullReplay_PionLT_HeeP_Sing_HMS (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file+
-  analyzer->SetOdefFile("DEF-files/PRODUCTION/Full_Replay_Pass2_Coin_PionLT.def"); // New version for PionLT, slimmed down
+  analyzer->SetOdefFile("DEF-files/PRODUCTION/Full_Replay_Pass2_Coin_PionLT.def"); // New version of PionLT, slimmed down
   // Define cuts file with different Aerogel trays
   //analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/coin_production_cuts.def");  // optional
   //  analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/coin_tracking_cuts.def");  // optional
 
   if (RunNumber >= 11700 && RunNumber <= 13042){
-   analyzer->SetCutFile("DEF-files/PRODUCTION/PionLT_DEF/Aero_1p011/Offline_HeeP_Sing_HMS_Cuts.def");
+   analyzer->SetCutFile("DEF-files/PRODUCTION/PionLT_DEF/Aero_1p011/Offline_Lumi_Sing_SHMS_Cuts.def");
   }
   else if (RunNumber >= 13043 && RunNumber <= 13130){
-   analyzer->SetCutFile("DEF-files/PRODUCTION/PionLT_DEF/Aero_1p030/Offline_HeeP_Sing_HMS_Cuts.def");
+   analyzer->SetCutFile("DEF-files/PRODUCTION/PionLT_DEF/Aero_1p030/Offline_Lumi_Sing_SHMS_Cuts.def");
   }
   else if (RunNumber >= 13131 && RunNumber <= 16201){
-   analyzer->SetCutFile("DEF-files/PRODUCTION/PionLT_DEF/Aero_1p011/Offline_HeeP_Sing_HMS_Cuts.def");
+   analyzer->SetCutFile("DEF-files/PRODUCTION/PionLT_DEF/Aero_1p011/Offline_Lumi_Sing_SHMS_Cuts.def");
   }
   else if (RunNumber >= 16202 && RunNumber <= 16286){
-   analyzer->SetCutFile("DEF-files/PRODUCTION/PionLT_DEF/Aero_1p030/Offline_HeeP_Sing_HMS_Cuts.def");
+   analyzer->SetCutFile("DEF-files/PRODUCTION/PionLT_DEF/Aero_1p030/Offline_Lumi_Sing_SHMS_Cuts.def");
   }
   else {
-   analyzer->SetCutFile("DEF-files/PRODUCTION/PionLT_DEF/Aero_1p011/Offline_HeeP_Sing_HMS_Cuts.def");
+   analyzer->SetCutFile("DEF-files/PRODUCTION/PionLT_DEF/Aero_1p011/Offline_Lumi_Sing_SHMS_Cuts.def");
   }
 
   // File to record accounting information for cuts
-  analyzer->SetSummaryFile(Form("/volatile/hallc/c-pionlt/junaid/REPORT_OUTPUT/SUMMARY_OUTPUT/HeeP/PionLT_HMS_HeePSing_summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
-  // Start the actual analysis.
-  analyzer->Process(run);
-  // Create report file from template
-  // analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/COIN_PROD.template",
-  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/PionLT_TEMP/PionLT_Offline_HEEP_Sing.template",
-  Form("/volatile/hallc/c-pionlt/junaid/REPORT_OUTPUT/Analysis/HeeP/PionLT_replay_HMS_HeePSing_%d_%d.report", RunNumber, MaxEvent));  // optional
-  // Helicity scalers output
-   analyzer->PrintReport("TEMPLATES/HMS/SCALERS/hhelscalers.template",
-                        Form("/volatile/hallc/c-pionlt/junaid/REPORT_OUTPUT/Scalers/HeeP/PionLT_replay_hms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
-   analyzer->PrintReport("TEMPLATES/SHMS/SCALERS/phelscalers.template",
-                        Form("/volatile/hallc/c-pionlt/junaid/REPORT_OUTPUT/Scalers/HeeP/PionLT_replay_shms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
-
-/*
-  if (RunNumber >= 11700 && RunNumber <= 14900){
-  // File to record accounting information for cuts
-  analyzer->SetSummaryFile(Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2021_v2/SUMMARY_OUTPUT/HeeP/PionLT_HMS_HeePSing_summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
+  analyzer->SetSummaryFile(Form("/volatile/hallc/c-pionlt/junaid/REPORT_OUTPUT/SUMMARY_OUTPUT/Lumi/PionLT_SHMS_Lumi_summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template
   //  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/COIN_PROD.template",
-  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/PionLT_TEMP/PionLT_Offline_HEEP_Sing.template",
-  Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2021_v2/REPORT_OUTPUT/HeeP/PionLT_replay_HMS_HeePSing_%d_%d.report", RunNumber, MaxEvent));  // optional
+  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/PionLT_TEMP/PionLT_Offline_Lumi_Sing.template",
+  Form("/volatile/hallc/c-pionlt/junaid/REPORT_OUTPUT/Analysis/Lumi/PionLT_replay_SHMS_Lumi_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Helicity scalers output
-   analyzer->PrintReport("TEMPLATES/HMS/SCALERS/hhelscalers.template",
-  			Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2021_v2/Scalers/HeeP/PionLT_replay_hms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
-   analyzer->PrintReport("TEMPLATES/SHMS/SCALERS/phelscalers.template",
-  			Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2021_v2/Scalers/HeeP/PionLT_replay_shms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
+  analyzer->PrintReport("TEMPLATES/HMS/SCALERS/hhelscalers.template",
+                        Form("/volatile/hallc/c-pionlt/junaid/REPORT_OUTPUT/Scalers/Lumi/PionLT_replay_hms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
+  analyzer->PrintReport("TEMPLATES/SHMS/SCALERS/phelscalers.template",
+                        Form("/volatile/hallc/c-pionlt/junaid/REPORT_OUTPUT/Scalers/Lumi/PionLT_replay_shms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional
 
+/*
+  if (RunNumber >= 11700 && RunNumber <= 14900){
+  // File to record accounting information for cuts
+  analyzer->SetSummaryFile(Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2021_v2/SUMMARY_OUTPUT/Lumi/PionLT_SHMS_Lumi_summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
+  // Start the actual analysis.
+  analyzer->Process(run);
+  // Create report file from template
+  //  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/COIN_PROD.template",
+  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/PionLT_TEMP/PionLT_Offline_Lumi_Sing.template",
+  Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2021_v2/REPORT_OUTPUT/Lumi/PionLT_replay_SHMS_Lumi_%d_%d.report", RunNumber, MaxEvent));  // optional
+  // Helicity scalers output
+  analyzer->PrintReport("TEMPLATES/HMS/SCALERS/hhelscalers.template",
+  			Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2021_v2/Scalers/Lumi/PionLT_replay_hms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
+  analyzer->PrintReport("TEMPLATES/SHMS/SCALERS/phelscalers.template",
+  			Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2021_v2/Scalers/Lumi/PionLT_replay_shms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
   }
   
   else if (RunNumber >= 14901 && RunNumber <= 17000) {
   // File to record accounting information for cuts
-  analyzer->SetSummaryFile(Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2022_v2/SUMMARY_OUTPUT/HeeP/PionLT_HMS_HeePSing_summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
+  analyzer->SetSummaryFile(Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2022_v2/SUMMARY_OUTPUT/Lumi/PionLT_SHMS_Lumi_summary_production_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template
   // analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/COIN_PROD.template",
-  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/PionLT_TEMP/PionLT_Offline_HEEP_Sing.template",
-  Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2022_v2/REPORT_OUTPUT/HeeP/PionLT_replay_HMS_HeePSing_%d_%d.report", RunNumber, MaxEvent));  // optional
+  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/PionLT_TEMP/PionLT_Offline_Lumi_Sing.template",
+  Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2022_v2/REPORT_OUTPUT/Lumi/PionLT_replay_SHMS_Lumi_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Helicity scalers output
   analyzer->PrintReport("TEMPLATES/HMS/SCALERS/hhelscalers.template",
-                        Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2022_v2/Scalers/HeeP/PionLT_replay_hms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
-   analyzer->PrintReport("TEMPLATES/SHMS/SCALERS/phelscalers.template",
-                        Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2022_v2/Scalers/HeeP/PionLT_replay_shms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
+                        Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2022_v2/Scalers/Lumi/PionLT_replay_hms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
+  analyzer->PrintReport("TEMPLATES/SHMS/SCALERS/phelscalers.template",
+                        Form("/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2022_v2/Scalers/Lumi/PionLT_replay_shms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
   }
 */
 

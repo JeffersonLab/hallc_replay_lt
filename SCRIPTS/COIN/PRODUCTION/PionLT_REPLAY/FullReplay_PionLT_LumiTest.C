@@ -93,8 +93,8 @@ void FullReplay_PionLT_LumiTest (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   THcShower* pcal = new THcShower("cal", "Calorimeter");
   SHMS->AddDetector(pcal);
   
-  // THcBCMCurrent* hbc = new THcBCMCurrent("H.bcm", "BCM current check");
-  // gHaPhysics->Add(hbc);
+  THcBCMCurrent* hbc = new THcBCMCurrent("H.bcm", "BCM current check");
+  gHaPhysics->Add(hbc);
 
   // Add rastered beam apparatus
   THaApparatus* pbeam = new THcRasteredBeam("P.rb", "Rastered Beamline");
@@ -178,8 +178,8 @@ void FullReplay_PionLT_LumiTest (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHaPhysics->Add(heff);
 
   // Add BCM Current check
-  // THcBCMCurrent* hbc = new THcBCMCurrent("H.bcm", "BCM current check");
-  // gHaPhysics->Add(hbc);       
+  THcBCMCurrent* hbc = new THcBCMCurrent("H.bcm", "BCM current check");
+  gHaPhysics->Add(hbc);       
 
   // Add event handler for scaler events
   THcScalerEvtHandler *hscaler = new THcScalerEvtHandler("H", "Hall C scaler event type 4");  
@@ -284,6 +284,7 @@ void FullReplay_PionLT_LumiTest (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   analyzer->SetEvent(event);
   // Set EPICS event type
+  analyzer->SetMarkInterval(50000);
   analyzer->SetEpicsEvtType(180);
   // Define crate map
   analyzer->SetCrateMapFileName("MAPS/db_cratemap.dat");
@@ -318,7 +319,7 @@ void FullReplay_PionLT_LumiTest (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Create report file from template
   //  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/COIN_PROD.template",
   analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/PionLT_TEMP/PionLT_Offline_Luminosity.template",
-  Form("REPORT_OUTPUT/Analysis/Lumi/PionLT_replay_Luminosity_%d_%d.report", RunNumber, MaxEvent));  // optional
+  Form("REPORT_OUTPUT/Analysis/Lumi/PionLT_replay_luminosity_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Helicity scalers output
 //  analyzer->PrintReport("TEMPLATES/HMS/SCALERS/hhelscalers.template",
 //  			Form("REPORT_OUTPUT/Scalers/replay_hms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  

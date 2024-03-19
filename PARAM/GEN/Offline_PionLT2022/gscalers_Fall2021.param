@@ -1,0 +1,15 @@
+;djm PRELIMINARY for Fall 2021. 
+; BCM calibration run 11988 taken on Sept 12. Cavity tunes tweaked on Sept 13 because it sucks to be us. 
+; Still needs wire calibration, filtering of an outlier point, check for 0.5%(?) gain shift after the re-tuning fiasco, and proof of long term stability.   
+; We'll probably use bcm1 or 2 for normalization of physics data (they are generally more stable due to the better RF cables).
+; Experimenters should be wary of the impact of the current threshold when taking production data near 5 muA.  
+; Note this version includes a small but highly significant saturation correction for BCM1,2 that turns on above 50 muA (reaching ~1% at 70 muA).
+gNumBCMs=6
+gBCM_Names =            "BCM1      BCM2    Unser    BCM4A   BCM4B  BCM4C"
+gBCM_Gain =            5756.,    5595.,   4011.2,   9081.,   6570.,  4559.
+gBCM_Offset =        252737.,  250294.,  240000.,  -289.5,  -136.7,  52.9 
+gBCM_SatOffset =         50.,      50.,    1000.,   1000.,   1000.,  1000. 
+gBCM_SatQuadratic =  0.00175,    0.002,      0.0,     0.0,     0.0,    0.0 
+gBCM_Current_threshold = 5.0
+; index = 0 to gNumBCMs-1
+gBCM_Current_threshold_index = 3

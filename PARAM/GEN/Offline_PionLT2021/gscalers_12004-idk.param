@@ -6,7 +6,7 @@
 ; Note this version includes a small but highly significant saturation correction for BCM1,2 that turns on above 50 muA (reaching ~1% at 70 muA).
 gNumBCMs=6
 gBCM_Names =            "BCM1      BCM2      Unser      BCM4A      BCM4B      BCM4C"
-gBCM_Gain =            5696.6,    5602.4,   4011.2,    9351.2    6665.1,    4574.4
+gBCM_Gain =            5696.6,    5602.4,   4011.2,    9351.2,    6665.1,    4574.4
 gBCM_Offset =        251640.,   249200.,  244000.,    -1081.9,   -703.7,    -263.3
 gBCM_SatOffset =         50.,       50.,    1000.,     1000.,     1000.,     1000. 
 gBCM_SatQuadratic =  0.00175,    0.002,      0.0,     0.0,     0.0,    0.0 

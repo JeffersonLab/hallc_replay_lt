@@ -178,8 +178,8 @@ void FullReplay_PionLT_LumiTest (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHaPhysics->Add(heff);
 
   // Add BCM Current check
-  THcBCMCurrent* hbc = new THcBCMCurrent("H.bcm", "BCM current check");
-  gHaPhysics->Add(hbc);       
+  //  THcBCMCurrent* hbc = new THcBCMCurrent("H.bcm", "BCM current check");
+  //  gHaPhysics->Add(hbc);       
 
   // Add event handler for scaler events
   THcScalerEvtHandler *hscaler = new THcScalerEvtHandler("H", "Hall C scaler event type 4");  

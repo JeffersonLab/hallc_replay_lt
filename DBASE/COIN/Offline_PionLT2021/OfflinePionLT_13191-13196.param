@@ -4,11 +4,11 @@ raddeg=3.14159265/180
 cminch=2.54
 
 ; General Hall-C parameter files
-#include "PARAM/GEN/genflags.param"
-#include "PARAM/GEN/gdebug.param"
-#include "PARAM/GEN/gtarget.param"
-#include "PARAM/GEN/gbeam.param"
-#include "PARAM/GEN/gscalers.param"
+#include "PARAM/GEN/Offline_PionLT2021/genflags.param"
+#include "PARAM/GEN/Offline_PionLT2021/gdebug.param"
+#include "PARAM/GEN/Offline_PionLT2021/gtarget.param"
+#include "PARAM/GEN/Offline_PionLT2021/gbeam.param"
+#include "PARAM/GEN/Offline_PionLT2021/gscalers_12004-idk.param"
 
 ; General HMS parameter files
 ; Note: hmsflags.param includes spectrometer offsets and options.
@@ -40,6 +40,8 @@ cminch=2.54
 #include "PARAM/HMS/DC/PionLT_PARAM/hdc_tzero_per_wire_11883.param"
 #include "PARAM/HMS/HODO/hhodo_calib.param"
 #include "PARAM/HMS/AERO/haero_calib.param"
+#include "PARAM/HMS/HODO/Offline_PionLT/hhodo_TWcalib_2021.param"
+#include "PARAM/HMS/HODO/PionLT_PARAM/hhodo_Vpcalib_11829.param"
 #include "PARAM/HMS/CAL/PionLT_PARAM/hcal_calib_13191.param"
 
 ; General SHMS parameter files

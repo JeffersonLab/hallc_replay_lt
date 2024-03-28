@@ -81,11 +81,11 @@ class THcPShowerCalib {
   TH2F* hETOTvsEPRunc;
   TH2F* hESHvsEPRunc;
   //wph more plots
-  TH1F* hCer;
-  TH1F* hP;
-  TH1F* hDelta;
-  TH1F* hBeta;
-  TH2F*  hClusTrk;
+  TH1F* HGCer;
+  TH1F* pP;
+  TH1F* pDelta;
+  TH1F* pBeta;
+  TH2F*  pClusTrk;
   TH2F*  hpr;
   TH2F*  hsh;
   TH2F*  hpra;
@@ -434,13 +434,13 @@ void THcPShowerCalib::Init() {
   hESHvsEPRunc = new TH2F("hESHvsEPRunc","E_{SH} versus E_{PR} uncalibrated",
 			   500,0.,0.2, 500,0.,0.2);
 
-  hClusTrk = new TH2F("hClusTrk","nTracks vs nClusters",9,-0.5,8, 41,-0.5,40.5);
+  pClusTrk = new TH2F("pClusTrk","nTracks vs nClusters",9,-0.5,8, 41,-0.5,40.5);
   //wph add plot
   // SJDK - 07/05/21 - These all seem misnamed? Should all be SHMS/P info surely?
-  hCer = new TH1F("hCer","H.cer.npeSum",210, -0.5, 50.5);
-  hP = new TH1F("hP","H.gtr.p",100, 0, 12);
-  hDelta = new TH1F("hDelta","H.gtr.dp",100, -20, 30);
-  hBeta = new TH1F("hBeta","H.hod.beta",100, 0, 2);
+  HGCer = new TH1F("HGCer","P.hgcer.npeSum",210, -0.5, 50.5);
+  pP = new TH1F("pP","P.gtr.p",100, 0, 12);
+  pDelta = new TH1F("pDelta","P.gtr.dp",100, -20, 30);
+  pBeta = new TH1F("pBeta","P.hod.beta",100, 0, 2);
   hpr= new TH2F("hpr","Preshower (Layer1)",2, .5, 2.5, 14, 0.5, 14.5);
   hsh= new TH2F("hsh","Shower (Layer2)",14, 0.5, 14.5, 16, 0.5, 16.5);
   hpra= new TH2F("hpra","Preshower (Layer1)",2, .5, 2.5, 14, 0.5, 14.5);
@@ -501,7 +501,8 @@ void THcPShowerCalib::CalcThresholds() {
       Double_t  xExit= P_tr_x + P_tr_xp*D_EXIT_FP ; //but not here
       Double_t  yExit= P_tr_y + P_tr_yp*D_EXIT_FP ;
       
-      hCaloPos->Fill(yCalo,xCalo);
+//      hCaloPos->Fill(yCalo,xCalo);
+      hCaloPos->Fill(xCalo,yCalo);      
       hExitPos->Fill(yExit,xExit);
 
 	//    trk.Print(cout);
@@ -1097,11 +1098,11 @@ void THcPShowerCalib::fillCutBranch() {
   for (UInt_t ientry=fNstart; ientry<fNstop; ientry++) 
     {
     fTree->GetEntry(ientry);
-    hCer->Fill(P_hgcer_npeSum);
-    hP->Fill(P_tr_p);
-    hDelta->Fill(P_tr_tg_dp);
-    hBeta->Fill(P_tr_beta);
-    hClusTrk->Fill(P_cal_nclust,P_tr_n);  
+    HGCer->Fill(P_hgcer_npeSum);
+    pP->Fill(P_tr_p);
+    pDelta->Fill(P_tr_tg_dp);
+    pBeta->Fill(P_tr_beta);
+    pClusTrk->Fill(P_cal_nclust,P_tr_n);  
     nev++;
     if (nev > 200000) break;
 

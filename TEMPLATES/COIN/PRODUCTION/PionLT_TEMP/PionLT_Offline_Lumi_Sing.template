@@ -1,0 +1,252 @@
+******************************************
+****** Created By - Muhammad Junaid ******
+************ Date - Dec, 2023 ************
+******************************************
+
+=====================================
+=========== General Info ============
+=====================================
+
+PLT_Run_Number		:		{gen_run_number}
+PLT_Beam_Energy		:		{gpbeam}
+PLT_Target_Mass_(amu)	:		{gtargmass_amu}
+
+PLT_HMS_Particle_Mass	:		{hpartmass}
+PLT_HMS_P_Central	:		{hpcentral}
+PLT_HMS_Angle		:		{htheta_lab}
+
+PLT_SHMS_Particle_Mass	:		{ppartmass}
+PLT_SHMS_P_Central	:		{ppcentral}
+PLT_SHMS_Angle		:		{ptheta_lab}
+
+PLT_SHMS_Run_Length	:		{P.1MHz.scalerTime:%.3f} sec
+PLT_HMS_Run_Length	:		{H.1MHz.scalerTime:%.3f} sec
+
+PLT_Total_Events	:		{GOOD_SINGLES_Events.npassed}
+
+=:=:=:=:=:=:=
+= BCM  Info =
+=:=:=:=:=:=:=
+
+Cut on BCM{gBCM_Current_threshold_index+1} current of {gBCM_Current_threshold} uA. Beam over threshold for {H.1MHz.scalerTimeCut:%.3f}s, or {((H.1MHz.scalerTimeCut/H.1MHz.scalerTime)*100.):%.3f}% of total run time.
+
+PLT_BCM_Cut_SHMS_Run_Length      :               {P.1MHz.scalerTimeCut:%.3f} sec                                  
+PLT_BCM_Cut_HMS_Run_Length       :               {H.1MHz.scalerTimeCut:%.3f} sec
+
+ With no cuts on BCM{gBCM_Current_threshold_index+1}.
+
+PLT_BCM1_Current			:		{H.BCM1.scalerCharge/H.1MHz.scalerTime:%.3f} uA
+PLT_Unser_Current			:		{H.Unser.scalerCharge/H.1MHz.scalerTime:%.3f} uA
+
+PLT_BCM1_Charge				:		{H.BCM1.scalerCharge/1000.:%.3f} mC
+PLT_Unser_Charge			:		{H.Unser.scalerCharge/1000.:%.3f} mC
+
+Cut on BCM{gBCM_Current_threshold_index+1} current of {gBCM_Current_threshold} uA. Beam over threshold for {H.1MHz.scalerTimeCut:%.3f}s, or {((H.1MHz.scalerTimeCut/H.1MHz.scalerTime)*100.):%.3f}% of total run time.
+
+PLT_BCM1_Beam_Cut_Current		   :	       {H.BCM1.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA
+PLT_Unser_Beam_Cut_Current   	   	   :	       {H.Unser.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA
+
+PLT_BCM1_Beam_Cut_Charge   	   	   :	       {H.BCM1.scalerChargeCut/1000.:%.3f} mC
+PLT_Unser_Beam_Cut_Charge   	   	   :	       {H.Unser.scalerChargeCut/1000.:%.3f} mC
+
+=:=:=:=:=:=:=:=:=
+= Trigger  Info =
+=:=:=:=:=:=:=:=:=
+
+PLT_Ps1_factor	 	 	    	   :		  {gHC_ti_ps_factors[0]}
+PLT_Ps2_factor				   :		  {gHC_ti_ps_factors[1]}
+PLT_Ps3_factor				   :		  {gHC_ti_ps_factors[2]}
+PLT_Ps4_factor				   :		  {gHC_ti_ps_factors[3]}
+PLT_Ps5_factor				   :		  {gHC_ti_ps_factors[4]}
+PLT_Ps6_factor				   :		  {gHC_ti_ps_factors[5]}
+
+PLT_Total_SHMS_EL-REAL_Triggers                   :		{P.pTRIG2.scaler}
+PLT_(current_cut)_Total_SHMS_EL-REAL_Triggers     :		{P.pTRIG2.scalerCut}
+PLT_Pre-Scaled_SHMS_EL-REAL_Triggers              :		{(P.pTRIG2.scaler/gHC_ti_ps_factors[1]):%.0f}
+PLT_SHMS_EL-REAL_Trigger_Rate                     :		{P.pTRIG2.scalerCut/P.1MHz.scalerTimeCut/1000.:%.3f} kHz
+PLT_Accepted_SHMS_Triggers                    	  :		{pTRIG2_ROC2.npassed}
+
+PLT_Total_HMS_EL-REAL_Triggers			  :		{P.pTRIG4.scaler}
+PLT_(current_cut)_Total_HMS_EL-REAL_Triggers  	  :		{P.pTRIG4.scalerCut}
+PLT_Pre-Scaled_HMS_EL-REAL_Triggers           	  :		{(P.pTRIG4.scaler/gHC_ti_ps_factors[3]):%.0f}
+PLT_HMS_EL-REAL_Trigger_Rate                  	  :		{P.pTRIG4.scalerCut/P.1MHz.scalerTimeCut/1000.:%.3f} kHz
+PLT_Accepted_HMS_Triggers                     	  :		{pTRIG4_ROC2.npassed}
+
+=:=:=:=:
+= EDTM =
+=:=:=:=:
+
+PLT_EDTM_Accepted_Triggers     :    {edtm_accepted.npassed}
+
+EDTM Live Time calculation using non-scaler cut
+
+PLT_Non_Scaler_EDTM_Live_Time                :    {edtm_accepted.npassed/(P.EDTM.scaler+0.0001):%8.4f} +- {(sqrt((((P.EDTM.scaler)*(edtm_accepted.npassed))-((edtm_accepted.npassed)*(edtm_accepted.npassed))) / ((P.EDTM.scaler)*(P.EDTM.scaler)*(P.EDTM.scaler)))):%8.4f}
+
+EDTM Live Time is corrected with threshold current cut. Added by AU on 20/12/22
+
+PLT_Non_Scaler_EDTM_Live_Time_Corr           :    {(((edtm_accepted.npassed / (P.EDTM.scaler+0.0001))-(1-((H.BCM1.scalerCharge / (H.1MHz.scalerTime)) / (H.BCM1.scalerChargeCut / (H.1MHz.scalerTimeCut))))) / ((H.BCM1.scalerCharge / (H.1MHz.scalerTime))/(H.BCM1.scalerChargeCut / (H.1MHz.scalerTimeCut)))):%8.4f} +- {(sqrt((((P.EDTM.scaler)*(edtm_accepted.npassed))-((edtm_accepted.npassed)*(edtm_accepted.npassed))) / ((P.EDTM.scaler)*(P.EDTM.scaler)*(P.EDTM.scaler)))):%8.4f}
+
+=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
+=   Computer Live/Dead Times   =
+=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
+
+Only reliable for COIN data as it's not prescaled. HMS and SHMS CPULT may not be accurate
+
+PLT_HMS_CPULT                     :          {((pTRIG4_ROC2.npassed)/(P.pTRIG4.scaler)):%8.4f} +- {(sqrt(((P.pTRIG4.scaler*pTRIG4_ROC2.npassed)+((pTRIG4_ROC2.npassed)*(pTRIG4_ROC2.npassed)))/(P.pTRIG4.scaler*P.pTRIG4.scaler*P.pTRIG4.scaler))):%8.4f}
+PLT_SHMS_CPULT                    :          {((pTRIG2_ROC2.npassed)/(P.pTRIG2.scaler)):%8.4f} +- {(sqrt(((P.pTRIG2.scaler*pTRIG2_ROC2.npassed)-((pTRIG2_ROC2.npassed)*(pTRIG2_ROC2.npassed)))/(P.pTRIG2.scaler*P.pTRIG2.scaler*P.pTRIG2.scaler))):%8.4f}
+
+======================
+===  Efficiencies  ===
+======================
+
+=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
+=     Tracking Efficiency    =
+=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
+
+PLT_SHMS_ELec_ALL_Trk_Should		:	{shmsScinShoulde.npassed}
+PLT_SHMS_Elec_ALL_Trk_Did		:	{shmsScinDide.npassed}
+PLT_SHMS_Elec_Sing_Trk_Should		:	{shmsScinSingShoulde.npassed}
+PLT_SHMS_Elec_Sing_Trk_Did		:	{shmsScinSingDide.npassed}
+PLT_HMS_Elec_ALL_Trk_Should		:	{HMSScinShoulde.npassed}
+PLT_HMS_Elec_ALL_Trk_Did		:	{HMSScinDide.npassed}
+PLT_HMS_Elec_Sing_Trk_Should		:	{HMSScinSingShoulde.npassed}
+PLT_HMS_Elec_Sing_Trk_Did		:	{HMSScinSingDide.npassed}
+
+PLT_SHMS_Elec_ALL_TRACK_EFF             :          {shmsScinDide.npassed / (shmsScinShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((shmsScinShoulde.npassed)*(shmsScinDide.npassed))+((shmsScinDide.npassed)*(shmsScinDide.npassed))) / ((shmsScinShoulde.npassed)*(shmsScinShoulde.npassed)*(shmsScinShoulde.npassed)))):%8.4f}
+
+PLT_SHMS_Elec_SING_TRACK_EFF		:	   {shmsScinSingDide.npassed / (shmsScinSingShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((shmsScinSingShoulde.npassed)*(shmsScinSingDide.npassed))+((shmsScinSingDide.npassed)*(shmsScinSingDide.npassed))) / ((shmsScinSingShoulde.npassed)*(shmsScinSingShoulde.npassed)*(shmsScinSingShoulde.npassed)))):%8.4f}
+
+PLT_HMS_Elec_ALL_TRACK_EFF		:          {HMSScinDide.npassed / (HMSScinShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((HMSScinShoulde.npassed)*(HMSScinDide.npassed))+((HMSScinDide.npassed)*(HMSScinDide.npassed))) / ((HMSScinShoulde.npassed)*(HMSScinShoulde.npassed)*(HMSScinShoulde.npassed)))):%8.4f}
+
+PLT_HMS_Elec_SING_TRACK_EFF		:	   {HMSScinSingDide.npassed / (HMSScinSingShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((HMSScinSingShoulde.npassed)*(HMSScinSingDide.npassed))+((HMSScinSingDide.npassed)*(HMSScinSingDide.npassed))) / ((HMSScinSingShoulde.npassed)*(HMSScinSingShoulde.npassed)*(HMSScinSingShoulde.npassed)))):%8.4f}
+
+=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
+=     Detector Efficiency    =
+=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
+
+=:=:=:=:=:=:=:=:=:=:=:=:=
+=     SHMS Cerenkovs    =
+=:=:=:=:=:=:=:=:=:=:=:=:=
+
+****************
+* HGC Cerenkov *
+****************
+
+PLT_SHMS_Elec_ALL_HGC_Did           :   {SHMSHGCDide.npassed}
+PLT_SHMS_Elec_ALL_HGC_Should        :   {SHMSHGCShoulde.npassed}
+PLT_SHMS_Elec_SING_HGC_Did          :   {SHMSHGCSINGDide.npassed}
+PLT_SHMS_Elec_SING_HGC_Should       :   {SHMSHGCSINGShoulde.npassed}
+
+PLT_SHMS_HGC_ALL_Elec_Eff                   :   {SHMSHGCDide.npassed/(SHMSHGCShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSHGCShoulde.npassed)*(SHMSHGCDide.npassed))+((SHMSHGCDide.npassed)*(SHMSHGCDide.npassed))) / ((SHMSHGCDide.npassed)*(SHMSHGCDide.npassed)*(SHMSHGCDide.npassed)))):%8.4f}
+
+PLT_SHMS_HGC_SING_Elec_Eff                  :   {SHMSHGCSINGDide.npassed/(SHMSHGCSINGShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSHGCSINGShoulde.npassed)*(SHMSHGCSINGDide.npassed))-((SHMSHGCSINGDide.npassed)*(SHMSHGCSINGDide.npassed))) / ((SHMSHGCSINGShoulde.npassed)*(SHMSHGCSINGShoulde.npassed)*(SHMSHGCSINGShoulde.npassed)))):%8.4f}
+
+***********
+* Aerogel *
+***********
+
+PLT_SHMS_Elec_ALL_Aero_Did                  :   {SHMSAeroDide.npassed}
+PLT_SHMS_Elec_ALL_Aero_Should               :   {SHMSAeroShoulde.npassed}
+PLT_SHMS_Elec_SING_Aero_Did                 :   {SHMSAeroSINGDide.npassed}
+PLT_SHMS_Elec_SING_Aero_Should              :   {SHMSAeroSINGShoulde.npassed}
+
+PLT_SHMS_Aero_ALL_Elec_Eff                  :   {SHMSAeroDide.npassed/(SHMSAeroShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSAeroShoulde.npassed)*(SHMSAeroDide.npassed))+((SHMSAeroDide.npassed)*(SHMSAeroDide.npassed))) / ((SHMSAeroShoulde.npassed)*(SHMSAeroShoulde.npassed)*(SHMSAeroShoulde.npassed)))):%8.4f}
+
+PLT_SHMS_Aero_SING_Elec_Eff                   :   {SHMSAeroSINGDide.npassed / (SHMSAeroSINGShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSAeroSINGShoulde.npassed)*(SHMSAeroSINGDide.npassed))-((SHMSAeroSINGDide.npassed)*(SHMSAeroSINGDide.npassed))) / ((SHMSAeroSINGShoulde.npassed)*(SHMSAeroSINGShoulde.npassed)*(SHMSAeroSINGShoulde.npassed)))):%8.4f}
+
+=:=:=:=:=:=:=:=:=:=:=:=:=
+=      HMS Cerenkov     =
+=:=:=:=:=:=:=:=:=:=:=:=:=
+
+PLT_HMS_ALL_Elec_Cer_Did            :   {HMSHGCDidelec.npassed}
+PLT_HMS_ALL_Elec_Cer_Should         :   {HMSHGCShouldelec.npassed}
+PLT_HMS_SING_Elec_Cer_Did           :   {HMSHGCSINGDidelec.npassed}
+PLT_HMS_SING_Elec_Cer_Should        :   {HMSHGCSINGShouldelec.npassed}
+
+PLT_HMS_Cer_ALL_Elec_Eff            :   {HMSHGCDidelec.npassed / (HMSHGCShouldelec.npassed+0.0001):%8.4f} +- {(sqrt((((HMSHGCShouldelec.npassed)*(HMSHGCDidelec.npassed))-((HMSHGCDidelec.npassed)*(HMSHGCDidelec.npassed))) / ((HMSHGCShouldelec.npassed)*(HMSHGCShouldelec.npassed)*(HMSHGCShouldelec.npassed)))):%8.4f}
+
+PLT_HMS_Cer_SING_Elec_Eff           :   {HMSHGCSINGDidelec.npassed / (HMSHGCSINGShouldelec.npassed+0.0001):%8.4f} +- {(sqrt((((HMSHGCSINGShouldelec.npassed)*(HMSHGCSINGDidelec.npassed))-((HMSHGCSINGDidelec.npassed)*(HMSHGCSINGDidelec.npassed))) / ((HMSHGCSINGShouldelec.npassed)*(HMSHGCSINGShouldelec.npassed)*(HMSHGCSINGShouldelec.npassed)))):%8.4f}
+
+**************************
+* Hodoscope Efficiencies *
+**************************
+
+=:=:=:=:=
+= SHMS  =
+=:=:=:=:=
+
+PLT_SHMS_Hodo_Plane_1	:	{phodo_plane_AND_eff[0]}
+PLT_SHMS_Hodo_Plane_2	:	{phodo_plane_AND_eff[1]}
+PLT_SHMS_Hodo_Plane_3	:	{phodo_plane_AND_eff[2]}
+PLT_SHMS_Hodo_Plane_4	:	{phodo_plane_AND_eff[3]}
+
+PLT_SHMS_Hodo_S1XY	:	{phodo_s1XY_eff}
+PLT_SHMS_Hodo_S2XY	:	{phodo_s2XY_eff}
+
+PLT_SHMS_Hodo_3_of_4_EFF	:	{phodo_3_of_4_eff}
+PLT_SHMS_Hodo_4_of_4_EFF	:	{phodo_4_of_4_eff}
+
+=:=:=:=:=
+=  HMS  =
+=:=:=:=:=
+
+PLT_HMS_Hodo_Plane_1	:	{hhodo_plane_AND_eff[0]}
+PLT_HMS_Hodo_Plane_2	:	{hhodo_plane_AND_eff[1]}
+PLT_HMS_Hodo_Plane_3	:	{hhodo_plane_AND_eff[2]}
+PLT_HMS_Hodo_Plane_4	:	{hhodo_plane_AND_eff[3]}
+
+PLT_HMS_Hodo_S1XY	:	{hhodo_s1XY_eff}
+PLT_HMS_Hodo_S2XY	:	{hhodo_s2XY_eff}
+
+PLT_HMS_Hodo_3_of_4_EFF	:	{hhodo_3_of_4_eff}
+PLT_HMS_Hodo_4_of_4_EFF	:	{hhodo_4_of_4_eff}
+
+****************************
+* Calorimeter Efficiencies *
+****************************
+
+These are raw efficiencies and should not be used for yield calculation
+
+=:=:=:=:=
+= SHMS  =
+=:=:=:=:=
+
+shmsPreShower        Counts: {P.cal.stat_trksum1} eff : {P.cal.stat_hitsum1 / P.cal.stat_trksum1} 
+shmsShowerArray      Counts: {P.cal.stat_trksum_array} eff : {P.cal.stat_hitsum_array / P.cal.stat_trksum_array}
+
+PLT_HMS_ALL_Elec_Cal_Did             :   {HMSCALDidelec.npassed}
+PLT_HMS_ALL_Elec_Cal_Should          :   {HMSCALShouldelec.npassed}
+PLT_SHMS_SING_Elec_Cal_Did           :   {SHMSCALSINGDide.npassed}
+PLT_SHMS_SING_Elec_Cal_Should        :   {SHMSCALSINGShoulde.npassed}
+
+PLT_HMS_Cal_ALL_Elec_Eff            :   {HMSCALDidelec.npassed / (HMSCALShouldelec.npassed+0.0001):%8.4f} +- {(sqrt((((HMSCALShouldelec.npassed)*(HMSCALDidelec.npassed))-((HMSCALDidelec.npassed)*(HMSCALDidelec.npassed))) / ((HMSCALShouldelec.npassed)*(HMSCALShouldelec.npassed)*(HMSCALShouldelec.npassed)))):%8.4f}
+
+PLT_SHMS_Cal_SING_Elec_Eff           :   {SHMSCALSINGDide.npassed / (SHMSCALSINGShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((SHMSCALSINGShoulde.npassed)*(SHMSCALSINGDide.npassed))-((SHMSCALSINGDide.npassed)*(SHMSCALSINGDide.npassed))) / ((SHMSCALSINGShoulde.npassed)*(SHMSCALSINGShoulde.npassed)*(SHMSCALSINGShoulde.npassed)))):%8.4f}
+
+=:=:=:=:=
+=  HMS  =
+=:=:=:=:=
+
+hA       Counts: {H.cal.stat_trksum1} eff : {H.cal.stat_hitsum1 / H.cal.stat_trksum1}
+hB       Counts: {H.cal.stat_trksum2} eff : {H.cal.stat_hitsum2 / H.cal.stat_trksum2}
+hC       Counts: {H.cal.stat_trksum3} eff : {H.cal.stat_hitsum3 / H.cal.stat_trksum3}
+hD       Counts: {H.cal.stat_trksum4} eff : {H.cal.stat_hitsum4 / H.cal.stat_trksum4}
+
+PLT_HMS_ALL_Elec_Cal_Did            :   {HMSCALDidelec.npassed}
+PLT_HMS_ALL_Elec_Cal_Should         :   {HMSCALShouldelec.npassed}
+PLT_HMS_SING_Elec_Cal_Did           :   {HMSCALSINGDidelec.npassed}
+PLT_HMS_SING_Elec_Cal_Should        :   {HMSCALSINGShouldelec.npassed}
+
+PLT_HMS_Cal_ALL_Elec_Eff            :   {HMSCALDidelec.npassed / (HMSCALShouldelec.npassed+0.0001):%8.4f} +- {(sqrt((((HMSCALShouldelec.npassed)*(HMSCALDidelec.npassed))-((HMSCALDidelec.npassed)*(HMSCALDidelec.npassed))) / ((HMSCALShouldelec.npassed)*(HMSCALShouldelec.npassed)*(HMSCALShouldelec.npassed)))):%8.4f}
+
+PLT_HMS_Cal_SING_Elec_Eff           :   {HMSCALSINGDidelec.npassed / (HMSCALSINGShouldelec.npassed+0.0001):%8.4f} +- {(sqrt((((HMSCALSINGShouldelec.npassed)*(HMSCALSINGDidelec.npassed))-((HMSCALSINGDidelec.npassed)*(HMSCALSINGDidelec.npassed))) / ((HMSCALSINGShouldelec.npassed)*(HMSCALSINGShouldelec.npassed)*(HMSCALSINGShouldelec.npassed)))):%8.4f}
+
+========================
+== Triggers Rate Info ==
+========================
+
+PLT_SHMS_Hodoscope_S1X_Triggers         :       {P.S1X.scalerCut}
+PLT_HMS_Hodoscope_S1X_Triggers          :       {H.S1X.scalerCut}
+
+PLT_SHMS_Hodoscope_S1X_Rate         :    {(P.S1X.scalerCut/P.1MHz.scalerTimeCut)/1000.:%.3f} kHz
+PLT_HMS_Hodoscope_S1X_Rate          :    {(H.S1X.scalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz

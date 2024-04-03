@@ -318,7 +318,7 @@ void FullReplay_PionLT_LumiTest (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   analyzer->Process(run);
   // Create report file from template
   //  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/COIN_PROD.template",
-  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/PionLT_TEMP/PionLT_Offline_Luminosity.template",
+  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/PionLT_TEMP/PionLT_Offline_Lumi_Sing.template",
   Form("REPORT_OUTPUT/Analysis/Lumi/PionLT_replay_luminosity_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Helicity scalers output
 //  analyzer->PrintReport("TEMPLATES/HMS/SCALERS/hhelscalers.template",

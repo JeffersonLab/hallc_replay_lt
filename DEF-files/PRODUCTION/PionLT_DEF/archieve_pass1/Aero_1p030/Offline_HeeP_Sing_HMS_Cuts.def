@@ -104,16 +104,21 @@ HMSScinDid            HMSScinShould && H.dc.ntrack > 0
 HMSScinDide           HMSScinShoulde && H.dc.ntrack > 0
 HMSScinSingDide	      HMSScinSingShoulde && H.dc.ntrack > 0
 
-HMS_GOOD_TRACK	          H.dc.ntrack > 0 
-SHMS_GOOD_Track           P.dc.ntrack > 0 
-GOOD_COIN_TRACK           HMS_GOOD_TRACK && SHMS_GOOD_Track
-ALL_GOOD_Track_Events     HMS_GOOD_TRACK || SHMS_GOOD_Track
+#HMS_GOOD_TRACK	           H.dc.ntrack > 0 
+#SHMS_GOOD_Track           P.dc.ntrack > 0 
+#GOOD_COIN_TRACK           HMS_GOOD_TRACK && SHMS_GOOD_Track
+#ALL_GOOD_Track_Events     HMS_GOOD_TRACK || SHMS_GOOD_Track
 
-Tracking_master ALL_GOOD_Track_Events
+Tracking_master ALL_events_NO_EDTM
 
 #################################################################################################################################
 
 Block: Physics       
+
+HMS_GOOD_TRACK            H.dc.ntrack > 0
+SHMS_GOOD_Track           P.dc.ntrack > 0 
+GOOD_COIN_TRACK           HMS_GOOD_TRACK && SHMS_GOOD_Track
+ALL_GOOD_Track_Events     HMS_GOOD_TRACK || SHMS_GOOD_Track
 
 ## Accceptance cuts for SHMS gloden track defined here (Not used in SHMS Tracking)
 
@@ -132,7 +137,7 @@ shmsAerogeomalln      shmsAeroxposalln && shmsAeroyposalln
 
 SHMScoindcindipole	P.dc.InsideDipoleExit == 1
 
-SHMSGEN		        shmshodstarttime && SHMScoindcindipole && pcut_acceptance
+SHMSGEN		        shmshodstarttime && SHMScoindcindipole && pcut_acceptance && ALL_GOOD_Track_Events
 
 SHMSCale	        P.cal.etottracknorm > 0.7              
 SHMSAEROe               P.aero.npeSum  > 1.0
@@ -163,7 +168,7 @@ hcut_acceptance         H.gtr.th > -0.08 && H.gtr.th < 0.08 && H.gtr.ph > -0.045
 
 HMScoindcindipole	H.dc.InsideDipoleExit == 1
 
-HMSGEN		        HMShodstarttime && HMScoindcindipole && hcut_acceptance
+HMSGEN		        HMShodstarttime && HMScoindcindipole && hcut_acceptance && ALL_GOOD_Track_Events
 
 #HMSCalelec              H.cal.etottracknorm > 0.7 &&  H.cal.etottracknorm < 2.0
 HMSCalelec              H.cal.etottracknorm > 0.7
@@ -190,11 +195,11 @@ HMSCALSINGDidelec       HMSCALSINGShouldelec && H.cal.etottracknorm > 0.7
 HMS_DELTA               H.gtr.dp > -10 && H.gtr.dp < 10
 SHMS_DELTA       	P.gtr.dp > -15 && P.gtr.dp < 25
 
-#HMSCalCer              H.cal.etottracknorm > 0.5 && H.cer.npeSum > 0.5
-#SHMSCalCer             P.cal.etottracknorm > 0.5 && P.aero.npeSum > 0.5
+#HMSCalCer               H.cal.etottracknorm > 0.5 && H.cer.npeSum > 0.5
+#SHMSCalCer              P.cal.etottracknorm > 0.5 && P.aero.npeSum > 0.5
 
-GOOD_SINGLES_Events	HMS_DELTA && HMS_GOOD_TRACK
+#GOOD_SINGLES_Events	HMS_DELTA && HMS_GOOD_TRACK
 
-#GOOD_SINGLES_Events     HMS_DELTA && HMS_GOOD_TRACK && hcut_acceptance && HMScoindcindipole
+GOOD_SINGLES_Events     HMS_DELTA && HMS_GOOD_TRACK && hcut_acceptance && HMScoindcindipole
 
-Physics_master GOOD_SINGLES_Events
+Physics_master ALL_events_NO_EDTM

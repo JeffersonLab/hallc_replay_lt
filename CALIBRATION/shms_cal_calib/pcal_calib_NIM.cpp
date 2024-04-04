@@ -177,7 +177,7 @@ void pcal_calib(string Prefix, int RunNumber, int nstop=-1, int nstart=0) {
 //  theShowerCalib.hEunc->GetXaxis()->SetTitle("Normalized Calorimeter Energy (Uncalibrated)");
 //  theShowerCalib.hEunc->GetYaxis()->SetTitle("Number of Hits");
   theShowerCalib.hEuncSel->DrawCopy("same");
-
+  Canvas_1->SaveAs("Uncalibrated_Normalized_Energy.png");
 
   TCanvas *Canvas_2=new TCanvas("Canvas_2", "E/p calibrated", 800, 600);
 //  Canvas_2->cd(1);
@@ -186,6 +186,7 @@ void pcal_calib(string Prefix, int RunNumber, int nstop=-1, int nstart=0) {
   theShowerCalib.hESHvsEPR->GetXaxis()->SetTitle("Preshower Energy");
   theShowerCalib.hESHvsEPR->GetYaxis()->SetTitle("Shower Energy");
   theShowerCalib.hESHvsEPR->Draw("colz");
+  Canvas_2->SaveAs("Sh_vs_presh.png");
 
   TCanvas *Canvas_3=new TCanvas("Canvas_3", "E_sh vs E_pr", 800, 600);
 //  Canvas_3->cd(1);
@@ -206,6 +207,7 @@ void pcal_calib(string Prefix, int RunNumber, int nstop=-1, int nstart=0) {
   theShowerCalib.hEcal->SetTitle("");
   theShowerCalib.hEcal->GetXaxis()->SetTitle("Normalized Calorimeter Energy (Calibrated)");
   theShowerCalib.hEcal->GetYaxis()->SetTitle("Number of Hits");
+  Canvas_3->SaveAs("Calibrated_Normalized_Energy.png");
 
   TCanvas *Canvas_4=new TCanvas("Canvas_4", "delta vs e_dep", 800, 600);
 //  Canvas_4->cd(1);
@@ -215,6 +217,7 @@ void pcal_calib(string Prefix, int RunNumber, int nstop=-1, int nstart=0) {
   theShowerCalib.hDPvsEcal->GetYaxis()->SetTitle("#delta (%)");
   theShowerCalib.hDPvsEcal->GetXaxis()->SetTitle("Normalized Calorimeter Energy");
   theShowerCalib.hDPvsEcal->Draw("colz");
+  Canvas_4->SaveAs("Normalized_Energy_vs_delta.png");
 
   TCanvas *Canvas_6=new TCanvas("Canvas_6", "track vs hcal", 800, 600);
 //  Canvas_6->cd(1);
@@ -224,6 +227,7 @@ void pcal_calib(string Prefix, int RunNumber, int nstop=-1, int nstart=0) {
   theShowerCalib.hCaloPos->GetXaxis()->SetTitle("X at Calo (cm)");
   theShowerCalib.hCaloPos->GetYaxis()->SetTitle("Y at Calo (cm)");
   theShowerCalib.hCaloPos->Draw("colz");
+  Canvas_6->SaveAs("Cal_X_vs_Y.png");
 
 
   TString Outpdf1 = Form("NIM_%s_%d_%d.pdf",Prefix.c_str(),RunNumber,nstop);

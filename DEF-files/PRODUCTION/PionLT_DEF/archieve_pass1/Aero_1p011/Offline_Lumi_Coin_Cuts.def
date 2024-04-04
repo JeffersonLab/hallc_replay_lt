@@ -118,16 +118,21 @@ HMSScinDide               HMSScinShoulde && H.dc.ntrack > 0
 HMSScinCoinDide	          HMSScinCoinShoulde && H.dc.ntrack > 0
 HMSScinSingDide	          HMSScinSingShoulde && H.dc.ntrack > 0
 
-HMS_GOOD_TRACK	          H.dc.ntrack > 0 
-SHMS_GOOD_Track           P.dc.ntrack > 0 
-GOOD_COIN_TRACK	          HMS_GOOD_TRACK && SHMS_GOOD_Track
-ALL_GOOD_Track_Events     HMS_GOOD_TRACK || SHMS_GOOD_Track
+#HMS_GOOD_TRACK	          H.dc.ntrack > 0 
+#SHMS_GOOD_Track          P.dc.ntrack > 0 
+#GOOD_COIN_TRACK	  HMS_GOOD_TRACK && SHMS_GOOD_Track
+#ALL_GOOD_Track_Events     HMS_GOOD_TRACK || SHMS_GOOD_Track
 
-Tracking_master ALL_GOOD_Track_Events
+Tracking_master ALL_events_NO_EDTM
 
 ##########################################################################################################################################
 
 Block: Physics       
+
+HMS_GOOD_TRACK            H.dc.ntrack > 0
+SHMS_GOOD_Track           P.dc.ntrack > 0
+GOOD_COIN_TRACK           HMS_GOOD_TRACK && SHMS_GOOD_Track
+ALL_GOOD_Track_Events     HMS_GOOD_TRACK || SHMS_GOOD_Track
 
 ## Accceptance cuts for SHMS gloden track defined here (Not used in SHMS Tracking)
 
@@ -145,7 +150,7 @@ shmsAerogeomalln      shmsAeroxposalln && shmsAeroyposalln
 ##################
 
 SHMScoindcindipole	 P.dc.InsideDipoleExit == 1
-SHMSGEN		         shmshodstarttime && SHMScoindcindipole && pcut_acceptance
+SHMSGEN		         shmshodstarttime && SHMScoindcindipole && pcut_acceptance && ALL_GOOD_Track_Events
 
 SHMSCalp	         P.cal.etottracknorm < 0.7              
 #SHMSCalp                 P.cal.etottracknorm > 0.05
@@ -182,7 +187,7 @@ hcut_acceptance          H.gtr.th > -0.08 && H.gtr.th < 0.08 && H.gtr.ph > -0.04
 
 HMScoindcindipole	 H.dc.InsideDipoleExit == 1
 
-HMSGEN		         HMShodstarttime && HMScoindcindipole && hcut_acceptance
+HMSGEN		         HMShodstarttime && HMScoindcindipole && hcut_acceptance && ALL_GOOD_Track_Events
 #HMSCalelec              H.cal.etottracknorm > 0.5 
 HMSCalelec               H.cal.etottracknorm > 0.7
 
@@ -217,4 +222,4 @@ SHMS_DELTA               P.gtr.dp > -15 && P.gtr.dp < 25
 
 GOOD_COIN_Events	 HMS_DELTA && SHMS_DELTA && GOOD_COIN_TRACK && shmsAerogeomalln
 
-Physics_master GOOD_COIN_Events
+Physics_master ALL_events_NO_EDTM

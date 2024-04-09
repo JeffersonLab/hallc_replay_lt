@@ -43,7 +43,7 @@ ALL_SHMS_events_NOEDTM      T.coin.pEDTM_tdcTime == 0.0 && SHMS_events
 ALL_COIN_events_NO_EDTM     T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime == 0.0 && ALL_COIN_events
 ALL_events_NO_EDTM          T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime == 0.0 && ALL_events
 
-Decode_master ALL_events_NO_EDTM
+Decode_master ALL_events
 
 ###########################################################################################################
 
@@ -109,7 +109,7 @@ HMSScinSingDide	      HMSScinSingShoulde && H.dc.ntrack > 0
 #GOOD_COIN_TRACK           HMS_GOOD_TRACK && SHMS_GOOD_Track
 #ALL_GOOD_Track_Events     HMS_GOOD_TRACK || SHMS_GOOD_Track
 
-Tracking_master ALL_events_NO_EDTM
+Tracking_master ALL_events
 
 #################################################################################################################################
 
@@ -202,4 +202,4 @@ SHMS_DELTA       	P.gtr.dp > -15 && P.gtr.dp < 25
 
 GOOD_SINGLES_Events     HMS_DELTA && HMS_GOOD_TRACK && hcut_acceptance && HMScoindcindipole
 
-Physics_master ALL_events_NO_EDTM
+Physics_master ALL_events

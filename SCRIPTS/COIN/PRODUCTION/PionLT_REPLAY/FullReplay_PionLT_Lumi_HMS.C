@@ -38,7 +38,7 @@ void FullReplay_PionLT_Lumi_HMS (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   //Output file name
 
-  const char* ROOTFileNamePattern = "/volatile/hallc/c-pionlt/junaid/ROOTfiles/Analysis/Lumi/PionLT_HMS_Lumi_replay_production_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfiles/Analysis/Lumi/PionLT_replay_luminosity_%d_%d.root";
   //const char* ROOTFileNamePattern = "/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2021_v2/Analysis/Lumi/PionLT_HMS_Lumi_replay_production_%d_%d.root";
   //const char* ROOTFileNamePattern = "/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2022_v2/Analysis/Lumi/PionLT_HMS_Lumi_replay_production_%d_%d.root";
 
@@ -318,7 +318,7 @@ void FullReplay_PionLT_Lumi_HMS (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Create report file from template
   // analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/COIN_PROD.template",
   analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/PionLT_TEMP/PionLT_Offline_Lumi_Sing.template",
-  Form("/volatile/hallc/c-pionlt/junaid/REPORT_OUTPUT/Analysis/Lumi/PionLT_replay_HMS_Lumi_%d_%d.report", RunNumber, MaxEvent));  // optional
+  Form("/volatile/hallc/c-pionlt/junaid/REPORT_OUTPUT/Analysis/Lumi/PionLT_replay_luminosity_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Helicity scalers output
    analyzer->PrintReport("TEMPLATES/HMS/SCALERS/hhelscalers.template",
                         Form("/volatile/hallc/c-pionlt/junaid/REPORT_OUTPUT/Scalers/Lumi/PionLT_replay_hms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  

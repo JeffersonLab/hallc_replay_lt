@@ -34,12 +34,12 @@ pTRIG5_ROC2                 T.coin.pTRIG5_ROC2_tdcTimeRaw > 0
 pTRIG6_ROC2	            T.coin.pTRIG6_ROC2_tdcTimeRaw > 0
 
 edtm_accepted		    T.coin.pEDTM_tdcTimeRaw > 0
-hms_edtm_accepted      	    T.coin.pEDTM_tdcTimeRaw > 0 && HMS_events
-shms_edtm_accepted          T.coin.pEDTM_tdcTimeRaw > 0 && SHMS_events
+hms_edtm_accepted      	    T.coin.pEDTM_tdcTimeRaw > 0 && ALL_HMS_events
+shms_edtm_accepted          T.coin.pEDTM_tdcTimeRaw > 0 && ALL_SHMS_events
 both_sing_edtm_accepted     T.coin.pEDTM_tdcTimeRaw > 0 && g.evtyp == 3
 
-ALL_HMS_events_NOEDTM       T.coin.hEDTM_tdcTime == 0.0 && HMS_events
-ALL_SHMS_events_NOEDTM      T.coin.pEDTM_tdcTime == 0.0 && SHMS_events
+ALL_HMS_events_NOEDTM       T.coin.hEDTM_tdcTime == 0.0 && ALL_HMS_events
+ALL_SHMS_events_NOEDTM      T.coin.pEDTM_tdcTime == 0.0 && ALL_SHMS_events
 ALL_COIN_events_NO_EDTM     T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime == 0.0 && ALL_COIN_events
 ALL_events_NO_EDTM          T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime == 0.0 && ALL_events
 
@@ -116,9 +116,9 @@ Tracking_master ALL_events
 Block: Physics       
 
 HMS_GOOD_TRACK            H.dc.ntrack > 0
-SHMS_GOOD_Track           P.dc.ntrack > 0 
-GOOD_COIN_TRACK           HMS_GOOD_TRACK && SHMS_GOOD_Track
-ALL_GOOD_Track_Events     HMS_GOOD_TRACK || SHMS_GOOD_Track
+SHMS_GOOD_TRACK           P.dc.ntrack > 0 
+GOOD_COIN_TRACK           HMS_GOOD_TRACK && SHMS_GOOD_TRACK
+ALL_GOOD_Track_Events     HMS_GOOD_TRACK || SHMS_GOOD_TRACK
 
 ## Accceptance cuts for SHMS gloden track defined here (Not used in SHMS Tracking)
 
@@ -126,8 +126,8 @@ pcut_acceptance         P.gtr.th > -0.06 && P.gtr.th < 0.06 && P.gtr.ph > -0.04 
 
 ## SHMS Aero Geom for n = 1.030 tray
 
-shmsAeroxposalln      P.aero.xAtAero > -55 && P.aero.xAtAero < 55
-shmsAeroyposalln      P.aero.yAtAero > -50 && P.aero.yAtAero < 50
+shmsAeroxposalln      P.aero.xAtAero > -45 && P.aero.xAtAero < 45
+shmsAeroyposalln      P.aero.yAtAero > -30 && P.aero.yAtAero < 30
 
 shmsAerogeomalln      shmsAeroxposalln && shmsAeroyposalln
 
@@ -200,6 +200,7 @@ SHMS_DELTA       	P.gtr.dp > -15 && P.gtr.dp < 25
 
 #GOOD_SINGLES_Events	HMS_DELTA && HMS_GOOD_TRACK
 
-GOOD_SINGLES_Events     HMS_DELTA && HMS_GOOD_TRACK && hcut_acceptance && HMScoindcindipole
+GOOD_HMS_SINGLES_Events     HMS_DELTA && HMS_GOOD_TRACK && hcut_acceptance && HMScoindcindipole
+GOOD_SHMS_SINGLES_Events     SHMS_DELTA && SHMS_GOOD_TRACK && pcut_acceptance && SHMScoindcindipole && shmsAerogeomalln
 
 Physics_master ALL_events

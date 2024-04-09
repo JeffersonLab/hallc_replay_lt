@@ -1,0 +1,17 @@
+;djm 
+; BCM calibration run 16432 taken Aug 2022
+; The BCM1 offset was found to be unstable on Oct 28, 2021. I removed the offsetting preamplifier (which is why its
+; offset is near zero below), but it was still unstable when NPS started up. 
+; BCM2 and BCM4A should give good performance over a wide dynamic range. 
+; BCM4B and BCM4C saturate above 20-ish and 30-ish muA, respectively. That might make them more useful at low currents. 
+; Experimenters should be wary of the impact of the current threshold when taking production data near 5 muA.  
+; Note this version includes a small but highly significant saturation correction for BCM1,2 that turns on above 50 muA (reaching ~1% at 70 muA).
+gNumBCMs=6
+gBCM_Names =            "BCM1      BCM2      Unser      BCM4A      BCM4B      BCM4C"
+gBCM_Gain =            5693.,     5542.,    4011.2,      9340.    39973.,    5088.4
+gBCM_Offset =          1502.,   249621.,  250000.,        715.,   -3612.,     325.
+gBCM_SatOffset =         50.,       50.,    1000.,     1000.,     1000.,     1000. 
+gBCM_SatQuadratic =  0.00175,    0.002,      0.0,     0.0,     0.0,    0.0 
+gBCM_Current_threshold = 3.0
+; index = 0 to gNumBCMs-1
+gBCM_Current_threshold_index = 3

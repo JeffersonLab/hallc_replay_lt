@@ -7,7 +7,7 @@ cminch=2.54
 #include "PARAM/GEN/Offline_PionLT2021/genflags.param"
 #include "PARAM/GEN/Offline_PionLT2021/gdebug.param"
 #include "PARAM/GEN/Offline_PionLT2021/gtarget.param"
-#include "PARAM/GEN/Offline_PionLT2021/gbeam_oneraster.param"
+#include "PARAM/GEN/PionLT_PARAM/gbeam_oneraster_13631-13861_Aug21.param"
 #include "PARAM/GEN/Offline_PionLT2021/gscalers_12004-idk.param"
 
 ; General HMS parameter files

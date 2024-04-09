@@ -4,11 +4,11 @@ raddeg=3.14159265/180
 cminch=2.54
 
 ; General Hall-C parameter files
-#include "PARAM/GEN/genflags.param"
-#include "PARAM/GEN/gdebug.param"
-#include "PARAM/GEN/gtarget.param"
-#include "PARAM/GEN/gbeam.param"
-#include "PARAM/GEN/gscalers.param"
+#include "PARAM/GEN/Offline_PionLT2021/genflags.param"
+#include "PARAM/GEN/Offline_PionLT2021/gdebug.param"
+#include "PARAM/GEN/Offline_PionLT2021/gtarget.param"
+#include "PARAM/GEN/PionLT_PARAM/gbeam_Aug21.param"
+#include "PARAM/GEN/Offline_PionLT2021/gscalers_11767-12003.param"
 
 ; General HMS parameter files
 ; Note: hmsflags.param includes spectrometer offsets and options.
@@ -55,7 +55,7 @@ cminch=2.54
 #include "PARAM/SHMS/DC/PionLT_PARAM/pdc_geom.param"
 #include "PARAM/SHMS/HODO/phodo_geom.param"
 #include "PARAM/SHMS/HGCER/phgcer_geom.param"
-#include "PARAM/SHMS/AERO/paero_geom.param"
+#include "PARAM/SHMS/AERO/Offline_PionLT/paero_geom_2021.param"
 #include "PARAM/SHMS/CAL/PionLT_PARAM/pcal_geom.param"
 
 ; SHMS default cut parameter files

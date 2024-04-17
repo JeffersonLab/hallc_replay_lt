@@ -318,7 +318,7 @@ void bcm_cal_4(string rootFilePath, string beamRangesFile, int runNumber, string
 		
 		
 		//		cout << "--- understood ---" << endl; 
-		
+		c1->Print(Form("bcm_data/%d_frequencyVtime_%s.png",runNumber, bcm_name.c_str()));
 		
 		TCanvas *c2 = new TCanvas("c2","Unser current vs BCMi frequency", 800, 900);	
 		c2->Divide(2,2);
@@ -430,6 +430,7 @@ void bcm_cal_4(string rootFilePath, string beamRangesFile, int runNumber, string
 		 l8->SetLineColor(9);
 		 l8->Draw();
 	 
+	    c2->Print(Form("bcm_data/%d_Fit_%s.png",runNumber, bcm_name.c_str()));
 
 	
 		 // opeing a new text file //

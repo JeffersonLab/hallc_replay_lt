@@ -100,7 +100,7 @@ void bcm_cal_4(string rootFilePath, string beamRangesFile, int runNumber, string
 	//cout << "shms_run_NUM "<< endl;
 	cout << "runNumber: ";
 	if (runNumber < 1) 
-    	cin >> run_NUM; 
+    	cin >> runNumber; 
 	else {
 	    cout << runNumber << '\n';
 	}
@@ -113,7 +113,7 @@ void bcm_cal_4(string rootFilePath, string beamRangesFile, int runNumber, string
         cout << "looking for: " << rootFilePath << '\n';
     }
     
-    TFile *f = new TFile(rootFilePath,"READ"); // %d : expects integer; %f expects float 
+    TFile *f = new TFile(rootFilePath.c_str(),"READ"); // %d : expects integer; %f expects float 
     
     TTree *T = (TTree*)f->Get("TSH"); // TSH : for HMS and TSP : for SHMS
 	
@@ -431,7 +431,7 @@ void bcm_cal_4(string rootFilePath, string beamRangesFile, int runNumber, string
 		 // opeing a new text file //
 		 
 		 ofstream bcm_text; 
-		 bcm_text.open (Form("bcm_data/%d_BCM_points_%s.csv",runNumber, bcm_name));
+		 bcm_text.open (Form("bcm_data/%d_BCM_points_%s.csv",runNumber, bcm_name.c_str()));
 		 bcm_text << "I_unser, I_Unser_error, BCM ave rate, BCM ave rate error, fit Residual, residual error, time (min)\n";
 		 for(Int_t i =0; i<size_rfile_trim ; i++){
 			 bcm_text << I_U[i]<< "," << I_U_err[i]<<"," << p_r[i] << ","<<p_r_err[i] <<"," <<residual[i] << ","<< residual_percent[i]<<"," << I_U_resi_err[i]<< "," << time_ave_min[i] << endl;	 ;

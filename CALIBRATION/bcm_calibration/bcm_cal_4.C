@@ -1,10 +1,12 @@
 /**********************
 		bcm_cal_4.C
-		updated by Nathan Heinrich (heinricn@jlab.org)
-		In a twist nobody expected this is getting edited to yet further remove hard coding, 
+		updated by: Nathan Heinrich (heinricn@jlab.org)
+		2024 04 17
+		In a twist nobody expected this is getting edited to make it easier to automate, 
 		and make it more friendly to use as part of a shell script.
 		
 		I'm adding code that will also make it easier to do secondary analysis (like in excel)
+		make sure ./bcm_data/ exists, otherwise the data will not save
 **********************/
 
 ////////////////////////

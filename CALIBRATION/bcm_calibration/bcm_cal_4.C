@@ -72,8 +72,10 @@ void bcm_cal_4(string rootFilePath, string beamRangesFile, int runNumber, string
 	    cout << "Looking for: " << beamRangesFile << '\n';
 	    filename_ranges = beamRangesFile;
 	}
+	cout << "debug1\n";
 	std::vector<Double_t> r1,r2;
 	ifstream infile(filename_ranges.c_str());
+	cout << "debug2\n";
 	if(infile.fail()){
 		cout << "Cannot open the file: " << endl;
 		cout << "ok" << endl;	 
@@ -82,10 +84,12 @@ void bcm_cal_4(string rootFilePath, string beamRangesFile, int runNumber, string
 	}else{
 		while(!infile.eof()){
 			infile >> cl1 >> cl2 ;
+			cout << cl1 << cl2;
 			r1.push_back(cl1);
 			r2.push_back(cl2);
 			
 		}
+		cout << "debug3\n";
 	}
 	r1.pop_back();
 	r2.pop_back();	

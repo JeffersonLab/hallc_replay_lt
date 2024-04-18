@@ -440,7 +440,7 @@ void bcm_cal_4(string rootFilePath, string beamRangesFile, int runNumber, string
 		 for(Int_t i =0; i<size_rfile_trim ; i++){
 			 bcm_text << I_U[i]<< "," << I_U_err[i]<<"," << p_r[i] << ","<<p_r_err[i] <<"," <<residual[i] << ","<< residual_percent[i]<<"," << I_U_resi_err[i]<< "," << time_ave_min[i] << endl;	 ;
 		 }
-		 bcm_text << "Fit Values: (y=mx+b),\nm = " << gr4->GetFunction("f4")->GetParameter(1) << " +- " << gr4->GetFunction("f4")->GetParError(1) << "\nb = " << gr4->GetFunction("f4")->GetParameter(0) << " +- " << gr4->GetFunction("f4")->GetParError(0) << '\n'; 
+		 bcm_text << "Slope, error, Intercept, error\n" << gr4->GetFunction("f4")->GetParameter(1) << "," << gr4->GetFunction("f4")->GetParError(1) << "," << gr4->GetFunction("f4")->GetParameter(0) << "," << gr4->GetFunction("f4")->GetParError(0) << '\n'; 
 		 bcm_text.close();
 		 
 

@@ -436,7 +436,7 @@ void bcm_cal_4(string rootFilePath, string beamRangesFile, int runNumber, string
 		 
 		 ofstream bcm_text; 
 		 bcm_text.open (Form("bcm_data/%d_BCM_points_%s.csv",runNumber, bcm_name.c_str()));
-		 bcm_text << "I_unser, I_Unser_error, BCM ave rate, BCM ave rate error, fit Residual, residual error, time (min)\n";
+		 bcm_text << "I_unser, I_Unser_error, BCM ave rate, BCM ave rate error, fit Residual, residual percent, residual error, time (min)\n";
 		 for(Int_t i =0; i<size_rfile_trim ; i++){
 			 bcm_text << I_U[i]<< "," << I_U_err[i]<<"," << p_r[i] << ","<<p_r_err[i] <<"," <<residual[i] << ","<< residual_percent[i]<<"," << I_U_resi_err[i]<< "," << time_ave_min[i] << endl;	 ;
 		 }

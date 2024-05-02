@@ -1,0 +1,20 @@
+;Nathan Heinrich - File for the summer 2022 run period of pionLT
+; BCM1 and BCM2 are a global fit of runs 15189 15503 16432 and 16898
+; BCM4A is a weighted average of the same runs
+; BCM4B,C were taken from run 16432
+; BCM4B has an extreamly large gain during this period, I did not do a proper study, 
+; but would recomend that anyone looking into the LD2 data to return to have a proper look at it (might be very effective for low currents) 
+; BCM4C should be ignored when excellent long term stability is required since it has an especially inferior RF cable. 
+; Experimenters should be wary of the impact of the current threshold when taking production data near 5 muA.  
+; Note this version includes a small but highly significant saturation correction for BCM1,2 that turns on above 50 muA (reaching ~1% at 70 muA).
+gNumBCMs=6
+gBCM_Names =            "BCM1      BCM2      Unser      BCM4A      BCM4B      BCM4C"
+gBCM_Gain =            5695.3,    5542.,   4011.2,    9380.2,    39666,    5108.29
+gBCM_Offset =           2157.3,   250029.,  244000.,   586.93,   1577.79,   294.773
+gBCM_SatOffset =         50.,       50.,    1000.,     1000.,     1000.,     1000. 
+gBCM_SatQuadratic =  0.00175,    0.002,      0.0,     0.0,     0.0,    0.0 
+gBCM_Current_threshold = 3.0
+; index = 0 to gNumBCMs-1
+gBCM_Current_threshold_index = 3
+
+

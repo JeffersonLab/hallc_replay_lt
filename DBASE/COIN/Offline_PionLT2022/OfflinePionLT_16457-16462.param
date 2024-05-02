@@ -8,7 +8,7 @@ cminch=2.54
 #include "PARAM/GEN/Offline_PionLT2022/gdebug.param"
 #include "PARAM/GEN/Offline_PionLT2022/gtarget.param"
 #include "PARAM/GEN/PionLT_PARAM/gbeam_June22.param"
-#include "PARAM/GEN/PionLT_PARAM/gscalers_16432.param"
+#include "PARAM/GEN/PionLT_PARAM/gscalers_14965-17000.param"
 
 ; General HMS parameter files
 ; Note: hmsflags.param includes spectrometer offsets and options.

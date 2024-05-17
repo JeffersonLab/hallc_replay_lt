@@ -35,18 +35,18 @@ PLT_BCM_Cut_HMS_Run_Length       :               {H.1MHz.scalerTimeCut:%.3f} sec
 
  With no cuts on BCM{gBCM_Current_threshold_index+1}.
 
-PLT_BCM2_Current			:		{H.BCM2.scalerCharge/H.1MHz.scalerTime:%.3f} uA
+PLT_BCM1_Current			:		{H.BCM1.scalerCharge/H.1MHz.scalerTime:%.3f} uA
 PLT_Unser_Current			:		{H.Unser.scalerCharge/H.1MHz.scalerTime:%.3f} uA
 
-PLT_BCM2_Charge				:		{H.BCM2.scalerCharge/1000.:%.3f} mC
+PLT_BCM1_Charge				:		{H.BCM1.scalerCharge/1000.:%.3f} mC
 PLT_Unser_Charge			:		{H.Unser.scalerCharge/1000.:%.3f} mC
 
 Cut on BCM{gBCM_Current_threshold_index+1} current of {gBCM_Current_threshold} uA. Beam over threshold for {H.1MHz.scalerTimeCut:%.3f}s, or {((H.1MHz.scalerTimeCut/H.1MHz.scalerTime)*100.):%.3f}% of total run time.
 
-PLT_BCM2_Beam_Cut_Current		   :	       {H.BCM2.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA
+PLT_BCM1_Beam_Cut_Current		   :	       {H.BCM1.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA
 PLT_Unser_Beam_Cut_Current   	   	   :	       {H.Unser.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA
 
-PLT_BCM2_Beam_Cut_Charge   	   	   :	       {H.BCM2.scalerChargeCut/1000.:%.3f} mC
+PLT_BCM1_Beam_Cut_Charge   	   	   :	       {H.BCM1.scalerChargeCut/1000.:%.3f} mC
 PLT_Unser_Beam_Cut_Charge   	   	   :	       {H.Unser.scalerChargeCut/1000.:%.3f} mC
 
 =:=:=:=:=:=:=:=:=
@@ -84,7 +84,7 @@ PLT_Non_Scaler_EDTM_Live_Time                :    {edtm_accepted.npassed/(P.EDTM
 
 EDTM Live Time is corrected with threshold current cut. Added by AU on 20/12/22
 
-PLT_Non_Scaler_EDTM_Live_Time_Corr           :    {(((edtm_accepted.npassed / (P.EDTM.scaler+0.0001))-(1-((H.BCM2.scalerCharge / (H.1MHz.scalerTime)) / (H.BCM2.scalerChargeCut / (H.1MHz.scalerTimeCut))))) / ((H.BCM2.scalerCharge / (H.1MHz.scalerTime))/(H.BCM2.scalerChargeCut / (H.1MHz.scalerTimeCut)))):%8.4f} +- {(sqrt((((P.EDTM.scaler)*(edtm_accepted.npassed))-((edtm_accepted.npassed)*(edtm_accepted.npassed))) / ((P.EDTM.scaler)*(P.EDTM.scaler)*(P.EDTM.scaler)))):%8.4f}
+PLT_Non_Scaler_EDTM_Live_Time_Corr           :    {(((edtm_accepted.npassed / (P.EDTM.scaler+0.0001))-(1-((H.BCM1.scalerCharge / (H.1MHz.scalerTime)) / (H.BCM1.scalerChargeCut / (H.1MHz.scalerTimeCut))))) / ((H.BCM1.scalerCharge / (H.1MHz.scalerTime))/(H.BCM1.scalerChargeCut / (H.1MHz.scalerTimeCut)))):%8.4f} +- {(sqrt((((P.EDTM.scaler)*(edtm_accepted.npassed))-((edtm_accepted.npassed)*(edtm_accepted.npassed))) / ((P.EDTM.scaler)*(P.EDTM.scaler)*(P.EDTM.scaler)))):%8.4f}
 
 =:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
 =   Computer Live/Dead Times   =

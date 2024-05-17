@@ -317,7 +317,7 @@ void FullReplay_PionLT_HeeP_Sing_HMS (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   analyzer->Process(run);
   // Create report file from template
   // analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/COIN_PROD.template",
-  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/PionLT_TEMP/PionLT_Offline_HEEP_SingOneArm.template",
+  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/PionLT_TEMP/PionLT_Offline_HEEP_Sing.template",
   Form("/volatile/hallc/c-pionlt/junaid/REPORT_OUTPUT/Analysis/HeeP/PionLT_replay_HMS_HeePSing_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Helicity scalers output
    analyzer->PrintReport("TEMPLATES/HMS/SCALERS/hhelscalers.template",

@@ -122,10 +122,10 @@ Block: Physics
 
 pcut_acceptance	         P.gtr.th > -0.06 && P.gtr.th < 0.06 && P.gtr.ph > -0.04 && P.gtr.ph < 0.04 && P.gtr.dp > -10 && P.gtr.dp < 20
 
-## SHMS Aero Geom for n = 1.011 tray
+## SHMS Aero Geom for n = 1.030 tray
 
-shmsAeroxposalln      P.aero.xAtAero > -45 && P.aero.xAtAero < 45
-shmsAeroyposalln      P.aero.yAtAero > -30 && P.aero.yAtAero < 30
+shmsAeroxposalln      P.aero.xAtAero > -55 && P.aero.xAtAero < 55
+shmsAeroyposalln      P.aero.yAtAero > -50 && P.aero.yAtAero < 50
 
 shmsAerogeomalln      shmsAeroxposalln && shmsAeroyposalln
 
@@ -166,14 +166,13 @@ SHMSAeroSINGDidp         SHMSAeroSINGShouldp && P.aero.npeSum < 1.0
 
 ## HMS Acceptance cuts (Not used in HMS Tracking Efficiency)
 
-hcut_acceptance          H.gtr.th > -0.08 && H.gtr.th < 0.08 && H.gtr.ph > -0.045 && H.gtr.ph < 0.045 && H.gtr.dp > -8 && H.gtr.dp < 8
+hcut_acceptance          H.gtr.th > -0.08 && H.gtr.th < 0.08 && H.gtr.ph > -0.045 && H.gtr.ph < 0.04 && H.gtr.dp > -8 && H.gtr.dp < 8
 
 HMScoindcindipole        H.dc.InsideDipoleExit == 1
 
 HMSGEN		         HMShodstarttime && HMScoindcindipole && hcut_acceptance
 #HMSCalelec               H.cal.etottracknorm > 0.7 &&  H.cal.etottracknorm < 1.6
-#HMSCalelec               H.cal.etottracknorm > 0.7
-HMSCalelec               H.cal.etottracknorm > 0.85
+HMSCalelec               H.cal.etottracknorm > 0.7
 
 HMSCERelec	         H.cer.npeSum > 1.5
 
@@ -189,8 +188,7 @@ HMSHGCSINGDidelec	 HMSHGCSINGShouldelec && H.cer.npeSum > 1.5
 ###   HMS CAL  ###
 ##################
 
-#HMSCerelec               H.cer.npeSum > 1.5
-HMSCerelec               H.cer.npeSum > 5.0
+HMSCerelec               H.cer.npeSum > 1.5
 
 #HMSCALPos               H.cal.xtrack > -50 && H.cal.xtrack < 40
 

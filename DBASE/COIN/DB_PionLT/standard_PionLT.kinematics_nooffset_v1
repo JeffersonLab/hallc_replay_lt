@@ -1866,7 +1866,7 @@ eHadCoinTime_Offset = 11.82
 # 13038 - 13042 cosmics
 
 13043 - 13044
-gpbeam = 5.984804
+gpbeam = 5.984792
 gtargmass_amu = 1.00727647
 htheta_lab = -31.15
 ptheta_lab = 8.00
@@ -1880,7 +1880,7 @@ SHMS_RF_Offset = 2
 eHadCoinTime_Offset = 11.82
 
 13045 - 13050
-gpbeam = 5.984804
+gpbeam = 5.984792
 gtargmass_amu = 1.00727647
 htheta_lab = -31.15
 ptheta_lab = 19.98
@@ -1894,7 +1894,7 @@ SHMS_RF_Offset = 2
 eHadCoinTime_Offset = 11.82
 
 13051 - 13057
-gpbeam = 5.984804
+gpbeam = 5.984792
 gtargmass_amu = 1.00727647
 htheta_lab = -28.285
 ptheta_lab = 28.28
@@ -1908,7 +1908,7 @@ SHMS_RF_Offset = 1
 eHadCoinTime_Offset = 11.82
 
 13058 - 13062
-gpbeam = 5.984804
+gpbeam = 5.984792
 gtargmass_amu = 1.00727647
 htheta_lab = -29.170
 ptheta_lab = 27.495
@@ -1922,7 +1922,7 @@ SHMS_RF_Offset = 0
 eHadCoinTime_Offset = 11.82
 
 13063 - 13075
-gpbeam = 5.984804
+gpbeam = 5.984792
 gtargmass_amu = 1.00727647
 htheta_lab = -31.145
 ptheta_lab = 13.785
@@ -1936,7 +1936,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13076 - 13084
-gpbeam = 5.984804
+gpbeam = 5.984792
 gtargmass_amu = 1.00727647
 htheta_lab = -31.145
 ptheta_lab = 15.79
@@ -1950,7 +1950,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13085 - 13091
-gpbeam = 5.984804
+gpbeam = 5.984792
 gtargmass_amu = 1.00727647
 htheta_lab = -31.145
 ptheta_lab = 17.795
@@ -1964,7 +1964,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13092 - 13093
-gpbeam = 5.984804
+gpbeam = 5.984792
 gtargmass_amu = 1.00727647
 htheta_lab = -12.40
 ptheta_lab = 9.420
@@ -1978,7 +1978,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13094 - 13095 
-gpbeam = 5.984804
+gpbeam = 5.984792
 gtargmass_amu = 1.00727647
 htheta_lab = -13.785
 ptheta_lab = 8.255
@@ -1992,7 +1992,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13096 - 13098
-gpbeam = 5.984804
+gpbeam = 5.984792
 gtargmass_amu = 1.00727647
 htheta_lab = -15.785
 ptheta_lab = 7.725
@@ -2006,7 +2006,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13099 - 13100
-gpbeam = 5.984804
+gpbeam = 5.984792
 gtargmass_amu = 1.00727647
 htheta_lab = -17.785
 ptheta_lab = 7.290
@@ -2020,7 +2020,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13102 - 13103
-gpbeam = 5.984804
+gpbeam = 5.984792
 gtargmass_amu = 1.00727647
 htheta_lab = -19.880
 ptheta_lab = 10.260
@@ -2034,7 +2034,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13105 - 13107
-gpbeam = 5.984804
+gpbeam = 5.984792
 gtargmass_amu = 1.00727647
 htheta_lab = -25.02
 ptheta_lab = 12.40
@@ -2048,7 +2048,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13108 - 13109 
-gpbeam = 5.984804
+gpbeam = 5.984792
 gtargmass_amu = 1.00727647
 htheta_lab = -23.53
 ptheta_lab = 13.79
@@ -2062,7 +2062,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13110 - 13113
-gpbeam = 5.984804
+gpbeam = 5.984792
 gtargmass_amu = 1.00727647
 htheta_lab = -29.355
 ptheta_lab = 17.79
@@ -2076,7 +2076,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13114 - 13120
-gpbeam = 5.984804
+gpbeam = 5.984792
 gtargmass_amu = 1.00727647
 htheta_lab = -29.55
 ptheta_lab = 19.885
@@ -2090,7 +2090,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13121 - 13122
-gpbeam = 5.984804
+gpbeam = 5.984792
 gtargmass_amu = 1.00727647
 htheta_lab = -30.50
 ptheta_lab = 29.36
@@ -2104,7 +2104,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13123 - 13125
-gpbeam = 5.984804
+gpbeam = 5.984792
 gtargmass_amu = 1.00727647
 htheta_lab = -32.80
 ptheta_lab = 27.32
@@ -2118,7 +2118,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13126 - 13127
-gpbeam = 5.984804
+gpbeam = 5.984792
 gtargmass_amu = 1.00727647
 htheta_lab = -32.8
 ptheta_lab = 23.405
@@ -2132,7 +2132,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13128 - 13128
-gpbeam = 5.984804
+gpbeam = 5.984792
 gtargmass_amu = 1.00727647
 htheta_lab = -29.170
 ptheta_lab = 27.505
@@ -2146,7 +2146,7 @@ SHMS_RF_Offset = -1.990
 eHadCoinTime_Offset = 11.82
 
 13129 - 13132
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -13.000
 ptheta_lab = 6.390
@@ -2160,7 +2160,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13133 - 13135
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -23.53
 ptheta_lab = 6.380
@@ -2174,7 +2174,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13136 - 13137
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -23.53
 ptheta_lab = 7.730
@@ -2188,7 +2188,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13138 - 13139
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -23.53
 ptheta_lab = 6.60
@@ -2202,7 +2202,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13140 - 13141
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -23.53
 ptheta_lab = 9.285
@@ -2216,7 +2216,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13142 - 13143
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -23.53
 ptheta_lab = 10.26
@@ -2230,7 +2230,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13144 - 13145
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -23.53
 ptheta_lab = 10.735
@@ -2244,7 +2244,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13146 - 13147
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -23.53
 ptheta_lab = 13.795
@@ -2258,7 +2258,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13148 - 13150
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -23.53
 ptheta_lab = 13.305
@@ -2272,7 +2272,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13151 - 13152
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -23.53
 ptheta_lab = 15.655
@@ -2286,7 +2286,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13153 - 13156
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -23.53
 ptheta_lab = 17.790
@@ -2300,7 +2300,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13157 - 13158
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -23.53
 ptheta_lab = 19.850
@@ -2314,7 +2314,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13159 - 13162
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -19.885
 ptheta_lab = 19.050
@@ -2328,7 +2328,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13163 - 13169
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -23.05
 ptheta_lab = 23.05
@@ -2342,7 +2342,7 @@ SHMS_RF_Offset = -1.990
 eHadCoinTime_Offset = 11.82
 
 13170 - 13180
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -11.015
 ptheta_lab = 6.995
@@ -2356,7 +2356,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13181 - 13190
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -11.015
 ptheta_lab = 8.690
@@ -2370,7 +2370,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13191 - 13199
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -11.015
 ptheta_lab = 10.690
@@ -2384,7 +2384,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13200 - 13201
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -11.015
 ptheta_lab = 10.690
@@ -2398,7 +2398,7 @@ SHMS_RF_Offset = 0.0
 eHadCoinTime_Offset = 11.82
 
 13202 - 13210
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -19.885
 ptheta_lab = 7.295
@@ -2412,7 +2412,7 @@ SHMS_RF_Offset = 0.0
 eHadCoinTime_Offset = 11.82
 
 13211 - 13219
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -19.885
 ptheta_lab = 9.290
@@ -2426,7 +2426,7 @@ SHMS_RF_Offset = 0.0
 eHadCoinTime_Offset = 11.82
 
 13220 - 13229
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -19.885
 ptheta_lab = 11.290
@@ -2440,7 +2440,7 @@ SHMS_RF_Offset = 0.0
 eHadCoinTime_Offset = 11.82
 
 13230 - 13253
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -23.535
 ptheta_lab = 7.725
@@ -2454,7 +2454,7 @@ SHMS_RF_Offset = 0.0
 eHadCoinTime_Offset = 11.82
 
 13254 - 13273
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -23.535
 ptheta_lab = 9.730
@@ -2468,7 +2468,7 @@ SHMS_RF_Offset = 0.0
 eHadCoinTime_Offset = 11.82
 
 13274 - 13308
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -23.535
 ptheta_lab = 11.735
@@ -2483,7 +2483,7 @@ eHadCoinTime_Offset = 11.82
 
 #Q2=6.0, W=3.19, middle epsilon
 13309 - 13358
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -34.520
 ptheta_lab = 8.595
@@ -2497,7 +2497,7 @@ SHMS_RF_Offset = 2.25
 eHadCoinTime_Offset = 11.82
 
 13359 - 13412
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -34.520
 ptheta_lab = 6.595
@@ -2511,7 +2511,7 @@ SHMS_RF_Offset = 1.95
 eHadCoinTime_Offset = 11.82
 
 13414 - 13444
-gpbeam = 9.876908
+gpbeam =  9.876901
 gtargmass_amu = 1.00727647
 htheta_lab = -34.520
 ptheta_lab = 8.595
@@ -2525,7 +2525,7 @@ SHMS_RF_Offset = 1.95
 eHadCoinTime_Offset = 11.82
 
 13445 - 13445
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.008665
 htheta_lab = -13.00
 ptheta_lab = 9.12
@@ -2539,7 +2539,7 @@ SHMS_RF_Offset = 1.95
 eHadCoinTime_Offset = 11.82
 
 13446 - 13468
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.008665
 htheta_lab = -34.58
 ptheta_lab = 9.12
@@ -2554,7 +2554,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 13469 - 13529
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.008665
 htheta_lab = -34.58
 ptheta_lab = 11.12
@@ -2569,7 +2569,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 13530 - 13586
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.008665
 htheta_lab = -34.58
 ptheta_lab = 13.12
@@ -2585,7 +2585,7 @@ Bunch_Spacing_Override = 2.004
 
 # contains EDTM prescale study
 13587 - 13693
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.008665
 htheta_lab = -35.12
 ptheta_lab = 8.39
@@ -2600,7 +2600,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 13694 - 13853
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.008665
 htheta_lab = -35.12
 ptheta_lab = 6.395
@@ -2615,7 +2615,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 13854 - 13855
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.00727647
 htheta_lab = -19.885
 ptheta_lab = 8.255
@@ -2630,7 +2630,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 13856 - 13858
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.00727647
 htheta_lab = -25.025
 ptheta_lab = 10.255
@@ -2645,7 +2645,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 13859 - 13865
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.00727647
 htheta_lab = -25.025
 ptheta_lab = 17.795
@@ -2660,7 +2660,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 13866 - 13868
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.00727647
 htheta_lab = -31.155
 ptheta_lab = 19.880
@@ -2675,7 +2675,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 13869 - 13873
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.00727647
 htheta_lab = -31.150
 ptheta_lab = 30.020
@@ -2690,7 +2690,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 13874 - 13919 
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.00727647
 htheta_lab = -12.50
 ptheta_lab = 8.50
@@ -2705,7 +2705,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 13920 - 13920
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.00727647
 htheta_lab = -19.885
 ptheta_lab = 8.245
@@ -2720,7 +2720,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 13921 - 13982
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.00727647
 htheta_lab = -34.575
 ptheta_lab = 9.115
@@ -2735,7 +2735,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 13983 - 14044
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.00727647
 htheta_lab = -34.575
 ptheta_lab = 11.12
@@ -2750,7 +2750,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 14045 - 14188
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.00727647
 htheta_lab = -34.575
 ptheta_lab = 13.115
@@ -2766,7 +2766,7 @@ Bunch_Spacing_Override = 2.004
 
 # from 14109 on this is January, untill 14207 this is just cosmics and beam checkout.
 14189 - 14199
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.00727647
 htheta_lab = -26.05
 ptheta_lab = 5.495
@@ -2781,7 +2781,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 14200 - 14284
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.00727647
 htheta_lab = -35.12
 ptheta_lab = 5.495
@@ -2796,7 +2796,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 14285 - 14342
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.00727647
 htheta_lab = -35.12
 ptheta_lab = 6.385
@@ -2811,7 +2811,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 14343 - 14386
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.00727647
 htheta_lab = -35.12
 ptheta_lab = 8.39
@@ -2826,7 +2826,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 14387 - 14462
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.00727647
 htheta_lab = -44.37
 ptheta_lab = 6.17
@@ -2841,7 +2841,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 14463 - 14544
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.00727647
 htheta_lab = -44.37
 ptheta_lab = 8.175
@@ -2856,7 +2856,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 14545 - 14556
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.00727647
 htheta_lab = -25.035
 ptheta_lab = 8.165
@@ -2871,7 +2871,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 14557 - 14569
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.00727647
 htheta_lab = -25.035
 ptheta_lab = 6.165
@@ -2886,7 +2886,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 14570 - 14574
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.00727647
 htheta_lab = -15.460
 ptheta_lab = 37.93
@@ -2901,7 +2901,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 14576 - 14580
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.00727647
 htheta_lab = -19.875
 ptheta_lab = 31.095
@@ -2916,7 +2916,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 14581 - 14587
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.00727647
 htheta_lab = -25.26
 ptheta_lab = 25.26
@@ -2931,7 +2931,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 14588 - 14600
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.00727647
 htheta_lab = -33.640
 ptheta_lab = 19.27
@@ -2946,7 +2946,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 14601 - 14611
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.00727647
 htheta_lab = -16.335
 ptheta_lab = 7.225
@@ -2961,7 +2961,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 14612 - 14627
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.00727647
 htheta_lab = -16.335
 ptheta_lab = 9.23
@@ -2976,7 +2976,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 14628 - 14683 
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.008665
 htheta_lab = -35.12
 ptheta_lab = 8.390
@@ -2991,7 +2991,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 14684 - 14735
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.008665
 htheta_lab = -35.12
 ptheta_lab = 6.385
@@ -3006,7 +3006,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 14736 - 14753 
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.008665
 htheta_lab = -34.585
 ptheta_lab = 11.12
@@ -3021,7 +3021,7 @@ eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 2.004
 
 14754 - 14826
-gpbeam = 7.9375695
+gpbeam = 7.937555
 gtargmass_amu = 1.008665
 htheta_lab = -34.585
 ptheta_lab = 13.115

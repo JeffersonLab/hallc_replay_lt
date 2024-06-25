@@ -172,7 +172,8 @@ HMScoindcindipole        H.dc.InsideDipoleExit == 1
 
 HMSGEN		         HMShodstarttime && HMScoindcindipole && hcut_acceptance
 #HMSCalelec               H.cal.etottracknorm > 0.7 &&  H.cal.etottracknorm < 1.6
-HMSCalelec               H.cal.etottracknorm > 0.7
+#HMSCalelec               H.cal.etottracknorm > 0.7
+HMSCalelec               H.cal.etottracknorm > 0.85
 
 HMSCERelec	         H.cer.npeSum > 1.5
 
@@ -188,7 +189,8 @@ HMSHGCSINGDidelec	 HMSHGCSINGShouldelec && H.cer.npeSum > 1.5
 ###   HMS CAL  ###
 ##################
 
-HMSCerelec               H.cer.npeSum > 1.5
+#HMSCerelec               H.cer.npeSum > 1.5
+HMSCerelec               H.cer.npeSum > 5.0
 
 #HMSCALPos               H.cal.xtrack > -50 && H.cal.xtrack < 40
 

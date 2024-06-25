@@ -17,4 +17,9 @@ gBCM_Current_threshold = 3.0
 ; index = 0 to gNumBCMs-1
 gBCM_Current_threshold_index = 3
 
-
+;NH - If using BCM2 then the following should be the the errors:
+; Slope +- 11.5
+; Int	+- 270
+; Error equation is then: 
+; (dI/I)^2 = (dSlope/Slope)^2 + (dInt/(Slope*I))^2 OR
+; (dC/C)^2 = (dSlope/Slope)^2 + (dInt*t/(Slope*C))^2

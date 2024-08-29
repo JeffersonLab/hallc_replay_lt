@@ -127,11 +127,11 @@ void FullReplay_PionLT_HeeP_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHaEvtHandlers->Add(pscaler);
 
   //Add SHMS event handler for helicity scalers
-  THcHelicityScaler *phelscaler = new THcHelicityScaler("P", "Hall C helicity scaler");
+//  THcHelicityScaler *phelscaler = new THcHelicityScaler("P", "Hall C helicity scaler");
   //phelscaler->SetDebugFile("PHelScaler.txt");
-  phelscaler->SetROC(8);
-  phelscaler->SetUseFirstEvent(kTRUE);
-  gHaEvtHandlers->Add(phelscaler);
+//  phelscaler->SetROC(8);
+//  phelscaler->SetUseFirstEvent(kTRUE);
+//  gHaEvtHandlers->Add(phelscaler);
 
   //=:=:=
   // HMS 
@@ -195,11 +195,11 @@ void FullReplay_PionLT_HeeP_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHaEvtHandlers->Add(hscaler);
 
   // Add event handler for helicity scalers
-  THcHelicityScaler *hhelscaler = new THcHelicityScaler("H", "Hall C helicity scaler");
+//  THcHelicityScaler *hhelscaler = new THcHelicityScaler("H", "Hall C helicity scaler");
   //hhelscaler->SetDebugFile("HHelScaler.txt");
-  hhelscaler->SetROC(5);
-  hhelscaler->SetUseFirstEvent(kTRUE);
-  gHaEvtHandlers->Add(hhelscaler);
+//  hhelscaler->SetROC(5);
+//  hhelscaler->SetUseFirstEvent(kTRUE);
+//  gHaEvtHandlers->Add(hhelscaler);
 
   //=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
   // Kinematics Modules
@@ -321,10 +321,10 @@ void FullReplay_PionLT_HeeP_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/PionLT_TEMP/PionLT_Offline_HEEP_Coin.template",
   Form("/volatile/hallc/c-pionlt/junaid/REPORT_OUTPUT/Analysis/HeeP/PionLT_replay_HeeP_coin_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Helicity scalers output
-  analyzer->PrintReport("TEMPLATES/HMS/SCALERS/hhelscalers.template",
-                        Form("/volatile/hallc/c-pionlt/junaid/REPORT_OUTPUT/Scalers/HeeP/PionLT_replay_hms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
-  analyzer->PrintReport("TEMPLATES/SHMS/SCALERS/phelscalers.template",
-                        Form("/volatile/hallc/c-pionlt/junaid/REPORT_OUTPUT/Scalers/HeeP/PionLT_replay_shms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
+//  analyzer->PrintReport("TEMPLATES/HMS/SCALERS/hhelscalers.template",
+//                        Form("/volatile/hallc/c-pionlt/junaid/REPORT_OUTPUT/Scalers/HeeP/PionLT_replay_hms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
+//  analyzer->PrintReport("TEMPLATES/SHMS/SCALERS/phelscalers.template",
+//                        Form("/volatile/hallc/c-pionlt/junaid/REPORT_OUTPUT/Scalers/HeeP/PionLT_replay_shms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
 /*
 
   if (RunNumber >= 11700 && RunNumber <= 14900){

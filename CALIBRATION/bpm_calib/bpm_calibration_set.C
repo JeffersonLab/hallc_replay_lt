@@ -138,7 +138,9 @@ bpm_calibration_set(const char* finname  = "harp_info.txt"){
    
     //TFile *f = new TFile(Form("../hallc_replay/ROOTfiles/shms_replay_raster_simple_%d_-1.root",shms_run_NUM[ir]),"READ"); // %d : expects integer; %f expects float 
     
-    TString file_format=gSystem->GetFromPipe("echo $hallc_replay_dir")+"/ROOTfiles/shms_replay_raster_simple_%d_-1.root";
+//    TString file_format=gSystem->GetFromPipe("echo $hallc_replay_dir")+"/ROOTfiles/shms_replay_raster_simple_%d_-1.root";
+    TString file_format = "/volatile/hallc/c-pionlt/junaid/ROOTfiles/Analysis/HeeP/PionLT_HeePCoin_replay_production_%d_-1.root";
+
     TFile *f = new TFile(Form(file_format,shms_run_NUM[irr]),"READ"); // %d : expects integer; %f expects float 
     TTree *T = (TTree*)f->Get("T");
     Int_t totev = T->GetEntries(); 
@@ -204,7 +206,9 @@ bpm_calibration_set(const char* finname  = "harp_info.txt"){
    
     //TFile *f = new TFile(Form("../hallc_replay/ROOTfiles/shms_replay_raster_simple_%d_-1.root",shms_run_NUM[ir]),"READ"); // %d : expects integer; %f expects float 
     
-    TString file_format=gSystem->GetFromPipe("echo $hallc_replay_dir")+"/ROOTfiles/shms_replay_raster_simple_%d_-1.root";
+//    TString file_format=gSystem->GetFromPipe("echo $hallc_replay_dir")+"/ROOTfiles/shms_replay_raster_simple_%d_-1.root";
+    TString file_format = "/volatile/hallc/c-pionlt/junaid/ROOTfiles/Analysis/HeeP/PionLT_HeePCoin_replay_production_%d_-1.root";
+
     TFile *f = new TFile(Form(file_format,shms_run_NUM[ir]),"READ"); // %d : expects integer; %f expects float 
     TTree *T = (TTree*)f->Get("E");
     Int_t totev = T->GetEntries(); 
@@ -300,7 +304,8 @@ bpm_calibration_set(const char* finname  = "harp_info.txt"){
    
     //TFile *f = new TFile(Form("../hallc_replay/ROOTfiles/shms_replay_raster_simple_%d_-1.root",shms_run_NUM[ir]),"READ"); // %d : expects integer; %f expects float 
     
-    TString file_format=gSystem->GetFromPipe("echo $hallc_replay_dir")+"/ROOTfiles/shms_replay_raster_simple_%d_-1.root";
+//    TString file_format=gSystem->GetFromPipe("echo $hallc_replay_dir")+"/ROOTfiles/shms_replay_raster_simple_%d_-1.root";
+    TString file_format = "/volatile/hallc/c-pionlt/junaid/ROOTfiles/Analysis/HeeP/PionLT_HeePCoin_replay_production_%d_-1.root";
     TFile *f = new TFile(Form(file_format,shms_run_NUM[ir]),"READ"); // %d : expects integer; %f expects float 
     TTree *T = (TTree*)f->Get("E");
     Int_t totev = T->GetEntries(); 

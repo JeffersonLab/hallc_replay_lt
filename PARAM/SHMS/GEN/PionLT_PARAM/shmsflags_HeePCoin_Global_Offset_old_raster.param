@@ -39,4 +39,4 @@ pthetacentral_offset = +0.0017
 
 ;; SHMS Out-of-Plane (Phi) Offset (Pion-LT Data)
 
-p_oopcentral_offset = -0.000082
+p_oopcentral_offset = -0.00005

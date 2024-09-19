@@ -34,7 +34,12 @@ htofusinginvadc=0
 
 ; tof and you figured out good values
 ;   htof_tolerance = 10.0
+<<<<<<< HEAD
   htof_tolerance = 2.0
+=======
+   htof_tolerance = 2.0
+
+>>>>>>> origin
 
 ;                                                                               
 ; hms_tof_params                                                                

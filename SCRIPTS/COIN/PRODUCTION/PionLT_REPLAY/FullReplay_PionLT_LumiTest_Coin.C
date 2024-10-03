@@ -297,19 +297,19 @@ void FullReplay_PionLT_LumiTest (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   //  analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/coin_tracking_cuts.def");  // optional
 
   if (RunNumber >= 11700 && RunNumber <= 13042){
-   analyzer->SetCutFile("DEF-files/PRODUCTION/PionLT_DEF/Aero_1p011/Offline_Lumi_Sing_Cuts.def");
+   analyzer->SetCutFile("DEF-files/PRODUCTION/PionLT_DEF/Aero_1p011/Offline_Lumi_Coin_Cuts.def");
   }
   else if (RunNumber >= 13043 && RunNumber <= 13130){
-   analyzer->SetCutFile("DEF-files/PRODUCTION/PionLT_DEF/Aero_1p030/Offline_Lumi_Sing_Cuts.def");
+   analyzer->SetCutFile("DEF-files/PRODUCTION/PionLT_DEF/Aero_1p030/Offline_Lumi_Coin_Cuts.def");
   }
   else if (RunNumber >= 13131 && RunNumber <= 16201){
-   analyzer->SetCutFile("DEF-files/PRODUCTION/PionLT_DEF/Aero_1p011/Offline_Lumi_Sing_Cuts.def");
+   analyzer->SetCutFile("DEF-files/PRODUCTION/PionLT_DEF/Aero_1p011/Offline_Lumi_Coin_Cuts.def");
   }
   else if (RunNumber >= 16202 && RunNumber <= 17000){
-   analyzer->SetCutFile("DEF-files/PRODUCTION/PionLT_DEF/Aero_1p030/Offline_Lumi_Sing_Cuts.def");
+   analyzer->SetCutFile("DEF-files/PRODUCTION/PionLT_DEF/Aero_1p030/Offline_Lumi_Coin_Cuts.def");
   }
   else {
-   analyzer->SetCutFile("DEF-files/PRODUCTION/PionLT_DEF/Aero_1p011/Offline_Lumi_Sing_Cuts.def");
+   analyzer->SetCutFile("DEF-files/PRODUCTION/PionLT_DEF/Aero_1p011/Offline_Lumi_Coin_Cuts.def");
   }
 
   // File to record accounting information for cuts
@@ -318,7 +318,7 @@ void FullReplay_PionLT_LumiTest (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   analyzer->Process(run);
   // Create report file from template
   //  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/COIN_PROD.template",
-  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/PionLT_TEMP/PionLT_Offline_Lumi_Sing.template",
+  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/PionLT_TEMP/PionLT_Offline_Lumi_Coin.template",
   Form("REPORT_OUTPUT/Analysis/Lumi/PionLT_replay_luminosity_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Helicity scalers output
 //  analyzer->PrintReport("TEMPLATES/HMS/SCALERS/hhelscalers.template",

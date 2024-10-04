@@ -1,4 +1,4 @@
-; Updated by Muhammad junaid - University of Regina
+; Updated by Muhammad +junaid - University of Regina
 ; Offset in the spectrometer momentum.
   hmomentum_factor = 0.000 ; leave 0 so it will have no effect
                            ; use hpcentral_offset if one needs to offset central momentum
@@ -14,10 +14,10 @@
 ; Do not to change these values, since these are the zero order
 ;  CMOP matrix elements. If you do change then your hms sieve
 ;  plots will be screwed up.
-  hdelta_offset = 0.       ; (%)   hdelta_tar = hdelta_tar + hdelta_offset
-  htheta_offset = 0.  ; (rad) hyp_tar = hyp_tar + htheta_offset
+  hdelta_offset = 0.0       ; (%)   hdelta_tar = hdelta_tar + hdelta_offset
+  htheta_offset = 0.0  ; (rad) hyp_tar = hyp_tar + htheta_offset
 ;  hphi_offset   = -4.946337367e-3 ; (rad) hxp_tar = hxp_tar + hphi_offset
-hphi_offset = 0.
+  hphi_offset = 0.0
 ;
 
 ;saturation correction flag
@@ -43,12 +43,12 @@ hcer_debug_adc = 1
 ;; Added by M. Junaid - 31/05/2024
 ;; HMS Centeral Momentum (P) Offset (Pion-LT Data)
 
-hpcentral_offset = +0.01
+hpcentral_offset = 0.0
 
 ;; HMS Central Angle (Theta) Offset (Pion-LT Data)
 
-hthetacentral_offset = +0.0012
+hthetacentral_offset = 0.0
 
 ;; HMS Out-of-Plane (OOP) Offset (Pion-LT Data)
 
-h_oopcentral_offset = +0.00196
+h_oopcentral_offset = 0.0

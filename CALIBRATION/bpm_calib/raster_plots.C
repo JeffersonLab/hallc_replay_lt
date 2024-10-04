@@ -11,8 +11,8 @@
 #include <TROOT.h>
 
 void
-raster_plots(Int_t run_NUM = 4251){
-  
+//raster_plots(Int_t run_NUM = 4251){
+raster_plots(Int_t run_NUM = 14986){  
   
   gStyle->SetOptStat(0);
   gStyle->SetOptStat(0);
@@ -57,7 +57,8 @@ raster_plots(Int_t run_NUM = 4251){
   Double_t rAcut = 5.00;
   Double_t rBcut = 5.00;
   
-  TFile *f = new TFile(Form("/Users/brash/Dropbox/Research/analysis/hallc_replay/ROOTfiles/coin_replay_production_%d_-1.root",run_NUM),"READ"); // %d : expects integer; %f expects float 
+//  TFile *f = new TFile(Form("/Users/brash/Dropbox/Research/analysis/hallc_replay/ROOTfiles/coin_replay_production_%d_-1.root",run_NUM),"READ"); // %d : expects integer; %f expects float 
+  TFile *f = new TFile(Form("/volatile/hallc/c-pionlt/junaid/ROOTfiles/Analysis/HeeP/PionLT_HeePCoin_replay_production_%d_-1.root",run_NUM),"READ"); // %d : expects integer; %f expects float 
     
     
     TTree *T = (TTree*)f->Get("T");

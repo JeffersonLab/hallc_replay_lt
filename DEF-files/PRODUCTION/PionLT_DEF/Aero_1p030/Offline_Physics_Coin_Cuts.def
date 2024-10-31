@@ -163,14 +163,14 @@ SHMSHGCSINGDidpi         SHMSHGCSINGShouldpi && P.hgcer.npeSum > 1.0
 ###  SHMS Aero  ###
 ###################
 
-SHMSHGCpi                P.hgcer.npeSum  > 1.0
+SHMSHGCpi                P.hgcer.npeSum  > 1.5
 
 SHMSAeroShouldpi         SHMSGEN && SHMSCalp && SHMSHGCpi && shmsAerogeomalln
-SHMSAeroDidpi            SHMSAeroShouldpi && P.aero.npeSum > 1.5
+SHMSAeroDidpi            SHMSAeroShouldpi && P.aero.npeSum > 2.5
 SHMSAeroCOINShouldpi	 SHMSAeroShouldpi && ALL_COIN_events
-SHMSAeroCOINDidpi	 SHMSAeroCOINShouldpi && P.aero.npeSum > 1.5
+SHMSAeroCOINDidpi	 SHMSAeroCOINShouldpi && P.aero.npeSum > 2.5
 SHMSAeroSINGShouldpi	 SHMSAeroShouldpi && SHMS_event
-SHMSAeroSINGDidpi	 SHMSAeroSINGShouldpi && P.aero.npeSum > 1.5
+SHMSAeroSINGDidpi	 SHMSAeroSINGShouldpi && P.aero.npeSum > 2.5
 
 ##################
 ###   HMS CER  ###

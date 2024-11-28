@@ -1,4 +1,4 @@
-void FullReplay_Online(Int_t RunNumber = 0, Int_t MaxEvent = 0) {
+void FullReplay_PionLT(Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   // Get RunNumber and MaxEvent if not provided.
   if(RunNumber == 0) {

@@ -2,6 +2,12 @@
 
 pcosmicflag=0
 
+; For pHodoEffEventType
+; If =1 then analyze SHMS singles and coin
+;    =2 then analyze HMS singles and coin
+;    =4 then analyze only coin events.
+pHodoEffEventType = 4
+
 ; for now manually set hte FADC mode
 ;  1 == Use the pulse int - pulse ped
 ;  2 == Use the sample integral - known ped
@@ -21,8 +27,8 @@ pstart_time_slop = 100.
 ;pscin_tdc_min = -500                                                           
 
 ;with run 4698
-;pscin_tdc_min = -1000                                                           
-pscin_tdc_min = -500
+pscin_tdc_min = -1000                                                           
+;pscin_tdc_min = -500
 
 ; pscin_tdc_max       maximum allowed tdc value                                 
 ;pscin_tdc_max = -1000                                                        

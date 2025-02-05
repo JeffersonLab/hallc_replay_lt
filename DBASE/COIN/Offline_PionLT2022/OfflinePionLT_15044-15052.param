@@ -14,7 +14,7 @@ cminch=2.54
 ; Note: hmsflags.param includes spectrometer offsets and options.
 #include "PARAM/HMS/GEN/PionLT_PARAM/hcana_newoptics_5p878.param"
 #include "PARAM/HMS/GEN/hdebug.param"
-#include "PARAM/HMS/GEN/PionLT_PARAM/hmsflags_HeePCoin_Global_Offset.param"
+#include "PARAM/HMS/GEN/PionLT_PARAM/hmsflags_HeePCoin_Global_Offset_5p878.param"
 #include "PARAM/HMS/GEN/htracking.param"
 #include "PARAM/HMS/GEN/Offline_PionLT/h_reftime_cut_PionLT.param"
 

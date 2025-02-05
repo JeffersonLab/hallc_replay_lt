@@ -163,7 +163,8 @@ SHMSHGCSINGDidpi         SHMSHGCSINGShouldpi && P.hgcer.npeSum > 1.0
 ###  SHMS Aero  ###
 ###################
 
-SHMSHGCpi                P.hgcer.npeSum  > 1.5
+#SHMSHGCpi                P.hgcer.npeSum  > 1.5
+SHMSHGCpi                P.hgcer.npeSum  > 2.0
 
 SHMSAeroShouldpi         SHMSGEN && SHMSCalp && SHMSHGCpi && shmsAerogeomalln
 SHMSAeroDidpi            SHMSAeroShouldpi && P.aero.npeSum > 2.5

@@ -14,10 +14,12 @@
 ; Do not to change these values, since these are the zero order
 ;  CMOP matrix elements. If you do change then your hms sieve
 ;  plots will be screwed up.
-  hdelta_offset = 0.       ; (%)   hdelta_tar = hdelta_tar + hdelta_offset
-  htheta_offset = 0.  ; (rad) hyp_tar = hyp_tar + htheta_offset
-;  hphi_offset   = -4.946337367e-3 ; (rad) hxp_tar = hxp_tar + hphi_offset
-hphi_offset = 0.
+;  hdelta_offset = 0.       ; (%)   hdelta_tar = hdelta_tar + hdelta_offset
+;  htheta_offset = 0.  ; (rad) hyp_tar = hyp_tar + htheta_offset
+;  hphi_offset = 0.
+   hdelta_offset = 0.       ; (%)   hdelta_tar = hdelta_tar + hdelta_offset
+   htheta_offset = 1.13226915e-3; New from NPS low-mom data: (rad) hyp_tar = hyp_tar + htheta_offset
+   hphi_offset   = -2.5535536e-4 ; new from NPS data (rad) hxp_tar = hxp_tar + hphi_offset
 ;
 
 ;saturation correction flag

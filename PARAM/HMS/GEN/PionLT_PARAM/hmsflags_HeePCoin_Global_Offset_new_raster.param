@@ -43,7 +43,7 @@ hcer_debug_adc = 1
 ;; Added by M. Junaid - 31/05/2024
 ;; HMS Centeral Momentum (P) Offset (Pion-LT Data)
 
-hpcentral_offset = +0.01
+hpcentral_offset = -0.01
 
 ;; HMS Central Angle (Theta) Offset (Pion-LT Data)
 

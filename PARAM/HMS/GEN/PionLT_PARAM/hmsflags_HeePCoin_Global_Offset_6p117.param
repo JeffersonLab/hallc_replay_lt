@@ -17,6 +17,7 @@
 ;  hdelta_offset = 0.       ; (%)   hdelta_tar = hdelta_tar + hdelta_offset
 ;  htheta_offset = 0.  ; (rad) hyp_tar = hyp_tar + htheta_offset
 ;  hphi_offset = 0.
+;
   hdelta_offset = 0.       ; (%)   hdelta_tar = hdelta_tar + hdelta_offset
   htheta_offset = 6.4761385e-4  ; (rad) hyp_tar = hyp_tar + htheta_offset
   hphi_offset   = 5.81654738e-4 ; (rad) hxp_tar = hxp_tar + hphi_offset
@@ -42,15 +43,17 @@
 
 hcer_debug_adc = 1
 
-;; Added by M. Junaid - 31/05/2024
-;; HMS Centeral Momentum (P) Offset (Pion-LT Data)
+;; Added by M. Junaid - 28/02/2025
+;; HMS Centeral Momentum (P) Offset (Pion-LT Data) - (Applied in 1% unit)
 
-hpcentral_offset = +0.01
+hpcentral_offset = 0.0
 
-;; HMS Central Angle (Theta) Offset (Pion-LT Data)
+;; HMS Central Angle (Theta) Offset (Pion-LT Data) - (Applied in rad unit)
 
-hthetacentral_offset = +0.0012
+;hthetacentral_offset = 0.0
+hthetacentral_offset = +0.0015
 
-;; HMS Out-of-Plane (OOP) Offset (Pion-LT Data)
+;; HMS Out-of-Plane (OOP) Offset (Pion-LT Data) - (Applied in rad unit)
 
-h_oopcentral_offset = +0.00196
+;h_oopcentral_offset = 0.0
+h_oopcentral_offset = +0.001875

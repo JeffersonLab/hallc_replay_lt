@@ -12,7 +12,7 @@ cminch=2.54
 
 ; General HMS parameter files
 ; Note: hmsflags.param includes spectrometer offsets and options.
-#include "PARAM/HMS/GEN/hcana.param"
+#include "PARAM/HMS/GEN/PionLT_PARAM/hcana.param"
 #include "PARAM/HMS/GEN/hdebug.param"
 #include "PARAM/HMS/GEN/PionLT_PARAM/hmsflags_HeePCoin_Global_Offset.param"
 #include "PARAM/HMS/GEN/htracking.param"
@@ -46,7 +46,7 @@ cminch=2.54
 
 ; General SHMS parameter files
 ; Note: shmsflags.param includes spectrometer offsets and options.
-#include "PARAM/SHMS/GEN/pcana.param"
+#include "PARAM/SHMS/GEN/PionLT_PARAM/pcana.param"
 #include "PARAM/SHMS/GEN/pdebug.param"
 #include "PARAM/SHMS/GEN/PionLT_PARAM/shmsflags_HeePCoin_Global_Offset.param"
 #include "PARAM/SHMS/GEN/Online_PionLT2021/ptracking.param"

@@ -31,7 +31,7 @@ pphi_offset = 0.0; (rad) hxp_tar = hxp_tar + hphi_offset
 
 ;; SHMS Centeral Momentum (P) Offset (Pion-LT Data)
 
-ppcentral_offset = +0.02
+ppcentral_offset = -0.02
 
 ;; SHMS Central Angle (Theta) Offset (Pion-LT Data)
 

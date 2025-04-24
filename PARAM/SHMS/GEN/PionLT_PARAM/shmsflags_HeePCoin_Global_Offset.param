@@ -13,11 +13,10 @@
 ;  plots will be screwed up.
 
 ; do not change pdelta_offset from zero, use ppcentral_offset
-pdelta_offset = 0.0; (%)   hdelta_tar = hdelta_tar + hdelta_offset
-; 
-ptheta_offset = 0.0 ; (rad) hyp_tar = hyp_tar + htheta_offset
-;pphi_offset = -8.681269905E-4; (rad) hxp_tar = hxp_tar + hphi_offset
-pphi_offset = 0.0; (rad) hxp_tar = hxp_tar + hphi_offset
+  pdelta_offset = 0.0; (%)   hdelta_tar = hdelta_tar + hdelta_offset 
+  ptheta_offset = 0.0 ; (rad) hyp_tar = hyp_tar + htheta_offset
+;  pphi_offset = -8.681269905E-4; (rad) hxp_tar = hxp_tar + hphi_offset
+  pphi_offset = 0.0; (rad) hxp_tar = hxp_tar + hphi_offset
 
 ; The following offsets are applied to the central kinematic variables
 ;      ptheta_lab=htheta_lab + pthetacentral_offset/degree 
@@ -27,16 +26,19 @@ pphi_offset = 0.0; (rad) hxp_tar = hxp_tar + hphi_offset
 ; sets ppcentral = ppcentral * ( 1. + ppcentral_offset / 100. )
 ;ppcentral_offset = -0.250
 
-;; Added by M. Junaid - 31/05/2024
+;; Added by M. Junaid - 28/02/2025
 
-;; SHMS Centeral Momentum (P) Offset (Pion-LT Data)
+;; SHMS Centeral Momentum (P) Offset (Pion-LT Data) - (Applied in 1% unit)
 
-ppcentral_offset = +0.02
+;ppcentral_offset = 0.0
+ppcentral_offset = -0.45
 
-;; SHMS Central Angle (Theta) Offset (Pion-LT Data)
+;; SHMS Central Angle (Theta) Offset (Pion-LT Data) - (Applied in rad unit)
 
-pthetacentral_offset = +0.0017
+;pthetacentral_offset = 0.0
+pthetacentral_offset = +0.0014
 
-;; SHMS Out-of-Plane (Phi) Offset (Pion-LT Data)
+;; SHMS Out-of-Plane (Phi) Offset (Pion-LT Data) - (Applied in rad unit)
 
-p_oopcentral_offset = -0.000082
+;p_oopcentral_offset = 0.0
+p_oopcentral_offset = -0.000155

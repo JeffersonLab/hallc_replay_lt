@@ -185,11 +185,10 @@ void replay_coin_scalers (Int_t RunNumber = 0, Int_t MaxEvent = 0,Int_t FirstEve
   // Define cuts file
   analyzer->SetCutFile("DEF-files/SCALERS/coinscaler_cuts.def");  // optional
   // File to record accounting information for cuts
-  //analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Scalers/summary_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional
+  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/Scalers/summary_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template
-  //analyzer->PrintReport("TEMPLATES/COIN/SCALERS/coinscalers.template",
-  //			Form("REPORT_OUTPUT/Scalers/replay_coin_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
+  analyzer->PrintReport("TEMPLATES/COIN/SCALERS/coinscalers.template", Form("REPORT_OUTPUT/Scalers/replay_coin_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
 
 }

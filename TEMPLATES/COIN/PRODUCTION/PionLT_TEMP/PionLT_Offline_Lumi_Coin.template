@@ -80,6 +80,11 @@ PLT_Pre-Scaled_COIN_Triggers                  :		{(P.pTRIG5.scaler/gHC_ti_ps_fac
 PLT_COIN_Trigger_Rate                         :		{P.pTRIG5.scalerCut/P.1MHz.scalerTimeCut/1000.:%.3f} kHz
 PLT_Accepted_COIN_Triggers                    :		{pTRIG5_ROC2.npassed}
 
+P1X : {P.S1X.scaler} [ {(P.S1X.scaler/P.1MHz.scalerTime)/1000.:%.3f} kHz ] AND between + and - sides of P1X
+P1Y : {P.S1Y.scaler} [ {(P.S1Y.scaler/P.1MHz.scalerTime)/1000.:%.3f} kHz ] AND between + and - sides of P1Y
+P2X : {P.S2X.scaler} [ {(P.S2X.scaler/P.1MHz.scalerTime)/1000.:%.3f} kHz ] AND between + and - sides of P2X
+P2Y : {P.S2Y.scaler} [ {(P.S2Y.scaler/P.1MHz.scalerTime)/1000.:%.3f} kHz ] AND between + and - sides of P2Y
+
 =:=:=:=:
 = EDTM =
 =:=:=:=:

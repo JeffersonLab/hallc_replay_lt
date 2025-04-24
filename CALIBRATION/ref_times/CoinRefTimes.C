@@ -15,7 +15,39 @@ TH1D *pTRIG4_ROC2_tdcTimeRaw, *pTRIG4_ROC2_tdcTime;
 TH1D *pT2_tdcTimeRaw;
 
 TH1D *CoinTime_RAW_ROC1, *CoinTime_RAW_ROC2;
-TH1D *ePiCoinTime_ROC1, *ePiCoinTime_ROC1;
+TH1D *ePiCoinTime_ROC1, *ePiCoinTime_ROC2;
+
+void fillHistos(TTree *DataTree)
+{
+    Int_t MaxEvents = DataTree->GetEntries();
+    cout << "Begining to fill histograms, " << MaxEvents << " events will be processed!\n";
+    for(Int_t iEntry = 0; iEntry < MaxEvents; iEntry++)
+    {
+        DataTree->GetEntry(iEntry);
+        
+        pTRIG1_ROC1_tdcTimeRaw->Fill(pTrig1_Roc1_Raw);
+        pTRIG1_ROC2_tdcTimeRaw->Fill(pTrig1_Roc2_Raw);
+        
+        pTRIG4_ROC1_tdcTimeRaw->Fill(pTrig4_Roc1_Raw);
+        pTRIG4_ROC2_tdcTimeRaw->Fill(pTrig4_Roc2_Raw);
+        
+        pTRIG1_ROC1_tdcTime->Fill(pTrig1_Roc1);
+        pTRIG1_ROC2_tdcTime->Fill(pTrig1_Roc2);
+        
+        pTRIG4_ROC1_tdcTime->Fill(pTrig4_Roc1);
+        pTRIG4_ROC2_tdcTime->Fill(pTrig4_Roc2);
+        
+        pT2_tdcTimeRaw->Fill(pTref2);
+        
+        CoinTime_RAW_ROC1->Fill(Cointime_ROC1_RAW);
+        CoinTime_RAW_ROC2->Fill(Cointime_ROC2_RAW);
+        
+        ePiCoinTime_ROC1->Fill(Ctime_ePi_Roc1);
+        ePiCoinTime_ROC2->Fill(Ctime_ePi_Roc2);
+    }
+    
+    return;
+}
 
 void CoinRefTimes( TString rootFileName, Int_t RunNumber)
 {
@@ -108,37 +140,7 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     canvas->Print(Form("output/CoinRefTimePlots_%d.pdf)",RunNumber),  ePiCoinTime_ROC2->GetName());
 }
 
-void fillHistos(TTree *DataTree)
-{
-    Int_t MaxEvents = DataTree->GetEntries();
-    cout << "Begining to fill histograms, " << MaxEvents << " events will be processed!\n";
-    for(Int_t iEntry = 0; iEntry < MaxEvents; iEntry++)
-    {
-        DataTree->GetEntry(iEntry);
-        
-        pTRIG1_ROC1_tdcTimeRaw->Fill(pTrig1_Roc1_Raw);
-        pTRIG1_ROC2_tdcTimeRaw->Fill(pTrig1_Roc2_Raw);
-        
-        pTRIG4_ROC1_tdcTimeRaw->Fill(pTrig4_Roc1_Raw);
-        pTRIG4_ROC2_tdcTimeRaw->Fill(pTrig4_Roc2_Raw);
-        
-        pTRIG1_ROC1_tdcTime->Fill(pTrig1_Roc1);
-        pTRIG1_ROC2_tdcTime->Fill(pTrig1_Roc2);
-        
-        pTRIG4_ROC1_tdcTime->Fill(pTrig4_Roc1);
-        pTRIG4_ROC2_tdcTime->Fill(pTrig4_Roc2);
-        
-        pT2_tdcTimeRaw->Fill(pTref2);
-        
-        CoinTime_RAW_ROC1->Fill(Cointime_ROC1_RAW);
-        CoinTime_RAW_ROC2->Fill(Cointime_ROC2_RAW);
-        
-        ePiCoinTime_ROC1->Fill(Ctime_ePi_Roc1);
-        ePiCoinTime_ROC2->Fill(Ctime_ePi_Roc2);
-    }
-    
-    return;
-}
+
         
         
         

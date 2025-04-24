@@ -1,4 +1,4 @@
-djm "final" for Fall 2021, period 1 which I define to be COIN runs 11767-12003
+;djm "final" for Fall 2021, period 1 which I define to be COIN runs 11767-12003
 ; BCM calibration run 11988 taken on Sept 12. Cavity tunes tweaked on Sept 13 because it sucks to be us. 
 ; I still need to check the wire calibration, but the result is unlikely to change. 
 ; Use BCM2 for normalization of physics data. (The BCM1 offset was found to be unstable on Oct 28. Not sure when the problem started.) 

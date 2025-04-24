@@ -14,10 +14,14 @@
 ; Do not to change these values, since these are the zero order
 ;  CMOP matrix elements. If you do change then your hms sieve
 ;  plots will be screwed up.
+
   hdelta_offset = 0.       ; (%)   hdelta_tar = hdelta_tar + hdelta_offset
   htheta_offset = 0.  ; (rad) hyp_tar = hyp_tar + htheta_offset
+  hphi_offset = 0.
 ;  hphi_offset   = -4.946337367e-3 ; (rad) hxp_tar = hxp_tar + hphi_offset
-hphi_offset = 0.
+
+;   htheta_offset = 1.13226915e-3; New from NPS low-mom data: (rad) hyp_tar = hyp_tar + htheta_offset
+;   hphi_offset   = -2.5535536e-4 ; new from NPS data (rad) hxp_tar = hxp_tar + hphi_offset
 ;
 
 ;saturation correction flag
@@ -40,15 +44,17 @@ hphi_offset = 0.
 
 hcer_debug_adc = 1
 
-;; Added by M. Junaid - 31/05/2024
-;; HMS Centeral Momentum (P) Offset (Pion-LT Data)
+;; Added by M. Junaid - 28/02/2025
+;; HMS Centeral Momentum (P) Offset (Pion-LT Data) - (Applied in 1% unit)
 
-hpcentral_offset = +0.01
+hpcentral_offset = 0.0
 
-;; HMS Central Angle (Theta) Offset (Pion-LT Data)
+;; HMS Central Angle (Theta) Offset (Pion-LT Data) - (Applied in rad unit)
 
-hthetacentral_offset = +0.0012
+;hthetacentral_offset = 0.0
+hthetacentral_offset = +0.0015
 
-;; HMS Out-of-Plane (OOP) Offset (Pion-LT Data)
+;; HMS Out-of-Plane (OOP) Offset (Pion-LT Data) - (Applied in rad unit)
 
-h_oopcentral_offset = +0.0019
+;h_oopcentral_offset = 0.0
+h_oopcentral_offset = +0.001875

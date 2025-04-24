@@ -1,0 +1,59 @@
+; Updated by Muhammad junaid - University of Regina
+; Offset in the spectrometer momentum.
+  hmomentum_factor = 0.000 ; leave 0 so it will have no effect
+                           ; use hpcentral_offset if one needs to offset central momentum
+;
+; The hdelta_offset,htheta_offset,hphi_offset effect the
+; reconstructed target quantities. Used in h_targ_trans.f 
+; For transport x is in the dispersive direction with + down
+;               y is in the horizontal + towards small angles.
+;               z is along the central optics axis.
+; In transport coordinates phi = hyptar = dy/dz and theta = hxptar = dx/dz 
+;    but for unknown reasons the yp offset is named  htheta_offset
+;    and  the xp offset is named  hphi_offset
+; Do not to change these values, since these are the zero order
+;  CMOP matrix elements. If you do change then your hms sieve
+;  plots will be screwed up.
+;  hdelta_offset = 0.       ; (%)   hdelta_tar = hdelta_tar + hdelta_offset
+;  htheta_offset = 0.  ; (rad) hyp_tar = hyp_tar + htheta_offset
+;  hphi_offset = 0.
+;
+  hdelta_offset = 0.       ; (%)   hdelta_tar = hdelta_tar + hdelta_offset
+  htheta_offset = 6.4761385e-4  ; (rad) hyp_tar = hyp_tar + htheta_offset
+  hphi_offset   = 5.81654738e-4 ; (rad) hxp_tar = hxp_tar + hphi_offset
+;
+
+;saturation correction flag
+;  hsatcorr = 2000 ; 
+                          ; a correction to hsdelta event by event
+                          ; for a problem in setting Q3 current.
+                          ; There was an unknown zero offset in the Q3 current.
+                          ; The magnet setting code field00.f partially 
+                          ; fixes this problem. T. Horn in 2003 determined
+                          ; the corrections to delta.
+                          ; Data taken with fields set by field99.f or earlier should set to 1999.
+                          ; Data taken with fields set by field00.f or later should set to 2000.
+; These offsets are determined from elastic ep data.
+; central field  correction
+;  hpcentral_offset = -0.00188 ;    
+;  hthetacentral_offset = .0 ; (rad) 
+;  h_oopcentral_offset = 0.00  ; (rad)
+; sets hpcentral = hpcentral * ( 1. + hpcentral_offset / 100. )
+;      htheta_lab=htheta_lab + hthetacentral_offset/degree 
+
+hcer_debug_adc = 1
+
+;; Added by M. Junaid - 28/02/2025
+;; HMS Centeral Momentum (P) Offset (Pion-LT Data) - (Applied in 1% unit)
+
+hpcentral_offset = 0.0
+
+;; HMS Central Angle (Theta) Offset (Pion-LT Data) - (Applied in rad unit)
+
+;hthetacentral_offset = 0.0
+hthetacentral_offset = +0.0015
+
+;; HMS Out-of-Plane (OOP) Offset (Pion-LT Data) - (Applied in rad unit)
+
+;h_oopcentral_offset = 0.0
+h_oopcentral_offset = +0.001875

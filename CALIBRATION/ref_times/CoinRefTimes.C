@@ -25,6 +25,8 @@ void fillHistos(TTree *DataTree)
     {
         DataTree->GetEntry(iEntry);
         
+        if( iEntry % 10000 == 0 ) cout << iEntry << "\n"; //status report
+        
         pTRIG1_ROC1_tdcTimeRaw->Fill(pTrig1_Roc1_Raw);
         pTRIG1_ROC2_tdcTimeRaw->Fill(pTrig1_Roc2_Raw);
         

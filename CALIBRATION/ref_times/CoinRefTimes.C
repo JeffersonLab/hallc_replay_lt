@@ -91,10 +91,10 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     pTRIG1_ROC2_tdcTimeRaw = new TH1D("T.coin.pTRIG1_ROC2_tdcTimeRaw","T.coin.pTRIG1_ROC2_tdcTimeRaw",5000, 0, 10000);
     pTRIG4_ROC2_tdcTimeRaw = new TH1D("T.coin.pTRIG4_ROC2_tdcTimeRaw","T.coin.pTRIG4_ROC2_tdcTimeRaw",5000, 0, 10000);
     
-    pTRIG1_ROC1_tdcTime = new TH1D("T.coin.pTRIG1_ROC1_tdcTime","T.coin.pTRIG1_ROC1_tdcTime",5000, 0, 10000);
-    pTRIG4_ROC1_tdcTime = new TH1D("T.coin.pTRIG4_ROC1_tdcTime","T.coin.pTRIG4_ROC1_tdcTime",5000, 0, 10000);
-    pTRIG1_ROC2_tdcTime = new TH1D("T.coin.pTRIG1_ROC2_tdcTime","T.coin.pTRIG1_ROC2_tdcTime",5000, 0, 10000);
-    pTRIG4_ROC2_tdcTime = new TH1D("T.coin.pTRIG4_ROC2_tdcTime","T.coin.pTRIG4_ROC2_tdcTime",5000, 0, 10000);
+    pTRIG1_ROC1_tdcTime = new TH1D("T.coin.pTRIG1_ROC1_tdcTime","T.coin.pTRIG1_ROC1_tdcTime",1000, -1000, 1000);
+    pTRIG4_ROC1_tdcTime = new TH1D("T.coin.pTRIG4_ROC1_tdcTime","T.coin.pTRIG4_ROC1_tdcTime",1000, -1000, 1000);
+    pTRIG1_ROC2_tdcTime = new TH1D("T.coin.pTRIG1_ROC2_tdcTime","T.coin.pTRIG1_ROC2_tdcTime",1000, -1000, 1000);
+    pTRIG4_ROC2_tdcTime = new TH1D("T.coin.pTRIG4_ROC2_tdcTime","T.coin.pTRIG4_ROC2_tdcTime",1000, -1000, 1000);
     
     pT2_tdcTimeRaw = new TH1D("T.coin.pT2_tdcTimeRaw","T.coin.pT2_tdcTimeRaw",5000, 0, 10000);
     

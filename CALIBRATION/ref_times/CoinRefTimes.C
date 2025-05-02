@@ -5,6 +5,7 @@ Double_t pTrig4_Roc1_Raw, pTrig4_Roc1;
 Double_t pTrig4_Roc2_Raw, pTrig4_Roc2;
 Double_t pTref2;
 Double_t Cointime_ROC1_RAW, Cointime_ROC2_RAW, Ctime_ePi_Roc1, Ctime_ePi_Roc2;
+Double_t MMpi;
 
 TH1D *pTRIG1_ROC1_tdcTimeRaw, *pTRIG1_ROC1_tdcTime;
 TH1D *pTRIG1_ROC2_tdcTimeRaw, *pTRIG1_ROC2_tdcTime;
@@ -16,6 +17,8 @@ TH1D *pT2_tdcTimeRaw;
 
 TH1D *CoinTime_RAW_ROC1, *CoinTime_RAW_ROC2;
 TH1D *ePiCoinTime_ROC1, *ePiCoinTime_ROC2;
+
+TH1D *MMpi_hist;
 
 void fillHistos(TTree *DataTree)
 {
@@ -46,6 +49,11 @@ void fillHistos(TTree *DataTree)
         
         ePiCoinTime_ROC1->Fill(Ctime_ePi_Roc1);
         ePiCoinTime_ROC2->Fill(Ctime_ePi_Roc2);
+        
+        if((Cointime_ROC2_RAW > 150) & (Cointime_ROC2_RAW < 400))
+        {
+            MMpi_hist->Fill(MMpi);
+        }
     }
     
     return;
@@ -86,6 +94,8 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     DataTree->SetBranchAddress("CTime.ePiCoinTime_ROC1", &Ctime_ePi_Roc1);
     DataTree->SetBranchAddress("CTime.ePiCoinTime_ROC2", &Ctime_ePi_Roc2);
     
+    DataTree->SetBranchAddress("P.kin.secondary.MMpi", &MMpi);
+    
     pTRIG1_ROC1_tdcTimeRaw = new TH1D("T.coin.pTRIG1_ROC1_tdcTimeRaw","T.coin.pTRIG1_ROC1_tdcTimeRaw",5000, 0, 10000);
     pTRIG4_ROC1_tdcTimeRaw = new TH1D("T.coin.pTRIG4_ROC1_tdcTimeRaw","T.coin.pTRIG4_ROC1_tdcTimeRaw",5000, 0, 10000);
     pTRIG1_ROC2_tdcTimeRaw = new TH1D("T.coin.pTRIG1_ROC2_tdcTimeRaw","T.coin.pTRIG1_ROC2_tdcTimeRaw",5000, 0, 10000);
@@ -103,6 +113,8 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     
     ePiCoinTime_ROC1 = new TH1D("CTime.ePiCoinTime_ROC1","CTime.ePiCoinTime_ROC1",1000,-1000,1000);
     ePiCoinTime_ROC2 = new TH1D("CTime.ePiCoinTime_ROC2","CTime.ePiCoinTime_ROC2",1000,-1000,1000);
+    
+    MMpi_hist = new TH1D("MMpi{150<CTime.CoinTime_RAW_ROC2<400}", "MMpi{150<CTime.CoinTime_RAW_ROC2<400}", 100,0,1.5);
     
     fillHistos(DataTree);
     

@@ -151,6 +151,9 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     ePiCoinTime_ROC1->Draw();
     canvas->Print(Form("output/CoinRefTimePlots_%d.pdf",RunNumber),  ePiCoinTime_ROC1->GetName());
     ePiCoinTime_ROC2->Draw();
+    canvas->Print(Form("output/CoinRefTimePlots_%d.pdf",RunNumber),  ePiCoinTime_ROC2->GetName());
+    
+    MMpi_hist->Draw();
     canvas->Print(Form("output/CoinRefTimePlots_%d.pdf)",RunNumber),  ePiCoinTime_ROC2->GetName());
 }
 

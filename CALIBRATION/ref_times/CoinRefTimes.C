@@ -24,6 +24,7 @@ void fillHistos(TTree *DataTree)
 {
     Int_t MaxEvents = DataTree->GetEntries();
     cout << "Begining to fill histograms, " << MaxEvents << " events will be processed!\n";
+    int coinCounter = 0;
     for(Int_t iEntry = 0; iEntry < MaxEvents; iEntry++)
     {
         DataTree->GetEntry(iEntry);
@@ -54,8 +55,14 @@ void fillHistos(TTree *DataTree)
         {
             MMpi_hist->Fill(MMpi);
         }
+        
+        if((Cointime_ROC2_RAW > -1.252) & (Cointime_ROC2_RAW < 1.252))
+        {
+            coinCounter++;
+        }
+        
     }
-    
+    cout << "inside Coin Cut: " << coinCounter;
     return;
 }
 

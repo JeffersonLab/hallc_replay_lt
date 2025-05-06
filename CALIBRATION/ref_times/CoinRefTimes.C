@@ -56,7 +56,7 @@ void fillHistos(TTree *DataTree)
             MMpi_hist->Fill(MMpi);
         }
         
-        if((Cointime_ROC2_RAW > -1.252) & (Cointime_ROC2_RAW < 1.252))
+        if((Ctime_ePi_Roc1 > -1.252) & (Ctime_ePi_Roc1 < 1.252))
         {
             coinCounter++;
         }

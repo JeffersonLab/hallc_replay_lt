@@ -61,7 +61,7 @@ void fillHistos(TTree *DataTree)
         if((Ctime_ePi_Roc1 > ((0)-((2.004)/2.0)-(0.25))) & (Ctime_ePi_Roc1 < ((0)+((2.004)/2.0)+(0.25))))
         {
             coinCounter++;
-            if ((bcm - 70) < 10.0)
+            if (|(bcm - 70)| < 10.0)
             {
                 coinCounter2++;
             }

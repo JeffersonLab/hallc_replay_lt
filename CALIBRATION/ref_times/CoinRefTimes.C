@@ -69,6 +69,7 @@ void fillHistos(TTree *DataTree)
         
     }
     cout << "inside Coin Cut: " << coinCounter;
+    cout << "\ninside bcm and coin cut: " << coinCounter2<< endl;
     return;
 }
 

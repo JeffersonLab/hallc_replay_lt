@@ -119,7 +119,7 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     
     DataTree->SetBranchAddress("H.bcm.bcm2.AvgCurrent", &bcm);
     DataTree->SetBranchAddress("P.aero.npeSum", &Paero);
-    DataTree->SetBranchAddress("H.cal.H.cal.etottracknorm", &Hcal);
+    DataTree->SetBranchAddress("H.cal.etottracknorm", &Hcal);
     DataTree->SetBranchAddress("H.cer.npeSum", &Hcer);
     
     pTRIG1_ROC1_tdcTimeRaw = new TH1D("T.coin.pTRIG1_ROC1_tdcTimeRaw","T.coin.pTRIG1_ROC1_tdcTimeRaw",5000, 0, 10000);

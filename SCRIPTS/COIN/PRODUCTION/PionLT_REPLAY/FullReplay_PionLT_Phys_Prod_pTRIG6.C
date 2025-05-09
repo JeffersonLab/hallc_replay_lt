@@ -36,7 +36,7 @@ void FullReplay_PionLT_Phys_Prod_pTRIG6 (Int_t RunNumber = 0, Int_t MaxEvent = 0
 //  pathList.push_back("./cache_kaonlt");
 //  pathList.push_back("./cache_pionlt");
 
-  const char* ROOTFileNamePattern = "/volatile/hallc/c-pionlt/junaid/ROOTfiles/Analysis/pTRIG6/PionLT_Coin_replay_production_pTRIG6_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfiles/Analysis/pTRIG6/PionLT_Coin_replay_production_pTRIG6_%d_%d.root";
   //const char* ROOTFileNamePattern = "/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2021_v2/Analysis/pTRIG6/PionLT_Coin_replay_production_pTRIG6_%d_%d.root";
   //const char* ROOTFileNamePattern = "/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2022_v2/Analysis/pTRIG6/PionLT_Coin_replay_production_pTRIG6_%d_%d.root";
 

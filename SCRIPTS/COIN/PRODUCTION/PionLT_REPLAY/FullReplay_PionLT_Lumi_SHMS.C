@@ -36,7 +36,7 @@ void FullReplay_PionLT_Luminosity(Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 //  pathList.push_back("./cache_pionlt");
 
   //Output file name
-  const char* ROOTFileNamePattern = "ROOTfiles/Analysis/Lumi/PionLT_replay_luminosity_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfiles/Analysis/Lumi/PionLT_replay_luminosity_SHMS_%d_%d.root";
   
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
@@ -306,5 +306,5 @@ void FullReplay_PionLT_Luminosity(Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template	       
-  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/PionLT_TEMP/PionLT_Offline_Luminosity.template", Form("REPORT_OUTPUT/Analysis/Lumi/PionLT_replay_luminosity_%d_%d.report", RunNumber, MaxEvent)); // optional}
+  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/PionLT_TEMP/PionLT_Offline_Luminosity.template", Form("REPORT_OUTPUT/Analysis/Lumi/PionLT_replay_luminosity_SHMS_%d_%d.report", RunNumber, MaxEvent)); // optional}
 }

@@ -3228,7 +3228,7 @@ hpartmass = 0.000511
 ppartmass = 0.139570
 helicity_freq = 120.0007547169
 HMS_RF_Offset = 0
-SHMS_RF_Offset = 1.90
+SHMS_RF_Offset = 1.95
 eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 4.008
 
@@ -3243,7 +3243,7 @@ hpartmass = 0.000511
 ppartmass = 0.139570
 helicity_freq = 120.0007547169
 HMS_RF_Offset = 0
-SHMS_RF_Offset = 1.90
+SHMS_RF_Offset = 1.95
 eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 4.008
 
@@ -3258,7 +3258,7 @@ hpartmass = 0.000511
 ppartmass = 0.139570
 helicity_freq = 120.0007547169
 HMS_RF_Offset = 0
-SHMS_RF_Offset = 1.90
+SHMS_RF_Offset = 1.95
 eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 4.008
 
@@ -3273,7 +3273,7 @@ hpartmass = 0.000511
 ppartmass = 0.139570
 helicity_freq = 120.0007547169
 HMS_RF_Offset = 0
-SHMS_RF_Offset = 1.95
+SHMS_RF_Offset = 2.1
 eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 4.008
 
@@ -4424,7 +4424,7 @@ SHMS_RF_Offset = 2.0
 eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 4.008
 
-16319 - 16329
+16319 - 16348
 gpbeam = 6.395660205
 gtargmass_amu = 1.00727647
 htheta_lab = -42.23
@@ -4439,21 +4439,6 @@ SHMS_RF_Offset = 0.0
 eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 4.008
 
-16330 - 16348
-gpbeam = 6.395660205
-gtargmass_amu = 1.00727647
-htheta_lab = -42.23
-ptheta_lab = 10.00
-hpcentral = 1.158
-ppcentral = 5.127
-hpartmass = 0.000511
-ppartmass = 0.139570
-helicity_freq = 120.0007547169
-HMS_RF_Offset = 0.0
-SHMS_RF_Offset = 1.90
-eHadCoinTime_Offset = 11.82
-Bunch_Spacing_Override = 4.008
-
 16349 - 16393
 gpbeam = 6.395660205
 gtargmass_amu = 1.00727647
@@ -4465,7 +4450,7 @@ hpartmass = 0.000511
 ppartmass = 0.139570
 helicity_freq = 120.0007547169
 HMS_RF_Offset = 0.0
-SHMS_RF_Offset = 1.90
+SHMS_RF_Offset = 2.0
 eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 4.008
 
@@ -4480,7 +4465,7 @@ hpartmass = 0.000511
 ppartmass = 0.139570
 helicity_freq = 120.0007547169
 HMS_RF_Offset = 0.0
-SHMS_RF_Offset = 1.90
+SHMS_RF_Offset = 2.0
 eHadCoinTime_Offset = 11.82
 Bunch_Spacing_Override = 4.008
 

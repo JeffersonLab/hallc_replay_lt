@@ -298,7 +298,7 @@ void fitHodoCalib(TString filename,Int_t runNUM,Bool_t cosmic_flag=kFALSE)
 	       
 	       
 	       //----Define TTree Leaf Names-----
-	       base = spec + static_cast<TString>('.') + det + static_cast<TString>('.') + static_cast<TString>(pl_names[npl];
+	       base = spec + static_cast<TString>('.') + det + static_cast<TString>('.') + static_cast<TString>(pl_names[npl]);
 	       
 	       TString Temp = "TdcTimeUnCorr";
 	       nTdcTimeUnCorr = base + static_cast<TString>('.') + static_cast<TString>(side_names[side]) + Temp;

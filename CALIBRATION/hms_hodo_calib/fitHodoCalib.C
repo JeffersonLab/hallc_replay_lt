@@ -301,9 +301,9 @@ void fitHodoCalib(TString filename,Int_t runNUM,Bool_t cosmic_flag=kFALSE)
 	       base = spec + '.' + det + '.' + pl_names[npl];
 	       
 	       TString Temp = "TdcTimeUnCorr";
-	       nTdcTimeUnCorr = base + '.' + side_names[side] + Temp;
+	       nTdcTimeUnCorr = (base + '.') + side_names[side] + Temp;
 	       Temp = "TdcTimeWalkCorr";
-	       nTdcTimeTWCorr = base + '.' + side_names[side] + Temp;
+	       nTdcTimeTWCorr = (base + '.') + side_names[side] + Temp;
 	       Temp = "AdcPulseTime";
 	       nAdcPulseTime = base + '.' + side_names[side] + Temp;
 	       Temp = "AdcPulseAmp";

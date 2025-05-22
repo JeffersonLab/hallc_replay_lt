@@ -298,16 +298,24 @@ void fitHodoCalib(TString filename,Int_t runNUM,Bool_t cosmic_flag=kFALSE)
 	       
 	       
 	       //----Define TTree Leaf Names-----
-	       base = spec + "." + det + "." + pl_names[npl];
+	       base = spec + '.' + det + '.' + pl_names[npl];
 	       
-	       nTdcTimeUnCorr = base + "." + side_names[side] + "TdcTimeUnCorr";
-	       nTdcTimeTWCorr = base + "." + side_names[side] + "TdcTimeWalkCorr";
-	       nAdcPulseTime = base + "." + side_names[side] + "AdcPulseTime";
-	       nAdcPulseAmp = base + "." + side_names[side] + "AdcPulseAmp";
-	       nDiffTWCorr = base + "." + "DiffDisTrackCorr";
-	       nTrackXPos = base + "." + "TrackXPos";
-	       nTrackYPos = base + "." + "TrackYPos";
-	       nhod_nhits = base + "." + "nhits";
+	       TString Temp = "TdcTimeUnCorr";
+	       nTdcTimeUnCorr = base + '.' + side_names[side] + Temp;
+	       Temp = "TdcTimeWalkCorr";
+	       nTdcTimeTWCorr = base + '.' + side_names[side] + Temp;
+	       Temp = "AdcPulseTime";
+	       nAdcPulseTime = base + '.' + side_names[side] + Temp;
+	       Temp = "AdcPulseAmp";
+	       nAdcPulseAmp = base + '.' + side_names[side] + Temp;
+	       Temp = "DiffDisTrackCorr";
+	       nDiffTWCorr = base + '.' + Temp;
+	       Temp = "TrackXPos";
+	       nTrackXPos = base + '.' + Temp;
+	       Temp = "TrackYPos";
+	       nTrackYPos = base + '.' + Temp;
+	       Temp = "nhits";
+	       nhod_nhits = base + '.' + Temp;
 	       
 	       //------Set Branch Address-------
 	       T->SetBranchAddress(nTdcTimeUnCorr,  &TdcTimeUnCorr[npl][side]);

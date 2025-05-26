@@ -322,7 +322,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	
 	c2->Print(Form("HMSBeta_output_%d.pdf", runNum));
 	
-	TCanvas *c3 = new TCanvas(Form("Beta_Comparison2d_%d", runNum),Form("Beta_Comparison2d_%d", runNum), 1200, 2400);
+	TCanvas *c3 = new TCanvas(Form("Comparison1d_%d", runNum),Form("Comparison1d_%d", runNum), 1200, 2400);
 	c3->Divide(2,2);
 	
 	c3->cd(1);

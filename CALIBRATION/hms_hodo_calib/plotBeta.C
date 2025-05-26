@@ -336,7 +336,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th1_delta2->SetStats();
 	th1_delta2->Draw("sames");
 	
-	c2->cd(2);
+	c3->cd(2);
 	th1_xfp1->SetLineColor(kBlue);
 	th1_xfp1->SetName(Form("Delta_preCalib_Run%d", runNum));
 	th1_xfp1->SetStats();
@@ -347,7 +347,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th1_xfp2->SetStats();
 	th1_xfp2->Draw("sames");
 	
-	c2->cd(3);
+	c3->cd(3);
 	th1_yfp1->SetLineColor(kBlue);
 	th1_yfp1->SetName(Form("Delta_preCalib_Run%d", runNum));
 	th1_yfp1->SetStats();

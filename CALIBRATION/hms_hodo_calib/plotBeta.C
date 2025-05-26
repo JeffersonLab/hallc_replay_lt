@@ -329,13 +329,13 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th1_delta1->SetLineColor(kBlue);
 	th1_delta1->SetName(Form("Delta_preCalib_Run%d", runNum));
 	//th1_delta1->SetStats();
-	th1_delta1->Draw();
+	th1_delta1->Draw("");
 	gPad->Update();
 	
 	th1_delta2->SetLineColor(kRed);
 	th1_delta2->SetName(Form("Delta_postCalib_Run%d", runNum));
 	//th1_delta2->SetStats();
-	th1_delta2->Draw("sames");
+	th1_delta2->Draw("same");
 	gPad->Update();
 	
 	c3->cd(2);
@@ -348,7 +348,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th1_xfp2->SetLineColor(kRed);
 	th1_xfp2->SetName(Form("Delta_postCalib_Run%d", runNum));
 	//th1_xfp2->SetStats();
-	th1_xfp2->Draw("sames");
+	th1_xfp2->Draw("same");
 	gPad->Update();
 	
 	c3->cd(3);
@@ -361,7 +361,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th1_yfp2->SetLineColor(kRed);
 	th1_yfp2->SetName(Form("Delta_postCalib_Run%d", runNum));
 	//th1_yfp2->SetStats();
-	th1_yfp2->Draw("sames");
+	th1_yfp2->Draw("SAME");
 	gPad->Update();
 	
 	c3->Print(Form("HMSBeta_output_%d.pdf)", runNum));

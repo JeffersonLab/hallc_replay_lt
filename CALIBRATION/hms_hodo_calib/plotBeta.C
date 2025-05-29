@@ -135,7 +135,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 		calCut = (calEtot >= calEtotLow);
 		cerCut = (cerNpeSum >= cerNpeSumLow);
 		//aeroCut = (aeroNpeSum >= aeroNpeSumLow);
-	    CoinTimeCut = (CT > (CTcutcenter - CTcutwidth/2)) || (CT < (CTcutcenter + CTcutwidth/2));
+	    CoinTimeCut = (CT > (CTcutcenter - CTcutwidth/2)) && (CT < (CTcutcenter + CTcutwidth/2));
 	    
 		if(calCut)   { th1_calCut->Fill(calEtot); }
 		if(cerCut) { th1_cerCut->Fill(cerNpeSum); }
@@ -225,7 +225,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 		calCut = (calEtot >= calEtotLow);
 		cerCut = (cerNpeSum >= cerNpeSumLow);
 		//aeroCut = (aeroNpeSum >= aeroNpeSumLow);
-		CoinTimeCut = (CT > (CTcutcenter - CTcutwidth/2)) || (CT < (CTcutcenter + CTcutwidth/2));
+		CoinTimeCut = (CT > (CTcutcenter - CTcutwidth/2)) && (CT < (CTcutcenter + CTcutwidth/2));
 	
 		if(calCut)   { th1_calCut->Fill(calEtot); }
 		if(cerCut) { th1_cerCut->Fill(cerNpeSum); }

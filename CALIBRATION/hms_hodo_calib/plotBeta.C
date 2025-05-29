@@ -45,6 +45,7 @@ TH2F *th2_delta1, *th2_xfp1, *th2_yfp1;
 TH2F *th2_delta2, *th2_xfp2, *th2_yfp2;
 TH1F *th1_delta1, *th1_xfp1, *th1_yfp1;
 TH1F *th1_delta2, *th1_xfp2, *th1_yfp2;
+TH2F *th2_CT1, *th2_CT2;
 
 //variables for cutting trees and plotting
 Double_t calEtot, cerNpeSum, aeroNpeSum, gtrBeta;
@@ -84,6 +85,9 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th2_delta2 = new TH2F("deltaVBeta_After", "deltaVBeta_After", 400, -20.0, 20.0, 100, 0.4, 1.6);
 	th2_xfp2 = new TH2F("xfpVbeta_After", "xfpVbeta_After", 400, -2.0, 2.0, 100, 0.6, 1.4);
 	th2_yfp2 = new TH2F("yfpVbeta_After", "yfpVbeta_After", 400, -5.0, 5.0, 100, 0.6, 1.4);
+
+    th2_CT1 = new TH2F("CTVxfp_Before", "CTVxfp_Before", 100, -6.0, 6.0, 100, 1.0, 1.0);
+    th2_CT2 = new TH2F("yfpVbeta_After", "CTVxfp_After", 100, -6.0, 6.0, 100, 1.0, 1.0);
 
     th1_delta1 = new TH1F("delta_Before", "delta_Before", 400, -20.0, 20.0);
     th1_xfp1 = new TH1F("xfp_Before", "xfp_Before", 400, -2.0, 2.0);
@@ -141,7 +145,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 		if(cerCut) { th1_cerCut->Fill(cerNpeSum); }
 		//if(aeroCut)  { th1_aeroCut->Fill(aeroNpeSum); }
 		
-		if(calCut && cerCut && CoinTimeCut) 
+		if(calCut && cerCut) 
 		{
 			beta1->Fill(gtrBeta);
 			th2_delta1->Fill(delta, gtrBeta);
@@ -151,6 +155,8 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 			th1_delta1->Fill(delta);
             th1_xfp1->Fill(xfp);
 			th1_yfp1->Fill(yfp);
+			
+			th2_CT1->Fill(CT, xfp);
 		}
 
 		if(iEntry % 100000 == 0) {cout << iEntry << endl;}
@@ -231,7 +237,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 		if(cerCut) { th1_cerCut->Fill(cerNpeSum); }
 		//if(aeroCut)  { th1_aeroCut->Fill(aeroNpeSum); }
 		
-		if(calCut && cerCut && CoinTimeCut) 
+		if(calCut && cerCut) 
 		{
 			beta2->Fill(gtrBeta);
 			th2_delta2->Fill(delta, gtrBeta);
@@ -241,6 +247,8 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 		    th1_delta2->Fill(delta);
             th1_xfp2->Fill(xfp);
 			th1_yfp2->Fill(yfp);
+			
+			th2_CT2->Fill(CT, xfp);
 		}
 		
 		if ( iEntry % 100000 == 0 ) {cout << iEntry << endl;}
@@ -319,7 +327,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	
 	c2->cd(5);
 	gPad->SetLogz(1);
-	th2_yfp1->Draw("colz");
+	th2_CT1->Draw("colz");
 	
 	c2->cd(2);
 	gPad->SetLogz(1);
@@ -331,7 +339,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	
 	c2->cd(6);
 	gPad->SetLogz(1);
-	th2_yfp2->Draw("colz");
+	th2_CT2->Draw("colz");
 	
 	c2->Print(Form("HMSBeta_output_%d.pdf", runNum));
 	

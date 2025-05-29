@@ -49,13 +49,17 @@ TH1F *th1_delta2, *th1_xfp2, *th1_yfp2;
 //variables for cutting trees and plotting
 Double_t calEtot, cerNpeSum, aeroNpeSum, gtrBeta;
 Double_t delta, xfp, yfp;
+Double_t CT;
 
 //cuts
 const Double_t calEtotLow = 0.1; //normaized energy
 const Double_t cerNpeSumLow = 1.5; //unit NPE
 const Double_t aeroNpeSumLow = 1.5; //unit NPE
+const Double_t CTcutwidth = 4; //unit ns
+const Double_t CTcutcenter = 0; //unit ns
 
 Bool_t calCut, cerCut, aeroCut;
+Bool_t CoinTimeCut;
 
 const Int_t INILENGTH = 64;
 Int_t NumEvents = -1;
@@ -108,6 +112,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	tree1->SetBranchAddress("H.gtr.dp", &delta);
 	tree1->SetBranchAddress("H.gtr.x", &xfp);
 	tree1->SetBranchAddress("H.gtr.y", &yfp);
+	tree1->SetBranchAddress("CTime.epiCoinTime_ROC1", &CT);
 	
 	
 	Int_t nEntries;
@@ -130,12 +135,13 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 		calCut = (calEtot >= calEtotLow);
 		cerCut = (cerNpeSum >= cerNpeSumLow);
 		//aeroCut = (aeroNpeSum >= aeroNpeSumLow);
-	
+	    CoinTimeCut = (CT > (CTcutcenter - CTcutwidth/2)) || (CT < (CTcutcenter + CTcutwidth/2));
+	    
 		if(calCut)   { th1_calCut->Fill(calEtot); }
 		if(cerCut) { th1_cerCut->Fill(cerNpeSum); }
 		//if(aeroCut)  { th1_aeroCut->Fill(aeroNpeSum); }
 		
-		if(calCut && cerCut ) 
+		if(calCut && cerCut && CoinTimeCut) 
 		{
 			beta1->Fill(gtrBeta);
 			th2_delta1->Fill(delta, gtrBeta);
@@ -145,7 +151,6 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 			th1_delta1->Fill(delta);
             th1_xfp1->Fill(xfp);
 			th1_yfp1->Fill(yfp);
-			
 		}
 
 		if(iEntry % 100000 == 0) {cout << iEntry << endl;}
@@ -193,6 +198,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	tree2->SetBranchAddress("H.gtr.dp", &delta);
 	tree2->SetBranchAddress("H.gtr.x", &xfp);
 	tree2->SetBranchAddress("H.gtr.y", &yfp);
+	tree2->SetBranchAddress("CTime.epiCoinTime_ROC1", &CT);
 	
 	// make empty histograms
 	th1_cal = new TH1F("H.cal.etottracknorm_Pt3", "H.cal.etottracknorm_Pt3", 100, 0.0, 1.5);
@@ -219,12 +225,13 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 		calCut = (calEtot >= calEtotLow);
 		cerCut = (cerNpeSum >= cerNpeSumLow);
 		//aeroCut = (aeroNpeSum >= aeroNpeSumLow);
+		CoinTimeCut = (CT > (CTcutcenter - CTcutwidth/2)) || (CT < (CTcutcenter + CTcutwidth/2));
 	
 		if(calCut)   { th1_calCut->Fill(calEtot); }
 		if(cerCut) { th1_cerCut->Fill(cerNpeSum); }
 		//if(aeroCut)  { th1_aeroCut->Fill(aeroNpeSum); }
 		
-		if(calCut && cerCut ) 
+		if(calCut && cerCut && CoinTimeCut) 
 		{
 			beta2->Fill(gtrBeta);
 			th2_delta2->Fill(delta, gtrBeta);
@@ -303,21 +310,27 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	c2->Divide(2,3);
 	
 	c2->cd(1);
+	gPad->SetLogz(1);
 	th2_delta1->Draw("colz");
 	
 	c2->cd(3);
+	gPad->SetLogz(1);
 	th2_xfp1->Draw("colz");
 	
 	c2->cd(5);
+	gPad->SetLogz(1);
 	th2_yfp1->Draw("colz");
 	
 	c2->cd(2);
+	gPad->SetLogz(1);
 	th2_delta2->Draw("colz");
 	
 	c2->cd(4);
+	gPad->SetLogz(1);
 	th2_xfp2->Draw("colz");
 	
 	c2->cd(6);
+	gPad->SetLogz(1);
 	th2_yfp2->Draw("colz");
 	
 	c2->Print(Form("HMSBeta_output_%d.pdf", runNum));

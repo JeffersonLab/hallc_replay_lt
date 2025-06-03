@@ -87,7 +87,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th2_yfp2 = new TH2F("yfpVbeta_After", "yfpVbeta_After", 400, -5.0, 5.0, 100, 0.6, 1.4);
 
     th2_CT1 = new TH2F("CTVxfp_Before", "CTVxfp_Before", 100, -6.0, 6.0, 100, 1.0, 1.0);
-    th2_CT2 = new TH2F("yfpVbeta_After", "CTVxfp_After", 100, -6.0, 6.0, 100, 1.0, 1.0);
+    th2_CT2 = new TH2F("CTVxfp_After", "CTVxfp_After", 100, -6.0, 6.0, 100, 1.0, 1.0);
 
     th1_delta1 = new TH1F("delta_Before", "delta_Before", 400, -20.0, 20.0);
     th1_xfp1 = new TH1F("xfp_Before", "xfp_Before", 400, -2.0, 2.0);
@@ -116,7 +116,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	tree1->SetBranchAddress("H.gtr.dp", &delta);
 	tree1->SetBranchAddress("H.gtr.x", &xfp);
 	tree1->SetBranchAddress("H.gtr.y", &yfp);
-	tree1->SetBranchAddress("CTime.epiCoinTime_ROC1", &CT);
+	tree1->SetBranchAddress("CTime.ePiCoinTime_ROC1", &CT);
 	
 	
 	Int_t nEntries;
@@ -204,7 +204,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	tree2->SetBranchAddress("H.gtr.dp", &delta);
 	tree2->SetBranchAddress("H.gtr.x", &xfp);
 	tree2->SetBranchAddress("H.gtr.y", &yfp);
-	tree2->SetBranchAddress("CTime.epiCoinTime_ROC1", &CT);
+	tree2->SetBranchAddress("CTime.ePiCoinTime_ROC1", &CT);
 	
 	// make empty histograms
 	th1_cal = new TH1F("H.cal.etottracknorm_Pt3", "H.cal.etottracknorm_Pt3", 100, 0.0, 1.5);

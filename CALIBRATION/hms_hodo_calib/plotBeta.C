@@ -327,6 +327,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	
 	c2->cd(5);
 	gPad->SetLogz(1);
+	th2_CT1->GetXaxis()->SetRangeUser(-6.0,6.0);
 	th2_CT1->Draw("colz");
 	
 	c2->cd(2);
@@ -339,6 +340,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	
 	c2->cd(6);
 	gPad->SetLogz(1);
+	th2_CT2->GetXaxis()->SetRangeUser(-6.0,6.0);
 	th2_CT2->Draw("colz");
 	
 	c2->Print(Form("HMSBeta_output_%d.pdf", runNum));

@@ -86,8 +86,8 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th2_xfp2 = new TH2F("xfpVbeta_After", "xfpVbeta_After", 400, -2.0, 2.0, 100, 0.6, 1.4);
 	th2_yfp2 = new TH2F("yfpVbeta_After", "yfpVbeta_After", 400, -5.0, 5.0, 100, 0.6, 1.4);
 
-    th2_CT1 = new TH2F("CTVxfp_Before", "CTVxfp_Before", 100, -20.0, 20.0, 100, 10.0, 10.0);
-    th2_CT2 = new TH2F("CTVxfp_After", "CTVxfp_After", 100, -20.0, 20.0, 100, 10.0, 10.0);
+    th2_CT1 = new TH2F("CTVxfp_Before", "CTVxfp_Before", 100, -6.0, 6.0, 100, 1.0, 1.0);
+    th2_CT2 = new TH2F("CTVxfp_After", "CTVxfp_After", 100, -6.0, 6.0, 100, 1.0, 1.0);
 
     th1_delta1 = new TH1F("delta_Before", "delta_Before", 400, -20.0, 20.0);
     th1_xfp1 = new TH1F("xfp_Before", "xfp_Before", 400, -2.0, 2.0);
@@ -326,7 +326,8 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th2_xfp1->Draw("colz");
 	
 	c2->cd(5);
-//	gPad->SetLogz(1);
+	gPad->SetLogz(1);
+	th2_CT1->GetXaxis()->SetRangeUser(-6.0,6.0);
 	th2_CT1->Draw("colz");
 	
 	c2->cd(2);
@@ -338,7 +339,8 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th2_xfp2->Draw("colz");
 	
 	c2->cd(6);
-//	gPad->SetLogz(1);
+	gPad->SetLogz(1);
+	th2_CT2->GetXaxis()->SetRangeUser(-6.0,6.0);
 	th2_CT2->Draw("colz");
 	
 	c2->Print(Form("HMSBeta_output_%d.pdf", runNum));

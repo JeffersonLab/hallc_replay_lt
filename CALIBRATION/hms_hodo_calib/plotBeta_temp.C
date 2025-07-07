@@ -86,8 +86,8 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th2_xfp2 = new TH2F("xfpVbeta_After", "xfpVbeta_After", 400, -2.0, 2.0, 100, 0.6, 1.4);
 	th2_yfp2 = new TH2F("yfpVbeta_After", "yfpVbeta_After", 400, -5.0, 5.0, 100, 0.6, 1.4);
 
-    th2_CT1 = new TH2F("CTVxfp_Before", "CTVxfp_Before", 100, -12.0, 12.0, 100, -12.0, 12.0);
-    th2_CT2 = new TH2F("CTVxfp_After", "CTVxfp_After", 100, -12.0, 12.0, 100, -12.0, 12.0);
+    th2_CT1 = new TH2F("CTVxfp_Before", "CTVxfp_Before", 100, -12.0, 12.0, 100, -14.0, 10.0);
+    th2_CT2 = new TH2F("yfpVbeta_After", "CTVxfp_After", 100, -12.0, 12.0, 100, -14.0, 10.0);
 
     th1_delta1 = new TH1F("delta_Before", "delta_Before", 400, -20.0, 20.0);
     th1_xfp1 = new TH1F("xfp_Before", "xfp_Before", 400, -2.0, 2.0);
@@ -156,7 +156,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
             th1_xfp1->Fill(xfp);
 			th1_yfp1->Fill(yfp);
 			
-			th2_CT1->Fill(CT, xfp);
+			th2_CT1->Fill(CT, delta);
 		}
 
 		if(iEntry % 100000 == 0) {cout << iEntry << endl;}
@@ -248,7 +248,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
             th1_xfp2->Fill(xfp);
 			th1_yfp2->Fill(yfp);
 			
-			th2_CT2->Fill(CT, xfp);
+			th2_CT2->Fill(CT, delta);
 		}
 		
 		if ( iEntry % 100000 == 0 ) {cout << iEntry << endl;}
@@ -327,7 +327,6 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	
 	c2->cd(5);
 	gPad->SetLogz(1);
-	th2_CT1->GetXaxis()->SetRangeUser(-6.0,6.0);
 	th2_CT1->Draw("colz");
 	
 	c2->cd(2);
@@ -340,7 +339,6 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	
 	c2->cd(6);
 	gPad->SetLogz(1);
-	th2_CT2->GetXaxis()->SetRangeUser(-6.0,6.0);
 	th2_CT2->Draw("colz");
 	
 	c2->Print(Form("HMSBeta_output_%d.pdf", runNum));
@@ -401,7 +399,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	return;
 }
 
-void plotBeta (  Int_t runNumber, Int_t NumEventsInput ) 
+void plotBeta_temp (  TString rootFile1, TString rootFile2, Int_t runNumber, Int_t NumEventsInput ) 
 {
 	gROOT->SetBatch(1);
   	cout << "\n\n";
@@ -418,8 +416,10 @@ void plotBeta (  Int_t runNumber, Int_t NumEventsInput )
 	// make dirrectories for putting output
 	betaDir = Outfile->mkdir("BetaDists");
 	cutsDir = Outfile->mkdir("CutsSummary");
-	rootFileName1 = Form("../../ROOTfiles/Calib/Hodo/HMS_Hodo_Calib_Pt1_%d_-1.root", runNumber);
-	rootFileName2 = Form("../../ROOTfiles/Calib/Hodo/HMS_Hodo_Calib_Pt3_%d_-1.root", runNumber);
+	rootFileName1 = rootFile1;
+	rootFileName2 = rootFile2;
+	//rootFileName1 = Form("../../ROOTfiles/Analysis/Lumi/PionLT_replay_luminosity_%d_-1_OLDtcoin.root", runNumber);
+	//rootFileName2 = Form("../../ROOTfiles/Analysis/Lumi/PionLT_replay_luminosity_%d_-1.root", runNumber);
 	
 	makePlots(rootFileName1, rootFileName2, runNumber);
 	

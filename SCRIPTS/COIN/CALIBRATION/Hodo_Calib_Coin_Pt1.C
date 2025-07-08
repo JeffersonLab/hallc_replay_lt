@@ -42,7 +42,8 @@ void Hodo_Calib_Coin_Pt1 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
   // Load params for COIN trigger configuration
-  gHcParms->Load("PARAM/TRIG/Offline_PionLT/tcoin_PionLT_elReal.param");
+  //gHcParms->Load("PARAM/TRIG/Offline_PionLT/tcoin_PionLT_elReal.param");
+  //gHcParms->Load("PARAM/TRIG/Online_PionLT/tcoin.param");
   // Load fadc debug parameters
   gHcParms->Load("PARAM/HMS/GEN/h_fadc_debug.param");
   gHcParms->Load("PARAM/SHMS/GEN/p_fadc_debug.param");

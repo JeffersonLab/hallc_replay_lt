@@ -51,8 +51,10 @@ void Hodo_Calib_Coin_Pt1 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHcDetectorMap = new THcDetectorMap();
   gHcDetectorMap->Load("MAPS/COIN/DETEC/coin.map");
 
+  
+
   // Dec data
-  gHaApps->Add(new Podd::DecData("D","Decoder raw data"));
+  //  gHaApps->Add(new Podd::DecData("D","Decoder raw data"));
 
   //=:=:=:=
   // SHMS 
@@ -67,8 +69,8 @@ void Hodo_Calib_Coin_Pt1 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   SHMS->AddEvtType(7);
   gHaApps->Add(SHMS);
   // Add Noble Gas Cherenkov to SHMS apparatus
-  THcCherenkov* ngcer = new THcCherenkov("ngcer", "Noble Gas Cherenkov");
-  SHMS->AddDetector(ngcer);  
+  THcCherenkov* pngcer = new THcCherenkov("ngcer", "Noble Gas Cherenkov");
+  SHMS->AddDetector(pngcer);
   // Add drift chambers to SHMS apparatus
   THcDC* pdc = new THcDC("dc", "Drift Chambers");
   SHMS->AddDetector(pdc);
@@ -84,9 +86,9 @@ void Hodo_Calib_Coin_Pt1 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Add calorimeter to SHMS apparatus
   THcShower* pcal = new THcShower("cal", "Calorimeter");
   SHMS->AddDetector(pcal);
-
-  // THcBCMCurrent* hbc = new THcBCMCurrent("H.bcm", "BCM current check");
-  // gHaPhysics->Add(hbc);
+  
+  THcBCMCurrent* hbc = new THcBCMCurrent("H.bcm", "BCM current check");
+  gHaPhysics->Add(hbc);
 
   // Add rastered beam apparatus
   THaApparatus* pbeam = new THcRasteredBeam("P.rb", "Rastered Beamline");
@@ -118,11 +120,11 @@ void Hodo_Calib_Coin_Pt1 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHaEvtHandlers->Add(pscaler);
 
   //Add SHMS event handler for helicity scalers
-  //THcHelicityScaler *phelscaler = new THcHelicityScaler("P", "Hall C helicity scaler");
+//  THcHelicityScaler *phelscaler = new THcHelicityScaler("P", "Hall C helicity scaler");
   //phelscaler->SetDebugFile("PHelScaler.txt");
-  //phelscaler->SetROC(8);
-  //phelscaler->SetUseFirstEvent(kTRUE);
-  //gHaEvtHandlers->Add(phelscaler);
+//  phelscaler->SetROC(8);
+//  phelscaler->SetUseFirstEvent(kTRUE);
+//  gHaEvtHandlers->Add(phelscaler);
 
   //=:=:=
   // HMS 
@@ -157,7 +159,7 @@ void Hodo_Calib_Coin_Pt1 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHaApps->Add(hbeam);  
   // Add physics modules
   // Calculate reaction point
-  THcReactionPoint* hrp = new THcReactionPoint("H.react", "HMS reaction point", "H", "H.rb");
+  THaReactionPoint* hrp = new THaReactionPoint("H.react", "HMS reaction point", "H", "H.rb");
   gHaPhysics->Add(hrp);
   // Calculate extended target corrections
   THcExtTarCor* hext = new THcExtTarCor("H.extcor", "HMS extended target corrections", "H", "H.react");
@@ -168,6 +170,10 @@ void Hodo_Calib_Coin_Pt1 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Calculate the hodoscope efficiencies
   THcHodoEff* heff = new THcHodoEff("hhodeff", "HMS hodo efficiency", "H.hod");
   gHaPhysics->Add(heff);
+
+  // Add BCM Current check
+  //  THcBCMCurrent* hbc = new THcBCMCurrent("H.bcm", "BCM current check");
+  //  gHaPhysics->Add(hbc);       
 
   // Add event handler for scaler events
   THcScalerEvtHandler *hscaler = new THcScalerEvtHandler("H", "Hall C scaler event type 4");  
@@ -180,6 +186,13 @@ void Hodo_Calib_Coin_Pt1 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   hscaler->SetDelayedType(129);
   hscaler->SetUseFirstEvent(kTRUE);
   gHaEvtHandlers->Add(hscaler);
+
+  // Add event handler for helicity scalers
+//  THcHelicityScaler *hhelscaler = new THcHelicityScaler("H", "Hall C helicity scaler");
+  //hhelscaler->SetDebugFile("HHelScaler.txt");
+//  hhelscaler->SetROC(5);
+//  hhelscaler->SetUseFirstEvent(kTRUE);
+//  gHaEvtHandlers->Add(hhelscaler);
 
   //=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=
   // Kinematics Modules
@@ -206,6 +219,16 @@ void Hodo_Calib_Coin_Pt1 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   coin->AddEvtType(2);
   TRG->AddDetector(coin); 
  
+  // THcHelicityScaler *helscaler = new THcHelicityScaler("HS", "Hall C helicity scalers"); 
+  // helscaler->SetROC(8);
+  // helscaler->SetUseFirstEvent(kTRUE);
+  // gHaEvtHandlers->Add(helscaler);
+  // Add helicity detector to trigger apparatus
+  // THcHelicity* helicity = new THcHelicity("helicity","Helicity Detector");
+  // TRG->AddDetector(helicity);
+  // helicity->SetHelicityScaler(helscaler);
+
+
   //Add coin physics module THcCoinTime::THcCoinTime (const char *name, const char* description, const char* hadArmName, 
   // const char* elecArmName, const char* coinname) :
   THcCoinTime* coinTime = new THcCoinTime("CTime", "Coincidende Time Determination", "P", "H", "T.coin");
@@ -248,6 +271,18 @@ void Hodo_Calib_Coin_Pt1 (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   run->Print();
 
   // Define the analysis parameters
+  TString ROOTFileName = Form(ROOTFileNamePattern, RunNumber, MaxEvent);
+  analyzer->SetCountMode(2);  // 0 = counter is # of physics triggers
+                              // 1 = counter is # of all decode reads
+                              // 2 = counter is event number
+
+  analyzer->SetEvent(event);
+  // Set EPICS event type
+  analyzer->SetMarkInterval(50000);
+  analyzer->SetEpicsEvtType(180);
+  // Define crate map
+  analyzer->SetCrateMapFileName("MAPS/db_cratemap.dat");
+  // Define output ROOT file
   TString ROOTFileName = Form(ROOTFileNamePattern, RunNumber, MaxEvent);
   analyzer->SetCountMode(2);  // 0 = counter is # of physics triggers
                               // 1 = counter is # of all decode reads

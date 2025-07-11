@@ -69,18 +69,18 @@ void fillHistos(TTree *DataTree)
         }
         if (pTrig1_Roc2_Mult == 1)
         {
-            pTRIG1_ROC2_tdcTimeRawM->Fill(pTrig1_Roc1_Raw);
-            pTRIG1_ROC2_tdcTimeM->Fill(pTrig1_Roc1);
+            pTRIG1_ROC2_tdcTimeRawM->Fill(pTrig1_Roc2_Raw);
+            pTRIG1_ROC2_tdcTimeM->Fill(pTrig1_Roc2);
         }
         if (pTrig4_Roc1_Mult == 1)
         {
-            pTRIG4_ROC1_tdcTimeRawM->Fill(pTrig1_Roc1_Raw);
-            pTRIG4_ROC1_tdcTimeM->Fill(pTrig1_Roc1);
+            pTRIG4_ROC1_tdcTimeRawM->Fill(pTrig4_Roc1_Raw);
+            pTRIG4_ROC1_tdcTimeM->Fill(pTrig4_Roc1);
         }
         if (pTrig4_Roc2_Mult == 1)
         {
-            pTRIG4_ROC2_tdcTimeRawM->Fill(pTrig1_Roc1_Raw);
-            pTRIG4_ROC2_tdcTimeM->Fill(pTrig1_Roc1);
+            pTRIG4_ROC2_tdcTimeRawM->Fill(pTrig4_Roc2_Raw);
+            pTRIG4_ROC2_tdcTimeM->Fill(pTrig4_Roc2);
         }
         if (pTref2_Mult == 1)
         {

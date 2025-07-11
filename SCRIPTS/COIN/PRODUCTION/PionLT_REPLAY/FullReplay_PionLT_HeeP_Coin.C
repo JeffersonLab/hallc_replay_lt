@@ -38,7 +38,7 @@ void FullReplay_PionLT_HeeP_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   //Output file name
   
-  const char* ROOTFileNamePattern = "/volatile/hallc/c-pionlt/junaid/ROOTfiles/Analysis/HeeP/PionLT_HeePCoin_replay_production_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfiles/Analysis/HeeP/PionLT_HeePCoin_replay_production_%d_%d.root";
   //const char* ROOTFileNamePattern = "/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2021_v2/Analysis/HeeP/PionLT_HeePCoin_replay_production_%d_%d.root";
   //const char* ROOTFileNamePattern = "/cache/hallc/c-pionlt/analysis/PionLT_Fullreplay_Analysis_Files_Pass1_2022_v2/Analysis/HeeP/PionLT_HeePCoin_replay_production_%d_%d.root";
 

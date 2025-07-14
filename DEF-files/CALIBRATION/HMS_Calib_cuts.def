@@ -14,7 +14,7 @@ ALL_events             g.evtyp >= 1 && g.evtyp <= 7
 ALL_HMS_events       HMS_event || COIN_ONLY_event || HMS_COIN_event  || COIN_ALL_event
 ALL_SHMS_events     SHMS_event || COIN_ONLY_event || SHMS_COIN_event || COIN_ALL_event
 
-RawDecode_master ALL_HMS_events
+RawDecode_master ALL_events
 
 Block: Decode
 
@@ -30,4 +30,4 @@ ALL_SHMS_events_NO_EDTM      T.coin.pEDTM_tdcTime == 0.0 && ALL_SHMS_events
 ALL_COIN_events_NO_EDTM     T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime == 0.0 && ALL_COIN_events
 ALL_events_NO_EDTM          T.coin.hEDTM_tdcTime == 0.0 && T.coin.pEDTM_tdcTime == 0.0 && ALL_events
 
-Decode_master ALL_HMS_events_NO_EDTM
+Decode_master ALL_events_NO_EDTM

@@ -132,12 +132,15 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     DataTree->SetBranchAddress("T.coin.pTRIG1_ROC2_tdcTimeRaw", &pTrig1_Roc2_Raw);
     DataTree->SetBranchAddress("T.coin.pTRIG1_ROC2_tdcTime", &pTrig1_Roc2);
     
-    DataTree->SetBranchAddress("T.coin.pTRIG4_ROC2_tdcTimeRaw", &pTrig1_Roc2_Raw);
-    DataTree->SetBranchAddress("T.coin.pTRIG4_ROC2_tdcTime", &pTrig1_Roc2);
+    DataTree->SetBranchAddress("T.coin.pTRIG4_ROC2_tdcTimeRaw", &pTrig4_Roc2_Raw);
+    DataTree->SetBranchAddress("T.coin.pTRIG4_ROC2_tdcTime", &pTrig4_Roc2);
     
     DataTree->SetBranchAddress("T.coin.pTRIG4_ROC1_tdcTimeRaw", &pTrig4_Roc1_Raw);
     DataTree->SetBranchAddress("T.coin.pTRIG4_ROC1_tdcTime", &pTrig4_Roc1);
-    
+
+    DataTree->SetBranchAddress("T.coin.pTRIG4_ROC1_tdcTimeRaw", &pTrig4_Roc1_Raw);
+    DataTree->SetBranchAddress("T.coin.pTRIG4_ROC1_tdcTime", &pTrig4_Roc1);
+
     DataTree->SetBranchAddress("T.coin.pT2_tdcTimeRaw", &pTref2);
     DataTree->SetBranchAddress("T.coin.pT2_tdcMultiplicity", &pTref2_Mult);
     

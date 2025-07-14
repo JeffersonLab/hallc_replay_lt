@@ -43,6 +43,8 @@ void fillHistos(TTree *DataTree)
         
         if( iEntry % 10000 == 0 ) cout << iEntry << "\n"; //status report
         
+        if(!(h_xfp > 3.5 && h_xfp < 6.5)) continue; // temp focal plain cut
+        
         pTRIG1_ROC1_tdcTimeRaw->Fill(pTrig1_Roc1_Raw);
         pTRIG1_ROC2_tdcTimeRaw->Fill(pTrig1_Roc2_Raw);
         
@@ -161,6 +163,8 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     DataTree->SetBranchAddress("H.cal.etottracknorm", &Hcal);
     DataTree->SetBranchAddress("H.cer.npeSum", &Hcer);
     
+    DataTree->SetBranchAddress("H.gtr.x", &h_xfp);
+    
     pTRIG1_ROC1_tdcTimeRaw = new TH1D("T.coin.pTRIG1_ROC1_tdcTimeRaw","T.coin.pTRIG1_ROC1_tdcTimeRaw",5000, 0, 10000);
     pTRIG4_ROC1_tdcTimeRaw = new TH1D("T.coin.pTRIG4_ROC1_tdcTimeRaw","T.coin.pTRIG4_ROC1_tdcTimeRaw",5000, 0, 10000);
     pTRIG1_ROC2_tdcTimeRaw = new TH1D("T.coin.pTRIG1_ROC2_tdcTimeRaw","T.coin.pTRIG1_ROC2_tdcTimeRaw",5000, 0, 10000);
@@ -193,6 +197,8 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     
     MMpi_hist = new TH1D("MMpi{unCut}", "MMpi{Uncut}", 100,0,1.5);
     MMpi_hist_cut = new TH1D("MMpi{Pid Cut}", "MMpi{Pid Cut}", 100,0,1.5);
+    
+    
     
     fillHistos(DataTree);
     

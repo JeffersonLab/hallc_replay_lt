@@ -8,6 +8,7 @@ Double_t Cointime_ROC1_RAW, Cointime_ROC2_RAW, Ctime_ePi_Roc1, Ctime_ePi_Roc2;
 Double_t MMpi;
 Double_t bcm;
 Double_t Paero, Hcal, Hcer;
+Double_t h_xfp;
 
 TH1D *pTRIG1_ROC1_tdcTimeRaw, *pTRIG1_ROC1_tdcTime;
 TH1D *pTRIG1_ROC2_tdcTimeRaw, *pTRIG1_ROC2_tdcTime;

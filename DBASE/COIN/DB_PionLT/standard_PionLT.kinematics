@@ -2972,7 +2972,7 @@ ppartmass = 0.139570
 helicity_freq = 120.0007547169
 HMS_RF_Offset = 0
 SHMS_RF_Offset = 0.95
-eHadCoinTime_Offset = 11.82
+eHadCoinTime_Offset = -53.18
 Bunch_Spacing_Override = 2.004
 
 14628 - 14683 

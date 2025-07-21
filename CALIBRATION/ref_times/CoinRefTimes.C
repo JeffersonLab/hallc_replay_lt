@@ -1,6 +1,8 @@
 
 Double_t pTrig1_Roc1_Raw, pTrig1_Roc1, pTrig1_Roc1_Mult;
 Double_t pTrig1_Roc2_Raw, pTrig1_Roc2, pTrig1_Roc2_Mult;
+Double_t pTrig3_Roc1_Raw, pTrig3_Roc1, pTrig3_Roc1_Mult;
+Double_t pTrig3_Roc2_Raw, pTrig3_Roc2, pTrig3_Roc2_Mult;
 Double_t pTrig4_Roc1_Raw, pTrig4_Roc1, pTrig4_Roc1_Mult;
 Double_t pTrig4_Roc2_Raw, pTrig4_Roc2, pTrig4_Roc2_Mult;
 Double_t pTref2, pTref2_Mult;
@@ -13,12 +15,18 @@ Double_t h_xfp;
 TH1D *pTRIG1_ROC1_tdcTimeRaw, *pTRIG1_ROC1_tdcTime;
 TH1D *pTRIG1_ROC2_tdcTimeRaw, *pTRIG1_ROC2_tdcTime;
 
+TH1D *pTRIG3_ROC1_tdcTimeRaw, *pTRIG3_ROC1_tdcTime;
+TH1D *pTRIG3_ROC2_tdcTimeRaw, *pTRIG3_ROC2_tdcTime;
+
 TH1D *pTRIG4_ROC1_tdcTimeRaw, *pTRIG4_ROC1_tdcTime;
 TH1D *pTRIG4_ROC2_tdcTimeRaw, *pTRIG4_ROC2_tdcTime;
 
 // Set with multiplicity cut
 TH1D *pTRIG1_ROC1_tdcTimeRawM, *pTRIG1_ROC1_tdcTimeM;
 TH1D *pTRIG1_ROC2_tdcTimeRawM, *pTRIG1_ROC2_tdcTimeM;
+
+TH1D *pTRIG3_ROC1_tdcTimeRawM, *pTRIG3_ROC1_tdcTimeM;
+TH1D *pTRIG3_ROC2_tdcTimeRawM, *pTRIG3_ROC2_tdcTimeM;
 
 TH1D *pTRIG4_ROC1_tdcTimeRawM, *pTRIG4_ROC1_tdcTimeM;
 TH1D *pTRIG4_ROC2_tdcTimeRawM, *pTRIG4_ROC2_tdcTimeM;
@@ -43,7 +51,7 @@ void fillHistos(TTree *DataTree)
         
         if( iEntry % 10000 == 0 ) cout << iEntry << "\n"; //status report
         
-        if(!(h_xfp > 3.5 && h_xfp < 6.5)) continue; // temp focal plain cut
+        //if(!(h_xfp > 3.5 && h_xfp < 6.5)) continue; // temp focal plain cut
         
         pTRIG1_ROC1_tdcTimeRaw->Fill(pTrig1_Roc1_Raw);
         pTRIG1_ROC2_tdcTimeRaw->Fill(pTrig1_Roc2_Raw);
@@ -51,12 +59,18 @@ void fillHistos(TTree *DataTree)
         pTRIG4_ROC1_tdcTimeRaw->Fill(pTrig4_Roc1_Raw);
         pTRIG4_ROC2_tdcTimeRaw->Fill(pTrig4_Roc2_Raw);
         
+        pTRIG3_ROC1_tdcTimeRaw->Fill(pTrig3_Roc1_Raw);
+        pTRIG3_ROC2_tdcTimeRaw->Fill(pTrig3_Roc2_Raw);
+
         pTRIG1_ROC1_tdcTime->Fill(pTrig1_Roc1);
         pTRIG1_ROC2_tdcTime->Fill(pTrig1_Roc2);
         
         pTRIG4_ROC1_tdcTime->Fill(pTrig4_Roc1);
         pTRIG4_ROC2_tdcTime->Fill(pTrig4_Roc2);
         
+        pTRIG3_ROC1_tdcTime->Fill(pTrig3_Roc1);
+        pTRIG3_ROC2_tdcTime->Fill(pTrig3_Roc2);
+
         pT2_tdcTimeRaw->Fill(pTref2);
         
         CoinTime_RAW_ROC1->Fill(Cointime_ROC1_RAW);
@@ -84,6 +98,16 @@ void fillHistos(TTree *DataTree)
         {
             pTRIG4_ROC2_tdcTimeRawM->Fill(pTrig4_Roc2_Raw);
             pTRIG4_ROC2_tdcTimeM->Fill(pTrig4_Roc2);
+        }
+        if (pTrig3_Roc1_Mult == 1)
+        {
+            pTRIG3_ROC1_tdcTimeRawM->Fill(pTrig3_Roc1_Raw);
+            pTRIG3_ROC1_tdcTimeM->Fill(pTrig3_Roc1);
+        }
+        if (pTrig3_Roc2_Mult == 1)
+        {
+            pTRIG3_ROC2_tdcTimeRawM->Fill(pTrig3_Roc2_Raw);
+            pTRIG3_ROC2_tdcTimeM->Fill(pTrig3_Roc2);
         }
         if (pTref2_Mult == 1)
         {
@@ -140,8 +164,12 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     DataTree->SetBranchAddress("T.coin.pTRIG4_ROC1_tdcTimeRaw", &pTrig4_Roc1_Raw);
     DataTree->SetBranchAddress("T.coin.pTRIG4_ROC1_tdcTime", &pTrig4_Roc1);
 
-    DataTree->SetBranchAddress("T.coin.pTRIG4_ROC1_tdcTimeRaw", &pTrig4_Roc1_Raw);
-    DataTree->SetBranchAddress("T.coin.pTRIG4_ROC1_tdcTime", &pTrig4_Roc1);
+    DataTree->SetBranchAddress("T.coin.pTRIG3_ROC2_tdcTimeRaw", &pTrig3_Roc2_Raw);
+    DataTree->SetBranchAddress("T.coin.pTRIG3_ROC2_tdcTime", &pTrig3_Roc2);
+    
+    DataTree->SetBranchAddress("T.coin.pTRIG3_ROC1_tdcTimeRaw", &pTrig3_Roc1_Raw);
+    DataTree->SetBranchAddress("T.coin.pTRIG3_ROC1_tdcTime", &pTrig3_Roc1);
+
 
     DataTree->SetBranchAddress("T.coin.pT2_tdcTimeRaw", &pTref2);
     DataTree->SetBranchAddress("T.coin.pT2_tdcMultiplicity", &pTref2_Mult);
@@ -155,6 +183,8 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     DataTree->SetBranchAddress("T.coin.pTRIG4_ROC1_tdcMultiplicity", &pTrig4_Roc1_Mult);
     DataTree->SetBranchAddress("T.coin.pTRIG1_ROC2_tdcMultiplicity", &pTrig1_Roc2_Mult);
     DataTree->SetBranchAddress("T.coin.pTRIG4_ROC2_tdcMultiplicity", &pTrig4_Roc2_Mult);
+    DataTree->SetBranchAddress("T.coin.pTRIG3_ROC1_tdcMultiplicity", &pTrig3_Roc1_Mult);
+    DataTree->SetBranchAddress("T.coin.pTRIG3_ROC2_tdcMultiplicity", &pTrig3_Roc2_Mult);
     
     DataTree->SetBranchAddress("P.kin.secondary.MMpi", &MMpi);
     
@@ -169,23 +199,32 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     pTRIG4_ROC1_tdcTimeRaw = new TH1D("T.coin.pTRIG4_ROC1_tdcTimeRaw","T.coin.pTRIG4_ROC1_tdcTimeRaw",5000, 0, 10000);
     pTRIG1_ROC2_tdcTimeRaw = new TH1D("T.coin.pTRIG1_ROC2_tdcTimeRaw","T.coin.pTRIG1_ROC2_tdcTimeRaw",5000, 0, 10000);
     pTRIG4_ROC2_tdcTimeRaw = new TH1D("T.coin.pTRIG4_ROC2_tdcTimeRaw","T.coin.pTRIG4_ROC2_tdcTimeRaw",5000, 0, 10000);
+    pTRIG3_ROC1_tdcTimeRaw = new TH1D("T.coin.pTRIG3_ROC1_tdcTimeRaw","T.coin.pTRIG3_ROC1_tdcTimeRaw",5000, 0, 10000);
+    pTRIG3_ROC2_tdcTimeRaw = new TH1D("T.coin.pTRIG3_ROC2_tdcTimeRaw","T.coin.pTRIG3_ROC2_tdcTimeRaw",5000, 0, 10000);
     
     pTRIG1_ROC1_tdcTime = new TH1D("T.coin.pTRIG1_ROC1_tdcTime","T.coin.pTRIG1_ROC1_tdcTime",1000, -1000, 1000);
     pTRIG4_ROC1_tdcTime = new TH1D("T.coin.pTRIG4_ROC1_tdcTime","T.coin.pTRIG4_ROC1_tdcTime",1000, -1000, 1000);
     pTRIG1_ROC2_tdcTime = new TH1D("T.coin.pTRIG1_ROC2_tdcTime","T.coin.pTRIG1_ROC2_tdcTime",1000, -1000, 1000);
     pTRIG4_ROC2_tdcTime = new TH1D("T.coin.pTRIG4_ROC2_tdcTime","T.coin.pTRIG4_ROC2_tdcTime",1000, -1000, 1000);
+    pTRIG3_ROC1_tdcTime = new TH1D("T.coin.pTRIG3_ROC1_tdcTime","T.coin.pTRIG3_ROC1_tdcTime",1000, -1000, 1000);
+    pTRIG3_ROC2_tdcTime = new TH1D("T.coin.pTRIG3_ROC2_tdcTime","T.coin.pTRIG3_ROC2_tdcTime",1000, -1000, 1000);
     
+
     pT2_tdcTimeRaw = new TH1D("T.coin.pT2_tdcTimeRaw","T.coin.pT2_tdcTimeRaw",5000, 0, 10000);
     
     pTRIG1_ROC1_tdcTimeRawM = new TH1D("T.coin.pTRIG1_ROC1_tdcTimeRaw_MultCut","T.coin.pTRIG1_ROC1_tdcTimeRaw_MultCut",5000, 0, 10000);
     pTRIG4_ROC1_tdcTimeRawM = new TH1D("T.coin.pTRIG4_ROC1_tdcTimeRaw_MultCut","T.coin.pTRIG4_ROC1_tdcTimeRaw_MultCut",5000, 0, 10000);
     pTRIG1_ROC2_tdcTimeRawM = new TH1D("T.coin.pTRIG1_ROC2_tdcTimeRaw_MultCut","T.coin.pTRIG1_ROC2_tdcTimeRaw_MultCut",5000, 0, 10000);
     pTRIG4_ROC2_tdcTimeRawM = new TH1D("T.coin.pTRIG4_ROC2_tdcTimeRaw_MultCut","T.coin.pTRIG4_ROC2_tdcTimeRaw_MultCut",5000, 0, 10000);
+    pTRIG3_ROC1_tdcTimeRawM = new TH1D("T.coin.pTRIG3_ROC1_tdcTimeRaw_MultCut","T.coin.pTRIG3_ROC1_tdcTimeRaw_MultCut",5000, 0, 10000);
+    pTRIG3_ROC2_tdcTimeRawM = new TH1D("T.coin.pTRIG3_ROC2_tdcTimeRaw_MultCut","T.coin.pTRIG3_ROC2_tdcTimeRaw_MultCut",5000, 0, 10000);
     
     pTRIG1_ROC1_tdcTimeM = new TH1D("T.coin.pTRIG1_ROC1_tdcTime_MultCut","T.coin.pTRIG1_ROC1_tdcTime_MultCut",1000, -1000, 1000);
     pTRIG4_ROC1_tdcTimeM = new TH1D("T.coin.pTRIG4_ROC1_tdcTime_MultCut","T.coin.pTRIG4_ROC1_tdcTime_MultCut",1000, -1000, 1000);
     pTRIG1_ROC2_tdcTimeM = new TH1D("T.coin.pTRIG1_ROC2_tdcTime_MultCut","T.coin.pTRIG1_ROC2_tdcTime_MultCut",1000, -1000, 1000);
     pTRIG4_ROC2_tdcTimeM = new TH1D("T.coin.pTRIG4_ROC2_tdcTime_MultCut","T.coin.pTRIG4_ROC2_tdcTime_MultCut",1000, -1000, 1000);
+    pTRIG3_ROC1_tdcTimeM = new TH1D("T.coin.pTRIG3_ROC1_tdcTime_MultCut","T.coin.pTRIG3_ROC1_tdcTime_MultCut",1000, -1000, 1000);
+    pTRIG3_ROC2_tdcTimeM = new TH1D("T.coin.pTRIG3_ROC2_tdcTime_MultCut","T.coin.pTRIG3_ROC2_tdcTime_MultCut",1000, -1000, 1000);
     
     pT2_tdcTimeRawM = new TH1D("T.coin.pT2_tdcTimeRaw_MultCut","T.coin.pT2_tdcTimeRaw_MultCut",5000, 0, 10000);
     
@@ -222,6 +261,14 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     pTRIG4_ROC2_tdcTimeRawM->SetLineColor(kPink+10);
     pTRIG4_ROC2_tdcTimeRawM->Draw("SAME");
     canvas->Print(Form("output/CoinRefTimePlots_%d.pdf",RunNumber),  pTRIG4_ROC2_tdcTimeRaw->GetName());
+    pTRIG3_ROC1_tdcTimeRaw->Draw();
+    pTRIG3_ROC1_tdcTimeRawM->SetLineColor(kPink+10);
+    pTRIG3_ROC1_tdcTimeRawM->Draw("SAME");
+    canvas->Print(Form("output/CoinRefTimePlots_%d.pdf",RunNumber),  pTRIG3_ROC1_tdcTimeRaw->GetName());
+    pTRIG3_ROC2_tdcTimeRaw->Draw();
+    pTRIG3_ROC2_tdcTimeRawM->SetLineColor(kPink+10);
+    pTRIG3_ROC2_tdcTimeRawM->Draw("SAME");
+    canvas->Print(Form("output/CoinRefTimePlots_%d.pdf",RunNumber),  pTRIG3_ROC2_tdcTimeRaw->GetName());
     
     pTRIG1_ROC1_tdcTime->Draw();
     pTRIG1_ROC1_tdcTimeM->SetLineColor(kPink+10);
@@ -240,6 +287,16 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     pTRIG4_ROC2_tdcTimeM->Draw("SAME");
     canvas->Print(Form("output/CoinRefTimePlots_%d.pdf",RunNumber),  pTRIG4_ROC2_tdcTime->GetName());
     
+    pTRIG3_ROC1_tdcTime->Draw();
+    pTRIG3_ROC1_tdcTimeM->SetLineColor(kPink+10);
+    pTRIG3_ROC1_tdcTimeM->Draw("SAME");
+    canvas->Print(Form("output/CoinRefTimePlots_%d.pdf",RunNumber),  pTRIG3_ROC1_tdcTime->GetName());
+    pTRIG3_ROC2_tdcTime->Draw();
+    pTRIG3_ROC2_tdcTimeM->SetLineColor(kPink+10);
+    pTRIG3_ROC2_tdcTimeM->Draw("SAME");
+    canvas->Print(Form("output/CoinRefTimePlots_%d.pdf",RunNumber),  pTRIG3_ROC2_tdcTime->GetName());
+    
+
     pT2_tdcTimeRaw->Draw();
     pT2_tdcTimeRawM->SetLineColor(kPink+10);
     pT2_tdcTimeRawM->Draw();

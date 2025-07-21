@@ -79,5 +79,5 @@ cminch=2.54
 
 
 ; Coin trigger parameters
-#include "PARAM/TRIG/Offline_PionLT/tcoin_PionLT_elReal.param"
+#include "PARAM/TRIG/Offline_PionLT/tcoin_PionLT_elReal_mrk8.param"
  

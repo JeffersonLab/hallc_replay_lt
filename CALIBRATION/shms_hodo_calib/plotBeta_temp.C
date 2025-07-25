@@ -48,7 +48,7 @@ TH1F *th1_delta2, *th1_xfp2, *th1_yfp2;
 TH2F *th2_CT1, *th2_CT2;
 
 //variables for cutting trees and plotting
-Double_t calEtot, cerNpeSum, aeroNpeSum, gtrBeta;
+Double_t calEtot, hgcerNpeSum, aeroNpeSum, gtrBeta;
 Double_t delta, xfp, yfp;
 Double_t CT;
 

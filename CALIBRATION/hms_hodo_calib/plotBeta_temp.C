@@ -86,9 +86,9 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th2_xfp2 = new TH2F("xfpVbeta_After", "xfpVbeta_After", 400, -2.0, 2.0, 100, 0.6, 1.4);
 	th2_yfp2 = new TH2F("yfpVbeta_After", "yfpVbeta_After", 400, -5.0, 5.0, 100, 0.6, 1.4);
 
-    th2_CT1 = new TH2F("CTVxfp_Before", "CTVxfp_Before", 100, -12.0, 12.0, 100, -14.0, 10.0);
+    th2_CT1 = new TH2F("CTVxfp_Before", "CTVxfp_Before", 300, -6.0, 4.0, 100, -14.0, 10.0);
     //    th2_CT2 = new TH2F("CTVxfp_After", "CTVxfp_After", 100, -12.0, 12.0, 100, -14.0, 10.0);
-    th2_CT2 = new TH2F("CTVxfp_After", "CTVxfp_After", 200, 50.0, 70.0, 100, -14.0, 10.0);
+    th2_CT2 = new TH2F("CTVxfp_After", "CTVxfp_After", 300, -70.0, -60.0, 100, -14.0, 10.0);
 
     th1_delta1 = new TH1F("delta_Before", "delta_Before", 400, -20.0, 20.0);
     th1_xfp1 = new TH1F("xfp_Before", "xfp_Before", 400, -2.0, 2.0);

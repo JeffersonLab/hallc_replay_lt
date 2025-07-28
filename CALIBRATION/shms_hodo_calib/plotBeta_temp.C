@@ -80,22 +80,22 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th1_cerCut = new TH1F("hgcerNpeSumCut_Pt1", "hgcerNpeSumCut_Pt1", 120, 0.0, 30.0);
 	
 	th2_delta1 = new TH2F("deltaVBeta_Before", "deltaVBeta_Before", 400, -20.0, 20.0, 100, 0.4, 1.6);
-	th2_xfp1 = new TH2F("xfpVbeta_Before", "xfpVbeta_Before", 400, -25.0, 12.0, 100, 0.6, 1.4);
-	th2_yfp1 = new TH2F("yfpVbeta_Before", "yfpVbeta_Before", 400, -25.0, 12.0, 100, 0.6, 1.4);
+	th2_xfp1 = new TH2F("xfpVbeta_Before", "xfpVbeta_Before", 400, -35.0, 15.0, 100, 0.6, 1.4);
+	th2_yfp1 = new TH2F("yfpVbeta_Before", "yfpVbeta_Before", 400, -35.0, 15.0, 100, 0.6, 1.4);
 	th2_delta2 = new TH2F("deltaVBeta_After", "deltaVBeta_After", 400, -20.0, 20.0, 100, 0.4, 1.6);
-	th2_xfp2 = new TH2F("xfpVbeta_After", "xfpVbeta_After", 400, -25.0, 12.0, 100, 0.6, 1.4);
-	th2_yfp2 = new TH2F("yfpVbeta_After", "yfpVbeta_After", 400, -25.0, 12.0, 100, 0.6, 1.4);
+	th2_xfp2 = new TH2F("xfpVbeta_After", "xfpVbeta_After", 400, -35.0, 15.0, 100, 0.6, 1.4);
+	th2_yfp2 = new TH2F("yfpVbeta_After", "yfpVbeta_After", 400, -35.0, 15.0, 100, 0.6, 1.4);
 
-    th2_CT1 = new TH2F("CTVxfp_Before", "CTVxfp_Before", 1000, -120.0, 120.0, 100, -20.0, 15.0);
+    th2_CT1 = new TH2F("CTVxfp_Before", "CTVxfp_Before", 200, -75.0, 55.0, 100, -35.0, 15.0);
     //    th2_CT2 = new TH2F("CTVxfp_After", "CTVxfp_After", 100, -12.0, 12.0, 100, -14.0, 10.0);
-    th2_CT2 = new TH2F("CTVxfp_After", "CTVxfp_After", 200, 20.0, 70.0, 100, -20.0, 15.0);
+    th2_CT2 = new TH2F("CTVxfp_After", "CTVxfp_After", 1000, -20.0, 100.0, 100, -35.0, 15.0);
 
     th1_delta1 = new TH1F("delta_Before", "delta_Before", 400, -20.0, 20.0);
-    th1_xfp1 = new TH1F("xfp_Before", "xfp_Before", 400, -25.0, 12.0);
-	th1_yfp1 = new TH1F("yfp_Before", "yfp_Before", 400, -25.0, 12.0);
+    th1_xfp1 = new TH1F("xfp_Before", "xfp_Before", 400, -35.0, 15.0);
+	th1_yfp1 = new TH1F("yfp_Before", "yfp_Before", 400, -35.0, 15.0);
 	th1_delta2 = new TH1F("delta_After", "delta_After", 400, -20.0, 20.0);
-	th1_xfp2 = new TH1F("xfp_After", "xfp_After", 400, -25.0, 12.0);
-	th1_yfp2 = new TH1F("yfp_After", "yfp_After", 400, -25.0, 12.0);
+	th1_xfp2 = new TH1F("xfp_After", "xfp_After", 400, -35.0, 15.0);
+	th1_yfp2 = new TH1F("yfp_After", "yfp_After", 400, -35.0, 15.0);
 
 
 	input1 = new TFile(rootFile1, "READ");

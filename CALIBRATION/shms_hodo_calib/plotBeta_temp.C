@@ -54,7 +54,7 @@ Double_t CT;
 
 //cuts
 const Double_t calEtotLow = 0.1; //normaized energy
-const Double_t cerNpeSumLow = 1.5; //unit NPE
+const Double_t hgcerNpeSumLow = 1.5; //unit NPE
 const Double_t aeroNpeSumLow = 1.5; //unit NPE
 const Double_t CTcutwidth = 4; //unit ns
 const Double_t CTcutcenter = 0; //unit ns
@@ -76,8 +76,8 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	
 	th1_cal = new TH1F("H.cal.etottracknorm_Pt1", "H.cal.etottracknorm_Pt1", 100, 0.0, 1.5);
 	th1_calCut = new TH1F("H.cal.etottracknormCut_Pt1", "H.cal.etottracknormCut_Pt1", 100, 0.0, 1.5);
-	th1_cer = new TH1F("cerNpeSum_Pt1", "cerNpeSum_Pt1", 120, 0.0, 30.0);
-	th1_cerCut = new TH1F("cerNpeSumCut_Pt1", "cerNpeSumCut_Pt1", 120, 0.0, 30.0);
+	th1_cer = new TH1F("hgcerNpeSum_Pt1", "hgcerNpeSum_Pt1", 120, 0.0, 30.0);
+	th1_cerCut = new TH1F("hgcerNpeSumCut_Pt1", "hgcerNpeSumCut_Pt1", 120, 0.0, 30.0);
 	
 	th2_delta1 = new TH2F("deltaVBeta_Before", "deltaVBeta_Before", 400, -20.0, 20.0, 100, 0.4, 1.6);
 	th2_xfp1 = new TH2F("xfpVbeta_Before", "xfpVbeta_Before", 400, -2.0, 2.0, 100, 0.6, 1.4);
@@ -134,17 +134,17 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 		tree1->GetEntry(iEntry);
 		
 		th1_cal->Fill(calEtot);
-		th1_cer->Fill(cerNpeSum);
+		th1_cer->Fill(hgcerNpeSum);
 		//th1_aero->Fill(aeroNpeSum);
 		
 		//cuts
 		calCut = (calEtot >= calEtotLow);
-		cerCut = (cerNpeSum >= cerNpeSumLow);
+		cerCut = (hgcerNpeSum >= hgcerNpeSumLow);
 		//aeroCut = (aeroNpeSum >= aeroNpeSumLow);
 	    CoinTimeCut = (CT > (CTcutcenter - CTcutwidth/2)) && (CT < (CTcutcenter + CTcutwidth/2));
 	    
 		if(calCut)   { th1_calCut->Fill(calEtot); }
-		if(cerCut) { th1_cerCut->Fill(cerNpeSum); }
+		if(cerCut) { th1_cerCut->Fill(hgcerNpeSum); }
 		//if(aeroCut)  { th1_aeroCut->Fill(aeroNpeSum); }
 		
 		if(calCut && cerCut) 
@@ -182,12 +182,12 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	PIDCut->cd(3);
 	th1_cer->SetStats();
 	th1_cer->Draw("");
-	cutsDir->WriteObject(th1_cer, "cerNpeSum_Pt1");
+	cutsDir->WriteObject(th1_cer, "hgcerNpeSum_Pt1");
 	
 	PIDCut->cd(4);
 	th1_cerCut->SetStats();
 	th1_cerCut->Draw("");
-	cutsDir->WriteObject(th1_cerCut, "cerNpeSumCut_Pt1");
+	cutsDir->WriteObject(th1_cerCut, "hgcerNpeSumCut_Pt1");
 	
 	PIDCut->Print(Form("SHMSBeta_output_%d.pdf(", runNum));
 	
@@ -212,8 +212,8 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	// make empty histograms
 	th1_cal = new TH1F("H.cal.etottracknorm_Pt3", "H.cal.etottracknorm_Pt3", 100, 0.0, 1.5);
 	th1_calCut = new TH1F("H.cal.etottracknormCut_ Pt3", "H.cal.etottracknormCut_ Pt3", 100, 0.0, 1.5);
-	th1_cer = new TH1F("cerNpeSum_ Pt3", "cerNpeSum_ Pt3", 120, 0.0, 30.0);
-	th1_cerCut = new TH1F("cerNpeSumCut_ Pt3", "cerNpeSumCut_ Pt3", 120, 0.0, 30.0);
+	th1_cer = new TH1F("hgcerNpeSum_ Pt3", "hgcerNpeSum_ Pt3", 120, 0.0, 30.0);
+	th1_cerCut = new TH1F("hgcerNpeSumCut_ Pt3", "hgcerNpeSumCut_ Pt3", 120, 0.0, 30.0);
 	
 	if (NumEvents == -1)
 	{
@@ -227,17 +227,17 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 		tree2->GetEntry(iEntry);
 		
 		th1_cal->Fill(calEtot);
-		th1_cer->Fill(cerNpeSum);
+		th1_cer->Fill(hgcerNpeSum);
 		//th1_aero->Fill(aeroNpeSum);
 		
 		//cuts
 		calCut = (calEtot >= calEtotLow);
-		cerCut = (cerNpeSum >= cerNpeSumLow);
+		cerCut = (hgcerNpeSum >= hgcerNpeSumLow);
 		//aeroCut = (aeroNpeSum >= aeroNpeSumLow);
 		CoinTimeCut = (CT > (CTcutcenter - CTcutwidth/2)) && (CT < (CTcutcenter + CTcutwidth/2));
 	
 		if(calCut)   { th1_calCut->Fill(calEtot); }
-		if(cerCut) { th1_cerCut->Fill(cerNpeSum); }
+		if(cerCut) { th1_cerCut->Fill(hgcerNpeSum); }
 		//if(aeroCut)  { th1_aeroCut->Fill(aeroNpeSum); }
 		
 		if(calCut && cerCut) 
@@ -265,10 +265,10 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	cutsDir->WriteObject(th1_calCut, "calEtotCut_Pt3");
 	
 	th1_cer->SetStats();
-	cutsDir->WriteObject(th1_cer, "cerNpeSum_Pt3");
+	cutsDir->WriteObject(th1_cer, "hgcerNpeSum_Pt3");
 	
 	th1_cerCut->SetStats();
-	cutsDir->WriteObject(th1_cerCut, "cerNpeSumCut_Pt3");
+	cutsDir->WriteObject(th1_cerCut, "hgcerNpeSumCut_Pt3");
 	
 	
 	

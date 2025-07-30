@@ -253,7 +253,7 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     fillHistos(DataTree);
     
     //write histogrames to pdf
-    TCanvas* canvas = new TCanvas("PDFOutput", "PDFOutput", 600, 600);
+    TCanvas* canvas = new TCanvas("PDFOutput", "PDFOutput", 1200, 2400);
     gPad->SetLogy();
     
     pTRIG1_ROC1_tdcTimeRaw->Draw();

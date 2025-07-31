@@ -293,7 +293,7 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     pTRIG3_ROC2_tdcTimeRaw->Draw();
     pTRIG3_ROC2_tdcTimeRawM->SetLineColor(kPink+10);
     pTRIG3_ROC2_tdcTimeRawM->Draw("SAME");
-    canvas->Print(Form("output/CoinRefTimePlots_%d.pdf(",RunNumber),  pTRIG3_ROC2_tdcTimeRaw->GetName());
+    canvas1->Print(Form("output/CoinRefTimePlots_%d.pdf(",RunNumber),  pTRIG3_ROC2_tdcTimeRaw->GetName());
     
     TCanvas* canvas2 = new TCanvas("PDFOutput2", "PDFOutput2", 1200, 2400);
     canvas2->Divide(2,3);
@@ -333,7 +333,7 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     pTRIG3_ROC2_tdcTime->Draw();
     pTRIG3_ROC2_tdcTimeM->SetLineColor(kPink+10);
     pTRIG3_ROC2_tdcTimeM->Draw("SAME");
-    canvas->Print(Form("output/CoinRefTimePlots_%d.pdf",RunNumber),  pTRIG3_ROC2_tdcTime->GetName());
+    canvas2->Print(Form("output/CoinRefTimePlots_%d.pdf",RunNumber),  pTRIG3_ROC2_tdcTime->GetName());
     
     TCanvas* canvas3 = new TCanvas("PDFOutput3", "PDFOutput3", 1200, 2400);
     canvas3->Divide(2,1);
@@ -350,7 +350,7 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     hT2_tdcTimeRaw->Draw();
     hT2_tdcTimeRawM->SetLineColor(kPink+10);
     hT2_tdcTimeRawM->Draw();
-    canvas->Print(Form("output/CoinRefTimePlots_%d.pdf",RunNumber),  hT2_tdcTimeRaw->GetName());
+    canvas3->Print(Form("output/CoinRefTimePlots_%d.pdf",RunNumber),  hT2_tdcTimeRaw->GetName());
     
     TCanvas* canvas4 = new TCanvas("PDFOutput4", "PDFOutput4", 1200, 2400);
     canvas4->Divide(2,1);
@@ -362,7 +362,7 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     canvas4->cd(2);
     gPad->SetLogy();
     CoinTime_RAW_ROC2->Draw();
-    canvas->Print(Form("output/CoinRefTimePlots_%d.pdf",RunNumber),  CoinTime_RAW_ROC2->GetName());
+    canvas4->Print(Form("output/CoinRefTimePlots_%d.pdf",RunNumber),  CoinTime_RAW_ROC2->GetName());
     
     TCanvas* canvas5 = new TCanvas("PDFOutput5", "PDFOutput5", 1200, 2400);
     canvas5->Divide(2,1);
@@ -374,11 +374,11 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     canvas5->cd(2);
     gPad->SetLogy();
     ePiCoinTime_ROC2->Draw();
-    canvas->Print(Form("output/CoinRefTimePlots_%d.pdf",RunNumber),  ePiCoinTime_ROC2->GetName());
+    canvas5->Print(Form("output/CoinRefTimePlots_%d.pdf",RunNumber),  ePiCoinTime_ROC2->GetName());
     
     TCanvas* canvas6 = new TCanvas("PDFOutput6", "PDFOutput6", 1200, 2400);
     MMpi_hist->Draw();
-    canvas->Print(Form("output/CoinRefTimePlots_%d.pdf)",RunNumber),  ePiCoinTime_ROC2->GetName());
+    canvas6->Print(Form("output/CoinRefTimePlots_%d.pdf)",RunNumber),  ePiCoinTime_ROC2->GetName());
 }
 
 

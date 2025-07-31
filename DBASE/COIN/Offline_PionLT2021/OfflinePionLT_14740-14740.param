@@ -82,5 +82,5 @@ cminch=2.54
 
 
 ; Coin trigger parameters
-#include "PARAM/TRIG/Offline_PionLT/tcoin_PionLT_3-4.param"
+#include "PARAM/TRIG/Offline_PionLT/tcoin_PionLT_final.param"
  

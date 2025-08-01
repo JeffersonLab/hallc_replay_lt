@@ -298,16 +298,24 @@ void fitHodoCalib(TString filename,Int_t runNUM,Bool_t cosmic_flag=kFALSE)
 	       
 	       
 	       //----Define TTree Leaf Names-----
-	       base = spec + "." + det + "." + pl_names[npl];
+	       base = spec + static_cast<TString>('.') + det + static_cast<TString>('.') + static_cast<TString>(pl_names[npl]);
 	       
-	       nTdcTimeUnCorr = base + "." + side_names[side] + "TdcTimeUnCorr";
-	       nTdcTimeTWCorr = base + "." + side_names[side] + "TdcTimeWalkCorr";
-	       nAdcPulseTime = base + "." + side_names[side] + "AdcPulseTime";
-	       nAdcPulseAmp = base + "." + side_names[side] + "AdcPulseAmp";
-	       nDiffTWCorr = base + "." + "DiffDisTrackCorr";
-	       nTrackXPos = base + "." + "TrackXPos";
-	       nTrackYPos = base + "." + "TrackYPos";
-	       nhod_nhits = base + "." + "nhits";
+	       TString Temp = "TdcTimeUnCorr";
+	       nTdcTimeUnCorr = base + static_cast<TString>('.') + static_cast<TString>(side_names[side]) + Temp;
+	       Temp = "TdcTimeWalkCorr";
+	       nTdcTimeTWCorr = base + static_cast<TString>('.') + static_cast<TString>(side_names[side]) + Temp;
+	       Temp = "AdcPulseTime";
+	       nAdcPulseTime = base + static_cast<TString>('.') + static_cast<TString>(side_names[side]) + Temp;
+	       Temp = "AdcPulseAmp";
+	       nAdcPulseAmp = base + static_cast<TString>('.') + static_cast<TString>(side_names[side]) + Temp;
+	       Temp = "DiffDisTrackCorr";
+	       nDiffTWCorr = base + static_cast<TString>('.') + Temp;
+	       Temp = "TrackXPos";
+	       nTrackXPos = base + static_cast<TString>('.') + Temp;
+	       Temp = "TrackYPos";
+	       nTrackYPos = base + static_cast<TString>('.') + Temp;
+	       Temp = "nhits";
+	       nhod_nhits = base + static_cast<TString>('.') + Temp;
 	       
 	       //------Set Branch Address-------
 	       T->SetBranchAddress(nTdcTimeUnCorr,  &TdcTimeUnCorr[npl][side]);

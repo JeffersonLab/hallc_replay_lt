@@ -1,4 +1,4 @@
-void FullReplay_Online(Int_t RunNumber = 0, Int_t MaxEvent = 0) {
+void FullReplay_PionLT(Int_t RunNumber = 0, Int_t MaxEvent = 0) {
 
   // Get RunNumber and MaxEvent if not provided.
   if(RunNumber == 0) {
@@ -34,7 +34,7 @@ void FullReplay_Online(Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back("./raw_volatile");
   pathList.push_back("./raw.volatile"); // It's raw.volatile on cdaq (not raw_volatile)
 
-  const char* ROOTFileNamePattern = "ROOTfiles/Analysis/General/Full_Online_coin_replay_%d_%d.root";
+  const char* ROOTFileNamePattern = "ROOTfiles/Analysis/General/Full_coin_replay_%d_%d.root";
   
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
@@ -43,7 +43,7 @@ void FullReplay_Online(Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
   // Load params for COIN trigger configuration
-  gHcParms->Load("PARAM/TRIG/tcoin.param");
+  //gHcParms->Load("PARAM/TRIG/tcoin.param");
   // Load fadc debug parameters
   gHcParms->Load("PARAM/HMS/GEN/h_fadc_debug.param");
   gHcParms->Load("PARAM/SHMS/GEN/p_fadc_debug.param");
@@ -262,7 +262,7 @@ void FullReplay_Online(Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   analyzer->SetOutFile(ROOTFileName.Data());
   // Define DEF-file+
   //analyzer->SetOdefFile("UTIL_PION/config/DEF-files/coin_production.def");
-  analyzer->SetOdefFile("DEF-files/PRODUCTION/Full_Coin_replay_Online.def");
+  analyzer->SetOdefFile("DEF-files/PRODUCTION/Full_Replay_Pass2_Coin_PionLT.def");
   // Define cuts file
   analyzer->SetCutFile("DEF-files/PRODUCTION/CUTS/Full_Coin_replay_Online_Cuts.def");  // optional
   // File to record accounting information for cuts

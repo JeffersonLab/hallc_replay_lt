@@ -13,6 +13,7 @@
 *.root*
 *_-1_0_-1
 *_0_-1
+*.pyc
 Tmp*
 
 # Directories

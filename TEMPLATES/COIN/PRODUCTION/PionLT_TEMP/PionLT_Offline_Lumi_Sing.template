@@ -73,6 +73,11 @@ PLT_Pre-Scaled_HMS_EL-REAL_Triggers           	  :		{(P.pTRIG4.scaler/gHC_ti_ps_
 PLT_HMS_EL-REAL_Trigger_Rate                  	  :		{P.pTRIG4.scalerCut/P.1MHz.scalerTimeCut/1000.:%.3f} kHz
 PLT_Accepted_HMS_Triggers                     	  :		{pTRIG4_ROC2.npassed}
 
+P1X : {P.S1X.scaler} [ {(P.S1X.scaler/P.1MHz.scalerTime)/1000.:%.3f} kHz ] AND between + and - sides of P1X
+P1Y : {P.S1Y.scaler} [ {(P.S1Y.scaler/P.1MHz.scalerTime)/1000.:%.3f} kHz ] AND between + and - sides of P1Y
+P2X : {P.S2X.scaler} [ {(P.S2X.scaler/P.1MHz.scalerTime)/1000.:%.3f} kHz ] AND between + and - sides of P2X
+P2Y : {P.S2Y.scaler} [ {(P.S2Y.scaler/P.1MHz.scalerTime)/1000.:%.3f} kHz ] AND between + and - sides of P2Y
+
 =:=:=:=:
 = EDTM =
 =:=:=:=:

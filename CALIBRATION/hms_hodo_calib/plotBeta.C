@@ -38,20 +38,29 @@ TDirectory *betaDir, *cutsDir;
 
 //histograms
 TH1F *beta1, *beta2;
+TH1F *delta1, *delta2;
+TH1F *xfp1, *xfp2;
 TH1F *th1_cal, *th1_calCut, *th1_cer, *th1_cerCut, *th1_aero, *th1_aeroCut;
 TH2F *th2_delta1, *th2_xfp1, *th2_yfp1;
 TH2F *th2_delta2, *th2_xfp2, *th2_yfp2;
+TH1F *th1_delta1, *th1_xfp1, *th1_yfp1;
+TH1F *th1_delta2, *th1_xfp2, *th1_yfp2;
+TH2F *th2_CT1, *th2_CT2;
 
 //variables for cutting trees and plotting
 Double_t calEtot, cerNpeSum, aeroNpeSum, gtrBeta;
 Double_t delta, xfp, yfp;
+Double_t CT;
 
 //cuts
 const Double_t calEtotLow = 0.1; //normaized energy
 const Double_t cerNpeSumLow = 1.5; //unit NPE
 const Double_t aeroNpeSumLow = 1.5; //unit NPE
+const Double_t CTcutwidth = 4; //unit ns
+const Double_t CTcutcenter = 0; //unit ns
 
 Bool_t calCut, cerCut, aeroCut;
+Bool_t CoinTimeCut;
 
 const Int_t INILENGTH = 64;
 Int_t NumEvents = -1;
@@ -77,6 +86,17 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	th2_xfp2 = new TH2F("xfpVbeta_After", "xfpVbeta_After", 400, -2.0, 2.0, 100, 0.6, 1.4);
 	th2_yfp2 = new TH2F("yfpVbeta_After", "yfpVbeta_After", 400, -5.0, 5.0, 100, 0.6, 1.4);
 
+    th2_CT1 = new TH2F("CTVxfp_Before", "CTVxfp_Before", 100, -12.0, 12.0, 100, -12.0, 12.0);
+    th2_CT2 = new TH2F("CTVxfp_After", "CTVxfp_After", 100, -12.0, 12.0, 100, -12.0, 12.0);
+
+    th1_delta1 = new TH1F("delta_Before", "delta_Before", 400, -20.0, 20.0);
+    th1_xfp1 = new TH1F("xfp_Before", "xfp_Before", 400, -2.0, 2.0);
+	th1_yfp1 = new TH1F("yfp_Before", "yfp_Before", 400, -5.0, 5.0);
+	th1_delta2 = new TH1F("delta_After", "delta_After", 400, -20.0, 20.0);
+	th1_xfp2 = new TH1F("xfp_After", "xfp_After", 400, -2.0, 2.0);
+	th1_yfp2 = new TH1F("yfp_After", "yfp_After", 400, -5.0, 5.0);
+
+
 	input1 = new TFile(rootFile1, "READ");
 	input2 = new TFile(rootFile2, "READ");
 	cout << "\n";
@@ -96,6 +116,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	tree1->SetBranchAddress("H.gtr.dp", &delta);
 	tree1->SetBranchAddress("H.gtr.x", &xfp);
 	tree1->SetBranchAddress("H.gtr.y", &yfp);
+	tree1->SetBranchAddress("CTime.ePiCoinTime_ROC1", &CT);
 	
 	
 	Int_t nEntries;
@@ -118,17 +139,24 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 		calCut = (calEtot >= calEtotLow);
 		cerCut = (cerNpeSum >= cerNpeSumLow);
 		//aeroCut = (aeroNpeSum >= aeroNpeSumLow);
-	
+	    CoinTimeCut = (CT > (CTcutcenter - CTcutwidth/2)) && (CT < (CTcutcenter + CTcutwidth/2));
+	    
 		if(calCut)   { th1_calCut->Fill(calEtot); }
 		if(cerCut) { th1_cerCut->Fill(cerNpeSum); }
 		//if(aeroCut)  { th1_aeroCut->Fill(aeroNpeSum); }
 		
-		if(calCut && cerCut ) 
+		if(calCut && cerCut) 
 		{
 			beta1->Fill(gtrBeta);
 			th2_delta1->Fill(delta, gtrBeta);
 			th2_xfp1->Fill(xfp, gtrBeta);
 			th2_yfp1->Fill(yfp, gtrBeta);
+			
+			th1_delta1->Fill(delta);
+            th1_xfp1->Fill(xfp);
+			th1_yfp1->Fill(yfp);
+			
+			th2_CT1->Fill(CT, xfp);
 		}
 
 		if(iEntry % 100000 == 0) {cout << iEntry << endl;}
@@ -176,6 +204,7 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	tree2->SetBranchAddress("H.gtr.dp", &delta);
 	tree2->SetBranchAddress("H.gtr.x", &xfp);
 	tree2->SetBranchAddress("H.gtr.y", &yfp);
+	tree2->SetBranchAddress("CTime.ePiCoinTime_ROC1", &CT);
 	
 	// make empty histograms
 	th1_cal = new TH1F("H.cal.etottracknorm_Pt3", "H.cal.etottracknorm_Pt3", 100, 0.0, 1.5);
@@ -202,17 +231,24 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 		calCut = (calEtot >= calEtotLow);
 		cerCut = (cerNpeSum >= cerNpeSumLow);
 		//aeroCut = (aeroNpeSum >= aeroNpeSumLow);
+		CoinTimeCut = (CT > (CTcutcenter - CTcutwidth/2)) && (CT < (CTcutcenter + CTcutwidth/2));
 	
 		if(calCut)   { th1_calCut->Fill(calEtot); }
 		if(cerCut) { th1_cerCut->Fill(cerNpeSum); }
 		//if(aeroCut)  { th1_aeroCut->Fill(aeroNpeSum); }
 		
-		if(calCut && cerCut ) 
+		if(calCut && cerCut) 
 		{
 			beta2->Fill(gtrBeta);
 			th2_delta2->Fill(delta, gtrBeta);
 			th2_xfp2->Fill(xfp, gtrBeta);
 			th2_yfp2->Fill(yfp, gtrBeta);
+		
+		    th1_delta2->Fill(delta);
+            th1_xfp2->Fill(xfp);
+			th1_yfp2->Fill(yfp);
+			
+			th2_CT2->Fill(CT, xfp);
 		}
 		
 		if ( iEntry % 100000 == 0 ) {cout << iEntry << endl;}
@@ -282,24 +318,77 @@ void makePlots ( TString rootFile1, TString rootFile2, Int_t runNum ) // first r
 	c2->Divide(2,3);
 	
 	c2->cd(1);
+	gPad->SetLogz(1);
 	th2_delta1->Draw("colz");
 	
 	c2->cd(3);
+	gPad->SetLogz(1);
 	th2_xfp1->Draw("colz");
 	
 	c2->cd(5);
-	th2_yfp1->Draw("colz");
+	gPad->SetLogz(1);
+	th2_CT1->GetXaxis()->SetRangeUser(-6.0,6.0);
+	th2_CT1->Draw("colz");
 	
 	c2->cd(2);
+	gPad->SetLogz(1);
 	th2_delta2->Draw("colz");
 	
 	c2->cd(4);
+	gPad->SetLogz(1);
 	th2_xfp2->Draw("colz");
 	
 	c2->cd(6);
-	th2_yfp2->Draw("colz");
+	gPad->SetLogz(1);
+	th2_CT2->GetXaxis()->SetRangeUser(-6.0,6.0);
+	th2_CT2->Draw("colz");
 	
-	c2->Print(Form("HMSBeta_output_%d.pdf)", runNum));
+	c2->Print(Form("HMSBeta_output_%d.pdf", runNum));
+	
+	TCanvas *c3 = new TCanvas(Form("Comparison1d_%d", runNum),Form("Comparison1d_%d", runNum), 1200, 2400);
+	c3->Divide(2,2);
+	
+	c3->cd(1);
+	th1_delta1->SetLineColor(kBlue);
+	th1_delta1->SetName(Form("Delta_preCalib_Run%d", runNum));
+	//th1_delta1->SetStats();
+	th1_delta1->Draw("");
+	gPad->Update();
+	
+	th1_delta2->SetLineColor(kRed);
+	th1_delta2->SetName(Form("Delta_postCalib_Run%d", runNum));
+	//th1_delta2->SetStats();
+	th1_delta2->Draw("same");
+	gPad->Update();
+	
+	c3->cd(2);
+	th1_xfp1->SetLineColor(kBlue);
+	th1_xfp1->SetName(Form("Delta_preCalib_Run%d", runNum));
+	//th1_xfp1->SetStats();
+	th1_xfp1->Draw();
+	gPad->Update();
+	
+	th1_xfp2->SetLineColor(kRed);
+	th1_xfp2->SetName(Form("Delta_postCalib_Run%d", runNum));
+	//th1_xfp2->SetStats();
+	th1_xfp2->Draw("same");
+	gPad->Update();
+	
+	c3->cd(3);
+	th1_yfp1->SetLineColor(kBlue);
+	th1_yfp1->SetName(Form("Delta_preCalib_Run%d", runNum));
+	//th1_yfp1->SetStats();
+	th1_yfp1->Draw();
+	gPad->Update();
+	
+	th1_yfp2->SetLineColor(kRed);
+	th1_yfp2->SetName(Form("Delta_postCalib_Run%d", runNum));
+	//th1_yfp2->SetStats();
+	th1_yfp2->Draw("SAME");
+	gPad->Update();
+	
+	c3->Print(Form("HMSBeta_output_%d.pdf)", runNum));
+	
 	
 	cout << "Finished making plots for run: " << runNum << endl;
 	

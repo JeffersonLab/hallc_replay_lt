@@ -22,6 +22,8 @@ PLT_SHMS_Angle		:		{ptheta_lab}
 PLT_SHMS_Run_Length	:		{P.1MHz.scalerTime:%.3f} sec
 PLT_HMS_Run_Length	:		{H.1MHz.scalerTime:%.3f} sec
 
+PLT_HMS_Total_Events	:		{GOOD_HMS_SINGLES_Events.npassed}
+PLT_SHMS_Total_Events	:		{GOOD_SHMS_SINGLES_Events.npassed}
 PLT_Total_Events	:		{GOOD_COIN_Events.npassed}
 
 =:=:=:=:=:=:=
@@ -78,6 +80,11 @@ PLT_Pre-Scaled_COIN_Triggers                  :		{(P.pTRIG5.scaler/gHC_ti_ps_fac
 PLT_COIN_Trigger_Rate                         :		{P.pTRIG5.scalerCut/P.1MHz.scalerTimeCut/1000.:%.3f} kHz
 PLT_Accepted_COIN_Triggers                    :		{pTRIG5_ROC2.npassed}
 
+P1X : {P.S1X.scaler} [ {(P.S1X.scaler/P.1MHz.scalerTime)/1000.:%.3f} kHz ] AND between + and - sides of P1X
+P1Y : {P.S1Y.scaler} [ {(P.S1Y.scaler/P.1MHz.scalerTime)/1000.:%.3f} kHz ] AND between + and - sides of P1Y
+P2X : {P.S2X.scaler} [ {(P.S2X.scaler/P.1MHz.scalerTime)/1000.:%.3f} kHz ] AND between + and - sides of P2X
+P2Y : {P.S2Y.scaler} [ {(P.S2Y.scaler/P.1MHz.scalerTime)/1000.:%.3f} kHz ] AND between + and - sides of P2Y
+
 =:=:=:=:
 = EDTM =
 =:=:=:=:
@@ -131,6 +138,10 @@ PLT_HMS_Elec_Coin_Trk_Did		:	{HMSScinCoinDide.npassed}
 PLT_HMS_Elec_Sing_Trk_Should		:	{HMSScinSingShoulde.npassed}
 PLT_HMS_Elec_Sing_Trk_Did		:	{HMSScinSingDide.npassed}
 
+
+PLT_SHMS_Elec_ALL_TRACK_EFF             :          {shmsScinDide.npassed / (shmsScinShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((shmsScinShoulde.npassed)*(shmsScinDide.npassed))+((shmsScinDide.npassed)*(shmsScinDide.npassed))) / ((shmsScinShoulde.npassed)*(shmsScinShoulde.npassed)*(shmsScinShoulde.npassed)))):%8.4f}
+
+PLT_SHMS_Elec_SING_TRACK_EFF		:	   {shmsScinSingDide.npassed / (shmsScinSingShoulde.npassed+0.0001):%8.4f} +- {(sqrt((((shmsScinSingShoulde.npassed)*(shmsScinSingDide.npassed))+((shmsScinSingDide.npassed)*(shmsScinSingDide.npassed))) / ((shmsScinSingShoulde.npassed)*(shmsScinSingShoulde.npassed)*(shmsScinSingShoulde.npassed)))):%8.4f}
 
 PLT_SHMS_Hadron_ALL_TRACK_EFF           :          {shmsScinDid.npassed / (shmsScinShould.npassed+0.0001):%8.4f} +- {(sqrt((((shmsScinShould.npassed)*(shmsScinDid.npassed))-((shmsScinDid.npassed)*(shmsScinDid.npassed))) / ((shmsScinShould.npassed)*(shmsScinShould.npassed)*(shmsScinShould.npassed)))):%8.4f}
 

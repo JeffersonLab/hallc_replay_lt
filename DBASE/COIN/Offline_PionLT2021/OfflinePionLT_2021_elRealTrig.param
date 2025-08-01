@@ -82,5 +82,5 @@ cminch=2.54
 #include "PARAM/SHMS/CAL/pcal_calib.param"
 
 ; Coin trigger parameters
-#include "PARAM/TRIG/Offline_PionLT/tcoin_PionLT_elReal.param"
+#include "PARAM/TRIG/Offline_PionLT/tcoin_PionLT_final.param"
  

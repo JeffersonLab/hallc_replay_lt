@@ -12,6 +12,9 @@ Double_t MMpi;
 Double_t bcm;
 Double_t Paero, Hcal, Hcer;
 Double_t h_xfp;
+Double_t pGtime, hGtime;
+Double_t pNtrack, hNtrack;
+Double_t pdp, hdp;
 
 TH1D *pTRIG1_ROC1_tdcTimeRaw, *pTRIG1_ROC1_tdcTime;
 TH1D *pTRIG1_ROC2_tdcTimeRaw, *pTRIG1_ROC2_tdcTime;
@@ -37,6 +40,9 @@ TH1D *hT2_tdcTimeRaw, *hT2_tdcTimeRawM;
 
 TH1D *CoinTime_RAW_ROC1, *CoinTime_RAW_ROC2;
 TH1D *ePiCoinTime_ROC1, *ePiCoinTime_ROC2;
+
+TH1D *CoinTime_RAW_ROC1_cut, *CoinTime_RAW_ROC2_cut;
+TH1D *ePiCoinTime_ROC1_cut, *ePiCoinTime_ROC2_cut;
 
 TH1D *MMpi_hist, *MMpi_hist_cut;
 
@@ -76,12 +82,16 @@ void fillHistos(TTree *DataTree)
         pT2_tdcTimeRaw->Fill(pTref2);
         hT2_tdcTimeRaw->Fill(hTref2);
         
-        CoinTime_RAW_ROC1->Fill(Cointime_ROC1_RAW);
-        CoinTime_RAW_ROC2->Fill(Cointime_ROC2_RAW);
+        if (pGtime == 1 && hGtime == 1 && pNtrack > 0 && hNtrack > 0 && hdp > -8.0 && hdp < 8.0 && pdp > -10.0 && pdp < 22.0)
+        {
+            CoinTime_RAW_ROC1_cut->Fill(Cointime_ROC1_RAW);
+            CoinTime_RAW_ROC2_cut->Fill(Cointime_ROC2_RAW);
         
-        ePiCoinTime_ROC1->Fill(Ctime_ePi_Roc1);
-        ePiCoinTime_ROC2->Fill(Ctime_ePi_Roc2);
+            ePiCoinTime_ROC1_cut->Fill(Ctime_ePi_Roc1);
+            ePiCoinTime_ROC2_cut->Fill(Ctime_ePi_Roc2);
+        }
         
+
         if (pTrig1_Roc1_Mult == 1)
         {
             pTRIG1_ROC1_tdcTimeRawM->Fill(pTrig1_Roc1_Raw);
@@ -203,7 +213,16 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     DataTree->SetBranchAddress("H.cer.npeSum", &Hcer);
     
     DataTree->SetBranchAddress("H.gtr.x", &h_xfp);
+
+    DataTree->SetBranchAddress("P.hod.goodstarttime", &pGtime);
+    DataTree->SetBranchAddress("H.hod.goodstarttime", &hGtime);
+
+    DataTree->SetBranchAddress("P.dc.ntrack", &pNtrack);
+    DataTree->SetBranchAddress("H.dc.ntrack", &hNtrack);
     
+    DataTree->SetBranchAddress("P.gtr.dp", &pdp);
+    DataTree->SetBranchAddress("H.gtr.dp", &hdp);
+
     pTRIG1_ROC1_tdcTimeRaw = new TH1D("T.coin.pTRIG1_ROC1_tdcTimeRaw","T.coin.pTRIG1_ROC1_tdcTimeRaw",5000, 0, 10000);
     pTRIG4_ROC1_tdcTimeRaw = new TH1D("T.coin.pTRIG4_ROC1_tdcTimeRaw","T.coin.pTRIG4_ROC1_tdcTimeRaw",5000, 0, 10000);
     pTRIG1_ROC2_tdcTimeRaw = new TH1D("T.coin.pTRIG1_ROC2_tdcTimeRaw","T.coin.pTRIG1_ROC2_tdcTimeRaw",5000, 0, 10000);
@@ -245,6 +264,12 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     ePiCoinTime_ROC1 = new TH1D("CTime.ePiCoinTime_ROC1","CTime.ePiCoinTime_ROC1",1000,-1000,1000);
     ePiCoinTime_ROC2 = new TH1D("CTime.ePiCoinTime_ROC2","CTime.ePiCoinTime_ROC2",1000,-1000,1000);
     
+    CoinTime_RAW_ROC1_cut = new TH1D("CTime.CoinTime_RAW_ROC1_cut","CTime.CoinTime_RAW_ROC1_cut",1000,-1000,1000);
+    CoinTime_RAW_ROC2_cut = new TH1D("CTime.CoinTime_RAW_ROC2_cut","CTime.CoinTime_RAW_ROC2_cut",1000,-1000,1000);
+    
+    ePiCoinTime_ROC1_cut = new TH1D("CTime.ePiCoinTime_ROC1_cut","CTime.ePiCoinTime_ROC1_cut",1000,-1000,1000);
+    ePiCoinTime_ROC2_cut = new TH1D("CTime.ePiCoinTime_ROC2_cut","CTime.ePiCoinTime_ROC2_cut",1000,-1000,1000);
+
     MMpi_hist = new TH1D("MMpi{unCut}", "MMpi{Uncut}", 100,0,1.5);
     MMpi_hist_cut = new TH1D("MMpi{Pid Cut}", "MMpi{Pid Cut}", 100,0,1.5);
     
@@ -293,7 +318,7 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     pTRIG3_ROC2_tdcTimeRaw->Draw();
     pTRIG3_ROC2_tdcTimeRawM->SetLineColor(kPink+10);
     pTRIG3_ROC2_tdcTimeRawM->Draw("SAME");
-    canvas1->Print(Form("output/CoinRefTimePlots_%d.pdf(",RunNumber),  pTRIG3_ROC2_tdcTimeRaw->GetName());
+    canvas1->Print(Form("output/CoinRefTimePlots_%d.pdf(",RunNumber));
     
     TCanvas* canvas2 = new TCanvas("PDFOutput2", "PDFOutput2", 1200, 2400);
     canvas2->Divide(2,3);
@@ -333,52 +358,62 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     pTRIG3_ROC2_tdcTime->Draw();
     pTRIG3_ROC2_tdcTimeM->SetLineColor(kPink+10);
     pTRIG3_ROC2_tdcTimeM->Draw("SAME");
-    canvas2->Print(Form("output/CoinRefTimePlots_%d.pdf",RunNumber),  pTRIG3_ROC2_tdcTime->GetName());
+    canvas2->Print(Form("output/CoinRefTimePlots_%d.pdf",RunNumber));
     
     TCanvas* canvas3 = new TCanvas("PDFOutput3", "PDFOutput3", 1200, 2400);
-    canvas3->Divide(2,1);
+    canvas3->Divide(1,2);
 
     canvas3->cd(1);
     gPad->SetLogy();
     pT2_tdcTimeRaw->Draw();
     pT2_tdcTimeRawM->SetLineColor(kPink+10);
-    pT2_tdcTimeRawM->Draw();
+    pT2_tdcTimeRawM->Draw("SAME");
     
     canvas3->cd(2);
     gPad->SetLogy();
     
     hT2_tdcTimeRaw->Draw();
     hT2_tdcTimeRawM->SetLineColor(kPink+10);
-    hT2_tdcTimeRawM->Draw();
-    canvas3->Print(Form("output/CoinRefTimePlots_%d.pdf",RunNumber),  hT2_tdcTimeRaw->GetName());
+    hT2_tdcTimeRawM->Draw("SAME");
+    canvas3->Print(Form("output/CoinRefTimePlots_%d.pdf",RunNumber));
     
     TCanvas* canvas4 = new TCanvas("PDFOutput4", "PDFOutput4", 1200, 2400);
-    canvas4->Divide(2,1);
+    canvas4->Divide(1,2);
     
     canvas4->cd(1);
     gPad->SetLogy();
     CoinTime_RAW_ROC1->Draw();
-    
+    CoinTime_RAW_ROC1_cut->SetLineColor(kPink+10);
+    CoinTime_RAW_ROC1_cut->Draw("SAME");
+
     canvas4->cd(2);
     gPad->SetLogy();
     CoinTime_RAW_ROC2->Draw();
-    canvas4->Print(Form("output/CoinRefTimePlots_%d.pdf",RunNumber),  CoinTime_RAW_ROC2->GetName());
+    CoinTime_RAW_ROC2_cut->SetLineColor(kPink+10);
+    CoinTime_RAW_ROC2_cut->Draw("SAME");
+    canvas4->Print(Form("output/CoinRefTimePlots_%d.pdf",RunNumber));
+    //canvas4->Print(Form("output/CoinRefTimePlots_%d.png",RunNumber));
     
     TCanvas* canvas5 = new TCanvas("PDFOutput5", "PDFOutput5", 1200, 2400);
-    canvas5->Divide(2,1);
+    canvas5->Divide(1,2);
     
     canvas5->cd(1);
     gPad->SetLogy();
     ePiCoinTime_ROC1->Draw();
-    
+    ePiCoinTime_ROC1_cut->SetLineColor(kPink+10);
+    ePiCoinTime_ROC1_cut->Draw("SAME");
+
     canvas5->cd(2);
     gPad->SetLogy();
     ePiCoinTime_ROC2->Draw();
-    canvas5->Print(Form("output/CoinRefTimePlots_%d.pdf",RunNumber),  ePiCoinTime_ROC2->GetName());
+    ePiCoinTime_ROC2_cut->SetLineColor(kPink+10);
+    ePiCoinTime_ROC2_cut->Draw("SAME");
+    canvas5->Print(Form("output/CoinRefTimePlots_%d.pdf",RunNumber));
     
     TCanvas* canvas6 = new TCanvas("PDFOutput6", "PDFOutput6", 1200, 2400);
+    gPad->SetLogy();
     MMpi_hist->Draw();
-    canvas6->Print(Form("output/CoinRefTimePlots_%d.pdf)",RunNumber),  ePiCoinTime_ROC2->GetName());
+    canvas6->Print(Form("output/CoinRefTimePlots_%d.pdf)",RunNumber));
 }
 
 

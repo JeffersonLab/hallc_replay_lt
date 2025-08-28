@@ -82,6 +82,12 @@ void fillHistos(TTree *DataTree)
         pT2_tdcTimeRaw->Fill(pTref2);
         hT2_tdcTimeRaw->Fill(hTref2);
         
+        CoinTime_RAW_ROC1->Fill(Cointime_ROC1_RAW);
+        CoinTime_RAW_ROC2->Fill(Cointime_ROC2_RAW);
+
+        ePiCoinTime_ROC1->Fill(Ctime_ePi_Roc1);
+        ePiCoinTime_ROC2->Fill(Ctime_ePi_Roc2);
+
         if (pGtime == 1 && hGtime == 1 && pNtrack > 0 && hNtrack > 0 && hdp > -8.0 && hdp < 8.0 && pdp > -10.0 && pdp < 22.0)
         {
             CoinTime_RAW_ROC1_cut->Fill(Cointime_ROC1_RAW);
@@ -138,7 +144,7 @@ void fillHistos(TTree *DataTree)
             if (abs(bcm - 70) < 10.0)
             {
                 coinCounter2++;
-                if ((Paero > 1.5) & (Hcal > 0.7) & (Hcer > 0.3))
+                if ((Paero > 1.5) & (Hcer > 0.3))
                 {
                     PidCounter++;
                     MMpi_hist_cut->Fill(MMpi);

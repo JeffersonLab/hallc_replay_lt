@@ -16,6 +16,12 @@ Double_t pGtime, hGtime;
 Double_t pNtrack, hNtrack;
 Double_t pdp, hdp;
 
+const Double_t CT_rawCut_low = 30;
+const Double_t CT_rawCut_high = 135;
+
+int coinCounter;
+int coinCounter2;
+
 TH1D *pTRIG1_ROC1_tdcTimeRaw, *pTRIG1_ROC1_tdcTime;
 TH1D *pTRIG1_ROC2_tdcTimeRaw, *pTRIG1_ROC2_tdcTime;
 
@@ -46,12 +52,22 @@ TH1D *ePiCoinTime_ROC1_cut, *ePiCoinTime_ROC2_cut;
 
 TH1D *MMpi_hist, *MMpi_hist_cut;
 
+// redraws axis border of current plot
+void redrawBorder()
+{
+   gPad->Update();
+   gPad->RedrawAxis();
+   //TLine l;
+   //   l.DrawLine(gPad->GetUxmin(), gPad->GetUymax(), gPad->GetUxmax(), gPad->GetUymax());
+   //l.DrawLine(gPad->GetUxmax(), gPad->GetUymin(), gPad->GetUxmax(), gPad->GetUymax());
+}
+
 void fillHistos(TTree *DataTree)
 {
     Int_t MaxEvents = DataTree->GetEntries();
     cout << "Begining to fill histograms, " << MaxEvents << " events will be processed!\n";
-    int coinCounter = 0;
-    int coinCounter2 = 0;
+    coinCounter = 0;
+    coinCounter2 = 0;
     int PidCounter = 0;
     for(Int_t iEntry = 0; iEntry < MaxEvents; iEntry++)
     {
@@ -95,8 +111,26 @@ void fillHistos(TTree *DataTree)
         
             ePiCoinTime_ROC1_cut->Fill(Ctime_ePi_Roc1);
             ePiCoinTime_ROC2_cut->Fill(Ctime_ePi_Roc2);
+
+            // if the event is inside the "Good" cointime window count it, also count outside the window
+            if (CT_rawCut_low < Ctime_ePi_Roc2 && CT_rawCut_high > Ctime_ePi_Roc2)
+            {
+                coinCounter++;
+            }else if (-150 < Ctime_ePi_Roc2 && 250 > Ctime_ePi_Roc2)
+            {
+                coinCounter2++;
+            }
         }
         
+        /*
+        // if the event is inside the "Good" cointime window count it, also count outside the window
+        if (CT_rawCut_low < Ctime_ePi_Roc2 && CT_rawCut_high > Ctime_ePi_Roc2)
+        {
+            coinCounter++;
+        }else if (-150 < Ctime_ePi_Roc2 && 250 > Ctime_ePi_Roc2)
+        {
+            coinCounter2++;
+        }*/
 
         if (pTrig1_Roc1_Mult == 1)
         {
@@ -138,23 +172,23 @@ void fillHistos(TTree *DataTree)
         }
         
         MMpi_hist->Fill(MMpi);
-        if((Ctime_ePi_Roc1 > ((0)-((2.004)/2.0)-(0.25))) & (Ctime_ePi_Roc1 < ((0)+((2.004)/2.0)+(0.25))))
+        if((Ctime_ePi_Roc2 > ((0)-((2.004)/2.0)-(0.25))) & (Ctime_ePi_Roc2 < ((0)+((2.004)/2.0)+(0.25))))
         {
             coinCounter++;
             if (abs(bcm - 70) < 10.0)
             {
-                coinCounter2++;
+                
                 if ((Paero > 1.5) & (Hcer > 0.3))
                 {
-                    PidCounter++;
+                    
                     MMpi_hist_cut->Fill(MMpi);
                 }
             }
         }
         
     }
-    cout << "inside Coin Cut: " << coinCounter;
-    cout << "\ninside bcm and coin cut: " << coinCounter2<< endl;
+    cout << "inside 'Good` Cointime window Cut: " << coinCounter;
+    cout << "\nOutside 'Good` Cointime window Cut: " << coinCounter2<< endl;
     cout << "PID counter: " << PidCounter << endl;
     return;
 }
@@ -264,17 +298,17 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     pT2_tdcTimeRawM = new TH1D("T.coin.pT2_tdcTimeRaw_MultCut","T.coin.pT2_tdcTimeRaw_MultCut",5000, 0, 10000);
     hT2_tdcTimeRawM = new TH1D("T.coin.hT2_tdcTimeRaw_MultCut","T.coin.hT2_tdcTimeRaw_MultCut",5000, 0, 10000);
     
-    CoinTime_RAW_ROC1 = new TH1D("CTime.CoinTime_RAW_ROC1","CTime.CoinTime_RAW_ROC1",1000,-1000,1000);
-    CoinTime_RAW_ROC2 = new TH1D("CTime.CoinTime_RAW_ROC2","CTime.CoinTime_RAW_ROC2",1000,-1000,1000);
+    CoinTime_RAW_ROC1 = new TH1D("CTime.CoinTime_RAW_ROC1","CTime.CoinTime_RAW_ROC1",1000,-150,250);
+    CoinTime_RAW_ROC2 = new TH1D("CTime.CoinTime_RAW_ROC2","CTime.CoinTime_RAW_ROC2",1000,-150,250);
     
-    ePiCoinTime_ROC1 = new TH1D("CTime.ePiCoinTime_ROC1","CTime.ePiCoinTime_ROC1",1000,-1000,1000);
-    ePiCoinTime_ROC2 = new TH1D("CTime.ePiCoinTime_ROC2","CTime.ePiCoinTime_ROC2",1000,-1000,1000);
+    ePiCoinTime_ROC1 = new TH1D("CTime.ePiCoinTime_ROC1","CTime.ePiCoinTime_ROC1",1000,-200,200);
+    ePiCoinTime_ROC2 = new TH1D("CTime.ePiCoinTime_ROC2","CTime.ePiCoinTime_ROC2",1000,-200,200);
     
-    CoinTime_RAW_ROC1_cut = new TH1D("CTime.CoinTime_RAW_ROC1_cut","CTime.CoinTime_RAW_ROC1_cut",1000,-1000,1000);
-    CoinTime_RAW_ROC2_cut = new TH1D("CTime.CoinTime_RAW_ROC2_cut","CTime.CoinTime_RAW_ROC2_cut",1000,-1000,1000);
+    CoinTime_RAW_ROC1_cut = new TH1D("CTime.CoinTime_RAW_ROC1_cut","CTime.CoinTime_RAW_ROC1_cut",1000,-150,250);
+    CoinTime_RAW_ROC2_cut = new TH1D("CTime.CoinTime_RAW_ROC2_cut","CTime.CoinTime_RAW_ROC2_cut",1000,-150,250);
     
-    ePiCoinTime_ROC1_cut = new TH1D("CTime.ePiCoinTime_ROC1_cut","CTime.ePiCoinTime_ROC1_cut",1000,-1000,1000);
-    ePiCoinTime_ROC2_cut = new TH1D("CTime.ePiCoinTime_ROC2_cut","CTime.ePiCoinTime_ROC2_cut",1000,-1000,1000);
+    ePiCoinTime_ROC1_cut = new TH1D("CTime.ePiCoinTime_ROC1_cut","CTime.ePiCoinTime_ROC1_cut",1000,-200,200);
+    ePiCoinTime_ROC2_cut = new TH1D("CTime.ePiCoinTime_ROC2_cut","CTime.ePiCoinTime_ROC2_cut",1000,-200,200);
 
     MMpi_hist = new TH1D("MMpi{unCut}", "MMpi{Uncut}", 100,0,1.5);
     MMpi_hist_cut = new TH1D("MMpi{Pid Cut}", "MMpi{Pid Cut}", 100,0,1.5);
@@ -283,6 +317,14 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     
     fillHistos(DataTree);
     
+
+    TLine* LeftLine = new TLine();
+    LeftLine->SetLineWidth(4);
+    LeftLine->SetLineStyle(9);
+
+    TLine* RightLine = new TLine();
+    RightLine->SetLineWidth(4);
+    RightLine->SetLineStyle(9);
     //write histogrames to pdf
     TCanvas* canvas1 = new TCanvas("PDFOutput1", "PDFOutput1", 1200, 2400);
     canvas1->Divide(2,3);
@@ -397,6 +439,14 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     CoinTime_RAW_ROC2->Draw();
     CoinTime_RAW_ROC2_cut->SetLineColor(kPink+10);
     CoinTime_RAW_ROC2_cut->Draw("SAME");
+    LeftLine->DrawLine( CT_rawCut_low, 0,  CT_rawCut_low, CoinTime_RAW_ROC2_cut->GetBinContent(CoinTime_RAW_ROC2_cut->GetMaximumBin()));
+    RightLine->DrawLine(CT_rawCut_high, 0, CT_rawCut_high, CoinTime_RAW_ROC2_cut->GetBinContent(CoinTime_RAW_ROC2_cut->GetMaximumBin()));
+    redrawBorder();
+    TLegend* legend = new TLegend(0.1,0.7,0.4,0.9);
+    legend->SetHeader("CoinTime Cut","C"); // option "C" allows to center the header
+    legend->AddEntry("",Form("Inside Cointime Cut: %d",coinCounter));
+    legend->AddEntry("",Form("Outside Cointime Cut: %d",coinCounter2));
+    legend->Draw();
     canvas4->Print(Form("output/CoinRefTimePlots_%d.pdf",RunNumber));
     //canvas4->Print(Form("output/CoinRefTimePlots_%d.png",RunNumber));
     

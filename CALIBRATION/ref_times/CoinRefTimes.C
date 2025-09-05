@@ -17,7 +17,7 @@ Double_t pNtrack, hNtrack;
 Double_t pdp, hdp;
 
 const Double_t CT_rawCut_low = 30;
-const Double_t CT_rawCut_high = 135;
+const Double_t CT_rawCut_high = 100;
 
 int coinCounter;
 int coinCounter2;
@@ -442,10 +442,14 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     LeftLine->DrawLine( CT_rawCut_low, 0,  CT_rawCut_low, CoinTime_RAW_ROC2_cut->GetBinContent(CoinTime_RAW_ROC2_cut->GetMaximumBin()));
     RightLine->DrawLine(CT_rawCut_high, 0, CT_rawCut_high, CoinTime_RAW_ROC2_cut->GetBinContent(CoinTime_RAW_ROC2_cut->GetMaximumBin()));
     redrawBorder();
+    
+
     TLegend* legend = new TLegend(0.1,0.7,0.4,0.9);
     legend->SetHeader("CoinTime Cut","C"); // option "C" allows to center the header
-    legend->AddEntry("",Form("Inside Cointime Cut: %d",coinCounter));
-    legend->AddEntry("",Form("Outside Cointime Cut: %d",coinCounter2));
+    //legend->AddEntry("",Form("Inside Cointime Cut: %d",coinCounter));
+    //legend->AddEntry("",Form("Outside Cointime Cut: %d",coinCounter2));
+    legend->AddEntry("",Form("Inside Cointime Cut: %f",CoinTime_RAW_ROC2_cut->Integral(CoinTime_RAW_ROC2_cut->GetXaxis()->FindBin(CT_rawCut_low), CoinTime_RAW_ROC2_cut->GetXaxis()->FindBin(CT_rawCut_high))));
+    legend->AddEntry("",Form("Outside Cointime Cut: %f",(CoinTime_RAW_ROC2_cut->Integral(CoinTime_RAW_ROC2_cut->GetXaxis()->FindBin(-150), CoinTime_RAW_ROC2_cut->GetXaxis()->FindBin(CT_rawCut_low)) + CoinTime_RAW_ROC2_cut->Integral(CoinTime_RAW_ROC2_cut->GetXaxis()->FindBin(CT_rawCut_high), CoinTime_RAW_ROC2_cut->GetXaxis()->FindBin(250)))));
     legend->Draw();
     canvas4->Print(Form("output/CoinRefTimePlots_%d.pdf",RunNumber));
     //canvas4->Print(Form("output/CoinRefTimePlots_%d.png",RunNumber));

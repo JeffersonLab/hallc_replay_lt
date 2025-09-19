@@ -16,8 +16,8 @@ Double_t pGtime, hGtime;
 Double_t pNtrack, hNtrack;
 Double_t pdp, hdp;
 
-const Double_t CT_rawCut_low = -40;
-const Double_t CT_rawCut_high = 40;
+const Double_t CT_rawCut_low = 30;
+const Double_t CT_rawCut_high = 100;
 
 int coinCounter;
 int coinCounter2;
@@ -174,7 +174,7 @@ void fillHistos(TTree *DataTree)
         MMpi_hist->Fill(MMpi);
         if((Ctime_ePi_Roc2 > ((0)-((2.004)/2.0)-(0.25))) & (Ctime_ePi_Roc2 < ((0)+((2.004)/2.0)+(0.25))))
         {
-            //coinCounter++;
+            coinCounter++;
             if (abs(bcm - 70) < 10.0)
             {
                 
@@ -298,17 +298,17 @@ void CoinRefTimes( TString rootFileName, Int_t RunNumber)
     pT2_tdcTimeRawM = new TH1D("T.coin.pT2_tdcTimeRaw_MultCut","T.coin.pT2_tdcTimeRaw_MultCut",5000, 0, 10000);
     hT2_tdcTimeRawM = new TH1D("T.coin.hT2_tdcTimeRaw_MultCut","T.coin.hT2_tdcTimeRaw_MultCut",5000, 0, 10000);
     
-    CoinTime_RAW_ROC1 = new TH1D("CTime.CoinTime_RAW_ROC1","CTime.CoinTime_RAW_ROC1",2000,-500,500);
-    CoinTime_RAW_ROC2 = new TH1D("CTime.CoinTime_RAW_ROC2","CTime.CoinTime_RAW_ROC2",2000,-500,500);
+    CoinTime_RAW_ROC1 = new TH1D("CTime.CoinTime_RAW_ROC1","CTime.CoinTime_RAW_ROC1",1000,-150,250);
+    CoinTime_RAW_ROC2 = new TH1D("CTime.CoinTime_RAW_ROC2","CTime.CoinTime_RAW_ROC2",1000,-150,250);
     
-    ePiCoinTime_ROC1 = new TH1D("CTime.ePiCoinTime_ROC1","CTime.ePiCoinTime_ROC1",1000,-250,250);
-    ePiCoinTime_ROC2 = new TH1D("CTime.ePiCoinTime_ROC2","CTime.ePiCoinTime_ROC2",1000,-250,250);
+    ePiCoinTime_ROC1 = new TH1D("CTime.ePiCoinTime_ROC1","CTime.ePiCoinTime_ROC1",1000,-200,200);
+    ePiCoinTime_ROC2 = new TH1D("CTime.ePiCoinTime_ROC2","CTime.ePiCoinTime_ROC2",1000,-200,200);
     
-    CoinTime_RAW_ROC1_cut = new TH1D("CTime.CoinTime_RAW_ROC1_cut","CTime.CoinTime_RAW_ROC1_cut",2000,-500,500);
-    CoinTime_RAW_ROC2_cut = new TH1D("CTime.CoinTime_RAW_ROC2_cut","CTime.CoinTime_RAW_ROC2_cut",2000,-500,500);
+    CoinTime_RAW_ROC1_cut = new TH1D("CTime.CoinTime_RAW_ROC1_cut","CTime.CoinTime_RAW_ROC1_cut",1000,-150,250);
+    CoinTime_RAW_ROC2_cut = new TH1D("CTime.CoinTime_RAW_ROC2_cut","CTime.CoinTime_RAW_ROC2_cut",1000,-150,250);
     
-    ePiCoinTime_ROC1_cut = new TH1D("CTime.ePiCoinTime_ROC1_cut","CTime.ePiCoinTime_ROC1_cut",1000,-250,250);
-    ePiCoinTime_ROC2_cut = new TH1D("CTime.ePiCoinTime_ROC2_cut","CTime.ePiCoinTime_ROC2_cut",1000,-250,250);
+    ePiCoinTime_ROC1_cut = new TH1D("CTime.ePiCoinTime_ROC1_cut","CTime.ePiCoinTime_ROC1_cut",1000,-200,200);
+    ePiCoinTime_ROC2_cut = new TH1D("CTime.ePiCoinTime_ROC2_cut","CTime.ePiCoinTime_ROC2_cut",1000,-200,200);
 
     MMpi_hist = new TH1D("MMpi{unCut}", "MMpi{Uncut}", 100,0,1.5);
     MMpi_hist_cut = new TH1D("MMpi{Pid Cut}", "MMpi{Pid Cut}", 100,0,1.5);

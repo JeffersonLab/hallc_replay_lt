@@ -9,7 +9,7 @@ t_coin_trig_tdcrefcut=-4700.
 t_coin_trig_adcrefcut=-5100.
 
 ; NH2025 - after much trial and error the contents below this point have been found to work for pionLT data.
-t_coin_trigNames="pTRIG1_ROC1 pTRIG4_ROC1 pTRIG1_ROC2 pTRIG4_ROC2" 
+t_coin_trigNames="pTRIG1_ROC1 pTRIG3_ROC1 pTRIG1_ROC2 pTRIG3_ROC2" 
 
 
 ; bar num:           1     2     3     4      5     6     7   8        9           10    11     12     13        14            15         16         17       18       19

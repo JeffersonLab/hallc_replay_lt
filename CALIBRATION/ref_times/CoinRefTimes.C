@@ -16,8 +16,8 @@ Double_t pGtime, hGtime;
 Double_t pNtrack, hNtrack;
 Double_t pdp, hdp;
 
-const Double_t CT_rawCut_low = 30;
-const Double_t CT_rawCut_high = 100;
+const Double_t CT_rawCut_low = 25;
+const Double_t CT_rawCut_high = 135;
 
 int coinCounter;
 int coinCounter2;

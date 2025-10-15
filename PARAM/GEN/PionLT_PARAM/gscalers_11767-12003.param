@@ -10,7 +10,7 @@ gBCM_Gain =            5765.9,    5604.8,   4011.2,    9089.7,    6576.1,    456
 gBCM_Offset =        252400.,   249970.,  240000.,     -739.1,    -481.6,    -173.2
 gBCM_SatOffset =         50.,       50.,    1000.,     1000.,     1000.,     1000. 
 gBCM_SatQuadratic =  0.00175,    0.002,      0.0,     0.0,     0.0,    0.0 
-gBCM_Current_threshold = 3.0
+gBCM_Current_threshold = 5.0
 ; index = 0 to gNumBCMs-1
 gBCM_Current_threshold_index = 3
 

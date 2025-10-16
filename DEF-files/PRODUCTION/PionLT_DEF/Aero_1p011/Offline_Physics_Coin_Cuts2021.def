@@ -222,9 +222,9 @@ GOOD_COIN_Events	 HMS_DELTA && SHMS_DELTA && GOOD_COIN_TRACK && shmsAerogeomalln
 ###    Lumi    ###
 ##################
 
-CoinBlocking_Total      CTime.CoinTime_RAW_ROC2 > -150 && CTime.CoinTime_RAW_ROC2 < 250 && ALL_COIN_events
-CoinBlocking_Good       CTime.CoinTime_RAW_ROC2 > 20 && CTime.CoinTime_RAW_ROC2 < 140 && ALL_COIN_events
-CoinBlocking_SysUp      CTime.CoinTime_RAW_ROC2 > 15 && CTime.CoinTime_RAW_ROC2 < 145 && ALL_COIN_events
-CoinBlocking_SysDown    CTime.CoinTime_RAW_ROC2 > 25 && CTime.CoinTime_RAW_ROC2 < 135 && ALL_COIN_events
+CoinBlocking_Total      CTime.CoinTime_RAW_ROC2 > -150 && CTime.CoinTime_RAW_ROC2 < 250 && ALL_COIN_events && H.hod.goodstarttime == 1 && P.hod.goodstarttime == 1
+CoinBlocking_Good       CTime.CoinTime_RAW_ROC2 > 20 && CTime.CoinTime_RAW_ROC2 < 140 && ALL_COIN_events && H.hod.goodstarttime == 1 && P.hod.goodstarttime == 1
+CoinBlocking_SysUp      CTime.CoinTime_RAW_ROC2 > 15 && CTime.CoinTime_RAW_ROC2 < 145 && ALL_COIN_events && H.hod.goodstarttime == 1 && P.hod.goodstarttime == 1
+CoinBlocking_SysDown    CTime.CoinTime_RAW_ROC2 > 25 && CTime.CoinTime_RAW_ROC2 < 135 && ALL_COIN_events && H.hod.goodstarttime == 1 && P.hod.goodstarttime == 1
 
 Physics_master GOOD_COIN_Events

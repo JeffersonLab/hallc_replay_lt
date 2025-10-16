@@ -56,7 +56,8 @@ PLT_Corrected_Charge        :   {H.BCM2.scalerChargeCut/1000.:%.6f} +- {(H.BCM2.
 = Target Boiling =
 =:=:=:=:=:=:=:=:=:
 
-Target_BoilingCorr          :   {(1-(((H.BCM2.scalerCharge/H.1MHz.scalerTime)-0.033)*(2.8/10000))):%.5f} +- {(1-(((H.BCM2.scalerCharge/H.1MHz.scalerTime)-0.033)*(2.8/10000)))*sqrt((((H.BCM2.scalerCharge/H.1MHz.scalerTime)-0.033)*(0.17/10000 + 0.32/10000)*((H.BCM2.scalerCharge/H.1MHz.scalerTime)-0.033)*(0.17/10000 + 0.32/10000)) + (((H.BCM2.scalerCharge/H.1MHz.scalerTime)-0.033)*((H.BCM2.scalerCharge/H.1MHz.scalerTime)-0.033)*((2.269/100000) + ((606.9*H.1MHz.scalerTime)/(5604.8*H.BCM2.scalerChargeCut))*((606.9*H.1MHz.scalerTime)/(5604.8*H.BCM2.scalerChargeCut))))):%.5f}
+Target_BoilingCorr          :   {(1-(((H.BCM2.scalerCharge/H.1MHz.scalerTime)-0.033)*(2.8/10000))):%.5f} +- {(1-(((H.BCM2.scalerCharge/H.1MHz.scalerTime))*(2.8/10000)))*sqrt((((H.BCM2.scalerCharge/H.1MHz.scalerTime))*(0.17/10000)*((H.BCM2.scalerCharge/H.1MHz.scalerTime))*(0.17/10000)) + (((H.BCM2.scalerCharge/H.1MHz.scalerTime))*((H.BCM2.scalerCharge/H.1MHz.scalerTime))*((2.269/100000) + ((606.9*H.1MHz.scalerTime)/(5604.8*H.BCM2.scalerChargeCut))*((606.9*H.1MHz.scalerTime)/(5604.8*H.BCM2.scalerChargeCut))))):%.5f}
+Target_BoilingCorr_SysUncer :   {(1-(((H.BCM2.scalerCharge/H.1MHz.scalerTime)-0.033)*(2.8/10000)))*sqrt((((H.BCM2.scalerCharge/H.1MHz.scalerTime))*(0.32/10000)*((H.BCM2.scalerCharge/H.1MHz.scalerTime))*(0.32/10000)) + (((H.BCM2.scalerCharge/H.1MHz.scalerTime))*((H.BCM2.scalerCharge/H.1MHz.scalerTime))*((1.9/1000000) + ((271*H.1MHz.scalerTime)/(5513.8*H.BCM2.scalerChargeCut))*((271*H.1MHz.scalerTime)/(5513.8*H.BCM2.scalerChargeCut))))):%.5f}
 
 
 =:=:=:=:=:=:=:=:=

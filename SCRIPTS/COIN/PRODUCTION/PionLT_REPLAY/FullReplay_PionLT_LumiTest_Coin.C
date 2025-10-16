@@ -46,7 +46,7 @@ void FullReplay_PionLT_LumiTest_Coin (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
   // Load params for COIN trigger configuration
   //  gHcParms->Load("PARAM/TRIG/KaonLT_Trig/tcoin_Spring19_Offline.param");
-  gHcParms->Load("PARAM/TRIG/Offline_PionLT/tcoin_PionLT_elReal.param");
+  //  gHcParms->Load("PARAM/TRIG/Offline_PionLT/tcoin_PionLT_elReal.param");
   // Load fadc debug parameters
   gHcParms->Load("PARAM/HMS/GEN/h_fadc_debug.param");
   gHcParms->Load("PARAM/SHMS/GEN/p_fadc_debug.param");

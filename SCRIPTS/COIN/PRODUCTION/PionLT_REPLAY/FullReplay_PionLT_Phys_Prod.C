@@ -321,8 +321,16 @@ void FullReplay_PionLT_Phys_Prod (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template
-  analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/PionLT_TEMP/PionLT_Offline_Physics_Coin.template",
+  if (RunNumber <= 12003){
+    analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/PionLT_TEMP/PionLT_Offline_Physics_Coin_11767-12003.template",
   Form("REPORT_OUTPUT/Analysis/PionLT/PionLT_replay_coin_production_%d_%d.report", RunNumber, MaxEvent));  // optional
+  } else if (RunNumber >= 12004 && RunNumber <= 14777){
+    analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/PionLT_TEMP/PionLT_Offline_Physics_Coin_12004-14777.template",
+  Form("REPORT_OUTPUT/Analysis/PionLT/PionLT_replay_coin_production_%d_%d.report", RunNumber, MaxEvent));  // optional
+  } else if (RunNumber >= 14778){
+    analyzer->PrintReport("TEMPLATES/COIN/PRODUCTION/PionLT_TEMP/PionLT_Offline_Physics_Coin_14778-99999.template",
+  Form("REPORT_OUTPUT/Analysis/PionLT/PionLT_replay_coin_production_%d_%d.report", RunNumber, MaxEvent));  // optional
+  } 
   // Helicity scalers output
   analyzer->PrintReport("TEMPLATES/HMS/SCALERS/hhelscalers.template",
                         Form("REPORT_OUTPUT/Scalers/PionLT/PionLT_replay_hms_helicity_scalers_%d_%d.report", RunNumber, MaxEvent));  // optional  
